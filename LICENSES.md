@@ -14,3 +14,9 @@ Følgende tredjepartsmaterialer er medleveret med deres licenstekster:
 Licenserne skal bevares ved distribution af de relevante filer. Fontfilerne leveres uændrede; appens CSS bruger lokale familienavne til visning.
 
 Myndighedskilderne er links og kildehenvisninger. Spørgsmålene og forklaringerne er selvstændige formuleringer. Konkurrentanalysen bygger på offentlige produktsider; ingen konkurrenters betalte spørgsmål, prøvebilleder, logoer eller appkode indgår i produktet.
+
+## Dansk oplæsning
+
+De medleverede MP3-filer bruger appens egne tekster med udtaleforklaringer af bl.a. km/t, ABS, ESC, promille og B13. De er produceret med Microsoft `da-DK-JeppeNeural` gennem det anonyme online-produktionsværktøj [edge-tts](https://github.com/rany2/edge-tts); der er ikke brugt API-nøgler, betaling eller top-ups. Appen kalder ikke dette værktøj eller en ekstern TTS-tjeneste. Værktøjets GPL-licens er ikke dokumentation for kommercielle rettigheder til Microsofts stemmeoutput. De rettigheder er endnu ikke afklaret; den aktuelle visning er fortsat ejerprivat.
+
+En separat lokal prøve bruger Piper med `da_DK-talesyntese-medium`. Dens [modelkort](https://huggingface.co/rhasspy/piper-voices/raw/main/da/da_DK/talesyntese/medium/MODEL_CARD) beskriver et CC0-datasæt. Det er ikke den valgte stemme og hverken Piper-kode eller modelvægt indgår i `dist/`. Der er ikke valgt en offentlig licens til projektets lydfiler.

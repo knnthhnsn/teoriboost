@@ -12,6 +12,7 @@
   <link rel="preload" href="assets/fonts/heading-bold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="lessons.css">
 <link rel="stylesheet" href="garage.css">
+<link rel="stylesheet" href="voice.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Spring til indhold</a>
@@ -26,7 +27,7 @@
       <nav aria-label="Hovednavigation" id="desktop-nav"></nav>
       <div class="sidebar-bottom"><div class="small-license"><span class="mono">DIT FØRERKORT</span><span class="license-symbol">B</span><strong>Det begynder<br>med et godt blik.</strong></div><button class="source-link" id="sources-btn">Kilder & faglig status <span>↗</span></button><p class="sidebar-note">Frivillig træning ved siden af<br>din køreskole.</p></div>
     </aside>
-    <main id="main" tabindex="-1"><div id="view"></div></main>
+    <main id="main" tabindex="-1"><section id="voice-panel" hidden></section><audio id="voice-audio" preload="none" hidden></audio><div id="view"></div></main>
   </div>
   <nav class="mobile-nav" aria-label="Mobilnavigation" id="mobile-nav"></nav>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>

@@ -1,0 +1,233 @@
+{
+  "checked": "2026-10-12T08:08:21.483Z",
+  "scope": "Actual local Brave playback and UI; viewport emulation, not physical phone/Safari or hosted auth QA. No human voice/learning approval.",
+  "checks": [
+    {
+      "check": "start-guide-real-decode",
+      "pass": true
+    },
+    {
+      "check": "same-trigger-pause",
+      "pass": true
+    },
+    {
+      "check": "same-trigger-resume",
+      "pass": true
+    },
+    {
+      "check": "mobile-390-no-overflow-controls-44px-static-panel",
+      "pass": true
+    },
+    {
+      "check": "navigation-stops-and-clears-src",
+      "pass": true
+    },
+    {
+      "check": "garage-seven-clip-queue-matches-visible-shuffle",
+      "pass": true
+    },
+    {
+      "check": "voice-click-does-not-submit-garage-answer",
+      "pass": true
+    },
+    {
+      "check": "garage-answer-stops-and-clears",
+      "pass": true
+    },
+    {
+      "check": "garage-explanation-and-recall-real-decode-new-trigger-switch",
+      "pass": true
+    },
+    {
+      "check": "closed-garage-answer-read-button-absent",
+      "pass": true
+    },
+    {
+      "check": "question-nine-clip-queue-matches-shuffled-statements-no-submit",
+      "pass": true
+    },
+    {
+      "check": "judge-real-instruction-decode",
+      "pass": true
+    },
+    {
+      "check": "judge-current-row-and-hotspot-highlight",
+      "pass": true
+    },
+    {
+      "check": "desktop-static-thin-bar",
+      "pass": true
+    },
+    {
+      "check": "question-current-statement-highlight",
+      "pass": true
+    },
+    {
+      "check": "mobile-final-static-113px-no-overflow-44px-controls",
+      "pass": true
+    },
+    {
+      "check": "grading-stops-and-clears-current-row",
+      "pass": true
+    },
+    {
+      "check": "post-answer-explanation-real-playback",
+      "pass": true
+    },
+    {
+      "check": "next-question-stops-old-feedback",
+      "pass": true
+    },
+    {
+      "check": "natural-completion-restart-plays-again-and-restores-trigger",
+      "pass": true
+    }
+  ],
+  "allPassed": true,
+  "consoleErrors": [],
+  "garageQueue": {
+    "initial": {
+      "currentTime": 0.003086,
+      "duration": 9.576,
+      "error": null,
+      "paused": false,
+      "src": "assets/voice/jeppe-neural-v1/v1-7a87a635cfde1cb0.mp3",
+      "status": "Afspiller · 1 af 7"
+    },
+    "completed": {
+      "error": null,
+      "paused": true,
+      "src": "assets/voice/jeppe-neural-v1/v1-177cf50bbb87f5d0.mp3",
+      "status": "Oplæsning færdig"
+    },
+    "requestedKeys": [
+      "v1-7a87a635cfde1cb0",
+      "v1-3f9b67e0edcb2cad",
+      "v1-076ad18f8fb56148",
+      "v1-3f9165e0edc2d4c2",
+      "v1-dffb1bd35fdf8221",
+      "v1-3f94c7e0edc5b11f",
+      "v1-177cf50bbb87f5d0"
+    ],
+    "requestedTexts": [
+      "I en bil med koblingspedal skal du forklare, hvad der sker under et gearskift. Hvilken rækkefølge følger koblingens funktion i Plan B?",
+      "Mulighed 1.",
+      "Pedalen trædes halvt ned, forbindelsen bevares delvist, gearet skiftes, og pedalen løftes hurtigt for blød overførsel.",
+      "Mulighed 2.",
+      "Pedalen trædes i bund, forbindelsen afbrydes, gearet skiftes, og pedalen løftes langsomt for blød overførsel.",
+      "Mulighed 3.",
+      "Pedalen trædes i bund, forbindelsen forstærkes, gearet skiftes, og pedalen holdes nede for blød overførsel."
+    ],
+    "visibleOptions": [
+      "Pedalen trædes halvt ned, forbindelsen bevares delvist, gearet skiftes, og pedalen løftes hurtigt for blød overførsel.",
+      "Pedalen trædes i bund, forbindelsen afbrydes, gearet skiftes, og pedalen løftes langsomt for blød overførsel.",
+      "Pedalen trædes i bund, forbindelsen forstærkes, gearet skiftes, og pedalen holdes nede for blød overførsel."
+    ]
+  },
+  "questionQueue": {
+    "requestedKeys": [
+      "v1-2d6e78641761cf1c",
+      "v1-9bae65921c54114c",
+      "v1-1079c21195d0007c",
+      "v1-9bab07921c513bbb",
+      "v1-5cb5e51fe9fdc812",
+      "v1-9ba7e5921c4ecc1e",
+      "v1-78ddccf919f13d00",
+      "v1-9ba487921c4bf68d",
+      "v1-57abee4d290e9173"
+    ],
+    "requestedTexts": [
+      "Hvad kræver tavlen? Du møder STOP og en tydelig stoplinje. Der er frit udsyn, og ingen anden trafik kan ses.",
+      "Udsagn 1.",
+      "Orienterer mig og kører først derefter, når vejen er fri.",
+      "Udsagn 2.",
+      "Springer standsningen over, fordi vejen ser tom ud.",
+      "Udsagn 3.",
+      "Ruller langsomt over linjen uden stop.",
+      "Udsagn 4.",
+      "Standser bilen helt ved stoplinjen."
+    ],
+    "completed": {
+      "answerCount": "0/4 VURDERET",
+      "paused": true,
+      "readButton": "Læs situationen op",
+      "status": "Oplæsning færdig"
+    }
+  },
+  "currentRow": {
+    "judge": {
+      "highlight": [
+        {
+          "current": "true",
+          "text": "Vognbanens placering"
+        },
+        {
+          "current": "true",
+          "text": "3Vognbanens placering"
+        }
+      ],
+      "src": "assets/voice/jeppe-neural-v1/v1-852c51c12f0f661d.mp3",
+      "status": "Afspiller · 7 af 7"
+    },
+    "question": {
+      "error": null,
+      "highlight": [
+        {
+          "current": "true",
+          "text": "Ruller langsomt over linjen uden stop."
+        }
+      ],
+      "src": "assets/voice/jeppe-neural-v1/v1-9ba7e5921c4ecc1e.mp3",
+      "status": "Afspiller · 6 af 9"
+    }
+  },
+  "mobile": {
+    "controls": [
+      {
+        "height": 44,
+        "width": 83.9625015258789,
+        "y": 138.40000915527344
+      },
+      {
+        "height": 44,
+        "width": 94.4749984741211,
+        "y": 138.40000915527344
+      },
+      {
+        "height": 44,
+        "width": 55.97500228881836,
+        "y": 138.40000915527344
+      },
+      {
+        "height": 44,
+        "width": 69.9749984741211,
+        "y": 138.40000915527344
+      }
+    ],
+    "panelHeight": 113.20000457763672,
+    "panelPosition": "static",
+    "scrollWidth": 375,
+    "transcriptVisibleSize": {
+      "height": 1,
+      "width": 1
+    },
+    "width": 390
+  },
+  "methodNotes": [
+    "An initial 3.4s locator wait missed a short first-choice interval. Subsequent actual media state verified the current final-choice hotspot and row against that clip text. No simulated seek/events were used.",
+    "Earlier partial-manifest unavailable-clip observations were production-only; final complete pack is gated and all files decode."
+  ],
+  "completionRestart": {
+    "before": {
+      "paused": true,
+      "status": "Oplæsning færdig",
+      "time": 13.824
+    },
+    "after": {
+      "error": null,
+      "paused": false,
+      "status": "Afspiller · 1 af 1",
+      "time": 0
+    }
+  }
+}

@@ -7,11 +7,24 @@ import { LESSONS } from './dist/lessons.js';
 import { questionDiagram } from './dist/diagrams.js';
 import { GARAGE } from './dist/garage-content.js';
 import { validateGarage } from './garage-data.mjs';
+import { VOICE_PACK } from './dist/voice-pack.js';
+import { validateVoicePack } from './voice-validation.mjs';
+import { buildVoiceCatalog } from './scripts/build-voice-catalog.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.join(root, 'dist');
 const errors = [];
 errors.push(...validateGarage(GARAGE));
+const savedVoiceCatalog = JSON.parse(fs.readFileSync(path.join(root, 'authoring/voice-catalog.json'), 'utf8'));
+const currentVoiceCatalog = buildVoiceCatalog();
+if (JSON.stringify(savedVoiceCatalog.entries) !== JSON.stringify(currentVoiceCatalog.entries)) errors.push('voice: kataloget matcher ikke de aktuelle læringstekster');
+const voice = validateVoicePack({
+  dist,
+  catalogue: savedVoiceCatalog,
+  production: JSON.parse(fs.readFileSync(path.join(root, 'authoring/voice-production.json'), 'utf8')),
+  pack: VOICE_PACK
+});
+errors.push(...voice.errors);
 const checkedAssets = new Set();
 
 const allowedSourceHosts = new Set([
@@ -207,5 +220,5 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exitCode = 1;
 } else {
-  console.log(`NATKØRSEL OK: ${SOURCES.length} kilder, ${CHAPTERS.length} kapitler, ${sections.length} sektioner, ${QUESTIONS.length} spørgsmål, ${Object.keys(LESSONS).length} mikrolektioner, ${GARAGE.topics.length} garageområder, ${checkedAssets.size} lokale runtime-filer.`);
+  console.log(`NATKØRSEL OK: ${SOURCES.length} kilder, ${CHAPTERS.length} kapitler, ${sections.length} sektioner, ${QUESTIONS.length} spørgsmål, ${Object.keys(LESSONS).length} mikrolektioner, ${GARAGE.topics.length} garageområder, ${voice.clips} verificerede lydfiler (${(voice.bytes / 1e6).toFixed(1)} MB), ${checkedAssets.size} lokale runtime-filer.`);
 }

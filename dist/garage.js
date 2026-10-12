@@ -1,5 +1,7 @@
 import { GARAGE } from './garage-content.js';
 import { SOURCES } from './content.js';
+import {createVoiceCue} from './voice-cues.js';
+import {garageCaseVoiceParts,garageExplainVoiceParts,garageFeedbackVoiceParts,garageRecallPromptParts,garageRecallAnswerParts,garagePracticalVoiceParts} from './voice-texts.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const source = SOURCES.find(item => item.id === 'plan-b-1-1');
@@ -31,6 +33,7 @@ const hooks = {
   'registreringsattest': 'Papirerne kender bilens grænser. Din optimisme gør ikke.'
 };
 const physical = objective => ['udpege', 'aflæse og forstå', 'kontrollere'].includes(objective.requirement);
+export { hooks as GARAGE_HOOKS };
 const topicMap = new Map(GARAGE.topics.map(topic => [topic.id, topic]));
 export const garageSummary = { topics: GARAGE.topics.length, objectives: GARAGE.topics.reduce((sum, topic) => sum + topic.objectives.length, 0) };
 
@@ -139,9 +142,9 @@ function overview(zoneId = '') {
 function caseMarkup(topic) {
   const selected = answers.get(topic.id);
   const answered = selected !== undefined;
-  return `<section class="garage-case" aria-labelledby="garage-case-title"><span class="garage-section-label">01 / TAG STILLING FØRST</span><h2 id="garage-case-title">Hvilket svar passer?</h2><p>${esc(topic.case.context)}</p>
+  return `<section class="garage-case" aria-labelledby="garage-case-title"><span class="garage-section-label">01 / TAG STILLING FØRST</span><h2 id="garage-case-title">Hvilket svar passer?</h2><p>${esc(topic.case.context)}</p><button class="voice-read" type="button" data-garage-voice="case" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til situationen og mulighederne</button>
     <div class="garage-case-options">${optionOrder(topic).map((option, index) => `<button type="button" class="garage-option ${answered && option.correct ? 'correct' : ''} ${answered && selected === option.id && !option.correct ? 'incorrect' : ''}" data-garage-answer="${esc(option.id)}" data-garage-topic="${esc(topic.id)}" ${answered ? 'disabled' : ''}><span>${answered && option.correct ? '✓' : String(index + 1).padStart(2, '0')}</span><strong>${esc(option.text)}</strong>${answered ? `<small>${esc(option.why)}</small>` : ''}</button>`).join('')}</div>
-    <div id="garage-case-feedback" role="status" aria-live="polite">${answered ? `<div class="garage-case-result"><strong>${gradeGarageChoice(topic, selected).correct ? 'Den beslutning passer til situationen.' : 'Se, hvad der ændrer beslutningen.'}</strong><p>Forstå forklaringen, og genkald den bagefter. Dette er en vidensøvelse; den godkender ingen fysisk kontrol.</p>${references([...new Set(topic.case.options.flatMap(option => option.refs))])}</div>${hooks[topic.id] ? `<aside class="garage-joke"><span class="mono">MØTRIK-MADS / EN HUSKEKROG</span><p>${esc(hooks[topic.id])}</p></aside>` : ''}<button class="text-link" data-garage-retry="${esc(topic.id)}">Prøv beslutningen igen ↻</button>` : '<p class="garage-case-note">Et svar åbner forklaringen. Du kan også vælge at læse den først.</p>'}</div>
+    <div id="garage-case-feedback" role="status" aria-live="polite">${answered ? `<div class="garage-case-result"><strong>${gradeGarageChoice(topic, selected).correct ? 'Den beslutning passer til situationen.' : 'Se, hvad der ændrer beslutningen.'}</strong><p>Forstå forklaringen, og genkald den bagefter. Dette er en vidensøvelse; den godkender ingen fysisk kontrol.</p>${references([...new Set(topic.case.options.flatMap(option => option.refs))])}<button class="voice-read" type="button" data-garage-voice="feedback" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til vurderingerne</button></div>${hooks[topic.id] ? `<aside class="garage-joke"><span class="mono">MØTRIK-MADS / EN HUSKEKROG</span><p>${esc(hooks[topic.id])}</p><button class="voice-read" type="button" data-garage-voice="hook" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til huskekrogen</button></aside>` : ''}<button class="text-link" data-garage-retry="${esc(topic.id)}">Prøv beslutningen igen ↻</button>` : '<p class="garage-case-note">Et svar åbner forklaringen. Du kan også vælge at læse den først.</p>'}</div>
   </section>`;
 }
 
@@ -152,10 +155,10 @@ function topicView(topic) {
   return `<article class="garage-page garage-detail">
     <div class="screen-head"><a class="back-btn" href="#garage" aria-label="Tilbage til garagen">←</a><div><div class="eyebrow">GARAGEN / PLANPUNKT ${esc(topic.pointRef)}</div><h1>${esc(topic.title)}</h1></div></div>
     <div class="garage-detail-grid"><div class="garage-detail-main"><div id="garage-current-case">${caseMarkup(topic)}</div>
-      <details class="garage-explanation" id="garage-explanation" ${answers.has(topic.id) ? 'open' : ''}><summary><span class="garage-section-label">02 / FORSTÅ SYSTEMET</span><strong>Se forklaringen</strong><span aria-hidden="true">＋</span></summary><div class="garage-explanation-body"><p class="garage-topic-lead">${esc(topic.lead)}</p>${topic.cards.map(card => `<section class="garage-knowledge-card"><h3>${esc(card.title)}</h3><p>${esc(card.body)}</p>${references(card.refs)}</section>`).join('')}<section class="garage-recall"><span class="garage-section-label">03 / GENKALD UDEN HJÆLP</span><h3>${esc(topic.recall.prompt)}</h3><details><summary>Se forklaringen, når du har tænkt</summary><p>${esc(topic.recall.answer)}</p>${references(topic.recall.refs)}</details><p class="garage-case-note">Forklar med dine egne ord. Dit svar bliver ikke automatisk vurderet.</p></section></div></details>
+      <details class="garage-explanation" id="garage-explanation" ${answers.has(topic.id) ? 'open' : ''}><summary><span class="garage-section-label">02 / FORSTÅ SYSTEMET</span><strong>Se forklaringen</strong><span aria-hidden="true">＋</span></summary><div class="garage-explanation-body"><p class="garage-topic-lead">${esc(topic.lead)}</p><button class="voice-read" type="button" data-garage-voice="explanation" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til forklaringen</button>${topic.cards.map(card => `<section class="garage-knowledge-card"><h3>${esc(card.title)}</h3><p>${esc(card.body)}</p>${references(card.refs)}</section>`).join('')}<section class="garage-recall"><span class="garage-section-label">03 / GENKALD UDEN HJÆLP</span><h3>${esc(topic.recall.prompt)}</h3><button class="voice-read" type="button" data-garage-voice="recall" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til spørgsmålet</button><details><summary>Se forklaringen, når du har tænkt</summary><p>${esc(topic.recall.answer)}</p>${references(topic.recall.refs)}<button class="voice-read" type="button" data-garage-voice="recall-answer" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til svaret</button></details><p class="garage-case-note">Forklar med dine egne ord. Dit svar bliver ikke automatisk vurderet.</p></section></div></details>
       <details class="garage-objectives"><summary>Se alle ${topic.objectives.length} delmål og deres krav</summary><ul>${topic.objectives.map(objective => `<li><div><span class="mono">${esc(objective.ref)}</span><span class="garage-requirement ${physical(objective) ? 'physical' : ''}">${esc(objective.requirement)}${physical(objective) ? ' · i bilen' : ''}</span></div><p>${esc(objective.summary)}</p></li>`).join('')}</ul>${references([topic.pointRef])}</details>
     </div><aside class="garage-detail-side">${vehicleGraphic(topic.zone)}
-      <section class="garage-practical"><span class="garage-section-label">TAG DET MED TIL BILEN</span><h2>${needsCar ? 'Skal vises i bilen.' : 'Tag forståelsen med.'}</h2><p class="garage-practical-intro">${needsCar ? 'Appen forbereder dig. Udpegning, aflæsning og kontrol trænes med kørelæreren i undervisningsbilen.' : 'Afprøv forståelsen sammen med kørelæreren. Placering og betjening afhænger af bilen.'}</p>${topic.practical.length ? `<ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol>` : ''}<a class="text-link" href="#garage:checklist">Se den samlede biltjekliste ↗</a></section>
+      <section class="garage-practical"><span class="garage-section-label">TAG DET MED TIL BILEN</span><h2>${needsCar ? 'Skal vises i bilen.' : 'Tag forståelsen med.'}</h2><p class="garage-practical-intro">${needsCar ? 'Appen forbereder dig. Udpegning, aflæsning og kontrol trænes med kørelæreren i undervisningsbilen.' : 'Afprøv forståelsen sammen med kørelæreren. Placering og betjening afhænger af bilen.'}</p>${topic.practical.length ? `<ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol>` : ''}<button class="voice-read" type="button" data-garage-voice="practical" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til opgaven i bilen</button><a class="text-link" href="#garage:checklist">Se den samlede biltjekliste ↗</a></section>
     </aside></div>
     <div class="garage-next"><a class="btn btn-primary" href="#garage:${esc(next.id)}">Næste system: ${esc(next.title)} →</a><a class="text-link" href="#garage">Tilbage til garagen ↗</a></div>
   </article>`;
@@ -175,7 +178,7 @@ export function renderGarage(id = '', zone = '') {
   return overview(zone);
 }
 
-export function mountGarage(root, { onAnswer = () => {} } = {}) {
+export function mountGarage(root, { onAnswer = () => {}, onNarrate = () => {} } = {}) {
   const input = root.querySelector('#garage-xray');
   input?.addEventListener('input', () => {
     const value = Number(input.value);
@@ -191,6 +194,26 @@ export function mountGarage(root, { onAnswer = () => {} } = {}) {
     output.innerHTML = matches.length ? topicLinks(matches) : '<p class="garage-empty" role="status">Ingen emner passer til søgningen. Prøv et andet ord.</p>';
   });
   root.addEventListener('click', event => {
+    const read = event.target.closest('[data-garage-voice]');
+    if (read) {
+      if (read.closest('details:not([open])') || read.closest('[hidden]') || !read.getClientRects().length) return;
+      const topic = topicMap.get(read.dataset.garageTopic);
+      if (!topic) return;
+      const kind = read.dataset.garageVoice, ids = optionOrder(topic).map(option => option.id);
+      let parts = [];
+      if (kind === 'case') parts = garageCaseVoiceParts(topic, ids);
+      else if (kind === 'explanation') parts = garageExplainVoiceParts(topic);
+      else if (kind === 'feedback' && answers.has(topic.id)) parts = garageFeedbackVoiceParts(topic, ids);
+      else if (kind === 'recall') parts = garageRecallPromptParts(topic);
+      else if (kind === 'recall-answer') parts = garageRecallAnswerParts(topic);
+      else if (kind === 'practical') parts = garagePracticalVoiceParts(topic);
+      else if (kind === 'hook' && answers.has(topic.id) && !document.body.classList.contains('calm')) parts = [hooks[topic.id]];
+      const optionRows = [...root.querySelectorAll('.garage-option')];
+      const cueRows = kind === 'case' ? [root.querySelector('.garage-case>p'), ...optionRows.flatMap(row => [row, row])]
+        : kind === 'feedback' ? optionRows.flatMap(row => [row, row, row, row]) : [];
+      if (parts.length) onNarrate(parts, { label: read.textContent.trim(), trigger: read, onPart: createVoiceCue(cueRows) });
+      return;
+    }
     const button = event.target.closest('[data-garage-answer]');
     if (button) {
       const topic = topicMap.get(button.dataset.garageTopic);

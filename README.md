@@ -12,8 +12,9 @@ Et originalt dansk kategori B-koncept til unge og voksne: se førerens fejl, fin
 - Korte blandede missioner, feedback efter svaret, et nyt spørgsmål fra samme emne og en personlig gentagelseskø. XP gives for korrekte svar med daglig begrænsning; fart giver ingen point.
 - En 25-situations øveprøve med gemte svar, markeringer, fast tidsfrist, historik og gennemgang. Appens egen fejlberegning er tydeligt beskrevet.
 - Den viderebearbejdede oprindelige gas- og bremsesimulation som særskilt timing-demo. Bilen holder selv banen; den tester ikke orientering.
+- Dansk oplæsning med den valgte Jeppe-neuralstemme: 1.235 lokale MP3-klip til spørgsmål, forklaringer, mikrolektioner, garage og spilinstruktioner. Lyt-knappen pauser og fortsætter; afspilleren har stop, start forfra og fire hastigheder. Oplæsningen følger de viste blandede svarmuligheder. Den starter på brugerens klik, og navigation stopper den.
 
-Appens egne svar og indstillinger gemmes i browserens localStorage. Der er ingen konto, betaling eller analyseintegration i appkoden. Skrifttyper og Three.js leveres lokalt; WebGL og en moderne browser er nødvendige for de animerede scener.
+Appens egne svar og indstillinger gemmes i browserens localStorage. Der er ingen konto, betaling eller analyseintegration i appkoden. Skrifttyper, Three.js og lydfiler leveres lokalt. Lydpakken fylder 84,1 MB samlet, men de enkelte klip hentes, når de afspilles; ingen TTS-tjeneste kaldes fra appen. WebGL og en moderne browser er nødvendige for de animerede scener.
 
 ## Kør og redigér
 
@@ -27,9 +28,11 @@ npm run content:lessons
 npm run content:garage
 ```
 
-På Windows kan kommandoerne køres med `npm.cmd`. Den lokale visning åbnes på `http://127.0.0.1:4178`. `build` validerer indhold, kilde-id'er, lektionernes mapping og lokale runtime-filer. `content:lessons` samler de redigerbare JSON-filer i `authoring/` til den modulfil, som appen anvender.
+På Windows kan kommandoerne køres med `npm.cmd`. Den lokale visning åbnes på `http://127.0.0.1:4178`. `build` validerer indhold, kilde-id'er, lektionernes mapping og lokale runtime-filer. Den afviser også delvise lydpakker, ændret læringstekst, manglende MP3-filer, forkert tekst/hash/størrelse og ufærdige produktionsfiler. `content:lessons` samler de redigerbare JSON-filer i `authoring/` til den modulfil, som appen anvender.
 
-`dist/` er den færdige statiske app og er direkte redigerbar. Spil, diagrammer, 3D-verden, indhold og øveprøvelogik er adskilte moduler. `tests/` indeholder 21 checks: 16 af svar, gentagelser, XP, prøvesamling og lagrede resultater samt fem af garagens delmålsinventar, fysiske opgaver, cases og søgning. `content:garage` samler de to redigerbare garagebatches i `authoring/`. Hostingkonfigurationen i `.openai/hosting.json` tilhører den allerede oprettede ejerprivate Site.
+`dist/` er den færdige statiske app og er direkte redigerbar. Spil, diagrammer, 3D-verden, indhold, oplæsning og øveprøvelogik er adskilte moduler. `tests/` indeholder 41 checks: 16 core-, fem garage-, 14 afspiller- og seks lydudgivelseschecks. `content:garage` samler de to redigerbare garagebatches i `authoring/`. Hostingkonfigurationen i `.openai/hosting.json` tilhører den allerede oprettede ejerprivate Site.
+
+Ved tekstændringer skal `scripts/build-voice-catalog.mjs` køres, berørte lydklip gendannes med `scripts/generate-voice.py`, og `scripts/verify-voice.py` kontrollerer fuld afkodning af alle klip. Produktionsværktøjerne kræver et separat Python-miljø samt FFmpeg; de er ikke runtime-afhængigheder. Se [oplæsningens status](docs/voice-status.md).
 
 Den private adresse er [NATKØRSEL](https://natkoersel-teori.knnthhnsn.chatgpt.site). Ejerlogin kræver ejerens egen passkey; den udgivne visning er endnu ikke browserkontrolleret. Native udgivelsesmetadata gemmes lokalt i `evidence/`.
 

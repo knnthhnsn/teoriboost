@@ -1,5 +1,7 @@
 import { SOURCES } from './content.js';
 import { createJudgeWorld } from './judge-world.js';
+import {createVoiceCue} from './voice-cues.js';
+import {judgeVoiceParts,JUDGE_INTRO_VOICE} from './voice-texts.js';
 
 const SOURCE_BY_ID = new Map(SOURCES.map(source => [source.id, source]));
 const SHORT_SOURCE = Object.freeze({
@@ -118,6 +120,7 @@ const CASES = Object.freeze([
     sourceIds: ['fl-2026','plan-b-1-1'],
   },
 ]);
+export { CASES as JUDGE_CASES };
 
 function escapeHtml(value) {
   return String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
@@ -164,6 +167,7 @@ export function renderJudge() {
       <div class="judge__intro" data-judge-intro>
         <p>Se førerens fejlklip. Find problemet, vælg reglen, og placér bilen korrekt.</p>
         <button class="judge__start" type="button" data-judge-start>Start første fejlklip</button>
+        <button class="judge__voice" type="button" data-judge-read-intro aria-pressed="false">Lyt til startguiden</button>
       </div>
       <div class="judge__hotspots" data-judge-hotspots></div>
       <button class="judge__replay" type="button" data-judge-replay hidden>Afspil igen</button>
@@ -176,6 +180,7 @@ export function renderJudge() {
       <details class="judge__description" data-judge-description><summary>Beskriv klippet med tekst</summary><p data-judge-description-text></p></details>
       <blockquote class="judge__excuse" data-judge-excuse hidden></blockquote>
       <h3 class="judge__prompt" data-judge-prompt></h3>
+      <button class="judge__voice" type="button" data-judge-read aria-pressed="false">Lyt til instruktionen</button>
       <div class="judge__answers" data-judge-answers></div>
       <p class="judge__status" data-judge-status role="status" aria-live="polite"></p>
       <div class="judge__feedback" data-judge-feedback hidden></div>
@@ -199,6 +204,7 @@ export function mountJudge(container, options={}) {
     excuse:$('[data-judge-excuse]'), prompt:$('[data-judge-prompt]'), answers:$('[data-judge-answers]'),
     status:$('[data-judge-status]'), feedback:$('[data-judge-feedback]'),
     humor:$('[data-judge-humor]'), motion:$('[data-judge-motion]'),
+    read:$('[data-judge-read]'), readIntro:$('[data-judge-read-intro]'),
   };
   let humor=options.humor!==false, motion=options.motion!==false, caseIndex=0, phase=1, caseFirstTry=true;
   let correctFirst=0, finishedCalled=false, disposed=false, started=false, transitioning=false, advancing=false;
@@ -283,6 +289,7 @@ export function mountJudge(container, options={}) {
     els.status.textContent='';els.step.textContent='Færdig';els.stepbar.style.width='100%';els.score.textContent=`Førstevalg: ${correctFirst}/${CASES.length}`;
   }
   function paint(){
+    options.onNarrationStop?.();
     const c=currentCase();
     els.title.textContent=phase===1?['Et kryds i nattebyen','En vej med tværtrafik','Et sving i nattebyen','En tur forbi feltet'][caseIndex]:c.title;
     els.progress.textContent=phase===1?`Klip ${caseIndex+1} af ${CASES.length}`:`Case ${caseIndex+1} af ${CASES.length} · ${c.short}`;
@@ -321,7 +328,20 @@ export function mountJudge(container, options={}) {
   }
   function setHumor(value){humor=!!value;els.humor.setAttribute('aria-pressed',String(humor));if(started&&!finishedCalled)paint();}
   function setMotion(value){motion=!!value;els.motion.setAttribute('aria-pressed',String(motion));world.setMotion(motion);if(!started)world.setCase(currentCase(),false);}
-  function correctedReplay(){world.replayCorrected();els.clip.textContent='Korrekt forløb · se forskellen';els.stage.scrollIntoView({block:'start',behavior:'instant'});}
+  function correctedReplay(){options.onNarrationStop?.();world.replayCorrected();els.clip.textContent='Korrekt forløb · se forskellen';els.stage.scrollIntoView({block:'start',behavior:'instant'});}
+  els.readIntro.addEventListener('click',()=>options.onNarrate?.([JUDGE_INTRO_VOICE],{label:'Startguiden',trigger:els.readIntro}));
+  els.read.addEventListener('click',()=>{
+    const c=currentCase();
+    const issueIds=phase===1?orderedChoices(c.issue).map(item=>item.id):[];
+    const ruleIds=phase===2?orderedChoices(c.rules).map(item=>item.id):[];
+    const placeIds=phase===3?orderedChoices(c.places).map(item=>item.id):[];
+    const parts=judgeVoiceParts(c,phase,{humor:phase===2&&humor,issueIds,ruleIds,placeIds});
+    const answerRows=[...els.answers.querySelectorAll('button')];
+    const hotspots=[...els.hotspots.querySelectorAll('button')];
+    const rows=phase===2?answerRows:answerRows.map((row,index)=>[row,hotspots[index]]);
+    const cueRows=phase===1?[els.prompt,...rows.flatMap(row=>[row,row])]:phase===2||phase===3?[els.setup,els.prompt,...rows.flatMap(row=>[row,row])]:[els.feedback.querySelector('.judge__rule')];
+    if(parts.length)options.onNarrate?.(parts,{label:phase===4?'Kørelærerens forklaring':'Instruktionen til dette trin',trigger:els.read,onPart:createVoiceCue(cueRows)});
+  });
   els.replay.addEventListener('click',()=>phase===4?correctedReplay():world.replay());
   els.start.addEventListener('click',()=>{
     if(started)return;started=true;root.classList.add('judge--started');els.intro.hidden=true;els.meta.hidden=false;els.toggles.hidden=true;els.replay.hidden=false;els.workspace.hidden=false;world.replay();paint();

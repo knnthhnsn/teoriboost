@@ -12,7 +12,7 @@
     "chapters": 10,
     "explanationCards": 174,
     "lessons": 58,
-    "localRuntimeFilesChecked": 23,
+    "localRuntimeFilesChecked": 29,
     "result": "passed",
     "sections": 58,
     "questions": 83,
@@ -24,7 +24,14 @@
       "cases": 17,
       "openRecalls": 17
     },
-    "updated": "2026-10-12"
+    "updated": "2026-10-12",
+    "voice": {
+      "clips": 1235,
+      "bytes": 84136407,
+      "durationSeconds": 13914.672,
+      "result": "passed",
+      "scope": "Complete current catalogue, local file hashes/metadata and full decode of all final MP3 files; not human listening"
+    }
   },
   "scope": "Schema, source-id and existence checks; no claim of full legal, curriculum or human validation",
   "garageTests": {
@@ -32,5 +39,14 @@
     "result": "passed",
     "scope": "Objective inventory, reference consistency, physical preparation, choices and search"
   },
-  "totalTests": 21
+  "totalTests": 41,
+  "voiceTests": {
+    "count": 14,
+    "result": "passed",
+    "scope": "Queue, async stale results, stop/pause/resume/rate, trigger restoration, row cues and completion restart"
+  },
+  "voiceReleaseTests": {
+    "count": 6,
+    "result": "passed"
+  }
 }
