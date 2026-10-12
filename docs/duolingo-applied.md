@@ -31,11 +31,12 @@ Jev klassificerede én tekstlig beskrivelse via eksisterende almindelig Playgrou
 
 ## Teknisk og visuel kontrol
 
-- 76/76 automatiske checks passer, inklusive alle 58 live lektioners egne cases, checkpoints, serialisering og afslutning.
+- 81/81 automatiske checks passer, inklusive alle 58 live lektioners egne cases, checkpoints, serialisering, afslutning og opgradering fra gamle faner.
 - Buildkontrollen verificerer 12 kilder, 10 kapitler, 58 sektioner, 83 spørgsmål, 17 garageområder og 1.235 lokale stemmefiler.
 - Faktisk lokal browser: komplet første lektion med bevidst fejl og reparation; læst kort, valg, kladde og korrekt checkpoint-feedback efter reload; korrekt afslutning; komplet senere gentagelse med vurdering før kort; browserens tilbagefunktion; senere-gentagelsesopgave; dagsmål uden genafspilningsbonus.
 - Faktisk 320/390-pixelskontrol: ingen vandret overflow i den rettede visning, alle ti emner tilgængelige, centrale kontroller mindst 44 px; betingelse står før billede; rolig tilstand skjuler maskotter; bevægelse fra stopper ruteanimationer.
 - Dansk neural lyd afspillet i det nye forløb; billedviseren standser lyd og returnerer til opgaven ved Escape.
+- En faktisk åben ældre appfane gemte sin gamle profil igen. Et læst kort og dagsmålet i den nye version overlevede både dette og efterfølgende reload. En separat beskyttet lokal profil gemmes før kompatibilitetskopien; gamle builds kan ikke slette den. Nye guidede forløb mærkes særskilt fra tidligere vurderinger.
 
 Skærmbilleder og den detaljerede kontroljournal ligger lokalt under `evidence/`. Det er afgrænset browser- og kildeverifikation, ikke en undersøgelse af virkelige elevers læring. Udgivet versionsidentitet og efterfølgende hosted kontrol gemmes separat i samme journal.
 

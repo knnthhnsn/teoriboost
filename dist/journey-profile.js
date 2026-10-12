@@ -53,3 +53,22 @@ export function mergeJourneyProfile(remote, local) {
   }
   return {journey,journeyGoalAt:newestGoal.journeyGoalAt,journeySessions};
 }
+
+// A later non-assessment is no evidence against an earlier demonstrated answer.
+export function mergeAssessmentRecords(remote = {}, local = {}) {
+  const records={...remote,...local};
+  const union=(a,b)=>[...new Set([...(Array.isArray(a)?a:[]),...(Array.isArray(b)?b:[])])];
+  for(const id of new Set([...Object.keys(remote),...Object.keys(local)])){
+    const a=remote[id], b=local[id];
+    if(!a || !b)continue;
+    const next=(a.last||0)>(b.last||0)?a:b, prior=next===a?b:a;
+    const combined={...next,attempts:Math.max(a.attempts||0,b.attempts||0),assessments:Math.max(a.assessments||0,b.assessments||0),correct:Math.max(a.correct||0,b.correct||0),days:union(a.days,b.days),questions:union(a.questions,b.questions)};
+    if(next.lastAssessment!=='complete'){
+      combined.streak=Math.max(prior.streak||0,next.streak||0);
+      combined.lastCorrect=prior.lastCorrect===true || next.lastCorrect===true;
+      combined.due=Math.min(prior.due,next.due);
+    }
+    records[id]=combined;
+  }
+  return records;
+}
