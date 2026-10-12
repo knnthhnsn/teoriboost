@@ -1,0 +1,46 @@
+{
+  "checked": "2026-10-12T05:13:22.108Z",
+  "finalGarageLabels": {
+    "labels": [
+      {
+        "height": 14.40000057220459,
+        "text": "01 / COCKPIT"
+      },
+      {
+        "height": 14.40000057220459,
+        "text": "02 / DRIVLINJE"
+      },
+      {
+        "height": 14.40000057220459,
+        "text": "03 / YDERSIDE"
+      },
+      {
+        "height": 14.40000057220459,
+        "text": "04 / PAPIRER"
+      }
+    ],
+    "scroll": 390,
+    "width": 390,
+    "zoneSizes": [
+      {
+        "height": 90,
+        "width": 173.1999969482422
+      },
+      {
+        "height": 90,
+        "width": 173.1999969482422
+      },
+      {
+        "height": 98.5999984741211,
+        "width": 173.1999969482422
+      },
+      {
+        "height": 98.5999984741211,
+        "width": 173.1999969482422
+      }
+    ]
+  },
+  "initialCaseLeadExcludedFromAccessibilityTree": true,
+  "result": "passed",
+  "scope": "Actual local390px viewport; no human device trial."
+}

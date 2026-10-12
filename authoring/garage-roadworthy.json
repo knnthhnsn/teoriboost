@@ -1,0 +1,413 @@
+{
+  "checked": "2026-10-12",
+  "sourceRef": "Plan B",
+  "scope": [
+    "1.2.1",
+    "1.2.2",
+    "1.2.3",
+    "1.2.4",
+    "1.2.5",
+    "1.2.6",
+    "1.2.7",
+    "1.2.9",
+    "1.2.10"
+  ],
+  "topics": [
+    {
+      "id": "ansvar-for-bilens-stand",
+      "title": "Ansvar for bilens stand",
+      "pointRef": "1.2.1",
+      "zone": "documents",
+      "lead": "Lovlighed og sikkerhed er to nært beslægtede ansvar, som skal være afklaret før og under kørslen.",
+      "objectives": [
+        {"ref":"1.2.1.1","requirement":"angive","summary":"Skeln mellem ejerens ansvar for lovlig stand og førerens ansvar for sikker stand."},
+        {"ref":"1.2.1.2","requirement":"angive","summary":"Føreren skal løbende holde øje med styring, bremser, lys og horn."},
+        {"ref":"1.2.1.3","requirement":"angive","summary":"Føreren skal sikre en forsvarlig tilkobling af påhængskøretøj."},
+        {"ref":"1.2.1.4","requirement":"angive","summary":"Føreren skal følge køretøjets støj og forureningsrelevante stand."}
+      ],
+      "cards": [
+        {"title":"To slags ansvar","body":"Ejeren eller den registrerede bruger har ansvaret for, at bilen er lovlig. Føreren har ansvaret for, at den er sikkerhedsmæssigt forsvarlig. En lånt bil flytter derfor ikke førerens pligt til at reagere på fejl, som kan gøre turen farlig.","refs":["1.2.1.1"]},
+        {"title":"Opmærksom hele turen","body":"Førerens kontrol slutter ikke, når bilen starter. Styring, bremser, lygter og horn skal fungere sikkert og efter reglerne, og en trailer skal være forsvarligt koblet. Nye lyde, lamper eller ændret adfærd undervejs kræver en konkret vurdering.","refs":["1.2.1.2","1.2.1.3"]},
+        {"title":"Støj og udledning tæller også","body":"Føreren skal være opmærksom på unødig støj og på fejl ved motor eller forureningsbegrænsende udstyr, som påvirker udledningen. Usædvanlig røg eller lyd er derfor ikke blot bilens humør; det kan være et tegn på ulovlig eller uforsvarlig stand.","refs":["1.2.1.4"]}
+      ],
+      "practical": [
+        {"title":"Ansvarsrunden","action":"Gå bilen rundt sammen med kørelæreren, peg på de områder føreren skal følge, og forklar ansvarsdelingen. Kørelæreren stiller spørgsmål til ejerens, brugerens og førerens ansvar ved den konkrete bil.","refs":["1.2.1.1","1.2.1.2","1.2.1.3","1.2.1.4"]}
+      ],
+      "case": {
+        "context":"En lovligt registreret bil lånes med påhængskøretøj. Hvilken ansvarsfordeling gengiver Plan B præcist?",
+        "options":[
+          {"id":"a","text":"Ejeren eller brugeren svarer for lovlig stand; føreren svarer for sikker stand og forsvarlig trailerkobling.","correct":true,"why":"Planen deler ansvaret netop sådan og pålægger føreren særskilt at sikre en forsvarlig tilkobling ved kørsel med påhængskøretøj.","refs":["1.2.1.1","1.2.1.2","1.2.1.3"]},
+          {"id":"b","text":"Føreren svarer for både lovlig og sikker stand; ejeren svarer kun for bilens registreringsoplysninger.","correct":false,"why":"Planen lægger den lovlige stand hos ejeren eller den registrerede bruger, mens føreren har ansvaret for den sikkerhedsmæssigt forsvarlige stand.","refs":["1.2.1.1","1.2.1.2"]},
+          {"id":"c","text":"Ejeren svarer for begge forhold, indtil føreren under kørslen bliver opmærksom på en konkret fejl.","correct":false,"why":"Førerens ansvar gælder ikke først efter en opdaget fejl; føreren skal hele tiden være opmærksom på bilens sikkerhedsmæssige stand.","refs":["1.2.1.1","1.2.1.2"]}
+        ]
+      },
+      "recall":{"prompt":"Hvem har ansvaret, når en lovlig bil udvikler en sikkerhedsrelevant fejl under kørslen?","answer":"Føreren skal opdage og reagere på, at bilen ikke længere er sikkerhedsmæssigt forsvarlig, selv om ejeren har ansvaret for den lovlige stand.","refs":["1.2.1.1","1.2.1.2"]}
+    },
+    {
+      "id": "styreapparat",
+      "title": "Styreapparat",
+      "pointRef": "1.2.2",
+      "zone": "cockpit",
+      "lead": "Styringen skal overføre rattets bevægelser præcist og uden unødig modstand, slør eller mislyde.",
+      "objectives": [
+        {"ref":"1.2.2.1","requirement":"viden","summary":"Rattets bevægelse overføres gennem forbindelser og led til forhjulene."},
+        {"ref":"1.2.2.2","requirement":"viden","summary":"Styringen er normalt selvoprettende mod ligeudstilling under kørsel."},
+        {"ref":"1.2.2.3","requirement":"viden","summary":"Servo letter styringen; svigt kan gøre fortsat kørsel uforsvarlig."},
+        {"ref":"1.2.2.4","requirement":"viden","summary":"Nyere biler skal have ESC, som mindsker udskridning og væltning ved hjulvis bremsning."},
+        {"ref":"1.2.2.5","requirement":"angive","summary":"Bilen skal kunne styres let, sikkert og hurtigt."},
+        {"ref":"1.2.2.6","requirement":"angive","summary":"Styreapparatet må ikke have væsentligt slør."},
+        {"ref":"1.2.2.7","requirement":"angive","summary":"Ved lav fart skal rattet bevæges let uden ujævn modstand eller mislyde."},
+        {"ref":"1.2.2.8","requirement":"kontrollere","summary":"Kontrollér at hjulene straks følger rattet; aktivér servo ved servostyring."},
+        {"ref":"1.2.2.9","requirement":"kontrollere","summary":"Kontrollér eventuel servovæske efter mærker eller kontrollampe og fabrikantens forskrift."},
+        {"ref":"1.2.2.10","requirement":"angive","summary":"Tung styring kan skyldes servovæske, drivrem eller elektrisk servofejl."},
+        {"ref":"1.2.2.11","requirement":"angive","summary":"Forsinket hjulreaktion kan vise slør i styreforbindelserne."},
+        {"ref":"1.2.2.12","requirement":"angive","summary":"For lidt servovæske eller væsentligt ratslør kræver eftersyn."}
+      ],
+      "cards": [
+        {"title":"Fra rat til forhjul","body":"Når rattet drejes, føres bevægelsen gennem styreapparatets forbindelser og led til forhjulene. Under kørsel søger styringen normalt tilbage mod ligeud, når grebet lettes. Funktionen hjælper bilen med at følge en stabil linje, men føreren skal bevare kontrollen.","refs":["1.2.2.1","1.2.2.2"]},
+        {"title":"Servo og ESC har forskellige roller","body":"Hydraulisk eller elektrisk servo gør rattet lettere at dreje. Nyere biler skal have ESC, som kan bremse ét eller flere hjul for at mindske udskridning eller væltning, især i sving. Et servosvigt gør styringen tungere; fortsat kørsel kan være uforsvarlig og ulovlig.","refs":["1.2.2.3","1.2.2.4"]},
+        {"title":"Lovkravet kan mærkes","body":"Styreapparatet skal gøre bilen let, sikker og hurtig at styre. Der må ikke være væsentligt slør. Ved lav fart skal rattet kunne drejes fra side til side uden ujævn modstand eller mislyde, som kan afsløre en fejl.","refs":["1.2.2.5","1.2.2.6","1.2.2.7"]},
+        {"title":"Ratslør og servovæske","body":"Ved kontrol skal hjulene straks følge rattets bevægelse. Har bilen servostyring, skal servoen være aktiveret. En eventuel servobeholder kontrolleres efter fabrikantens forskrift, typisk mellem min- og maxmærket eller ved at sikre, at den relevante kontrollampe ikke lyser.","refs":["1.2.2.8","1.2.2.9"]},
+        {"title":"Fejlene fortæller en historie","body":"Tung styring kan skyldes for lidt servovæske, en slidt eller knækket drivrem eller fejl i elektrisk servo. Følger hjulene ikke rattet straks, kan der være slør. For lidt væske eller væsentligt ratslør kræver eftersyn.","refs":["1.2.2.10","1.2.2.11","1.2.2.12"]}
+      ],
+      "practical": [
+        {"title":"Kontrollér ratslør","action":"På en holdende bil og efter kørelærerens anvisning: aktivér eventuel servo, bevæg rattet lidt, og se udefra om forhjulene straks følger rattets bevægelse.","refs":["1.2.2.8"]},
+        {"title":"Kontrollér servosystemet","action":"Find med kørelæreren bilens relevante servokontrol: væskebeholder med min- og maxmærke eller kontrollampe efter fabrikantens forskrift. Metoden afhænger af bilen, og den fysiske udførelse vurderes ved bilen.","refs":["1.2.2.9"]}
+      ],
+      "case": {
+        "context":"På en bil med aktiveret servo følger forhjulene ikke straks en lille ratbevægelse. Hvilken vurdering gengiver Plan B?",
+        "options":[
+          {"id":"a","text":"Det kan være slør i styreforbindelserne; ved væsentligt ratslør skal styreapparatet efterses.","correct":true,"why":"Hjulene skal normalt følge rattets bevægelse straks. Forsinket reaktion kan vise slør, og væsentligt ratslør udløser krav om eftersyn.","refs":["1.2.2.8","1.2.2.11","1.2.2.12"]},
+          {"id":"b","text":"Det er normalt ved servostyring, hvis rattet ellers kan drejes uden mislyde ved lav fart.","correct":false,"why":"Aktiveret servo er netop forudsætningen for ratslørskontrollen. Let styring uden mislyd ophæver ikke kravet om, at hjulene straks følger rattet.","refs":["1.2.2.7","1.2.2.8","1.2.2.11"]},
+          {"id":"c","text":"Det peger alene på for lidt servovæske; styreforbindelserne kræver derfor ikke nærmere eftersyn.","correct":false,"why":"For lidt servovæske kan give tung styring, men forsinket hjulreaktion er særskilt tegn på slør i styreforbindelserne.","refs":["1.2.2.9","1.2.2.10","1.2.2.11"]}
+        ]
+      },
+      "recall":{"prompt":"Hvordan kontrolleres ratslør i en bil med servostyring?","answer":"Med servoen aktiveret bevæges rattet, mens man ser, om forhjulene straks følger rattets bevægelse.","refs":["1.2.2.8"]}
+    },
+    {
+      "id": "bremser",
+      "title": "Bremser",
+      "pointRef": "1.2.3",
+      "zone": "cockpit",
+      "lead": "Bremsernes funktion, kontrollamper og fysiske kontrol skal tilsammen afsløre fejl, før sikkerheden svigter.",
+      "objectives": [
+        {"ref":"1.2.3.1","requirement":"viden","summary":"Væsketryk presser belægninger mod skive eller tromle og bremser hjulet."},
+        {"ref":"1.2.3.2","requirement":"viden","summary":"Pedal, hovedcylinder, rør, slanger og forstærker skaber og fører bremsetryk."},
+        {"ref":"1.2.3.3","requirement":"viden","summary":"Tokredssystemet bevarer nødbremsevirkning ved svigt i én kreds."},
+        {"ref":"1.2.3.4","requirement":"viden","summary":"ABS bruger hjulfølere og en styreboks til at modvirke blokering og bevare begrænset styremulighed."},
+        {"ref":"1.2.3.5","requirement":"viden","summary":"Parkeringsbremsen virker på hjulbremser og kan være elektrisk."},
+        {"ref":"1.2.3.6","requirement":"viden","summary":"Bremseassistent øger deceleration eller aktiverer ABS fuldt ved kraftig bremsning."},
+        {"ref":"1.2.3.7","requirement":"viden","summary":"One-pedal kan ofte slås til og fra i elbiler og giver regeneration, men erstatter ikke altid bremsepedalen."},
+        {"ref":"1.2.3.8","requirement":"viden","summary":"Elbilers bremser kræver særlig vedligeholdelsesopmærksomhed."},
+        {"ref":"1.2.3.9","requirement":"angive","summary":"Driftsbremsen skal virke på alle hjul ved alle hastigheder og belastninger."},
+        {"ref":"1.2.3.10","requirement":"angive","summary":"Parkeringsbremsen skal kunne holde bilen på en hældning."},
+        {"ref":"1.2.3.11","requirement":"viden","summary":"Hydraulisk driftsbremse kan være vakuum- eller elektrisk forstærket."},
+        {"ref":"1.2.3.12","requirement":"viden","summary":"Nødbremsen skal kunne bremse sikkert ved svigt af driftsbremsen."},
+        {"ref":"1.2.3.13","requirement":"kontrollere","summary":"Pedalen må ikke kunne trædes i bund ved hårdt tryk."},
+        {"ref":"1.2.3.14","requirement":"kontrollere","summary":"Pedalen må normalt ikke synke ved konstant tryk."},
+        {"ref":"1.2.3.15","requirement":"kontrollere","summary":"Bremsevæsken skal stå korrekt eller kontrollampen være slukket."},
+        {"ref":"1.2.3.16","requirement":"angive","summary":"Skævtrækning kan skyldes bremsefejl eller midlertidig fugt og snavs."},
+        {"ref":"1.2.3.17","requirement":"angive","summary":"Ujævn bremsning eller hug kan skyldes tromler, skiver eller belægninger."},
+        {"ref":"1.2.3.18","requirement":"angive","summary":"Pludseligt længere pedalvandring er tegn på en defekt bremsekreds."},
+        {"ref":"1.2.3.19","requirement":"angive","summary":"Skævtrækning ved let bremsning på vandret vej er et fejltegn."},
+        {"ref":"1.2.3.20","requirement":"angive","summary":"Ujævn bremsning eller hjulvise hug er fejltegn."},
+        {"ref":"1.2.3.21","requirement":"angive","summary":"Væske-, lampe-, pedal- og retningsfejl kræver straks eftersyn."},
+        {"ref":"1.2.3.22","requirement":"angive","summary":"Ved vedvarende ABS-lampe er kun kørsel til nærmeste værksted tilladt."},
+        {"ref":"1.2.3.23","requirement":"angive","summary":"Konstant ESC-lampe kan vise fejl; følg fabrikantens anvisning."}
+      ],
+      "cards": [
+        {"title":"Tryk bliver til bremsekraft","body":"Når pedalen trædes ned, skaber hovedcylinderen væsketryk, som føres gennem rør og slanger til hjulbremserne. Belægninger presses mod skiver eller tromler. En forstærker hjælper føreren; svigter den, kan fortsat kørsel være uforsvarlig og ulovlig.","refs":["1.2.3.1","1.2.3.2"]},
+        {"title":"Kredse og nødbremse","body":"Tokredsbremsen har to adskilte kredse. Hvis én bliver utæt, kan den anden yde nødbremsevirkning, men fortsat kørsel er uforsvarlig og ulovlig. Nødbremsen skal kunne bremse bilen sikkert, hvis driftsbremsen svigter under kørslen.","refs":["1.2.3.3","1.2.3.12"]},
+        {"title":"ABS, assistent og ESC","body":"Hjulfølere sender hjulenes omdrejninger til en elektronisk styreboks, som regulerer bremsetrykket og modvirker blokering. Reguleringen giver vibrationer i pedalen og muliggør i en vis udstrækning styring under bremsning. Bremseassistent hjælper ved kraftig opbremsning. Vedvarende ABS-lampe tillader kun kørsel til nærmeste værksted; konstant ESC-lampe kræver fabrikantens anvisning.","refs":["1.2.3.4","1.2.3.6","1.2.3.22","1.2.3.23"]},
+        {"title":"Elbilens særlige bremser","body":"One-pedal-funktion findes på elbiler og kan ofte slås til og fra. Når speederen løftes, aktiveres regenerativ bremsning, som samtidig lader batteriet. Er virkningen utilstrækkelig, skal bremsepedalen bruges. Elbilens bremser kræver mere vedligeholdelsesopmærksomhed for at bevare en effektiv funktion.","refs":["1.2.3.7","1.2.3.8"]},
+        {"title":"Tre bremsekrav","body":"Driftsbremsen skal virke på alle hjul og bremse sikkert, hurtigt og virksomt ved alle hastigheder og belastninger. Parkeringsbremsen skal holde bilen på hældende vej og kan være elektrisk. En hydraulisk driftsbremse kan være vakuum- eller elektrisk forstærket.","refs":["1.2.3.5","1.2.3.9","1.2.3.10","1.2.3.11"]},
+        {"title":"Pedal og væske","body":"Ved fysisk kontrol må bremsepedalen ikke gå i bund ved hårdt tryk eller normalt synke under et konstant tryk. Bremsevæsken skal stå mellem min- og maxmærket, eller den tilhørende kontrollampe skal være slukket. Pedalvandringen varierer mellem biler.","refs":["1.2.3.13","1.2.3.14","1.2.3.15"]},
+        {"title":"Fejl mærkes i bilen","body":"Skævtrækning, hug, ujævn bremsning eller pludseligt længere pedalvandring er fejltegn. Fugt efter bilvask kan kortvarigt påvirke belægningerne, men vedvarende afvigelser, for lidt væske eller en tændt bremselampe kræver straks eftersyn.","refs":["1.2.3.16","1.2.3.17","1.2.3.18","1.2.3.19","1.2.3.20","1.2.3.21"]}
+      ],
+      "practical": [
+        {"title":"Kontrollér pedalvandring","action":"I den holdende bil og efter kørelærerens anvisning: tryk hårdt på pedalen og hold derefter et konstant tryk. Vurder, om pedalen går i bund eller normalt synker under det konstante tryk.","refs":["1.2.3.13","1.2.3.14"]},
+        {"title":"Kontrollér bremsevæske","action":"Find med kørelæreren beholderens min- og maxmærker eller den relevante kontrollampe. Følg bilens løsning uden værktøj; den fysiske kontrol skal læres og vurderes på den konkrete bil.","refs":["1.2.3.15"]}
+      ],
+      "case": {
+        "context":"ABS-lampen slukker ikke kort efter igangsætning. Hvilken kørselsadgang angiver Plan B præcist for denne fejl?",
+        "options":[
+          {"id":"a","text":"Planen tillader kun kørsel direkte til nærmeste værksted, fordi bilens bremseegenskaber er ændret.","correct":true,"why":"En ABS-lampe, der ikke slukker kort efter igangsætning, er tegn på fejl; Plan B afgrænser kørslen til nærmeste værksted.","refs":["1.2.3.4","1.2.3.22"]},
+          {"id":"b","text":"Planen forbyder al egen kørsel og kræver transport af bilen direkte til et værksted.","correct":false,"why":"Det er lovligt at lade bilen stå, men udsagnet gengiver ikke planen: den tillader den snævert afgrænsede kørsel til nærmeste værksted.","refs":["1.2.3.4","1.2.3.22"]},
+          {"id":"c","text":"Planen tillader forsigtige nødvendige ture, hvis føreren undgår hårde opbremsninger og holder lav hastighed.","correct":false,"why":"Planen giver ikke en generel adgang til nødvendige ture; den eneste angivne fortsatte kørsel er til nærmeste værksted.","refs":["1.2.3.4","1.2.3.22"]}
+        ]
+      },
+      "recall":{"prompt":"Hvad gør du, hvis bremsepedalen pludselig kan trædes længere ned end sædvanligt?","answer":"Det er tegn på en defekt bremsekreds. Bremserne skal straks efterses, og normal videre kørsel er ikke forsvarlig.","refs":["1.2.3.18","1.2.3.21"]}
+    },
+    {
+      "id": "lygter-reflekser-horn",
+      "title": "Lygter, reflekser og horn",
+      "pointRef": "1.2.4",
+      "zone": "exterior",
+      "lead": "Bilens lys skal både oplyse vejen og gøre køretøjet tydeligt uden at blænde andre.",
+      "objectives": [
+        {"ref":"1.2.4.1","requirement":"angive","summary":"Bilen må kun have påbudte eller tilladte lygter og reflekser."},
+        {"ref":"1.2.4.2","requirement":"angive","summary":"Kend bilens obligatoriske lygter, blinklys og bagreflekser."},
+        {"ref":"1.2.4.3","requirement":"angive","summary":"Kend rækkevidderne 100, 30 og 300 meter for forlygter og positionslys."},
+        {"ref":"1.2.4.4","requirement":"angive","summary":"Lygter og reflekser skal være hele, rene og funktionsdygtige."},
+        {"ref":"1.2.4.5","requirement":"angive","summary":"Forlygter skal lyse hvidt eller gulligt."},
+        {"ref":"1.2.4.6","requirement":"angive","summary":"Pærer skal være korrekt monteret."},
+        {"ref":"1.2.4.7","requirement":"angive","summary":"Lygter i et par skal have samme farve og styrke."},
+        {"ref":"1.2.4.8","requirement":"angive","summary":"Baglygter skal lyse rødt."},
+        {"ref":"1.2.4.9","requirement":"angive","summary":"Nummerpladelys skal gøre pladen læselig på mindst 20 meter."},
+        {"ref":"1.2.4.10","requirement":"angive","summary":"Biler over 6 meter kræver gule sidereflekser og sidemarkeringslygter."},
+        {"ref":"1.2.4.11","requirement":"viden","summary":"Kend hele listen over tilladte ekstra lygter samt hvide, gule og supplerende røde reflekser."},
+        {"ref":"1.2.4.12","requirement":"viden","summary":"Pæremontering kan vurderes på lys-mørke-grænsen mod en væg."},
+        {"ref":"1.2.4.13","requirement":"viden","summary":"Nærlysets lysgrænse skal falde 1 centimeter pr. meter."},
+        {"ref":"1.2.4.14","requirement":"kontrollere","summary":"Kontrollér at alle lygter og reflekser er hele og rene."},
+        {"ref":"1.2.4.15","requirement":"kontrollere","summary":"Kontrollér at stoplys er væsentligt kraftigere end baglys."},
+        {"ref":"1.2.4.16","requirement":"kontrollere","summary":"Kontrollér gult blinklys, som er tydeligt i sollys."},
+        {"ref":"1.2.4.17","requirement":"kontrollere","summary":"Kontrollér at havariblink tænder alle blinklygter samtidig."},
+        {"ref":"1.2.4.18","requirement":"kontrollere","summary":"Kontrollér hvid belysning af den bageste nummerplade."},
+        {"ref":"1.2.4.19","requirement":"kontrollere","summary":"Kontrollér at hornet giver en klar og konstant tone."},
+        {"ref":"1.2.4.20","requirement":"angive","summary":"Hurtig blinkrytme viser normalt en defekt blinklygte."}
+      ],
+      "cards": [
+        {"title":"Det obligatoriske lyssæt","body":"Bilen skal have to fjernlys, to asymmetriske nærlys, to positionslys, to baglys, normalt tre stoplys, mindst ét nummerpladelys, blinklys foran, bagpå og på siderne samt to røde, godkendte, mærkede og ikke-trekantede bagreflekser.","refs":["1.2.4.1","1.2.4.2"]},
+        {"title":"Tre afstande og én plade","body":"Fjernlys skal oplyse mindst 100 meter frem. Nærlys skal nå mindst 30 meter uden at blænde. Positionslys skal kunne ses mindst 300 meter væk. Nummerpladelyset skal gøre den bageste plade læselig mindst 20 meter bag bilen.","refs":["1.2.4.3","1.2.4.9"]},
+        {"title":"Farver og par","body":"Forlygter skal lyse hvidt eller gulligt, mens baglygter skal lyse rødt. Pærer skal sidde korrekt, og lygter i samme par skal have ens farve og lysstyrke. Alle lygter og reflekser skal være hele, rene og funktionsdygtige.","refs":["1.2.4.4","1.2.4.5","1.2.4.6","1.2.4.7","1.2.4.8"]},
+        {"title":"Lange biler","body":"En bil over 6 meter skal have godkendte og mærkede gule sidereflekser samt sidemarkeringslygter fordelt på siderne. Kravet er knyttet til bilens længde og skal ikke forveksles med de supplerende reflekser, som kan være tilladt på andre biler.","refs":["1.2.4.10"]},
+        {"title":"Tilladte ekstra lygter og reflekser","body":"Tilladt ekstraudstyr omfatter ekstra fjernlys, kørelys, ekstra stop- og baglygter, tågeforlygter, baklygter, tågebaglygter, søge- og arbejdslygter, afmærknings- og markeringslygter, parkeringslygter og overhalingsblink. Desuden må bilen have hvide reflekser foran, gule på siderne og supplerende røde bagpå. Udstyret følger særlige regler.","refs":["1.2.4.11"]},
+        {"title":"Nærlysets grænse","body":"En forkert monteret pære kan give et forkert lysbillede. Mod en væg kan lys-mørke-grænsen vurderes. Nærlyset må ikke blænde, og overkanten af lysgrænsen skal falde 1 centimeter for hver meter væk fra bilen.","refs":["1.2.4.12","1.2.4.13"]},
+        {"title":"Rundt om bilen","body":"Kontrollen omfatter hele og rene lygter og reflekser, kraftigere stoplys end baglys, synligt gult blinklys, samlet havariblink, hvidt nummerpladelys og et horn med klar, konstant tone. Hurtig blinkrytme betyder normalt, at mindst én blinklygte ikke virker.","refs":["1.2.4.14","1.2.4.15","1.2.4.16","1.2.4.17","1.2.4.18","1.2.4.19","1.2.4.20"]}
+      ],
+      "practical": [
+        {"title":"Lygter og reflekser","action":"Sammen med kørelæreren i undervisningsbilen: 1) kontrollér at alle lygter og reflekser er hele og rene, 2) sammenlign stoplys med baglys og se at stoplyset er væsentligt kraftigere, 3) kontrollér gult blinklys, som ses tydeligt i sollys, 4) tænd havariblink og se at alle blinklygter tænder samtidig, og 5) kontrollér at nummerpladelyset belyser den bageste nummerplade med hvidt lys.","refs":["1.2.4.14","1.2.4.15","1.2.4.16","1.2.4.17","1.2.4.18"]},
+        {"title":"Hornet","action":"På et egnet sted og efter kørelærerens anvisning: giv et kort signal og vurder, om tonen er klar og konstant. Undgå unødig brug; kontrollen skal udføres på bilen.","refs":["1.2.4.19"]}
+      ],
+      "case": {
+        "context":"Blinklygterne blinker væsentligt hurtigere end sædvanligt. Hvad er dette normalt tegn på ifølge Plan B?",
+        "options":[
+          {"id":"a","text":"Det er normalt tegn på, at én eller flere af bilens blinklygter ikke virker.","correct":true,"why":"Plan B knytter den væsentligt hurtigere blinkrytme direkte til, at én eller flere blinklygter normalt er ude af funktion.","refs":["1.2.4.20"]},
+          {"id":"b","text":"Det er normalt en selvtest, som viser, at alle blinklygter og havariblink virker korrekt.","correct":false,"why":"Planen beskriver ikke den hurtige rytme som en selvtest; den er normalt et tegn på en ikke-fungerende blinklygte.","refs":["1.2.4.17","1.2.4.20"]},
+          {"id":"c","text":"Det viser normalt, at blinklygterne lyser for kraftigt, selv om alle fortsat virker.","correct":false,"why":"Lysstyrken kontrolleres ved tydelig synlighed i sollys, mens den hurtige rytme knyttes til manglende funktion i en blinklygte.","refs":["1.2.4.16","1.2.4.20"]}
+        ]
+      },
+      "recall":{"prompt":"Hvilke tre afstande knytter sig til fjernlys, nærlys og positionslys?","answer":"Fjernlys mindst 100 meter, nærlys mindst 30 meter uden at blænde og positionslys synligt på mindst 300 meter.","refs":["1.2.4.3"]}
+    },
+    {
+      "id": "motor-udstoedning-batteri",
+      "title": "Motor, udstødning og batteri",
+      "pointRef": "1.2.5",
+      "zone": "powertrain",
+      "lead": "Væsker, støj, røg og ændret kraftoverførsel giver tidlige tegn på fejl i drivlinjen.",
+      "objectives": [
+        {"ref":"1.2.5.1","requirement":"kontrollere","summary":"Kontrollér tilstrækkelig motorolie efter pind, instrument eller instruktionsbog."},
+        {"ref":"1.2.5.2","requirement":"kontrollere","summary":"Kontrollér kølervæske efter instruktionsbogens anvisning."},
+        {"ref":"1.2.5.3","requirement":"angive","summary":"Utæt udstødning eller åben bagklap kan føre farlig kulilte ind."},
+        {"ref":"1.2.5.4","requirement":"angive","summary":"For lidt olie eller kølervæske kan beskadige motoren."},
+        {"ref":"1.2.5.5","requirement":"angive","summary":"Unormal udstødningsrøg viser dårlig forbrænding og fejl."},
+        {"ref":"1.2.5.6","requirement":"angive","summary":"Unormal støj ved gasgivning viser mulig udstødningsfejl."},
+        {"ref":"1.2.5.7","requirement":"angive","summary":"Stigende motoromdrejning uden højere fart viser mulig koblingsfejl."},
+        {"ref":"1.2.5.8","requirement":"angive","summary":"Vanskeligt gearskift med kraftig mislyd viser gear- eller koblingsfejl."},
+        {"ref":"1.2.5.9","requirement":"angive","summary":"Kryb i første gear med koblingen helt nede viser koblingsfejl."},
+        {"ref":"1.2.5.10","requirement":"viden","summary":"Elbilbatteriers kapacitet og rækkevidde falder med alder og slid."},
+        {"ref":"1.2.5.11","requirement":"viden","summary":"Fabrikantens instruktioner kan begrænse unødigt batterislid."},
+        {"ref":"1.2.5.12","requirement":"viden","summary":"Forvarmning eller køling under opladning kan gavne rækkevidden."},
+        {"ref":"1.2.5.13","requirement":"angive","summary":"Føreren skal følge støj, motor og emissionsbegrænsende udstyr."}
+      ],
+      "cards": [
+        {"title":"Olie og kølervæske","body":"Motorolie kontrolleres i tilstrækkelig mængde mellem min- og maxmærker på oliepinden, via bilens instrumenter eller efter instruktionsbogen. Kølervæske kontrolleres efter instruktionsbogen. For lidt olie eller kølervæske kan skade motoren alvorligt under kørsel.","refs":["1.2.5.1","1.2.5.2","1.2.5.4"]},
+        {"title":"Kulilte kan ikke lugtes","body":"En utæt udstødning eller kørsel med åben bagklap kan føre kulilte ind i bilen. Gassen er lugtfri og farlig selv i små mængder. Lugt er derfor ingen sikker test; fejl og uhensigtsmæssig brug skal forebygges.","refs":["1.2.5.3"]},
+        {"title":"Røg, støj og kraftoverførsel","body":"Unormal udstødningsrøg peger på dårlig forbrænding, og usædvanlig støj ved gasgivning på udstødningsfejl. Stiger motorens omdrejninger uden tilsvarende fart, kan koblingen glide. Kraftige mislyde ved gearskift eller kryb med koblingen nede er også fejltegn.","refs":["1.2.5.5","1.2.5.6","1.2.5.7","1.2.5.8","1.2.5.9"]},
+        {"title":"Elbilens batteri ændrer sig","body":"Et højvoltsbatteri mister normalt kapacitet med alder og slid, så rækkevidden bliver kortere. Følg fabrikantens råd for at begrænse unødigt slid. Opvarmning eller køling af kabine og batteri, mens bilen stadig lader, kan forbedre rækkevidden.","refs":["1.2.5.10","1.2.5.11","1.2.5.12"]},
+        {"title":"Lovlig stand undervejs","body":"Føreren skal løbende være opmærksom på unødig støj og på fejl ved motor eller forureningsbegrænsende udstyr, der påvirker udledningen. En ny lyd eller røgsky er ikke noget, man gemmer til næste olieskift uden vurdering.","refs":["1.2.5.13"]}
+      ],
+      "practical": [
+        {"title":"Kontrollér motorolie","action":"På den konkrete bil viser kørelæreren den korrekte metode: oliepind, instrumentvisning eller instruktionsbog. Udfør kontrollen uden værktøj efter fabrikantens anvisning, og forklar hvordan du afgør, om oliemængden er tilstrækkelig.","refs":["1.2.5.1"]},
+        {"title":"Kontrollér kølervæske","action":"Find beholder eller relevant visning med kørelæreren, og følg instruktionsbogen. Åbn aldrig et varmt system på egen hånd. Den praktiske kontrol skal udføres og vurderes ved bilen.","refs":["1.2.5.2"]}
+      ],
+      "case": {
+        "context":"Motoren tager omdrejninger uden tilsvarende fart, og gearskiftet er vanskeligt med kraftige mislyde. Hvilken fejlkobling følger Plan B?",
+        "options":[
+          {"id":"a","text":"Opspeedningen tyder på koblingsfejl; mislydene ved vanskelig gearskiftning tyder på fejl i gear eller kobling.","correct":true,"why":"Plan B beskriver præcis de to tegn og knytter dem henholdsvis til koblingen og til gear eller kobling.","refs":["1.2.5.7","1.2.5.8"]},
+          {"id":"b","text":"Begge tegn skyldes normalt for lidt kølervæske og skal derfor vurderes som en motorfejl.","correct":false,"why":"For lidt kølervæske kan skade motoren, men planen knytter ikke disse to konkrete symptomer til kølesystemet.","refs":["1.2.5.2","1.2.5.4","1.2.5.7","1.2.5.8"]},
+          {"id":"c","text":"Opspeedningen viser udstødningsfejl, mens mislydene viser, at batteriets kapacitet er blevet for lav.","correct":false,"why":"Udstødningsfejl forbindes med unormal støj ved gasgivning, og batterikapacitet med rækkevidde; ingen af dem matcher de beskrevne tegn.","refs":["1.2.5.6","1.2.5.7","1.2.5.8","1.2.5.10"]}
+        ]
+      },
+      "recall":{"prompt":"Hvorfor kan man ikke bruge lugtesansen til at afgøre, om der er kulilte i bilen?","answer":"Kulilte er lugtfri og farlig selv i små mængder; en utæt udstødning eller åben bagklap kan føre den ind i kabinen.","refs":["1.2.5.3"]}
+    },
+    {
+      "id": "energi-og-miljo",
+      "title": "Energi- og miljørigtig kørsel",
+      "pointRef": "1.2.6",
+      "zone": "powertrain",
+      "lead": "Forudseenhed, jævn fart og bevidst brug af biltypen reducerer energi, støj og unødige udledninger.",
+      "objectives": [
+        {"ref":"1.2.6.1","requirement":"angive","summary":"Start først motoren umiddelbart før afgang."},
+        {"ref":"1.2.6.2","requirement":"angive","summary":"Undgå længere tomgang for at begrænse støj og luftforurening."},
+        {"ref":"1.2.6.3","requirement":"angive","summary":"Køremåden har stor betydning for energiforbruget."},
+        {"ref":"1.2.6.4","requirement":"angive","summary":"Automatisk motorstop ved korte standsninger sparer energi."},
+        {"ref":"1.2.6.5","requirement":"angive","summary":"Sluk motoren ved længere standsning for at spare energi."},
+        {"ref":"1.2.6.6","requirement":"angive","summary":"Undgå unødige og gentagne hastighedsændringer."},
+        {"ref":"1.2.6.7","requirement":"angive","summary":"Slip speederen og undgå så vidt muligt udkobling ved fartreduktion."},
+        {"ref":"1.2.6.8","requirement":"angive","summary":"Vælg så højt gear som muligt for lavere energiforbrug."},
+        {"ref":"1.2.6.9","requirement":"angive","summary":"Accelerér kvikt med cirka halv speeder og vælg tidligt et højt gear, eventuelt ved at springe gear over."},
+        {"ref":"1.2.6.10","requirement":"angive","summary":"Unødig vægt øger energiforbruget."},
+        {"ref":"1.2.6.11","requirement":"angive","summary":"Brug bilens eventuelle energiforbrugsvisning."},
+        {"ref":"1.2.6.12","requirement":"angive","summary":"For lavt dæktryk øger energiforbruget."},
+        {"ref":"1.2.6.13","requirement":"angive","summary":"Tagboks og lignende øger energiforbruget."},
+        {"ref":"1.2.6.14","requirement":"angive","summary":"Aircondition og andet elektrisk udstyr øger energiforbruget."},
+        {"ref":"1.2.6.15","requirement":"angive","summary":"Høj fart og aggressiv acceleration øger forbruget markant."},
+        {"ref":"1.2.6.16","requirement":"angive","summary":"Forudse signalstop og sænk farten tidligt frem for sen hård bremsning."},
+        {"ref":"1.2.6.17","requirement":"angive","summary":"Undgå korte og unødvendige køreture."},
+        {"ref":"1.2.6.18","requirement":"viden","summary":"Kørsel uden for myldretid kan skåne miljøet."},
+        {"ref":"1.2.6.19","requirement":"viden","summary":"Planlæg samkørsel, når det er muligt."},
+        {"ref":"1.2.6.20","requirement":"viden","summary":"Vælg om muligt det mest energieffektive og mindst forurenende køretøj."},
+        {"ref":"1.2.6.21","requirement":"viden","summary":"Hybrid og plug-in-hybrid kombinerer forbrændingsmotor og elmotor."},
+        {"ref":"1.2.6.22","requirement":"viden","summary":"Plug-in-hybridens fordel kræver, at opladningsmuligheden bruges mest muligt."},
+        {"ref":"1.2.6.23","requirement":"viden","summary":"Elkøretøjer udnytter generelt energien bedre end fossilkøretøjer."},
+        {"ref":"1.2.6.24","requirement":"viden","summary":"Elbilens rækkevidde afhænger af køremåde og årstid."},
+        {"ref":"1.2.6.25","requirement":"viden","summary":"Lange elbilture kræver omhyggelig rute- og ladeplanlægning."},
+        {"ref":"1.2.6.26","requirement":"viden","summary":"Mest mulig regeneration kan øge elbilens rækkevidde."},
+        {"ref":"1.2.6.27","requirement":"angive","summary":"Betjen bilen uden unødig støj, røg eller gasudvikling."},
+        {"ref":"1.2.6.28","requirement":"angive","summary":"Undgå unødig forstyrrende kørsel ved bebyggelse og begræns gene."},
+        {"ref":"1.2.6.29","requirement":"angive","summary":"Lokale regler kan begrænse tomgangstiden."}
+      ],
+      "cards": [
+        {"title":"Start, når turen starter","body":"Start først forbrændingsmotoren umiddelbart før afgang. Undgå længere tomgang, og brug automatisk stop ved korte standsninger, hvis bilen har funktionen. Ved længere ventetid kan motoren slukkes. Det begrænser både energi, støj og luftforurening.","refs":["1.2.6.1","1.2.6.2","1.2.6.3","1.2.6.4","1.2.6.5"]},
+        {"title":"Jævnhed og gearvalg","body":"Undgå gentagne fartændringer. Ved fartreduktion slippes speederen helt, og i en bil med kobling undgås udkobling så vidt muligt. I en relevant manuelt gearet bil kan korrekt, tidligt gearvalg eksempelvis være skift fra 2. til 4. eller fra 3. til 5. gear efter kvik acceleration med cirka halv speeder.","refs":["1.2.6.6","1.2.6.7","1.2.6.8","1.2.6.9"]},
+        {"title":"Modstand koster energi","body":"Unødig vægt, for lavt dæktryk og en tagboks øger energiforbruget. Aircondition, klimaanlæg og andet elektrisk udstyr bruger også energi. Bilens eventuelle forbrugsvisning kan gøre virkningen synlig, så føreren kan justere sine vaner.","refs":["1.2.6.10","1.2.6.11","1.2.6.12","1.2.6.13","1.2.6.14"]},
+        {"title":"Se rødt lys tidligt","body":"Høj fart og aggressiv acceleration øger forbruget. Frem mod et signal bør føreren forudse et muligt stop og sænke farten tidligt i stedet for at fortsætte hurtigt og bremse hårdt. Energiøkonomisk teknik kan normalt spare 5-10 procent og i mange tilfælde op til 25 procent brændstof.","refs":["1.2.6.15","1.2.6.16"]},
+        {"title":"Planlæg før du kører","body":"Undgå korte, unødvendige ture. Når det er muligt, kan turen flyttes uden for myldretiden, deles med andre eller gennemføres i et mere energieffektivt og mindre forurenende køretøj. Den bedste sparemanøvre kan være at planlægge anderledes.","refs":["1.2.6.17","1.2.6.18","1.2.6.19","1.2.6.20"]},
+        {"title":"Hybrid kræver opladning","body":"Hybrid- og plug-in-hybridbiler kombinerer forbrændingsmotor og elmotor for at forbedre energiforbruget mest muligt. Plug-in-modellen er kun miljøvenlig og energieffektiv, når opladningsmuligheden gennem en ladestander udnyttes mest muligt. Den faktiske opladning er derfor afgørende for den tilsigtede energi- og miljøfordel.","refs":["1.2.6.21","1.2.6.22"]},
+        {"title":"Elbilens rækkevidde","body":"Elbiler udnytter generelt energien bedre end fossilbiler. Rækkevidden påvirkes af køremåde og årstid. På lange ture skal rute og ladestop planlægges omhyggeligt, gerne med relevante apps, og regeneration bør udnyttes mest muligt, når forholdene tillader det.","refs":["1.2.6.23","1.2.6.24","1.2.6.25","1.2.6.26"]},
+        {"title":"Støj og røg er ikke gratis","body":"Bilen skal betjenes uden unødig støj eller unødige mængder røg og gas. Forstyrrende kørsel ved bebyggelse skal undgås eller udføres med mindst mulig gene. Lokale bestemmelser kan desuden sætte en konkret grænse for tomgang.","refs":["1.2.6.27","1.2.6.28","1.2.6.29"]}
+      ],
+      "practical": [
+        {"title":"Læs forbrugsvisningen","action":"I undervisningsbilen viser kørelæreren den eventuelle energivisning. Aflæs den før og efter rolige og ujævne hastighedsændringer under lovlig undervisning, og forklar hvordan køremåden påvirker visningen.","refs":["1.2.6.3","1.2.6.11","1.2.6.15"]},
+        {"title":"Biltypecheck","action":"Afgør sammen med kørelæreren, om bilen er forbrændingsbil, hybrid, plug-in-hybrid eller elbil, og peg på de relevante stop-, lade- eller regenerationsfunktioner. Funktionerne afhænger af bilen.","refs":["1.2.6.4","1.2.6.21","1.2.6.22","1.2.6.26"]}
+      ],
+      "case": {
+        "context":"Hvilken beskrivelse gengiver Plan B's energirigtige teknik for en relevant manuelt gearet forbrændingsbil præcist?",
+        "options":[
+          {"id":"a","text":"Start umiddelbart før afgang, undgå længere tomgang, accelerér kvikt med cirka halv speeder, skift tidligt højt og tilpas farten før signalet.","correct":true,"why":"Alle led følger planens konkrete råd om starttidspunkt, tomgang, acceleration, gearvalg og forudseende farttilpasning ved signalregulerede kryds.","refs":["1.2.6.1","1.2.6.2","1.2.6.8","1.2.6.9","1.2.6.16"]},
+          {"id":"b","text":"Start tidligt og varm motoren roligt i tomgang; accelerér derefter forsigtigt i lave gear og koble ud ved fartreduktion.","correct":false,"why":"Planen fraråder længere tomgang, anbefaler højt gear og siger, at udkobling så vidt muligt bør undgås ved fartreduktion.","refs":["1.2.6.1","1.2.6.2","1.2.6.7","1.2.6.8","1.2.6.9"]},
+          {"id":"c","text":"Start ved afgang og behold lave gear for trækkraft; hold normal fart mod signalet, før der bremses jævnt.","correct":false,"why":"Starttidspunktet passer, men de lave gear og den sene farttilpasning strider mod rådene om højt gear og tidlig tilpasning før signalet.","refs":["1.2.6.1","1.2.6.8","1.2.6.16"]}
+        ]
+      },
+      "recall":{"prompt":"Hvorfor er en plug-in-hybrid ikke automatisk energi- og miljørigtig?","answer":"Fordi dens opladningsmulighed skal udnyttes mest muligt; køremåde, tomgang, vægt og turplanlægning har stadig betydning.","refs":["1.2.6.2","1.2.6.3","1.2.6.22"]}
+    },
+    {
+      "id": "daek-faelge-baerende-dele",
+      "title": "Dæk, fælge og bærende dele",
+      "pointRef": "1.2.7",
+      "zone": "exterior",
+      "lead": "Dæk og hjul skal passe sammen, være korrekt monteret og afsløre fejl gennem slid, lyd og styreadfærd.",
+      "objectives": [
+        {"ref":"1.2.7.1","requirement":"angive","summary":"Dæk, fælge og hjullejer skal være ubeskadigede."},
+        {"ref":"1.2.7.2","requirement":"angive","summary":"Dæk på samme aksel skal have samme dimension og type, bortset fra nødhjul."},
+        {"ref":"1.2.7.3","requirement":"angive","summary":"Dæktrykket skal følge fabrikantens forskrift."},
+        {"ref":"1.2.7.4","requirement":"angive","summary":"Køretøjet må ikke have åbenbart uegnede dæk."},
+        {"ref":"1.2.7.5","requirement":"viden","summary":"Kend almindelige dæk, vinterdæk og helårsdæk samt deres temperaturformål."},
+        {"ref":"1.2.7.6","requirement":"viden","summary":"Bjerg-snefnug med M+S viser vinterdæk; M+S alene kan være helårsdæk."},
+        {"ref":"1.2.7.7","requirement":"viden","summary":"Pigdæk må bruges 1. november til 15. april og skal sidde på alle hjul."},
+        {"ref":"1.2.7.8","requirement":"viden","summary":"El- og hybridbiler har ofte større dækslid på grund af vægt og regeneration."},
+        {"ref":"1.2.7.9","requirement":"kontrollere","summary":"Kontrollér mindst 1,6 millimeter hovedmønster på alle hjul."},
+        {"ref":"1.2.7.10","requirement":"kontrollere","summary":"Kontrollér at dæk og fælge er ubeskadigede."},
+        {"ref":"1.2.7.11","requirement":"kontrollere","summary":"Kontrollér korrekt omløbsretning på retningsbestemte dæk."},
+        {"ref":"1.2.7.12","requirement":"angive","summary":"Ujævnt eller skævt dækslid viser fejl."},
+        {"ref":"1.2.7.13","requirement":"angive","summary":"Over- eller understyring og sidevindsfølsomhed kan vise forkert dæktryk."},
+        {"ref":"1.2.7.14","requirement":"angive","summary":"Knirkelyde kan vise fejl i fjedre, støddæmpere eller hjulophæng."},
+        {"ref":"1.2.7.15","requirement":"angive","summary":"Skævt slid kan skyldes dæktryk, hjulindstilling, bremser eller støddæmpere."},
+        {"ref":"1.2.7.16","requirement":"angive","summary":"Unormal støj eller vibration kan vise fejl i hjulleje eller ophæng."},
+        {"ref":"1.2.7.17","requirement":"angive","summary":"Fejl bag ujævnt dækslid skal straks afhjælpes."},
+        {"ref":"1.2.7.18","requirement":"angive","summary":"Tegn på forkert dæktryk skal straks afhjælpes."}
+      ],
+      "cards": [
+        {"title":"Hjulene skal passe sammen","body":"Dæk, fælge og hjullejer skal være ubeskadigede. På samme aksel skal dækkene have samme dimension og type, bortset fra et nødhjul til midlertidig brug. Dæktrykket skal følge fabrikantens forskrift, og åbenbart uegnede dæk må ikke anvendes.","refs":["1.2.7.1","1.2.7.2","1.2.7.3","1.2.7.4"]},
+        {"title":"Læs dækkets type","body":"Almindelige dæk er beregnet til højere temperaturer end vinterdæk. M+S sammen med bjerg- og snefnugsymbol viser et vinterdæk; M+S alene kan være et helårsdæk. Symbolet skal læses, ikke gættes ud fra mønsterets dramatiske udseende.","refs":["1.2.7.5","1.2.7.6"]},
+        {"title":"Pigdæk og tunge biler","body":"Pigdæk må bruges fra 1. november til 15. april og skal sidde på alle hjul, også på en eventuel tilkoblet påhængsvogn. El- og hybridbiler har ofte større dækslid på grund af højere vægt og regenerationsfunktion.","refs":["1.2.7.7","1.2.7.8"]},
+        {"title":"Tre konkrete kontroller","body":"Hovedmønstret skal være mindst 1,6 millimeter på alle hjul og kan vurderes ved slidindikatorer. Dæk og fælge skal være uden skader. Et retningsbestemt dæk skal vende i korrekt omløbsretning efter markeringen på siden.","refs":["1.2.7.9","1.2.7.10","1.2.7.11"]},
+        {"title":"Slid peger videre","body":"Ujævnt eller skævt slid kan skyldes forkert dæktryk, hjul, hjulindstilling, bremser eller støddæmpere. Over- eller understyring og større sidevindsfølsomhed kan også pege på dæktrykket. Årsagen skal straks findes og afhjælpes.","refs":["1.2.7.12","1.2.7.13","1.2.7.15","1.2.7.17","1.2.7.18"]},
+        {"title":"Lyt til ophænget","body":"Knirk under kørsel kan komme fra hjulophæng, fjedre eller støddæmpere. Unormal støj eller vibration fra hjulleje eller ophæng kan også være tegn på fejl. Lyden er et signal om undersøgelse, ikke et soundtrack bilen selv har valgt.","refs":["1.2.7.14","1.2.7.16"]}
+      ],
+      "practical": [
+        {"title":"Mønster og skader","action":"På samtlige hjul på den konkrete bil viser kørelæreren hovedmønster og eventuelle slidindikatorer. Kontrollér mindst 1,6 millimeter i hovedmønstret samt synlige skader på dæk og fælge.","refs":["1.2.7.9","1.2.7.10"]},
+        {"title":"Omløbsretning","action":"Find pil eller anden retningsmarkering på et retningsbestemt dæk sammen med kørelæreren, og kontrollér den mod hjulets fremadgående rotation. Kravet gælder kun, når dækket er retningsbestemt.","refs":["1.2.7.11"]}
+      ],
+      "case": {
+        "context":"Dækkene har lovlig mønsterdybde, men ét er skævt slidt, og bilen er usædvanligt sidevindsfølsom. Hvilken vurdering følger Plan B?",
+        "options":[
+          {"id":"a","text":"Skævt slid tyder på fejl, sidevindsfølsomhed kan pege på forkert dæktryk, og forholdene skal straks afhjælpes.","correct":true,"why":"Planen gør både skævt slid og den unormale styreadfærd til fejltegn og kræver umiddelbar afhjælpning af årsagen.","refs":["1.2.7.12","1.2.7.13","1.2.7.15","1.2.7.17","1.2.7.18"]},
+          {"id":"b","text":"Lovlig mønsterdybde betyder, at skævslid og sidevindsfølsomhed kan afvente det næste almindelige serviceeftersyn.","correct":false,"why":"Mindstekravet til mønsterdybde ophæver ikke de øvrige fejltegn; planen siger, at disse fejl skal afhjælpes umiddelbart.","refs":["1.2.7.9","1.2.7.12","1.2.7.13","1.2.7.17","1.2.7.18"]},
+          {"id":"c","text":"Skævslid kræver kun dækombytning på akslen; fabrikantens dæktryk og øvrige mulige fejl er uden betydning.","correct":false,"why":"Planen peger på flere mulige årsager, blandt andet dæktryk, hjulindstilling, bremser og støddæmpere; dækombytning alene løser ikke årsagen.","refs":["1.2.7.3","1.2.7.12","1.2.7.15","1.2.7.17"]}
+        ]
+      },
+      "recall":{"prompt":"Hvad skal du gøre ved ujævnt eller skævt dækslid, selv om mønsterdybden stadig er lovlig?","answer":"Få årsagen undersøgt og straks afhjulpet; den kan være dæktryk, hjulindstilling, bremser, støddæmpere eller andre hjulfejl.","refs":["1.2.7.12","1.2.7.15","1.2.7.17"]}
+    },
+    {
+      "id": "sikkerhedsseler-udsyn-udstyr",
+      "title": "Sikkerhedsseler, udsyn og særligt udstyr",
+      "pointRef": "1.2.9",
+      "zone": "exterior",
+      "lead": "Seler, ruder, viskere og spejle skal give beskyttelse og udsyn i den konkrete bil.",
+      "objectives": [
+        {"ref":"1.2.9.1","requirement":"angive","summary":"Bilen skal normalt have sikkerhedssele på alle siddepladser."},
+        {"ref":"1.2.9.2","requirement":"angive","summary":"Sikkerhedsseler skal være ubeskadigede."},
+        {"ref":"1.2.9.3","requirement":"angive","summary":"Påbudte nakkestøtter må ikke fjernes fra benyttede pladser."},
+        {"ref":"1.2.9.4","requirement":"angive","summary":"Forruden skal normalt være hel og kunne holdes ren med visker og vasker."},
+        {"ref":"1.2.9.5","requirement":"angive","summary":"Bilen skal have indvendigt førerspejl og udvendigt spejl i hver side."},
+        {"ref":"1.2.9.6","requirement":"angive","summary":"Spejle skal være rene og ubeskadigede."},
+        {"ref":"1.2.9.7","requirement":"angive","summary":"Spejle kan erstattes af kamera- og monitorløsning."},
+        {"ref":"1.2.9.8","requirement":"angive","summary":"Medbring en godkendt advarselstrekant til situationer, hvor den skal opstilles."},
+        {"ref":"1.2.9.9","requirement":"angive","summary":"En rude, der ikke kan holdes ren, viser fejl ved visker eller vasker."},
+        {"ref":"1.2.9.10","requirement":"kontrollere","summary":"Kontrollér at der er tilstrækkelig sprinklervæske."},
+        {"ref":"1.2.9.11","requirement":"kontrollere","summary":"Kontrollér at viskerne kan holde forruden ren."},
+        {"ref":"1.2.9.12","requirement":"kontrollere","summary":"Kontrollér korrekt indstillede, rene og hele spejle."},
+        {"ref":"1.2.9.13","requirement":"viden","summary":"Indvendig film på ruder og spejle kan ødelægge udsynet i modlys."}
+      ],
+      "cards": [
+        {"title":"Sele og nakkestøtte","body":"Bilen skal normalt have sikkerhedssele på alle siddepladser, og selerne skal være uden skader. Påbudte nakkestøtter må ikke fjernes, når pladsen bruges. Beskyttelsen begynder altså før kørslen med udstyr, der er til stede og intakt.","refs":["1.2.9.1","1.2.9.2","1.2.9.3"]},
+        {"title":"Ruden skal kunne holdes ren","body":"Forruden skal som hovedregel være hel og uden skader. Visker og vasker skal kunne holde den ren. Hvis det ikke lykkes, er det tegn på fejl i et af systemerne, også selv om udsynet virker acceptabelt i tørvejr.","refs":["1.2.9.4","1.2.9.9"]},
+        {"title":"Spejle eller kamera","body":"Bilen skal have et indvendigt førerspejl og et udvendigt førerspejl på hver side. Spejlene skal være rene og ubeskadigede. De kan erstattes af en kamera- og monitorløsning. Find derfor først ud af, hvilken løsning den konkrete bil er udstyret med.","refs":["1.2.9.5","1.2.9.6","1.2.9.7"]},
+        {"title":"Trekanten skal være ved hånden","body":"En godkendt advarselstrekant bør medbringes, så den kan opstilles i de situationer, hvor der er pligt til det. Den hjælper ikke meget hjemme i garagen, når bilen står havareret et andet sted.","refs":["1.2.9.8"]},
+        {"title":"Udsynets skjulte film","body":"Sprinklervæske skal være tilstrækkelig, viskerne skal rense ruden, og spejlene skal være hele, rene og korrekt indstillede. En tynd indvendig film kan være næsten usynlig i gråvejr, men gøre udsynet meget dårligt ved lav sol eller blændende lygter.","refs":["1.2.9.10","1.2.9.11","1.2.9.12","1.2.9.13"]}
+      ],
+      "practical": [
+        {"title":"Sprinkler og viskere","action":"I undervisningsbilen og sammen med kørelæreren: kontrollér væskemængden efter bilens løsning og instruktionsbog, aktivér vasker og viskere, og vurder om viskerne kan holde forruden ren.","refs":["1.2.9.10","1.2.9.11"]},
+        {"title":"Spejlkontrol","action":"Indstil siddestillingen først. Kontrollér derefter med kørelæreren, at spejle eller monitorer er rene, hele og korrekt indstillet for den konkrete bil. Den fysiske præstation vurderes ved bilen.","refs":["1.2.9.12"]}
+      ],
+      "case": {
+        "context":"Forruden har indvendig film, sprinklervæsken er næsten tom, og viskerne bevæger sig. Hvilken kontrol og vurdering følger Plan B?",
+        "options":[
+          {"id":"a","text":"Sprinklervæsken skal være tilstrækkelig, viskerne skal kunne holde ruden ren, og filmen bør fjernes på grund af modlys.","correct":true,"why":"Planen kræver tilstrækkelig sprinklervæske og fungerende viskere og beskriver, at indvendig film kan gøre udsynet umuligt i modlys.","refs":["1.2.9.4","1.2.9.9","1.2.9.10","1.2.9.11","1.2.9.13"]},
+          {"id":"b","text":"Viskernes bevægelse opfylder kontrollen alene; sprinklervæsken kan vente, hvis der ikke forventes regn.","correct":false,"why":"Kontrollen gælder både tilstrækkelig sprinklervæske og viskernes evne til faktisk at holde forruden ren, uanset vejrudsigten.","refs":["1.2.9.4","1.2.9.9","1.2.9.10","1.2.9.11"]},
+          {"id":"c","text":"Den indvendige film er kun relevant ved rudeskade; rene spejle kan ellers erstatte en ren forrude.","correct":false,"why":"Planen behandler filmen som en selvstændig udsynsrisiko i modlys, og spejlkravene erstatter ikke kravet om en forrude, der kan holdes ren.","refs":["1.2.9.4","1.2.9.5","1.2.9.6","1.2.9.13"]}
+        ]
+      },
+      "recall":{"prompt":"Hvorfor skal ruder rengøres indvendigt, selv når de ser acceptable ud i gråvejr?","answer":"En tynd film kan blive stærkt synshæmmende ved lav sol eller blændende lygter og i værste fald gøre udsynet umuligt.","refs":["1.2.9.13"]}
+    },
+    {
+      "id": "saerlige-koeretoejer",
+      "title": "Særlige køretøjer",
+      "pointRef": "1.2.10",
+      "zone": "documents",
+      "lead": "Kategori B kan omfatte flere køretøjstyper, men hver type kan have særlige krav til indretning og udstyr.",
+      "objectives": [
+        {"ref":"1.2.10.1","requirement":"viden","summary":"Kend at flere B-køretøjer har særregler om mål, vægt, udstyr og tilkobling."}
+      ],
+      "cards": [
+        {"title":"Flere typer under kategori B","body":"Særregler kan gælde for varebil, påhængskøretøj til person- og varebil, quadricykel, trehjulet motorcykel, ATV, stor knallert, traktor og motorredskab, selv når køretøjet kan føres med kategori B. Førerretten gør dem ikke teknisk ens.","refs":["1.2.10.1"]},
+        {"title":"Mål og vægt varierer","body":"Reglerne vedrører især længde, bredde, tilladt last og tilladt totalvægt. Derfor kan man ikke overføre personbilens grænser eller antage, at et køretøj må lastes ud fra den plads, der ser ledig ud.","refs":["1.2.10.1"]},
+        {"title":"Udstyr følger køretøjet","body":"Bremser, lygter, dæk og spejle kan være reguleret særligt. For nogle typer er styrthjelm relevant, og for påhængskøretøj gælder særlige tilkoblingskrav. Kravene findes i reglerne for den konkrete køretøjstype; dokumenterne bruges som støtte, når de indeholder relevante oplysninger.","refs":["1.2.10.1"]}
+      ],
+      "practical": [
+        {"title":"Type og særkrav","action":"Gennemgå med kørelæreren et konkret køretøjs type, relevante dokumenter og de regler, der gælder for typen. Peg på krav til mål, vægt, bremser, lygter, dæk, spejle, hjelm eller tilkobling, hvor de er relevante.","refs":["1.2.10.1"]}
+      ],
+      "case": {
+        "context":"En bestemt ATV kan føres med kategori B. Hvilken konklusion om indretning og udstyr følger Plan B?",
+        "options":[
+          {"id":"a","text":"ATV-typen kan have særregler om blandt andet mål, vægt, bremser, lygter, dæk, spejle og styrthjelm.","correct":true,"why":"Planen siger udtrykkeligt, at de nævnte kategori B-køretøjer kan være omfattet af særlige regler om disse forhold.","refs":["1.2.10.1"]},
+          {"id":"b","text":"ATV-typen følger personbilens udstyrskrav, men kan have en særregel om styrthjelm, hvis den er åben.","correct":false,"why":"Planens særregler er ikke begrænset til styrthjelm; de kan også vedrøre mål, vægt, bremser, lygter, dæk og spejle.","refs":["1.2.10.1"]},
+          {"id":"c","text":"Kategori B betyder, at særregler bortfalder, når ATV'en er registreret og dens tilladte totalvægt er kendt.","correct":false,"why":"Førerretten og registreringen fjerner ikke køretøjstypens særlige regler om indretning, udstyr og eventuelt førerudstyr.","refs":["1.2.10.1"]}
+        ]
+      },
+      "recall":{"prompt":"Hvorfor er kategori B alene ikke nok til at afgøre et særligt køretøjs udstyrskrav?","answer":"Fordi køretøjstypen kan have egne regler om blandt andet mål, vægt, bremser, lys, dæk, spejle, hjelm og tilkobling.","refs":["1.2.10.1"]}
+    }
+  ]
+}

@@ -5,10 +5,13 @@ import { fileURLToPath } from 'node:url';
 import { CHAPTERS, QUESTIONS, SOURCES } from './dist/content.js';
 import { LESSONS } from './dist/lessons.js';
 import { questionDiagram } from './dist/diagrams.js';
+import { GARAGE } from './dist/garage-content.js';
+import { validateGarage } from './garage-data.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.join(root, 'dist');
 const errors = [];
+errors.push(...validateGarage(GARAGE));
 const checkedAssets = new Set();
 
 const allowedSourceHosts = new Set([
@@ -195,7 +198,7 @@ function inspectAsset(file) {
   }
 }
 
-for (const required of ['index.html', 'styles.css', 'app.js', 'core.js', 'content.js', 'scene.js', 'judge.css', 'driving.html', 'lessons.css', 'assets/three.min.js', 'assets/icon.svg']) {
+for (const required of ['index.html', 'styles.css', 'app.js', 'core.js', 'content.js', 'scene.js', 'judge.css', 'driving.html', 'lessons.css', 'garage.css', 'garage.js', 'garage-content.js', 'assets/three.min.js', 'assets/icon.svg']) {
   inspectAsset(path.join(dist, required));
 }
 
@@ -204,5 +207,5 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exitCode = 1;
 } else {
-  console.log(`NATKØRSEL OK: ${SOURCES.length} kilder, ${CHAPTERS.length} kapitler, ${sections.length} sektioner, ${QUESTIONS.length} spørgsmål, ${Object.keys(LESSONS).length} mikrolektioner, ${checkedAssets.size} lokale runtime-filer.`);
+  console.log(`NATKØRSEL OK: ${SOURCES.length} kilder, ${CHAPTERS.length} kapitler, ${sections.length} sektioner, ${QUESTIONS.length} spørgsmål, ${Object.keys(LESSONS).length} mikrolektioner, ${GARAGE.topics.length} garageområder, ${checkedAssets.size} lokale runtime-filer.`);
 }

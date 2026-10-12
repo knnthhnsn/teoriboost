@@ -12,11 +12,25 @@
     "chapters": 10,
     "explanationCards": 174,
     "lessons": 58,
-    "localRuntimeFilesChecked": 20,
+    "localRuntimeFilesChecked": 23,
     "result": "passed",
     "sections": 58,
     "questions": 83,
-    "sources": 12
+    "sources": 12,
+    "garage": {
+      "topics": 17,
+      "objectiveEntries": 183,
+      "cards": 77,
+      "cases": 17,
+      "openRecalls": 17
+    },
+    "updated": "2026-10-12"
   },
-  "scope": "Schema, source-id and existence checks; no claim of full legal, curriculum or human validation"
+  "scope": "Schema, source-id and existence checks; no claim of full legal, curriculum or human validation",
+  "garageTests": {
+    "count": 5,
+    "result": "passed",
+    "scope": "Objective inventory, reference consistency, physical preparation, choices and search"
+  },
+  "totalTests": 21
 }

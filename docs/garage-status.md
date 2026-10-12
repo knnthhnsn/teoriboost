@@ -1,0 +1,15 @@
+# Garagen — kontrolleret 12. oktober 2026
+
+Garagen gør bilens teknik og kontrolkrav til en konkret indgang: fire områder, original SVG-bil med røntgenskyder, cases før forklaringen, genkaldelse og opgaver til næste køretime. Teoriatlasets søgning finder også ord i garagens delmål.
+
+Den officielle Plan B v1.1 ligger til grund for 17 underområder og 183 delmålsposter, inklusive otte separate ADAS-eksempler. De øvrige bogstavopregninger er repræsenteret under deres nummererede punkt. 77 forklaringskort, 17 originale cases og 17 åbne genkaldelser forklarer stoffet; de beviser ikke, at alle mål beherskes. Den samlede fysiske liste rummer ni områder og har ingen afkrydsning, XP eller bestået-status.
+
+To batches blev skrevet og derefter krydsreviewet mod primærkilden. 24 fund blev vurderet: 23 rettet, ét forslag om gentagen certificeringsadvarsel afvist, fordi det globale fysiske panel allerede er tydeligt. De korrigerede praktiske instruktioner beholder bilspecifikke anvisninger og kørelærer. Efter Claudes billedkritik blev faktuel lead flyttet ind under forklaringen og alle cases omskrevet til plausible, længdebalancerede svar. Ved ABS spørges der om planens kørselsadgang, så frivillig sikker parkering ikke underkendes.
+
+Alle 17 endelige cases er gennemført i Brave ved 390×844 med forkert svar, forklaring, omkamp, korrekt svar og valgfri huskekrog. Cases starter uden facit, lead eller meme synligt; omkamp skjuler forklaringen igen. Ingen vandret overflow i de afprøvede indledende og udvidede visninger. Søgning, tomt søgeresultat, områdevalg og tjekliste er særskilt kontrolleret. Røntgenskyderen er tastaturbetjent; den korrekte maskebredde blev observeret. Brainrot OFF skjuler huskekrogen og bevarer fakta/kilder. XP i den lokale testprofil var 645 både før og efter garagetræning.
+
+De faktiske mobilbilleder viste små SVG-etiketter; de blev forstørret. Den sidste måling fandt 14,4 px høje tekstfelter og fire separate områdelinks på mindst 44×44 px. Etiketterne på tegningen er beskrivende, ikke små trykflader. En tidlig assert om nulhøjde på indhold i foldede native details var ikke egnet: browseren bevarede DOM-geometrien, mens accessibility-visningen udelod teksten. Kontrollen blev rettet til lukket details-ancestor og faktisk accessibility-udeladelse.
+
+21 automatiske checks og validering af 23 runtime-filer består. De fem garagechecks kontrollerer struktur, referenceinventar, praktisk forberedelse, gyldige cases og søgning; de vurderer ikke automatisk alt semantisk indhold. Claude vurderede to faktiske billeder; Jev klassificerede den tekstlige kontrolrapport uden billeder eller browserhandlinger. Rå resultater og closures er bevaret i `research/`.
+
+Begrænsninger: ingen godkendt kørelærer, reelle elever eller fysiske telefoner har endnu afprøvet garagen. En case pr. område dækker ikke alle variationer. Ingen særskilt vedvarende spaced-recall-kø for garagen er implementeret. De øvrige kapitler mangler samme detaljeringsgrad. Udgivet browservisning afventer ejerens passkey; native udgivelsesmetadata er særskilt lokal evidens.

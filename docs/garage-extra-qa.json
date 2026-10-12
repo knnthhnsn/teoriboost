@@ -1,0 +1,41 @@
+{
+  "atlasGarageHits": [
+    {
+      "href": "#garage:styreapparat",
+      "text": "Styreapparat\nGaragen · Styringen skal overføre rattets bevægelser præcist og uden unødig modstand, slør eller mislyde."
+    }
+  ],
+  "steeringFirst": {
+    "caseCount": 3,
+    "physical": "Skal vises i bilen.",
+    "scroll": 390,
+    "title": "Styreapparat",
+    "width": 390
+  },
+  "garageSearchMatches": [
+    "#garage:betjeningsudstyr",
+    "#garage:motor-taending-og-speeder",
+    "#garage:kobling",
+    "#garage:ansvar-for-bilens-stand",
+    "#garage:motor-udstoedning-batteri",
+    "#garage:energi-og-miljo",
+    "#garage:saerlige-koeretoejer"
+  ],
+  "emptyGarageText": "Ingen emner passer til søgningen. Prøv et andet ord.",
+  "zoneMatches": [
+    "#garage:motor-taending-og-speeder",
+    "#garage:kobling",
+    "#garage:gear",
+    "#garage:motor-udstoedning-batteri",
+    "#garage:energi-og-miljo"
+  ],
+  "checklistStatus": {
+    "checkboxes": 0,
+    "scope": "En fælles huskeliste til dig og kørelæreren. Udfør kontrollen i undervisningsbilen efter dens anvisninger. Listen registrerer eller godkender ingen praktisk færdighed.",
+    "scroll": 390,
+    "title": "Tag kontrollen\nmed til bilen.",
+    "topics": 9,
+    "width": 390
+  },
+  "result": "passed"
+}

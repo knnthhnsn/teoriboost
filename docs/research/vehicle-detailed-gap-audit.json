@@ -1,0 +1,184 @@
+{
+  "source": {
+    "id": "plan-b-1-1",
+    "title": "Færdselsstyrelsen: Undervisningsplan for kategori B, version 1.1, maj 2026",
+    "url": "https://cdn.fstyr.dk/faerdselsstyrelsen/Media/639159124710541258/undervisningsplan-kategori-b-almindelig-bil-version-11-maj-2026_pdf290526.pdf",
+    "locator": "Hovedafsnit 1, side 19-30; præstationskrav side 11-12"
+  },
+  "checked": "2026-10-12",
+  "headingId": "1",
+  "items": [
+    {
+      "pointRef": "1.1.1, pkt. 1-6",
+      "skill": "udpege-i-bilen",
+      "shortTarget": "Udpeg kontakter til start, viskere, horn, lys, klima og spejle; pedaler, gear, parkeringsbremse, rat og sele; åbning af hætter og dæksler til drivmiddel og relevante væsker.",
+      "matchedSectionIds": [
+        "cockpit",
+        "start-stop"
+      ],
+      "coverage": "partial",
+      "nextAction": "Lav en køretøjsspecifik udpegningsliste til brug med kørelærer. Bevar teksten som forberedelse og kræv fysisk lokalisering i undervisningsbilen; tilføj de manglende kontakter, åbninger og væskedæksler."
+    },
+    {
+      "pointRef": "1.1.2, pkt. 1-3",
+      "skill": "aflaese-og-forstaa-i-bilen",
+      "shortTarget": "Aflæs speedometer og relevante målere samt forstå bilens kontrollys, øvrige displayoplysninger og akustiske alarmer, herunder nødvendig reaktion på sikkerheds- og miljøadvarsler.",
+      "matchedSectionIds": [
+        "cockpit",
+        "motor-dokumenter"
+      ],
+      "coverage": "partial",
+      "nextAction": "Tilføj en mærkeuafhængig oversigt over de nævnte instrumentgrupper og en fysisk tjekliste til undervisningsbilen. Skeln mellem at genkende et eksempel i appen og at kunne aflæse bilens faktiske symboler og alarmer."
+    },
+    {
+      "pointRef": "1.1.3, pkt. 1-7",
+      "skill": "viden",
+      "shortTarget": "Forklar hovedprincippet i forbrændingsmotorens kraftvej, speederens regulering og startmotorens brug samt forskellen på elbil og hybrid og deres batteribaserede drivkraft.",
+      "matchedSectionIds": [],
+      "coverage": "missing",
+      "nextAction": "Opret kort teori om kraftvejen fra motor gennem kobling og gear til hjul, korrekt frigivelse af startknap og de grundlæggende el- og hybridprincipper. Motoradvarsler i den nuværende bank dækker ikke funktionsmålet."
+    },
+    {
+      "pointRef": "1.1.4, pkt. 1-7",
+      "skill": "viden",
+      "shortTarget": "Forklar koblingens sammen- og frakobling af motor og gearkasse, korrekt pedalbrug ved start og gearskift, blød kraftoverførsel, mulig hydraulik og fraværet af koblingspedal i automatgear og elbil.",
+      "matchedSectionIds": [],
+      "coverage": "missing",
+      "nextAction": "Tilføj en kort funktionsforklaring for manuel kobling, hydraulik og biler uden koblingspedal. Henvis derefter til fysisk øvelse; den nuværende praktiske note om koblingspunkt er ikke en forklaring af delmålet."
+    },
+    {
+      "pointRef": "1.1.5, pkt. 1-5",
+      "skill": "viden",
+      "shortTarget": "Forklar gearkassens ændring af kraft og hastighed, forskellen på manuel og automatisk transmission, brugen af lave og høje gear samt bakgearets funktion.",
+      "matchedSectionIds": [],
+      "coverage": "missing",
+      "nextAction": "Tilføj målrettet teori om gearkassens funktion, trækkraft, energiforbrug og bakgear. Køretekniske omtaler af gearvalg andre steder er ikke tilstrækkelig dækning af dette funktionsmål."
+    },
+    {
+      "pointRef": "1.1.6, pkt. 1-6, herunder 3 a-h",
+      "skill": "viden-og-aflaese-i-bilen",
+      "shortTarget": "Kend sensorbaserede førerassistenter, deres typiske funktioner og begrænsninger, førerens fortsatte ansvar og øgede distraktionsrisiko; aflæs og forstå alle systemer i undervisnings- og prøvebilen.",
+      "matchedSectionIds": [
+        "assistenter"
+      ],
+      "coverage": "partial",
+      "nextAction": "Udvid med planens systemtyper: adaptiv fartpilot, blindvinkel-, vognbane-, parkerings-, nødbremse-, trætheds-, tavle- og lysassistent. Tilføj en køretøjsspecifik aflæsningstjekliste uden at kræve farlige fremprovokerede indgreb."
+    },
+    {
+      "pointRef": "1.2.1, pkt. 1-4",
+      "skill": "angive-regel",
+      "shortTarget": "Angiv ejerens eller brugerens ansvar for lovlig stand og førerens ansvar for sikker stand, løbende kontrol af styring, bremser, lys og horn, forsvarlig trailerkobling samt støj og emissioner.",
+      "matchedSectionIds": [
+        "bremser",
+        "lys-daek",
+        "motor-dokumenter",
+        "laes-trailer"
+      ],
+      "coverage": "partial",
+      "nextAction": "Saml ansvarspunkterne i én regeloversigt. Tilføj den præcise forskel mellem ejer eller registreret bruger og fører samt de nu manglende krav om horn, tilkobling, støj og forureningsbegrænsende udstyr."
+    },
+    {
+      "pointRef": "1.2.2, pkt. 1-12",
+      "skill": "viden-angive-og-kontrollere-i-bilen",
+      "shortTarget": "Forstå styring, selvopretning, servostyring og ESC; angiv krav og fejltegn; kontrollér uden værktøj, at hjul følger rattet uden væsentligt slør, og at eventuel servovæske er korrekt.",
+      "matchedSectionIds": [
+        "bremser"
+      ],
+      "coverage": "partial",
+      "nextAction": "Opret et selvstændigt styreapparatforløb med funktionsviden, lovkrav, ratslørskontrol, servovæske eller kontrollampe og handling ved tung styring, mislyde eller slør. Den nuværende bank nævner kun styretøjsfejl generelt."
+    },
+    {
+      "pointRef": "1.2.3, pkt. 1-23",
+      "skill": "viden-angive-og-kontrollere-i-bilen",
+      "shortTarget": "Forstå drifts-, nødbremse, parkeringsbremse, ABS, ESC, bremseassistent og regenerativ bremsning; angiv krav og fejltegn; kontrollér pedalvandring, konstant tryk og bremsevæske uden værktøj.",
+      "matchedSectionIds": [
+        "bremser",
+        "fart-energi"
+      ],
+      "coverage": "partial",
+      "nextAction": "Bevar pedal- og skævtrækningsstoffet, men tilføj systemernes funktion, parkerings- og nødbremsekrav, ABS- og ESC-lamper, bremsevæskekontrol samt elbilens one-pedal- og vedligeholdelsesforhold. Markér kontrolpunkterne som fysisk kompetence."
+    },
+    {
+      "pointRef": "1.2.4, pkt. 1-20, herunder 2 a-h og 11",
+      "skill": "viden-angive-og-kontrollere-i-bilen",
+      "shortTarget": "Angiv påbudte og tilladte lygter, reflekser, farver, rækkevidder og fejltegn; kontrollér uden værktøj lygter, reflekser, stoplys, blink, havariblink, nummerpladelys og horn.",
+      "matchedSectionIds": [
+        "lys-daek"
+      ],
+      "coverage": "partial",
+      "nextAction": "Udbyg den eksisterende lygtekontrol med fuld inventarliste, 100/30/300-meterkrav, farver, ikke-blændende nærlys, stoplys, havariblink, nummerpladelys og horn. Gør den fysiske rundt-om-bilen-kontrol eksplicit."
+    },
+    {
+      "pointRef": "1.2.5, pkt. 1-13",
+      "skill": "kontrollere-i-bilen-angive-og-viden",
+      "shortTarget": "Kontrollér olie og kølervæske efter bilens anvisninger; forklar risiko og fejltegn ved udstødning, røg, støj, kobling og gear samt grundlæggende batteri- og rækkeviddeforhold for elkøretøjer.",
+      "matchedSectionIds": [
+        "motor-dokumenter"
+      ],
+      "coverage": "partial",
+      "nextAction": "Tilføj konkret olie- og kølervæskekontrol, kulilterisiko ved utæt udstødning eller åben bagklap, tre specifikke koblings- og gearfejltegn samt elbilens batterislid, forvarmning og fabrikantvejledning."
+    },
+    {
+      "pointRef": "1.2.6, pkt. 1-29",
+      "skill": "angive-og-viden",
+      "shortTarget": "Angiv sikker energi- og miljørigtig kørsel, herunder start og tomgang, jævn fart, gear, dæktryk, vægt, tagudstyr, klima, planlægning og regler om støj og røg; kend særlige el- og hybridforhold.",
+      "matchedSectionIds": [
+        "energi-miljoe"
+      ],
+      "coverage": "partial",
+      "nextAction": "Bevar den stærke kerne om forudseenhed, modstand og sikkerhed. Tilføj tomgang, gearvalg, korte ture, samkørsel, køretøjsvalg, el- og hybridopladning, regeneration og ruteplanlægning samt lovregler om støj, røg og lokale tomgangsforbud."
+    },
+    {
+      "pointRef": "1.2.7, pkt. 1-18",
+      "skill": "viden-angive-og-kontrollere-i-bilen",
+      "shortTarget": "Angiv regler om dæk, fælge, hjullejer, typer, tryk og pigdæk; kontrollér mindst 1,6 mm hovedmønster, skader og omløbsretning; forstå slid-, styre-, lyd- og vibrationsfejltegn.",
+      "matchedSectionIds": [
+        "lys-daek",
+        "energi-miljoe"
+      ],
+      "coverage": "partial",
+      "nextAction": "Udvid fra mønsterdybde og skade til samme type og dimension på akslen, fabrikanttryk, sommer-, vinter- og helårsdæk, pigdæk, omløbsretning og de konkrete fejltegn fra ujævnt slid, hjulleje og hjulophæng."
+    },
+    {
+      "pointRef": "1.2.8, pkt. 1-3",
+      "skill": "viden",
+      "shortTarget": "Kend kravene om, at karrosseriet ikke må have farlige skarpe eller udragende dele eller sikkerhedsfarlig skade og rust, og at døre samt front- og bagklap skal kunne holdes lukkede.",
+      "matchedSectionIds": [],
+      "coverage": "missing",
+      "nextAction": "Tilføj et kort, selvstændigt karrosseritjek med skarpe kanter, udragende dele, alvorlig skade eller rust og fungerende låse til døre og klapper."
+    },
+    {
+      "pointRef": "1.2.9, pkt. 1-13",
+      "skill": "viden-angive-og-kontrollere-i-bilen",
+      "shortTarget": "Angiv krav til seler, nakkestøtter, forrude, spejle og advarselstrekant; forklar tegn på visker- eller vaskerfejl; kontrollér sprinklervæske, viskere, spejlindstilling, renhed og skader.",
+      "matchedSectionIds": [
+        "cockpit",
+        "lys-daek"
+      ],
+      "coverage": "partial",
+      "nextAction": "Saml kravene til sele, nakkestøtte, rude, spejle og advarselstrekant. Tilføj fysisk kontrol af sprinklervæske, viskerfunktion og spejle samt betydningen af indvendig rudefilm i modlys."
+    },
+    {
+      "pointRef": "1.2.10, pkt. 1",
+      "skill": "viden",
+      "shortTarget": "Kend, at særlige regler om mål, vægt, last, bremser, lys, dæk, spejle, hjelm og tilkobling gælder for de forskellige særlige køretøjer, som kategori B kan give adgang til.",
+      "matchedSectionIds": [
+        "laes-trailer",
+        "motor-dokumenter"
+      ],
+      "coverage": "partial",
+      "nextAction": "Tilføj overblikket over varebil, påhængskøretøj, quadricykel, trehjulet motorcykel, ATV, stor knallert, traktor og motorredskab. Bevar trailerstoffet som ét eksempel og undgå at fremstille praktisk trailerkørsel som obligatorisk B-undervisning."
+    },
+    {
+      "pointRef": "1.3.1, pkt. 1-6",
+      "skill": "angive-og-viden",
+      "shortTarget": "Angiv krav om registrering og attest, find vægt- og trailerdata, afgør lovlig sammenkobling og medbring korrekte attester eller kopier; kend elbilers ofte lavere lasteevne.",
+      "matchedSectionIds": [
+        "motor-dokumenter",
+        "laes-trailer"
+      ],
+      "coverage": "partial",
+      "nextAction": "Udvid det eksisterende vægt- og sammenkoblingsstof med registreringskravet, danske kopier kontra originale attester eller genpart i udlandet og elbilers ofte lavere lasteevne. Tilføj en aflæsningsøvelse med realistisk attestudsnit."
+    }
+  ]
+}

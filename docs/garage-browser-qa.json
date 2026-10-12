@@ -1,0 +1,569 @@
+{
+  "checked": "2026-10-12T05:10:00.736Z",
+  "version": "Final source-rechecked plausible cases; lead inside collapsed explanation; 17post-answer hooks",
+  "scope": "Actual local Brave UI, all17 wrong/retry/correct branches, no human learner and no hosted browser verification",
+  "measurementCorrection": "A prior lead-height===0 assertion failed because collapsed native details retained DOM geometry; actual AX omitted lead. Replaced with closed-ancestor assertion; no content was moved back out.",
+  "cases": [
+    {
+      "id": "betjeningsudstyr",
+      "pointRef": "1.1.1",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "instrumenter-og-kontrollys",
+      "pointRef": "1.1.2",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "motor-taending-og-speeder",
+      "pointRef": "1.1.3",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "kobling",
+      "pointRef": "1.1.4",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "gear",
+      "pointRef": "1.1.5",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "foererassistentsystemer",
+      "pointRef": "1.1.6",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "ansvar-for-bilens-stand",
+      "pointRef": "1.2.1",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "styreapparat",
+      "pointRef": "1.2.2",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "bremser",
+      "pointRef": "1.2.3",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "lygter-reflekser-horn",
+      "pointRef": "1.2.4",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "motor-udstoedning-batteri",
+      "pointRef": "1.2.5",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "energi-og-miljo",
+      "pointRef": "1.2.6",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "daek-faelge-baerende-dele",
+      "pointRef": "1.2.7",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "karrosseri",
+      "pointRef": "1.2.8",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "sikkerhedsseler-udsyn-udstyr",
+      "pointRef": "1.2.9",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "saerlige-koeretoejer",
+      "pointRef": "1.2.10",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    },
+    {
+      "id": "registreringsattest",
+      "pointRef": "1.3.1",
+      "viewport": "390x844",
+      "initial": {
+        "choices": 3,
+        "jokes": 0,
+        "leadInExplanation": true,
+        "open": false,
+        "scroll": 390,
+        "width": 390
+      },
+      "wrong": {
+        "jokes": 1,
+        "open": true,
+        "right": 1,
+        "wrong": 1
+      },
+      "retry": {
+        "choices": 3,
+        "jokes": 0,
+        "open": false
+      },
+      "correct": {
+        "open": true,
+        "right": 1,
+        "scroll": 390,
+        "text": "Den beslutning passer til situationen.",
+        "width": 390,
+        "wrong": 0
+      },
+      "result": "passed"
+    }
+  ]
+}

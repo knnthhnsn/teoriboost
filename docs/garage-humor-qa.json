@@ -1,0 +1,27 @@
+{
+  "beforeHook": {
+    "choices": 3,
+    "jokes": 0,
+    "open": false
+  },
+  "withHook": {
+    "feedback": "Den beslutning passer til situationen.\n\nForstå forklaringen, og genkald den bagefter. Dette er en vidensøvelse; den godkender ingen fysisk kontrol.\n\nUndervisningsplanen ↗\n1.2.3.4 · 1.2.3.22 · 1.2.3.7\nMØTRIK-MADS / EN HUSKEKROG\n\nBremsepedalen skal være en bremsepedal. Ikke en elevator mod gulvet.\n\nPrøv beslutningen igen ↻",
+    "jokeDisplay": "block",
+    "scroll": 390,
+    "width": 390
+  },
+  "calmHook": {
+    "feedback": "Den beslutning passer til situationen.",
+    "jokeDisplay": "none",
+    "refs": 1
+  },
+  "humorRestored": "block",
+  "garageXP": [
+    "ERFARING\n645\nXP",
+    "MISSIONER\n4",
+    "GENTAGET SIKKERT\n0\nregler",
+    "KØ TIL GENTAGELSE\n43\nregler"
+  ],
+  "result": "passed",
+  "scope": "One final brake case on390px; optional humor after answer, calm hides humor and keeps factual feedback/source. Local test profile XP remains645, physical checks awardnone."
+}

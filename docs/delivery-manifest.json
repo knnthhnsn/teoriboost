@@ -1,6 +1,6 @@
 {
   "checked": "2026-10-12",
-  "scope": "Saved static app files and local evidence; file hashes are integrity checks, not acceptance proof",
+  "scope": "Historical first-delivery snapshot, superseded for changed runtime files by garage-delivery-manifest.json",
   "runtime": [
     {
       "path": "dist/app.js",
@@ -354,5 +354,6 @@
       "bytes": 99938,
       "sha256": "A0F1DCBD105F19DDA2591754B8523284F998821D0D1512565D5299255C05F17C"
     }
-  ]
+  ],
+  "supersededBy": "garage-delivery-manifest.json"
 }

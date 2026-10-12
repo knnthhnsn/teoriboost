@@ -1,0 +1,155 @@
+{
+  "checked": "2026-10-12T05:19:26.449Z",
+  "scope": "Current local runtime hashes and rendered screenshot inventory; no human acceptance or hosted UI verification claim",
+  "runtime": [
+    {
+      "path": "dist/app.js",
+      "bytes": 51704,
+      "sha256": "6c8119f23802b919aa9688eda0beba3c77d0ddd411db1c107c22e5c6de872fe4"
+    },
+    {
+      "path": "dist/assets/fonts/barlow-OFL.txt",
+      "bytes": 4377,
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f"
+    },
+    {
+      "path": "dist/assets/fonts/body-bold.ttf",
+      "bytes": 48200,
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    {
+      "path": "dist/assets/fonts/body-regular.ttf",
+      "bytes": 48280,
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    {
+      "path": "dist/assets/fonts/dm-sans-OFL.txt",
+      "bytes": 4482,
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+    },
+    {
+      "path": "dist/assets/fonts/heading-bold.ttf",
+      "bytes": 87556,
+      "sha256": "73bc9e17231e9073780d3c81574c7253cecd5645c93544df1a935054b39a364f"
+    },
+    {
+      "path": "dist/assets/fonts/mono.ttf",
+      "bytes": 128812,
+      "sha256": "a7fdc993f9f0387caedba4e42521136fa97e4c0837ae6239bf0413ccf8af00c2"
+    },
+    {
+      "path": "dist/assets/fonts/plex-OFL.txt",
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    {
+      "path": "dist/assets/icon.svg",
+      "bytes": 202,
+      "sha256": "7c1f6eb284560b6189126ee8d2103cb19ce9b72264c47d206dbe735423098b71"
+    },
+    {
+      "path": "dist/assets/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "7dddf7c5b8fd10ee654db8857d75d104b5557889aa5a91fc4ca545ea7c07062f"
+    },
+    {
+      "path": "dist/assets/three.min.js",
+      "bytes": 603445,
+      "sha256": "9274bbcec8d96168626c732b5d31c775aa8cfb7eaa0599bec0c175908a2c1ce2"
+    },
+    {
+      "path": "dist/content.js",
+      "bytes": 88723,
+      "sha256": "69b0d03134d779f08d04df143f5c5996770415b93bd05469dca02da99fb7a9a0"
+    },
+    {
+      "path": "dist/core.js",
+      "bytes": 11274,
+      "sha256": "127f622593e3d777fa7654411f8c6d29f758fe84b858262330b53121977f655f"
+    },
+    {
+      "path": "dist/diagrams.js",
+      "bytes": 40766,
+      "sha256": "ad908aa0703b325ee05c10eec2cc1ef60e41701f83d7afb9d5f5139d3e43c1a7"
+    },
+    {
+      "path": "dist/driving.html",
+      "bytes": 39695,
+      "sha256": "830e2c7a5bb38549db209a400e31902d3795ba71fc9c1e10d0a53fd901dd2fb6"
+    },
+    {
+      "path": "dist/garage-content.js",
+      "bytes": 116008,
+      "sha256": "2e13dfc56e3437c5bb0bb51156c5a24b70a814827c9fa8c905630f4dfc112fa0"
+    },
+    {
+      "path": "dist/garage.css",
+      "bytes": 13306,
+      "sha256": "9bee17b6d2593a08027ba245bf324b485ea4cb6715e44158109764dff51c208e"
+    },
+    {
+      "path": "dist/garage.js",
+      "bytes": 21261,
+      "sha256": "57aa3053ca2644163c348be7b4787cbacd8a9a40e95788f48c055731209f9414"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 2374,
+      "sha256": "658ff129a0a79327e85948162915e704aa08ecd637220c2aaab55098188f7078"
+    },
+    {
+      "path": "dist/judge-world.js",
+      "bytes": 22529,
+      "sha256": "134d3f25a643ea8e6ba3ffce6a7b1f6f8fd8b4ad211c9907fb0fb2eb66a52cc7"
+    },
+    {
+      "path": "dist/judge.css",
+      "bytes": 14397,
+      "sha256": "32fc2c5c5d0664fd13cf5f13817ab2459dfea2862293a84efa9df9fc45171546"
+    },
+    {
+      "path": "dist/judge.js",
+      "bytes": 24863,
+      "sha256": "71a77af7b3ae41c7042b56a5ec2e4e9bc227b2b88f882bdd83d641e280948c2a"
+    },
+    {
+      "path": "dist/lesson-view.js",
+      "bytes": 2706,
+      "sha256": "1d89f651740a9c594e2eeb5643fef4f7251ce21459c29133b2276b3d56338bcc"
+    },
+    {
+      "path": "dist/lessons.css",
+      "bytes": 2833,
+      "sha256": "41d04c8ffb50881a874bed13c2de88cd02cc58b3f4b50e90367112b27c419d7f"
+    },
+    {
+      "path": "dist/lessons.js",
+      "bytes": 141069,
+      "sha256": "34e7022edf68ad77188a1ad72b04865a7720ffdac33af838cda73711e2852872"
+    },
+    {
+      "path": "dist/scene.js",
+      "bytes": 13594,
+      "sha256": "5c6c4019deac57769a561cf83656caa9dfb5c6a72030d76856070102058b1847"
+    },
+    {
+      "path": "dist/styles.css",
+      "bytes": 33256,
+      "sha256": "ea0ad41401d7bfe49454398f3524286f36970c94c2f431acd2353b852f686e41"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "evidence/garage-overview-mobile-final.jpg",
+      "bytes": 39813,
+      "sha256": "8acd3e632392f2be08f04824f0e86a2606174f5b15455750e5d2403db97460bb",
+      "scope": "Actual local screenshot, not a hosted view"
+    },
+    {
+      "path": "evidence/garage-case-mobile-final.jpg",
+      "bytes": 48187,
+      "sha256": "2e2d4c95d8d67e67dcc9b766946809c97be90ed18e4e3f57971e7339d19e34c9",
+      "scope": "Actual local screenshot, not a hosted view"
+    }
+  ]
+}

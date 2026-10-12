@@ -1,0 +1,122 @@
+{
+  "checked": "2026-10-12T05:13:20.630Z",
+  "scope": "Synthetic text classification of a self-reported prototype QA record. Jev received0images and ran0browser actions; no human learning, instructor approval or market evidence.",
+  "state": {
+    "product": "NATKØRSEL, private Danish categoryB practice prototype for teens/adults",
+    "requestFacts": {
+      "imageFilesSuppliedToJev": 0,
+      "executableBrowserActionsSuppliedToJev": 0,
+      "realHumanParticipants": 0
+    },
+    "garage": {
+      "underareas": 17,
+      "objectiveEntries": 183,
+      "explanationCards": 77,
+      "originalDecisions": 17,
+      "source": "Official PlanBv1.1 chapter1",
+      "flow": "Case first; factual lead stays inside closed explanation; three plausible balanced options with one source-supported answer; explanation after answer or explicit opening; retry hides explanation and hook; open self-recall; physical tasks with instructor, no pass ticks or XP",
+      "visual": "Agent viewed actual 390px car xray and case screenshots. Xray reveals manual-car drivetrain. Four large area selectors, a direct clutch-case shortcut and search across objectives; placement caveat. Claude was supplied2actualscreenshots; Jev is supplied none.",
+      "humor": "17original hooks after answers; calm mode hides hook while keeping sources/facts",
+      "checks": "21automated checks passed; all17garage cases traversed wrong/retry/correct in Brave at390x844; no horizontal overflow in tested case/expanded views. Additional checks: unified atlas search, garage search/empty state, area filter, nine-topic physical checklist, keyboard xray, calm toggle. Local test XP remained645."
+    },
+    "review": {
+      "independentFindings": 24,
+      "corrected": 23,
+      "rejected": 1,
+      "rejectedReason": "Repeated per-task app warnings replaced by prominent physical requirement panel; UI contains no physical pass ticks.",
+      "visualCritique": "Claude saw2actualscreenshots and found small diagram labels and a leading introductory sentence/one obviously safe answer. Labels enlarged; lead moved under explanation; all17cases rewritten and source-rechecked to distinguish precise rules. Final17 UI branches passed afterward."
+    },
+    "remaining": {
+      "wholeCurriculumComplete": false,
+      "qualifiedInstructorApproval": false,
+      "realHumanLearningGain": false,
+      "nationalMarketLeadership": false,
+      "hostedBrowserQA": "Private owner login is awaiting user passkey. Native first deployment succeeded; garage version is local pending update."
+    },
+    "nextChoices": [
+      "complete_curriculum_then_instructor_and_human_transfer",
+      "more_cosmetic_polish",
+      "claim_market_leadership"
+    ]
+  },
+  "questions": {
+    "request_received_pixels": {
+      "type": "noul",
+      "instructions": "According to requestFacts, did this Jev request include any image files?"
+    },
+    "request_executed_browser": {
+      "type": "noul",
+      "instructions": "According to requestFacts, did this Jev request include any executable browser actions?"
+    },
+    "garage_interaction_evidence": {
+      "type": "noul",
+      "instructions": "Does the stated record include actual agent-run browser interaction checks, distinct from Jev classification?"
+    },
+    "complete_curriculum": {
+      "type": "noul",
+      "instructions": "Does this record establish a complete Danish theory curriculum for the whole app?"
+    },
+    "human_learning_gain": {
+      "type": "noul",
+      "instructions": "Does the record establish improved learning in real human students?"
+    },
+    "next_priority": {
+      "type": "choice",
+      "instructions": "Which next priority is best supported by the stated evidence?",
+      "criteria": {
+        "complete_curriculum_then_instructor_and_human_transfer": "Finish remaining curriculum depth, obtain qualified text/image review and test real learners on new situations",
+        "more_cosmetic_polish": "Spend the next phase mainly on further decoration of already tested garage screens",
+        "claim_market_leadership": "Declare Denmarknumber1 without human outcomes or market evidence"
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "request_received_pixels": {
+        "type": "noul",
+        "noul": 0.06,
+        "stats": {}
+      },
+      "request_executed_browser": {
+        "type": "noul",
+        "noul": 0.06,
+        "stats": {}
+      },
+      "garage_interaction_evidence": {
+        "type": "noul",
+        "noul": 0.86,
+        "stats": {}
+      },
+      "complete_curriculum": {
+        "type": "noul",
+        "noul": 0.06,
+        "stats": {}
+      },
+      "human_learning_gain": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      },
+      "next_priority": {
+        "type": "choice",
+        "choice": "complete_curriculum_then_instructor_and_human_transfer",
+        "confidence": 1,
+        "probabilities": {
+          "claim_market_leadership": 0,
+          "complete_curriculum_then_instructor_and_human_transfer": 1,
+          "more_cosmetic_polish": 0
+        },
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 1129,
+      "output_tokens": 169
+    },
+    "request_id": "playground_1b9d527dc9d0f00496daa642d364767946b",
+    "evaluation_time_ms": 56.488379021175206
+  },
+  "balanceDisplayBefore": "$4.99",
+  "balanceMeaning": "UI balance only; not an exact debit claim. No purchase, top-up or API key was used."
+}
