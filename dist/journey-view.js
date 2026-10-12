@@ -76,7 +76,7 @@ function quickLinks() {
 function path(units, activeUnitId, activeNodeId) {
   const unit = units.find(item => item.id === activeUnitId) || units[0];
   if (!unit) return '<p class="journey-empty">Ruten er ikke klar endnu.</p>';
-  return `<section class="journey-path" aria-labelledby="journey-path-title"><div class="journey-path-head"><div><span class="journey-kicker">${escape(String(unit.chapterIndex + 1).padStart(2, '0'))} / EMNE</span><h2 id="journey-path-title">${escape(unit.title)}</h2><p>${escape(unit.tagline || 'En kort strækning ad gangen.')}</p></div><span class="journey-path-count">${unit.nodes.filter(node => node.lessonComplete).length}/${unit.nodes.length} øvet</span></div><div class="journey-road" role="list">${unit.nodes.map(node => `<div role="listitem">${routeNode(node, node.id === activeNodeId)}</div>`).join('')}</div></section>`;
+  return `<section class="journey-path" aria-labelledby="journey-path-title"><div class="journey-path-head"><div><span class="journey-kicker">${escape(String(unit.chapterIndex + 1).padStart(2, '0'))} / EMNE</span><h2 id="journey-path-title">${escape(unit.title)}</h2><p>${escape(unit.tagline || 'En kort strækning ad gangen.')}</p></div><span class="journey-path-count">${unit.nodes.filter(node => node.lessonComplete).length}/${unit.nodes.length} forløb</span></div><div class="journey-road" role="list">${unit.nodes.map(node => `<div role="listitem">${routeNode(node, node.id === activeNodeId)}</div>`).join('')}</div></section>`;
 }
 
 export function renderJourneyHome({ units = [], daily = {}, recommendations = {}, humor = true, activeUnitId } = {}) {
@@ -94,5 +94,5 @@ export function renderJourneyHome({ units = [], daily = {}, recommendations = {}
 export function renderJourneyProgress({ units = [], daily = {}, recommendations = {}, humor = true, activeUnitId } = {}) {
   const completed = units.flatMap(unit => unit.nodes || []).filter(node => node.lessonComplete).length;
   const total = units.flatMap(unit => unit.nodes || []).length;
-  return `<div class="journey-shell journey-progress"><header class="journey-progress-head"><div><span class="journey-kicker">DIN FREMDRIFT</span><h1>Ruten bliver<br><em>mere din.</em></h1><p>${escape(String(completed))} af ${escape(String(total))} regelkort er øvet. Hold øje med det, du kan hente frem igen.</p></div>${humor ? renderArt('natmobil', { variant: 'garage', humorOnly: true }) : ''}</header>${renderJourneyHome({ units, daily, recommendations, humor: false, activeUnitId })}</div>`;
+  return `<div class="journey-shell journey-progress"><header class="journey-progress-head"><div><span class="journey-kicker">DIN FREMDRIFT</span><h1>Ruten bliver<br><em>mere din.</em></h1><p>${escape(String(completed))} af ${escape(String(total))} guidede forløb er gennemført. Dine tidligere vurderinger er bevaret.</p></div>${humor ? renderArt('natmobil', { variant: 'garage', humorOnly: true }) : ''}</header>${renderJourneyHome({ units, daily, recommendations, humor: false, activeUnitId })}</div>`;
 }
