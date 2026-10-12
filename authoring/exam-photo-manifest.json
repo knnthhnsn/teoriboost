@@ -1,0 +1,50 @@
+{
+  "assets": [
+    {
+      "filename": "tyre-check-v1.png",
+      "questionIds": [
+        "q-004"
+      ],
+      "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-b4392949-cc30-48e7-b8eb-dbfe2630ab10.png",
+      "width": 1586,
+      "height": 992,
+      "mode": "RGB",
+      "bytes": 2352918,
+      "sha256": "e518c736e1063bcee45341decb936afc6e529795487200ed07830928e55b242a",
+      "review": "agent inspected native pixels; not instructor approval"
+    },
+    {
+      "filename": "stop-clear-v1.png",
+      "questionIds": [
+        "q-032",
+        "q-059"
+      ],
+      "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-444d8b7d-cb3a-4673-b891-e758aa224b84.png",
+      "width": 1586,
+      "height": 992,
+      "mode": "RGB",
+      "bytes": 3149742,
+      "sha256": "a577aed4687780a8f6481be54b35b0ab5546120bbb63803044267ba11b6e0bf4",
+      "review": "agent inspected native pixels; not instructor approval"
+    },
+    {
+      "filename": "bike-alongside-v1.png",
+      "questionIds": [
+        "q-034",
+        "q-066"
+      ],
+      "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-ac5151f7-d548-4782-a9ff-a46e3258b754.png",
+      "width": 1586,
+      "height": 992,
+      "mode": "RGB",
+      "bytes": 2766730,
+      "sha256": "d488f75e46c30942d79feaf5ba3b22524e8883718cd7244c81a481b2a64a8bfc",
+      "review": "agent inspected native pixels; not instructor approval"
+    }
+  ],
+  "limits": [
+    "Generated original illustrations, not official test photographs",
+    "Still images do not show blink frequency, prior mirror checks or movement",
+    "Prompted tread depth is given by LCD/context; pixels cannot certify physical depth"
+  ]
+}

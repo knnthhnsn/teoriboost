@@ -1,0 +1,250 @@
+[
+  {
+    "id": "q-001",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Du har lånt en bil. Sædet står langt tilbage, sidespejlet viser mest himmel, og en metalflaske ligger løs på hattehylden. Scene direction: View looking diagonally into an unbranded car interior from the open driver's door, detailed actual seat pushed conspicuously far back from steering wheel, exterior side mirror reflecting predominantly pale sky, and loose stainless metal drinks bottle lying on rear parcel shelf visible through gap. These three details should be clearly visible. No person's face or text.",
+    "context": "Du har lånt en bil. Sædet står langt tilbage, sidespejlet viser mest himmel, og en metalflaske ligger løs på hattehylden.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-386fed72-942f-4371-9a2e-0e27221e0e67.png",
+    "src": "assets/exam/detail-q-001-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-003",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Før turen synker bremsepedalen langsomt mod gulvet, mens du holder et fast, konstant tryk. Bilen står stadig parkeret. Scene direction: Close-up of the actual driver's footwell of a parked car. One adult shoe maintains firm contact pressing a broad black rubber brake pedal down near the floor; other accelerator pedal is visible untouched. Real detailed molded pedal, dashboard underside, mat, normal geometry. No motion arrows, readouts or claims. The slowly sinking condition cannot be represented by a still photograph and remains in question text.",
+    "context": "Før turen synker bremsepedalen langsomt mod gulvet, mens du holder et fast, konstant tryk. Bilen står stadig parkeret.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-1c0a7fae-f87f-4ac2-b583-553288ff9290.png",
+    "src": "assets/exam/detail-q-003-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-005",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Under kørsel tænder en rød advarselslampe for olietryk, og motoren begynder at lyde usædvanligt. Du kan straks holde sikkert ind. Scene direction: Close-up of ordinary unbranded car instrument panel at eye level. EXACT canonical oil-pressure warning symbol glowing RED in centre: side profile oil can with short spout and one droplet at tip, not an engine-outline/check-engine icon. Other neutral gauge dials in background, no additional warning icons or 'STOP' advice. Readable crisp central red symbol, professional macro.",
+    "context": "Under kørsel tænder en rød advarselslampe for olietryk, og motoren begynder at lyde usædvanligt. Du kan straks holde sikkert ind.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-e9ba0128-a954-41fa-a0ed-9205e7379dc5.png",
+    "src": "assets/exam/detail-q-005-v1.png",
+    "approved": false,
+    "rejectedReason": "Speedometer at 0 conflicts with the stated driving moment; revise gauge only."
+  },
+  {
+    "id": "q-015",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Bagagerummet er fyldt. En tung værktøjskasse står løst øverst, og bilen føles tungere end normalt. Scene direction: Looking into open rear hatch of ordinary hatchback parked; boot filled with ordinary suitcases and boxes, a visibly heavy steel toolbox sits loosely ON TOP of stacked luggage with no straps attached to it. Correct physical gravity, real box handle and latches, no falling objects, no injury, no labels or answer.",
+    "context": "Bagagerummet er fyldt. En tung værktøjskasse står løst øverst, og bilen føles tungere end normalt.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-20e6ba98-795f-4bf7-b45f-1094501de749.png",
+    "src": "assets/exam/detail-q-015-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-005",
+    "prompt": "Edit this original driving-theory instrument-panel photograph. Preserve the entire photographic composition, lighting, central RED canonical oil-pressure warning can-and-drop symbol, dial typography and car interior. Change ONLY the RIGHT speedometer's red needle so it reads about30km/h (halfway between20and40), since the question says the warning occurs UNDER KØRSEL. Also change LEFT tachometer needle from idle to approximately1500rpm as natural gentle driving, leaving the markings intact. Do not add text, advice, warnings, people or other icons. Keep landscape dimensions and exact oil symbol. High physical realism.",
+    "context": "Under kørsel tænder en rød advarselslampe for olietryk, og motoren begynder at lyde usædvanligt. Du kan straks holde sikkert ind.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-6e03ad4b-6bdb-4d33-91ec-e311f16e0105.png",
+    "src": "assets/exam/detail-q-005-v2.png",
+    "approved": true
+  },
+  {
+    "id": "q-017",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Telefonen vibrerer i din håndholder med en vigtig besked. Du kører i tæt trafik og skal trykke flere gange for at læse den. Scene direction: Driver eye view in unbranded left-hand-drive car, roadway traffic ahead several ordinary anonymous cars clustered close in own lane, parked smartphone in proper fixed dash holder mid-right has a neutral new-message notification 'Ny besked' on screen, no contents/personal messages. Both mounted phone and traffic visible, no hands touching phone, no slogans/arrows.",
+    "context": "Telefonen vibrerer i din håndholder med en vigtig besked. Du kører i tæt trafik og skal trykke flere gange for at læse den.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-3d831cdd-1889-4301-9edb-dc36b03d55c4.png",
+    "src": "assets/exam/detail-q-017-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-018",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Efter en nat uden søvn gaber du konstant og mister kortvarigt fokus. Du skal køre en ven til lufthavnen. Scene direction: Three-quarter front passenger view of fully clothed synthetic adult driver seated in ordinary left-hand-drive car, visibly yawning with eyelids drooping and tired face, hands naturally resting on steering wheel, ordinary airport access road visible out windscreen. A calm documentary photo of fatigue, no crash, no text, no flight logos.",
+    "context": "Efter en nat uden søvn gaber du konstant og mister kortvarigt fokus. Du skal køre en ven til lufthavnen.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-d2ecae1c-d1cd-459c-a297-4751fb45d9d2.png",
+    "src": "assets/exam/detail-q-018-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-019",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Du er ny bilist og skal til fest. Du har bilen med og ved endnu ikke, om du vil drikke. Scene direction: A believable modest Danish party entrance with an ordinary unbranded parked car as centre subject, keys and a party invitation on a small foreground table alongside a clear empty glass. Warm normal evening venue lighting. Invitation blank/no names. No person drinking and driving, no claims about alcohol level, no police or other vehicles.",
+    "context": "Du er ny bilist og skal til fest. Du har bilen med og ved endnu ikke, om du vil drikke.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-1c34dfd6-bd3f-432a-827a-424c45378c35.png",
+    "src": "assets/exam/detail-q-019-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-041",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Du kører på en jævn vej med god oversigt. Tagboksen er tom, dækkene mangler luft, og du accelererer og bremser gentagne gange uden grund. Scene direction: An ordinary unbranded hatchback in side/rear three-quarter view parked on calm paved verge beside an open flat country road. A modern long roof cargo box is open so EMPTY inner cavity clearly visible. Nearest tyre is slightly underinflated with modest sidewall compression, not completely flat or destroyed. Show roof box and tyre, no mechanical diagram or text.",
+    "context": "Du kører på en jævn vej med god oversigt. Tagboksen er tom, dækkene mangler luft, og du accelererer og bremser gentagne gange uden grund.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-dfc8cd2e-ddcb-44cd-af51-5bfd13be08b9.png",
+    "src": "assets/exam/detail-q-041-v1.png",
+    "approved": false,
+    "rejectedReason": "Open roofbox adds an unsafe condition absent from the moving-vehicle context; revise to closed box."
+  },
+  {
+    "id": "q-045",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Du skal køre en kort tur med et barn på 120 cm. Den godkendte barnestol, som passer til barnets højde og vægt og til bilen, står i en anden bil. Scene direction: Adult-height documentary viewpoint at open REAR passenger door of unbranded ordinary car. Synthetic fully clothed child approx120cm tall stands naturally beside door, not inside or strapped into any seat. Car's rear bench clearly empty with normal belts and NO booster or child seat. Friendly neutral adult-sized hand holding door edge optional but avoid awkward anatomy. No ruler or written height, given by text. No injuries, no unsafe moving car.",
+    "context": "Du skal køre en kort tur med et barn på 120 cm. Den godkendte barnestol, som passer til barnets højde og vægt og til bilen, står i en anden bil.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-71a6f872-a7a8-42ec-8193-1a6524a11a8f.png",
+    "src": "assets/exam/detail-q-045-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-041",
+    "context": "Du kører på en jævn vej med god oversigt. Tagboksen er tom, dækkene mangler luft, og du accelererer og bremser gentagne gange uden grund.",
+    "prompt": "Edit this original automotive photograph only by closing the empty roof cargo box's upper lid into the correct closed fitted position. Preserve the vehicle, low-inflation tyre appearance, roof rack, Scandinavian country road and photographic light/composition. The question already states that the cargo box is empty; the photograph must not add an open lid during a driving context. Smooth physically believable closed dark grey roofbox, no labels/text/branding or other changes.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-4b32365b-a9ec-42de-a4ee-61274a91c04c.png",
+    "src": "assets/exam/detail-q-041-v2.png",
+    "approved": true
+  },
+  {
+    "id": "q-046",
+    "context": "Du har gennemført alle NATKØRSEL-kapitler hjemme på eget initiativ. En kørelærer har ikke planlagt eller registreret det som selvstudium.",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Du har gennemført alle NATKØRSEL-kapitler hjemme på eget initiativ. En kørelærer har ikke planlagt eller registreret det som selvstudium. Scene direction: Premium daylight home study desk photograph, laptop with original neutral driving theory training UI showing several simple lesson cards and generic 'NATKØRSEL' heading, notebook and pencil, plant, no certificate, no completed official registration, no logos except own Natkørsel, no person's private data.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-04ecf33d-744b-45c2-8e11-ab7e66e65a18.png",
+    "src": "assets/exam/detail-q-046-v1.png",
+    "approved": false,
+    "rejectedReason": "Part-filled progress bars conflict with all chapters completed; revise study screen."
+  },
+  {
+    "id": "q-046",
+    "context": "Du har gennemført alle NATKØRSEL-kapitler hjemme på eget initiativ. En kørelærer har ikke planlagt eller registreret det som selvstudium.",
+    "prompt": "Edit this original home-study photograph, preserve laptop, desk, light, mug, notebook and high photographic quality. Replace ONLY laptop screen contents with a clean minimal ORIGINAL NATKØRSEL study completion screen: clear heading 'NATKØRSEL', a simple green check icon and exact large Danish text 'Alle kapitler gennemført'. A row of10small green dots beneath can indicate all ten own app chapters. No course certificate, government logo, official registration, score or legal approval. No partial progress bars, no tiny invented lesson titles or additional text. This is independent HOME PRACTICE completion only.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-8cdd638b-f8e8-4f02-9de3-6c940161279f.png",
+    "src": "assets/exam/detail-q-046-v2.png",
+    "approved": true
+  },
+  {
+    "id": "q-047",
+    "context": "Du forbereder en fuld digital øveprøve til kategori B efter Færdselsstyrelsens aktuelle offentlige format.",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Du forbereder en fuld digital øveprøve til kategori B efter Færdselsstyrelsens aktuelle offentlige format. Scene direction: Premium photograph of laptop on quiet study desk, screen displays an ORIGINAL generic own practice-test UI, four equally styled neutral statement rows and unselected yes/no controls, large top heading 'ØVEPRØVE'. No actual answer text, official seal, result, score or brand. Real screen perspective, screen dominant legible structure, mouse beside it.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-007fbc0a-c46c-4932-8968-7b0ecddd05db.png",
+    "src": "assets/exam/detail-q-047-v1.png",
+    "approved": false,
+    "rejectedReason": "Four row thumbnails imply four situations rather than one situation and four statements."
+  },
+  {
+    "id": "q-047",
+    "context": "Du forbereder en fuld digital øveprøve til kategori B efter Færdselsstyrelsens aktuelle offentlige format.",
+    "prompt": "Edit original laptop photograph. Preserve room, physical laptop and photoreal quality. Replace ONLY screen content with a correctly structured ORIGINAL practice-test interface: heading 'ØVEPRØVE'. Directly under heading ONE SINGLE road-scene photograph spanning whole width of screen top40percent. Below that exactlyFOUR equal horizontal statement rows with blank grey placeholder lines and unselected 'Ja' and 'Nej' controls on right. Do NOT put any thumbnail images inside the four rows. One situation, four statements. No answers, correctness, certificate or logos, no other text necessary. Fit layout naturally within screen.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-9e81cc13-e3a3-4826-b4fa-9448a8232f26.png",
+    "src": "assets/exam/detail-q-047-v2.png",
+    "approved": true
+  },
+  {
+    "id": "q-048",
+    "context": "I NATKØRSEL-øveprøven er du i tvivl om situation 8. Der er tid tilbage, og prøvefladen giver mulighed for markering og navigation.",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: I NATKØRSEL-øveprøven er du i tvivl om situation 8. Der er tid tilbage, og prøvefladen giver mulighed for markering og navigation. Scene direction: Premium desktop laptop photograph of own generic practice-test interface, heading 'Situation 8', a small neutral flag/mark-for-review button and numbered navigation 1 to25 visible, some time remaining e.g '12:30' in small top corner. Four unselected equivalent answer rows with no readable content. No correctness colors or results. Original screen, no official logos. VERY IMPORTANT SCREEN TOPOLOGY: Only ONE large road-scene photograph at the TOP of screen. Beneath it FOUR equal statement rows with blank grey placeholder lines and unselected Ja/Nej choices. No photos/thumbnails beside individual statement rows. This is ONE situation and four statements, not four situations.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-79ead4a0-4336-4939-a86f-c7943c0a7c97.png",
+    "src": "assets/exam/detail-q-048-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-049",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: En 17-årig med gyldigt dansk B-kørekort vil køre alene i Danmark kl. 19.45 og forventer at være hjemme kl. 20.10. Der er ingen ledsager med. Scene direction: Driver seat eye view in parked left-hand-drive ordinary car, dashboard clock clearly shows exactly '19:45'; smartphone in fixed holder shows a neutral planned journey arrival '20:10' in large readable numerals, no map or private names. Empty front passenger seat visible at right, quiet Danish road outdoors at dusk. Both time readings must be exact. No legal advice or age stickers.",
+    "context": "En 17-årig med gyldigt dansk B-kørekort vil køre alene i Danmark kl. 19.45 og forventer at være hjemme kl. 20.10. Der er ingen ledsager med.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-273a47f8-465f-46a3-a71e-06284fb04f74.png",
+    "src": "assets/exam/detail-q-049-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-050",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: En 32-årig fik sit første B-kørekort for ét år siden og skal til middag. Personen mener, at den lave alkoholgrænse kun gælder 17-årige. Scene direction: Natural premium close-up on an adult's car keys and a simple generic driver-learning card resting on ordinary kitchen table next to unbranded parked-car view through window. Card contains ONLY 'B' and '1 år' clean readable type, no government emblem, name, birth date, signature or personal identity. It is a generic educational prop, not a forged official driving licence. Warm neutral meal preparation background with no alcohol action.",
+    "context": "En 32-årig fik sit første B-kørekort for ét år siden og skal til middag. Personen mener, at den lave alkoholgrænse kun gælder 17-årige.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-5b8a08e8-e4db-4c2b-aee6-0c54fe40129f.png",
+    "src": "assets/exam/detail-q-050-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-053",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: På en lovlig vejkant uden tavler eller andre forbud bliver du siddende i bilen og venter i to minutter på en passager. Du skaber ikke fare eller ulempe. Scene direction: Exterior three-quarter view of ordinary unbranded car parked correctly parallel to a legal right-hand Danish kerb. Synthetic adult waits seated behind steering wheel. Entire roadway free, normal sidewalk, no signs and no other restrictions or cars. Ordinary calm scene, no parking clock text; two-minute wait is stated in text. No curb straddling.",
+    "context": "På en lovlig vejkant uden tavler eller andre forbud bliver du siddende i bilen og venter i to minutter på en passager. Du skaber ikke fare eller ulempe.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-91931edc-fe9a-4a64-ae4d-ffc470582d5d.png",
+    "src": "assets/exam/detail-q-053-v1.png",
+    "approved": false,
+    "rejectedReason": "Front-facing car at image-right curb points against ordinary right-hand travel; q054 also shows the driver front door."
+  },
+  {
+    "id": "q-054",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Ved en C 62-tavle er parkering forbudt, men standsning er tilladt. En gangbesværet passager bruger fire minutter på en sammenhængende påstigning, og bilen er ikke til fare eller ulempe. Scene direction: Exterior three-quarter view of ordinary car lawfully stopped at right-hand Danish kerb. Front passenger door open toward sidewalk. A synthetic older fully clothed adult with walking stick is carefully in process of boarding continuously; supportive companion only if needed, natural bodies. Nearby authentic C62 NO PARKING sign: circular BLUE disc with RED outer ring and ONE RED diagonal bar, absolutely NOT a red X (no-stopping). No other signs/vehicles, free traffic lane. No time printed.",
+    "context": "Ved en C 62-tavle er parkering forbudt, men standsning er tilladt. En gangbesværet passager bruger fire minutter på en sammenhængende påstigning, og bilen er ikke til fare eller ulempe.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-06e43f0a-5928-4030-92cb-dd6069b9da13.png",
+    "src": "assets/exam/detail-q-054-v1.png",
+    "approved": false,
+    "rejectedReason": "Front-facing car at image-right curb points against ordinary right-hand travel; q054 also shows the driver front door."
+  },
+  {
+    "id": "q-053",
+    "prompt": "ONE original photorealistic Danish driving theory situation, landscape16:10, natural Scandinavian daylight, professional crisp automotive photography, no CGI/diagram/text/brands/privateplates. FACTUAL CONDITION: På en lovlig vejkant uden tavler eller andre forbud bliver du siddende i bilen og venter i to minutter på en passager. Du skaber ikke fare eller ulempe. CRITICAL ROAD/CAR ORIENTATION: Camera stands in the roadway BEHIND the parked car and looks downstreet in the SAME direction the car points. We see the BACK of car with RED TAILLIGHTS, rear hatch/window, not headlights/windscreen/grille. Car NOSE points AWAY from camera toward distance. Car parked parallel on RIGHT-hand side of a normal two-way Danish street, its RIGHT wheels next to curb/sidewalk on IMAGE RIGHT, centreline/dashed marks to IMAGE LEFT ofcar. Correct LEFT-HAND DRIVE. Rear three-quarter slightly left camera, show synthetic adult waiting behind left-side steeringwheel through window if natural. Empty free street, no traffic signs, no parkedcars, no restrictions, no danger. Doorsclosed. Two-minute waiting time stated only in app text. Real roadgeometryandactorpositions moreimportant than cinematic angle; signanddoor both clear onmobile. No captions/watermarks oransweradvice.",
+    "context": "På en lovlig vejkant uden tavler eller andre forbud bliver du siddende i bilen og venter i to minutter på en passager. Du skaber ikke fare eller ulempe.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-c3f7ec8c-2887-477c-b1a2-7c62f3afacbb.png",
+    "src": "assets/exam/detail-q-053-v2.png",
+    "approved": true
+  },
+  {
+    "id": "q-054",
+    "prompt": "ONE original photorealistic Danish driving theory situation, landscape16:10, natural Scandinavian daylight, professional crisp automotive photography, no CGI/diagram/text/brands/privateplates. FACTUAL CONDITION: Ved en C 62-tavle er parkering forbudt, men standsning er tilladt. En gangbesværet passager bruger fire minutter på en sammenhængende påstigning, og bilen er ikke til fare eller ulempe. CRITICAL ROAD/CAR ORIENTATION: Camera stands in the roadway BEHIND the parked car and looks downstreet in the SAME direction the car points. We see the BACK of car with RED TAILLIGHTS, rear hatch/window, not headlights/windscreen/grille. Car NOSE points AWAY from camera toward distance. Car parked parallel on RIGHT-hand side of a normal two-way Danish street, its RIGHT wheels next to curb/sidewalk on IMAGE RIGHT, centreline/dashed marks to IMAGE LEFT ofcar. Correct LEFT-HAND DRIVE. Rear three-quarter slightly RIGHT camera so RIGHT FRONT PASSENGER DOOR opening outward onto sidewalk clearly visible beyond rearbody. A fully clothed synthetic older adultwithwalkingstick is boarding through THAT right frontpassengerdoor, a companion supports fromsidewalk. No driverdooropen. Single largeauthenticC62bluecirclewithredringandONEreddiagonalbar stands besideSIDEWALK right, bar is notX. No otherrestrictions orcars, freecarriageway. Four-minutecontinuousboarding statedonlyinapptext. Real roadgeometryandactorpositions moreimportant than cinematic angle; signanddoor both clear onmobile. No captions/watermarks oransweradvice.",
+    "context": "Ved en C 62-tavle er parkering forbudt, men standsning er tilladt. En gangbesværet passager bruger fire minutter på en sammenhængende påstigning, og bilen er ikke til fare eller ulempe.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-53db5bcd-15eb-460d-a17f-5b24629f3af9.png",
+    "src": "assets/exam/detail-q-054-v2.png",
+    "approved": true
+  },
+  {
+    "id": "q-055",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Det er onsdag kl. 10.00. En E 33-tavle med undertavle siger “2 timer, P-skive, hverdage 8-18”. Der er en fri almindelig bås, og ingen anden regel forbyder parkering. Scene direction: Driver eye perspective at an EMPTY ordinary parking bay by Danish curb with readable Danish parking sign: blue rectangular E33 white P; directly beneath a simple white rectangular supplemental sign exact '2 timer' on first row, 'P-skive' on second, 'hverdage 8–18' on third. Foreground dashboard digital clock exact '10:00'. NO parking-disc face, needle or setting shown: the pupil must decide the setting. No handicapped symbol, no other restrictions, no people, no cars in bay. Sign and free bay both clearly visible, no arrow annotations.",
+    "context": "Det er onsdag kl. 10.00. En E 33-tavle med undertavle siger “2 timer, P-skive, hverdage 8-18”. Der er en fri almindelig bås, og ingen anden regel forbyder parkering.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-b7727a9e-2298-4c5e-b812-e9f8eadad503.png",
+    "src": "assets/exam/detail-q-055-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-057",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: En bås er afmærket med E 33 og handicapsymbol. Du har ikke et gyldigt parkeringskort og vil holde i to minutter for at hente kaffe. Scene direction: Driver eye photograph approaching EMPTY reserved accessible parking bay in Denmark. Blue rectangular E33 P sign with white wheelchair pictogram supplemental panel; white parking bay boundary and conventional wheelchair mark on ground. Normal car hood at bottom no readable private plate. No accessible parking permit or valid card visible anywhere. Simple cafe distant anonymous background, no people/traffic, no extra restrictions. Don't label it legal/illegal.",
+    "context": "En bås er afmærket med E 33 og handicapsymbol. Du har ikke et gyldigt parkeringskort og vil holde i to minutter for at hente kaffe.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-b63bb311-879b-4f74-b89a-c33aad6f4478.png",
+    "src": "assets/exam/detail-q-057-v1.png",
+    "approved": false,
+    "rejectedReason": "Administrative code E33 printed on sign; actual road sign should show P only."
+  },
+  {
+    "id": "q-057",
+    "context": "En bås er afmærket med E 33 og handicapsymbol. Du har ikke et gyldigt parkeringskort og vil holde i to minutter for at hente kaffe.",
+    "prompt": "Edit this original accessible-parking illustration photograph. Preserve all photograph, road, EMPTY accessible bay, wheelchair ground marking, cafe, light and foreground dashboard. Change ONLY upper blue P sign: REMOVE the small administrative text 'E 33' at top; actual Danish road sign displays only one large WHITE capital P centred on plain BLUE rectangle with white border. Enlarge/recentre P naturally to fill blue sign. Retain separate wheelchair pictogram panel below, no othertext. No watermarks or otherchanges.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-4e6513bc-3bc5-4ae5-bec2-8b1447bf439e.png",
+    "src": "assets/exam/detail-q-057-v2.png",
+    "approved": true
+  },
+  {
+    "id": "q-069",
+    "context": "En 17-årig har gyldigt dansk B-kørekort og befinder sig i Danmark. Klokken skifter fra 04.59 til 05.00, og der er ingen ledsager i bilen.",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: En 17-årig har gyldigt dansk B-kørekort og befinder sig i Danmark. Klokken skifter fra 04.59 til 05.00, og der er ingen ledsager i bilen. Scene direction: View into parked left-hand-drive car cabin from passenger side at early dawn in Denmark, empty passenger seat foreground and clear car dashboard digital clock EXACT '05:00'. Small amount pale dawn street visible beyond windscreen. No driver ID, no age text, no change/time arrow in photograph; question describes transition from04:59. Crisp readable clock, physically mounted real instrument screen.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-7a8f341b-e484-4f67-b7dd-23d5feea970d.png",
+    "src": "assets/exam/detail-q-069-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-070",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: En 17-årig kører alene i Danmark og holder lovligt ind kl. 19.59. Personen vil fortsætte kl. 20.00 uden ledsager. Scene direction: Parked left-hand-drive car cabin view from passenger side in Danish evening light, empty passenger seat foreground and clear car dashboard digital clock EXACT '20:00'. Car stationary by legal roadside, no passengers. No age/legal-advice text, no additional restriction signs. Question describes preceding19:59 transition; photograph shows20:00 condition. Professional realistic interiors.",
+    "context": "En 17-årig kører alene i Danmark og holder lovligt ind kl. 19.59. Personen vil fortsætte kl. 20.00 uden ledsager.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-93ac77bc-5d33-413d-b46c-57069ea5b59a.png",
+    "src": "assets/exam/detail-q-070-v1.png",
+    "approved": true
+  },
+  {
+    "id": "q-079",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Køreskolens placering gør det umuligt at nå et letbaneområde, køre relevant dér og vende tilbage inden for en praktisk lektion på mindst 45 minutter. Kørelæreren planlægger derfor afsnit 7.21. Scene direction: Natural photograph of driving-school CLASSROOM, synthetic adult instructor and adult learner studying a paper local route map at clean desk, large neutral wall image of Danish light-rail tram crossing an ordinary intersection as educational reference. A small wall clock optional not digital numbers. No official curriculum certificate or written teaching outcomes. Focus maps and relevant tram education without implying learner drove a tram.",
+    "context": "Køreskolens placering gør det umuligt at nå et letbaneområde, køre relevant dér og vende tilbage inden for en praktisk lektion på mindst 45 minutter. Kørelæreren planlægger derfor afsnit 7.21.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-e32e00bd-9183-4eba-9294-5f1598d4fad4.png",
+    "src": "assets/exam/detail-q-079-v1.png",
+    "approved": false,
+    "rejectedReason": "Tram backdrop can be read as a window outside the classroom, conflicting with inaccessible light-rail location; make framed wall poster explicit."
+  },
+  {
+    "id": "q-079",
+    "context": "Køreskolens placering gør det umuligt at nå et letbaneområde, køre relevant dér og vende tilbage inden for en praktisk lektion på mindst 45 minutter. Kørelæreren planlægger derfor afsnit 7.21.",
+    "prompt": "Edit this original photoreal driving-school classroom image. Preserve instructor, adult learner, paper route map, table, classroom light and natural faces/hands. Change the tram scene on the BACK WALL so it is unambiguously a FRAMED PRINTED EDUCATIONAL POSTER, not a window overlooking an actual tram street. Put a thick dark rectangular frame visible on ALL FOUR sides around a somewhat SMALLER tram photograph, with at least20cmof plain white painted classroom wall visible surrounding all four sides. Keep any actual side window unrelated, showing diffuse sky only. Tram appears ONLY inside wall poster, not outside any window. No extra written text, no logos/claims. Same landscapephotographicquality.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-d318d366-7b90-46a5-a526-d6892fe597b6.png",
+    "src": "assets/exam/detail-q-079-v2.png",
+    "approved": true
+  },
+  {
+    "id": "q-080",
+    "context": "Du skal have en afsluttende praktisk lektion i afsnit 7.22. Kørelæreren og du har valgt rute, men har endnu ikke aftalt et konkret læringsmål eller planlagt opfølgning.",
+    "prompt": "ONE original PHOTOREALISTIC educational situation photograph for a Danish driving theory app. Landscape16:10, high-end documentary/automotive photography, sharp physical materials, natural restrained light, mobile-readable primary subject. Never low-polyCGI/cartoon/vector/diagram. No watermarks, copied examphotos, commercial logos, private identities, licence-plate numbers, answer/explanation captions or decorative arrows. Factual condition: Du skal have en afsluttende praktisk lektion i afsnit 7.22. Kørelæreren og du har valgt rute, men har endnu ikke aftalt et konkret læringsmål eller planlagt opfølgning. Scene direction: Natural professional photograph of synthetic adult Danish driving instructor and adult learner beside a parked unbranded dual-control training car, reviewing a paper ROUTE map on bonnet with a blank notepad and pencil alongside. Calm engaged discussion, no posed thumbs-up, no legal registration sheets or certificate, no printed goals or answers. Real human anatomy, fully clothed, daylight.",
+    "sourcePath": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-af3612c4-22f8-42d8-be17-131baf80da98.png",
+    "src": "assets/exam/detail-q-080-v1.png",
+    "approved": true
+  }
+]

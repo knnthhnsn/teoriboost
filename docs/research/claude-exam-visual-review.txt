@@ -1,0 +1,34 @@
+Observed Claude response from same concept chat, two actual local UI screenshots. Screenshots: exam-photo-desktop.png and exam-photo-mobile-lightbox-390.jpg. Claude saw no other images, audio, browser actions or source code.
+
+Claude responded: Dom: billederne løfter prøven visuelt, men et AI-tegnet skilt er en faglig risiko.
+Checking Danish motorway sign colors and realism of pictured signage.
+
+Checking Danish motorway sign colors and realism of pictured signage.
+
+Dom: billederne løfter prøven visuelt, men et AI-tegnet skilt er en faglig risiko. “Bevist” kan ses på billederne; resten er hypoteser.
+
+P1 · AI-skiltning
+
+Bevist: skiltet viser kun “5 km” uden afkørselsnummer og bynavn. Sådan ser et dansk skilt ikke ud.
+Hypotese: farven passer måske ikke til danske motorvejsskilte, og spejlet viser en kurvet vej med skraveringer, som ikke hænger sammen med den lige vej foran. Tjek det mod vejafmærkningsbekendtgørelsen; jeg er ikke sikker på farven.
+Før pilot: gennemgå alle 81 billeder for tavler og afmærkning. Et forkert skilt bliver lært som rigtigt. Fjern teksten på skiltet, eller skift billedet, hvor det ikke kan rettes.
+
+P2 · Valgte svar ligner facit
+
+Bevist: valgte JA og NEJ er fyldt med lime, appens farve for “rigtigt”.
+Hypotese: eleven kan læse det som rigtigt svar før aflevering.
+Ret: vis valget neutralt, fx med ramme og flueben.
+
+P2 · Billede og tekst passer ikke sammen
+
+Bevist: overskriften er “Den passerede afkørsel”, men billedet viser ingen afkørsel.
+Før pilot: tjek hvert billede for, om det indeholder det afgørende, eller om det i det mindste ikke modsiger teksten.
+
+I orden på billederne: visningen på mobil, mærkningen “AI-illustration” og den dæmpede brainrot under prøven.
+
+
+
+
+
+
+7 minutes ago

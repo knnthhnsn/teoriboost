@@ -12,6 +12,9 @@ import { validateVoicePack } from './voice-validation.mjs';
 import { buildVoiceCatalog } from './scripts/build-voice-catalog.mjs';
 import { ART_ASSETS } from './dist/art.js';
 import { createHash } from 'node:crypto';
+import {EXAM_PHOTOS} from './dist/exam-photos.js';
+import {validateExamVisuals} from './visual-validation.mjs';
+import {execFileSync} from 'node:child_process';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.join(root, 'dist');
@@ -236,6 +239,10 @@ for (const [id, asset] of Object.entries(ART_ASSETS)) {
   check(record.bytes === buffer.length && createHash('sha256').update(buffer).digest('hex') === record.sha256, `${id}: billedfilen er ændret siden alpha/decode-kontrollen`);
 }
 
+const pixelProbes=JSON.parse(execFileSync('python',['-X','utf8',path.join(root,'scripts/probe-exam-pixels.py')],{encoding:'utf8',maxBuffer:2e6}));
+const examVisuals=validateExamVisuals({questions:QUESTIONS,photos:EXAM_PHOTOS,manifest:JSON.parse(fs.readFileSync(path.join(root,'authoring/exam-visual-manifest.json'),'utf8')),readAsset:src=>fs.readFileSync(path.join(dist,src)),readPixelProbe:src=>pixelProbes[src],files:fs.readdirSync(path.join(dist,'assets/exam'))});
+errors.push(...examVisuals.errors);
+for(const photo of Object.values(EXAM_PHOTOS))inspectAsset(path.join(dist,photo.src));
 if (errors.length) {
   console.error(`NATKØRSEL-validering fejlede med ${errors.length} problem(er):`);
   for (const error of errors) console.error(`- ${error}`);

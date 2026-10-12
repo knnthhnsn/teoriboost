@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "generatedWith": "built-in image_gen",
+  "policy": "v1 assets and their source originals are preserved as rejected historical revisions; registry integration is handled separately",
+  "entries": [
+    {
+      "id": "q-064",
+      "replaces": "dist/assets/exam/traffic-q-064-v1.png",
+      "nativePath": "dist/assets/exam/traffic-q-064-v2.png",
+      "originalSource": "C:/Users/kenne/.codex/generated_images/01a12fa7-5765-7aa3-b575-b82029b4ff90/exec-591761bc-fc7c-48d5-8788-c33dc4824805.png",
+      "width": 1586,
+      "height": 992,
+      "bytes": 3041841,
+      "sha256": "C21FA14126DEFB61ED3FC0164C86139289B181FBE6D14CC09E1817CA3C57CEC7",
+      "oldRejectedReason": "The camera-facing B 13 was a blank red octagon without the required white STOP legend.",
+      "prompt": "Original premium photoreal professional Danish traffic-safety photograph, landscape 16:10, natural optics, lifelike scale and materials, mobile-readable critical geometry. Danish right-hand traffic. No copied exam photo, brand, readable licence plate, private identifier, watermark, caption, explanatory arrow, diagram, answer text, neon, toy-like 3D, miniature look, crash, or unmentioned road user/control. Driver-eye view stopped completely at a thick white stop line before a small urban T-junction. On the RIGHT roadside, a proper Danish B 13 STOP sign faces the driver: red octagon, white border, and the word STOP in large perfectly legible white uppercase letters. A tall stone wall directly across and continuing along the left corner blocks sight from the stop line. Beyond the line there is a short clear area before the crossing carriageway where the driver could later creep forward for a view, but the car remains at the stop line now. Empty intersection; no other signs or road users."
+    },
+    {
+      "id": "q-067",
+      "replaces": "dist/assets/exam/traffic-q-067-v1.png",
+      "nativePath": "dist/assets/exam/traffic-q-067-v2.png",
+      "originalSource": "C:/Users/kenne/.codex/generated_images/01a12fa7-5765-7aa3-b575-b82029b4ff90/exec-a4cf858a-28a1-4d4c-9d2a-8991e332837d.png",
+      "width": 1586,
+      "height": 992,
+      "bytes": 3415610,
+      "sha256": "BB8ED79CB032E9BD31BE7A09E768B4183840325E1DABB83C65C3679C93809493",
+      "oldRejectedReason": "The v1 image added an unmentioned car emerging from the equal road on the right, changing pure uncontrolled geometry into an active vehicle conflict.",
+      "prompt": "Original premium photoreal professional Danish traffic-safety photograph, landscape 16:10, natural optics, lifelike scale and materials, mobile-readable critical geometry. Danish right-hand traffic. No copied exam photo, brand, readable licence plate, private identifier, watermark, caption, explanatory arrow, diagram, answer text, neon, toy-like 3D, miniature look, crash, or unmentioned road user/control. Driver-eye view travelling straight on a small two-way rural-residential road. An equally small road of the same surface and visually similar width joins from the RIGHT, forming an uncontrolled T-junction. Absolutely no cars, bicycles, pedestrians, signs, signals, yield teeth, stop line, sidewalk crossing, raised driveway, or other special regulation anywhere. The right-hand side road must read clearly as a public equal road, not a private driveway. Neutral daylight."
+    },
+    {
+      "id": "q-072",
+      "replaces": "dist/assets/exam/traffic-q-072-v1.png",
+      "nativePath": "dist/assets/exam/traffic-q-072-v2.png",
+      "originalSource": "C:/Users/kenne/.codex/generated_images/01a12fa7-5765-7aa3-b575-b82029b4ff90/exec-c751f55c-4e68-4460-b296-d4753b6cc395.png",
+      "width": 1586,
+      "height": 992,
+      "bytes": 2689721,
+      "sha256": "76D61F3054B76FCAE42C837C8D2E4656C04BEB5DE01397DCF5AEBD416FDE920B",
+      "oldRejectedReason": "The v1 car faced the camera while the right-edge bay lay beside or behind its forward direction, so forward travel could not enter the bay.",
+      "prompt": "Original premium photoreal professional Danish traffic-safety photograph, landscape 16:10, natural optics, lifelike scale and materials, mobile-readable critical geometry. Danish right-hand traffic. No copied exam photo, brand, readable licence plate, private identifier, watermark, caption, explanatory arrow, diagram, answer text, neon, toy-like 3D, miniature look, crash, or unmentioned road user/control. High rear three-quarter view on a closed Danish driving practice area. A learner car points AWAY from camera and is moving slowly FORWARD. The learner is in the left front seat and an instructor is seated beside her in the right front seat. A large white rectangular practice bay lies AHEAD of the car along the RIGHT edge of the asphalt, with ample open space for the first exercise. The car has not entered the bay yet and its front is aimed so forward travel can turn smoothly into it. Sparse cones far away only; no public traffic."
+    },
+    {
+      "id": "q-073",
+      "replaces": "dist/assets/exam/traffic-q-073-v1.png",
+      "nativePath": "dist/assets/exam/traffic-q-073-v2.png",
+      "originalSource": "C:/Users/kenne/.codex/generated_images/01a12fa7-5765-7aa3-b575-b82029b4ff90/exec-ef84d030-68d0-4a4a-b928-df0c513bdc7b.png",
+      "width": 1586,
+      "height": 992,
+      "bytes": 2724913,
+      "sha256": "922120E06FA2F0A93FF115A92AB607FBBB5F7D5B564A6681ECDE79ECAC7CFF51",
+      "oldRejectedReason": "The front-facing v1 placed the curb at viewer-right, which was the LHD car's left side; the required right-wheel spacing was mirrored.",
+      "prompt": "Original premium photoreal professional Danish traffic-safety photograph, landscape 16:10, natural optics, lifelike scale and materials, mobile-readable critical geometry. Danish right-hand traffic. No copied exam photo, brand, readable licence plate, private identifier, watermark, caption, explanatory arrow, diagram, answer text, neon, toy-like 3D, miniature look, crash, or unmentioned road user/control. Closed Danish driving practice area, high REAR three-quarter view. A learner car points AWAY from camera and has completed forward parking parallel to the RIGHT asphalt edge. Because this is a rear view, the car's actual RIGHT wheels are on IMAGE RIGHT. Show those right wheels uniformly about 30 centimetres from the right curb/edge, with a narrow visible strip of asphalt between tyre and curb; the car is straight and parallel. Learner and instructor stand safely on IMAGE LEFT inspecting the result. Sparse distant cones only, no public traffic."
+    },
+    {
+      "id": "q-075",
+      "replaces": "dist/assets/exam/traffic-q-075-v1.png",
+      "nativePath": "dist/assets/exam/traffic-q-075-v2.png",
+      "originalSource": "C:/Users/kenne/.codex/generated_images/01a12fa7-5765-7aa3-b575-b82029b4ff90/exec-6c974040-4384-4345-a658-017f8998b192.png",
+      "width": 1586,
+      "height": 992,
+      "bytes": 2677294,
+      "sha256": "5571D0C4B5A8E918F59CE19E9CF3AA119E87237685EBCBDBC1EB3F0F12848DB9",
+      "oldRejectedReason": "The v1 showed the cyclists and speed bump but omitted the E 47 sign required by the signed-cycle-street context.",
+      "officialReference": "https://www.vejdirektoratet.dk/sites/default/files/2025-04/Notat_Erfaringsopsamling%20Cykelgader_FINAL%20140423.pdf",
+      "prompt": "Original premium photoreal professional Danish traffic-safety photograph, landscape 16:10, natural optics, lifelike scale and materials, mobile-readable critical geometry. Danish right-hand traffic. No copied exam photo, brand, readable licence plate, private identifier, watermark, caption, explanatory arrow, diagram, answer text, neon, toy-like 3D, miniature look, crash, or unmentioned road user/control. Driver-eye view inside a car on a narrow Danish cycle street. At the RIGHT roadside, prominently show an official E 47 cycle-street zone sign facing the driver: a BLUE RECTANGULAR sign with a white bicycle symbol and the exact white words CYKELGADE and ZONE, no code number printed and no unrelated symbol. Ahead, exactly two cyclists ride side by side in the driving lane and a black-white speed bump spans the road farther ahead. There is no safe passing gap. Residential setting, no other moving road users. Keep sign, cyclists, and bump large and clear."
+    },
+    {
+      "id": "q-082",
+      "replaces": "dist/assets/exam/traffic-q-082-v1.png",
+      "nativePath": "dist/assets/exam/traffic-q-082-v2.png",
+      "originalSource": "C:/Users/kenne/.codex/generated_images/01a12fa7-5765-7aa3-b575-b82029b4ff90/exec-c34d69b9-ad15-43f8-bbb3-955e581f7666.png",
+      "width": 1586,
+      "height": 992,
+      "bytes": 2402434,
+      "sha256": "47A3868788A7D47C1D82818B634647E673324DF0DAD1DF5AB312D5684786C501",
+      "oldRejectedReason": "The front-facing v1 put viewer-right wheels over the curb, but those were the LHD car's left wheels; the required right wheels remained on asphalt.",
+      "prompt": "Original premium photoreal professional Danish traffic-safety photograph, landscape 16:10, natural optics, lifelike scale and materials, mobile-readable critical geometry. Danish right-hand traffic. No copied exam photo, brand, readable licence plate, private identifier, watermark, caption, explanatory arrow, diagram, answer text, neon, toy-like 3D, miniature look, crash, or unmentioned road user/control. Closed approved Danish driving-technique facility, dynamic high REAR three-quarter view. A learner car points AWAY from camera along wet asphalt. Because this is a rear view, the car's actual RIGHT wheels are on IMAGE RIGHT. Both RIGHT wheels have run off the asphalt over a clearly HIGH vertical road edge and are now on the LOWER gravel shoulder beside it, while both left wheels remain on asphalt. The edge is an asphalt-to-lower-gravel training edge, NOT a raised sidewalk and NOT a curb the wheels climbed onto. Mild motion blur communicates remaining speed. Instructor stands far left at a safe distance giving guidance; cones and wet skid area establish a closed facility."
+    }
+  ]
+}
