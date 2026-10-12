@@ -1,0 +1,99 @@
+{
+  "checked": "2026-10-12T08:07:17.866Z",
+  "url": "https://console.typesafe.ai/playground",
+  "scope": "Synthetic classification of our reported QA text. Zero image/audio files, zero Jev browser actions, zero human participants. Scores are not human voice quality or learning proof.",
+  "state": {
+    "product": "NATKØRSEL Danish category B private learning prototype for teens/adults",
+    "requestFacts": {
+      "imageFiles": 0,
+      "audioFiles": 0,
+      "browserActionsPerformedByJev": 0,
+      "humanParticipants": 0
+    },
+    "voice": {
+      "chosenByOwner": "first sample, da-DK-JeppeNeural",
+      "clips": 1235,
+      "bytes": 84136407,
+      "production": "Pre-rendered own text; local MP3 playback, no app runtime TTS or response telemetry",
+      "reportedChecks": "Every MP3 hash, format, metadata and full decoder pass. 40 automated source tests. Agent observed real playback in Brave: intro, garage explanation/recall, natural 7-clip garage and 9-clip question completion in visible shuffled order; read buttons submit no answers. Pause/resume/restart/rate/navigation tested. Separate source permutation review.",
+      "visual": "Claude received one real desktop screenshot and reported overlap. Static compact 75.6px desktop bar replaces sticky overlay. Current spoken row and game hotspot highlighted cyan. Jev receives no image or audio files.",
+      "limits": "Not all clips have human listening review. No real human learning or qualified instructor approval. Public commercial voice-output rights not verified; owner-private only. Whole curriculum incomplete; live browser QA awaits user passkey."
+    },
+    "candidates": [
+      "complete_curriculum_and_human_pronunciation_transfer_review",
+      "declare_best_danish_voice_and_learning_proven",
+      "more_decoration_only"
+    ]
+  },
+  "questions": {
+    "heard_audio": {
+      "type": "noul",
+      "instructions": "Did THIS Jev request include audio files to listen to? Use requestFacts."
+    },
+    "direct_visual_review": {
+      "type": "noul",
+      "instructions": "Did Jev itself receive screenshots or execute browser actions in THIS request?"
+    },
+    "reported_browser_audio": {
+      "type": "noul",
+      "instructions": "Does the submitted record report actual browser audio playback in addition to unit tests?"
+    },
+    "human_voice_quality_proven": {
+      "type": "noul",
+      "instructions": "Does this record establish voice quality and learning effectiveness with real human listeners/students?"
+    },
+    "next_priority": {
+      "type": "choice",
+      "instructions": "Choose the next priority supported by the submitted facts.",
+      "criteria": {
+        "complete_curriculum_and_human_pronunciation_transfer_review": "Complete remaining curriculum, obtain qualified content review, and test pronunciation/novel-situation transfer with real students.",
+        "declare_best_danish_voice_and_learning_proven": "Claim that best Danish voice and learning gain are already established.",
+        "more_decoration_only": "Use the next phase only for cosmetic decoration."
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "heard_audio": {
+        "type": "noul",
+        "noul": 0.05,
+        "stats": {}
+      },
+      "direct_visual_review": {
+        "type": "noul",
+        "noul": 0.12,
+        "stats": {}
+      },
+      "reported_browser_audio": {
+        "type": "noul",
+        "noul": 0.95,
+        "stats": {}
+      },
+      "human_voice_quality_proven": {
+        "type": "noul",
+        "noul": 0.05,
+        "stats": {}
+      },
+      "next_priority": {
+        "type": "choice",
+        "choice": "complete_curriculum_and_human_pronunciation_transfer_review",
+        "confidence": 1,
+        "probabilities": {
+          "declare_best_danish_voice_and_learning_proven": 0,
+          "complete_curriculum_and_human_pronunciation_transfer_review": 1,
+          "more_decoration_only": 0
+        },
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 851,
+      "output_tokens": 148
+    },
+    "request_id": "playground_1b942d18469d6e3457491c82b03e2a3767b",
+    "evaluation_time_ms": 111.56901804497465
+  },
+  "balanceDisplayBefore": "$4.99",
+  "balanceMeaning": "Existing allowance only; no purchase, top-up, API key or exact debit claim."
+}

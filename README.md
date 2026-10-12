@@ -12,6 +12,7 @@ Et originalt dansk kategori B-koncept til unge og voksne: se førerens fejl, fin
 - Korte blandede missioner, feedback efter svaret, et nyt spørgsmål fra samme emne og en personlig gentagelseskø. XP gives for korrekte svar med daglig begrænsning; fart giver ingen point.
 - En 25-situations øveprøve med gemte svar, markeringer, fast tidsfrist, historik og gennemgang. Appens egen fejlberegning er tydeligt beskrevet.
 - Den viderebearbejdede oprindelige gas- og bremsesimulation som særskilt timing-demo. Bilen holder selv banen; den tester ikke orientering.
+- Fem native billeder med gennemsigtig baggrund: Møtrik-Mads, en mintbil, hjerne med kørelys, kvittering og omkampskegle. Små entréer/hoverreaktioner med rolig og reduceret-bevægelse-visning. Se [billedstatus og promptsæt](docs/art-status.md).
 - Dansk oplæsning med den valgte Jeppe-neuralstemme: 1.235 lokale MP3-klip til spørgsmål, forklaringer, mikrolektioner, garage og spilinstruktioner. Lyt-knappen pauser og fortsætter; afspilleren har stop, start forfra og fire hastigheder. Oplæsningen følger de viste blandede svarmuligheder. Den starter på brugerens klik, og navigation stopper den.
 
 Appens egne svar og indstillinger gemmes i browserens localStorage. Der er ingen konto, betaling eller analyseintegration i appkoden. Skrifttyper, Three.js og lydfiler leveres lokalt. Lydpakken fylder 84,1 MB samlet, men de enkelte klip hentes, når de afspilles; ingen TTS-tjeneste kaldes fra appen. WebGL og en moderne browser er nødvendige for de animerede scener.

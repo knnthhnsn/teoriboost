@@ -1,0 +1,92 @@
+{
+  "checked": "2026-10-12T09:48:15.616Z",
+  "url": "https://console.typesafe.ai/playground",
+  "scope": "Synthetic classification of submitted QA text. Jev received0images and executed0browser actions; no human learning or preference proof.",
+  "state": {
+    "product": "NATKØRSEL owner-private Danish driving theory prototype for teens and adults",
+    "requestFacts": {
+      "imageFilesSuppliedToJev": 0,
+      "browserActionsExecutedByJev": 0,
+      "realHumanParticipants": 0
+    },
+    "assets": {
+      "count": 5,
+      "format": "5 original native1254×1254 RGBA PNG;6,737,755bytes",
+      "reportedFileQA": "All fully decoded by Pillow, native SHA256/alpha recorded; checked in actual Brave on dark/light/checker at180px and48px; no pixel edits or cropping",
+      "placements": "Brain in header/mission/progress/result; Møtrik-Mads in garage intro and post-answer hook; unbranded mint car beside driving-demo entry; receipt after correct STOP; cone after wrong answers/mixed result",
+      "learningBoundary": "Decorative images are inert and empty-alt; no generated images in active traffic decisions or exams. 4 actual mission questions showed0art before grading. Figures are not rule diagrams.",
+      "interactionQA": "Actual Brave: home CTA at390/360, started-game art hidden, full mission3/4 with1intentional error and correct recall, correct receipt/cone/brain feedback, garagewrong→Mads→Danish hook playback, motionoff freezes without hiding images, calm hides jokes retaining factual text and scores, reduced-motion emulation works.41automated tests passed.",
+      "review": "Claude saw2actual screenshots, not Jev. Claude identified brain standing on road and tiny retry action. Brain moved to header outside canvas; retry is now44px button; source links enlarged. Adult-tone is still a hypothesis requiring human testing."
+    },
+    "remaining": {
+      "fullCurriculum": false,
+      "qualifiedInstructorApproval": false,
+      "humanLearningGain": false,
+      "humanAdultToneApproval": false,
+      "hostedAuthenticatedBrowserQA": "awaiting owner passkey"
+    }
+  },
+  "questions": {
+    "received_pixels": {
+      "type": "noul",
+      "instructions": "Did THIS Jev request include any actual image files? Use requestFacts, not descriptions of other reviewers."
+    },
+    "reported_file_and_browser_qa": {
+      "type": "noul",
+      "instructions": "Does the record report actual file integrity and browser interaction checks, rather than only proposed work?"
+    },
+    "human_learning_or_tone_proven": {
+      "type": "noul",
+      "instructions": "Does the record prove improved learning or adult acceptance with real human participants?"
+    },
+    "next_priority": {
+      "type": "choice",
+      "instructions": "Select the next priority supported by these facts.",
+      "criteria": {
+        "curriculum_and_real_learner_transfer": "Complete remaining curriculum and qualified review, then test real learners for transfer and acceptance.",
+        "more_decorative_assets_only": "Prioritize additional decorative assets without completing teaching depth or human tests.",
+        "declare_denmark_number_one": "Announce Denmark number one before market or human outcome evidence."
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "received_pixels": {
+        "type": "noul",
+        "noul": 0.11,
+        "stats": {}
+      },
+      "reported_file_and_browser_qa": {
+        "type": "noul",
+        "noul": 0.9,
+        "stats": {}
+      },
+      "human_learning_or_tone_proven": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      },
+      "next_priority": {
+        "type": "choice",
+        "choice": "curriculum_and_real_learner_transfer",
+        "confidence": 1,
+        "probabilities": {
+          "more_decorative_assets_only": 0,
+          "declare_denmark_number_one": 0,
+          "curriculum_and_real_learner_transfer": 1
+        },
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 945,
+      "output_tokens": 124
+    },
+    "request_id": "playground_1b9d79667f210f6469999a8621b38d60efa",
+    "evaluation_time_ms": 57.650987000670284
+  },
+  "balanceDisplayBefore": "$4.99",
+  "balanceMeaning": "Existing allowance only; no purchase/topup/API key or exact debit claim.",
+  "retrieval": "Rendered response JSON; initial clipboard read returned stale content and was rejected. No second model run."
+}

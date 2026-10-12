@@ -1,6 +1,7 @@
 import { SOURCES } from './content.js';
 import { createJudgeWorld } from './judge-world.js';
 import {createVoiceCue} from './voice-cues.js';
+import {renderArt} from './art.js';
 import {judgeVoiceParts,JUDGE_INTRO_VOICE} from './voice-texts.js';
 
 const SOURCE_BY_ID = new Map(SOURCES.map(source => [source.id, source]));
@@ -154,7 +155,8 @@ export function getJudgeCases() {
 export function renderJudge() {
   return `<section class="judge" data-judge-root aria-label="Du er kørelæreren">
     <header class="judge__header">
-      <div><p class="judge__eyebrow">NATKØRSEL · DIN FØRSTE VAGT</p><h1 class="judge__title" data-judge-title>Du er kørelæreren</h1></div>
+      <div class="judge__heading"><p class="judge__eyebrow">NATKØRSEL · DIN FØRSTE VAGT</p><h1 class="judge__title" data-judge-title>Du er kørelæreren</h1></div>
+      <div class="judge__welcome-mascot art-scene">${renderArt('koerelys-brain',{variant:'reaction',priority:true,humorOnly:true})}</div>
       <div class="judge__toggles" data-judge-toggles aria-label="Visning" hidden>
         <button class="judge__toggle" type="button" data-judge-humor aria-pressed="true">Humor</button>
         <button class="judge__toggle" type="button" data-judge-motion aria-pressed="true">Bevægelse</button>

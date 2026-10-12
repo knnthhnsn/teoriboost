@@ -1,0 +1,60 @@
+/* Optional native-transparent cutouts. The base app owns layout and colour tokens. */
+.art-asset {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform-origin: 50% 85%;
+}
+
+.art-asset--hero { max-width: min(42vw, 360px); margin-inline: auto; }
+.art-asset--garage { max-width: 180px; margin-inline: auto; }
+.art-asset--mission { max-width: 160px; margin-inline: auto; }
+.art-asset--result { max-width: 190px; margin-inline: auto; }
+.art-asset--reaction { max-width: 80px; margin-inline: auto; }
+
+/* One short entrance, then a small hover acknowledgement where a parent permits it. */
+.art-asset:not(.art-asset--humor-only) { animation: art-enter .32s ease-out both; }
+.art-scene:hover .art-asset { animation: art-nod .22s ease-out both; }
+.art-asset--humor-only { animation: art-bounce-in .34s ease-out both; }
+
+/* Calm hides optional joke cutouts and freezes the remaining art. */
+.calm .art-asset--humor-only { display: none; }
+.calm .art-asset:not(.art-asset--humor-only),
+.no-motion .art-asset { animation: none !important; }
+
+@keyframes art-enter {
+  from { opacity: 0; transform: translateY(8px) rotate(-2deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+@keyframes art-bounce-in {
+  0% { opacity: 0; transform: translateY(10px) scale(.96); }
+  70% { opacity: 1; transform: translateY(-2px) scale(1.01); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes art-nod {
+  from { transform: rotate(0); }
+  50% { transform: rotate(2deg) translateY(-1px); }
+  to { transform: rotate(0); }
+}
+
+@media (max-width: 680px) {
+  .art-asset--hero { max-width: 120px; }
+  .art-asset--garage, .art-asset--mission { max-width: 120px; }
+  .art-asset--result { max-width: 120px; }
+  .art-asset--reaction { max-width: 48px; }
+}
+
+.no-motion .art-asset,
+[data-motion="off"] .art-asset {
+  animation: none !important;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .art-asset,
+  .art-scene:hover .art-asset { animation: none !important; }
+}

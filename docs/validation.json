@@ -12,7 +12,7 @@
     "chapters": 10,
     "explanationCards": 174,
     "lessons": 58,
-    "localRuntimeFilesChecked": 29,
+    "localRuntimeFilesChecked": 37,
     "result": "passed",
     "sections": 58,
     "questions": 83,
@@ -31,6 +31,17 @@
       "durationSeconds": 13914.672,
       "result": "passed",
       "scope": "Complete current catalogue, local file hashes/metadata and full decode of all final MP3 files; not human listening"
+    },
+    "art": {
+      "assets": 5,
+      "nativeDimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 6737755,
+      "format": "RGBA PNG",
+      "result": "passed",
+      "scope": "Native byte/hash/alpha/decode and actual local CSS compositing. No human acceptance proof."
     }
   },
   "scope": "Schema, source-id and existence checks; no claim of full legal, curriculum or human validation",

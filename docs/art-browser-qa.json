@@ -1,0 +1,238 @@
+{
+  "checked": "2026-10-12T09:56:31.215Z",
+  "scope": "Actual local Brave with responsive viewport emulation; no physical phone, Safari, authenticated hosted view or human learning/age-preference approval.",
+  "assetGallery": {
+    "assets": 5,
+    "backgrounds": [
+      "dark",
+      "light",
+      "checker"
+    ],
+    "sizes": [
+      180,
+      48
+    ],
+    "allDecoded": true,
+    "inspectionScreenshot": "evidence/art-alpha-gallery-final.jpg"
+  },
+  "home": {
+    "desktopBefore": {
+      "images": [
+        {
+          "animation": "art-bounce-in",
+          "loaded": true,
+          "naturalWidth": 1254,
+          "pointerEvents": "none",
+          "rect": {
+            "height": 132,
+            "width": 132,
+            "x": 803.4000244140625,
+            "y": 277.3500061035156
+          },
+          "src": "assets/illustrations/koerelys-brain.png"
+        }
+      ],
+      "overflow": false,
+      "start": {
+        "height": 52,
+        "y": 521.3500366210938
+      },
+      "viewport": {
+        "height": 726,
+        "width": 1536
+      }
+    },
+    "final390": {
+      "guideBottom": 730.5000267028809,
+      "height": 844,
+      "mascot": {
+        "bottom": 159.1500015258789,
+        "height": 48,
+        "left": 292.3999938964844,
+        "right": 340.3999938964844,
+        "top": 111.1500015258789,
+        "width": 48,
+        "x": 292.3999938964844,
+        "y": 111.1500015258789
+      },
+      "mascotInStage": false,
+      "navTop": 778.4000244140625,
+      "scrollWidth": 375,
+      "startBottom": 657.4000244140625,
+      "width": 390
+    },
+    "final360": {
+      "guideBottom": 686.5000267028809,
+      "height": 800,
+      "mascotInStage": false,
+      "navTop": 734.4000244140625,
+      "scrollWidth": 345,
+      "startBottom": 613.4000244140625,
+      "width": 360
+    },
+    "final320": {
+      "guideBottom": 626.2000389099121,
+      "height": 720,
+      "mascotInStage": false,
+      "navTop": 639.2000122070312,
+      "scrollWidth": 315,
+      "startBottom": 553.1000061035156,
+      "width": 320
+    },
+    "finalActiveGame": {
+      "stageArt": 0,
+      "visibleArt": 0
+    }
+  },
+  "settings": {
+    "motionOff": {
+      "assets": [
+        {
+          "animation": "none",
+          "display": "block",
+          "iterations": "1",
+          "parentHovered": true,
+          "src": "assets/illustrations/koerelys-brain.png"
+        },
+        {
+          "animation": "none",
+          "display": "block",
+          "iterations": "1",
+          "parentHovered": false,
+          "src": "assets/illustrations/stop-receipt.png"
+        },
+        {
+          "animation": "none",
+          "display": "block",
+          "iterations": "1",
+          "parentHovered": false,
+          "src": "assets/illustrations/natmobil.png"
+        }
+      ],
+      "noMotion": true
+    },
+    "calm": {
+      "assets": [
+        {
+          "animation": "none",
+          "display": "none",
+          "src": "assets/illustrations/koerelys-brain.png"
+        },
+        {
+          "animation": "none",
+          "display": "none",
+          "src": "assets/illustrations/stop-receipt.png"
+        },
+        {
+          "animation": "none",
+          "display": "block",
+          "src": "assets/illustrations/natmobil.png"
+        }
+      ],
+      "calm": true,
+      "text": "Se → vælg → forstå → husk.Din valgte regel, to emner fra din gentagelseskø og en genkaldelse. Du får en forklaring efter hvert svar og nye gentagelser senere. XP følger korrekte svar; der er ingen point for fart. Alle missioner er åbne."
+    },
+    "reducedMotionEmulated": {
+      "images": [
+        {
+          "animation": "none",
+          "display": "block",
+          "hovered": true,
+          "src": "assets/illustrations/koerelys-brain.png"
+        },
+        {
+          "animation": "none",
+          "display": "block",
+          "hovered": false,
+          "src": "assets/illustrations/natmobil.png"
+        }
+      ],
+      "matches": true
+    },
+    "restored": "Original motion/humor ON; temporary viewport/media overrides reset"
+  },
+  "garage": {
+    "before": {
+      "explanationOpen": false,
+      "visibleImages": 0
+    },
+    "after": {
+      "audioError": null,
+      "imageSrc": "assets/illustrations/mads-nut.png",
+      "loaded": true,
+      "overflow": false,
+      "width": 68
+    },
+    "retryFinal": {
+      "className": "btn btn-secondary garage-retry",
+      "fontSize": "14px",
+      "height": 46.60000228881836,
+      "width": 208.46250915527344
+    }
+  },
+  "mission": {
+    "agentChosenFromOriginalSourceBank": true,
+    "runs": [
+      {
+        "id": "q-032",
+        "beforeArt": 0,
+        "intent": "all correct",
+        "image": "assets/illustrations/stop-receipt.png"
+      },
+      {
+        "id": "q-006",
+        "beforeArt": 0,
+        "intent": "one intentional error",
+        "image": "assets/illustrations/omkamp-cone.png"
+      },
+      {
+        "id": "q-008",
+        "beforeArt": 0,
+        "intent": "all correct",
+        "image": "assets/illustrations/koerelys-brain.png"
+      },
+      {
+        "id": "q-006",
+        "beforeArt": 0,
+        "intent": "all correct",
+        "image": "assets/illustrations/koerelys-brain.png"
+      }
+    ],
+    "result": {
+      "art": "assets/illustrations/omkamp-cone.png",
+      "heading": "GOD ØVNING. TAG REGLEN MED.",
+      "overflow": false,
+      "score": [
+        "3/4",
+        "+15",
+        "5"
+      ]
+    },
+    "calmResult": {
+      "artDisplay": "none",
+      "score": [
+        "3/4",
+        "+15",
+        "5"
+      ],
+      "symbolDisplay": "block"
+    }
+  },
+  "car": {
+    "loaded": true,
+    "overflow": false,
+    "src": "assets/illustrations/natmobil.png",
+    "width": 151.4042205810547
+  },
+  "consoleErrors": [],
+  "repairs": [
+    "Receipt removed from featured mobile card after crowded layout observation",
+    "Brain moved from road canvas to header after Claude critique",
+    "Retry promoted to14px/44px+ button and sources enlarged",
+    "320px voice-guide edge overlap repaired with extra bottom padding"
+  ],
+  "methodNotes": [
+    "Some viewport screenshot attempts captured stale dimensions or timed out. Final mobile screenshot uses explicit CDP viewport clip; original asset pixels were never edited.",
+    "Source-level independent review is in docs/art-integration-review.md; actual images seen by Claude are the two uploaded screenshots."
+  ]
+}

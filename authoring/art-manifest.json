@@ -1,0 +1,193 @@
+{
+  "checked": "2026-10-12",
+  "tool": "built-in imagegen",
+  "nativePixelsPreserved": true,
+  "scope": "Pillow full decode and alpha/hash metadata. Visual CSS-compositing reviewed separately in actual browser; no image pixel editing, cropping, resizing or recolouring. Faint native edge alpha is retained.",
+  "assets": [
+    {
+      "id": "mads-nut",
+      "src": "assets/illustrations/mads-nut.png",
+      "promptKey": "mads",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "bytes": 1579538,
+      "sha256": "17905871614500b012434522a9ab0c4da264dc77ef986dfaa4709a1d71972f12",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "transparentPixels": 923022,
+      "nonzeroPixels": 649494,
+      "foregroundAlphaAtLeast240": 596703,
+      "faintAlpha1to15": 40489,
+      "boundsNonzero": [
+        0,
+        0,
+        1243,
+        1254
+      ],
+      "boundsAbove32": [
+        31,
+        69,
+        1238,
+        1210
+      ],
+      "corners": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "generatedSource": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-c9c4d09f-8c27-4330-ad19-0621f28951df.png",
+      "sourceHashMatches": true
+    },
+    {
+      "id": "natmobil",
+      "src": "assets/illustrations/natmobil.png",
+      "promptKey": "car",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "bytes": 1225187,
+      "sha256": "ccfb7b5b1a2121aef5ae5f2a0810af210db7ab7cb2fd439f1a75a7779b3df72e",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "transparentPixels": 894703,
+      "nonzeroPixels": 677813,
+      "foregroundAlphaAtLeast240": 656638,
+      "faintAlpha1to15": 15757,
+      "boundsNonzero": [
+        0,
+        87,
+        1238,
+        1254
+      ],
+      "boundsAbove32": [
+        26,
+        258,
+        1235,
+        1018
+      ],
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "generatedSource": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-a7854d34-7ce5-42ce-844b-4a4a45d1bfd2.png",
+      "sourceHashMatches": true
+    },
+    {
+      "id": "koerelys-brain",
+      "src": "assets/illustrations/koerelys-brain.png",
+      "promptKey": "brain",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "bytes": 1454470,
+      "sha256": "b42b36fe4a16edc79495a7c3bb3f37f73a73f1c1960826e0419992fc9a4ff674",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "transparentPixels": 877750,
+      "nonzeroPixels": 694766,
+      "foregroundAlphaAtLeast240": 645885,
+      "faintAlpha1to15": 40051,
+      "boundsNonzero": [
+        0,
+        32,
+        1238,
+        1254
+      ],
+      "boundsAbove32": [
+        165,
+        113,
+        1188,
+        1167
+      ],
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "generatedSource": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-052032de-2840-4d88-9433-cfd99f4efaee.png",
+      "sourceHashMatches": true
+    },
+    {
+      "id": "stop-receipt",
+      "src": "assets/illustrations/stop-receipt.png",
+      "promptKey": "receipt",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "bytes": 1064994,
+      "sha256": "399750eda14461f1f67b64e60f062b44192737152c7572c70d8a38ea0e6a5672",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "transparentPixels": 1006745,
+      "nonzeroPixels": 565771,
+      "foregroundAlphaAtLeast240": 525735,
+      "faintAlpha1to15": 30661,
+      "boundsNonzero": [
+        0,
+        0,
+        1240,
+        1254
+      ],
+      "boundsAbove32": [
+        256,
+        43,
+        1191,
+        1213
+      ],
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "generatedSource": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-11e3b06a-1928-4d32-b0d2-8be765411b3c.png",
+      "sourceHashMatches": true
+    },
+    {
+      "id": "omkamp-cone",
+      "src": "assets/illustrations/omkamp-cone.png",
+      "promptKey": "cone",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "bytes": 1413566,
+      "sha256": "a70b9bc95c9ecdb132d9a2d2dfb4a18996019645b344fc953a1dc0bac718807d",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "transparentPixels": 848443,
+      "nonzeroPixels": 724073,
+      "foregroundAlphaAtLeast240": 695720,
+      "faintAlpha1to15": 19749,
+      "boundsNonzero": [
+        0,
+        21,
+        1238,
+        1238
+      ],
+      "boundsAbove32": [
+        127,
+        26,
+        1180,
+        1234
+      ],
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "generatedSource": "C:\\Users\\kenne\\.codex\\generated_images\\01a12da8-1c3d-7c50-aa40-72a72cdc3486\\exec-1a50181b-bab6-4235-9b1f-03883e80fa4c.png",
+      "sourceHashMatches": true
+    }
+  ]
+}

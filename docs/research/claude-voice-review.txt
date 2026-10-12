@@ -1,0 +1,37 @@
+Claude responded: Dom: oplæsningen er en god idé, men panelet fylder for meget og står i vejen.
+Gennemgår duplikerede knapper og oplæst tekst i panelet.
+
+Gennemgår duplikerede knapper og oplæst tekst i panelet.
+
+Dom: oplæsningen er en god idé, men panelet fylder for meget og står i vejen. Billedet beviser det første punkt; resten er hypoteser, fordi jeg ikke har hørt lyden.
+
+P2 · Panelet dækker indholdet (bevist)
+
+Det ligger oven på scenekortet, så overskriften “STOP ved tomt overskueligt kryds” er delvist skjult.
+Det viser hele teksten en gang til, selv om den står lige nedenunder.
+Ret: gør det til en smal bjælke uden afskrift.
+
+P2 · Dobbelte kontroller (bevist)
+
+“Fortsæt” i panelet og “Fortsæt oplæsning” ved spørgsmålet gør det samme. Behold én.
+
+Hypotese · Eleven skal huske fire udsagn på én gang
+
+Alle fire udsagn læses i én strøm. Uden markering af det udsagn, der læses lige nu, skal eleven holde dem alle i hovedet.
+Ret: fremhæv den række, der læses, og giv hver række sin egen lytteknap.
+
+Hypotese · Standardhastighed 1,15× kan være for hurtig for netop dem, der har mest brug for lyd. Start på 1,0×.
+
+To hurtige rettelser: gør panelet til en kompakt bjælke uden afskrift, og fremhæv udsagnet, der læses.
+
+Før en privat elevpilot
+
+Ret overlapningen.
+Lad et dansk øre lytte til en stikprøve. Gå især efter “B 13”, “km/t”, “§” og tal, som en AI-stemme ofte læser forkert.
+Behold mærkningen “AI-stemme”; den er god.
+
+
+
+
+
+14 minutes ago

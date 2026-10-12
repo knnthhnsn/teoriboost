@@ -10,6 +10,8 @@ import { validateGarage } from './garage-data.mjs';
 import { VOICE_PACK } from './dist/voice-pack.js';
 import { validateVoicePack } from './voice-validation.mjs';
 import { buildVoiceCatalog } from './scripts/build-voice-catalog.mjs';
+import { ART_ASSETS } from './dist/art.js';
+import { createHash } from 'node:crypto';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.join(root, 'dist');
@@ -213,6 +215,25 @@ function inspectAsset(file) {
 
 for (const required of ['index.html', 'styles.css', 'app.js', 'core.js', 'content.js', 'scene.js', 'judge.css', 'driving.html', 'lessons.css', 'garage.css', 'garage.js', 'garage-content.js', 'assets/three.min.js', 'assets/icon.svg']) {
   inspectAsset(path.join(dist, required));
+}
+
+const artManifest = JSON.parse(fs.readFileSync(path.join(root, 'authoring/art-manifest.json'), 'utf8'));
+check(artManifest.nativePixelsPreserved === true, 'illustrationer: native pixel-proveniens mangler');
+check(artManifest.assets.length === Object.keys(ART_ASSETS).length, 'illustrationer: manifestantal matcher ikke');
+checkUnique(artManifest.assets.map(asset => asset.id), 'illustration');
+for (const [id, asset] of Object.entries(ART_ASSETS)) {
+  const record = artManifest.assets.find(item => item.id === id);
+  check(!!record && record.src === asset.src, `${id}: billedmanifest mangler eller har forkert sti`);
+  const file = path.join(dist, asset.src);
+  inspectAsset(file);
+  if (!record || !fs.existsSync(file)) continue;
+  const buffer = fs.readFileSync(file);
+  check(buffer.length >= 33 && buffer.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10])), `${id}: filen er ikke PNG`);
+  if (buffer.length < 33) continue;
+  check(buffer.readUInt32BE(16) === asset.width && buffer.readUInt32BE(20) === asset.height && record.width === asset.width && record.height === asset.height, `${id}: forkert native dimension`);
+  check(buffer[25] === 6 && record.mode === 'RGBA' && record.alphaMin === 0 && record.alphaMax === 255, `${id}: mangler ægte RGBA-transparens`);
+  check(record.transparentPixels > record.width * record.height / 4 && record.corners?.length === 4 && record.corners.every(alpha => alpha <= 15), `${id}: mangler fri transparent baggrund`);
+  check(record.bytes === buffer.length && createHash('sha256').update(buffer).digest('hex') === record.sha256, `${id}: billedfilen er ændret siden alpha/decode-kontrollen`);
 }
 
 if (errors.length) {

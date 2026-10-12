@@ -1,0 +1,13 @@
+.art-note{display:flow-root}.art-note>.art-scene{float:right;width:138px;margin:0 0 12px 22px}.art-note>.art-scene img{width:100%;height:auto}
+.calm .art-note>.art-scene{display:none}
+.judge__heading{min-width:0;flex:1}.judge__welcome-mascot{width:64px;flex:none;margin-left:12px}.judge__welcome-mascot .art-asset{width:64px;max-width:64px;height:auto}
+.calm .judge__welcome-mascot,.judge--started .judge__welcome-mascot{display:none}
+.garage-retry{min-height:44px;font-size:14px;margin-top:14px;padding:12px 18px}
+.garage-refs{font-size:12px;overflow-wrap:anywhere}.garage-refs a{font-size:13px;min-height:44px;display:inline-flex;align-items:center}.garage-practical .text-link{font-size:14px;min-height:44px;display:inline-flex;align-items:center}.garage-joke .mono{font-size:11px}
+.card-art.art-scene{display:flex;align-items:center;justify-content:center;gap:18px}.card-art .art-asset{width:84px;max-width:84px;position:relative;z-index:1}
+.art-route{width:148px;flex:0 0 148px}.art-route .art-asset{width:148px;max-width:148px;margin:0}
+.gag.art-scene{display:flex;align-items:center;gap:18px}.gag .art-asset{width:76px;max-width:76px;flex:none}.gag>div{min-width:0}
+.garage-joke.art-scene{display:grid;grid-template-columns:88px minmax(0,1fr);gap:18px;align-items:center}.garage-joke .art-asset{width:88px;max-width:88px}.garage-joke>div{min-width:0}
+.result-art{margin:0 auto 10px;width:160px}.result-art .art-asset{width:160px;max-width:160px}.art-result-symbol{display:none}.calm .result-art{display:none}.calm .art-result-symbol{display:block}
+@media(max-width:700px){.art-note>.art-scene{width:88px;margin-left:14px}.judge:not(.judge--started) .judge__header{display:grid;grid-template-columns:minmax(0,1fr) 48px;align-items:center;gap:12px}.calm .judge:not(.judge--started) .judge__header{display:flex}.judge__welcome-mascot{margin-left:0}.judge__welcome-mascot,.judge__welcome-mascot .art-asset{width:48px;max-width:48px}.card-art .art-asset{width:72px;max-width:72px}.art-route{width:96px;flex-basis:96px}.art-route .art-asset{width:96px;max-width:96px}.gag .art-asset{width:56px;max-width:56px}.garage-joke.art-scene{grid-template-columns:68px minmax(0,1fr);gap:12px}.garage-joke .art-asset{width:68px;max-width:68px}.result-art,.result-art .art-asset{width:120px;max-width:120px}}
+@media(max-width:380px){.art-note>.art-scene{width:72px}.judge:not(.judge--started) .judge__intro{padding-bottom:56px}}
