@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "checked": "2026-10-12",
+  "officialPlan": {
+    "title": "Undervisningsplan for kategori B (almindelig bil), version 1.1, maj 2026",
+    "url": "https://cdn.fstyr.dk/faerdselsstyrelsen/Media/639159124710541258/undervisningsplan-kategori-b-almindelig-bil-version-11-maj-2026_pdf290526.pdf",
+    "granularity": "Officielle hovedafsnit og nummererede underafsnit i indholdsfortegnelsen. En mapping dokumenterer kun berøring af emnet, ikke opfyldelse af hvert delmål eller præstationskrav."
+  },
+  "contentSnapshot": {
+    "chapters": 10,
+    "sections": 58,
+    "questions": 83,
+    "sourceFile": "outputs/natkoersel/dist/content.js"
+  },
+  "coverageDefinitions": {
+    "brief": "Emnet berøres af få fakta eller et smalt scenarie; bredden og flere centrale delmål mangler.",
+    "partial": "Flere centrale dele er repræsenteret, men væsentlige delmål, variationer eller praktiske færdigheder mangler.",
+    "missing": "Ingen meningsfuld direkte dækning i den nuværende teori- og spørgsmålsbank."
+  },
+  "mainTopics": [
+    {
+      "id": "1",
+      "title": "Køretøjets indretning, udstyr, betjening og dokumenter",
+      "coverage": "partial",
+      "items": [
+        {"id":"1.1","title":"Betjeningsudstyr og instrumenter","coverage":"brief","sections":["cockpit","assistenter"],"questions":["q-001","q-002"],"priority":"P1","nextContent":"Byg cockpit-serie om instrumenter, kontrollys, motorstart, speeder, kobling, gear og konkrete førerassistentsvigt."},
+        {"id":"1.2","title":"Lovbestemmelser om bilens indretning og udstyr","coverage":"partial","sections":["bremser","lys-daek","motor-dokumenter","energi-miljoe"],"questions":["q-003","q-004","q-005","q-041"],"priority":"P0","nextContent":"Tilføj kontrolcases for styretøj, drifts-/parkeringsbremse, alle lygtekrav, horn, dæk, bærende dele, karrosseri, særligt udstyr og lovlig reaktion på fejl."},
+        {"id":"1.3","title":"Køretøjets dokumenter","coverage":"brief","sections":["motor-dokumenter"],"questions":["q-005"],"priority":"P1","nextContent":"Tilføj scenarier om registreringsattestens oplysninger, ejerskifte, syn, forsikring og dokumenter ved bil/påhæng."}
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Manøvrer på lukket øvelsesplads",
+      "coverage": "brief",
+      "items": [
+        {"id":"2.1","title":"Forberedelse til kørsel","coverage":"brief","sections":["cockpit"],"questions":["q-001"],"priority":"P1","nextContent":"Lav før-tur-sekvens med indstigning, sele, sæde, nakkestøtte, spejle, døre og instrumentkontrol."},
+        {"id":"2.2","title":"Igangsætning og standsning","coverage":"brief","sections":["start-stop"],"questions":["q-006"],"priority":"P1","nextContent":"Tilføj gear/kobling, kontrolleret bremsning og igangsætning på hældende vej."},
+        {"id":"2.3","title":"Kørsel i 8-tal","coverage":"brief","sections":["rat-blik"],"questions":["q-007"],"priority":"P2","nextContent":"Tilføj interaktiv øvelse i blik, håndstilling og ratkoordination gennem 8-tal."},
+        {"id":"2.4","title":"Forlæns og baglæns kørsel med målbremsning","coverage":"brief","sections":["rat-blik","bakning"],"questions":["q-007","q-008"],"priority":"P1","nextContent":"Tilføj målbremsning og bedømmelse af bilens længde både frem og tilbage."},
+        {"id":"2.5","title":"Baglæns kørsel med svingning","coverage":"brief","sections":["bakning"],"questions":["q-008"],"priority":"P1","nextContent":"Lav praktisk orienteringscase om baglæns svingning, opretning, blinde vinkler og afbrydelse."},
+        {"id":"2.6","title":"Forlæns og baglæns slalom","coverage":"brief","sections":["rat-blik"],"questions":["q-007"],"priority":"P2","nextContent":"Tilføj slalomøvelse om koordinering af lav fart, blik og styring."},
+        {"id":"2.7","title":"Parkering ved vejkant","coverage":"brief","sections":["parkering-manovre"],"questions":["q-072","q-073"],"priority":"P0","nextContent":"Udvid med hele den praktiske progression fra rigelig til begrænset manøvreplads og varieret orientering; fasthold, at færdigheden opnås på lukket øvelsesplads."},
+        {"id":"2.8","title":"Kørsel i 2. gear, højresving og eventuel hård opbremsning","coverage":"brief","sections":["start-stop","bremser"],"questions":["q-003","q-006"],"priority":"P1","nextContent":"Tilføj lukket-plads-case om gearskift, højresving, hastighed og kontrolleret hård opbremsning."},
+        {"id":"2.9","title":"Vending","coverage":"brief","sections":["vending"],"questions":["q-010"],"priority":"P1","nextContent":"Tilføj U-vending og trepunktsvending med løbende 360-graders orientering."}
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Køretøjers manøvreegenskaber",
+      "coverage": "partial",
+      "items": [
+        {"id":"3.1","title":"Generelt om manøvreegenskaber","coverage":"partial","sections":["blindzoner","laes-trailer","opfattelse"],"questions":["q-011","q-015","q-016"],"priority":"P1","nextContent":"Udvid med sammenlignelige cases om fart-, styre- og orienteringsegenskaber for forskellige køretøjer."},
+        {"id":"3.2","title":"Forskellige køretøjers manøvreegenskaber","coverage":"partial","sections":["tunge","tohjulede","cykler-smaa","laes-trailer"],"questions":["q-012","q-013","q-014","q-015"],"priority":"P0","nextContent":"Tilføj person-/varebil, bus, vogntog, traktor/motorredskab, elløbehjul og selvbalancerende køretøj; test længde, svingareal, acceleration, blindzone og hastighedsbedømmelse."}
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Trafikantadfærd",
+      "coverage": "partial",
+      "items": [
+        {"id":"4.1","title":"Opfattelse og reaktion","coverage":"partial","sections":["opfattelse","distraktion"],"questions":["q-016","q-017"],"priority":"P1","nextContent":"Tilføj scenarier om selektiv opmærksomhed, reaktionsstrækning, teknologidistraktion og sikker kontra hurtig reaktion."},
+        {"id":"4.2","title":"Syn og bevægelse","coverage":"brief","sections":["rat-blik","opfattelse"],"questions":["q-007","q-016"],"priority":"P1","nextContent":"Lav cases om synsretning, perifer opfattelse, fiksering og sammenhæng mellem blik og styring."},
+        {"id":"4.3","title":"Bedømmelse af afstand og hastighed","coverage":"partial","sections":["tohjulede","kurver-bakker","fart-energi"],"questions":["q-013","q-023","q-042"],"priority":"P0","nextContent":"Tilføj visuelle sammenligninger af egen/andres hastighed og afstand på byvej og landevej, især små silhuetter og modkørende."},
+        {"id":"4.4","title":"Lovbestemmelser om køreevne og helbred","coverage":"partial","sections":["traet-medicin","alkohol-stoffer","nybilist"],"questions":["q-018","q-019","q-050"],"priority":"P0","nextContent":"Tilføj narkotika, medicinmærkning, sygdom, træthedstegn og beslutning om helt at undlade kørsel; bevar særskilt nybilist-promillecase."},
+        {"id":"4.5","title":"Andre trafikanters adfærd","coverage":"partial","sections":["tunge","tohjulede","cykler-smaa","vejmiljoe"],"questions":["q-012","q-013","q-014","q-024"],"priority":"P1","nextContent":"Tilføj alder, trafikantart og typiske fejl hos børn, ældre, gående, cyklister og tunge køretøjer."},
+        {"id":"4.6","title":"Bedømmelse af andre trafikanter","coverage":"brief","sections":["vejmiljoe","tegn"],"questions":["q-024","q-028"],"priority":"P1","nextContent":"Byg cases om hensigt, øjenkontakt, kropssprog, alder og usikker adfærd uden at stole på blinklys alene."},
+        {"id":"4.7","title":"Egne holdninger og egen adfærd","coverage":"partial","sections":["holdning"],"questions":["q-020"],"priority":"P1","nextContent":"Tilføj beslutningsscenarier om tidspres, gruppepres, vrede, overvurdering af egne evner og læring af fejl."}
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Vejforhold",
+      "coverage": "partial",
+      "items": [
+        {"id":"5.1","title":"Vejenes sikkerhedsmæssige udformning","coverage":"brief","sections":["vejmiljoe","kurver-bakker"],"questions":["q-023","q-024"],"priority":"P0","nextContent":"Tilføj landevejs- og byvejscases om vejklasse, sidearealer, kurver, bakker, krydsudformning og vejes sikkerhedsgrænser."},
+        {"id":"5.2","title":"Risikoforhold ved vejene","coverage":"partial","sections":["vaadt-glat","sigt","kurver-bakker","vejmiljoe","tunnel-jernbane"],"questions":["q-021","q-022","q-023","q-024","q-025","q-036","q-042","q-063"],"priority":"P0","nextContent":"Udvid systematisk med omgivelser, udstyr/standard, forløb, brug og vejtype; tilføj særskilte by-, landevejs-, tunnel- og baneoverkørselsvariationer."}
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Grundregler for færdsel",
+      "coverage": "partial",
+      "items": [
+        {"id":"6.1","title":"Anvisninger for færdslen","coverage":"partial","sections":["anvisninger","tavler-signaler","stop"],"questions":["q-026","q-032","q-058","q-059","q-060","q-061","q-062","q-064"],"priority":"P0","nextContent":"Byg dækningsserie for tavlekategorier, vejafmærkning og signaler; den nuværende bank tester kun få symboler og prioriteringsregler."},
+        {"id":"6.2","title":"Sikker og uhindret afvikling af færdslen","coverage":"partial","sections":["hensyn","tegn","udrykning","uheld","sele-ansvar","laes-trailer"],"questions":["q-015","q-027","q-028","q-029","q-030","q-045"],"priority":"P0","nextContent":"Tilføj konkrete lovcases om lys, fri passage, personer/gods, motorstop/slæbning, ulykkespligter, forsikring og overladelse af køretøj."}
+      ]
+    },
+    {
+      "id": "7",
+      "title": "Manøvrer på vej",
+      "coverage": "partial",
+      "items": [
+        {"id":"7.1","title":"Igangsætning og standsning ved kørebanekant","coverage":"brief","sections":["start-stop"],"questions":["q-006"],"priority":"P1","nextContent":"Tilføj risikoforhold, spejl/skulderblik, tegn, placering og lovlig standsning i flere trafikmiljøer."},
+        {"id":"7.2","title":"Placering under ligeudkørsel","coverage":"brief","sections":["placering-fart","tavler-signaler"],"questions":["q-036","q-061","q-062"],"priority":"P0","nextContent":"Tilføj placering på byvej, landevej, flerbanet vej, ved cyklister, busbaner, heller og midlertidig afmærkning."},
+        {"id":"7.3","title":"Hastighed under ligeudkørsel","coverage":"partial","sections":["placering-fart","kurver-bakker","fart-energi","tavler-signaler"],"questions":["q-023","q-036","q-042","q-060"],"priority":"P0","nextContent":"Tilføj landevejsserier om standselængde, overskuelig strækning, møde, tæt trafik og forskel mellem maksimal og forsvarlig fart."},
+        {"id":"7.4","title":"Vognbaneskift og sammenfletning","coverage":"brief","sections":["bane-flet"],"questions":["q-037"],"priority":"P0","nextContent":"Tilføj særskilte scenarier for vognbaneskift, sammenfletning, ophørende bane, køkørsel og blindvinkel."},
+        {"id":"7.5","title":"Vending og baglænskørsel","coverage":"brief","sections":["bakning","vending"],"questions":["q-008","q-010"],"priority":"P1","nextContent":"Tilføj vejcases med lovligt stedvalg, orientering under hele manøvren og afbrydelse for sårbare trafikanter."},
+        {"id":"7.6","title":"Kørsel forbi holdende køretøjer og gående mv.","coverage":"brief","sections":["vejmiljoe","fodgaenger-rund","standsning-parkering"],"questions":["q-024","q-052","q-068"],"priority":"P0","nextContent":"Tilføj forbikørsel af bus, parkerede biler, skolepatrulje og gående med udsyn, sideafstand og beredskab."},
+        {"id":"7.7","title":"Møde","coverage":"brief","sections":["afstand-moede"],"questions":["q-038"],"priority":"P0","nextContent":"Tilføj møde på smal landevej, bakke/kurve, hindring i begge sider og korrekt hastighed/sideafstand."},
+        {"id":"7.8","title":"Kørsel foran eller efter andre","coverage":"brief","sections":["afstand-moede"],"questions":["q-038"],"priority":"P0","nextContent":"Tilføj følgeafstand, stopberedskab, forankørendes tegn og risiko ved tæt kørsel i by og på landevej."},
+        {"id":"7.9","title":"Overhaling","coverage":"brief","sections":["overhaling","kurver-bakker"],"questions":["q-023","q-039"],"priority":"P0","nextContent":"Tilføj fuldt overhalingsforløb på landevej: før/under/efter, forbudssteder, cyklist, modkørende, bagfrakommende og afbrydelse."},
+        {"id":"7.10","title":"Kørsel i trafiksanerede områder","coverage":"brief","sections":["trafiksanering"],"questions":["q-074","q-075"],"priority":"P0","nextContent":"Tilføj gågade, udkørsel med ubetinget vigepligt, E 47-54, bump/rumlestriber, parkering i cykelgade og flere børn-/fodgængervariationer."},
+        {"id":"7.11","title":"Fremkørsel mod kryds","coverage":"partial","sections":["anvisninger","hensyn","udrykning","tavler-signaler","ubetinget","stop","hoejre"],"questions":["q-026","q-027","q-029","q-031","q-032","q-033","q-058","q-059","q-064","q-065","q-067","q-071"],"priority":"P1","nextContent":"Udvid med signalregulerede kryds, dårlig oversigt, blokering, fodgængerfelt og trinvis orientering; bevar B11/B13-varianter."},
+        {"id":"7.12","title":"Ligeudkørsel i kryds","coverage":"partial","sections":["ubetinget","hoejre"],"questions":["q-031","q-033","q-065","q-067","q-071"],"priority":"P1","nextContent":"Tilføj hastighedsbedømmelse fra begge sider, forankørende, signal, cykelsti og gående på fjerneste hjørne."},
+        {"id":"7.13","title":"Højresving i kryds","coverage":"partial","sections":["sving-cykel","cykler-smaa"],"questions":["q-014","q-034","q-066"],"priority":"P0","nextContent":"Tilføj placering, tegn, flere cykelstityper, modkørende på dobbeltrettet sti, gående og højresving uden cykelsti."},
+        {"id":"7.14","title":"Venstresving i kryds","coverage":"brief","sections":["venstresving"],"questions":["q-076","q-077"],"priority":"P0","nextContent":"Udvid med placering og tegngivning, kryds med forskellige vigepligtsforhold, venteplads/midterrabat, modkørende venstresvinger og sikker rømning ved signalskift."},
+        {"id":"7.15","title":"Kørsel i rundkørsel","coverage":"brief","sections":["fodgaenger-rund"],"questions":["q-035"],"priority":"P0","nextContent":"Tilføj indkørsel, vognbanevalg, skift, tegn, flere udkørsler, cyklister og gående; nu findes kun én udkørselscase."},
+        {"id":"7.16","title":"Kørsel på motorvej","coverage":"brief","sections":["motorvej","vending"],"questions":["q-010","q-040"],"priority":"P0","nextContent":"Byg motorvejsforløb for tilkørsel, sammenfletning, afstand, overhaling, frakørsel, kø, nødspor og havari; dæk også delmålet 7.16.6 om motortrafikvej særskilt."},
+        {"id":"7.17","title":"Kørsel ved siden af andre","coverage":"brief","sections":["bane-flet","blindzoner"],"questions":["q-011","q-037"],"priority":"P0","nextContent":"Tilføj parallelkørsel i tæt trafik, placering ved store køretøjer og konflikter ved samtidige vognbaneskift."},
+        {"id":"7.18","title":"Standsning og parkering","coverage":"partial","sections":["standsning-parkering","doer-aabning"],"questions":["q-009","q-051","q-052","q-053","q-054","q-055","q-056","q-057"],"priority":"P0","nextContent":"Bevar den stærke regelserie og tilføj faktisk parkeringsmanøvre, oversigtsforhold, bakning, sikring og flere tavle/undertavlekombinationer."},
+        {"id":"7.19","title":"Kørsel i mørke og i lygtetændingstiden i øvrigt","coverage":"brief","sections":["sigt","tohjulede"],"questions":["q-013","q-022","q-063"],"priority":"P0","nextContent":"Byg natserie om lygtevalg, blænding, møde, fart efter synslængde, mørke trafikanter, standsning og landevej."},
+        {"id":"7.20","title":"Kørsel i tunnel","coverage":"brief","sections":["tunnel-jernbane"],"questions":[],"priority":"P0","nextContent":"Tilføj særskilt tunnelscenarie om lys, afstand, signaler, havari, nødudgang, brand og vending/bakning."},
+        {"id":"7.21","title":"Kørsel ved letbane","coverage":"brief","sections":["letbane"],"questions":["q-078","q-079"],"priority":"P0","nextContent":"Tilføj V 43, UB 11,3 og X 19, sporforløb ved overhaling/forbikørsel, hastighedstilpasning samt flere kryds- og svingvariationer."},
+        {"id":"7.22","title":"Afsluttende øvelseskørsel på vej","coverage":"brief","sections":["sammensat-koersel"],"questions":["q-080","q-081"],"priority":"P1","nextContent":"Tilføj sammensatte refleksionsruter om bilkontrol, energi, egne styrker/svagheder, svage trafikanter og skiftende vejforhold; appen må ikke registrere den praktiske lektion som gennemført."}
+      ]
+    },
+    {
+      "id": "8",
+      "title": "Særlige risikoforhold i trafikken",
+      "coverage": "partial",
+      "items": [
+        {"id":"8.1","title":"Særlige risikoforhold","coverage":"partial","sections":["traet-medicin","alkohol-stoffer","fart-energi","sele-ansvar","nybilist"],"questions":["q-018","q-019","q-042","q-045","q-050"],"priority":"P0","nextContent":"Udvid alkohol/narkotika, hastighed og manglende sele med ulykkesmekanismer, konsekvensbedømmelse og forebyggende valg."},
+        {"id":"8.2","title":"Egne holdninger og adfærd","coverage":"partial","sections":["holdning"],"questions":["q-020"],"priority":"P1","nextContent":"Tilføj aktive dilemmaer om egne grænser, ansvar for andre, gruppepres og korrigering af risikoblindhed."}
+      ]
+    },
+    {
+      "id": "9",
+      "title": "Manøvrer på køretekniske anlæg",
+      "coverage": "brief",
+      "items": [
+        {"id":"9.1","title":"Vejgreb og belæsning","coverage":"partial","sections":["vaadt-glat","laes-trailer","bremse-greb"],"questions":["q-015","q-021","q-043"],"priority":"P1","nextContent":"Tilføj sammenligninger af dæk, dæktryk, belæsning, vejgreb og bilens reaktion; appen kan forklare, men ikke erstatte anlægsøvelsen."},
+        {"id":"9.2","title":"Hastighed, centrifugalkraft, bremselængde og vejgrebets udnyttelse","coverage":"partial","sections":["fart-energi","bremse-greb"],"questions":["q-042","q-043"],"priority":"P0","nextContent":"Byg tal- og situationsbaserede sammenligninger af hastighed, energi, bremselængde, kurvekraft og samlet grebsforbrug."},
+        {"id":"9.3","title":"Hindringer på vejen og slalom","coverage":"brief","sections":["udskridning","rat-blik"],"questions":["q-007","q-044"],"priority":"P1","nextContent":"Tilføj valg mellem bremsning og undvigelse samt dobbelt undvigemanøvre; markér praktisk træning som anlægsstof."},
+        {"id":"9.4","title":"Genvindelse af vejgreb efter udskridning","coverage":"brief","sections":["udskridning"],"questions":["q-044"],"priority":"P0","nextContent":"Den nuværende case handler kun om forebyggelse. Tilføj sikre forklaringer og scenarier om korrekt reaktion ved for-/baghjulsudskridning uden at simulere anlægsgodkendelse."},
+        {"id":"9.5","title":"Bevare herredømmet efter kørsel ud over høj vejkant","coverage":"brief","sections":["hoej-vejkant"],"questions":["q-082","q-083"],"priority":"P0","nextContent":"Bevar teorien som forberedelse og refleksion; den krævede erfaring med gentagelser, stigende hastighed og eventuelt venstre vejkant kan kun opnås praktisk på køreteknisk anlæg."}
+      ]
+    },
+    {
+      "id": "10",
+      "title": "Regler og retningslinjer for kørekort",
+      "coverage": "partial",
+      "items": [
+        {"id":"10.1","title":"Betingelser for at få kørekort","coverage":"brief","sections":["forloeb","sytten"],"questions":["q-046","q-049","q-069","q-070"],"priority":"P0","nextContent":"Tilføj alder, helbred, førstehjælp, ophold, undervisningsforløb, lektionsplan, ansøgning og indstilling til prøve med aktuelle myndighedskilder."},
+        {"id":"10.2","title":"Køreprøvens gennemførelse","coverage":"partial","sections":["teoriproeve","digital-proeve"],"questions":["q-047","q-048"],"priority":"P0","nextContent":"Bevar digitalt teoriformat og tilføj prøvebetingelser, identitet, hjælpemidler, særlige prøver samt den praktiske prøves formål og bedømmelse."},
+        {"id":"10.3","title":"Lovbestemmelser om kørekort","coverage":"partial","sections":["sytten","nybilist"],"questions":["q-049","q-050","q-069","q-070"],"priority":"P0","nextContent":"Tilføj gyldighed, kategorier, medbringelse, 17-års ledsagerkrav, frakendelse, generhvervelse/gengivelse og sanktioner for nye bilister."}
+      ]
+    }
+  ]
+}

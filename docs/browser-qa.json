@@ -1,0 +1,565 @@
+{
+  "checked": "2026-10-12",
+  "scope": "Actual Brave desktop browser; viewport emulation for mobile. Only listed flows and sampled pixels are evidence. Earlier version checks are labelled by name and retained as history.",
+  "checks": [
+    {
+      "case": "exam-answer-flag-navigation",
+      "passed": true,
+      "evidence": "First question answered JA JA NEJ NEJ; flag retained after next/back; no answer explanation before submission.",
+      "name": "exam-answer-flag-navigation"
+    },
+    {
+      "case": "exam-reload",
+      "passed": true,
+      "evidence": "q-057; JA JA NEJ NEJ and flag preserved; wall-clock decreased to 21:30; same tab not blocked.",
+      "name": "exam-reload"
+    },
+    {
+      "case": "exam-two-tabs",
+      "passed": true,
+      "evidence": "Second independently opened tab cannot resume active first-tab exam; visible \"Prøven er aktiv i en anden fane.\"",
+      "name": "exam-two-tabs"
+    },
+    {
+      "case": "exam-25-five-errors",
+      "passed": true,
+      "evidence": "5\nØVEPRØVE AFLEVERET\nINDEN FOR VORES FEJLGRÆNSE.\n\nDenne gang er du inden for vores øvegrænse. Det er ikke dokumentation for prøveklarhed eller en garanti for at bestå myndighedens prøve.\n\nEGEN BEDØMMELSE: Appen tæller én fejl pr. situation, hvis mindst ét af de fire udsagn er forkert eller ubesvaret. Myndighedens fulde fejlberegning er ikke offentliggjort i den anvendte vejledning.\n\n20/25\nKORREKTE SITUATIONER\n5\nAPP-FEJL\n0\nUBESVAREDE\nTræn mine svage emner\nPrøv igen",
+      "steps": [
+        {
+          "id": "q-057",
+          "deliberateError": true
+        },
+        {
+          "id": "q-050",
+          "deliberateError": true
+        },
+        {
+          "id": "q-022",
+          "deliberateError": true
+        },
+        {
+          "id": "q-061",
+          "deliberateError": true
+        },
+        {
+          "id": "q-067",
+          "deliberateError": true
+        },
+        {
+          "id": "q-014",
+          "deliberateError": false
+        },
+        {
+          "id": "q-041",
+          "deliberateError": false
+        },
+        {
+          "id": "q-004",
+          "deliberateError": false
+        },
+        {
+          "id": "q-007",
+          "deliberateError": false
+        },
+        {
+          "id": "q-017",
+          "deliberateError": false
+        },
+        {
+          "id": "q-070",
+          "deliberateError": false
+        },
+        {
+          "id": "q-052",
+          "deliberateError": false
+        },
+        {
+          "id": "q-023",
+          "deliberateError": false
+        },
+        {
+          "id": "q-028",
+          "deliberateError": false
+        },
+        {
+          "id": "q-030",
+          "deliberateError": false
+        },
+        {
+          "id": "q-063",
+          "deliberateError": false
+        },
+        {
+          "id": "q-039",
+          "deliberateError": false
+        },
+        {
+          "id": "q-003",
+          "deliberateError": false
+        },
+        {
+          "id": "q-015",
+          "deliberateError": false
+        },
+        {
+          "id": "q-008",
+          "deliberateError": false
+        },
+        {
+          "id": "q-043",
+          "deliberateError": false
+        },
+        {
+          "id": "q-051",
+          "deliberateError": false
+        },
+        {
+          "id": "q-045",
+          "deliberateError": false
+        },
+        {
+          "id": "q-071",
+          "deliberateError": false
+        },
+        {
+          "id": "q-035",
+          "deliberateError": false
+        }
+      ],
+      "name": "exam-25-five-errors"
+    },
+    {
+      "case": "exam-result-reload",
+      "passed": true,
+      "evidence": "Same 20/25, 5 app-errors, 0 unanswered after reload.",
+      "name": "exam-result-reload"
+    },
+    {
+      "case": "exam-partial-unanswered",
+      "passed": true,
+      "evidence": "25\nØVEPRØVE AFLEVERET\nHER ER DIN NÆSTE TRÆNING.\n\nResultatet peger på konkrete regler, du kan øve. Gå gennem forklaringerne og tag en ny prøve, når du har forstået dem.\n\nEGEN BEDØMMELSE: Appen tæller én fejl pr. situation, hvis mindst ét af de fire udsagn er forkert eller ubesvaret. Myndighedens fulde fejlberegning er ikke offentliggjort i den anvendte vejledning.\n\n0/25\nKORREKTE SITUATIONER\n25\nAPP-FEJL\n25\nUBESVAREDE\nTræn mine svage emner\nPrøv igen",
+      "name": "exam-partial-unanswered"
+    },
+    {
+      "case": "judge-four-cases",
+      "passed": true,
+      "evidence": "All 4 issue→rule→position→feedback flows completed; final 4/4; source425 visible; XP awarded only first correct daily completion.",
+      "details": [
+        {
+          "id": "judge-stop",
+          "ruleText": "REGEL\nB 13 betyder fuldt stop ved stoplinjen. Et tomt kryds ophæver ikke stoppligten; efter stoppet gælder den ubetingede vigepligt stadig.",
+          "sourceURLs": [
+            "https://www.retsinformation.dk/eli/lta/2023/425",
+            "https://www.retsinformation.dk/eli/lta/2026/118",
+            "https://cdn.fstyr.dk/faerdselsstyrelsen/Media/639159124710541258/undervisningsplan-kategori-b-almindelig-bil-version-11-maj-2026_pdf290526.pdf"
+          ]
+        },
+        {
+          "id": "judge-yield",
+          "ruleText": "REGEL\nVed B 11 og hajtænder har føreren ubetinget vigepligt. Bilen skal vente, så den krydsende trafik kan fortsætte uden at ændre fart eller placering.",
+          "sourceURLs": [
+            "https://www.retsinformation.dk/eli/lta/2023/425",
+            "https://www.retsinformation.dk/eli/lta/2026/118",
+            "https://cdn.fstyr.dk/faerdselsstyrelsen/Media/639159124710541258/undervisningsplan-kategori-b-almindelig-bil-version-11-maj-2026_pdf290526.pdf"
+          ]
+        },
+        {
+          "id": "judge-bike",
+          "ruleText": "REGEL\nVed højresving skal føreren orientere sig helt frem til svinget og holde tilbage for cyklister, der fortsætter ligeud. Blinklyset ændrer ikke vigepligten.",
+          "sourceURLs": [
+            "https://www.retsinformation.dk/eli/lta/2026/118",
+            "https://cdn.fstyr.dk/faerdselsstyrelsen/Media/639159124710541258/undervisningsplan-kategori-b-almindelig-bil-version-11-maj-2026_pdf290526.pdf"
+          ]
+        },
+        {
+          "id": "judge-pedestrian",
+          "ruleText": "REGEL\nVed et ureguleret fodgængerfelt skal føreren tilpasse farten og om nødvendigt standse for en gående, der er på vej ud, så personen ikke udsættes for fare eller ulempe.",
+          "sourceURLs": [
+            "https://www.retsinformation.dk/eli/lta/2026/118",
+            "https://cdn.fstyr.dk/faerdselsstyrelsen/Media/639159124710541258/undervisningsplan-kategori-b-almindelig-bil-version-11-maj-2026_pdf290526.pdf"
+          ]
+        }
+      ],
+      "name": "judge-four-cases"
+    },
+    {
+      "case": "judge-mobile-calm",
+      "passed": true,
+      "evidence": "390×844, no horizontal overflow; direct correct position advances; 44px markers plus numbered labels; humor OFF removes excuse and receipt; rule/source preserved; motion OFF matches global setting.",
+      "name": "judge-mobile-calm"
+    },
+    {
+      "case": "exam-real-25-minute-expiry",
+      "passed": true,
+      "evidence": "Exam left unanswered across routes/reloads; actual25-minute deadline elapsed; UI automatically rendered TIDEN UDLØB with25app-errors/25unanswered. No clock manipulation.",
+      "name": "exam-real-25-minute-expiry"
+    },
+    {
+      "case": "v4-first-observation",
+      "passed": true,
+      "evidence": "Only neutral caption, plausible physical choices, no visible fullsetup/0of4/duplicatehumorcontrols; optional textdescription available; STOP uprightcamera-facing, owncarblue, markersoffactors.",
+      "name": "v4-first-observation"
+    },
+    {
+      "name": "v4-mission-three-and-new-stop-recall",
+      "pass": true,
+      "details": {
+        "missionIds": [
+          "q-032",
+          "q-002",
+          "q-004"
+        ],
+        "recallId": "q-064",
+        "firstId": "q-032",
+        "allCorrect": true
+      },
+      "passed": true
+    },
+    {
+      "name": "shuffled-exam-answer-flag-reload",
+      "pass": true,
+      "details": {
+        "answers": [
+          false,
+          false,
+          false,
+          true
+        ],
+        "clock": "24:52",
+        "id": "q-017"
+      },
+      "passed": true
+    },
+    {
+      "name": "shuffled-full25-five-errors-result-reload",
+      "pass": true,
+      "details": {
+        "answers": [
+          {
+            "position": 1,
+            "id": "q-017",
+            "deliberateError": true
+          },
+          {
+            "position": 2,
+            "id": "q-011",
+            "deliberateError": true
+          },
+          {
+            "position": 3,
+            "id": "q-060",
+            "deliberateError": true
+          },
+          {
+            "position": 4,
+            "id": "q-066",
+            "deliberateError": true
+          },
+          {
+            "position": 5,
+            "id": "q-079",
+            "deliberateError": true
+          },
+          {
+            "position": 6,
+            "id": "q-050",
+            "deliberateError": false
+          },
+          {
+            "position": 7,
+            "id": "q-043",
+            "deliberateError": false
+          },
+          {
+            "position": 8,
+            "id": "q-001",
+            "deliberateError": false
+          },
+          {
+            "position": 9,
+            "id": "q-025",
+            "deliberateError": false
+          },
+          {
+            "position": 10,
+            "id": "q-009",
+            "deliberateError": false
+          },
+          {
+            "position": 11,
+            "id": "q-059",
+            "deliberateError": false
+          },
+          {
+            "position": 12,
+            "id": "q-062",
+            "deliberateError": false
+          },
+          {
+            "position": 13,
+            "id": "q-040",
+            "deliberateError": false
+          },
+          {
+            "position": 14,
+            "id": "q-027",
+            "deliberateError": false
+          },
+          {
+            "position": 15,
+            "id": "q-047",
+            "deliberateError": false
+          },
+          {
+            "position": 16,
+            "id": "q-018",
+            "deliberateError": false
+          },
+          {
+            "position": 17,
+            "id": "q-052",
+            "deliberateError": false
+          },
+          {
+            "position": 18,
+            "id": "q-075",
+            "deliberateError": false
+          },
+          {
+            "position": 19,
+            "id": "q-074",
+            "deliberateError": false
+          },
+          {
+            "position": 20,
+            "id": "q-033",
+            "deliberateError": false
+          },
+          {
+            "position": 21,
+            "id": "q-028",
+            "deliberateError": false
+          },
+          {
+            "position": 22,
+            "id": "q-051",
+            "deliberateError": false
+          },
+          {
+            "position": 23,
+            "id": "q-056",
+            "deliberateError": false
+          },
+          {
+            "position": 24,
+            "id": "q-080",
+            "deliberateError": false
+          },
+          {
+            "position": 25,
+            "id": "q-076",
+            "deliberateError": false
+          }
+        ],
+        "result": "20/25, 5 app-fejl, 0 ubesvarede",
+        "sameResultAfterReload": true
+      },
+      "passed": true
+    },
+    {
+      "name": "v4-mobile390-feedback-calm-and-static-replay",
+      "pass": true,
+      "details": {
+        "viewport": "390×844",
+        "overflow": false,
+        "snapshotLoaded": true,
+        "snapshotWidth": 441,
+        "minButtonHeight": 44,
+        "wrongAnswerRetry": true,
+        "humorHidden": true,
+        "staticCaption": "0 KM/T · FULDT STOP"
+      },
+      "passed": true
+    },
+    {
+      "name": "v4-mobile360-feedback-no-overflow",
+      "pass": true,
+      "details": {
+        "scroll": 360,
+        "w": 360
+      },
+      "passed": true
+    },
+    {
+      "name": "v4-humor-motion-settings-reload",
+      "pass": true,
+      "details": {
+        "humor": false,
+        "motion": false
+      },
+      "passed": true
+    },
+    {
+      "name": "lesson-stop-mobile-search-case-recall",
+      "pass": true,
+      "details": {
+        "cards": 3,
+        "correctAction": "Dit næste trækKør langsomt frem og stands igen, før du kommer ind i tværtrafikkens bane.DerforStoppligten er opfyldt, men vigepligten kræver fortsat sikkert udsyn.Undervisningsplanen ↗Plan B 7.11.4",
+        "openCases": true,
+        "openRecall": true,
+        "scroll": 390,
+        "w": 390
+      },
+      "passed": true
+    },
+    {
+      "name": "final-desktop-scene-follows-workspace-height",
+      "pass": true,
+      "details": [
+        {
+          "phase": "Trin 1 af 4",
+          "scroll": 1536,
+          "stage": 410,
+          "w": 1536,
+          "workspace": 410
+        },
+        {
+          "phase": "Trin 2 af 4",
+          "scroll": 1521,
+          "stage": 585,
+          "w": 1521,
+          "workspace": 585
+        },
+        {
+          "phase": "Trin 3 af 4",
+          "scroll": 1536,
+          "stage": 410,
+          "w": 1536,
+          "workspace": 410
+        },
+        {
+          "phase": "feedback",
+          "stage": 754,
+          "workspace": 754
+        },
+        {
+          "phase": "next-case-observation",
+          "stage": 410,
+          "workspace": 410
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "final-mobile390-stop-thumb-receipt",
+      "pass": true,
+      "details": {
+        "legend": "Din rettelseFejlklippet",
+        "receipt": "STOP & SØNKVITTERING FOR ET WUNDSKYLDNING: AFVISTHJUL: 0 KM/T VED LINJENMANØVRE: RETTET · PRIS: 0 KRIngen bøde. Bare en bedre beslutning.",
+        "scroll": 390,
+        "thumbLoaded": true,
+        "thumbWidth": 441,
+        "width": 390
+      },
+      "passed": true
+    },
+    {
+      "name": "legacy-driving-start-gas-brake-smoke",
+      "pass": true,
+      "details": "Started through UI, held W for1s ->9km/t; held S for1s ->0km/t. Fullthree-situationrun and precise stop-window notyettested.",
+      "passed": true
+    },
+    {
+      "name": "legacy-driving-full-three-deliberate-errors",
+      "pass": true,
+      "details": {
+        "incidents": [
+          {
+            "phase": "yield-incident",
+            "body": "KØRETIME 01 · BYZONE\nLINDEVEJ\nTID\n0:13.0\nFEJL\n1\nKØRELÆRER\nVi tager den ovenfra. Reglen er din næste genvej.\n0\nkm/t\n50\nBrems\n↓ · S · MELLEMRUM\nGas\n↑ · W\nFEJL 1 · UBETINGET VIGEPLIGT\nDEN ANDEN HAVDE RET TIL VEJEN.\n\nDu kørte ud i krydset med 55 km/t, mens der kom biler på den krydsende vej.\n\nVed hajtænder eller vigepligtstavle har du ubetinget vigepligt for færdsel fra begge sider. Vis det tydeligt ved at sænke farten i god tid eller standse. Kør først frem, når det kan ske uden fare eller ulempe for andre.\n\nKilde: Færdselsloven § 26, stk. 2 og 5\nNYT MOVE · SAMME REGEL\nKØR VIDERE"
+          },
+          {
+            "phase": "stop-incident",
+            "body": "KØRETIME 01 · BYZONE\nFELTET VED SKOLEN\nFodgængerfelt · 112 m\nTID\n0:25.8\nFEJL\n2\nKØRELÆRER\nVi tager den ovenfra. Reglen er din næste genvej.\n0\nkm/t\n50\nBrems\n↓ · S · MELLEMRUM\nGas\n↑ · W\nFEJL 2 · STOPTAVLE\nDET VAR IKKE ET STOP.\n\nDu rullede over stoplinjen med 55 km/t. Et stop er 0.\n\nVed stoptavle skal du standse helt ved stoplinjen. Er der ingen linje, standser du umiddelbart før den krydsende vej. Derefter har du ubetinget vigepligt for færdsel fra begge sider.\n\nKilde: Stoptavle B 13 · færdselsloven § 26, stk. 2\nNYT MOVE · SAMME REGEL\nKØR VIDERE"
+          },
+          {
+            "phase": "pedestrian",
+            "body": "KØRETIME 01 · BYZONE\nLINDEVEJ\nTID\n0:37.6\nFEJL\n3\nKØRELÆRER\nVi tager den ovenfra. Reglen er din næste genvej.\n0\nkm/t\n50\nBrems\n↓ · S · MELLEMRUM\nGas\n↑ · W\nFEJL 3 · FODGÆNGERFELT\nHUN VAR PÅ VEJ OVER.\n\nDu kørte ind i feltet med 53 km/t, mens der var en gående i det.\n\nNærmer du dig et fodgængerfelt uden signal, skal du afpasse farten, så gående i feltet eller på vej ud i det ikke udsættes for fare eller ulempe. Om nødvendigt standser du og lader dem passere.\n\nKilde: Færdselsloven § 27, stk. 7\nNYT MOVE · SAMME REGEL\nKØR VIDERE"
+          },
+          {
+            "phase": "result",
+            "body": "KØRETIME 01 · BYZONE\nLINDEVEJ\nTID\n0:46.6\nFEJL\n3\nKØRELÆRER\nVidere. Samme regler som før.\n48\nkm/t\n50\nBrems\n↓ · S · MELLEMRUM\nGas\n↑ · W\nTRE SITUATIONER GENNEMFØRT\nDU KOM FREM.\n\nTre situationer, tre fejl. Det er i det mindste konsekvent.\n\nRene situationer\n0 af 3\nRegler at øve\n3\nFartgrænse\n50 km/t\nBelønning\nKorrekte beslutninger\n\nSelvstændig timing-simulation. Ingen fartscore eller XP. Øv og genkald reglerne i missionerne; faglig og visuel kørelærergennemgang udestår.\n\nKØR IGEN"
+          }
+        ],
+        "expected": "0/3 rene,3regleratøve,ingen tidsscore"
+      },
+      "passed": true
+    },
+    {
+      "name": "legacy-driving-near-line-stop-positive",
+      "pass": true,
+      "details": {
+        "earlyStopAt4mNotRecognized": "KØRETIME 01 · BYZONE\nKRYDSET VED EGEVEJ\nStoptavle · 4 m\nTID\n1:11.7\nFEJL\n1\nKØRELÆRER\nStoptavle. Hjulene skal holde helt stille.\n0\nkm/t\n50\nBrems\n↓ · S · MELLEMRUM\nGas\n↑ · W",
+        "recognizedStop": "KØRETIME 01 · BYZONE\nKRYDSET VED EGEVEJ\nStoptavle · 1 m\nTID\n1:45.2\nFEJL\n1\nKØRELÆRER\nDet var et stop. Se dig for, før du kører.\n0\nkm/t\n50\nBrems\n↓ · S · MELLEMRUM\nGas\n↑ · W"
+      },
+      "passed": true
+    },
+    {
+      "name": "legacy-stop-clean-passage-expectation",
+      "pass": false,
+      "disposition": "UNVERIFIED_POSITIVE_PATH",
+      "details": {
+        "expected": "A clean passage after recognized full stop",
+        "observed": "KØRETIME 01 · BYZONE\nFELTET VED SKOLEN\nFodgængerfelt · 111 m\nTID\n5:45.1\nFEJL\n2\nKØRELÆRER\nVi tager den ovenfra. Reglen er din næste genvej.\n0\nkm/t\n50\nBrems\n↓ · S · MELLEMRUM\nGas\n↑ · W\nFEJL 2 · STOPTAVLE\nDU STOPPEDE. OG KØRTE SÅ UD FORAN EN BIL.\n\nStoppet var fint. Vigepligten gælder stadig bagefter.\n\nVed stoptavle skal du standse helt ved stoplinjen. Er der ingen linje, standser du umiddelbart før den krydsende vej. Derefter har du ubetinget vigepligt for færdsel fra begge sider.\n\nKilde: Stoptavle B 13 · færdselsloven § 26, stk. 2\nNYT MOVE · SAMME REGEL\nKØR VIDERE",
+        "interpretation": "The simulator recognized the stop but rejected the next passage for continuing vigepligt. This was not a controlled traffic-free passage test; no clean passage is claimed."
+      },
+      "passed": false
+    }
+  ],
+  "finalFourCaseRun": [
+    {
+      "id": "judge-stop",
+      "waitInfo": {
+        "caption": "0 KM/T · FULDT STOP",
+        "legend": "Din rettelseFejlklippet",
+        "legendHidden": false
+      },
+      "continueCaption": "Passagen er fri · fortsæt sikkert"
+    },
+    {
+      "id": "judge-yield",
+      "waitInfo": {
+        "caption": "Vent på tværtrafikken",
+        "legend": "Din rettelseFejlklippet",
+        "legendHidden": false
+      },
+      "continueCaption": "Passagen er fri · fortsæt sikkert"
+    },
+    {
+      "id": "judge-bike",
+      "waitInfo": {
+        "caption": "Lad cyklisten passere",
+        "legend": "Din rettelseFejlklippet",
+        "legendHidden": false
+      },
+      "continueCaption": "Passagen er fri · fortsæt sikkert"
+    },
+    {
+      "id": "judge-pedestrian",
+      "waitInfo": {
+        "caption": "Lad den gående passere",
+        "legend": "Din rettelseFejlklippet",
+        "legendHidden": false
+      },
+      "continueCaption": "Passagen er fri · fortsæt sikkert"
+    }
+  ],
+  "localAppConsoleErrors": [],
+  "limits": [
+    "No human learning or market data",
+    "No instructor approval",
+    "No real-device campaign",
+    "No full visual audit of83diagrams",
+    "A clean positive legacy STOP passage remains unverified; recognized standstill and subsequent vigepligt rejection were observed"
+  ]
+}

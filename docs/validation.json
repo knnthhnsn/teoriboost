@@ -1,0 +1,22 @@
+{
+  "checked": "2026-10-12",
+  "coreTests": {
+    "command": "node --test --test-reporter=dot tests/*.test.mjs",
+    "result": "passed",
+    "count": 16
+  },
+  "contentValidation": {
+    "svgDiagramsChecked": 83,
+    "facts": 190,
+    "statements": 332,
+    "chapters": 10,
+    "explanationCards": 174,
+    "lessons": 58,
+    "localRuntimeFilesChecked": 20,
+    "result": "passed",
+    "sections": 58,
+    "questions": 83,
+    "sources": 12
+  },
+  "scope": "Schema, source-id and existence checks; no claim of full legal, curriculum or human validation"
+}

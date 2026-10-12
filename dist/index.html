@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111416">
+  <meta name="description" content="Træn dansk køreteori i korte missioner. Lær af dine fejl, genkald reglerne og øv prøveformatet.">
+  <title>NATKØRSEL — din hjerne. Dit kørekort.</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="judge.css">
+  <link rel="preload" href="assets/fonts/heading-bold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="lessons.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Spring til indhold</a>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Natkørsel, hjem"><span class="brand-mark" aria-hidden="true">///</span><span>NATKØRSEL<span class="brand-dot">B</span></span></a>
+    <div class="top-strap mono">KATEGORI B <span>/</span> DANMARK <span>/</span> LÆR. KØR. GENTAG.</div>
+    <div class="top-actions"><button id="humor-toggle" class="mode-toggle" aria-pressed="true"><span class="mode-led"></span><span>BRAINROT</span><b>ON</b></button><button id="settings-btn" class="icon-btn" aria-label="Indstillinger"></button></div>
+  </header>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-label mono">DIN GENVEJ TIL TEORIEN</div>
+      <nav aria-label="Hovednavigation" id="desktop-nav"></nav>
+      <div class="sidebar-bottom"><div class="small-license"><span class="mono">DIT FØRERKORT</span><span class="license-symbol">B</span><strong>Det begynder<br>med et godt blik.</strong></div><button class="source-link" id="sources-btn">Kilder & faglig status <span>↗</span></button><p class="sidebar-note">Frivillig træning ved siden af<br>din køreskole.</p></div>
+    </aside>
+    <main id="main" tabindex="-1"><div id="view"></div></main>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobilnavigation" id="mobile-nav"></nav>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="modal" aria-labelledby="modal-title"><div id="modal-content"></div></dialog>
+  <script src="assets/three.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

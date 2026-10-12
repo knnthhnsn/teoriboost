@@ -1,0 +1,160 @@
+{
+  "source": "TypeSafe Playground, live browser",
+  "state": {
+    "kind": "synthetic_design_triage",
+    "evidenceScope": "Text classification only; Jev receives no pixels and did not execute the app. Claude inspected 3 real desktop/mobile V3 screenshots. V4 changes are implemented but not yet re-tested in browser. No real learner results.",
+    "claudeObserved": [
+      "First error step reveals the mistake in clip caption and visible setup before observation.",
+      "Correct rule is consistently longer/more legalistic than distractors.",
+      "STOP sign looks flat; grey road hierarchy and mint own car reduce clarity.",
+      "Hotspots cover the car/line; mobile labels overlapped earlier and caused a wrong click.",
+      "Two humor controls duplicate one setting; initial 0/4 score looks like failure.",
+      "Mobile feedback lacks a picture of correct placement."
+    ],
+    "verifiedEarlier": {
+      "browser": "4 coaching cases completed in desktop browser; mobile44px direct position choice; optional humor/motion; 25-question exam with5deliberateerrors; answers/flag/deadline survive reload; active exam blocked in second tab; partial answercountsaserror.",
+      "automated": "13 deterministic tests pass.",
+      "coverage": "83 scenarios/58 short sections map57official subsections as35brief/22partial, not a complete book; code-reviewed official sources and original support diagrams."
+    },
+    "v4Implemented": [
+      "Neutral first caption and closed optional clip description; full setup after observation.",
+      "Plausible physical candidates; options shuffled with similar tone/length.",
+      "Night contrast, blue own car, uprightSTOP, thickownlaneSTOPline.",
+      "Offset markers with leader lines.",
+      "One visible humor control; score hidden until first completed case.",
+      "Mobile corrected-position photo; corrected replay with STOP pause0km/h, wait for cross traffic/cycle/person then safecontinue; wrongghostnoncolliding."
+    ],
+    "unproven": [
+      "V4 browser flow and pixels still pending.",
+      "Qualified instructor approval pending.",
+      "Full curriculum depth pending.",
+      "Real retention or pass-rate gains unmeasured.",
+      "Denmark number1 unproven."
+    ]
+  },
+  "questions": {
+    "answer_leak": {
+      "type": "noul",
+      "instructions": "Does the supplied Claude observation indicate the old first-step caption gives away the correct answer?"
+    },
+    "guess_signal": {
+      "type": "noul",
+      "instructions": "Does the supplied Claude review identify unequal answer length as a guessing cue?"
+    },
+    "numbered_mobile": {
+      "type": "noul",
+      "instructions": "Do the reported overlap clicks justify separate readable mobile choices?"
+    },
+    "corrected_replay": {
+      "type": "noul",
+      "instructions": "Could a correct replay with fullSTOPpause address the documented missing visual connection between rule and movement?"
+    },
+    "duplicated_controls": {
+      "type": "noul",
+      "instructions": "Does one visible global humor setting address the documented duplicated-control confusion?"
+    },
+    "v4_verified": {
+      "type": "noul",
+      "instructions": "Has V4 already passed browser testing according to this state?"
+    },
+    "human_retention": {
+      "type": "noul",
+      "instructions": "Do these synthetic/code/browser checks prove improved retention for real learners?"
+    },
+    "complete_book": {
+      "type": "noul",
+      "instructions": "Does the57-subsection mapping prove a complete instructional theory book?"
+    },
+    "instructor_approved": {
+      "type": "noul",
+      "instructions": "Is a qualified instructor approval documented?"
+    },
+    "national_leader": {
+      "type": "noul",
+      "instructions": "Is Denmark number1 status supported by actual market evidence?"
+    },
+    "next_priority": {
+      "type": "choice",
+      "instructions": "Which next step follows from the actual state?",
+      "criteria": {
+        "verify_v4": "Browser-test and visually inspect implemented V4 before treating the corrections as solved",
+        "rank_ad": "Advertise number1 based on classifier confidence",
+        "more_score": "Add more scoreboard numbers before observation",
+        "unrelated_gallery": "Replace traffic learning with an unrelated picture gallery"
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "answer_leak": {
+        "type": "noul",
+        "noul": 0.89,
+        "stats": {}
+      },
+      "guess_signal": {
+        "type": "noul",
+        "noul": 0.96,
+        "stats": {}
+      },
+      "numbered_mobile": {
+        "type": "noul",
+        "noul": 0.8,
+        "stats": {}
+      },
+      "corrected_replay": {
+        "type": "noul",
+        "noul": 0.75,
+        "stats": {}
+      },
+      "duplicated_controls": {
+        "type": "noul",
+        "noul": 0.87,
+        "stats": {}
+      },
+      "v4_verified": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "human_retention": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "complete_book": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "instructor_approved": {
+        "type": "noul",
+        "noul": 0.05,
+        "stats": {}
+      },
+      "national_leader": {
+        "type": "noul",
+        "noul": 0.06,
+        "stats": {}
+      },
+      "next_priority": {
+        "type": "choice",
+        "choice": "verify_v4",
+        "confidence": 1,
+        "probabilities": {
+          "unrelated_gallery": 0,
+          "rank_ad": 0,
+          "more_score": 0,
+          "verify_v4": 1
+        },
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 1084,
+      "output_tokens": 239
+    },
+    "request_id": "playground_1b980c80876bd374dd8b66d3676fc103204",
+    "evaluation_time_ms": 47.102666983846575
+  }
+}

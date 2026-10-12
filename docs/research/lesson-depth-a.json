@@ -1,0 +1,1227 @@
+{
+  "checked": "2026-10-12",
+  "scope": [
+    "bil",
+    "grundmanoevrer",
+    "koeretoejer",
+    "foereren",
+    "vej-vejr"
+  ],
+  "lessons": [
+    {
+      "sectionId": "cockpit",
+      "chapterId": "bil",
+      "lead": "En sikker kørestilling gør betjeningen rolig og udsynet pålideligt, før bilen bevæger sig.",
+      "cards": [
+        {
+          "title": "Byg fra sædet",
+          "body": "Indstil først sæde og ryglæn, så pedaler og rat kan betjenes uden at strække kroppen. Indstil derefter spejlene fra den færdige siddestilling. Flytter du sædet bagefter, ændrer du også det udsnit, spejlene viser.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.1.1"
+        },
+        {
+          "title": "Udsyn er et system",
+          "body": "Forrude, sideruder og spejle supplerer hinanden, men de fjerner ikke alle skjulte områder. Brug spejlene som tidlig information, og supplér med direkte orientering, når en manøvre kan bringe cyklister, gående eller andre tæt på bilen.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.1.2 og 2.1.1"
+        },
+        {
+          "title": "Kabinen skal tåle en opbremsning",
+          "body": "En løs telefon eller flaske kan flytte sig ved en pludselig opbremsning og forstyrre både fører og pedaler. Placér genstande stabilt, spænd sikkerhedsselen korrekt, og lær betjeningsgrebene, mens bilen holder stille.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.1.1-1.1.5 og 2.1.1"
+        }
+      ],
+      "case": {
+        "context": "Du overtager en delebil, hvor sædet står langt tilbage, og sidespejlene viser mest af bilens egne sider.",
+        "action": "Bliv holdende, indstil sæde og ryglæn, og indstil derefter spejlene fra din endelige position.",
+        "why": "Så kan du nå betjeningen sikkert og stole på, at spejlbilledet passer til den stilling, du faktisk kører i.",
+        "sourceIds": [
+          "plan-b-1-1"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 2.1.1"
+      },
+      "recall": {
+        "prompt": "Hvorfor skal sædet indstilles før spejlene?",
+        "answer": "Fordi en ændret siddestilling også ændrer synsvinklen i spejlene og kan gøre den tidligere indstilling misvisende."
+      },
+      "practicalNote": "Korrekt indstilling og orientering skal øves fysisk i undervisningsbilen med en kørelærer."
+    },
+    {
+      "sectionId": "assistenter",
+      "chapterId": "bil",
+      "lead": "Førerassistenter kan varsle og støtte, men føreren skal stadig forstå situationen og vælge den sikre handling.",
+      "cards": [
+        {
+          "title": "Støtte er ikke overtagelse",
+          "body": "En assistent reagerer på de oplysninger, dens sensorer og data kan registrere. Afmærkning, vejarbejde, snavs eller usædvanlige forløb kan begrænse hjælpen. Hold derfor selv øje med vej, færdsel og tegn, også når systemet er aktivt.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.1.6"
+        },
+        {
+          "title": "Kontrollér signalet",
+          "body": "En advarsel er en anledning til at undersøge situationen, ikke til en automatisk bevægelse med rat eller pedaler. Se, hvad der udløste signalet, orientér dig omkring bilen, og reagér kun på en måde, der passer til den faktiske trafik.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.1.6 og 4.1.5"
+        },
+        {
+          "title": "Når vej og skærm er uenige",
+          "body": "Et kort eller en hastighedsvisning kan være forældet eller have aflæst et tegn forkert. Synlig, gældende regulering og de aktuelle forhold skal styre kørslen. Usikkerhed bør føre til mere observation og en forsigtig tilpasning.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.1.6; Færdselsloven § 4"
+        }
+      ],
+      "case": {
+        "context": "Bilens skærm viser en højere tilladt hastighed end et tydeligt midlertidigt skilt ved et vejarbejde.",
+        "action": "Følg skiltningen, sænk hastigheden i god tid, og hold øje med arbejdere og ændrede baneforløb.",
+        "why": "Assistentens data kan være uaktuelle, mens skiltning og den konkrete risiko på stedet gælder for din kørsel.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 1.1.6; Færdselsloven §§ 3-4"
+      },
+      "recall": {
+        "prompt": "Hvad gør du først, hvis en assistent advarer, men årsagen ikke er tydelig?",
+        "answer": "Bevar kontrollen, orientér dig i den virkelige trafik og tilpas kørslen efter det, du kan se og sikkert vurdere."
+      },
+      "practicalNote": "Eleven skal kunne aflæse og forstå systemerne i undervisningsbilen. En eventuel demonstration skal følge kørelærerens og fabrikantens anvisninger og må aldrig fremprovokeres ved at skabe en faresituation."
+    },
+    {
+      "sectionId": "bremser",
+      "chapterId": "bil",
+      "lead": "Bremsekontrollen skal opdage afvigelser, før de bliver til manglende kontrol i trafikken.",
+      "cards": [
+        {
+          "title": "Pedalen giver information",
+          "body": "Bremsepedalens modstand og vandring skal opleves som normal for bilen. En pedal, der synker ved vedvarende tryk eller føles markant anderledes, kan varsle en fejl. Undersøg afvigelsen, før bilen bruges i trafik.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.3, pkt. 13-15 og 18-21"
+        },
+        {
+          "title": "Retning under bremsning",
+          "body": "Ved en forsigtig bremseprøve på et egnet sted skal bilen bevare en stabil retning. Trækker den tydeligt til en side, er bremsekraften muligvis ujævn. Det øger risikoen for at forlade sporet ved hårdere bremsning.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.2-1.2.3"
+        },
+        {
+          "title": "Reagér før turen",
+          "body": "En kontrollampe, unormal lyd eller ændret bremsevirkning skal ikke normaliseres, fordi bilen stadig kan standse. Sammenhold signalet med bilens betjeningsvejledning, og undlad videre kørsel, hvis bremsesikkerheden ikke kan fastslås før turen.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.3 og 1.3.1"
+        }
+      ],
+      "case": {
+        "context": "Før afgang holder du et jævnt tryk på bremsepedalen, men pedalen fortsætter langsomt længere ned end normalt.",
+        "action": "Lad bilen stå, og få bremsesystemets tilstand afklaret, før du kører ud.",
+        "why": "Den ændrede pedalvandring kan være tegn på en fejl; en prøve i trafikken udsætter både dig og andre for en unødig risiko.",
+        "sourceIds": [
+          "plan-b-1-1"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.3"
+      },
+      "recall": {
+        "prompt": "Hvorfor er det utilstrækkeligt kun at kontrollere, om bilen kan standse ved lav fart?",
+        "answer": "Fordi pedaladfærd, retningsstabilitet og advarsler kan afsløre fejl, som bliver kritiske ved en kraftigere eller gentagen bremsning."
+      },
+      "practicalNote": "Bremsekontrol og bremseprøve skal demonstreres og øves fysisk med kørelærer på et egnet sted."
+    },
+    {
+      "sectionId": "lys-daek",
+      "chapterId": "bil",
+      "lead": "Lys og dæk forbinder førerens hensigt med vejgreb, synlighed og mulighed for at blive forstået af andre.",
+      "cards": [
+        {
+          "title": "Lys skal både ses og vise",
+          "body": "Lygter hjælper dig med at se, men gør også bilen læsbar for andre. Kontrollér derfor funktion, renhed og synlige skader. En lygte, der lyser, kan stadig være utilstrækkelig, hvis den er dækket eller beskadiget.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.4 og 6.2.5"
+        },
+        {
+          "title": "Mønsteret leder vand væk",
+          "body": "Dækmønster og dækkenes tilstand har betydning for kontakten med våd vej. Den lovlige mindste mønsterdybde er 1,6 mm, men føreren skal også reagere på skader, forkert tryk og forhold, der svækker vejgrebet.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.7, punkt om mindst 1,6 mm mønsterdybde"
+        },
+        {
+          "title": "Blinkrytmen kan afsløre en fejl",
+          "body": "En usædvanligt hurtig blinkrytme kan pege på, at en blinklygte ikke virker som forventet. Gå rundt om bilen og kontrollér alle relevante lygter i stedet for at antage, at lampen i instrumenthuset beviser funktionen udenfor.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.4"
+        }
+      ],
+      "case": {
+        "context": "Efter kraftig regn opdager du en skade i et fordæk, samtidig med at blinklyset slår hurtigere end normalt.",
+        "action": "Bliv holdende, kontrollér dækket og de udvendige blinklygter, og få fejlene bragt i orden før turen.",
+        "why": "Dækket påvirker vejgrebet, og et svigtende blinksignal kan gøre dine manøvrer uklare for andre trafikanter.",
+        "sourceIds": [
+          "plan-b-1-1"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.4 og 1.2.7"
+      },
+      "recall": {
+        "prompt": "Hvorfor er et tændt kontrolsymbol for blinklys ikke i sig selv en fuld funktionskontrol?",
+        "answer": "Fordi den udvendige lygte stadig kan være defekt eller skjult; den faktiske funktion skal kontrolleres på bilen."
+      },
+      "practicalNote": "Lygte- og dækkontrol skal udføres på en rigtig bil; teksten kan ikke erstatte den praktiske demonstration."
+    },
+    {
+      "sectionId": "motor-dokumenter",
+      "chapterId": "bil",
+      "lead": "Advarsler og registreringsoplysninger hjælper føreren med at afgøre, om bilen passer til turen og må bruges sikkert.",
+      "cards": [
+        {
+          "title": "Advarsler kræver fortolkning",
+          "body": "En kontrollampe fortæller, at et system kræver opmærksomhed, men farve og symbol har forskellig betydning fra bil til bil. Brug bilens vejledning, og skeln mellem information, snarlig kontrol og forhold, der kræver øjeblikkelig standsning.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.1.5, 1.2.5 og 1.3.1"
+        },
+        {
+          "title": "Lyd, lugt og røg er også signaler",
+          "body": "Motorens tilstand aflæses ikke kun i instrumenthuset. Ny mekanisk støj, brændt lugt eller røg kan pege på en fejl, selv uden en lampe. Stands sikkert og undersøg situationen frem for at vente på et tydeligere svigt.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.5 og 1.3.1"
+        },
+        {
+          "title": "Dokumentet sætter rammer",
+          "body": "Registreringsattesten indeholder oplysninger om køretøjet, som er relevante ved blandt andet trailer og belastning. Sammenhold bilens og påhængskøretøjets data med opgaven og førerretten; udseendet alene fortæller ikke, hvad kombinationen må.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.3.1, pkt. 2-5; 6.1.3, pkt. 2-3"
+        }
+      ],
+      "case": {
+        "context": "Du låner en bil til at trække en trailer og ser samtidig en ukendt advarselslampe ved start.",
+        "action": "Slå lampen op, afklar bilens tilstand, og sammenhold registreringsoplysningerne for bil, trailer og førerret før afgang.",
+        "why": "Så undgår du både at overse en teknisk fejl og at vælge en kombination, som bilen eller din førerret ikke dækker.",
+        "sourceIds": [
+          "plan-b-1-1"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 1.1.2, 1.2.5 og 1.3.1, pkt. 2-5; 6.1.3, pkt. 2-3"
+      },
+      "recall": {
+        "prompt": "Hvorfor bør registreringsoplysninger kontrolleres, selv når bilen ser stor nok ud til traileren?",
+        "answer": "Fordi tilladte vægte og kombinationer følger registrerede oplysninger og førerret, ikke et visuelt skøn."
+      },
+      "practicalNote": "Kontrollamper og dokumenter varierer mellem biler og skal gennemgås på det konkrete køretøj."
+    },
+    {
+      "sectionId": "start-stop",
+      "chapterId": "grundmanoevrer",
+      "lead": "Igangsætning og standsning bliver sikre, når observation, tydelig kommunikation og præcis betjening sker i den rigtige rækkefølge.",
+      "cards": [
+        {
+          "title": "Skab et hul før du bevæger bilen",
+          "body": "Orientér dig fremad, i spejle og direkte mod skjulte områder, før du sætter i gang. Vurder ikke kun, om vejen er tom nu, men også om en cyklist eller bil kan nå frem, mens bilen forlader kanten.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.2 og 7.1; Færdselsloven § 3"
+        },
+        {
+          "title": "Blinklyset fortæller, det giver ikke plads",
+          "body": "Giv tegn i god tid, når andre har nytte af det, men vent stadig på et sikkert hul. Et blinklys oplyser om din hensigt; det ændrer ikke andre trafikanters fart, placering eller ret til at fortsætte.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 7.1; Færdselsloven § 32"
+        },
+        {
+          "title": "Standsningen planlægges bagfra",
+          "body": "Se tidligt efter et lovligt og overskueligt sted, kontrollér trafikken bagved, og sænk farten jævnt. Den sidste placering ved kanten bliver lettere, når du har skabt tid til styre- og bremsekorrektioner.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.2 og 7.18"
+        }
+      ],
+      "case": {
+        "context": "Du holder ved kantstenen og vil sætte i gang, mens en cyklist nærmer sig bagfra langs bilens højre side.",
+        "action": "Bliv holdende, orientér dig igen, og sæt først i gang, når cyklisten er passeret og der er et sikkert hul.",
+        "why": "Cyklisten kan ligge uden for spejlets dækkede område, og dit blinklys giver ikke ret til at skære ind i cyklistens bane.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 7.1; Færdselsloven §§ 3 og 32"
+      },
+      "recall": {
+        "prompt": "Hvad skal du vurdere ud over, om vejen ser fri ud i selve øjeblikket?",
+        "answer": "Om en trafikant kan nå ind i din planlagte bane, mens igangsætningen gennemføres."
+      },
+      "practicalNote": "Rækkefølge, koblingspunkt og jævn betjening kræver fysisk øvelse med kørelærer."
+    },
+    {
+      "sectionId": "rat-blik",
+      "chapterId": "grundmanoevrer",
+      "lead": "Blik og ratføring skal arbejde sammen, så bilen følger den valgte linje uden sene, store korrektioner.",
+      "cards": [
+        {
+          "title": "Se mod den vej, du vil følge",
+          "body": "Et blik tæt foran motorhjelmen opdager afvigelser sent og fremkalder mange små ratbevægelser. Flyt blikket længere frem langs den ønskede bane, og brug korte kontrolblik nær bilen, når afstand til kant eller forhindring skal vurderes.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.3-2.4"
+        },
+        {
+          "title": "Rattet skal kunne korrigeres",
+          "body": "Hold rattet, så begge hænder kan styre præcist og hurtigt uden at spænde kroppen. Lad hænderne samarbejde gennem svinget, og ret op i takt med bilens bevægelse frem for at slippe kontrollen brat.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.3-2.4"
+        },
+        {
+          "title": "Lav fart giver læringstid",
+          "body": "Ved grundmanøvrer skal farten være så lav, at du kan standse ved usikkerhed og nå at se virkningen af en ratbevægelse. Højere fart forstørrer en forkert kurs og reducerer tiden til at rette den.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.3-2.6"
+        }
+      ],
+      "case": {
+        "context": "På øvelsespladsen ser du konstant på kantlinjen tæt ved forhjulet, og bilen slingrer trods mange små rettelser.",
+        "action": "Sænk farten, ret blikket længere frem på den ønskede linje, og brug korte kontrolblik til siden.",
+        "why": "Det længere blik afslører kursændringen tidligere, så ratbevægelserne kan blive mindre og bilen mere stabil.",
+        "sourceIds": [
+          "plan-b-1-1"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 2.3-2.4"
+      },
+      "recall": {
+        "prompt": "Hvorfor giver et fast blik lige foran bilen ofte mere slingren?",
+        "answer": "Fordi kursafvigelser opdages sent, så føreren reagerer med hyppige og større korrektioner."
+      },
+      "practicalNote": "Blikføring, ratgreb og samspil mellem hænderne skal trænes fysisk på lukket øvelsesplads."
+    },
+    {
+      "sectionId": "bakning",
+      "chapterId": "grundmanoevrer",
+      "lead": "Bakning kræver lav fart og gentagen orientering, fordi bilens bevægelse og skjulte områder ændrer sig under hele manøvren.",
+      "cards": [
+        {
+          "title": "Bagenden bestemmer pladsbehovet",
+          "body": "Når du bakker og drejer, flytter bilens bagende sig mod den valgte side, mens fronten kan svinge ud modsat. Kontrollér derfor både området bag bilen og pladsen ved forhjørnerne; ét spejl kan ikke dække hele bevægelsen.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.5 og 7.5"
+        },
+        {
+          "title": "Orienteringen skal gentages",
+          "body": "En fri rute ved manøvrens begyndelse er ikke en garanti for resten. Gående, cyklister eller køretøjer kan komme ind bag bilen. Bak så langsomt, at du kan standse straks, når udsynet ændres eller bliver utilstrækkeligt.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.5 og 7.5; Færdselsloven § 3"
+        },
+        {
+          "title": "Kameraet er kun ét udsnit",
+          "body": "Et bakkamera kan vise lave genstande bag bilen, men billedet kan forvrænge afstand og udelade siderne. Kombinér kamera, spejle og direkte orientering, og stands ved tvivl i stedet for at udfylde et uset område med en antagelse.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.1.6, 2.5 og 7.5"
+        }
+      ],
+      "case": {
+        "context": "Du bakker ud fra en indkørsel; kameraet viser fri vej, men en hæk skjuler fortovet i højre side.",
+        "action": "Bak i meget lav fart, stands før fortovet, og skab nyt udsyn med direkte orientering til begge sider.",
+        "why": "En gående kan nærme sig uden for kameraets felt, og først den nye position giver et tilstrækkeligt beslutningsgrundlag.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 7.5; Færdselsloven § 3"
+      },
+      "recall": {
+        "prompt": "Hvorfor skal bilens forhjørner kontrolleres, selv om bilen bevæger sig baglæns?",
+        "answer": "Fordi fronten svinger ud til siden under drejningen og kan ramme noget, som ikke ligger bag bilen."
+      },
+      "practicalNote": "Bakningens styrevirkning, udsyn og standsninger skal øves fysisk på lukket øvelsesplads og senere i trafik."
+    },
+    {
+      "sectionId": "parkering-manovre",
+      "chapterId": "grundmanoevrer",
+      "lead": "En parkeringsmanøvre bliver overskuelig, når den deles i langsomme observationer, referencepunkter og kontrollerede korrektioner.",
+      "cards": [
+        {
+          "title": "Vælg plads før du styrer",
+          "body": "Vurder pladsens længde, bredde, adgang og trafikken omkring den, før manøvren begynder. Et lovligt felt er ikke nødvendigvis let at nå sikkert. Vælg en anden plads, hvis udsyn eller arbejdsrum ikke passer til dine færdigheder.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.7.1 og 7.18"
+        },
+        {
+          "title": "Brug referencepunkter som kontrol",
+          "body": "Et spejlpunkt eller en linje i ruden kan hjælpe med afstand, men virker kun fra en fast siddestilling og for den konkrete bil. Bekræft placeringen ved at se flere steder og korrigér, hvis virkeligheden ikke passer til referencepunktet.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.7.1"
+        },
+        {
+          "title": "Slutplaceringen skal være brugbar",
+          "body": "På øvelsespladsen skal bilen blandt andet kunne placeres parallelt med kanten med højre hjulpar højst 20 cm fra den. Målet træner præcision, men føreren skal samtidig bevare observation og mulighed for at standse.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.7.1, præstationskrav om højst 20 cm"
+        }
+      ],
+      "case": {
+        "context": "Du har påbegyndt en parkering, men kan ikke længere se den lave pullert ved bilens højre forhjørne.",
+        "action": "Stands, orientér dig på ny, og korrigér eller afbryd manøvren, før bilen flyttes videre.",
+        "why": "Referencepunktet kan ikke erstatte synlig kontrol; når en forhindring forsvinder, er dens afstand blevet usikker.",
+        "sourceIds": [
+          "plan-b-1-1"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 2.7.1"
+      },
+      "recall": {
+        "prompt": "Hvornår bør du opgive en indlært parkeringsreference og standse?",
+        "answer": "Når udsyn, siddestilling eller bil ikke svarer til forudsætningen, så referencepunktet ikke længere kan bekræftes."
+      },
+      "practicalNote": "Parkeringsfærdigheden er et fysisk præstationskrav og skal trænes med kørelærer; mikrolektionen gennemfører ikke øvelsen."
+    },
+    {
+      "sectionId": "doer-aabning",
+      "chapterId": "grundmanoevrer",
+      "lead": "En sikker afslutning på turen fortsætter, til døren er åbnet uden at skabe fare for forbipasserende.",
+      "cards": [
+        {
+          "title": "Dørzonen er en trafikzone",
+          "body": "En cyklist kan være tættere på og hurtigere fremme, end spejlbilledet antyder. Kontrollér spejl og direkte bagud, før døren løsnes, og åbn først en smal sprække, så ny trafik stadig kan opdages.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 7.18.3-7.18.5; Færdselsloven § 3"
+        },
+        {
+          "title": "Passagerer skal inddrages",
+          "body": "Føreren kan se forhold, som en passager overser, og bør sikre, at alle åbner mod et frit område. Giv en tydelig besked, især ved cykelsti eller kørebane, og vent med oplåsning, hvis nogen ellers åbner straks.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 7.18.3-7.18.5"
+        },
+        {
+          "title": "Sikr bilen før opmærksomheden flyttes",
+          "body": "Når bilen er standset, skal den sikres mod at bevæge sig, før føreren samler ting eller hjælper passagerer. En korrekt afslutningsrækkefølge frigør opmærksomhed til den sidste orientering og til at åbne døren sikkert i trafikken.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 7.18.3-7.18.5"
+        }
+      ],
+      "case": {
+        "context": "Du holder langs en cykelsti, og passageren rækker straks efter dørhåndtaget, mens en cyklist nærmer sig bagfra.",
+        "action": "Bed passageren vente, kontrollér trafikken bagud, og åbn først, når cyklisten er passeret og området er frit.",
+        "why": "En pludselig dør i cyklistens linje efterlader meget lidt mulighed for at undvige og kan skabe alvorlig fare.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 7.18.3-7.18.5; Færdselsloven § 3"
+      },
+      "recall": {
+        "prompt": "Hvorfor er et spejlblik alene utilstrækkeligt før døråbning?",
+        "answer": "Fordi en cyklist kan være i et skjult område eller nå frem, mens døren åbnes; direkte kontrol og langsom åbning giver ny information."
+      },
+      "practicalNote": "Afslutningsrækkefølge og direkte orientering bør indøves i den konkrete undervisningsbil."
+    },
+    {
+      "sectionId": "vending",
+      "chapterId": "grundmanoevrer",
+      "lead": "En vending er først forsvarlig, når sted, udsyn, trafik og manøvrens mange bevægelser kan kontrolleres samlet.",
+      "cards": [
+        {
+          "title": "Vælg stedet kritisk",
+          "body": "Vending kræver plads og udsyn i flere retninger gennem hele manøvren. Undgå steder, hvor bakke, sving, tæt trafik eller skjulte trafikanter kan gøre en del af forløbet uoverskueligt. Kør videre til et bedre sted ved tvivl.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.9, 7.5 og 7.16"
+        },
+        {
+          "title": "Hver del kræver ny orientering",
+          "body": "En trepunktsvending består af flere igangsætninger, standsninger og retningsskift. Trafikbilledet kan ændre sig mellem dem. Gentag derfor orienteringen før hver bevægelse i stedet for at behandle hele vendingen som én beslutning.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 2.9 og 7.5; Færdselsloven § 3"
+        },
+        {
+          "title": "Nogle veje udelukker manøvren",
+          "body": "På motorvej må føreren ikke vende eller bakke. Fejlkørsel skal derfor løses ved at fortsætte til en lovlig afkørsel. En sen ruteændring er aldrig grund til en manøvre, der bryder vejens sikre trafikretning.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 7.16.5; Færdselsloven § 46, stk. 2"
+        }
+      ],
+      "case": {
+        "context": "Du opdager en forkert rute på en smal vej lige før en uoverskuelig bakketop og overvejer at vende straks.",
+        "action": "Fortsæt til et sted med tilstrækkeligt udsyn og plads, og gennemfør kun vendingen efter ny orientering før hver bevægelse.",
+        "why": "Ved bakketoppen kan en trafikant dukke op sent, mens bilen spærrer flere retninger under vendingen.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 2.9 og 7.5; Færdselsloven § 3"
+      },
+      "recall": {
+        "prompt": "Hvorfor skal du orientere dig igen mellem vendingens enkelte bevægelser?",
+        "answer": "Fordi andre trafikanter kan komme ind i området, mens bilen skifter retning og holder stille."
+      },
+      "practicalNote": "Vending er en praktisk manøvre og skal øves på lukket øvelsesplads og i relevante trafiksituationer med kørelærer."
+    },
+    {
+      "sectionId": "blindzoner",
+      "chapterId": "koeretoejer",
+      "lead": "Blindzoner er skiftende områder uden sikkert udsyn, som kræver placering, direkte orientering og forudseenhed.",
+      "cards": [
+        {
+          "title": "Spejlene overlapper, men dækker ikke alt",
+          "body": "Sidespejl og bakspejl giver forskellige udsnit, og en trafikant kan bevæge sig fra ét udsnit til et skjult område. Følg trafikanter over tid, og supplér med direkte orientering før sideværts bevægelse.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.1.3 og 3.2.1"
+        },
+        {
+          "title": "Blindzonen flytter sig",
+          "body": "Når din bil eller den anden trafikant ændrer fart og retning, ændres det skjulte område også. En cyklist, du så for et øjeblik siden, skal derfor genfindes visuelt, før du krydser den forventede bane.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.1.3 og 3.2.7"
+        },
+        {
+          "title": "Placering kan skabe tid",
+          "body": "Undgå at blive liggende tæt ved siden af et stort køretøj, hvor føreren kan have svært ved at se dig. Skab afstand, og passér kun, når forløbet er tydeligt og kan afsluttes uden at blive fanget ved et sving.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.2 og 3.2.7"
+        }
+      ],
+      "case": {
+        "context": "En cyklist, som du så i højre spejl, forsvinder fra spejlet kort før dit planlagte højresving.",
+        "action": "Vent med svinget, orientér dig direkte mod højre, og genfind cyklisten eller fastslå sikkert, hvor personen er.",
+        "why": "At cyklisten ikke længere ses, betyder ikke, at banen er fri; cyklisten kan være flyttet ind i bilens skjulte område.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 3.1.3, 3.2.7 og 7.13; Færdselsloven § 3"
+      },
+      "recall": {
+        "prompt": "Hvad betyder det, når en trafikant, du fulgte i spejlet, pludselig ikke længere kan ses?",
+        "answer": "Det skaber usikkerhed om placeringen og kræver ny orientering; det er ikke bevis for, at området er frit."
+      },
+      "practicalNote": "Egen bils blinde områder skal findes og øves fysisk fra den faktiske førerplads."
+    },
+    {
+      "sectionId": "tunge",
+      "chapterId": "koeretoejer",
+      "lead": "Tunge køretøjers størrelse og bevægelse kræver ekstra plads, tid og forståelse for deres svingforløb.",
+      "cards": [
+        {
+          "title": "Baghjulene følger en snævrere linje",
+          "body": "Når et langt køretøj drejer, kan baghjulene skære tættere om hjørnet end førerhuset. Hold dig væk fra indersiden af svinget, også hvis der først ser ud til at være plads ved siden af køretøjet.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.2"
+        },
+        {
+          "title": "Langsom acceleration ændrer hullet",
+          "body": "Et tungt køretøj kan bruge længere tid på at sætte i gang og komme gennem et kryds. Pres ikke ind i den plads, føreren har valgt. Hullet kan være nødvendigt for både længde, svingradius og udsyn.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.2 og 4.3.2"
+        },
+        {
+          "title": "Afstand giver gensidigt udsyn",
+          "body": "Meget tæt kørsel bag en lastbil skjuler vej, tegn og trafik længere fremme. Øget afstand giver dig tidligere information og flere handlemuligheder og gør samtidig din bil lettere at opdage i lastbilens spejle.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.2 og 6.2.3"
+        }
+      ],
+      "case": {
+        "context": "En lastbil foran dig trækker mod venstre før et højresving, og der åbner sig kortvarigt plads langs dens højre side.",
+        "action": "Bliv bag lastbilen og uden for svingområdet, indtil køretøjet har afsluttet manøvren.",
+        "why": "Pladsen kan være nødvendig for lastbilens sving, mens baghjulene bevæger sig ind over området på højre side.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.2; Færdselsloven § 3"
+      },
+      "recall": {
+        "prompt": "Hvorfor kan en lastbil først trække væk fra den side, den bagefter drejer imod?",
+        "answer": "Den kan have brug for et bredere indledende forløb, fordi køretøjet er langt og baghjulene skærer tættere gennem svinget."
+      },
+      "practicalNote": null
+    },
+    {
+      "sectionId": "tohjulede",
+      "chapterId": "koeretoejer",
+      "lead": "Tohjulede kan være svære at bedømme, fordi deres smalle profil skjuler fart, afstand og placering.",
+      "cards": [
+        {
+          "title": "Smal profil giver usikker afstand",
+          "body": "En motorcykel fylder lidt i synsfeltet, så ændringen i størrelse kan være sværere at aflæse end for en bil. Se flere gange med mellemrum, og vurder bevægelsen i forhold til faste punkter i omgivelserne.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.5-3.2.6 og 4.1.2"
+        },
+        {
+          "title": "Hele kørebanen kan blive brugt",
+          "body": "En motorcyklist kan ændre placering i banen for udsyn, vejgreb eller afstand til farer. Planlæg derfor ikke en passage ud fra, at motorcyklen bliver ved kantlinjen eller holder samme sideplacering.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.5-3.2.6"
+        },
+        {
+          "title": "Genfind før du krydser banen",
+          "body": "Ved venstresving skal en modkørende motorcykels fart og afstand vurderes med ekstra forsigtighed. Hvis observationerne ikke giver et sikkert hul, vent. En fejlvurdering placerer bilen direkte på tværs af motorcyklens kurs.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.5-3.2.6 og 7.14"
+        }
+      ],
+      "case": {
+        "context": "Du vil dreje til venstre, men en modkørende motorcykel ses kortvarigt mellem biler, og dens fart er vanskelig at bedømme.",
+        "action": "Bliv holdende, følg motorcyklens bevægelse over flere observationer, og drej kun ved et tydeligt sikkert hul.",
+        "why": "Den smalle profil kan få afstand og fart til at virke mindre kritiske, end de faktisk er.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.5-3.2.6 og 7.14; Færdselsloven § 3"
+      },
+      "recall": {
+        "prompt": "Hvordan kan faste punkter i omgivelserne hjælpe ved vurdering af en motorcykel?",
+        "answer": "De gør det muligt at se, hvor hurtigt motorcyklens placering ændrer sig, i stedet for kun at vurdere dens lille silhuet."
+      },
+      "practicalNote": null
+    },
+    {
+      "sectionId": "cykler-smaa",
+      "chapterId": "koeretoejer",
+      "lead": "Cykler og små køretøjer kræver gentagen observation, fordi de let skjules og hurtigt kan nå et konfliktpunkt.",
+      "cards": [
+        {
+          "title": "Vurder ankomst, ikke kun afstand",
+          "body": "En cyklist kan se langt væk ud, men nå krydset, mens du gennemfører et sving. Følg udviklingen og sammenlign jeres forventede ankomst til samme punkt. Et enkelt afstandsblik er ikke nok.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.7-3.2.8 og 7.13"
+        },
+        {
+          "title": "Små trafikanter forsvinder bag små ting",
+          "body": "En stolpe, parkeret bil eller spejlramme kan dække en cyklist eller knallert i flere sekunder. Bevæg hovedet, skift synsvinkel og søg igen fra førerpladsen, især før du krydser en cykelsti eller et fortov.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.1.3, 3.2.7-3.2.8 og 7.13"
+        },
+        {
+          "title": "Gentag kontrollen efter standsning",
+          "body": "Mens du holder for andre, fortsætter cyklister og små køretøjer med at flytte sig. Orientér dig derfor igen umiddelbart før igangsætning eller sving, selv om området var frit, da bilen standsede.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.7-3.2.8 og 7.13"
+        }
+      ],
+      "case": {
+        "context": "Ved højresving har du set en cyklist bagude, men cyklisten forsvinder bag en parkeret varebil, mens du venter.",
+        "action": "Bliv holdende, søg cyklisten igen fra en bedre synsvinkel, og sving først, når den forventede bane er fri.",
+        "why": "Cyklisten kan fortsat bevæge sig mod krydset bag varebilen og nå højresvingsområdet, før bilen er gennem svinget.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.7 og 7.13; Færdselsloven §§ 3 og 26"
+      },
+      "recall": {
+        "prompt": "Hvorfor skal du søge igen efter en cyklist, der kortvarigt forsvinder bag en forhindring?",
+        "answer": "Fordi skjul ikke stopper cyklistens bevægelse; personen kan være nået tættere på konfliktpunktet uden at være synlig."
+      },
+      "practicalNote": "Orientering ved sving og krydsning af cykelsti skal trænes i rigtig trafik med kørelærer."
+    },
+    {
+      "sectionId": "laes-trailer",
+      "chapterId": "koeretoejer",
+      "lead": "Læs og trailer ændrer bilens bevægelse, udsyn og lovlige rammer, før kombinationen overhovedet sættes i gang.",
+      "cards": [
+        {
+          "title": "Last skal blive, hvor den er placeret",
+          "body": "Last, der kan forskyde sig ved sving eller bremsning, ændrer bilens balance og kan ramme personer eller vej. Fordel og fastgør lasten efter dens vægt og form, og kontrollér sikringen igen under en længere tur.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.3 og 6.2.7; Færdselsloven § 82"
+        },
+        {
+          "title": "Traileren følger en anden kurve",
+          "body": "I et sving følger trailerens hjul ofte en snævrere linje end bilens. Giv ekstra plads ved hjørner og kantsten, og kontrollér spejlene gennem svinget, så du opdager en afvigelse, før den bliver fastlåst.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 3.2.3 og 9.1"
+        },
+        {
+          "title": "Kombinationen skal passe sammen",
+          "body": "Kontrollér registreringsoplysningerne for bil og trailer før afgang. Bilens tilladte påhængsvægt, trailerens tilladte totalvægt, den faktiske belastning og din førerret skal passe sammen; én tilladt værdi afgør ikke hele kombinationen. Selve koblingen og udstyret kontrolleres efter fabrikantens anvisninger.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.10, 1.3.1, pkt. 2-5; 6.1.3, pkt. 2-3"
+        }
+      ],
+      "case": {
+        "context": "Efter læsning hænger traileren korrekt på bilen, men en tung genstand kan glide frit på ladet ved opbremsning.",
+        "action": "Undlad at køre, placér og fastgør genstanden forsvarligt, og kontrollér, at registreringsoplysninger, førerret og faktisk belastning passer sammen.",
+        "why": "En korrekt kobling forhindrer ikke løs last i at forskyde balancen eller skabe fare under turen.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 1.3.1, pkt. 2-5; 6.1.3, pkt. 2-3; Færdselsloven § 82"
+      },
+      "recall": {
+        "prompt": "Hvorfor er trailerens tilladte totalvægt ikke det eneste, der skal kontrolleres?",
+        "answer": "Fordi bilens trækevne, faktisk belastning, kobling, registreringsdata og førerens kørekortret også indgår i den lovlige og sikre kombination."
+      },
+      "practicalNote": "Hvis føreren senere skal bruge en trailer, bør kobling, kontrol og kørsel læres på den konkrete kombination. Denne mikrolektion dokumenterer ikke sådan praktisk instruktion og er ikke et gennemført kategori B-krav."
+    },
+    {
+      "sectionId": "opfattelse",
+      "chapterId": "foereren",
+      "lead": "Sikker kørsel kræver, at føreren opdager, forstår og handler på tegn, før situationen bliver akut.",
+      "cards": [
+        {
+          "title": "At se er ikke det samme som at opdage",
+          "body": "Øjnene kan være rettet mod vejen, uden at den relevante fare bliver bearbejdet. Søg systematisk efter ændringer, kanter, sideveje og mennesker, og spørg dig selv, hvad der kan bevæge sig ind i din bane.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.1.1-4.1.4"
+        },
+        {
+          "title": "Fart forkorter beslutningen",
+          "body": "Når farten stiger, tilbagelægges mere vej, mens føreren opdager, vurderer og reagerer. Tilpas derfor farten før komplekse steder, så observationerne kan omsættes til en rolig handling frem for en sen nødbeslutning.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.1.2-4.1.4; Færdselsloven § 3"
+        },
+        {
+          "title": "Forudseenhed bygger på tegn",
+          "body": "En bold ved vejkanten, et åbent bildørshåndtag eller hjul, der drejer, kan varsle næste bevægelse. Brug sådanne tegn til at skabe plads og bremseberedskab, uden at antage at den varslede handling med sikkerhed sker.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.1.3-4.1.4 og 4.2"
+        }
+      ],
+      "case": {
+        "context": "En bold ruller ud fra en række parkerede biler, men der er endnu ingen person synlig.",
+        "action": "Sænk straks farten, skab sideafstand og vær klar til at standse, mens du søger efter et barn bag bilerne.",
+        "why": "Bolden er et tidligt tegn på mulig bevægelse; handling før barnet bliver synligt giver mere plads og reaktionstid.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 4.1.3-4.1.4 og 4.2; Færdselsloven § 3"
+      },
+      "recall": {
+        "prompt": "Hvordan adskiller forudseenhed sig fra at gætte?",
+        "answer": "Forudseenhed kobler synlige tegn til mulige risici og skaber sikkerhedsmargin, men behandler ikke muligheden som et sikkert faktum."
+      },
+      "practicalNote": null
+    },
+    {
+      "sectionId": "distraktion",
+      "chapterId": "foereren",
+      "lead": "Distraktion kan flytte blik, hænder eller tanker væk fra den opgave, som trafiksituationen kræver nu.",
+      "cards": [
+        {
+          "title": "Opmærksomhed kan være væk med øjnene fremme",
+          "body": "En samtale eller besked kan optage den mentale bearbejdning, selv når blikket peger mod vejen. Tegn kan blive set uden at blive forstået. Reducér sekundære opgaver, før trafikken bliver kompleks.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.1.5-4.1.7"
+        },
+        {
+          "title": "Håndholdt udstyr er forbudt under kørsel",
+          "body": "Færdselsloven forbyder føreren at benytte håndholdt teleudstyr og andre håndholdte kommunikationsapparater under kørsel. Håndfri betjening gør ikke automatisk enhver brug forsvarlig; den generelle pligt til opmærksom og hensynsfuld kørsel gælder stadig.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.1.5-4.1.7; Færdselsloven §§ 3 og 55 a"
+        },
+        {
+          "title": "Planlæg et sikkert stop",
+          "body": "Hvis navigation, en besked eller en genstand kræver opmærksomhed, så find et lovligt sted og afslut kørslen, før udstyret betjenes håndholdt. Håndholdt brug er også ulovlig, mens du holder for rødt eller i kø, fordi du stadig anses for kørende.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.1.5-4.1.7; Færdselsloven § 55 a; Nordjyllands Politi, dom af 10. januar 2025, omtalt 14. januar 2025"
+        }
+      ],
+      "case": {
+        "context": "Navigationen mister ruten lige før et kompliceret kryds, og telefonen ligger løst på passagersædet.",
+        "action": "Fortsæt efter skiltning uden at række efter telefonen, og find senere et lovligt sted at standse og ændre ruten.",
+        "why": "Krydset kræver observation og valg; en håndholdt opgave fjerner blik og tanke netop dér, hvor situationen udvikler sig hurtigt.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 4.1.5-4.1.7; Færdselsloven §§ 3 og 55 a"
+      },
+      "recall": {
+        "prompt": "Hvorfor kan håndfri betjening stadig være distraherende?",
+        "answer": "Fordi samtalen eller opgaven kan beslaglægge forståelse og beslutningskapacitet, selv om begge hænder er på rattet."
+      },
+      "practicalNote": null
+    },
+    {
+      "sectionId": "traet-medicin",
+      "chapterId": "foereren",
+      "lead": "Føreren skal afstå fra kørsel, når træthed, sygdom eller påvirkende midler gør fuldt betryggende kørsel usikker.",
+      "cards": [
+        {
+          "title": "Selvvurderingen skal ske før afgang",
+          "body": "Gentagne koncentrationssvigt, oversete tegn eller vanskelighed ved at holde opmærksomheden er relevante advarsler, ikke noget der skal afprøves i trafik. Vurder køreevnen ærligt før turen og på ny, hvis tilstanden ændrer sig.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.4.3 og 8.1; Færdselsloven § 54"
+        },
+        {
+          "title": "Medicin kan ændre køreevnen",
+          "body": "Et lægemiddel kan påvirke opmærksomhed, reaktion eller dømmekraft, og virkningen kan variere. Følg præparatets advarsler og den faglige information, du har fået; kør ikke, hvis du ikke kan føre bilen på fuldt betryggende måde.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.4.3 og 8.1; Færdselsloven § 54"
+        },
+        {
+          "title": "En pause er en beslutning, ikke et bevis",
+          "body": "At standse kan give mulighed for at revurdere tilstanden, men en kort pause garanterer ikke, at køreevnen er genoprettet. Fortsæt kun, hvis du reelt kan køre fuldt betryggende; ellers skal turen ikke fortsætte.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.4.3 og 8.1; Færdselsloven § 54"
+        }
+      ],
+      "case": {
+        "context": "På en aftentur opdager du, at du har overset to vejvisninger og har svært ved at fastholde opmærksomheden.",
+        "action": "Find et sikkert og lovligt sted at standse, og fortsæt ikke, medmindre du igen kan køre fuldt betryggende.",
+        "why": "De gentagne svigt viser, at vigtig information ikke bliver bearbejdet; at presse videre kan gøre næste oversete forhold farligt.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 4.4.3 og 8.1; Færdselsloven § 54"
+      },
+      "recall": {
+        "prompt": "Hvorfor er det utilstrækkeligt at vurdere træthed ud fra, om du stadig kan holde bilen på vejen?",
+        "answer": "Fordi sikker kørsel også kræver, at tegn, risici og ændringer opdages og bearbejdes i tide."
+      },
+      "practicalNote": null
+    },
+    {
+      "sectionId": "alkohol-stoffer",
+      "chapterId": "foereren",
+      "lead": "Alkohol og andre påvirkende stoffer svækker netop de evner, føreren bruger til at vurdere sin egen sikkerhed.",
+      "cards": [
+        {
+          "title": "Påvirkning og selvvurdering hænger dårligt sammen",
+          "body": "Alkohol kan forringe opmærksomhed, reaktion og dømmekraft, samtidig med at føreren føler sig mere sikker. Planlæg derfor transporten før indtagelse i stedet for at lade en senere følelse afgøre, om bilen bruges.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.4.1-4.4.2 og 8.1; Færdselsloven § 53"
+        },
+        {
+          "title": "Lovgrænsen er ikke et personligt mål",
+          "body": "Den almindelige grænse er overskredet, når alkoholkoncentrationen er over 0,50 promille i blodet eller over 0,25 milligram pr. liter udåndingsluft. I de første tre år efter førstegangserhvervelse af retten til kategori B gælder over 0,20 promille eller over 0,10 milligram pr. liter. Spirituskørsel kan også straffes under talgrænsen, hvis alkoholen hindrer betryggende kørsel.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Færdselsloven § 53, stk. 1-3; Undervisningsplan kategori B v1.1, 4.4.1, pkt. 3-6"
+        },
+        {
+          "title": "Andre stoffer kan også udelukke kørsel",
+          "body": "Euforiserende stoffer og andre påvirkende midler kan gøre kørsel ulovlig eller uforsvarlig. Kombinationer og eftervirkning er ikke en situation, som bør testes bag rattet; vælg en transportform uden egen kørsel.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.4 og 8.1; Færdselsloven § 54"
+        }
+      ],
+      "case": {
+        "context": "Efter en fest siger en ven, at du virker upåvirket, og foreslår, at du kører den korte vej hjem.",
+        "action": "Lad bilen stå og brug den transportløsning, der blev planlagt uden egen kørsel.",
+        "why": "Vennens indtryk og turens længde siger ikke, om opmærksomhed og reaktion er sikre eller lovens krav er opfyldt.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 4.4 og 8.1; Færdselsloven §§ 53-54"
+      },
+      "recall": {
+        "prompt": "Hvorfor er følelsen af at være upåvirket et usikkert beslutningsgrundlag?",
+        "answer": "Fordi påvirkningen kan svække både køreevnen og evnen til at bedømme denne svækkelse."
+      },
+      "practicalNote": null
+    },
+    {
+      "sectionId": "holdning",
+      "chapterId": "foereren",
+      "lead": "Førerens holdning viser sig i de sikkerhedsmargener, der vælges, når tidspres, irritation eller gruppepres opstår.",
+      "cards": [
+        {
+          "title": "Normalisering flytter grænsen",
+          "body": "Når en risikofyldt vane gentages uden uheld, kan den begynde at føles sikker. Fravær af en konsekvens er ikke bevis for god kørsel. Vurder handlingen efter risiko og regler, ikke efter tidligere held.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.7 og 8.2"
+        },
+        {
+          "title": "Tidspres skal løses uden fartpres",
+          "body": "Forsinkelse kan få en fører til at forkorte afstande og acceptere usikre huller. Anerkend presset, bevar den nødvendige margin, og lad ankomsttiden ændre sig frem for at flytte risikoen over på andre.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.7 og 8.2; Færdselsloven § 3"
+        },
+        {
+          "title": "Defensiv kørsel giver plads til andres fejl",
+          "body": "Du kan følge reglerne og stadig møde en trafikant, der overser dig. Afstand, moderat fart og tydelig kommunikation skaber handlemuligheder, når andre handler uventet, uden at du behøver afgøre skyld i øjeblikket.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.7 og 8.2"
+        }
+      ],
+      "case": {
+        "context": "En utålmodig passager presser dig til at tage et lille hul i tæt trafik, fordi I er sent på den.",
+        "action": "Vent på et tydeligt sikkert hul og accepter forsinkelsen uden at diskutere beslutningen midt i manøvren.",
+        "why": "Passagerens tidspres ændrer ikke trafikkens bevægelser; sikkerhedsmarginen giver mulighed for at håndtere en andens uventede handling.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 4.7 og 8.2; Færdselsloven § 3"
+      },
+      "recall": {
+        "prompt": "Hvordan kan mange ture uden uheld gøre en dårlig vane mere risikabel?",
+        "answer": "De kan få føreren til at forveksle held med sikkerhed og gradvist acceptere mindre margin."
+      },
+      "practicalNote": null
+    },
+    {
+      "sectionId": "vaadt-glat",
+      "chapterId": "vej-vejr",
+      "lead": "Våd eller glat vej reducerer den samlede reserve til at bremse, styre og ændre fart på samme tid.",
+      "cards": [
+        {
+          "title": "Vejgrebet er et fælles budget",
+          "body": "Dækkene bruger vejgreb til både sideføring og bremsning. Kraftig opbremsning midt i et sving kræver begge dele samtidig. Sænk derfor farten før kurven, og udfør styring og fartændring så roligt som forholdene kræver.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.1-5.2.4 og 9.1"
+        },
+        {
+          "title": "Tilpas før den glatte del",
+          "body": "Broer, skyggepartier, blade, vand eller skiftende belægning kan ændre vejgrebet lokalt. Opdag tegnene tidligt, sænk farten og øg afstanden, mens bilen stadig har stabilt greb, frem for at reagere brat på området.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.3-5.2.4 og 9.1"
+        },
+        {
+          "title": "Dækkene kan ikke ophæve forholdene",
+          "body": "Korrekt dæktryk og tilstrækkeligt mønster støtter kontakten med vejen, men fjerner ikke risikoen ved vand, sne eller is. Føreren skal stadig tilpasse fart, afstand og bevægelser til den friktion, der faktisk er til rådighed.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 1.2.7, 5.2 og 9.1; Færdselsloven § 41"
+        }
+      ],
+      "case": {
+        "context": "Regnen tiltager før en kurve, og vand samler sig i sporene, mens bilen foran sænker farten.",
+        "action": "Slip speederen roligt, øg afstanden og vælg en fart før kurven, der mindsker behovet for kraftig bremsning under svinget.",
+        "why": "Vand kan reducere dækkenes kontakt, og samtidige store styre- og bremsekrav bruger mere af det begrænsede vejgreb.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2 og 9.1; Færdselsloven § 41"
+      },
+      "recall": {
+        "prompt": "Hvorfor er det bedre at reducere farten før en glat kurve end midt i den?",
+        "answer": "Fordi dækkene så ikke samtidig skal levere en stor bremsekraft og den sidekraft, der holder bilen i kurven."
+      },
+      "practicalNote": "Vejgreb og korrekt reaktion på glat føre skal opleves under fysisk køreundervisning, herunder på køreteknisk anlæg."
+    },
+    {
+      "sectionId": "sigt",
+      "chapterId": "vej-vejr",
+      "lead": "Begrænset sigt ændrer, hvor tidligt føreren kan opdage en fare, og dermed hvilken fart og afstand der er forsvarlig.",
+      "cards": [
+        {
+          "title": "Du skal kunne reagere inden for det synlige",
+          "body": "Tåge, mørke, regn eller blænding forkorter den strækning, du kan overskue. Tilpas farten, så ny information kan nå at føre til en sikker reaktion, og øg afstanden til den forankørende.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.4 og 7.19; Færdselsloven §§ 3 og 41"
+        },
+        {
+          "title": "Lysvalg påvirker både dig og andre",
+          "body": "Brug den belysning, som forholdene kræver, og skift i tide, så andre ikke blændes. Mere lys er ikke altid bedre: tåge og nedbør kan sende lyset tilbage og gøre kontraster sværere at se.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 6.2.5 og 7.19; Færdselsloven § 33"
+        },
+        {
+          "title": "Efter blænding kræves ny sikkerhedsmargin",
+          "body": "Når en modkørendes lys kortvarigt forringer synet, skal blikket søge vejens højre begrænsning uden at låse sig fast i lyset. Sænk farten efter behov, fordi synet ikke straks giver samme detaljer som før.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.4, 6.2.5 og 7.19"
+        }
+      ],
+      "case": {
+        "context": "I tæt tåge kan du kun se få vejmarkeringer frem, selv om bilen foran fortsætter med uændret fart.",
+        "action": "Sænk farten jævnt, øg afstanden, brug korrekt lys og undgå at følge den forankørendes tempo som målestok.",
+        "why": "Den anden førers valg udvider ikke dit udsyn; din fart skal give mulighed for at reagere på det, du selv kan opdage.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.4, 6.2.5 og 7.19; Færdselsloven §§ 3 og 41"
+      },
+      "recall": {
+        "prompt": "Hvorfor kan det være farligt blot at følge baglygterne foran i tåge?",
+        "answer": "Fordi den forankørende kan køre for hurtigt, og lysene kan trække dit blik væk fra farer i dit eget synlige område."
+      },
+      "practicalNote": "Kørsel i mørke trænes i den obligatoriske mørkelektion. Tåge, regn, blænding og anden nedsat sigt indgår som risikoforhold; mikrolektionen dokumenterer ingen praktisk erfaring med disse forhold."
+    },
+    {
+      "sectionId": "kurver-bakker",
+      "chapterId": "vej-vejr",
+      "lead": "Kurver og bakker skjuler det næste vejstykke, så farten skal vælges ud fra det, der kan ses, ikke det man håber er frit.",
+      "cards": [
+        {
+          "title": "Den skjulte del kan allerede være optaget",
+          "body": "Bag en kurve eller bakketop kan der stå et køretøj, være kø eller ligge en forhindring. Kør ind med en fart og placering, der giver handlemulighed inden for den synlige frie strækning.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.4, 7.3 og 7.9; Færdselsloven § 3"
+        },
+        {
+          "title": "Farten vælges før kurven",
+          "body": "Tidlig farttilpasning giver ro til at se gennem kurven og styre stabilt. En sen kraftig opbremsning kan flytte opmærksomheden fra vejforløbet og kræve mere vejgreb, netop mens bilen også skal dreje.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.4 og 7.9"
+        },
+        {
+          "title": "Overhaling kræver dokumenteret udsyn",
+          "body": "Før en overhaling skal hele den nødvendige strækning kunne overskues. Ved bakketop eller uoverskuelig kurve kan modkørende være skjult, og en kort tilsyneladende fri strækning er derfor ikke et sikkert hul.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 7.9 og 7.11; Færdselsloven § 23"
+        }
+      ],
+      "case": {
+        "context": "En langsom traktor kører foran dig lige før en bakketop, og der er ingen synlig modkørende.",
+        "action": "Bliv bag traktoren med afstand, og vent med overhaling, til den nødvendige modgående strækning kan overskues.",
+        "why": "Fravær af en synlig bil er ikke fri bane, når bakketoppen skjuler den del af vejen, som overhalingen kræver.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 7.9 og 7.11; Færdselsloven § 23"
+      },
+      "recall": {
+        "prompt": "Hvad er forskellen på en vejstrækning, der ser tom ud, og en strækning, der kan overskues som fri?",
+        "answer": "Den første kan indeholde skjult trafik; den anden er synlig langt nok til, at den planlagte manøvre kan afsluttes sikkert."
+      },
+      "practicalNote": "Valg af fart, placering og gear gennem kurver og bakker skal øves på vej med kørelærer."
+    },
+    {
+      "sectionId": "vejmiljoe",
+      "chapterId": "vej-vejr",
+      "lead": "Vejens omgivelser giver spor om, hvem der kan dukke op, og hvilken fejlmargin situationen kræver.",
+      "cards": [
+        {
+          "title": "Miljøet ændrer forventningen",
+          "body": "Skole, butikker, boliger, busstoppested eller parkerede biler peger på forskellige bevægelser. Brug omgivelserne til at lede efter relevante trafikanter og mulige skjul, før nogen træder ud, kører ud eller på anden måde bevæger sig ind i din bane.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.2 og 5.2.5"
+        },
+        {
+          "title": "Parkerede biler skaber flere risici",
+          "body": "En parkeret bil kan skjule gående, begynde at køre eller åbne en dør. Skab sideafstand, se efter personer, lys og hjulretning, og tilpas farten, så du kan reagere på en begyndende bevægelse.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 4.2, 5.2.2 og 5.2.5"
+        },
+        {
+          "title": "Vejens udformning er ikke hele reglen",
+          "body": "Bred belægning kan føles som invitation til høj fart, selv hvor sideveje og mennesker gør situationen kompleks. Lad risiko, udsyn og gældende regulering styre farten frem for vejens visuelle rummelighed alene.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.2 og 5.2.5; Færdselsloven §§ 3 og 41"
+        }
+      ],
+      "case": {
+        "context": "Du kører på en bred bygade ved et busstoppested, hvor en bus skjuler fortovet og flere passagerer er steget af.",
+        "action": "Sænk farten, skab afstand til bussen og vær klar til at standse for en person, der kommer frem foran den.",
+        "why": "Den brede vej ændrer ikke, at bussen skjuler gående, som kan nå kørebanen med meget kort varsel.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 5.2.2 og 5.2.5; Færdselsloven §§ 3 og 27"
+      },
+      "recall": {
+        "prompt": "Hvordan kan et busstoppested ændre din kørsel, selv når ingen person står i kørebanen?",
+        "answer": "Det gør gående og skjult bevægelse mere sandsynlig, så søgningen, farten og bremseberedskabet bør tilpasses før en konflikt opstår."
+      },
+      "practicalNote": null
+    },
+    {
+      "sectionId": "tunnel-jernbane",
+      "chapterId": "vej-vejr",
+      "lead": "Tunnel og jernbaneoverkørsel kræver tidlig observation, fri udvej og respekt for særlige signaler og begrænset plads.",
+      "cards": [
+        {
+          "title": "Lys og afstand ændres ved tunnelmundingen",
+          "body": "Overgangen mellem dagslys og tunnel kan midlertidigt reducere detaljesynet. Sikr før indkørslen, at nærlyset og dermed baglyset er tændt, øg opmærksomheden og hold længere afstand, så en langsommere kø ikke først opdages inde i det mørkere rum.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 7.20.2, pkt. 2-3; 7.20.4, pkt. 1, 3 og 6"
+        },
+        {
+          "title": "Tunnelen begrænser flugtveje",
+          "body": "Standsning, vending og bakning i en tunnel kan skabe særlig fare, fordi plads, udsyn og adgang for hjælp er begrænset. Følg signaler og anvisninger, og hold den afstand, der giver mulighed for kontrolleret standsning.",
+          "sourceIds": [
+            "plan-b-1-1"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 7.20"
+        },
+        {
+          "title": "Kør kun over sporet med fri udgang",
+          "body": "Ved jernbaneoverkørsel skal du udvise særlig forsigtighed og sikre, at passagen kan gennemføres uden unødigt ophold. Kør ikke ind, hvis køen foran kan efterlade bilen på sporet, selv om bommen er oppe.",
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Undervisningsplan kategori B v1.1, 7.3.3, pkt. 59; 7.3.4, pkt. 13-15; Færdselsloven § 5"
+        }
+      ],
+      "case": {
+        "context": "Bommen er oppe, men bilkøen efter jernbaneoverkørslen står så tæt, at der ikke er plads til din bil på den anden side.",
+        "action": "Bliv før sporet, og kør først frem, når der er fri plads til at passere hele overkørslen uden ophold.",
+        "why": "Et åbent signal fjerner ikke risikoen ved at blive fanget på sporet; fri udgang skal være sikret før indkørsel.",
+        "sourceIds": [
+          "plan-b-1-1",
+          "fl-2026"
+        ],
+        "sourceLocator": "Undervisningsplan kategori B v1.1, 7.3.3, pkt. 59; 7.3.4, pkt. 13-15; Færdselsloven § 5"
+      },
+      "recall": {
+        "prompt": "Hvorfor er en åben bom ikke alene nok til at begynde passage af en jernbaneoverkørsel?",
+        "answer": "Fordi der også skal være plads til at komme helt fri af sporet uden unødigt ophold."
+      },
+      "practicalNote": "Praktisk tunnelkørsel er kun obligatorisk, når en lektion på mindst 45 minutter tillader turen til, gennem og tilbage fra en angivet tunnel; ellers undervises færdighederne i teorilokalet. Her dokumenteres heller ingen praktisk passage af jernbaneoverkørsel."
+    }
+  ]
+}

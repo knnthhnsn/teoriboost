@@ -1,0 +1,181 @@
+{
+  "source": "TypeSafe Playground, live browser",
+  "state": {
+    "kind": "design_and_implementation_review",
+    "evidenceScope": "Jev is being given text summaries, NOT pixels. Claude inspected 3 actual v1 browser screenshots. Node checks are real local tests, not human learning validation. New coaching-game implementation is IN PROGRESS, not yet browser-verified.",
+    "v1Observed": {
+      "layout": "Dark quiz dashboard with lime accent, 3D road, yes/no choices, STOP receipt. Brainrot toggle changes visual humor only.",
+      "visualIssues": [
+        "Mobile headline wrapped to three lines and clipped lower content.",
+        "v1 generic stop 3D showed a crossing car despite prompt stating an empty junction.",
+        "Metadata under 11px and question text around 12px.",
+        "3D street looked turquoise daytime rather than a clear night scene."
+      ]
+    },
+    "claudeReview": {
+      "critique": "The game distinctiveness is missing; interaction is a quiz, scene mostly decorative. Put the situation first, increase learning text to 16-18px, remove developer labels, make scenes actually night.",
+      "suggestedMechanic": "You are the driving instructor. Watch a 5-second mistake, select the error location, reject an absurd Danish excuse by choosing the correct rule, place the car safely, then receive the rule, source and Stop & Son receipt."
+    },
+    "v2Implemented": {
+      "questions": 71,
+      "sections": 52,
+      "topics": 10,
+      "sourceCount": 12,
+      "sources": "Current official Danish sources, checked 2026-10-12. Text reviewed by another coding agent; no qualified driving-instructor sign-off.",
+      "changes": [
+        "Question-specific support diagrams replace contradictory generic scenes.",
+        "Smaller mobile hero heading and planned larger learning text.",
+        "Own grading clearly labelled app errors, not official identical grading.",
+        "13 passing deterministic tests for scoring5/6, missing responses, sparse arrays, corrupt storage, expiry data, result persistence and idempotency.",
+        "Browser QA of new full version and new game is still pending."
+      ]
+    },
+    "v3Plan": {
+      "interaction": "Driving-instructor game as first screen, 4 original street cases, no collision shown, no speed/time rewards, free retries, humor and motion optional.",
+      "learning": "Correct rule and positioning; recall variants, followed by spaced repetition and calm practice exam."
+    }
+  },
+  "questions": {
+    "diagram_mismatch": {
+      "type": "noul",
+      "instructions": "Does the v1 empty-junction prompt with a crossing car create a misleading visual learning risk?"
+    },
+    "readability_fix": {
+      "type": "noul",
+      "instructions": "Does the supplied screenshot review support larger learning text on mobile?"
+    },
+    "game_first": {
+      "type": "noul",
+      "instructions": "Does the supplied design critique support presenting a driving decision before dashboard statistics?"
+    },
+    "coaching_differentiation": {
+      "type": "noul",
+      "instructions": "Would the proposed coaching interaction address the specific missing-game critique, based on the supplied mechanism?"
+    },
+    "speed_rewards": {
+      "type": "noul",
+      "instructions": "Does the proposed V3 mechanism explicitly reward driving speed?"
+    },
+    "human_signoff": {
+      "type": "noul",
+      "instructions": "Does the supplied evidence establish qualified driving-instructor approval?"
+    },
+    "full_curriculum": {
+      "type": "noul",
+      "instructions": "Does the supplied compact bank establish exhaustive Danish curriculum coverage?"
+    },
+    "real_learning": {
+      "type": "noul",
+      "instructions": "Do the synthetic reviews and 13 unit tests prove improved human learning retention?"
+    },
+    "number_one": {
+      "type": "noul",
+      "instructions": "Does the supplied evidence prove the app is Denmark number one?"
+    },
+    "official_grading": {
+      "type": "noul",
+      "instructions": "Is exact equivalence to current official Danish grading documented here?"
+    },
+    "new_game_tested": {
+      "type": "noul",
+      "instructions": "Has the new V3 game actually passed browser testing according to this state?"
+    },
+    "safe_before_collision": {
+      "type": "noul",
+      "instructions": "Does the described coaching mechanic avoid showing a collision with vulnerable people?"
+    },
+    "next_priority": {
+      "type": "choice",
+      "instructions": "Which concrete next priority best closes the documented V1 product gap?",
+      "criteria": {
+        "playable_coaching": "Implement and browser-test the original coaching interaction with readable source-first feedback",
+        "more_stats": "Add dashboard statistics and leaderboards",
+        "rank_claim": "Market it as Danish number one now",
+        "more_darkness": "Only darken the background without changing interaction"
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "diagram_mismatch": {
+        "type": "noul",
+        "noul": 0.82,
+        "stats": {}
+      },
+      "readability_fix": {
+        "type": "noul",
+        "noul": 0.83,
+        "stats": {}
+      },
+      "game_first": {
+        "type": "noul",
+        "noul": 0.88,
+        "stats": {}
+      },
+      "coaching_differentiation": {
+        "type": "noul",
+        "noul": 0.85,
+        "stats": {}
+      },
+      "speed_rewards": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "human_signoff": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      },
+      "full_curriculum": {
+        "type": "noul",
+        "noul": 0.14,
+        "stats": {}
+      },
+      "real_learning": {
+        "type": "noul",
+        "noul": 0.05,
+        "stats": {}
+      },
+      "number_one": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "official_grading": {
+        "type": "noul",
+        "noul": 0.07,
+        "stats": {}
+      },
+      "new_game_tested": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "safe_before_collision": {
+        "type": "noul",
+        "noul": 0.91,
+        "stats": {}
+      },
+      "next_priority": {
+        "type": "choice",
+        "choice": "playable_coaching",
+        "confidence": 1,
+        "probabilities": {
+          "more_darkness": 0,
+          "rank_claim": 0,
+          "more_stats": 0,
+          "playable_coaching": 1
+        },
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 1197,
+      "output_tokens": 281
+    },
+    "request_id": "playground_1b93b10c8b386064dbf976d92b83754d0e8",
+    "evaluation_time_ms": 102.87274001166224
+  }
+}

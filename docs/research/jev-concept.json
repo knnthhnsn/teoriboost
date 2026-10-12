@@ -1,0 +1,393 @@
+{
+  "source": "TypeSafe Playground, live browser",
+  "requestId": "playground_1b9a4e5e006df314edab8b3049c056b846a",
+  "access": {
+    "monthlyCreditUsd": 4.99,
+    "autoRecharge": false,
+    "paymentMethod": false,
+    "checkedDate": "2026-10-12"
+  },
+  "state": {
+    "kind": "synthetic_concept_study",
+    "warning": "All 6 personas and raw reactions are invented by Codex. No real people or customer behavior; classify only the supplied text. This is hypothesis generation, not proof of learning or market demand.",
+    "variants": {
+      "A": "Pure night-driving simulation, dry jokes, gas/brake, three scenarios, total time is score.",
+      "B": "NATKØRSEL: vibrant neon night city; original Danish brainrot after decisions; 60-120 second missions, one rule plus old ones; immediate explanation and source; active recall in a different scene; spaced repetition of errors; calm 25 scenario practice mode; no speed rewards, paywalls on mistakes or fake pass guarantees; optional humor, motion and audio."
+    },
+    "personas": [
+      {
+        "id": "P1",
+        "segment": "16, meme-heavy gamer, first licence soon, low patience",
+        "raw": "A ser ret fed ud, men jeg ville bare holde gassen nede og prøve at slå min tid. B lyder som noget jeg faktisk ville åbne igen. Giv mig en mærkelig STOP-kvittering og en kort mission, men lad mig prøve igen uden en betalingsmur. Hvis alle jokes er gamle TikTok-ord bliver det hurtigt pinligt."
+      },
+      {
+        "id": "P2",
+        "segment": "17, exam anxious, little gaming experience",
+        "raw": "Jeg vil helst ikke føle mig dum eller blive råbt ad, når jeg fejler. A gør mig mere nervøs med tiden. Jeg vil bruge B hvis det forklarer min fejl og lader mig vælge rolig tilstand. Det skal være tydeligt, hvad der er rigtige regler, og hvad der er en joke. Jeg har brug for at øve prøveformatet."
+      },
+      {
+        "id": "P3",
+        "segment": "20, design-aware student, bored by rote theory",
+        "raw": "Jeg ville prøve B, fordi de korte situationer og et genafspil af min beslutning virker mere interessante end at læse en bog. Neon skal stadig lade mig se cyklisten. Jeg synes XP er fint, men et flot tal siger mig ikke om jeg kan reglerne. Jeg vil gerne se mine konkrete svage emner."
+      },
+      {
+        "id": "P4",
+        "segment": "28, busy adult, little free time",
+        "raw": "Jeg ville vælge B i rolig tilstand. Jeg vil kunne tage to minutter og fortsætte hvor jeg slap. Ingen tvungen intro eller daglig streak-skam. Jeg behøver ikke memes, men en kort huskeregel er nyttig. A virker som underholdning, B kan være et godt supplement hvis det har hele pensummet og kilder."
+      },
+      {
+        "id": "P5",
+        "segment": "41, retaking licence, skeptical of AI",
+        "raw": "Jeg er usikker på begge. Jeg vil først stole på det, når en kørelærer har kontrolleret teorien, og prøverne har rigtigt format. B er den jeg kunne prøve, især med helt almindelig tekst og forklaringer. Jeg vil have en søgbar teoribog og slippe for slang. Gør det klart hvor appens træning stopper og køreskolens undervisning begynder."
+      },
+      {
+        "id": "P6",
+        "segment": "19, distractible learner, uses reduced motion and audio",
+        "raw": "B ville passe mig hvis skærmen har én opgave ad gangen, læs op og ingen blinkende baggrund. Humor kan hjælpe mig med at huske, men den skal komme efter det jeg skal kigge efter. En låst mission fordi jeg fejlede ville få mig til at lukke appen. Jeg vil altid kunne øve igen og også gå direkte til teorien."
+      }
+    ]
+  },
+  "questions": {
+    "P1_variant": {
+      "type": "choice",
+      "instructions": "Based only on persona P1 raw reaction, which concept would this persona prefer to try?",
+      "criteria": {
+        "A": "Variant A, pure speed-scored simulation",
+        "B": "Variant B, adaptive missions and optional brainrot",
+        "neither": "Neither concept",
+        "unclear": "Text does not support a preference"
+      }
+    },
+    "P1_intent": {
+      "type": "choice",
+      "instructions": "Map only persona P1 raw thoughts to stated willingness to TRY variant B (no payment prediction).",
+      "criteria": {
+        "1": "Definitely would not try",
+        "2": "Probably would not try",
+        "3": "Unsure, needs substantial proof first",
+        "4": "Probably would try with stated usability conditions",
+        "5": "Ready to try it immediately"
+      }
+    },
+    "P2_variant": {
+      "type": "choice",
+      "instructions": "Based only on persona P2 raw reaction, which concept would this persona prefer to try?",
+      "criteria": {
+        "A": "Variant A, pure speed-scored simulation",
+        "B": "Variant B, adaptive missions and optional brainrot",
+        "neither": "Neither concept",
+        "unclear": "Text does not support a preference"
+      }
+    },
+    "P2_intent": {
+      "type": "choice",
+      "instructions": "Map only persona P2 raw thoughts to stated willingness to TRY variant B (no payment prediction).",
+      "criteria": {
+        "1": "Definitely would not try",
+        "2": "Probably would not try",
+        "3": "Unsure, needs substantial proof first",
+        "4": "Probably would try with stated usability conditions",
+        "5": "Ready to try it immediately"
+      }
+    },
+    "P3_variant": {
+      "type": "choice",
+      "instructions": "Based only on persona P3 raw reaction, which concept would this persona prefer to try?",
+      "criteria": {
+        "A": "Variant A, pure speed-scored simulation",
+        "B": "Variant B, adaptive missions and optional brainrot",
+        "neither": "Neither concept",
+        "unclear": "Text does not support a preference"
+      }
+    },
+    "P3_intent": {
+      "type": "choice",
+      "instructions": "Map only persona P3 raw thoughts to stated willingness to TRY variant B (no payment prediction).",
+      "criteria": {
+        "1": "Definitely would not try",
+        "2": "Probably would not try",
+        "3": "Unsure, needs substantial proof first",
+        "4": "Probably would try with stated usability conditions",
+        "5": "Ready to try it immediately"
+      }
+    },
+    "P4_variant": {
+      "type": "choice",
+      "instructions": "Based only on persona P4 raw reaction, which concept would this persona prefer to try?",
+      "criteria": {
+        "A": "Variant A, pure speed-scored simulation",
+        "B": "Variant B, adaptive missions and optional brainrot",
+        "neither": "Neither concept",
+        "unclear": "Text does not support a preference"
+      }
+    },
+    "P4_intent": {
+      "type": "choice",
+      "instructions": "Map only persona P4 raw thoughts to stated willingness to TRY variant B (no payment prediction).",
+      "criteria": {
+        "1": "Definitely would not try",
+        "2": "Probably would not try",
+        "3": "Unsure, needs substantial proof first",
+        "4": "Probably would try with stated usability conditions",
+        "5": "Ready to try it immediately"
+      }
+    },
+    "P5_variant": {
+      "type": "choice",
+      "instructions": "Based only on persona P5 raw reaction, which concept would this persona prefer to try?",
+      "criteria": {
+        "A": "Variant A, pure speed-scored simulation",
+        "B": "Variant B, adaptive missions and optional brainrot",
+        "neither": "Neither concept",
+        "unclear": "Text does not support a preference"
+      }
+    },
+    "P5_intent": {
+      "type": "choice",
+      "instructions": "Map only persona P5 raw thoughts to stated willingness to TRY variant B (no payment prediction).",
+      "criteria": {
+        "1": "Definitely would not try",
+        "2": "Probably would not try",
+        "3": "Unsure, needs substantial proof first",
+        "4": "Probably would try with stated usability conditions",
+        "5": "Ready to try it immediately"
+      }
+    },
+    "P6_variant": {
+      "type": "choice",
+      "instructions": "Based only on persona P6 raw reaction, which concept would this persona prefer to try?",
+      "criteria": {
+        "A": "Variant A, pure speed-scored simulation",
+        "B": "Variant B, adaptive missions and optional brainrot",
+        "neither": "Neither concept",
+        "unclear": "Text does not support a preference"
+      }
+    },
+    "P6_intent": {
+      "type": "choice",
+      "instructions": "Map only persona P6 raw thoughts to stated willingness to TRY variant B (no payment prediction).",
+      "criteria": {
+        "1": "Definitely would not try",
+        "2": "Probably would not try",
+        "3": "Unsure, needs substantial proof first",
+        "4": "Probably would try with stated usability conditions",
+        "5": "Ready to try it immediately"
+      }
+    },
+    "speed_risk": {
+      "type": "noul",
+      "instructions": "Does variant A create an incentive to drive fast rather than safely?"
+    },
+    "optional_humor": {
+      "type": "noul",
+      "instructions": "Do raw reactions support making humor optional?"
+    },
+    "full_theory_claim": {
+      "type": "noul",
+      "instructions": "Does this state establish that the proposed app already covers all Danish theory?"
+    },
+    "market_leader_claim": {
+      "type": "noul",
+      "instructions": "Does this synthetic state prove the app will be Danish number 1?"
+    },
+    "learning_proof": {
+      "type": "noul",
+      "instructions": "Does this state prove improved real learning retention?"
+    },
+    "sources_needed": {
+      "type": "noul",
+      "instructions": "Do raw reactions make source-backed theory and qualified content review a priority?"
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "P1_variant": {
+        "type": "choice",
+        "choice": "B",
+        "confidence": 1,
+        "probabilities": {
+          "neither": 0,
+          "B": 1,
+          "A": 0,
+          "unclear": 0
+        },
+        "stats": {}
+      },
+      "P1_intent": {
+        "type": "choice",
+        "choice": "4",
+        "confidence": 0.91,
+        "probabilities": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0.93,
+          "5": 0.07
+        },
+        "stats": {}
+      },
+      "P2_variant": {
+        "type": "choice",
+        "choice": "B",
+        "confidence": 1,
+        "probabilities": {
+          "neither": 0,
+          "B": 1,
+          "unclear": 0,
+          "A": 0
+        },
+        "stats": {}
+      },
+      "P2_intent": {
+        "type": "choice",
+        "choice": "4",
+        "confidence": 0.94,
+        "probabilities": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0.95,
+          "5": 0.05
+        },
+        "stats": {}
+      },
+      "P3_variant": {
+        "type": "choice",
+        "choice": "B",
+        "confidence": 1,
+        "probabilities": {
+          "neither": 0,
+          "B": 1,
+          "A": 0,
+          "unclear": 0
+        },
+        "stats": {}
+      },
+      "P3_intent": {
+        "type": "choice",
+        "choice": "4",
+        "confidence": 0.64,
+        "probabilities": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0.71,
+          "5": 0.29
+        },
+        "stats": {}
+      },
+      "P4_variant": {
+        "type": "choice",
+        "choice": "B",
+        "confidence": 1,
+        "probabilities": {
+          "neither": 0,
+          "B": 1,
+          "unclear": 0,
+          "A": 0
+        },
+        "stats": {}
+      },
+      "P4_intent": {
+        "type": "choice",
+        "choice": "4",
+        "confidence": 0.95,
+        "probabilities": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0.96,
+          "5": 0.04
+        },
+        "stats": {}
+      },
+      "P5_variant": {
+        "type": "choice",
+        "choice": "B",
+        "confidence": 0.99,
+        "probabilities": {
+          "neither": 0.01,
+          "B": 0.99,
+          "unclear": 0,
+          "A": 0
+        },
+        "stats": {}
+      },
+      "P5_intent": {
+        "type": "choice",
+        "choice": "3",
+        "confidence": 0.56,
+        "probabilities": {
+          "1": 0,
+          "2": 0,
+          "3": 0.65,
+          "4": 0.35,
+          "5": 0
+        },
+        "stats": {}
+      },
+      "P6_variant": {
+        "type": "choice",
+        "choice": "B",
+        "confidence": 1,
+        "probabilities": {
+          "neither": 0,
+          "B": 1,
+          "unclear": 0,
+          "A": 0
+        },
+        "stats": {}
+      },
+      "P6_intent": {
+        "type": "choice",
+        "choice": "4",
+        "confidence": 0.99,
+        "probabilities": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0.99,
+          "5": 0.01
+        },
+        "stats": {}
+      },
+      "speed_risk": {
+        "type": "noul",
+        "noul": 0.84,
+        "stats": {}
+      },
+      "optional_humor": {
+        "type": "noul",
+        "noul": 0.92,
+        "stats": {}
+      },
+      "full_theory_claim": {
+        "type": "noul",
+        "noul": 0.06,
+        "stats": {}
+      },
+      "market_leader_claim": {
+        "type": "noul",
+        "noul": 0.02,
+        "stats": {}
+      },
+      "learning_proof": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      },
+      "sources_needed": {
+        "type": "noul",
+        "noul": 0.75,
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 2636,
+      "output_tokens": 702
+    },
+    "request_id": "playground_1b9a4e5e006df314edab8b3049c056b846a",
+    "evaluation_time_ms": 59.18953596847132
+  }
+}

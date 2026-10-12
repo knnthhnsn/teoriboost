@@ -1,0 +1,88 @@
+{
+  "source": "TypeSafe Playground live browser",
+  "excludedFromV4": true,
+  "reason": "First editor replacement did not update CodeMirror input; response repeats previous13questions. Kept for audit, not V4 validation.",
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "diagram_mismatch": {
+        "type": "noul",
+        "noul": 0.82,
+        "stats": {}
+      },
+      "readability_fix": {
+        "type": "noul",
+        "noul": 0.82,
+        "stats": {}
+      },
+      "game_first": {
+        "type": "noul",
+        "noul": 0.88,
+        "stats": {}
+      },
+      "coaching_differentiation": {
+        "type": "noul",
+        "noul": 0.85,
+        "stats": {}
+      },
+      "speed_rewards": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "human_signoff": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      },
+      "full_curriculum": {
+        "type": "noul",
+        "noul": 0.14,
+        "stats": {}
+      },
+      "real_learning": {
+        "type": "noul",
+        "noul": 0.05,
+        "stats": {}
+      },
+      "number_one": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "official_grading": {
+        "type": "noul",
+        "noul": 0.07,
+        "stats": {}
+      },
+      "new_game_tested": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "safe_before_collision": {
+        "type": "noul",
+        "noul": 0.9,
+        "stats": {}
+      },
+      "next_priority": {
+        "type": "choice",
+        "choice": "playable_coaching",
+        "confidence": 1,
+        "probabilities": {
+          "more_darkness": 0,
+          "playable_coaching": 1,
+          "more_stats": 0,
+          "rank_claim": 0
+        },
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 1197,
+      "output_tokens": 281
+    },
+    "request_id": "playground_1b98f82e3921dac4f638b923592b2591fab",
+    "evaluation_time_ms": 97.60382503736764
+  }
+}

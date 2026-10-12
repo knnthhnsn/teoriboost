@@ -1,0 +1,504 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>
+@font-face{font-family:Barlow;src:url('assets/fonts/heading-bold.ttf')}
+@font-face{font-family:DM;src:url('assets/fonts/body-regular.ttf')}
+:root{--asphalt:#111b20;--dash:#18252a;--seam:#42574b;--sodium:#d5ff62;--mist:#b2c5c2}
+body{font-family:DM,sans-serif;color:#f1f4e8}h1,h2,.go,.pedal{font-family:Barlow,Impact,sans-serif!important}.card{border-radius:10px!important;background:#172329f2!important}.go{background:#d5ff62!important;color:#172112!important;border-radius:5px}.rule{border-color:#78b8a0!important}.penalty{color:#ffb48d!important;font-size:11px!important}#frame{border-color:#3c514d!important}#radio{color:#d4e3df!important}.held{box-shadow:inset 0 0 0 2px #d5ff62!important}
+</style></head><body>
+<title>NATKØRSEL — kør en tur</title>
+
+<style>
+/* Layout: one framed windscreen fills the screen; instruments sit on the glass like a head-up display,
+   pedals in the lower right, the instructor's line above the speed. Single dark look by choice: it is night. */
+:root {
+  color-scheme: dark;
+  --asphalt: #0b101c;      /* page ground */
+  --dash: #131b2c;         /* panels */
+  --seam: #2c3853;         /* hairlines, borders */
+  --marking: #e9edf4;      /* text, road-marking white */
+  --mist: #98a5bd;         /* secondary text */
+  --sodium: #f2a43c;       /* street-lamp amber, the accent */
+  --signal: #e2493b;       /* sign red, errors */
+  --clear: #5fcc9f;        /* clean situation */
+  --glass: rgba(11, 16, 28, .74);
+  --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+html, body { height: 100%; }
+body {
+  background: var(--asphalt); color: var(--marking);
+  font-family: var(--body); font-size: 15px; line-height: 1.5;
+  padding-inline: 16px; padding-block: 16px; box-sizing: border-box;
+  overflow: hidden;
+}
+*, *::before, *::after { box-sizing: border-box; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--sodium); outline-offset: 3px; }
+
+.frame {
+  position: relative; height: 100%; min-height: 420px; max-width: 1500px; margin-inline: auto;
+  border: 1px solid var(--seam); border-radius: 6px; overflow: hidden; background: #0d1424;
+  user-select: none; -webkit-user-select: none; touch-action: none;
+}
+#view { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* ---------- head-up display ---------- */
+.hud { position: absolute; inset: 0; pointer-events: none; padding: 16px; display: grid;
+  grid-template-rows: auto 1fr auto; gap: 12px; }
+.hud-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.label { font-family: var(--data); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mist); }
+.where strong { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(22px, 3.4vw, 34px);
+  line-height: 1; letter-spacing: .02em; text-transform: uppercase; margin-top: 4px; text-shadow: 0 2px 12px #000a; }
+.where .next { font-family: var(--data); font-size: 12px; color: var(--sodium); margin-top: 6px; min-height: 18px; text-shadow: 0 1px 6px #000c; }
+.tally { display: flex; gap: 18px; background: var(--glass); border: 1px solid var(--seam); border-radius: 4px; padding: 8px 14px; }
+.tally div { display: grid; gap: 2px; }
+.tally b { font-family: var(--data); font-weight: 500; font-size: 17px; font-variant-numeric: tabular-nums; }
+.tally .bad b { color: var(--signal); }
+
+.hud-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.left { display: grid; gap: 10px; min-width: 0; max-width: min(460px, 58%); }
+.radio { background: var(--glass); border-left: 3px solid var(--sodium); padding: 8px 12px; font-size: 14px;
+  min-height: 38px; border-radius: 0 4px 4px 0; }
+.radio .label { display: block; margin-bottom: 2px; }
+.cluster { display: flex; align-items: flex-end; gap: 14px; }
+.speed { font-family: var(--display); font-weight: 800; font-size: clamp(54px, 9vw, 96px); line-height: .82;
+  font-variant-numeric: tabular-nums; min-width: 2ch; text-shadow: 0 2px 18px #000b; }
+.speed.over { color: var(--signal); }
+.unit { font-family: var(--data); font-size: 12px; color: var(--mist); padding-bottom: 6px; }
+.limit { width: 46px; height: 46px; border-radius: 50%; border: 5px solid var(--signal); background: var(--marking);
+  color: #11151d; font-family: var(--display); font-weight: 800; font-size: 22px; display: grid; place-items: center; margin-bottom: 2px; }
+
+.pedals { display: flex; gap: 12px; pointer-events: auto; }
+.pedal { width: clamp(84px, 13vw, 124px); height: clamp(84px, 15vh, 124px); border-radius: 6px; cursor: pointer;
+  border: 1px solid var(--seam); background: var(--glass); display: grid; align-content: end; justify-items: start;
+  padding: 10px 12px; text-align: left; touch-action: none; transition: transform 80ms ease-out, background 80ms ease-out; }
+.pedal b { font-family: var(--display); font-weight: 800; font-size: 24px; letter-spacing: .04em; line-height: 1; }
+.pedal span { font-family: var(--data); font-size: 10px; letter-spacing: .08em; color: var(--mist); text-transform: uppercase; }
+.pedal--gas { border-bottom: 4px solid var(--sodium); }
+.pedal--brake { border-bottom: 4px solid var(--signal); }
+.pedal.held { transform: translateY(3px) scale(.97); background: rgba(44, 56, 83, .9); }
+
+/* ---------- cards: start, mistake, result ---------- */
+.veil { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr); padding: 16px; overflow-y: auto; touch-action: pan-y;
+  background: linear-gradient(180deg, rgba(8, 11, 20, .25), rgba(8, 11, 20, .82)); }
+.veil--start { place-items: end start; }
+.veil--card { place-items: center end; }
+.card { width: min(440px, 100%); min-width: 0; background: var(--dash); border: 1px solid var(--seam); border-radius: 6px;
+  padding: 22px 22px 20px; display: grid; gap: 14px; box-shadow: 0 18px 60px #000a; }
+.card h1, .card h2 { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: .01em;
+  line-height: .95; margin: 0; text-wrap: balance; }
+.card h1 { font-size: clamp(40px, 11vw, 84px); overflow-wrap: anywhere; }
+.card h2 { font-size: clamp(32px, 5.4vw, 46px); }
+.card p { margin: 0; max-width: 62ch; }
+.card .lede { color: var(--mist); }
+.keys { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: 13px; color: var(--mist); }
+.keys kbd { font-family: var(--data); font-size: 12px; color: var(--marking); border: 1px solid var(--seam); border-radius: 3px; padding: 1px 6px; }
+.rule { border: 1px solid var(--seam); border-radius: 4px; padding: 12px 14px; display: grid; gap: 8px; background: rgba(152, 165, 189, .06); }
+.rule small { font-family: var(--data); font-size: 11px; color: var(--mist); }
+.penalty { justify-self: start; font-family: var(--data); font-size: 13px; color: var(--asphalt); background: var(--signal);
+  padding: 3px 9px; border-radius: 3px; }
+.go { justify-self: start; pointer-events: auto; cursor: pointer; border: 0; border-radius: 4px; background: var(--sodium);
+  color: #18130a; font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: .05em;
+  text-transform: uppercase; padding: 12px 22px; min-height: 48px; }
+.go:hover { filter: brightness(1.08); }
+.sheet { display: grid; gap: 0; margin: 0; }
+.sheet div { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; border-bottom: 1px solid var(--seam); }
+.sheet dt { color: var(--mist); }
+.sheet dd { margin: 0; font-family: var(--data); font-variant-numeric: tabular-nums; }
+.sheet .ok dd { color: var(--clear); } .sheet .bad dd { color: var(--signal); }
+.note { font-size: 12px; color: var(--mist); }
+
+@media (max-width: 640px) {
+  body { padding-block: 12px; }
+  .hud { padding: 12px; }
+  .left { max-width: none; flex: 1; }
+  .hud-bottom { flex-direction: column; align-items: stretch; }
+  .pedals { justify-content: space-between; }
+  .pedal { flex: 1; height: 96px; width: auto; }
+  .veil--start, .veil--card { place-items: end center; }
+  .tally { gap: 12px; padding: 6px 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .pedal { transition: none; } }
+</style>
+
+<div class="frame" id="frame">
+  <canvas id="view" aria-label="Udsyn gennem forruden på en mørk villavej"></canvas>
+
+  <div class="hud" id="hud">
+    <div class="hud-top">
+      <div class="where">
+        <span class="label">Køretime 01 · byzone</span>
+        <strong id="place">Lindevej</strong>
+        <div class="next" id="next"></div>
+      </div>
+      <div class="tally" aria-live="off">
+        <div><span class="label">Tid</span><b id="time">0:00.0</b></div>
+        <div class="bad"><span class="label">Fejl</span><b id="errors">0</b></div>
+      </div>
+    </div>
+    <div></div>
+    <div class="hud-bottom">
+      <div class="left">
+        <div class="radio" role="status" aria-live="polite"><span class="label">Kørelærer</span><span id="radio">Kør, når du er klar. Jeg siger først noget, når det går galt.</span></div>
+        <div class="cluster">
+          <div class="speed" id="speed">0</div><div class="unit">km/t</div>
+          <div class="limit" title="Hastighedsgrænse i byzone: 50 km/t" aria-label="Grænse 50 km i timen">50</div>
+        </div>
+      </div>
+      <div class="pedals">
+        <button class="pedal pedal--brake" id="brake" type="button" aria-label="Brems, hold nede"><b>Brems</b><span>↓ · S · mellemrum</span></button>
+        <button class="pedal pedal--gas" id="gas" type="button" aria-label="Gas, hold nede"><b>Gas</b><span>↑ · W</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="veil veil--start" id="start">
+    <section class="card" aria-labelledby="start-title">
+      <span class="label">Gas og bremse · tre situationer</span>
+      <h1 id="start-title">Natkørsel</h1>
+      <p class="lede">Tre situationer på en dansk villavej efter mørkets frembrud: hajtænder, stoptavle og fodgængerfelt. Du styrer gas og bremse. Bilen holder selv banen.</p>
+      <ul class="keys">
+        <li><kbd>↑</kbd> eller <kbd>W</kbd> holder gassen nede</li>
+        <li><kbd>↓</kbd>, <kbd>S</kbd> eller <kbd>mellemrum</kbd> bremser</li>
+        <li>På telefon holder du pedalerne nederst</li>
+      </ul>
+      <button class="go" id="start-btn" type="button">Start køretimen</button>
+    </section>
+  </div>
+
+  <div class="veil veil--card" id="incident" hidden>
+    <section class="card" role="alertdialog" aria-labelledby="inc-title" aria-describedby="inc-rule">
+      <span class="label" id="inc-kicker"></span>
+      <h2 id="inc-title"></h2>
+      <p class="lede" id="inc-lede"></p>
+      <div class="rule"><p id="inc-rule"></p><small id="inc-source"></small></div>
+      <span class="penalty">NYT MOVE · SAMME REGEL</span>
+      <button class="go" id="inc-btn" type="button">Kør videre</button>
+    </section>
+  </div>
+
+  <div class="veil veil--card" id="result" hidden>
+    <section class="card" aria-labelledby="res-title">
+      <span class="label">Tre situationer gennemført</span>
+      <h2 id="res-title">Køretimen er slut.</h2>
+      <p class="lede" id="res-lede"></p>
+      <dl class="sheet" id="res-sheet"></dl>
+      <p class="note">Selvstændig timing-simulation. Ingen fartscore eller XP. Øv og genkald reglerne i missionerne; faglig og visuel kørelærergennemgang udestår.</p>
+      <button class="go" id="res-btn" type="button">Kør igen</button>
+    </section>
+  </div>
+
+  <div class="veil veil--card" id="nogl" hidden>
+    <section class="card"><h2>Ingen 3D her</h2><p class="lede">Browseren kunne ikke starte WebGL, så forruden er sort. Prøv en anden browser eller slå hardwareacceleration til.</p></section>
+  </div>
+</div>
+
+<script src="assets/three.min.js"></script>
+<script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const frame = $('frame'), canvas = $('view');
+  const T = window.THREE;
+  let renderer = null;
+  try { if (T) renderer = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' }); } catch (e) { renderer = null; }
+  if (!renderer) { $('start').hidden = true; $('hud').hidden = true; $('nogl').hidden = false; return; }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------- world layout (metres; we drive towards -z, right-hand traffic) ---------- */
+  const HALF = 3.25, LANE = 1.625;           // half road width, centre of our lane
+  const J1 = -110, J2 = -240, PED = -350, END = -420;
+  const FRONT = 2.1, REAR = 2.1;              // car centre to bumpers
+  const FOG = 0x172637;
+
+  const scene = new T.Scene();
+  scene.fog = new T.FogExp2(FOG, 0.0135);
+  const camera = new T.PerspectiveCamera(60, 1.6, 0.08, 420);
+  scene.add(camera);
+
+  // sky: last light on the horizon
+  { const c = document.createElement('canvas'); c.width = 4; c.height = 256; const g = c.getContext('2d');
+    const grad = g.createLinearGradient(0, 0, 0, 256);
+    grad.addColorStop(0, '#05080f'); grad.addColorStop(.42, '#0d1528'); grad.addColorStop(.56, '#1c2a47');
+    grad.addColorStop(.64, '#3a3550'); grad.addColorStop(.69, '#6b4a4a'); grad.addColorStop(.74, '#151d31'); grad.addColorStop(1, '#151d31');
+    g.fillStyle = grad; g.fillRect(0, 0, 4, 256); scene.background = new T.CanvasTexture(c); }
+
+  scene.add(new T.HemisphereLight(0x8da2cc, 0x0b0d14, 0.92));
+  const moon = new T.DirectionalLight(0x9db4e0, 0.34); moon.position.set(-40, 80, 30); scene.add(moon);
+  const reviewLight = new T.DirectionalLight(0xffffff, 0); reviewLight.position.set(10, 60, 20); scene.add(reviewLight);
+
+  const mat = (color, extra) => new T.MeshStandardMaterial(Object.assign({ color, roughness: .92, metalness: 0 }, extra || {}));
+  const glow = color => new T.MeshBasicMaterial({ color });
+  const add = (mesh, x, y, z, parent) => { mesh.position.set(x, y, z); (parent || scene).add(mesh); return mesh; };
+  let seed = 20261012; const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const pick = list => list[Math.floor(rnd() * list.length)];
+  const flat = (w, d) => { const g = new T.PlaneGeometry(w, d); g.rotateX(-Math.PI / 2); return g; };
+
+  // ground, roads, pavements
+  add(new T.Mesh(flat(700, 900), mat(0x18221f)), 0, -0.06, -200);
+  const roadMat = mat(0x2b2f37, { roughness: .86 });
+  add(new T.Mesh(flat(HALF * 2, 520), roadMat), 0, 0, -215);
+  for (const j of [J1, J2]) add(new T.Mesh(flat(360, HALF * 2), roadMat), 0, 0.004, j);
+  const paveMat = mat(0x4b4f57);
+  const kerbGaps = [[J1 - HALF - 2.2, J1 + HALF + 2.2], [J2 - HALF - 2.2, J2 + HALF + 2.2]];
+  { let from = 45; for (const [lo, hi] of kerbGaps.concat([[-480, -475]])) { const len = from - hi; if (len > 0) for (const side of [-1, 1])
+      add(new T.Mesh(new T.BoxGeometry(2.1, 0.14, len), paveMat), side * (HALF + 1.05), 0.07, hi + len / 2); from = lo; } }
+  for (const j of [J1, J2]) for (const sz of [-1, 1]) for (const sx of [-1, 1])
+    add(new T.Mesh(new T.BoxGeometry(170, 0.14, 2.1), paveMat), sx * (HALF + 2.2 + 85), 0.07, j + sz * (HALF + 1.05));
+
+  // markings
+  const white = new T.MeshBasicMaterial({ color: 0xd9dee8 });
+  const inJunction = z => kerbGaps.some(([lo, hi]) => z > lo - 1 && z < hi + 1) || Math.abs(z - PED) < 5;
+  for (let z = 36; z > -470; z -= 6) if (!inJunction(z)) add(new T.Mesh(flat(0.12, 3), white), 0, 0.02, z);
+  for (const j of [J1, J2]) for (let x = -170; x < 170; x += 6) if (Math.abs(x) > HALF + 2) add(new T.Mesh(flat(3, 0.12), white), x, 0.024, j);
+  // hajtænder: a row of triangles, points towards the driver who has to give way
+  { const shape = new T.Shape(); shape.moveTo(-0.25, 0); shape.lineTo(0.25, 0); shape.lineTo(0, 0.62); shape.closePath();
+    const g = new T.ShapeGeometry(shape); g.rotateX(-Math.PI / 2); g.rotateY(Math.PI);     // tip towards +z
+    for (let i = 0; i < 5; i++) add(new T.Mesh(g, white), 0.42 + i * 0.6, 0.022, J1 + HALF + 0.35); }
+  const STOP_LINE = J2 + HALF + 0.9;
+  add(new T.Mesh(flat(HALF - 0.2, 0.42), white), LANE, 0.022, STOP_LINE - 0.21);
+  for (let x = -HALF + 0.45; x < HALF; x += 1) add(new T.Mesh(flat(0.5, 4), white), x, 0.022, PED);
+
+  // signs, drawn on canvases
+  function signTexture(draw) { const c = document.createElement('canvas'); c.width = c.height = 256; draw(c.getContext('2d')); const t = new T.CanvasTexture(c); t.anisotropy = 4; return t; }
+  const poly = (g, pts, fill) => { g.beginPath(); pts.forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.closePath(); g.fillStyle = fill; g.fill(); };
+  const texYield = signTexture(g => { poly(g, [[10, 28], [246, 28], [128, 236]], '#c9281e'); poly(g, [[56, 54], [200, 54], [128, 182]], '#f1f1ec'); });
+  const texStop = signTexture(g => { const o = []; for (let i = 0; i < 8; i++) { const a = Math.PI / 8 + i * Math.PI / 4; o.push([128 + Math.cos(a) * 124, 128 + Math.sin(a) * 124]); }
+    poly(g, o, '#f1f1ec'); poly(g, o.map(([x, y]) => [128 + (x - 128) * .92, 128 + (y - 128) * .92]), '#c9281e');
+    g.fillStyle = '#f1f1ec'; g.font = '800 78px "Arial Narrow", Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('STOP', 128, 133); });
+  const texCross = signTexture(g => { g.fillStyle = '#1f4f9c'; g.fillRect(6, 6, 244, 244); poly(g, [[128, 34], [228, 218], [28, 218]], '#f1f1ec');
+    g.fillStyle = '#12161d'; g.beginPath(); g.arc(128, 96, 13, 0, 7); g.fill(); g.lineWidth = 13; g.lineCap = 'round'; g.strokeStyle = '#12161d';
+    g.beginPath(); g.moveTo(128, 112); g.lineTo(124, 160); g.lineTo(104, 198); g.moveTo(124, 160); g.lineTo(150, 198); g.moveTo(104, 138); g.lineTo(128, 124); g.lineTo(154, 146); g.stroke();
+    g.fillRect(70, 204, 22, 8); g.fillRect(104, 204, 22, 8); g.fillRect(138, 204, 22, 8); g.fillRect(172, 204, 22, 8); });
+  const poleMat = mat(0x7b8492, { roughness: .6 });
+  function sign(tex, x, z, size) { const g = new T.Group();
+    add(new T.Mesh(new T.CylinderGeometry(0.035, 0.035, 2.6, 8), poleMat), 0, 1.3, 0, g);
+    add(new T.Mesh(new T.PlaneGeometry(size, size), new T.MeshBasicMaterial({ map: tex, transparent: true, alphaTest: .5 })), 0, 2.45, 0.05, g);
+    g.position.set(x, 0, z); scene.add(g); }
+  sign(texYield, HALF + 0.9, J1 + HALF + 2.6, 1.0);
+  sign(texStop, HALF + 0.9, J2 + HALF + 2.6, 0.95);
+  sign(texCross, HALF + 0.9, PED + 2.8, 0.85);
+  sign(texCross, -HALF - 0.9, PED + 2.8, 0.85);
+
+  // street lamps with a pool of sodium light on the asphalt
+  const poolTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d');
+    const r = g.createRadialGradient(64, 64, 2, 64, 64, 64); r.addColorStop(0, 'rgba(255,176,84,.62)'); r.addColorStop(.45, 'rgba(255,160,70,.2)'); r.addColorStop(1, 'rgba(255,150,60,0)');
+    g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new T.CanvasTexture(c); })();
+  const poolMat = new T.MeshBasicMaterial({ map: poolTex, transparent: true, blending: T.AdditiveBlending, depthWrite: false });
+  const lampMat = mat(0x2a303b, { roughness: .5 }), bulbMat = glow(0xffc27a);
+  function lamp(x, z, towards) { const g = new T.Group();
+    add(new T.Mesh(new T.CylinderGeometry(0.07, 0.09, 6.4, 8), lampMat), 0, 3.2, 0, g);
+    add(new T.Mesh(new T.BoxGeometry(1.7, 0.08, 0.1), lampMat), towards * 0.85, 6.4, 0, g);
+    add(new T.Mesh(new T.BoxGeometry(0.5, 0.1, 0.22), bulbMat), towards * 1.6, 6.33, 0, g);
+    g.position.set(x, 0, z); scene.add(g);
+    add(new T.Mesh(flat(15, 15), poolMat), x + towards * 2.2, 0.03, z); }
+  { let side = 1; for (let z = 22; z > -470; z -= 29) { if (Math.abs(z - J1) < 7 || Math.abs(z - J2) < 7) continue; lamp(side * (HALF + 0.75), z, -side); side = -side; } }
+  for (const j of [J1, J2]) { lamp(-HALF - 0.75, j + HALF + 1.6, 1); lamp(HALF + 0.75, j - HALF - 1.6, -1); for (const x of [-34, 34, -68, 68]) add(new T.Mesh(flat(15, 15), poolMat), x, 0.03, j); }
+  lamp(HALF + 0.75, PED + 1.2, -1);
+
+  // houses, hedges, trees. The corners at each junction are kept open so cross traffic can be seen.
+  const wallColors = [0x74524a, 0x8c8676, 0x565d6b, 0x6a6257, 0x7d5a44], roofColors = [0x2a2c33, 0x40302c, 0x33363d];
+  const winLit = glow(0xffcf8a), winDark = glow(0x1a2233), hedgeMat = mat(0x1b2f25), trunkMat = mat(0x33291f), crownMat = mat(0x1d3a2b);
+  const openCorner = z => [J1, J2].some(j => Math.abs(z - j) < 24);
+  function house(side, z) { const w = 8 + rnd() * 3, d = 7 + rnd() * 3, h = 3.1 + rnd() * 2.4, x = side * (HALF + 7.5 + w / 2 + rnd() * 3); const g = new T.Group();
+    add(new T.Mesh(new T.BoxGeometry(w, h, d), mat(pick(wallColors))), 0, h / 2, 0, g);
+    const r = 4, roof = new T.Mesh(new T.ConeGeometry(r, 2 + rnd() * 1.2, 4), mat(pick(roofColors))); roof.rotation.y = Math.PI / 4;
+    roof.scale.set(w * 1.1 / (r * Math.SQRT2), 1, d * 1.1 / (r * Math.SQRT2)); add(roof, 0, h + roof.geometry.parameters.height / 2, 0, g);
+    const n = 2 + Math.floor(rnd() * 2); for (let i = 0; i < n; i++) { const win = new T.Mesh(new T.PlaneGeometry(1.1, 1.2), rnd() < .55 ? winLit : winDark);
+      win.rotation.y = -side * Math.PI / 2; add(win, -side * (w / 2 + 0.02), 1.7, (i - (n - 1) / 2) * (d / (n + .4)), g); }
+    g.position.set(x, 0, z); scene.add(g);
+    if (rnd() < .7) add(new T.Mesh(new T.BoxGeometry(0.7, 1.1, d + 4), hedgeMat), side * (HALF + 2.7), 0.55, z); }
+  function tree(x, z) { const h = 4 + rnd() * 3; add(new T.Mesh(new T.CylinderGeometry(0.16, 0.22, h * .5, 6), trunkMat), x, h * .25, z);
+    const c = new T.Mesh(new T.IcosahedronGeometry(1.5 + rnd() * .9, 0), crownMat); c.scale.y = 1.25; add(c, x, h * .5 + 1.5, z); }
+  for (let z = 30; z > -470; z -= 15) { if (openCorner(z)) continue; house(-1, z + rnd() * 3); house(1, z + rnd() * 3); if (rnd() < .5) tree(pick([-1, 1]) * (HALF + 5.2 + rnd() * 2), z + 7); }
+  for (const j of [J1, J2]) for (let x = 30; x < 170; x += 17) for (const sx of [-1, 1]) { if (rnd() < .65) tree(sx * x, j + pick([-1, 1]) * (HALF + 6 + rnd() * 5)); }
+  { const g = new T.BufferGeometry(), p = []; for (let i = 0; i < 260; i++) { const a = rnd() * Math.PI * 2, e = .12 + rnd() * 1.2, R = 380; p.push(Math.cos(a) * Math.cos(e) * R, Math.sin(e) * R, Math.sin(a) * Math.cos(e) * R - 200); }
+    g.setAttribute('position', new T.Float32BufferAttribute(p, 3)); scene.add(new T.Points(g, new T.PointsMaterial({ color: 0xc9d6f2, size: 1.4, sizeAttenuation: false, fog: false }))); }
+
+  /* ---------- vehicles ---------- */
+  const headMat = glow(0xfff0c8), tailMat = glow(0xd8322a);
+  function carMesh(color) { const g = new T.Group();           // nose towards -z
+    add(new T.Mesh(new T.BoxGeometry(1.8, 0.62, 4.2), mat(color, { roughness: .62, metalness: .08 })), 0, 0.62, 0, g);
+    add(new T.Mesh(new T.BoxGeometry(1.6, 0.56, 2.1), mat(0x10151f, { roughness: .3 })), 0, 1.2, 0.25, g);
+    for (const sx of [-1, 1]) { add(new T.Mesh(new T.BoxGeometry(0.36, 0.16, 0.06), headMat), sx * 0.6, 0.7, -2.11, g); add(new T.Mesh(new T.BoxGeometry(0.36, 0.14, 0.06), tailMat), sx * 0.6, 0.72, 2.11, g); }
+    const beam = new T.Mesh(flat(3.4, 9), new T.MeshBasicMaterial({ map: poolTex, transparent: true, blending: T.AdditiveBlending, depthWrite: false, color: 0xcfd8ff })); add(beam, 0, 0.035, -6, g);
+    scene.add(g); return g; }
+  const ownCar = carMesh(0x1e5360); ownCar.visible = false;
+  const beamLight = new T.SpotLight(0xfff0d2, 1.45, 80, 0.46, 0.7, 1.5); scene.add(beamLight); scene.add(beamLight.target);
+
+  // cross traffic runs on a fixed timetable per junction: a busy stretch, then a clear one
+  const SPEED = 12;
+  function junction(z, period, slots, lead) { return { z, period, lead, shift: lead, free: Math.max(...slots.map(s => s.at)) + 1.4,
+    slots: slots.map(s => Object.assign({ mesh: carMesh(pick([0x8a8f99, 0x6b2f2a, 0x2f4b6e, 0xb9b4a6, 0x30343c])) }, s)) }; }
+  const junctions = [
+    junction(J1, 18, [{ at: 0, dir: 1 }, { at: 3, dir: 1 }, { at: 6.2, dir: 1 }, { at: 1.6, dir: -1 }, { at: 4.6, dir: -1 }, { at: 7.4, dir: -1 }], 5.5),
+    junction(J2, 20, [{ at: 0, dir: -1 }, { at: 2.8, dir: 1 }, { at: 5.4, dir: -1 }, { at: 8, dir: 1 }, { at: 9.6, dir: -1 }], 0),
+  ];
+  // seconds since this car passed our lane (negative: still on its way)
+  const sincePass = (j, slot, t) => { let p = (t + j.shift - slot.at) % j.period; if (p < 0) p += j.period; return p >= j.period / 2 ? p - j.period : p; };
+  function placeTraffic(t) { for (const j of junctions) for (const s of j.slots) { const tau = sincePass(j, s, t), x = LANE + s.dir * SPEED * tau;
+      s.x = x; s.mesh.position.set(x, 0, j.z + s.dir * LANE); s.mesh.rotation.y = -s.dir * Math.PI / 2; s.mesh.visible = Math.abs(x) < j.period * SPEED / 2 - 4; } }
+  // how long we need, from here with the gas down, before our rear bumper is clear of the far side
+  function timeToClear(front, v, farEdge) { let d = (front - farEdge) + FRONT + REAR, t = 0; while (d > 0 && t < 12) { v += 2.9 * (1 - v / 17.2) * .05; d -= v * .05; t += .05; } return t; }
+  function conflict(j, front, v, t) { const need = timeToClear(front, v, j.z - HALF) + 1.2, half = (0.9 + 2.1) / SPEED;
+    return j.slots.some(s => { const until = -sincePass(j, s, t); return until + half > -0.2 && until - half < need; }); }
+  const collides = (j, z, t) => j.slots.some(s => Math.abs(s.dir * SPEED * sincePass(j, s, t)) < 3.0 && Math.abs((j.z + s.dir * LANE) - z) < FRONT + 0.9);
+
+  // pedestrian
+  const walker = new T.Group();
+  add(new T.Mesh(new T.CylinderGeometry(0.2, 0.24, 1.15, 8), mat(0x2b3140)), 0, 0.95, 0, walker);
+  add(new T.Mesh(new T.SphereGeometry(0.17, 10, 8), mat(0xc9a58c)), 0, 1.7, 0, walker);
+  add(new T.Mesh(new T.BoxGeometry(0.46, 0.14, 0.3), mat(0xd9b24a, { emissive: 0x5a4410 })), 0, 1.36, 0, walker);   // scarf, catches the light
+  const legs = [-1, 1].map(s => add(new T.Mesh(new T.BoxGeometry(0.13, 0.5, 0.15), mat(0x1b1f29)), s * 0.09, 0.25, 0, walker));
+  scene.add(walker);
+
+  /* ---------- cockpit, in camera space ---------- */
+  const cockpit = new T.Group(); camera.add(cockpit);
+  const trim = new T.MeshBasicMaterial({ color: 0x0c1018 }), trim2 = new T.MeshBasicMaterial({ color: 0x161c28 });
+  add(new T.Mesh(new T.BoxGeometry(1.86, 0.1, 1.9), mat(0x1e5360, { roughness: .4, metalness: .3 })), 0.36, -0.6, -2.1, cockpit);    // bonnet
+  add(new T.Mesh(new T.BoxGeometry(2.6, 0.5, 0.8), trim), 0.36, -0.66, -0.76, cockpit);                                              // dashboard
+  add(new T.Mesh(new T.BoxGeometry(0.5, 0.09, 0.26), trim2), 0, -0.385, -0.84, cockpit);                                              // binnacle
+  const rim = new T.MeshBasicMaterial({ color: 0x2c3649 }); const wheel = new T.Group(); add(new T.Mesh(new T.TorusGeometry(0.185, 0.019, 10, 40), rim), 0, 0, 0, wheel);
+  add(new T.Mesh(new T.BoxGeometry(0.36, 0.035, 0.02), rim), 0, 0, 0, wheel); add(new T.Mesh(new T.BoxGeometry(0.035, 0.19, 0.02), rim), 0, -0.09, 0, wheel);
+  wheel.position.set(0, -0.36, -0.5); wheel.rotation.x = -0.42; cockpit.add(wheel);
+  for (const [x, tilt] of [[-0.9, 0.34], [1.62, -0.34]]) { const p = new T.Mesh(new T.BoxGeometry(0.065, 1.7, 0.08), trim); p.rotation.z = tilt; add(p, x, 0.2, -0.86, cockpit); }
+  const strip = add(new T.Mesh(new T.BoxGeometry(0.2, 0.007, 0.01), glow(0x3c7f8a)), 0, -0.372, -0.708, cockpit);                      // instrument light
+
+  /* ---------- state ---------- */
+  const TEXT = {
+    yield: { kicker: 'Ubetinget vigepligt', place: 'Krydset ved Lindevej',
+      rule: 'Ved hajtænder eller vigepligtstavle har du ubetinget vigepligt for kørende trafik fra begge sider. Vis det tydeligt ved at sænke farten i god tid eller standse. Kør først frem, når det kan ske uden fare eller ulempe for andre.',
+      source: 'Færdselsloven § 26, stk. 2 og 5' },
+    stop: { kicker: 'Stoptavle', place: 'Krydset ved Egevej',
+      rule: 'Ved stoptavle skal du standse helt ved stoplinjen. Er der ingen linje, standser du umiddelbart før den krydsende vej. Derefter har du ubetinget vigepligt for kørende trafik fra begge sider.',
+      source: 'Stoptavle B 13 · færdselsloven § 26, stk. 2' },
+    ped: { kicker: 'Fodgængerfelt', place: 'Feltet ved skolen',
+      rule: 'Nærmer du dig et fodgængerfelt uden signal, skal du afpasse farten, så gående i feltet eller på vej ud i det ikke udsættes for fare eller ulempe. Om nødvendigt standser du og lader dem passere.',
+      source: 'Færdselsloven § 27, stk. 7' },
+  };
+  const S = {}; const input = { gas: false, brake: false };
+  function reset() { Object.assign(S, { mode: 'intro', z: 26, v: 0, acc: 0, time: 0, clock: 0, errors: 0, penalty: 0, top: 0, overSince: 0, said: {}, spot: null,
+      sit: { yield: { status: 'pending' }, stop: { status: 'pending', stopped: false }, ped: { status: 'pending' } }, walker: { state: 'wait', x: HALF + 1.3 } });
+    junctions.forEach(j => { j.shift = j.lead + Math.random() * 3; }); say('Kør, når du er klar. Jeg siger først noget, når det går galt.'); }
+  const radio = $('radio'); function say(text) { if (radio.textContent !== text) radio.textContent = text; }
+  const once = (key, text) => { if (!S.said[key]) { S.said[key] = true; say(text); } };
+
+  function fail(kind, title, lede, spotZ) { const sit = S.sit[kind]; if (sit.status !== 'pending') return; sit.status = 'failed';
+    S.errors++; S.penalty += 12; S.mode = 'incident'; S.v = 0; S.spot = { z: spotZ }; input.gas = input.brake = false; pedalClass();
+    const t = TEXT[kind]; $('inc-kicker').textContent = `Fejl ${S.errors} · ${t.kicker}`; $('inc-title').textContent = title; $('inc-lede').textContent = lede;
+    $('inc-rule').textContent = t.rule; $('inc-source').textContent = 'Kilde: ' + t.source; $('incident').hidden = false; $('inc-btn').focus(); say('Vi tager den ovenfra. Reglen er din næste genvej.'); }
+  function resume() { if (S.mode !== 'incident') return; $('incident').hidden = true; S.mode = 'drive';
+    for (const j of junctions) if (Math.abs(S.z - j.z) < 30) j.shift = j.free - S.clock;            // the road ahead is clear when we roll on
+    if (S.sit.ped.status === 'failed' && S.walker.state !== 'done') { S.walker.state = 'done'; S.walker.x = -HALF - 1.6; }
+    say('Videre. Samme regler som før.'); $('gas').focus(); }
+  function finish() { S.mode = 'result'; input.gas = input.brake = false; pedalClass(); const clean = Object.values(S.sit).filter(s => s.status === 'clean').length, top = Math.round(S.top * 3.6);
+    $('res-title').textContent = S.errors === 0 ? 'Rent kørt.' : 'Du kom frem.';
+    $('res-lede').textContent = S.errors === 0 ? 'Ingen fejl. Kørelæreren har ingen kommentar og virker lidt skuffet over det.'
+      : S.errors < 3 ? 'Det gjorde reglerne ikke alle sammen.' : 'Tre situationer, tre fejl. Det er i det mindste konsekvent.';
+    const rows = [['Rene situationer', clean + ' af 3', clean === 3 ? 'ok' : 'bad'], ['Regler at øve', String(S.errors), S.errors ? 'bad' : 'ok'], ['Fartgrænse', '50 km/t', ''], ['Belønning', 'Korrekte beslutninger', 'ok']];
+    $('res-sheet').innerHTML = rows.map(([k, v, c]) => `<div class="${c}"><dt>${k}</dt><dd>${v}</dd></div>`).join(''); $('result').hidden = false; $('res-btn').focus(); }
+  const clock = s => `${Math.floor(s / 60)}:${(s % 60).toFixed(1).padStart(4, '0')}`;
+  const kmh = v => Math.round(v * 3.6);
+
+  /* ---------- simulation ---------- */
+  function step(dt) {
+    S.clock += dt; S.time += dt;
+    const braking = input.brake, a = braking ? -7 : input.gas ? 2.9 * (1 - S.v / 17.2) : -(0.35 + 0.035 * S.v);
+    S.v = Math.max(0, S.v + a * dt); S.acc = S.v > 0 || a > 0 ? a : 0;
+    const before = S.z - FRONT; S.z -= S.v * dt; const front = S.z - FRONT, rear = S.z + REAR;
+    S.top = Math.max(S.top, S.v);
+    if (S.v > 14.75) { S.overSince += dt; if (S.overSince > 1.2) once('speed', 'Byzone. 50. Tallet er ikke vejledende.'); } else S.overSince = 0;
+    const crossed = line => before > line && front <= line;
+
+    // 1 · hajtænder
+    const y = S.sit.yield, j1 = junctions[0];
+    if (y.status === 'pending') {
+      if (front - J1 < 75) once('y', 'Hajtænder forude. De er ikke pynt.');
+      if (crossed(J1 + HALF) && conflict(j1, front, S.v, S.clock)) return fail('yield', 'Den anden havde ret til vejen.', `Du kørte ud i krydset med ${kmh(S.v)} km/t, mens der kom biler på den krydsende vej.`, J1);
+      if (front < J1 + HALF && rear > J1 - HALF && collides(j1, S.z, S.clock)) return fail('yield', 'Den anden havde ret til vejen.', 'Du holdt i krydset, da den næste bil kom. Den havde ikke tænkt sig at vente.', J1);
+      if (rear < J1 - HALF) { y.status = 'clean'; say('Du så dig for. Bemærkelsesværdigt.'); }
+    }
+    // 2 · stoptavle
+    const st = S.sit.stop, j2 = junctions[1];
+    if (st.status === 'pending') {
+      if (front - J2 < 80) once('s', 'Stoptavle. Hjulene skal holde helt stille.');
+      if (!st.stopped && S.v === 0 && front >= STOP_LINE && front <= STOP_LINE + 1) { st.stopped = true; say('Det var et stop. Se dig for, før du kører.'); }
+      if (crossed(STOP_LINE) && !st.stopped) return fail('stop', 'Det var ikke et stop.', `Du rullede over stoplinjen med ${Math.max(1, kmh(S.v))} km/t. Et stop er 0.`, J2 + 2);
+      if (crossed(J2 + HALF) && conflict(j2, front, S.v, S.clock)) return fail('stop', 'Du stoppede. Og kørte så ud foran en bil.', 'Stoppet var fint. Vigepligten gælder stadig bagefter.', J2);
+      if (front < J2 + HALF && rear > J2 - HALF && collides(j2, S.z, S.clock)) return fail('stop', 'Du stoppede. Og kørte så ud foran en bil.', 'Du holdt i krydset, da den næste bil kom.', J2);
+      if (rear < J2 - HALF) { st.status = 'clean'; say('Fuldt stop og fri bane. Jeg noterer det som en begivenhed.'); }
+    }
+    // 3 · fodgængerfelt
+    const p = S.sit.ped, w = S.walker;
+    if (front - PED < 95) once('p', 'Fodgængerfelt. Hold øje med fortovet.');
+    if (w.state === 'wait' && front - (PED + 2) < 44) w.state = 'walk';
+    if (w.state === 'walk') { w.x -= 1.35 * dt; if (w.x < -HALF - 1.6) w.state = 'done'; }
+    if (p.status === 'pending') {
+      if (w.state === 'walk' && w.x > -1.4 && front <= PED + 2.3 && rear >= PED - 2)
+        return fail('ped', 'Hun var på vej over.', `Du kørte ind i feltet med ${kmh(S.v)} km/t, mens der var en gående i det.`, PED);
+      if (rear < PED - 2) { p.status = 'clean'; say('Hun kom over. Det gjorde du også.'); }
+    }
+    if (front < END) finish();
+  }
+
+  /* ---------- drawing ---------- */
+  const hud = { speed: $('speed'), time: $('time'), errors: $('errors'), next: $('next'), place: $('place') };
+  let lastHud = '';
+  function drawHud() { const front = S.z - FRONT; let next = '', place = 'Lindevej';
+    const ahead = [['yield', J1 + HALF, 'Hajtænder'], ['stop', STOP_LINE, 'Stoptavle'], ['ped', PED + 2, 'Fodgængerfelt']].find(([k]) => S.sit[k].status === 'pending');
+    if (ahead) { const d = Math.max(0, Math.round(front - ahead[1])); if (d < 120) { next = `${ahead[2]} · ${d} m`; place = TEXT[ahead[0]].place; } } else if (S.mode === 'drive') next = `Mål · ${Math.max(0, Math.round(front - END))} m`;
+    const key = [kmh(S.v), clock(S.time), S.errors, next, place].join('|'); if (key === lastHud) return; lastHud = key;
+    hud.speed.textContent = kmh(S.v); hud.speed.classList.toggle('over', S.v > 14.75); hud.time.textContent = clock(S.time); hud.errors.textContent = S.errors; hud.next.textContent = next; hud.place.textContent = place; }
+
+  let dive = 0;
+  function draw(t) {
+    placeTraffic(S.clock);
+    const w = S.walker; walker.position.set(w.x, 0.14 * (Math.abs(w.x) > HALF ? 1 : 0), PED); walker.rotation.y = -Math.PI / 2;
+    const stride = w.state === 'walk' ? Math.sin(t * 7) * 0.22 : 0; legs[0].position.z = stride; legs[1].position.z = -stride;
+    ownCar.position.set(LANE, 0, S.z);
+    beamLight.position.set(LANE, 0.7, S.z - 3.3); beamLight.target.position.set(LANE, 0, S.z - 34);
+    const review = S.mode === 'incident';
+    cockpit.visible = !review; ownCar.visible = review; reviewLight.intensity = review ? 0.75 : 0;
+    if (review) { camera.position.set(11, 27, S.spot.z + 21); camera.lookAt(0.5, 0, S.spot.z - 1); }
+    else { const target = reduceMotion.matches ? 0 : Math.max(-0.02, Math.min(0.02, -S.acc * 0.0028)); dive += (target - dive) * 0.12;
+      camera.position.set(LANE - 0.36, 1.2 + (reduceMotion.matches ? 0 : Math.sin(t * 9) * 0.0025 * Math.min(1, S.v / 8)), S.z + 0.35); camera.rotation.set(-0.045 + dive, 0, 0); }
+    strip.material.color.setHex(S.v > 14.75 ? 0xb5463c : 0x3c7f8a);
+    drawHud(); renderer.render(scene, camera);
+  }
+
+  function resize() { const w = frame.clientWidth, h = frame.clientHeight; if (!w || !h) return; renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.setSize(w, h, false);
+    camera.aspect = w / h; camera.fov = camera.aspect < 0.8 ? 76 : camera.aspect < 1.2 ? 68 : 60; camera.updateProjectionMatrix(); }
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(frame); else window.addEventListener('resize', resize);
+
+  let last = performance.now();
+  function loop(now) { const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (S.mode === 'drive') { let left = dt; while (left > 0 && S.mode === 'drive') { const h = Math.min(left, 1 / 120); step(h); left -= h; } }
+    else if (S.mode === 'intro') S.clock += dt;
+    draw(now / 1000); requestAnimationFrame(loop); }
+
+  /* ---------- input ---------- */
+  const gasBtn = $('gas'), brakeBtn = $('brake');
+  function pedalClass() { gasBtn.classList.toggle('held', input.gas); brakeBtn.classList.toggle('held', input.brake); }
+  function press(kind, down) { if (S.mode !== 'drive') down = false; if (input[kind] === down) return; input[kind] = down; pedalClass(); }
+  for (const [btn, kind] of [[gasBtn, 'gas'], [brakeBtn, 'brake']]) {
+    btn.addEventListener('pointerdown', e => { e.preventDefault(); try { btn.setPointerCapture(e.pointerId); } catch (_) {} press(kind, true); });
+    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) btn.addEventListener(type, () => press(kind, false));
+    btn.addEventListener('contextmenu', e => e.preventDefault());
+  }
+  const KEYS = { ArrowUp: 'gas', KeyW: 'gas', ArrowDown: 'brake', KeyS: 'brake', Space: 'brake' };
+  window.addEventListener('keydown', e => { const kind = KEYS[e.code]; if (!kind || S.mode !== 'drive') return; e.preventDefault(); press(kind, true); });
+  window.addEventListener('keyup', e => { const kind = KEYS[e.code]; if (kind) press(kind, false); });
+  window.addEventListener('blur', () => { press('gas', false); press('brake', false); });
+
+  $('start-btn').addEventListener('click', () => { $('start').hidden = true; S.mode = 'drive'; gasBtn.focus(); });
+  $('inc-btn').addEventListener('click', resume);
+  $('res-btn').addEventListener('click', () => { $('result').hidden = true; reset(); S.mode = 'drive'; lastHud = ''; gasBtn.focus(); });
+
+  reset(); resize(); placeTraffic(0);
+  window.__natkorsel = { S, input, junctions, conflict, step, K: { J1, J2, PED, END, HALF, STOP_LINE, FRONT } };      // read by the concept's own checks
+  requestAnimationFrame(loop);
+})();
+</script>
+
+</body></html>

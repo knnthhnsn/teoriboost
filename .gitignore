@@ -1,0 +1,7 @@
+evidence/
+reference/
+*.zip
+*.log
+.openai/local/
+node_modules/
+dist/qa-gallery.html

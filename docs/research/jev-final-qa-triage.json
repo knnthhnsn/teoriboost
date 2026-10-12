@@ -1,0 +1,149 @@
+{
+  "checked": "2026-10-12",
+  "scope": "Synthetic text classification of a self-reported QA record. Jev receives no screenshots and executes no browser tests. Scores are not human opinions, learning gains, purchase probabilities, expert approval or national rankings.",
+  "state": {
+    "scope": "Synthetic text classification of a self-reported QA record. Jev receives no screenshots and executes no browser tests. Scores are not human opinions, learning gains, purchase probabilities, expert approval or national rankings.",
+    "product": "NATKØRSEL, original Danish category B supplement for teens and adults",
+    "observedByAgent": {
+      "game": "Four 3D cases: observe mistake, choose rule, place car, see legal explanation, replay corrected approach/wait/continue. Four full cases completed in the real browser twice; last result4/4. STOP0km/h label observed during waiting; blue correct car and gray mistake ghost visually inspected.",
+      "exam": "After deterministic mixing of statement positions, 25 different questions were answered. The first five had one intentionally wrong statement each. Result: 20/25 correct, 5 app-errors, 0 unanswered. Answers, flag and deadline persisted reload; result unchanged after reload. Earlier real 25-minute expiry was also tested.",
+      "mobile": "390×844 and360×800 no horizontal overflow in tested game/feedback views. Loaded correct-position thumbnail,44px+ buttons, no humor in calm setting, static corrected STOP supported. Humor/motion settings persisted reload.",
+      "content": "83 original four-statement questions, 58 sections across 10 chapters, 58 short lessons, 174 cards, 58 cases and 58 self-recalls. Initial legal/text review found 2 P1 and 13 P2 issues across lessons; repaired. A later numbered-heading existence audit found additional wrong references; repaired. The 232 card/case locators now contain only existing numbered plan headings. This does not prove every fact or image flawless, and is not a full curriculum audit.",
+      "visual": "Claude reviewed3actualscreenshots, identified roadcontrast, duplicatewaitinglabels, distantcolorlegend, inconsistentfictionalreceiptandintrotext. Local implementation changedroad/buildingcontrast/curbs,scenelegend,onewaitinglabel,receiptandintro. Agent viewed rendered STOP/bike pixels after changes."
+    },
+    "unknowns": {
+      "completeTheory": false,
+      "instructorApproval": false,
+      "humanRetention": false,
+      "marketLeader": false,
+      "realDeviceCoverage": false,
+      "syntheticSurveyIsHuman": false
+    },
+    "nextOptions": [
+      "finish_private_qa_then_instructor_and_human_transfer_test",
+      "add_faster_countdown_scoring",
+      "claim_denmark_number_one",
+      "copy_competitor_paid_question_bank"
+    ]
+  },
+  "questions": {
+    "browserEvidence": {
+      "type": "noul",
+      "instructions": "Does the record contain actual browser evidence for the four-case interaction, separate from synthetic classification?"
+    },
+    "examEvidence": {
+      "type": "noul",
+      "instructions": "Does the record contain actual evidence of the25-question app grading with exactly5deliberate errors and stable reload?"
+    },
+    "imageEvidence": {
+      "type": "noul",
+      "instructions": "Did Jev itself inspect the visual pixels or execute the app?"
+    },
+    "completeTheory": {
+      "type": "noul",
+      "instructions": "Does this evidence establish a complete accurate Danish categoryB theory curriculum?"
+    },
+    "learningGain": {
+      "type": "noul",
+      "instructions": "Does this evidence establish improved retention in real human learners?"
+    },
+    "instructorApproval": {
+      "type": "noul",
+      "instructions": "Does this record include approval by a qualified driving instructor?"
+    },
+    "nationalLeader": {
+      "type": "noul",
+      "instructions": "Does this record establish Denmark number1 market position?"
+    },
+    "visuallyPerfect": {
+      "type": "noul",
+      "instructions": "Does the record prove every image and every fact is flawless?"
+    },
+    "privateTrial": {
+      "type": "noul",
+      "instructions": "Is the evidence sufficient to propose a bounded private prototype trial that openly states current limitations?"
+    },
+    "nextPriority": {
+      "type": "choice",
+      "instructions": "Which listed next step is best supported by the evidence?",
+      "criteria": {
+        "finish_private_qa_then_instructor_and_human_transfer_test": "Finish private QA, obtain qualified text/image review, and measure transfer to new situations with real learners",
+        "add_faster_countdown_scoring": "Add reward for choosing answers faster",
+        "claim_denmark_number_one": "Advertise national leadership from model confidence",
+        "copy_competitor_paid_question_bank": "Copy proprietary competitor test questions"
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "browserEvidence": {
+        "type": "noul",
+        "noul": 0.73,
+        "stats": {}
+      },
+      "examEvidence": {
+        "type": "noul",
+        "noul": 0.87,
+        "stats": {}
+      },
+      "imageEvidence": {
+        "type": "noul",
+        "noul": 0.67,
+        "stats": {}
+      },
+      "completeTheory": {
+        "type": "noul",
+        "noul": 0.05,
+        "stats": {}
+      },
+      "learningGain": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      },
+      "instructorApproval": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      },
+      "nationalLeader": {
+        "type": "noul",
+        "noul": 0.02,
+        "stats": {}
+      },
+      "visuallyPerfect": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      },
+      "privateTrial": {
+        "type": "noul",
+        "noul": 0.82,
+        "stats": {}
+      },
+      "nextPriority": {
+        "type": "choice",
+        "choice": "finish_private_qa_then_instructor_and_human_transfer_test",
+        "confidence": 1,
+        "probabilities": {
+          "finish_private_qa_then_instructor_and_human_transfer_test": 1,
+          "copy_competitor_paid_question_bank": 0,
+          "add_faster_countdown_scoring": 0,
+          "claim_denmark_number_one": 0
+        },
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 1219,
+      "output_tokens": 269
+    },
+    "request_id": "playground_1b9320525cb60f44528b99b3e8d998e3f43",
+    "evaluation_time_ms": 44.884536997415125
+  },
+  "review": {
+    "contradiction": "imageEvidence=0.67 contradicts the actual request, which contained no images and no executable browser actions. Treat as failed synthetic role attribution, never proof of visual validation.",
+    "limits": "All scores classify supplied text. Actual test proof is in separate browser evidence."
+  }
+}

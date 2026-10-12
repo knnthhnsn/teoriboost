@@ -1,0 +1,68 @@
+{
+  "checked": "2026-10-12",
+  "scope": "Synthetic calibration on four known true/false facts about the supplied request; no images or browser execution by Jev",
+  "state": {
+    "requestFacts": {
+      "imageFilesSuppliedToJev": 0,
+      "executableBrowserActionsSuppliedToJev": 0,
+      "agentViewedSavedScreenshots": true,
+      "realHumanParticipantCount": 0
+    },
+    "scope": "These are known properties of the request and workflow. Jev only classifies this JSON. No image file or executable tool is included."
+  },
+  "questions": {
+    "jev_received_pixels": {
+      "type": "noul",
+      "instructions": "Does requestFacts say any image files were supplied to Jev?"
+    },
+    "jev_executed_browser_tests": {
+      "type": "noul",
+      "instructions": "Does requestFacts say Jev was supplied any executable browser actions?"
+    },
+    "agent_viewed_pixels": {
+      "type": "noul",
+      "instructions": "Does requestFacts say the agent viewed saved screenshots?"
+    },
+    "human_trial_done": {
+      "type": "noul",
+      "instructions": "Does requestFacts say at least one real human participant was tested?"
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "jev_received_pixels": {
+        "type": "noul",
+        "noul": 0.07,
+        "stats": {}
+      },
+      "jev_executed_browser_tests": {
+        "type": "noul",
+        "noul": 0.06,
+        "stats": {}
+      },
+      "agent_viewed_pixels": {
+        "type": "noul",
+        "noul": 0.99,
+        "stats": {}
+      },
+      "human_trial_done": {
+        "type": "noul",
+        "noul": 0.02,
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 441,
+      "output_tokens": 81
+    },
+    "request_id": "playground_1b98ea233de7b1f4e5481bbcad1a809bc38",
+    "evaluation_time_ms": 57.642620988190174
+  },
+  "expected": {
+    "jev_received_pixels": false,
+    "jev_executed_browser_tests": false,
+    "agent_viewed_pixels": true,
+    "human_trial_done": false
+  }
+}
