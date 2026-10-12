@@ -1,5 +1,7 @@
+import { restoreJourneyProfile } from './journey-profile.js';
+
 export const VERSION = 1;
-export const blankState = () => ({version:VERSION,xp:0,rewards:[],records:{},history:[],sessions:0,settings:{humor:true,sound:false,motion:true},savedExam:null});
+export const blankState = () => ({version:VERSION,xp:0,rewards:[],records:{},history:[],sessions:0,settings:{humor:true,sound:false,motion:true},savedExam:null,...restoreJourneyProfile(null)});
 
 export function normalizeResponse(value) {
   const answer=[null,null,null,null];
@@ -81,14 +83,14 @@ export function restoreState(raw) {
   try {
     const parsed=typeof raw==='string'?JSON.parse(raw):raw;
     if(!parsed||parsed.version!==VERSION)return blankState();
-    const s=blankState();
+    const s={...blankState(),...restoreJourneyProfile(parsed)};
     s.xp=Number.isSafeInteger(parsed.xp)&&parsed.xp>=0?parsed.xp:0;
     s.sessions=Number.isSafeInteger(parsed.sessions)&&parsed.sessions>=0?parsed.sessions:0;
     s.rewards=Array.isArray(parsed.rewards)?parsed.rewards.filter(v=>typeof v==='string').slice(-10000):[];
     s.history=Array.isArray(parsed.history)?parsed.history.map(sanitizeHistoryEntry).filter(Boolean).slice(-30):[];
     for(const [id,r] of Object.entries(parsed.records||{})){
       if(!r||!Number.isInteger(r.attempts)||r.attempts<0||!Number.isFinite(r.due))continue;
-      s.records[id]={attempts:r.attempts,correct:Math.max(0,Number.isInteger(r.correct)?r.correct:0),streak:Math.max(0,Number.isInteger(r.streak)?r.streak:0),due:r.due,last:Number.isFinite(r.last)?r.last:0,lastCorrect:!!r.lastCorrect,days:Array.isArray(r.days)?r.days.filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)):[],questions:Array.isArray(r.questions)?r.questions.filter(q=>typeof q==='string'):[]};
+      s.records[id]={attempts:r.attempts,assessments:Math.max(0,Number.isInteger(r.assessments)?r.assessments:Number.isInteger(r.correct)?r.correct:0),correct:Math.max(0,Number.isInteger(r.correct)?r.correct:0),streak:Math.max(0,Number.isInteger(r.streak)?r.streak:0),due:r.due,last:Number.isFinite(r.last)?r.last:0,lastCorrect:!!r.lastCorrect,lastAssessment:['complete','partial','unanswered','unknown'].includes(r.lastAssessment)?r.lastAssessment:r.lastCorrect?'complete':'unknown',days:Array.isArray(r.days)?r.days.filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)):[],questions:Array.isArray(r.questions)?r.questions.filter(q=>typeof q==='string'):[]};
     }
     for(const key of ['humor','sound','motion'])if(typeof parsed.settings?.[key]==='boolean')s.settings[key]=parsed.settings[key];
     if(parsed.savedExam&&Array.isArray(parsed.savedExam.ids)&&parsed.savedExam.ids.length===25&&Number.isFinite(parsed.savedExam.deadline))s.savedExam=parsed.savedExam;
@@ -105,8 +107,11 @@ export function gradeQuestion(question,answers) {
 
 export function recordAnswer(state,question,answers,now=Date.now()) {
   const correct=gradeQuestion(question,answers),id=question.sectionId;
-  const r=state.records[id]||{attempts:0,correct:0,streak:0,due:0,last:0,lastCorrect:false,days:[],questions:[]};
-  r.attempts++;r.last=now;r.lastCorrect=correct;r.streak=correct?r.streak+1:0;
+  const r=state.records[id]||{attempts:0,assessments:0,correct:0,streak:0,due:0,last:0,lastCorrect:false,days:[],questions:[]};
+  const response=normalizeResponse(answers);
+  const complete=isCompleteResponse(answers);
+  r.attempts++;r.last=now;r.lastAssessment=complete?'complete':response.some(v=>v!==null)?'partial':'unanswered';
+  if(complete){r.assessments=(r.assessments||0)+1;r.lastCorrect=correct;r.streak=correct?r.streak+1:0;}
   if(correct){
     r.correct++;
     const day=new Date(now).toLocaleDateString('sv-SE',{timeZone:'Europe/Copenhagen'});
@@ -122,7 +127,7 @@ export function recordAnswer(state,question,answers,now=Date.now()) {
 
 export function isMastered(r){return !!r&&r.streak>=3&&r.days.length>=2;}
 export function reviewQueue(state,questions,now=Date.now()){
-  return [...questions].sort((a,b)=>{const x=state.records[a.sectionId],y=state.records[b.sectionId];const rank=r=>!r?2:!r.lastCorrect?0:r.due<=now?1:3;return rank(x)-rank(y)||(x?.last||0)-(y?.last||0)||a.id.localeCompare(b.id);});
+  return [...questions].sort((a,b)=>{const x=state.records[a.sectionId],y=state.records[b.sectionId];const rank=r=>!r?2:r.lastAssessment==='complete'&&!r.lastCorrect?0:r.due<=now?1:3;return rank(x)-rank(y)||(x?.last||0)-(y?.last||0)||a.id.localeCompare(b.id);});
 }
 export function chooseMission(state,questions,now=Date.now(),size=3){
   const queue=reviewQueue(state,questions,now),chosen=[];

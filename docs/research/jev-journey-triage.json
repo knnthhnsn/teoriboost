@@ -1,0 +1,96 @@
+{
+  "checked": "2026-10-12T20:47:37.198Z",
+  "scope": "One text-only synthetic classification; zero human participants, pixels or app actions by Jev; not learning-outcome proof.",
+  "state": {
+    "product": "NATKØRSEL original owner-private Danish driving theory prototype for teens/adults",
+    "requestFacts": {
+      "pixelsSuppliedToJev": 0,
+      "actualJevBrowserActions": 0,
+      "realHumanParticipants": 0
+    },
+    "implementation": {
+      "route": "58 existing lessons across10 chapters; one clear next lesson; every alternative open",
+      "lesson": "Three authored cards; four actual yes/no statements with feedback and free repair; open transfer case; own-word recall with explicit self-check (no AI grading); alternate question or clearly labelled reordered same question",
+      "habit": "Daily goal1/2/3 completed sessions; Copenhagen streak/calendar; unique section/day count prevents farming",
+      "spacing": "Repaired lesson recommended after20minutes rather than immediately; transparent starting heuristic, not calibrated Duolingo HLR",
+      "retained": "3Ddecision game;81unique AI photos for83bindings; chosen Danish neural narration; optional original mascots"
+    },
+    "reportedChecks": {
+      "testsBeforeLatestFixes": 71,
+      "actualLocalUI": "Complete5stage lesson: intentional error, repair, transfer draft reload, checkpoint feedback reload and finalization;390px ready photo, no overflow; goal3→1 survives reload",
+      "fixed": "Phone grid width; stale-session generation merge; unfinished exam provenance; preserving previous demonstrated recall; final checks/hosted proof pending"
+    },
+    "limits": {
+      "fullCurriculum": false,
+      "instructorReview": false,
+      "humanLearningGain": false,
+      "numberOneMarketEvidence": false
+    },
+    "openRisks": [
+      "Some sections have only one question; reordered repetition does not prove transfer to unseen visual situations",
+      "Five stages plus prose may feel slow; real usability timing is unmeasured"
+    ]
+  },
+  "questions": {
+    "engagement_equals_learning": {
+      "type": "noul",
+      "instructions": "Does this record prove improved retained driving knowledge with real humans from streaks, completion or applying Duolingo mechanics?"
+    },
+    "has_scheduled_retrieval": {
+      "type": "noul",
+      "instructions": "Does the described implementation include objective answer checks, mistake repair and delayed retrieval rather than only cosmetic rewards?"
+    },
+    "unseen_transfer_proven": {
+      "type": "noul",
+      "instructions": "Does reordered repetition of the same four statements establish transfer to genuinely unseen road scenes in this record?"
+    },
+    "next_product_priority": {
+      "type": "choice",
+      "instructions": "Choose the strongest next product-learning priority after final technical checks, given the stated open risks.",
+      "criteria": {
+        "varied_cases_and_real_delayed_learning": "Expand original item families and test comprehension, delayed mixed retrieval, time burden and teen/adult tone with real learners and qualified instructor review",
+        "more_xp_and_streak_pressure": "Increase XP and streak pressure as a sufficient learning proxy",
+        "announce_denmark_number_one": "Claim market leadership and guaranteed theory-test success from synthetic results"
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "engagement_equals_learning": {
+        "type": "noul",
+        "noul": 0.04,
+        "stats": {}
+      },
+      "has_scheduled_retrieval": {
+        "type": "noul",
+        "noul": 0.95,
+        "stats": {}
+      },
+      "unseen_transfer_proven": {
+        "type": "noul",
+        "noul": 0.07,
+        "stats": {}
+      },
+      "next_product_priority": {
+        "type": "choice",
+        "choice": "varied_cases_and_real_delayed_learning",
+        "confidence": 1,
+        "probabilities": {
+          "varied_cases_and_real_delayed_learning": 1,
+          "announce_denmark_number_one": 0,
+          "more_xp_and_streak_pressure": 0
+        },
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 918,
+      "output_tokens": 128
+    },
+    "request_id": "playground_1b9cf04fcd833324d5c96deda98e7d79e93",
+    "evaluation_time_ms": 124.84498496633023
+  },
+  "balanceDisplayBefore": "$4.99",
+  "allowance": "Existing ordinary Playground access; no purchase, top-up, new key or new paid plan. Exact account debit is not established."
+}
