@@ -122,7 +122,8 @@ test('hele femtrinsløbet kræver tre kort, fire faktiske svar, selvcheck og kor
     objectiveComplete: true,
     cardsCompleted: 3,
     apply: { graded: true, hadWrong: true, repaired: true, correct: true },
-    recall: { selfChecked: true },
+    transfer: { responded: true, revealed: true },
+    recall: { responded: true, revealed: true, selfChecked: true },
     checkpoint: { graded: true, hadWrong: true, repaired: true, correct: true, questionId: question.id },
     startedAt: 1000,
     completedAt: session.completedAt
@@ -183,6 +184,91 @@ test('forkert kold review-vurdering repareres før kortene og bevarer første fe
   session = readAllCards(session);
   assert.equal(session.stage, 'transfer');
   assert.ok(restoreJourneySession(serializeJourneySession(session), content), 'review-rækkefølgen kan gendannes ved canonical replay');
+});
+
+test('mentalt bud og reveal er virkelige events, kan replayes og kræver stadig selvcheck', () => {
+  const question = QUESTIONS[0];
+  let session = readAllCards(create(question, { sessionId: 'journey-mental-flow' }));
+  session = dispatch(session, JOURNEY_ACTIONS.SUBMIT_APPLY, { answers: correctAnswers(question) }).session;
+
+  session = dispatch(session, JOURNEY_ACTIONS.COMMIT_TRANSFER_MENTAL).session;
+  let step = getJourneyStep(session, content);
+  assert.equal(step.responseMode, 'mental');
+  assert.equal(step.committed, true);
+  assert.equal(step.revealed, false);
+  assert.equal(step.modelAnswer, null, 'et mentalt bud må ikke afsløre facit automatisk');
+
+  const modeSwitch = transitionJourneySession(session, {
+    type: JOURNEY_ACTIONS.SUBMIT_TRANSFER,
+    actionId: 'mental-to-written-forgery',
+    at: 1006,
+    answer: 'Et skriftligt svar efter mental commit.'
+  }, content);
+  assert.equal(modeSwitch.outcome.accepted, false, 'responsmåden kan ikke skiftes efter commit');
+
+  const prematureTransfer = transitionJourneySession(session, {
+    type: JOURNEY_ACTIONS.CONTINUE_TRANSFER,
+    actionId: 'mental-transfer-too-soon',
+    at: 1006
+  }, content);
+  assert.equal(prematureTransfer.outcome.accepted, false);
+  assert.equal(prematureTransfer.outcome.reason, 'transfer-answer-required');
+
+  session = dispatch(session, JOURNEY_ACTIONS.REVEAL_TRANSFER).session;
+  step = getJourneyStep(session, content);
+  assert.equal(step.revealed, true);
+  assert.equal(step.modelAnswer.action, LESSONS[question.sectionId].case.action);
+  session = dispatch(session, JOURNEY_ACTIONS.CONTINUE_TRANSFER).session;
+
+  session = dispatch(session, JOURNEY_ACTIONS.COMMIT_RECALL_MENTAL).session;
+  step = getJourneyStep(session, content);
+  assert.equal(step.modelAnswer, null);
+  const prematureSelfCheck = transitionJourneySession(session, {
+    type: JOURNEY_ACTIONS.SELF_CHECK_RECALL,
+    actionId: 'mental-self-check-too-soon',
+    at: 1009,
+    selfCheck: 'remembered'
+  }, content);
+  assert.equal(prematureSelfCheck.outcome.accepted, false);
+  assert.equal(prematureSelfCheck.outcome.reason, 'recall-answer-required');
+
+  session = dispatch(session, JOURNEY_ACTIONS.REVEAL_RECALL).session;
+  session = dispatch(session, JOURNEY_ACTIONS.SELF_CHECK_RECALL, { selfCheck: 'needs-review' }).session;
+  const checkpoint = getJourneyStep(session, content).question;
+  session = dispatch(session, JOURNEY_ACTIONS.SUBMIT_CHECKPOINT, { answers: correctAnswers(checkpoint) }).session;
+
+  const evidence = getJourneyCompletionEvidence(session);
+  assert.deepEqual(evidence.transfer, { responded: true, revealed: true });
+  assert.deepEqual(evidence.recall, { responded: true, revealed: true, selfChecked: true });
+  const restored = restoreJourneySession(serializeJourneySession(session), content);
+  assert.deepEqual(restored, session, 'canonical replay bevarer mental commit, reveal og selvcheck');
+});
+
+test('gentagne mentale handlinger deduplikeres og gamle skriftlige sessioner gendannes uændret', () => {
+  const question = QUESTIONS[0];
+  let session = readAllCards(create(question, { sessionId: 'journey-response-modes' }));
+  session = dispatch(session, JOURNEY_ACTIONS.SUBMIT_APPLY, { answers: correctAnswers(question) }).session;
+
+  const commit = {
+    type: JOURNEY_ACTIONS.COMMIT_TRANSFER_MENTAL,
+    actionId: 'mental-transfer-once',
+    at: 1005
+  };
+  session = transitionJourneySession(session, commit, content).session;
+  const duplicate = transitionJourneySession(restoreJourneySession(serializeJourneySession(session), content), commit, content);
+  assert.equal(duplicate.outcome.duplicate, true);
+  assert.equal(duplicate.session.events.filter(event => event.type === JOURNEY_ACTIONS.COMMIT_TRANSFER_MENTAL).length, 1);
+
+  let written = readAllCards(create(question, { sessionId: 'journey-legacy-written' }));
+  written = dispatch(written, JOURNEY_ACTIONS.SUBMIT_APPLY, { answers: correctAnswers(question) }).session;
+  written = dispatch(written, JOURNEY_ACTIONS.SUBMIT_TRANSFER, { answer: 'Mit tidligere gemte skriftlige bud.' }).session;
+  const serialized = serializeJourneySession(written);
+  const restored = restoreJourneySession(serialized, content);
+  assert.deepEqual(restored, written, 'den gamle eventform får ingen opdigtede mode-felter');
+  const step = getJourneyStep(restored, content);
+  assert.equal(step.responseMode, 'written');
+  assert.equal(step.revealed, true);
+  assert.equal(step.answer, 'Mit tidligere gemte skriftlige bud.');
 });
 
 test('genindlæsning afviser korrupt, forfalsket, transient og ændret indhold', () => {

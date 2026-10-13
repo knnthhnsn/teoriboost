@@ -10,6 +10,16 @@ const content={questions:QUESTIONS,lessons:LESSONS};
 const question=QUESTIONS[0], time=Date.UTC(2026,9,12,8);
 const make=()=>createJourneySession({sessionId:'journey-profile-test',kind:'lesson',question,lesson:LESSONS[question.sectionId],questions:QUESTIONS,startedAt:time});
 
+test('lean player position and optional writing survive save; malformed UI remains bounded',()=>{
+  const source=blankState();
+  source.journeySessions[question.sectionId]={session:make(),updatedAt:time,ui:{answers:[true,false,null,null],statementIndex:1,writingStage:'transfer',audioCards:true,transferDraft:'Et rigtigt udkast'}};
+  const restored=restoreState(source).journeySessions[question.sectionId].ui;
+  assert.equal(restored.statementIndex,1);assert.equal(restored.writingStage,'transfer');assert.equal(restored.audioCards,true);assert.equal(restored.transferDraft,'Et rigtigt udkast');
+  source.journeySessions[question.sectionId].ui={statementIndex:99,writingStage:'done',audioCards:'true'};
+  const bounded=restoreState(source).journeySessions[question.sectionId].ui;
+  assert.equal(bounded.statementIndex,null);assert.equal(bounded.writingStage,null);assert.equal(bounded.audioCards,false);
+});
+
 test('new journey and resumed lesson survive profile restore without losing old progress',()=>{
   const profile=blankState();recordAnswer(profile,question,question.statements.map(s=>s.correct),time);
   profile.settings.humor=false;profile.sessions=5;profile.history=[{at:time,errors:3,unanswered:0}];

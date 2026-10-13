@@ -23,14 +23,26 @@ An unanswered or partially answered exam item is not evidence that the learner c
 
 1. **Understand:** finish all three authored lesson cards.
 2. **Apply:** judge all four statements of an actual question. A wrong attempt stays in the event history and must be repaired.
-3. **Transfer:** answer the authored case in free text, then compare with the authored action and reason.
-4. **Recall:** answer the authored recall prompt in the learner's own words, reveal the authored answer, and explicitly self-check. The engine never auto-grades this prose.
+3. **Transfer:** form a response to the authored case, then deliberately reveal and compare with the authored action and reason.
+4. **Recall:** retrieve the answer, deliberately reveal the authored answer, and explicitly self-check. The engine never auto-grades the learner's response.
 5. **Checkpoint:** answer a different question from the same section when one exists. If the bank has only one question for that section, the engine reorders the same four statements and labels that fallback clearly; it is not presented as an unseen scenario.
 6. **Done:** only reached after the cards, a complete four-answer apply assessment and any repair, the open transfer and recall steps, and a correct checkpoint.
 
 A review deliberately changes the first two stages to **Apply → Understand → Transfer → Recall → Checkpoint**. It opens on a complete, unanswered four-statement assessment before showing any card. A wrong cold attempt stays in Apply for authored feedback and repair; the first correct attempt then opens all three cards. Only after the learner explicitly finishes those cards does the review move to Transfer. This makes the first review attempt a retrieval observation rather than recognition immediately after rereading. Existing saved review sessions from the earlier card-first order fail canonical replay and may be discarded without changing profile or journey progress.
 
-Self-checking prose cannot itself complete a lesson or create mastery. An immediate retry is repair feedback, not delayed recall. Complete wrong attempts in both Apply and Checkpoint are retained after a later correct answer, and completion evidence marks each repaired stage separately. Unanswered or partial submissions are rejected before grading and never become mistake evidence. This lets analytics and the repair quest distinguish first-pass accuracy from eventual repair.
+Transfer and Recall default to an honest mental-response flow: **“Jeg har et bud”** records a mental commit, and **“Vis svaret”** records a separate answer reveal. The optional **“Skriv mit bud”** path retains the earlier own-words input. Mental responses are never filled with placeholder prose and neither response mode is presented as AI-graded. Canonical replay preserves the commit, shown answer, and self-check events; old written sessions replay with their original event shape.
+
+Self-checking cannot itself complete a lesson or create mastery. Completion evidence also requires a real response and reveal in both Transfer and Recall. An immediate retry is repair feedback, not delayed recall. Complete wrong attempts in both Apply and Checkpoint are retained after a later correct answer, and completion evidence marks each repaired stage separately. Unanswered or partial submissions are rejected before grading and never become mistake evidence. This lets analytics and the repair quest distinguish first-pass accuracy from eventual repair.
+
+## Player interaction
+
+The player shows one authored rule card and one assessment statement at a time. Choosing JA or NEJ advances after about 220 ms, while numbered controls and a back control allow revision. No explanation or answer key is shown until all four statements have an answer and the learner explicitly grades the complete set. The context and photo stay mounted while statements change, so image loading and zoom state are not reset during the four-answer assessment.
+
+Assessment feedback appears in a compact bottom tray. The full explanation, sources, and four-answer comparison remain available in an expandable region. Primary controls stay at the bottom of the active step, transitions respect reduced-motion settings, and completion animation runs only after the objective checkpoint gate has passed.
+
+The existing lesson narration is one whole-lesson recording containing all three cards. Starting it therefore opens a compact view of all three cards; the player does not describe that audio as narration of only the currently focused card.
+
+`createJourneyPlayer` accepts an optional `onExperience(event, details)` callback. It emits `selection`, `card-advance`, `step`, `correct`, `repair`, and `complete`. These are presentation hooks for the application's sound and motion layer; reducer state and objective completion remain authoritative, and the player does not add a second assessment sound through `onAssess`.
 
 Session state contains content signatures. `restoreJourneySession` checks the current lesson and questions and returns `null` on content or signature drift, an invalid stage order, or an obsolete review event order. The caller should then discard only the transient session value; it must retain the user's journey, core records, preferences, and other profile fields. Grading and finalisation use stable action ids/terminal state so reloads and repeated clicks cannot grade or finish the same transition twice.
 

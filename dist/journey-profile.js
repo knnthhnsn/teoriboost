@@ -17,6 +17,9 @@ export function restoreJourneySessions(raw) {
       const original = value.ui;
       const ui = {
         answers:response(original?.answers),
+        statementIndex:Number.isInteger(original?.statementIndex) && original.statementIndex >= 0 && original.statementIndex <= 3 ? original.statementIndex : null,
+        writingStage:['transfer','recall'].includes(original?.writingStage) ? original.writingStage : null,
+        audioCards:original?.audioCards === true,
         transferDraft:typeof original?.transferDraft === 'string' ? original.transferDraft.slice(0,5000) : '',
         recallDraft:typeof original?.recallDraft === 'string' ? original.recallDraft.slice(0,5000) : '',
         feedback:null

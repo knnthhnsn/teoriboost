@@ -1,7 +1,7 @@
 import { restoreJourneyProfile } from './journey-profile.js';
 
 export const VERSION = 1;
-export const blankState = () => ({version:VERSION,xp:0,rewards:[],records:{},history:[],sessions:0,settings:{humor:true,sound:false,motion:true},savedExam:null,...restoreJourneyProfile(null)});
+export const blankState = () => ({version:VERSION,xp:0,rewards:[],records:{},history:[],sessions:0,settings:{humor:true,sound:true,motion:true},savedExam:null,...restoreJourneyProfile(null)});
 
 export function normalizeResponse(value) {
   const answer=[null,null,null,null];

@@ -1,0 +1,76 @@
+{
+  "checked": "2026-10-13T10:40:46.311Z",
+  "scope": "One text-only synthetic classification. Zero human participants, pixels, audio or app actions by Jev. No learning or retention efficacy proof.",
+  "usageBefore": {
+    "balance": "$4.99",
+    "estimated30daySpend": "$0.0023",
+    "tokens": 68911,
+    "requests": 35,
+    "statsMayBeDelayed": true
+  },
+  "state": {
+    "product": "NATKØRSEL Danish driving theory for teens/adults",
+    "evidenceBoundary": {
+      "pixelsGivenToJev": 0,
+      "audioGivenToJev": 0,
+      "JevBrowserActions": 0,
+      "humanParticipants": 0
+    },
+    "changes": {
+      "home": "Compact real daily goal/streak, connected nodes, visible next action, optional calendar",
+      "lesson": "One full authored card and one statement at a time; four graded together; free repair; mental commit/reveal or optional writing; explicit self-check with no AI essay grade",
+      "motion": "Reported running AudioContext synthesis and 120/240ms transitions with intermediate frames; mute/no-motion produced zero oscillators/animations; Jeppe narration ended",
+      "retention": "Unique section/day completion, reload resume, delayed review starting heuristic20min, no readiness score"
+    },
+    "reportedQA": "Complete local loop with intentional error/repair; mental commit, optional written draft and checkpoint feedback survived reload; one daily completion; final hosted QA pending",
+    "limits": {
+      "fullCurriculum": false,
+      "instructorApproval": false,
+      "humanLearningGain": false,
+      "causalRetentionLift": false,
+      "marketLeadership": false
+    }
+  },
+  "questions": {
+    "retention_effect_proven": {
+      "type": "noul",
+      "instructions": "Does this evidence establish a causal improvement in 30-day learner retention or delayed driving knowledge with real humans?"
+    },
+    "next_validation": {
+      "type": "choice",
+      "instructions": "Choose the most useful next validation after final technical and hosted checks pass.",
+      "criteria": {
+        "real_learner_time_and_delayed_knowledge": "Observe teens/adults, measure time to first meaningful action and completion burden, test delayed recall and varied scenarios with qualified instructor review",
+        "more_streak_pressure": "Increase streak pressure and reward effects as sufficient evidence of learning",
+        "claim_market_leadership": "Announce Denmark number one and guaranteed pass rate from synthetic feedback"
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "retention_effect_proven": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      },
+      "next_validation": {
+        "type": "choice",
+        "choice": "real_learner_time_and_delayed_knowledge",
+        "confidence": 1,
+        "probabilities": {
+          "claim_market_leadership": 0,
+          "more_streak_pressure": 0,
+          "real_learner_time_and_delayed_knowledge": 1
+        },
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 740,
+      "output_tokens": 89
+    },
+    "request_id": "playground_1b9910435da511f4fc0bfae6f3db66b1d8a",
+    "evaluation_time_ms": 51.40555597608909
+  }
+}

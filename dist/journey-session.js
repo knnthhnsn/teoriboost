@@ -13,8 +13,12 @@ export const JOURNEY_STAGES = Object.freeze([
 export const JOURNEY_ACTIONS = Object.freeze({
   READ_CARD: 'read-card',
   SUBMIT_APPLY: 'submit-apply',
+  COMMIT_TRANSFER_MENTAL: 'commit-transfer-mental',
+  REVEAL_TRANSFER: 'reveal-transfer',
   SUBMIT_TRANSFER: 'submit-transfer',
   CONTINUE_TRANSFER: 'continue-transfer',
+  COMMIT_RECALL_MENTAL: 'commit-recall-mental',
+  REVEAL_RECALL: 'reveal-recall',
   SUBMIT_RECALL: 'submit-recall',
   SELF_CHECK_RECALL: 'self-check-recall',
   SUBMIT_CHECKPOINT: 'submit-checkpoint',
@@ -281,7 +285,8 @@ function performAction(session, action, resolved) {
 
   if (action.type === JOURNEY_ACTIONS.SUBMIT_TRANSFER) {
     const answer = cleanOpenAnswer(action.answer);
-    if (session.stage !== 'transfer' || session.transfer.answer !== null || answer === null) {
+    if (session.stage !== 'transfer' || session.transfer.answer !== null
+      || session.transfer.mode !== undefined || answer === null) {
       return outcome(session, false, { reason: 'open-transfer-answer-required' });
     }
     const transfer = { answer, submittedAt: action.at, continuedAt: null };
@@ -291,8 +296,38 @@ function performAction(session, action, resolved) {
     });
   }
 
+  if (action.type === JOURNEY_ACTIONS.COMMIT_TRANSFER_MENTAL) {
+    if (session.stage !== 'transfer' || session.transfer.answer !== null || session.transfer.mode === 'mental') {
+      return outcome(session, false, { reason: 'transfer-response-already-committed' });
+    }
+    const transfer = {
+      ...session.transfer,
+      mode: 'mental',
+      committedAt: action.at,
+      revealedAt: null
+    };
+    const next = appendEvent({ ...session, transfer }, action, { responseMode: 'mental' });
+    return outcome(next, true, { responseMode: 'mental', modelAnswer: null });
+  }
+
+  if (action.type === JOURNEY_ACTIONS.REVEAL_TRANSFER) {
+    if (session.stage !== 'transfer' || session.transfer.mode !== 'mental'
+      || !safeTime(session.transfer.committedAt) || session.transfer.revealedAt !== null) {
+      return outcome(session, false, { reason: 'mental-transfer-commit-required' });
+    }
+    const transfer = { ...session.transfer, revealedAt: action.at };
+    const next = appendEvent({ ...session, transfer }, action, { responseMode: 'mental' });
+    return outcome(next, true, {
+      responseMode: 'mental',
+      modelAnswer: { action: resolved.lesson.case.action, why: resolved.lesson.case.why }
+    });
+  }
+
   if (action.type === JOURNEY_ACTIONS.CONTINUE_TRANSFER) {
-    if (session.stage !== 'transfer' || session.transfer.answer === null || session.transfer.continuedAt !== null) {
+    const writtenResponse = session.transfer.answer !== null;
+    const revealedMentalResponse = session.transfer.mode === 'mental' && safeTime(session.transfer.revealedAt);
+    if (session.stage !== 'transfer' || (!writtenResponse && !revealedMentalResponse)
+      || session.transfer.continuedAt !== null) {
       return outcome(session, false, { reason: 'transfer-answer-required' });
     }
     const transfer = { ...session.transfer, continuedAt: action.at };
@@ -302,7 +337,8 @@ function performAction(session, action, resolved) {
 
   if (action.type === JOURNEY_ACTIONS.SUBMIT_RECALL) {
     const answer = cleanOpenAnswer(action.answer);
-    if (session.stage !== 'recall' || session.recall.answer !== null || answer === null) {
+    if (session.stage !== 'recall' || session.recall.answer !== null
+      || session.recall.mode !== undefined || answer === null) {
       return outcome(session, false, { reason: 'open-recall-answer-required' });
     }
     const recall = { ...session.recall, answer, submittedAt: action.at };
@@ -310,9 +346,39 @@ function performAction(session, action, resolved) {
     return outcome(next, true, { modelAnswer: resolved.lesson.recall.answer, autoAssessed: false });
   }
 
+  if (action.type === JOURNEY_ACTIONS.COMMIT_RECALL_MENTAL) {
+    if (session.stage !== 'recall' || session.recall.answer !== null || session.recall.mode === 'mental') {
+      return outcome(session, false, { reason: 'recall-response-already-committed' });
+    }
+    const recall = {
+      ...session.recall,
+      mode: 'mental',
+      committedAt: action.at,
+      revealedAt: null
+    };
+    const next = appendEvent({ ...session, recall }, action, { responseMode: 'mental' });
+    return outcome(next, true, { responseMode: 'mental', modelAnswer: null, autoAssessed: false });
+  }
+
+  if (action.type === JOURNEY_ACTIONS.REVEAL_RECALL) {
+    if (session.stage !== 'recall' || session.recall.mode !== 'mental'
+      || !safeTime(session.recall.committedAt) || session.recall.revealedAt !== null) {
+      return outcome(session, false, { reason: 'mental-recall-commit-required' });
+    }
+    const recall = { ...session.recall, revealedAt: action.at };
+    const next = appendEvent({ ...session, recall }, action, { responseMode: 'mental' });
+    return outcome(next, true, {
+      responseMode: 'mental',
+      modelAnswer: resolved.lesson.recall.answer,
+      autoAssessed: false
+    });
+  }
+
   if (action.type === JOURNEY_ACTIONS.SELF_CHECK_RECALL) {
     const selfCheck = action.selfCheck;
-    if (session.stage !== 'recall' || session.recall.answer === null || session.recall.selfChecked) {
+    const writtenResponse = session.recall.answer !== null;
+    const revealedMentalResponse = session.recall.mode === 'mental' && safeTime(session.recall.revealedAt);
+    if (session.stage !== 'recall' || (!writtenResponse && !revealedMentalResponse) || session.recall.selfChecked) {
       return outcome(session, false, { reason: 'recall-answer-required' });
     }
     if (!['remembered', 'needs-review'].includes(selfCheck)) {
@@ -435,19 +501,35 @@ export function getJourneyStep(session, content) {
   }
   if (restored.stage === 'apply') return { stage: 'apply', question: resolved.question, attempts: restored.apply.attempts.length };
   if (restored.stage === 'transfer') {
+    const responseMode = restored.transfer.mode === 'mental'
+      ? 'mental'
+      : (restored.transfer.answer === null ? null : 'written');
+    const revealed = responseMode === 'written'
+      || (responseMode === 'mental' && safeTime(restored.transfer.revealedAt));
     return {
       stage: 'transfer',
       case: resolved.lesson.case,
       answer: restored.transfer.answer,
-      modelAnswer: restored.transfer.answer === null ? null : { action: resolved.lesson.case.action, why: resolved.lesson.case.why }
+      responseMode,
+      committed: responseMode !== null,
+      revealed,
+      modelAnswer: revealed ? { action: resolved.lesson.case.action, why: resolved.lesson.case.why } : null
     };
   }
   if (restored.stage === 'recall') {
+    const responseMode = restored.recall.mode === 'mental'
+      ? 'mental'
+      : (restored.recall.answer === null ? null : 'written');
+    const revealed = responseMode === 'written'
+      || (responseMode === 'mental' && safeTime(restored.recall.revealedAt));
     return {
       stage: 'recall',
       prompt: resolved.lesson.recall.prompt,
       answer: restored.recall.answer,
-      modelAnswer: restored.recall.answer === null ? null : resolved.lesson.recall.answer,
+      responseMode,
+      committed: responseMode !== null,
+      revealed,
+      modelAnswer: revealed ? resolved.lesson.recall.answer : null,
       selfChecked: restored.recall.selfChecked,
       selfCheck: restored.recall.selfCheck,
       autoAssessed: false
@@ -475,12 +557,20 @@ export function getJourneyCompletionEvidence(session) {
   const applyCorrectIndex = applyAttempts.findIndex(attempt => attempt.correct === true);
   const checkpointHadWrong = checkpointAttempts.some(attempt => attempt.correct === false);
   const checkpointCorrectIndex = checkpointAttempts.findIndex(attempt => attempt.correct === true);
+  const transferResponded = session.transfer?.answer !== null || session.transfer?.mode === 'mental';
+  const transferRevealed = session.transfer?.answer !== null || safeTime(session.transfer?.revealedAt);
+  const recallResponded = session.recall?.answer !== null || session.recall?.mode === 'mental';
+  const recallRevealed = session.recall?.answer !== null || safeTime(session.recall?.revealedAt);
   return {
     sessionId: session.sessionId,
     sectionId: session.sectionId,
     kind: session.kind,
     objectiveComplete: session.cardsRead?.every(Boolean) === true
       && applyCorrectIndex >= 0
+      && transferResponded
+      && transferRevealed
+      && recallResponded
+      && recallRevealed
       && session.recall?.selfChecked === true
       && checkpointAttempts.at(-1)?.correct === true,
     cardsCompleted: session.cardsRead?.filter(Boolean).length ?? 0,
@@ -490,7 +580,15 @@ export function getJourneyCompletionEvidence(session) {
       repaired: applyHadWrong && applyCorrectIndex > 0,
       correct: applyAttempts.at(-1)?.correct === true
     },
-    recall: { selfChecked: session.recall?.selfChecked === true },
+    transfer: {
+      responded: transferResponded,
+      revealed: transferRevealed
+    },
+    recall: {
+      responded: recallResponded,
+      revealed: recallRevealed,
+      selfChecked: session.recall?.selfChecked === true
+    },
     checkpoint: {
       graded: checkpointAttempts.length > 0,
       hadWrong: checkpointHadWrong,
