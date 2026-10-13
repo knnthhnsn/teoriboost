@@ -30,3 +30,23 @@
 @media(max-width:700px){.scene-photo-top{padding:10px 12px;font-size:10px}.scene-photo-bottom{gap:8px;padding:11px 12px}.scene-photo-bottom p{font-size:14px}.scene-expand{font-size:11px;padding:6px 8px}.scene-facts{padding:0 12px 12px}.scene-facts span{font-size:12px}.scene-photo-note{padding:0 12px 12px}.scene-lightbox{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:10px}.scene-lightbox header{padding:12px;gap:10px}.scene-lightbox h2{font-size:16px}.scene-lightbox-context{font-size:14px;padding:12px}.scene-lightbox-stage{height:auto;aspect-ratio:16/11}.exam-active .screen-head h1{font-size:29px}.exam-active .question-layout{gap:18px}}
 @media(max-width:700px){.scene-lightbox-stage{height:calc(68.75vw - 12.375px);aspect-ratio:auto}.scene-lightbox h2{font-size:15px}.scene-lightbox-controls{gap:6px}.scene-lightbox-zoom{font-size:12px;min-width:85px;padding:8px}}
 @media(max-width:359px){.scene-photo-bottom{flex-wrap:wrap}.scene-photo-bottom p{min-width:100%}.scene-expand{width:100%;justify-content:center}}
+
+/* Read the complete authored situation before its illustration on a narrow screen. */
+@media(max-width:950px){
+  .exam-active .question-layout{display:flex;flex-direction:column;gap:12px}
+  .exam-active .question-panel{display:contents}
+  .exam-active .question-panel>.eyebrow,
+  .exam-active .question-panel>h2,
+  .exam-active .question-panel>.question-context,
+  .exam-active .question-panel>.voice-read{order:0}
+  .exam-active .question-panel>.eyebrow{margin:0}
+  .exam-active .question-panel>.question-context{margin:0}
+  .exam-active .question-panel>.voice-read{align-self:flex-start}
+  .exam-active .question-layout>.scene-photo{order:1}
+  .exam-active .question-panel>.answer-note,
+  .exam-active .question-panel>.exam-selection-note,
+  .exam-active .question-panel>.statements,
+  .exam-active .question-panel>.question-actions{order:2}
+  .exam-active .question-panel>.answer-note{margin:8px 0 0}
+  .exam-active .question-panel>.exam-selection-note{margin:0}
+}

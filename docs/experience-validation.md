@@ -11,6 +11,7 @@ The previous screen spent attention on a poster and multiple controls before the
 - Real daily completion and streak in the result, a visible return action and an optional next lesson. No duplicate success toast covering the action. Completion is deduplicated; existing question and exam progress remains separate from guided lesson progress.
 - Original short local earcons for selection, card advance, success, repair and completion. Audio starts after a trusted gesture, can be muted, avoids narration overlap and is suppressed in an active exam. Saved explicit mute preferences remain valid; new profiles enable feedback sounds.
 - User and system reduced-motion settings, 44 px learning controls, stage-change focus/scroll, and saved statement position, writing mode and drafts.
+- Exam layout on narrow screens puts the complete authored prompt and conditions before the picture. The same DOM nodes remain available to narration and focus, and all four statements still follow the picture.
 
 ## Local evidence
 
@@ -36,3 +37,5 @@ These checks do not establish full curriculum coverage, instructor approval, hum
 ## Publication handoff
 
 The existing owner-private Sites project is reused. Publication and final hosted UI checks occur after the frozen source is pushed and packaged. Their authoritative result is saved separately in ignored `evidence/experience-site-published.json` and `evidence/experience-hosted-qa.json`; this preparation document does not claim a deployment before it succeeds.
+
+The first published iteration passed a full hosted assistant lesson, running-context feedback sounds, a 6.264-second completed Jeppe clip, mental/checkpoint reloads and retained completion. The exam smoke check found its full context still below the illustration. A final CSS-only repair moves the original context nodes before the picture on screens up to 950 px; it changes no questions, facit, pictures or saved state. Its fresh layout check and final publication supersede the first iteration's exam layout.
