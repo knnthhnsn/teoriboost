@@ -1,0 +1,110 @@
+{
+  "scope": "Only all current Trafiklab narration clips, hash and full MP3 decode. No claim of human pronunciation acceptance.",
+  "engine": "edge-tts 7.3.1",
+  "speaker": "da-DK-JeppeNeural",
+  "clips": [
+    {
+      "key": "v1-31b2aee869447a45",
+      "duration": 6.888,
+      "bytes": 41853,
+      "sha256": "98a2b1377d85b397520cb3da2c17e504fd31f1bcd7148bf05f5f408609ec0c76"
+    },
+    {
+      "key": "v1-32f6e12d0bf298d0",
+      "duration": 12.648,
+      "bytes": 76413,
+      "sha256": "94f68914e6805e949491dc3c8bf2ad4f1a575095ffb6d68f011eaa39050dea29"
+    },
+    {
+      "key": "v1-3cafe7dd9858fb56",
+      "duration": 8.304,
+      "bytes": 50349,
+      "sha256": "fd956570c255fe2e3a1ea2a1ced9396629e1ee9c95d129be26d7ca909abe8cd3"
+    },
+    {
+      "key": "v1-51572c72ba006e49",
+      "duration": 13.2,
+      "bytes": 79725,
+      "sha256": "0f883333d0d9ba9935fb9af78debdacce88500b5b5c0a11e08706e758f290dad"
+    },
+    {
+      "key": "v1-51c2731c1f5ea500",
+      "duration": 12.096,
+      "bytes": 73101,
+      "sha256": "133bbbe7047a0e44e1615cc60aa04d27ce520c2ce81335a2eee126976e3e54b4"
+    },
+    {
+      "key": "v1-586eceddaab8a555",
+      "duration": 11.568,
+      "bytes": 69933,
+      "sha256": "dd75e1a1ace79d4d24871d31f4fd635ece83bdf80b7a0bf1af986b9becbac9f1"
+    },
+    {
+      "key": "v1-651f1168501148c5",
+      "duration": 10.8,
+      "bytes": 65325,
+      "sha256": "e372b8205a5b0a9f4e37507fbce021d0cafac1316c86c50d526420bb8e932955"
+    },
+    {
+      "key": "v1-7a5dbf81193dbee0",
+      "duration": 9.216,
+      "bytes": 55821,
+      "sha256": "269d3b0e325ea4011f8df1658111ee7b72126d7d77c3eb3cceecce76f6e175ac"
+    },
+    {
+      "key": "v1-7bf0fc0c6ebd6d68",
+      "duration": 11.664,
+      "bytes": 70509,
+      "sha256": "43108447a93da644b65c42aaf1c980c2594406a82908ec946c07920969fae1d4"
+    },
+    {
+      "key": "v1-7e5e3145ca8a97dd",
+      "duration": 8.856,
+      "bytes": 53661,
+      "sha256": "7ac6fe41cbdcbc2a24c7a659a276fa854c5242f6b343f57b6c4fa22a938157c8"
+    },
+    {
+      "key": "v1-8534d168e203aa2d",
+      "duration": 12.624,
+      "bytes": 76269,
+      "sha256": "b13b2546b3b45ae02bbcb04a0e17e18c9e0934041f811c8b2228bbaa8cf4d867"
+    },
+    {
+      "key": "v1-912edac3b4b568ef",
+      "duration": 8.184,
+      "bytes": 49629,
+      "sha256": "e0ae2397fc1957f64d56558261711a1d8b8b6114772bbdf13c9142da23de7ae7"
+    },
+    {
+      "key": "v1-b99789cb8b73ad84",
+      "duration": 13.176,
+      "bytes": 79581,
+      "sha256": "ceb359134a0fa3935d21c962c757912ee428d5f879bc43a8a51ec4ac70f19394"
+    },
+    {
+      "key": "v1-be31da3dcf2bb84a",
+      "duration": 12.216,
+      "bytes": 73821,
+      "sha256": "f1a3c7621415f748e1ff9b75a3de5f197b5eb48238129bbdaa01d0de44153f7e"
+    },
+    {
+      "key": "v1-e0fcd02f464fd776",
+      "duration": 16.104,
+      "bytes": 97149,
+      "sha256": "6960a73549dd2671705a1c333889094e82944c8b20a745445a6261ccdcec3960"
+    },
+    {
+      "key": "v1-f3efe9e60b485d0f",
+      "duration": 14.616,
+      "bytes": 88221,
+      "sha256": "709a700066420f8568a4caae3f1c1dca521269dfa6c5374378115f771cb3f01a"
+    },
+    {
+      "key": "v1-aaf6ec4d3185c42a",
+      "duration": 19.272,
+      "bytes": 116157,
+      "sha256": "021156ade3998c80e86b2aef75daa522ed61f9b1045316248719a90f5863e543"
+    }
+  ],
+  "passed": true
+}

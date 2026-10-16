@@ -6,6 +6,7 @@ import { LESSONS } from '../dist/lessons.js';
 import { GARAGE } from '../dist/garage-content.js';
 import { GARAGE_HOOKS } from '../dist/garage.js';
 import { JUDGE_CASES } from '../dist/judge.js';
+import { TURN_VOICE } from '../dist/turn-learning.js';
 import { voiceKey, normalizeVoiceText } from '../dist/voice-key.js';
 import {
   JUDGE_INTRO_VOICE,
@@ -31,6 +32,7 @@ const add = (value, uses) => {
 const addParts = (parts, use) => parts.forEach((part, index) => add(part, [`${use}:${index + 1}`]));
 
 add(JUDGE_INTRO_VOICE, ['judge:intro']);
+for(const [stage,text] of Object.entries(TURN_VOICE))add(text,[`turn-lab:${stage}`]);
 for (const q of QUESTIONS) {
   addParts(questionVoiceParts(q), `question:${q.id}:initial`);
   addParts(questionFeedbackParts(q), `question:${q.id}:feedback`);

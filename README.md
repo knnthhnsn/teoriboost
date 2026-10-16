@@ -59,3 +59,7 @@ Den brede matrix berører alle 57 nummererede underafsnit, men dokumenterer ikke
 Garagen indeholder nu en tekstlig repræsentation af de 17 underområder i planens kapitel 1 med 183 delmålsposter, herunder de otte ADAS-eksempler. Andre underpunkters opregninger er samlet under deres nummererede mål. Dette inventar og én case pr. område dokumenterer ikke elevens beherskelse af samtlige krav. De øvrige kapitlers tilsvarende detaljerede mapping mangler stadig.
 
 Reelle elever skal derefter afprøve forståelse, nye trafikvariationer og genkaldelse efter en forsinkelse. Nationale markedsandele, menneskelig læringsgevinst og Danmarks nr. 1-status er endnu ikke dokumenteret. Næste produktion og validering er beskrevet i [STATUS.md](STATUS.md).
+
+## Trafiklab · 16. oktober 2026
+
+Åbn `#trafiklab` eller vælg “Et blink. To baner.” på hjemsiden. Det nye, afgrænsede højresvingsforløb begynder i trafiksituationen og omfatter direkte udpegning, konsekvens, fejlretning, en anden vej, en fri-bane-kontrast og senere genkaldelse. Se [validering og grænser](docs/turn-validation.md), [pensumoversigt](docs/curriculum-coverage.md) og [forberedt elevforsøg](docs/learner-pilot.md). Gennemført indhold er ikke dokumenteret kørefærdighed.

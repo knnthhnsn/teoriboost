@@ -1,0 +1,65 @@
+{
+  "checked": "2026-10-16T19:59:53.051Z",
+  "scope": "One actual 390x844 screenshot, synthetic pixel classification; zero app actions, audio, human participants, instructor sign-off or learning efficacy proof. Existing allowance, no top-up.",
+  "asset": "evidence/turn-phone-shoulder.jpg",
+  "state": "NATKØRSEL: Danish driving theory for teens/adults. Actual 390x844 screenshot of the new right-turn lesson: <turn-phone-shoulder>. The learner switches from forward to right-side view, then identifies the relevant risk, chooses a safe action, watches a deterministic consequence and tries a different driveway scene. The screenshot shows only the opening step after a view change. Judge the supplied pixels only. You have not operated the app, heard audio, or tested humans. No claim of human learning, instructor approval or market leadership.",
+  "questions": {
+    "cyclist_legible": {
+      "type": "noul",
+      "instructions": "In the supplied screenshot, is a person riding a bicycle visibly distinguishable on the red cycle track?"
+    },
+    "primary_action_visible": {
+      "type": "noul",
+      "instructions": "Is the primary next-action button fully visible and free from overlapping text or controls in this exact screenshot?"
+    },
+    "next_user_action": {
+      "type": "choice",
+      "instructions": "What does this exact screen principally ask the learner to do next?",
+      "criteria": {
+        "choose_after_inspecting": "Continue to choose an action after inspecting the right side",
+        "drive_immediately": "Begin turning the real car immediately",
+        "read_three_cards": "Read three text cards before seeing any road"
+      }
+    },
+    "learning_efficacy_proven": {
+      "type": "noul",
+      "instructions": "Do these supplied pixels and reported implementation alone establish improved retained learning with real learners?"
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "cyclist_legible": {
+        "type": "noul",
+        "noul": 0.98,
+        "stats": {}
+      },
+      "primary_action_visible": {
+        "type": "noul",
+        "noul": 0.91,
+        "stats": {}
+      },
+      "next_user_action": {
+        "type": "choice",
+        "choice": "choose_after_inspecting",
+        "confidence": 1,
+        "probabilities": {
+          "choose_after_inspecting": 1,
+          "drive_immediately": 0,
+          "read_three_cards": 0
+        },
+        "stats": {}
+      },
+      "learning_efficacy_proven": {
+        "type": "noul",
+        "noul": 0.03,
+        "stats": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 1421,
+      "output_tokens": 113
+    },
+    "evaluation_time_ms": 57.944808
+  }
+}

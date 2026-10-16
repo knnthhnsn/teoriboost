@@ -18,10 +18,18 @@ Spørgsmål og garagevalg oplæses i den rækkefølge, der faktisk vises. Facit 
 
 ## Afgrænsning og produktion
 
-Filintegritet er ikke subjektiv stemmekvalitet. Ikke alle optagelser er lyttet igennem af et menneske, og ingen syntetisk Jev-klassifikation kan høre eller fagligt godkende dem. Fysisk telefon, Safari, danske udtalepræferencer og forståelse med faktiske elever udestår. Den ejerprivate hosting har endnu ikke browser-QA, fordi ejerens passkey kræves.
+Filintegritet er ikke subjektiv stemmekvalitet. Ikke alle optagelser er lyttet igennem af et menneske, og ingen syntetisk Jev-klassifikation kan høre eller fagligt godkende dem. Fysisk telefon, Safari, danske udtalepræferencer og forståelse med faktiske elever udestår. Hosted QA er en separat afsluttende kontrol og afventer den nye hostkontrol.
 
 Claude modtog ét faktisk desktopbillede og fandt panel-overlap. Det er rettet og efterfølgende kontrolleret; kritik og closure er bevaret i `docs/research/`. Jev modtog kun vores tekst, nul billeder og nul lydfiler. Kørsel `playground_1b942d18469d6e3457491c82b03e2a3767b` (jev-1.13.0, 851 input-/148 outputtokens) gav 0,05 for modtaget lyd, 0,12 for direkte visuelt arbejde, 0,95 for rapporteret browserlyd og 0,05 for menneskelig stemme-/læringsevidens. Valget var videre pensum og menneskelig udtale-/transferreview med klassifikationsconfidence 1. Det rå input beskrev de daværende 40 tests; den efterfølgende genstartsrettelse løftede den faktiske suite til 41. Kun eksisterende månedlig saldo blev brugt.
 
 Produktionen brugte `edge-tts` uden API-nøgle, betaling eller top-up. Det er en online produktionstjeneste; elevens app bruger den ikke. Kommercielle rettigheder til Microsoft-stemmeoutput er endnu ikke afklaret; se `LICENSES.md`. Den lokale Piper-prøve er bevaret som alternativ, men indgår ikke i den valgte pakke.
 
 Katalog og originale tekster findes i `authoring/voice-catalog.json`; filmetadata og udtaletekster i `authoring/voice-production.json`. Genoptagelse bevarer verificerede cacheklip i manifestet og invaliderer dem ved ændret tekst, udtaletekst eller stemmeidentitet. Der er ingen system-/engelsk fallback. Manglende eller forældet lyd giver en synlig besked, mens den almindelige læsning fortsat er tilgængelig.
+
+## Addendum — 16. oktober 2026
+
+Den aktuelle deduplikerede produktionspakke indeholder **1.252 klip med 1.948 anvendelser**, i alt **85.353.924 bytes** og **14.116,104 sekunders** klipvarighed. De 17 aktuelle Trafiklab-klip er hver hash- og fuldt FFmpeg-dekodekontrolleret i `evidence/turn-voice-validation.json`; det er medieintegritet, ikke menneskelig udtalegodkendelse. Den separate produktionsruntime under `../voice-runtime` blev opgraderet fra `edge-tts` 7.2.8 til 7.3.1 efter en upstream 403-fejl. Det krævede ingen betaling, top-up eller anden spend.
+
+En ny browserkontrol af beslutningsklippet `v1-31b2aee869447a45` afspillede den lokale MP3 naturligt til **6,888 sekunder**. Genstart og global mute blev også kontrolleret; mute satte afspilningen på pause. Dette er ikke menneskelig lytte- eller udtalekvalitetsgodkendelse. Den historiske QA fra **12. oktober 2026** ovenfor er fortsat dateret og skal ikke læses som en ny kontrol. Ejerhostens nye hosted QA afventer den separate kontrol.
+
+To forældede mellemproduktions-MP3'er er flyttet til `reference/voice-retired`; cachen og filerne er bevaret.

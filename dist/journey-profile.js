@@ -1,4 +1,5 @@
 import { emptyJourney, restoreJourney, mergeJourney, setDailyGoal } from './journey-core.js';
+import {restoreTurnProfile,mergeTurnProfile} from './turn-learning.js';
 
 const validTime = value => Number.isFinite(value) && value >= 0 && value <= 8640000000000000;
 const response = value => Array.from({length:4}, (_, i) => typeof value?.[i] === 'boolean' ? value[i] : null);
@@ -37,6 +38,7 @@ export function restoreJourneySessions(raw) {
 export function restoreJourneyProfile(raw) {
   return {
     journey:restoreJourney(raw?.journey || emptyJourney()),
+    turnLab:restoreTurnProfile(raw?.turnLab),
     journeyGoalAt:validTime(raw?.journeyGoalAt) ? raw.journeyGoalAt : 0,
     journeySessions:restoreJourneySessions(raw?.journeySessions)
   };
@@ -54,7 +56,7 @@ export function mergeJourneyProfile(remote, local) {
     const newer=same ? value.session.events.length > old.session.events.length || (value.session.events.length === old.session.events.length && value.updatedAt >= old.updatedAt) : !old || value.session.startedAt > old.session.startedAt || (value.session.startedAt === old.session.startedAt && value.session.sessionId > old.session.sessionId);
     if (newer) journeySessions[id]=value;
   }
-  return {journey,journeyGoalAt:newestGoal.journeyGoalAt,journeySessions};
+  return {journey,journeyGoalAt:newestGoal.journeyGoalAt,journeySessions,turnLab:mergeTurnProfile(a.turnLab,b.turnLab)};
 }
 
 // A later non-assessment is no evidence against an earlier demonstrated answer.

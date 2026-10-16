@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-16",
+  "origin": "http://127.0.0.1:4178",
+  "scope": "Browser checks by agent, not human learning evidence",
+  "checks": [
+    {
+      "name": "wrong-path-repair",
+      "passed": true,
+      "detail": "Wrong risk/decision/transfer/contrast/self-check repaired; final table still reports first errors."
+    },
+    {
+      "name": "recall-draft-reload",
+      "passed": true,
+      "detail": "Typed 104-character recall survived reload before commit."
+    },
+    {
+      "name": "390-layout-done",
+      "passed": true,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "name": "image-pick-phone",
+      "passed": true,
+      "detail": "Actual cyclist clicked at observed phone coordinates; correct risk feedback rendered."
+    },
+    {
+      "name": "neural-audio-ended",
+      "passed": true,
+      "src": "assets/voice/jeppe-neural-v1/v1-31b2aee869447a45.mp3",
+      "duration": 6.888,
+      "detail": "Actual local MP3 ended naturally; restart then global mute paused narration."
+    },
+    {
+      "name": "320-layout-decision",
+      "passed": true,
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "name": "motion-off-consequence",
+      "passed": true,
+      "detail": "Safe final pose and enabled Next rendered immediately; no forced wait."
+    },
+    {
+      "name": "camera-switch-during-replay",
+      "passed": true,
+      "detail": "Switched to right side during motion; replay still completed and Next enabled."
+    },
+    {
+      "name": "overhead-full-car",
+      "passed": true,
+      "detail": "Rendered corrected camera includes whole car, cycle track, cyclist and conflict in safe overview and cleared contrast."
+    },
+    {
+      "name": "correct-path-image-to-done",
+      "passed": true,
+      "detail": "First risk image selection, safe decision, transfer, proceed contrast, typed recall and self-check complete; final table reports each first choice accurately."
+    },
+    {
+      "name": "cross-tab-stale-action",
+      "passed": true,
+      "detail": "Other tab restarted; stale Done action was refused and current situation re-rendered with notice."
+    },
+    {
+      "name": "risk-text-keyboard-alternative",
+      "passed": true,
+      "detail": "Opened text alternative; Enter selected cyclist and advanced to correct feedback."
+    },
+    {
+      "name": "seven-day-fixture-browser",
+      "passed": true,
+      "detail": "Separate localhost-origin synthetic completion dated >7days ago. New visit opened T-junction review; transfer/contrast/recall completed; delayed status appears. No human retention result."
+    },
+    {
+      "name": "route-exit-stops-narration",
+      "passed": true,
+      "detail": "Started risk explanation narration then navigated to existing lesson; audio paused and panel removed."
+    }
+  ],
+  "replayPerformance": {
+    "completed": true,
+    "elapsedMs": 4017.6999999761574,
+    "firstTwoFramesMs": 19.399999976158142,
+    "frames": 576,
+    "p50FrameMs": 6.900000000001455,
+    "p95FrameMs": 7,
+    "maxFrameMs": 13.799999999999272,
+    "over50ms": 0
+  },
+  "baselinePerformance": {
+    "firstTwoFramesMs": 36.39999997615814
+  }
+}

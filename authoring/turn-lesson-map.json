@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "id": "right-turn-hidden-cyclist",
+  "status": "runtime-implemented-pending-qualified-review",
+  "claimBoundary": "These are explicit candidate links between official objectives and the authored lesson. They do not establish legal correctness, instructional sufficiency, practical competence, instructor approval, or human learning.",
+  "source": {
+    "officialPlan": "Undervisningsplan for kategori B, version 1.1 (maj 2026)",
+    "planPdf": "reference/plan-b-v11-2026.pdf",
+    "trafficAct": "Færdselsloven, LBK nr. 118 af 12. januar 2026, § 26, stk. 6, 2. og 5. pkt.; jf. § 17, stk. 1, og § 16, stk. 2"
+  },
+  "runtime": {
+    "route": "#trafiklab",
+    "lessonFile": "dist/turn-lesson.js",
+    "stateFile": "dist/turn-learning.js",
+    "sceneFile": "dist/turn-scene.js",
+    "sourceConstant": "TURN_ANCHOR",
+    "stageContract": {
+      "risk": "Actual cyclist image-point selection, with an accessible text alternative, records the relevant cycle-track hazard.",
+      "decision": "Wrong turn/horn paths are recorded and repaired; the first decision remains preserved.",
+      "consequence": "Safe playback shows the cyclist clear before proceeding; unsafe playback stops before contact.",
+      "transfer": "Driveway transfer uses a different geometry and requires renewed observation and yielding.",
+      "contrast": "After transfer, the learner distinguishes safe proceed after a renewed check from always-wait or skip-check answers.",
+      "recall": "Typed free recall is shown back to the learner as an explicit self-report and is not independently scored.",
+      "completion": "The final table preserves first errors, repairs, transfer, and self-report separately from mastery."
+    },
+    "browserEvidence": [
+      "verified-bounded: evidence/turn-phone-risk.jpg (390px actual image point and accessible alternative)",
+      "verified-bounded: evidence/turn-phone-transfer.jpg (wrong path and transfer repair)",
+      "verified-bounded: evidence/turn-phone-contrast.jpg (cleared cyclist, renewed check, contrast choices)",
+      "verified-bounded: evidence/turn-phone-done.jpg (first-error table and explicit recall self-report)",
+      "verified-bounded: typed recall survives reload",
+      "recorded-in: docs/turn-validation.md",
+      "pending: qualified review, human efficacy, and full-suite release result"
+    ]
+  },
+  "objectives": [
+    {
+      "objectiveId": "7.13.3.5",
+      "role": "hidden rear-right cyclist hazard",
+      "ruleAction": "A cyclist can remain in the conflict path even when an obstacle or blind angle hides the cyclist.",
+      "explanationRefs": ["dist/turn-lesson.js: risk-feedback", "dist/turn-lesson.js: explain"],
+      "scenarioRefs": ["junction: observe/risk", "junction: decision"],
+      "facitRefs": ["risk answer cycle", "decision answer wait"],
+      "validationRefs": ["tests/turn-learning.test.mjs: no skipped observation", "tests/turn-scene.test.mjs: SAT7 geometry", "browser: evidence/turn-phone-risk.jpg", "browser: evidence/turn-phone-transfer.jpg"],
+      "qualifiedReview": "pending",
+      "humanEvidence": "none"
+    },
+    {
+      "objectiveId": "7.13.3.11",
+      "role": "right-turn conditions and cyclist placement",
+      "ruleAction": "Before turning right across the cycle track, establish the cyclist's position and the crossing path.",
+      "explanationRefs": ["dist/turn-lesson.js: decision", "dist/turn-lesson.js: explain"],
+      "scenarioRefs": ["junction: decision", "driveway: transfer"],
+      "facitRefs": ["decision answer wait", "transfer answer yield"],
+      "validationRefs": ["tests/turn-learning.test.mjs: correct sequence", "tests/turn-scene.test.mjs: SAT7 geometry", "browser: evidence/turn-phone-transfer.jpg", "browser: evidence/turn-phone-contrast.jpg"],
+      "qualifiedReview": "pending",
+      "humanEvidence": "none"
+    },
+    {
+      "objectiveId": "7.13.3.12",
+      "role": "mirror and blind-angle checks before positioning",
+      "ruleAction": "Check mirrors and the blind angle before positioning for the turn.",
+      "explanationRefs": ["dist/turn-lesson.js: explain", "dist/turn-learning.js: explain voice"],
+      "scenarioRefs": ["junction: observe shoulder view", "junction: risk"],
+      "facitRefs": ["risk answer cycle", "recall answer repeat"],
+      "validationRefs": ["tests/turn-learning.test.mjs: observation gate", "tests/turn-scene.test.mjs: SAT7 geometry", "browser: evidence/turn-phone-risk.jpg", "browser: accessible text alternative"],
+      "qualifiedReview": "pending",
+      "humanEvidence": "none"
+    },
+    {
+      "objectiveId": "7.13.3.19",
+      "role": "repeat rearward check before turning",
+      "ruleAction": "Repeat the rearward and blind-angle check immediately before crossing the cycle track.",
+      "explanationRefs": ["dist/turn-lesson.js: explain", "dist/turn-lesson.js: recall-check"],
+      "scenarioRefs": ["junction: consequence", "driveway: transfer"],
+      "facitRefs": ["decision answer wait", "recall-check answer repeat"],
+      "validationRefs": ["tests/turn-learning.test.mjs: free recall remains unscored", "tests/turn-scene.test.mjs: SAT7 geometry", "browser: evidence/turn-phone-contrast.jpg", "browser: evidence/turn-phone-done.jpg"],
+      "qualifiedReview": "pending",
+      "humanEvidence": "none"
+    },
+    {
+      "objectiveId": "7.13.3.21",
+      "role": "final blind-angle check before turning",
+      "ruleAction": "Do not treat a missing reflection as proof that the cycle track is clear; search again before turning.",
+      "explanationRefs": ["dist/turn-lesson.js: explain", "dist/turn-lesson.js: recall"],
+      "scenarioRefs": ["junction: risk-feedback", "review: transfer"],
+      "facitRefs": ["risk answer cycle", "recall-check answer repeat"],
+      "validationRefs": ["tests/turn-learning.test.mjs: repair preserves first answer", "tests/turn-scene.test.mjs: SAT7 geometry", "browser: evidence/turn-phone-contrast.jpg", "browser: typed recall survives reload"],
+      "qualifiedReview": "pending",
+      "humanEvidence": "none"
+    },
+    {
+      "objectiveId": "7.13.4.10",
+      "role": "yield to straight-ahead cyclist",
+      "ruleAction": "Hold back and let a cyclist continuing straight pass before completing the right turn.",
+      "explanationRefs": ["dist/turn-lesson.js: explain", "dist/turn-lesson.js: transfer-feedback"],
+      "scenarioRefs": ["junction: decision", "driveway: transfer", "review: transfer"],
+      "facitRefs": ["decision answer wait", "transfer answer yield"],
+      "validationRefs": ["tests/turn-learning.test.mjs: correct sequence", "tests/turn-scene.test.mjs: SAT7 geometry", "browser: evidence/turn-phone-transfer.jpg", "browser: evidence/turn-phone-contrast.jpg"],
+      "qualifiedReview": "pending",
+      "humanEvidence": "none"
+    },
+    {
+      "objectiveId": "7.13.4.11",
+      "role": "do not inconvenience cyclist continuing straight",
+      "ruleAction": "A right turn must not force a straight-ahead cyclist to brake, stop, or change line; wait until the crossing path is free.",
+      "explanationRefs": ["dist/turn-lesson.js: explain", "dist/turn-lesson.js: transfer-feedback"],
+      "scenarioRefs": ["junction: consequence", "driveway: transfer", "review: transfer"],
+      "facitRefs": ["decision answer wait", "transfer answer yield"],
+      "validationRefs": ["tests/turn-learning.test.mjs: repairs never overwrite first answers", "tests/turn-scene.test.mjs: SAT7 geometry", "browser: evidence/turn-phone-contrast.jpg", "browser: evidence/turn-phone-done.jpg"],
+      "qualifiedReview": "pending",
+      "humanEvidence": "none"
+    }
+  ]
+}

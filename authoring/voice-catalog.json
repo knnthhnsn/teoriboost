@@ -1,5 +1,5 @@
 {
-  "checked": "2026-10-12",
+  "checked": "2026-10-16",
   "entries": [
     {
       "key": "v1-0042ebbb92272a05",
@@ -1950,6 +1950,13 @@
       ]
     },
     {
+      "key": "v1-31b2aee869447a45",
+      "text": "Cyklisten kommer bagfra og fortsætter ligeud. Hvad gør du, før du drejer til højre?",
+      "uses": [
+        "turn-lab:decision"
+      ]
+    },
+    {
       "key": "v1-32079fec4df90f6d",
       "text": "Hvilke tre hovedtyper af karrosserikrav skal du kende?",
       "uses": [
@@ -1982,6 +1989,13 @@
       "text": "60 km/t er den højest tilladte hastighed fra tavlen.",
       "uses": [
         "question:q-060:initial:5"
+      ]
+    },
+    {
+      "key": "v1-32f6e12d0bf298d0",
+      "text": "Se tidligt i spejle og blind vinkel før placering, og gentag kontrollen lige før svinget. Når du drejer til højre, må du ikke være til fare eller ulempe for cyklister, der fortsætter ligeud.",
+      "uses": [
+        "turn-lab:explain"
       ]
     },
     {
@@ -2303,6 +2317,13 @@
       "text": "Trafiksanerede områder. I opholds- og legeområder kan gående og legende børn færdes på hele vejarealet, og motorkørsel sker på deres betingelser. Hastigheden skal normalt være under 15 km/t; føreren holder tilbage og fortsætter først, når de gående har set bilen og givet plads, og ingen kan komme farligt nær den. Parkering i opholds- og legeområde må kun ske på særligt afmærkede pladser. I gågade kræves særlig hensyn til gående; i cykelgade skal motorkørende vise særlig agtpågivenhed og må ikke unødigt hindre andre kørende. Bump, forsætninger og andre fartdæmpere kan kræve lavere fart end områdets angivne maksimum.",
       "uses": [
         "section:trafiksanering:1"
+      ]
+    },
+    {
+      "key": "v1-3cafe7dd9858fb56",
+      "text": "Du har gennemført situationen. En ny variant og en genkaldelse efter en uge kan vise mere om, hvad der bliver hængende.",
+      "uses": [
+        "turn-lab:done"
       ]
     },
     {
@@ -3202,6 +3223,13 @@
       ]
     },
     {
+      "key": "v1-51572c72ba006e49",
+      "text": "Hent reglen frem uden hjælp. Du har set i spejlet i god tid. Hvad skal du gøre lige før højresvinget? Skriv dit svar, eller sig det højt for dig selv, før du viser reglen.",
+      "uses": [
+        "turn-lab:recall"
+      ]
+    },
+    {
       "key": "v1-5194cad889ebdd94",
       "text": "Fortsæt til et sted med tilstrækkeligt udsyn og plads, og gennemfør kun vendingen efter ny orientering før hver bevægelse. Ved bakketoppen kan en trafikant dukke op sent, mens bilen spærrer flere retninger under vendingen.",
       "uses": [
@@ -3213,6 +3241,13 @@
       "text": "Papirerne kender bilens grænser. Din optimisme gør ikke.",
       "uses": [
         "garage:registreringsattest:hook:1"
+      ]
+    },
+    {
+      "key": "v1-51c2731c1f5ea500",
+      "text": "Nu er cyklisten allerede forbi svingstedet. Der er ingen andre trafikanter i nærheden. Du holder stille og har frit udsyn. Hvad gør du nu?",
+      "uses": [
+        "turn-lab:contrast"
       ]
     },
     {
@@ -3373,6 +3408,13 @@
       "text": "Tværbilens vognbane",
       "uses": [
         "judge:judge-yield:phase1:5"
+      ]
+    },
+    {
+      "key": "v1-586eceddaab8a555",
+      "text": "Ny situation. Du skal ind ad en indkørsel over en gennemgående cykelsti. En cyklist kommer bagfra. Hvad afgør, om du kan dreje?",
+      "uses": [
+        "turn-lab:transfer"
       ]
     },
     {
@@ -3708,6 +3750,13 @@
       "uses": [
         "judge:judge-pedestrian:phase2:6",
         "judge:judge-pedestrian:phase2-humor:6"
+      ]
+    },
+    {
+      "key": "v1-651f1168501148c5",
+      "text": "Følg den bane, du vil krydse. En cyklist kan nå fra bag bilen til siden. En tom vej foran bilen siger ikke, at cykelstien er fri.",
+      "uses": [
+        "turn-lab:riskExplain"
       ]
     },
     {
@@ -4357,6 +4406,13 @@
       ]
     },
     {
+      "key": "v1-7a5dbf81193dbee0",
+      "text": "Hvad skal du blive ved med at undersøge, mens du gør klar til at dreje? Tænk på, hvor bilen skal hen, og hvem der kan komme i vejen for svinget.",
+      "uses": [
+        "turn-lab:risk"
+      ]
+    },
+    {
       "key": "v1-7a616ed387f8abaa",
       "text": "Tegnet viser en hensigt, men kan være glemt eller ændret. Bedøm hele situationen.",
       "uses": [
@@ -4404,6 +4460,13 @@
       "text": "Læs forbrugsvisningen. I undervisningsbilen viser kørelæreren den eventuelle energivisning. Aflæs den før og efter rolige og ujævne hastighedsændringer under lovlig undervisning, og forklar hvordan køremåden påvirker visningen. Biltypecheck. Afgør sammen med kørelæreren, om bilen er forbrændingsbil, hybrid, plug-in-hybrid eller elbil, og peg på de relevante stop-, lade- eller regenerationsfunktioner. Funktionerne afhænger af bilen.",
       "uses": [
         "garage:energi-og-miljo:practical:1"
+      ]
+    },
+    {
+      "key": "v1-7bf0fc0c6ebd6d68",
+      "text": "Jeres baner krydser hinanden. Blinklyset giver dig ikke ret til at køre foran cyklisten. Hold tilbage, orientér dig igen, og lad cyklisten passere.",
+      "uses": [
+        "turn-lab:unsafe"
       ]
     },
     {
@@ -4517,6 +4580,13 @@
       "text": "Fordi andre trafikanter kan komme ind i området, mens bilen skifter retning og holder stille.",
       "uses": [
         "lesson:vending:recall-answer:1"
+      ]
+    },
+    {
+      "key": "v1-7e5e3145ca8a97dd",
+      "text": "Du holder tilbage. Cyklisten passerer først. Orientér dig igen, og drej først, når det er frit.",
+      "uses": [
+        "turn-lab:safe"
       ]
     },
     {
@@ -4745,6 +4815,13 @@
       "text": "Vognbanens placering",
       "uses": [
         "judge:judge-stop:phase1:5"
+      ]
+    },
+    {
+      "key": "v1-8534d168e203aa2d",
+      "text": "Du skal give plads, når der er nogen at give plads til. Når du har orienteret dig igen og sikret dig, at svinget er frit, kan du dreje. Reglen betyder ikke, at du altid skal vente.",
+      "uses": [
+        "turn-lab:contrastExplain"
       ]
     },
     {
@@ -5202,6 +5279,13 @@
       "text": "Find et sikkert og lovligt sted at standse, og fortsæt ikke, medmindre du igen kan køre fuldt betryggende. De gentagne svigt viser, at vigtig information ikke bliver bearbejdet; at presse videre kan gøre næste oversete forhold farligt.",
       "uses": [
         "lesson:traet-medicin:answer:1"
+      ]
+    },
+    {
+      "key": "v1-912edac3b4b568ef",
+      "text": "Du vil dreje til højre. Bilen holder stille. Undersøg højresiden, før du vælger din handling.",
+      "uses": [
+        "turn-lab:observe"
       ]
     },
     {
@@ -6951,6 +7035,13 @@
       ]
     },
     {
+      "key": "v1-b99789cb8b73ad84",
+      "text": "Bilen skal over cyklistens bane. Fri vej for bilen eller et tændt blinklys giver ikke forrang over cyklisten. Orientér dig, hold tilbage, og drej først, når det er frit.",
+      "uses": [
+        "turn-lab:transferExplain"
+      ]
+    },
+    {
       "key": "v1-ba86298c25b58349",
       "text": "Stiger om nødvendigt ud og skaber overblik.",
       "uses": [
@@ -7098,6 +7189,13 @@
       "text": "Sænk farten, skab afstand til bussen og vær klar til at standse for en person, der kommer frem foran den. Den brede vej ændrer ikke, at bussen skjuler gående, som kan nå kørebanen med meget kort varsel.",
       "uses": [
         "lesson:vejmiljoe:answer:1"
+      ]
+    },
+    {
+      "key": "v1-be31da3dcf2bb84a",
+      "text": "En ny situation efter en uge. Du vil til højre i et T-kryds. Cyklisten på højresiden fortsætter ligeud. Hvad afgør, om du kan dreje?",
+      "uses": [
+        "turn-lab:review"
       ]
     },
     {
@@ -8172,6 +8270,13 @@
       ]
     },
     {
+      "key": "v1-e0fcd02f464fd776",
+      "text": "Tag handlingen én gang mere. En cyklist kan nå fra bag bilen til siden, mens du nærmer dig svinget. Se tidligt i spejle og blind vinkel, og gentag orienteringen lige før svinget. Hent derefter dit eget svar frem igen.",
+      "uses": [
+        "turn-lab:recallRepair"
+      ]
+    },
+    {
       "key": "v1-e13e99fc2387e431",
       "text": "Kører blindt over for rødt ind mellem fodgængerne.",
       "uses": [
@@ -8898,6 +9003,13 @@
       ]
     },
     {
+      "key": "v1-f3efe9e60b485d0f",
+      "text": "Dit selvtjek er gemt. En cyklist kan nå fra bag bilen til siden, mens du nærmer dig svinget. Se tidligt i spejle og blind vinkel, og gentag orienteringen lige før svinget. Gem nu dit forløb.",
+      "uses": [
+        "turn-lab:recallSaved"
+      ]
+    },
+    {
       "key": "v1-f3f592ab7043208f",
       "text": "Hvad gælder præcis kl. 20.00? En 17-årig kører alene i Danmark og holder lovligt ind kl. 19.59. Personen vil fortsætte kl. 20.00 uden ledsager.",
       "uses": [
@@ -9340,6 +9452,13 @@
       "text": "Behandler tavlen som B 11 uden stoppligt.",
       "uses": [
         "question:q-059:initial:5"
+      ]
+    },
+    {
+      "key": "v1-aaf6ec4d3185c42a",
+      "text": "Sammenlign med dit eget svar. Første punkt: Gentag orienteringen i spejle og blind vinkel lige før svinget. Andet punkt: Hold tilbage for cyklisten, og drej først, når det er frit. Vurder selv, om begge punkter var med. Ingen AI bedømmer dit svar.",
+      "uses": [
+        "turn-lab:recallCheck"
       ]
     }
   ]
