@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Natkørsel redesign · checkpoint 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;800&family=Rubik:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F3EE; --surface:#FFFFFF; --ink:#1C1B22; --muted:#5E5B68; --line:#E3DED5; --accent:#3D3AD6;
+  --good:#12805C; --warn:#B4231F;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Figtree,system-ui,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header.top{padding:56px 0 28px}
+.kicker{font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:800 clamp(34px,6vw,64px)/1.02 "Bricolage Grotesque",sans-serif;margin:8px 0 14px;letter-spacing:-.02em}
+h2{font:800 clamp(26px,3.6vw,38px)/1.1 "Bricolage Grotesque",sans-serif;margin:0 0 8px;letter-spacing:-.01em}
+h3{font:800 20px/1.25 Figtree,sans-serif;margin:0 0 6px}
+.lede{font-size:19px;max-width:760px;color:#34323C}
+section{padding:44px 0;border-top:1px solid var(--line)}
+.sub{color:var(--muted);max-width:760px;margin:0 0 24px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+.stat b{display:block;font:800 34px/1 "Bricolage Grotesque",sans-serif;margin-bottom:6px}
+.stat.bad b{color:var(--warn)} .stat.ok b{color:var(--good)}
+.stat span{color:var(--muted);font-size:14px}
+ul.tight{margin:6px 0 0;padding-left:20px} ul.tight li{margin:4px 0}
+.shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px}
+.shots figure{margin:0;flex:0 0 auto}
+.shots img{height:420px;border-radius:14px;border:1px solid var(--line);display:block}
+.shots figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:18px;overflow:hidden;border:1px solid var(--line);font-size:15px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:#FBFAF7}
+tr:last-child td{border-bottom:0}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:#EEECFB;color:#2F2CA8;white-space:nowrap}
+.tag.k{background:#F1EFE9;color:#5E5B68}
+.table-scroll{overflow-x:auto;border-radius:18px}
+/* character directions */
+.dir{background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;margin-bottom:22px}
+.dir-head{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:0}
+.hero{display:grid;place-items:center;padding:24px;min-height:340px}
+.hero svg{width:min(280px,100%);height:auto}
+.dir-body{padding:26px 28px}
+.dir-letter{font:800 15px/1 Figtree;letter-spacing:.08em;color:var(--muted)}
+.dir-body h2{margin-top:6px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.swatch{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:4px 10px 4px 4px;border-radius:99px;background:#F4F2EE}
+.swatch i{width:22px;height:22px;border-radius:50%;display:block;border:1px solid rgba(0,0,0,.08)}
+.expr{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+.expr figure{margin:0;padding:14px 8px 12px;text-align:center;border-right:1px solid var(--line)}
+.expr figure:last-child{border-right:0}
+.expr svg{width:100%;max-width:120px;height:auto}
+.expr figcaption{font-size:13px;font-weight:600;color:var(--muted)}
+.foot{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line)}
+.foot>div{padding:16px 20px;border-right:1px solid var(--line);font-size:15px}
+.foot>div:last-child{border-right:0}
+.foot h4{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.sil{display:flex;gap:10px;align-items:flex-end}
+.sil svg{height:64px;width:auto;filter:brightness(0)}
+.cast{display:flex;gap:6px;align-items:flex-end;flex-wrap:wrap}
+.cast svg{height:84px;width:auto}
+@media (max-width:760px){
+  .dir-head{grid-template-columns:1fr}
+  .expr{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .expr figure:nth-child(3){border-right:0}
+  .expr figure:nth-child(n+4){border-top:1px solid var(--line)}
+  .foot{grid-template-columns:1fr}
+  .foot>div{border-right:0;border-bottom:1px solid var(--line)}
+  .shots img{height:340px}
+}
+/* phones */
+.ui-dir{margin-bottom:34px}
+.ui-meta{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;margin-bottom:18px}
+.ui-meta .card{flex:1 1 300px}
+.phones{display:flex;gap:22px;flex-wrap:wrap;justify-content:flex-start}
+.phone{width:300px;height:640px;border-radius:40px;padding:10px;background:#111;box-shadow:0 20px 40px -20px rgba(0,0,0,.35);flex:0 0 auto}
+.screen{width:100%;height:100%;border-radius:31px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.phone-cap{font-size:13px;font-weight:600;color:var(--muted);margin-top:10px;text-align:center}
+
+/* UI 1 — Varm nat */
+.n{--n-bg:#15132B;--n-s1:#211E40;--n-s2:#2C2852;--n-ink:#F5F2FF;--n-mut:#B9B3D9;--n-amber:#FFB547;--n-amber-ink:#2A1A00;--n-mint:#55E0AE;--n-coral:#FF7E6B;
+  background:var(--n-bg);color:var(--n-ink);font-family:"Atkinson Hyperlegible",sans-serif}
+.n .disp{font-family:Rubik,sans-serif;font-weight:800;letter-spacing:-.01em}
+.n .bar{display:flex;align-items:center;gap:10px;padding:18px 18px 8px}
+.n .x{width:28px;height:28px;border-radius:50%;background:var(--n-s1);display:grid;place-items:center;color:var(--n-mut);font-size:15px}
+.n .prog{flex:1;height:10px;border-radius:99px;background:var(--n-s2);overflow:hidden}
+.n .prog i{display:block;height:100%;width:58%;background:var(--n-amber);border-radius:99px}
+.n .cond{margin:6px 16px 10px;padding:12px 14px;border-radius:16px;background:var(--n-s1);font-size:14px;line-height:1.45}
+.n .cond b{color:var(--n-amber)}
+.n .img{margin:0 16px;border-radius:16px;overflow:hidden;height:150px;background:#333 center/cover}
+.n .q{margin:12px 16px 6px;font-size:18px;line-height:1.25}
+.n .st{margin:0 16px 8px;padding:10px 12px;border-radius:14px;background:var(--n-s1);display:flex;align-items:center;gap:10px;font-size:14px}
+.n .st span{flex:1}
+.n .yn{display:flex;gap:6px}
+.n .yn b{font:700 13px Rubik;padding:7px 10px;border-radius:10px;background:var(--n-s2);color:var(--n-mut)}
+.n .yn b.on{background:var(--n-amber);color:var(--n-amber-ink)}
+.n .cta{margin:auto 16px 18px;padding:14px;border-radius:16px;background:var(--n-amber);color:var(--n-amber-ink);text-align:center;font:800 16px Rubik;box-shadow:0 4px 0 #C98318}
+.n .sheet{margin-top:auto;background:var(--n-s1);border-radius:24px 24px 0 0;padding:16px 16px 18px;border-top:3px solid var(--n-coral)}
+.n .sheet h5{margin:0 0 4px;font:800 18px Rubik;color:var(--n-coral)}
+.n .sheet p{margin:0 0 12px;font-size:14px;line-height:1.45;color:var(--n-ink)}
+.n .sheet .row{display:flex;gap:10px;align-items:flex-end}
+.n .sheet .row svg{width:76px;height:auto;flex:0 0 auto}
+.n .sheet .cta{margin:0;background:var(--n-coral);box-shadow:0 4px 0 #B84A3B;color:#2B0C07}
+.n .home-top{padding:22px 18px 6px;display:flex;justify-content:space-between;align-items:center}
+.n .chip{font:700 13px Rubik;padding:6px 10px;border-radius:99px;background:var(--n-s1)}
+.n .chip.a{color:var(--n-amber)}
+.n .hello{padding:2px 18px 0;display:flex;gap:10px;align-items:flex-end}
+.n .hello svg{width:96px;height:auto;flex:0 0 auto}
+.n .bubble{background:var(--n-s1);padding:10px 12px;border-radius:16px 16px 16px 4px;font-size:14px;margin-bottom:22px}
+.n .ready{margin:12px 16px;padding:14px;border-radius:18px;background:var(--n-s1);display:flex;gap:14px;align-items:center}
+.n .ring{width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--n-mint) 0 34%,var(--n-s2) 0);display:grid;place-items:center;flex:0 0 auto}
+.n .ring b{width:48px;height:48px;border-radius:50%;background:var(--n-s1);display:grid;place-items:center;font:800 15px Rubik}
+.n .ready small{color:var(--n-mut);display:block;font-size:13px}
+.n .path{margin:4px 16px;display:flex;flex-direction:column;gap:10px}
+.n .node{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;background:var(--n-s1);font-size:14px}
+.n .node i{width:34px;height:34px;border-radius:50%;background:var(--n-s2);display:grid;place-items:center;font-style:normal;font:700 13px Rubik;color:var(--n-mut);flex:0 0 auto}
+.n .node.done i{background:var(--n-mint);color:#06281C}
+.n .node.now{outline:2px solid var(--n-amber)} .n .node.now i{background:var(--n-amber);color:var(--n-amber-ink)}
+.n .node small{display:block;color:var(--n-mut);font-size:12px}
+.n .tabs{margin-top:auto;display:flex;justify-content:space-around;padding:10px 6px 14px;background:var(--n-s1);font:600 11px "Atkinson Hyperlegible";color:var(--n-mut)}
+.n .tabs span.on{color:var(--n-amber)}
+
+/* UI 2 — Dagkørsel */
+.d{--d-bg:#FFF8EC;--d-s1:#FFFFFF;--d-ink:#1B1F3B;--d-mut:#5A5F7A;--d-line:#E9E1D2;--d-blue:#1F5FBF;--d-blue-d:#123F86;--d-yel:#FFD23F;--d-red:#E63946;--d-green:#1E9E6A;
+  background:var(--d-bg);color:var(--d-ink);font-family:Figtree,sans-serif}
+.d .disp{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;letter-spacing:-.015em}
+.d .bar{display:flex;align-items:center;gap:10px;padding:18px 18px 8px}
+.d .x{width:28px;height:28px;border-radius:50%;border:2px solid var(--d-line);display:grid;place-items:center;color:var(--d-mut);font-size:15px}
+.d .prog{flex:1;height:12px;border-radius:99px;background:#EFE6D4;overflow:hidden}
+.d .prog i{display:block;height:100%;width:58%;background:var(--d-blue);border-radius:99px}
+.d .cond{margin:6px 16px 10px;padding:12px 14px;border-radius:16px;background:#FFF1C7;font-size:14px;line-height:1.45;border:2px solid #F3DE9B}
+.d .img{margin:0 16px;border-radius:16px;overflow:hidden;height:150px;background:#333 center/cover;border:2px solid var(--d-line)}
+.d .q{margin:12px 16px 6px;font-size:19px;line-height:1.2}
+.d .st{margin:0 16px 8px;padding:9px 10px 9px 12px;border-radius:14px;background:var(--d-s1);border:2px solid var(--d-line);display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+.d .st span{flex:1}
+.d .yn{display:flex;gap:6px}
+.d .yn b{font:800 13px Figtree;padding:6px 10px;border-radius:10px;border:2px solid var(--d-line);border-bottom-width:4px;color:var(--d-mut);background:#fff}
+.d .yn b.on{border-color:var(--d-blue);background:#E6EEFB;color:var(--d-blue)}
+.d .cta{margin:auto 16px 18px;padding:13px;border-radius:16px;background:var(--d-blue);color:#fff;text-align:center;font:800 16px Figtree;box-shadow:0 5px 0 var(--d-blue-d)}
+.d .sheet{margin-top:auto;background:#E8F7EF;border-radius:24px 24px 0 0;padding:16px 16px 18px}
+.d .sheet h5{margin:0 0 4px;font:800 19px "Bricolage Grotesque";color:#0F6B47}
+.d .sheet p{margin:0 0 12px;font-size:14px;line-height:1.45}
+.d .sheet .row{display:flex;gap:10px;align-items:flex-end}
+.d .sheet .row svg{width:70px;height:auto;flex:0 0 auto}
+.d .sheet .cta{margin:0;background:var(--d-green);box-shadow:0 5px 0 #11704A}
+.d .home-top{padding:22px 18px 6px;display:flex;justify-content:space-between;align-items:center}
+.d .chip{font:800 13px Figtree;padding:6px 10px;border-radius:99px;background:#fff;border:2px solid var(--d-line)}
+.d .chip.y{background:var(--d-yel);border-color:#E6B800}
+.d .hello{padding:2px 18px 0;display:flex;gap:10px;align-items:flex-end}
+.d .hello svg{width:92px;height:auto;flex:0 0 auto}
+.d .bubble{background:#fff;border:2px solid var(--d-line);padding:10px 12px;border-radius:16px 16px 16px 4px;font-size:14px;font-weight:500;margin-bottom:22px}
+.d .ready{margin:12px 16px;padding:14px;border-radius:18px;background:var(--d-blue);color:#fff;display:flex;gap:14px;align-items:center}
+.d .ring{width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--d-yel) 0 34%,rgba(255,255,255,.25) 0);display:grid;place-items:center;flex:0 0 auto}
+.d .ring b{width:48px;height:48px;border-radius:50%;background:var(--d-blue);display:grid;place-items:center;font:800 15px Figtree}
+.d .ready small{opacity:.85;display:block;font-size:13px}
+.d .path{margin:4px 16px;display:flex;flex-direction:column;gap:10px}
+.d .node{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;background:#fff;border:2px solid var(--d-line);font-size:14px;font-weight:600}
+.d .node i{width:34px;height:34px;border-radius:50%;background:#EFE6D4;display:grid;place-items:center;font:800 13px Figtree;font-style:normal;color:var(--d-mut);flex:0 0 auto}
+.d .node.done i{background:var(--d-green);color:#fff}
+.d .node.now{border-color:var(--d-blue);border-bottom-width:4px} .d .node.now i{background:var(--d-blue);color:#fff}
+.d .node small{display:block;color:var(--d-mut);font-size:12px;font-weight:500}
+.d .tabs{margin-top:auto;display:flex;justify-content:space-around;padding:10px 6px 14px;background:#fff;border-top:2px solid var(--d-line);font:700 11px Figtree;color:var(--d-mut)}
+.d .tabs span.on{color:var(--d-blue)}
+
+.ask{background:var(--ink);color:#fff;border-radius:24px;padding:28px}
+.ask h2{color:#fff}
+.ask ol{margin:10px 0 0;padding-left:22px} .ask li{margin:8px 0}
+.ask code{background:rgba(255,255,255,.12);padding:1px 6px;border-radius:6px}
+footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="kicker">Natkørsel · redesign · checkpoint 1 · 19. oktober 2026</div>
+  <h1>Fra “tech-demo om natten” til en ven, der får dig gennem teoriprøven.</h1>
+  <p class="lede">Audit, research, tre karakterretninger og to UI-retninger. Du vælger én karakter og én UI-retning (eller et mix), så bygger jeg resten.</p>
+</header>
+
+<!-- 1. AUDIT -->
+<section id="audit">
+  <h2>1 · Audit med evidens</h2>
+  <p class="sub">Hele appen er kørt lokalt og fotograferet på 14 skærme × 5 bredder (320–1440 px), med axe ved 390 px og Lighthouse på mobil. Rådata ligger i <code>docs/redesign/audit/</code>.</p>
+  <div class="grid g4">
+    <div class="card stat bad"><b>56</b><span>Lighthouse-performance, mobil (forside og prøve)</span></div>
+    <div class="card stat bad"><b>20,7 s</b><span>LCP på forsiden, mobil. Første indhold efter 9,4 s</span></div>
+    <div class="card stat bad"><b>6–8 px</b><span>mindste tekst (mono-etiketter) på 9 af 14 skærme</span></div>
+    <div class="card stat bad"><b>12+</b><span>indgange: rute, missioner, atlas, garage, Trafiklab, dommer, kørsel, pitstop, prøve …</span></div>
+    <div class="card stat ok"><b>0</b><span>vandret overflow på alle 70 skærmbilleder</span></div>
+    <div class="card stat ok"><b>3</b><span>axe-fund i alt (1 kontrast, 1 aria, 1 overskrift). Fundamentet er sundt</span></div>
+    <div class="card stat ok"><b>96–100</b><span>Lighthouse-tilgængelighed</span></div>
+    <div class="card stat bad"><b>0</b><span>lys visning. Appen findes kun i mørk</span></div>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h3>Test af vores antagelse: “problemet er det visuelle”</h3>
+      <p>Kun delvist. Det visuelle er generisk (mørk navy, syregrøn, mono-mikroetiketter, kondenseret display-font, AI-hjerne med sneakers). Men tre ting vejer mindst lige så tungt:</p>
+      <ul class="tight">
+        <li><b>Ingen rød tråd.</b> Forsiden har 6 konkurrerende handlinger, og missionssiden er 3.100 px høj. Eleven ved ikke, hvad “i dag” er.</li>
+        <li><b>Langsom start.</b> Three.js (600 KB) og TTF-fonte loades på alle sider. Målet om første svar inden for 30 s er umuligt med LCP på 20 s.</li>
+        <li><b>Intet mål at styre efter.</b> Der er XP og streak, men intet svar på “er jeg klar til prøven?”</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Det, der skal bevares</h3>
+      <ul class="tight">
+        <li>83 spørgsmål / 332 udsagn, 58 mikrolektioner, garagen: kildebelagt og reviewet.</li>
+        <li>Øveprøvelogikken (25 situationer, 25 min, ≤ 5 fejl, flag, genoptagelse) er rigtig god.</li>
+        <li>81 situationsbilleder, billedviser med zoom, 1.235 klip dansk oplæsning.</li>
+        <li>Ærlig tone om hvad appen er og ikke er. Gentagelseskø, ingen fart-point.</li>
+      </ul>
+      <p style="margin-bottom:0"><b>Konklusion:</b> nyt skin, ny karakter, ny informationsarkitektur og hurtigere start. Indhold og logik bliver.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:26px">Nuværende skærme (390 px)</h3>
+  <div class="shots">
+    <figure><img src="audit/home-390.png" alt="Nuværende forside, 390 px" loading="lazy"><figcaption>Forside</figcaption></figure>
+    <figure><img src="audit/missions-390.png" alt="Nuværende missionsside" loading="lazy"><figcaption>Missioner</figcaption></figure>
+    <figure><img src="audit/exam-question-390.png" alt="Nuværende prøvespørgsmål" loading="lazy"><figcaption>Øveprøve, spørgsmål</figcaption></figure>
+    <figure><img src="audit/theory-390.png" alt="Nuværende teoriatlas" loading="lazy"><figcaption>Atlas</figcaption></figure>
+    <figure><img src="audit/garage-390.png" alt="Nuværende garage" loading="lazy"><figcaption>Garagen</figcaption></figure>
+    <figure><img src="audit/pitstop-390.png" alt="Nuværende pitstop" loading="lazy"><figcaption>Pitstop (6 px tekst)</figcaption></figure>
+  </div>
+</section>
+
+<!-- 2. STEP 0 -->
+<section id="step0">
+  <h2>2 · Trin 0: dybere, ikke større</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Hvad ville et verdensklasse-team gøre, som ikke stod i briefen?</h3>
+      <ul class="tight">
+        <li><b>Én daglig løkke</b> i stedet for 12 indgange: Fortsæt → lektion → gentagelse → mini-prøve. Alt andet ligger i Atlas.</li>
+        <li><b>“Prøveklar”-score pr. emne</b> som nordstjerne i stedet for XP, og senere kalibreret mod øveprøver.</li>
+        <li><b>Karakteren har et job:</b> den forklarer <i>hvorfor</i> efter hvert svar og beroliger før prøven. Den er ikke pynt.</li>
+        <li><b>Prøvedato i onboarding</b>, så planen tæller ned mod den rigtige dag.</li>
+        <li><b>Performance som feature:</b> 3D kun på de sider, der bruger det, woff2-fonte, billeder i rette størrelse.</li>
+        <li><b>Dag- og nat-visning</b>, med navnet Natkørsel som en historie og ikke som et mørkt tema.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Råmateriale, metoder og ydre dommere</h3>
+      <ul class="tight">
+        <li><b>Råkilder:</b> BEK 731/2026, Undervisningsplan kat. B v1.1 (PDF ligger i <code>reference/</code>), prøveformat 25 situationer · 25 min · højst 5 fejl (<a href="../research/danish-theory.md">danish-theory.md</a>, kilder fra maj–aug. 2026; tjekkes igen før lancering).</li>
+        <li><b>Mangler:</b> rigtige fejldata fra elever. Det kræver piloten i <a href="../learner-pilot.md">learner-pilot.md</a>; ingen er kontaktet.</li>
+        <li><b>Metoder:</b> silhuettest, udtryksark, Rive-state machine med krop og mund som to lag, spaced repetition, 5-sekunders-test.</li>
+        <li><b>Ydre dommere (sat op):</b> Playwright-screenshots i 5 bredder, axe og Lighthouse som script (<code>docs/redesign/audit.mjs</code>), som køres igen efter hver ændring.</li>
+        <li><b>Ydre dommere (senere):</b> skjulte spørgsmål til at kalibrere prøveklar-scoren, en kørelærers review og 5–8 rigtige elever (genkaldelse dag 1 og dag 7).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. RESEARCH -->
+<section id="research">
+  <h2>3 · Research: principper, ikke kopier</h2>
+  <p class="sub"><span class="tag">kilde læst</span> betyder, at primærkilden er læst i denne runde. <span class="tag k">produktkendskab</span> betyder, at punktet bygger på kendskab til produktet og skal efterprøves hands-on.</p>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Reference</th><th>Tag dette princip</th><th>Undgå</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://blog.duolingo.com/shape-language-duolingos-art-style/">Duolingo: shape language</a><br><span class="tag">kilde læst</span></td><td>Få primitive former, færrest mulige detaljer, tydelig silhuet, overdriv det vigtigste træk. Humor skal sænke frygten for at fejle.</td><td>Den grønne, chunky Duo-æstetik én-til-én. Uklare billeder, for i en læringsapp bliver vores fejl elevens fejl.</td></tr>
+      <tr><td><a href="https://blog.duolingo.com/world-character-visemes">Duolingo: visemes og Rive</a><br><span class="tag">kilde læst</span></td><td>Rive-state machine med to lag (krop og mund). Reagerer på elevens handlinger i realtid og fylder meget lidt.</td><td>Mundsynk på alle 1.235 klip i første version. Det kommer senere.</td></tr>
+      <tr><td><a href="https://rive.app/blog/duolingo-s-ai-powered-video-call-brings-lily-to-life">Rive: Lily</a><br><span class="tag k">produktkendskab</span></td><td>Personlighed gennem tilbageholdenhed. En karakter med attitude virker stærkere end én, der altid er glad.</td><td>Karakterer uden kant, som kun klapper.</td></tr>
+      <tr><td><a href="https://www.tolans.com/relay/designing-tolan-part-1-characters">Tolan: designing characters</a><br><span class="tag">kilde læst</span></td><td>En præmis, der undskylder fejl (et væsen, der er nyt her). “Aged-up cute” for teens og voksne. Mød en færdig figur først, og tilpas den bagefter.</td><td>Tolans rumvæsen-look og 3D-stil. Den tilhører Hilleli og Zanotto.</td></tr>
+      <tr><td><a href="https://dmcg.co/projects/tolan">Tolan: brand (DMCG)</a><br><span class="tag">kilde læst</span></td><td>Rolig, dæmpet UI, så karakteren står frem. Karakteren interagerer med UI (sidder på progressbaren, kigger frem bag kort). Én tung, afrundet skrift.</td><td>Kaotisk karakterenergi i selve prøveflowet.</td></tr>
+      <tr><td><a href="https://ixd.prattsi.org/2025/09/design-critique-finch-ios-app-2/">Finch: design critique</a><br><span class="tag">kilde læst</span></td><td>Omsorgsløkke knyttet til rigtige mål. Energien stiger synligt, når man gør noget.</td><td>Mange tilpasningsvalg i onboarding. Skyld, når man udebliver.</td></tr>
+      <tr><td><a href="https://www.headspace.com">Headspace</a><br><span class="tag k">produktkendskab</span></td><td>Bløde figurer, langsom bevægelse og varm palette til nervøsitet. Oplagt til prøvenerver og dagen før prøven.</td><td>Velvære-sprog, der udvander fagligheden.</td></tr>
+      <tr><td><a href="https://www.pokemon.com/us/app/pokemon-sleep">Pokémon Sleep</a><br><span class="tag k">produktkendskab</span></td><td>Fremgang som opdagelse og samling, fx “du har mødt 7 af 10 vejtyper”.</td><td>Gacha og tilfældige belønninger.</td></tr>
+      <tr><td><a href="https://brilliant.org">Brilliant</a><br><span class="tag k">produktkendskab</span></td><td>Problemet først, forklaringen bagefter. Lys, rolig UI med stærke illustrationer. Passer til “se situationen → vælg”.</td><td>Lange tekstlektioner.</td></tr>
+      <tr><td><a href="https://www.speak.com">Speak</a><br><span class="tag k">produktkendskab</span></td><td>Selvtillid som produkt. Feedback er glidende og aldrig dømmende.</td><td>Abonnementsmur før værdi.</td></tr>
+      <tr><td><a href="https://learn.khanacademy.org/khan-academy-kids/">Khan Academy Kids</a><br><span class="tag k">produktkendskab</span></td><td>Et cast, hvor hver karakter har en rolle (guide, nørd, nybegynder).</td><td>For barnlige proportioner, da målgruppen er 17+.</td></tr>
+      <tr><td><a href="https://www.forestapp.cc">Forest</a><br><span class="tag k">produktkendskab</span></td><td>Én enkel metafor for fokus, som kan forstås på et sekund.</td><td>Straf (træet dør) ved fravær.</td></tr>
+      <tr><td><a href="https://discord.com/branding">Discord: Wumpus</a><br><span class="tag k">produktkendskab</span></td><td>Maskot i tomme tilstande og fejlsider, så pauser og fejl bliver venlige.</td><td>Maskot overalt.</td></tr>
+      <tr><td><a href="https://mailchimp.com/about/brand-assets/">Mailchimp: Freddie</a><br><span class="tag k">produktkendskab</span></td><td>Maskot som et blink og en high-five i succesøjeblikke. Den står aldrig i vejen for arbejdet.</td><td>Jokes midt i alvorlige forklaringer.</td></tr>
+      <tr><td><a href="https://mobbin.com">Mobbin</a><br><span class="tag k">bibliotek</span></td><td>Reelle onboarding-, quiz- og feedbackflows at sammenligne mod, når skærmene bygges.</td><td>At kopiere skærme direkte.</td></tr>
+      <tr><td><a href="../research/competitors.md">Danske konkurrenter</a> (Teoriklar, TeoriTjek, KørekortKlar, Zutobi …)<br><span class="tag">kilde læst</span> (tidligere runde)</td><td>Forklaring efter svar, tydelig progression og separat prøveforløb er standard. Karakter og varme er det, ingen af dem har.</td><td>Generisk quiz-UI i blå og hvid.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 4. CHARACTERS -->
+<section id="karakterer">
+  <h2>4 · Tre karakterretninger</h2>
+  <p class="sub">Alle tre er originale skitser tegnet i SVG ud fra de samme regler: få primitive former, læsbar ved 32 px, virker på lys og mørk baggrund, og klar til Rive-rig. Udtrykkene svarer til appens rigtige hændelser. De fem viste er tomgang, korrekt, forkert (opmuntrende), prøvenerver og bestået. Udtryksarket får også tænker, streak, level-up og savnet-en-dag, når retningen er valgt.</p>
+
+  <div class="dir" id="dirA">
+    <div class="dir-head">
+      <div class="hero" style="background:radial-gradient(circle at 50% 45%,#2C2852 0,#15132B 70%)"><svg data-char="A" data-expr="idle" viewBox="0 0 200 220"></svg></div>
+      <div class="dir-body">
+        <div class="dir-letter">RETNING A · CAST: 1 + 2</div>
+        <h2>Glim, natlyset</h2>
+        <p><b>Personlighed:</b> rolig, nysgerrig og lidt tør. Glim lyser op, når du ser det rigtige, og dæmpes, når du overser noget.</p>
+        <p><b>Baggrund:</b> Glim boede i en gadelygte på en landevej og har set tusind bilister lave de samme fejl. Nu vil den have dig til at være den første, der ikke gør.</p>
+        <p><b>Hvorfor det passer:</b> navnet <i>Natkørsel</i> bliver en historie. Lys er lig med opmærksomhed, og antennerne er forlygter. Prøveklar-scoren kan vises som Glims lysstyrke.</p>
+        <div class="pill-row">
+          <span class="swatch"><i style="background:#5B55E0"></i>Natblå #5B55E0</span>
+          <span class="swatch"><i style="background:#FFC857"></i>Lygte-rav #FFC857</span>
+          <span class="swatch"><i style="background:#55E0AE"></i>Grønt lys #55E0AE</span>
+        </div>
+        <p style="margin:0"><b>Støttecast:</b> Blink (en nervøs blinklys-unge) og Refleks (en reflekvest-nørd, der elsker paragraffer).</p>
+      </div>
+    </div>
+    <div class="expr">
+      <figure><svg data-char="A" data-expr="idle" viewBox="0 0 200 220"></svg><figcaption>Tomgang</figcaption></figure>
+      <figure><svg data-char="A" data-expr="correct" viewBox="0 0 200 220"></svg><figcaption>Korrekt</figcaption></figure>
+      <figure><svg data-char="A" data-expr="wrong" viewBox="0 0 200 220"></svg><figcaption>Forkert, opmuntrende</figcaption></figure>
+      <figure><svg data-char="A" data-expr="nervous" viewBox="0 0 200 220"></svg><figcaption>Prøvenerver</figcaption></figure>
+      <figure><svg data-char="A" data-expr="passed" viewBox="0 0 200 220"></svg><figcaption>Bestået</figcaption></figure>
+    </div>
+    <div class="foot">
+      <div><h4>Silhuettest</h4><div class="sil"><svg data-char="A" data-expr="idle" viewBox="0 0 200 220"></svg><svg data-char="A" data-expr="correct" viewBox="0 0 200 220"></svg></div></div>
+      <div><h4>Styrke</h4>Stærkest kobling til brandet og Tolan-varme. Ét enkelt træk (glødende antenner) gør den genkendelig.</div>
+      <div><h4>Risiko</h4>Kan blive “sød lampe” uden kant. Den tørre humor skal bære personligheden.</div>
+    </div>
+  </div>
+
+  <div class="dir" id="dirB">
+    <div class="dir-head">
+      <div class="hero" style="background:#FFF8EC"><svg data-char="B" data-expr="idle" viewBox="0 0 200 220"></svg></div>
+      <div class="dir-body">
+        <div class="dir-letter">RETNING B · CAST: 1 + 3</div>
+        <h2>Skiltebanden</h2>
+        <p><b>Personlighed:</b> hovedpersonen Vig er høflig, overforsigtig og hjertevarm. Den siger altid “du først”. Stop er den strenge, men retfærdige træner. Rund er regelnørden, og Info er den chill guide.</p>
+        <p><b>Baggrund:</b> skiltene er trætte af at blive overset og har startet deres egen køreskole.</p>
+        <p><b>Hvorfor det passer:</b> karaktererne <i>er</i> pensum. Formen lærer eleven skiltefamilierne: trekant betyder vigepligt og fare, cirkel betyder påbud og forbud, firkant betyder information. Det er Duolingos shape language med en faglig mening.</p>
+        <div class="pill-row">
+          <span class="swatch"><i style="background:#E63946"></i>Skilterød #E63946</span>
+          <span class="swatch"><i style="background:#1F5FBF"></i>Vejblå #1F5FBF</span>
+          <span class="swatch"><i style="background:#FFD23F"></i>Gul #FFD23F</span>
+        </div>
+        <div class="cast"><svg data-char="B2" data-expr="idle" viewBox="0 0 200 220"></svg><svg data-char="B3" data-expr="idle" viewBox="0 0 200 220"></svg><svg data-char="B4" data-expr="idle" viewBox="0 0 200 220"></svg></div>
+      </div>
+    </div>
+    <div class="expr">
+      <figure><svg data-char="B" data-expr="idle" viewBox="0 0 200 220"></svg><figcaption>Tomgang</figcaption></figure>
+      <figure><svg data-char="B" data-expr="correct" viewBox="0 0 200 220"></svg><figcaption>Korrekt</figcaption></figure>
+      <figure><svg data-char="B" data-expr="wrong" viewBox="0 0 200 220"></svg><figcaption>Forkert, opmuntrende</figcaption></figure>
+      <figure><svg data-char="B" data-expr="nervous" viewBox="0 0 200 220"></svg><figcaption>Prøvenerver</figcaption></figure>
+      <figure><svg data-char="B" data-expr="passed" viewBox="0 0 200 220"></svg><figcaption>Bestået</figcaption></figure>
+    </div>
+    <div class="foot">
+      <div><h4>Silhuettest</h4><div class="sil"><svg data-char="B" data-expr="idle" viewBox="0 0 200 220"></svg><svg data-char="B2" data-expr="idle" viewBox="0 0 200 220"></svg><svg data-char="B3" data-expr="idle" viewBox="0 0 200 220"></svg></div></div>
+      <div><h4>Styrke</h4>Mest lærerig og mest Duolingo-agtig. Fire klart forskellige silhuetter giver et naturligt cast.</div>
+      <div><h4>Risiko</h4>Karaktererne må aldrig stå i situationsbilleder, hvor de kan forveksles med rigtige skilte. De hører kun til i UI.</div>
+    </div>
+  </div>
+
+  <div class="dir" id="dirC">
+    <div class="dir-head">
+      <div class="hero" style="background:#F3EFFF"><svg data-char="C" data-expr="idle" viewBox="0 0 200 220"></svg></div>
+      <div class="dir-body">
+        <div class="dir-letter">RETNING C · CAST: 1 + 2</div>
+        <h2>Pløk, medkursisten</h2>
+        <p><b>Personlighed:</b> entusiastisk, lidt klodset og ærligt nervøs. Pløk er ikke din lærer; Pløk tager kørekort <i>sammen med dig</i>.</p>
+        <p><b>Baggrund:</b> Pløk er landet i Danmark og har aldrig set en rundkørsel. Skolevogns-skiltet på hovedet har den fået af sin kørelærer, og den tager det aldrig af.</p>
+        <p><b>Hvorfor det passer:</b> Tolans præmis vendt om. Når du forklarer Pløk reglen (protégé-effekten), lærer du den selv bedst. Fejl bliver delte og ikke pinlige.</p>
+        <div class="pill-row">
+          <span class="swatch"><i style="background:#FF7A59"></i>Koral #FF7A59</span>
+          <span class="swatch"><i style="background:#FFF4D6"></i>Creme #FFF4D6</span>
+          <span class="swatch"><i style="background:#1F5FBF"></i>Skolevognsblå #1F5FBF</span>
+        </div>
+        <p style="margin:0"><b>Støttecast:</b> Kørelærer Bente (en rolig, gammel bus) og Turbo (Pløks overmodige fætter, der lærer det på den hårde måde).</p>
+      </div>
+    </div>
+    <div class="expr">
+      <figure><svg data-char="C" data-expr="idle" viewBox="0 0 200 220"></svg><figcaption>Tomgang</figcaption></figure>
+      <figure><svg data-char="C" data-expr="correct" viewBox="0 0 200 220"></svg><figcaption>Korrekt</figcaption></figure>
+      <figure><svg data-char="C" data-expr="wrong" viewBox="0 0 200 220"></svg><figcaption>Forkert, opmuntrende</figcaption></figure>
+      <figure><svg data-char="C" data-expr="nervous" viewBox="0 0 200 220"></svg><figcaption>Prøvenerver</figcaption></figure>
+      <figure><svg data-char="C" data-expr="passed" viewBox="0 0 200 220"></svg><figcaption>Bestået</figcaption></figure>
+    </div>
+    <div class="foot">
+      <div><h4>Silhuettest</h4><div class="sil"><svg data-char="C" data-expr="idle" viewBox="0 0 200 220"></svg><svg data-char="C" data-expr="nervous" viewBox="0 0 200 220"></svg></div></div>
+      <div><h4>Styrke</h4>Stærkest følelsesmæssigt bånd og rigtig god til prøvenerver. Skolevogns-skiltet er et unikt dansk silhuettræk.</div>
+      <div><h4>Risiko</h4>Et blødt rumvæsen ligger tæt på Tolan. Det ene øje og skiltet skal holde det tydeligt originalt.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. UI DIRECTIONS -->
+<section id="ui">
+  <h2>5 · To UI-retninger</h2>
+  <p class="sub">Begge viser den nye løkke: forside med <i>én</i> næste handling, prøveklar-score og prøvedato, og et spørgsmål, hvor karakteren forklarer hvorfor. Karakter og UI-retning kan kombineres frit. Billedet er appens rigtige situationsbillede (q-065).</p>
+
+  <div class="ui-dir">
+    <div class="ui-meta">
+      <div class="card"><h3>UI 1 · Varm nat</h3>Natkørsel-identiteten bevares, men varmere: dyb indigo, lygte-rav og grønt lys i stedet for syregrønt. Rubik ExtraBold (afrundet, voksen) og Atkinson Hyperlegible til brødtekst (bygget til læsbarhed og ordblinde). Dagvisning følger som sekundært tema. <b>Passer bedst med A eller C.</b></div>
+    </div>
+    <div class="phones">
+      <div><div class="phone"><div class="screen n">
+        <div class="home-top"><span class="chip a">🔥 4 dage</span><span class="chip">Prøve om 23 dage</span></div>
+        <div class="hello"><svg data-char="A" data-expr="idle" viewBox="0 0 200 220"></svg><div class="bubble">Hajtænder igen? Ja. Du var <b>så</b> tæt på i går.</div></div>
+        <div class="ready"><div class="ring"><b>34%</b></div><div><b class="disp" style="font-size:17px">Prøveklar</b><small>Stærk: skilte · Svag: vigepligt</small></div></div>
+        <div class="path">
+          <div class="node done"><i>✓</i><div>Bilen før turen<small>5/5 lektioner</small></div></div>
+          <div class="node now"><i>2</i><div>Vigepligt i kryds<small>Fortsæt · 6 min</small></div></div>
+          <div class="node"><i>3</i><div>Cyklister og højresving<small>Låst op</small></div></div>
+        </div>
+        <div class="cta disp">Fortsæt</div>
+        <div class="tabs"><span class="on">Hjem</span><span>Atlas</span><span>Prøve</span><span>Mig</span></div>
+      </div></div><div class="phone-cap">Hjem: én næste handling</div></div>
+
+      <div><div class="phone"><div class="screen n">
+        <div class="bar"><span class="x">✕</span><div class="prog"><i></i></div></div>
+        <div class="cond">Du vil lige over et kryds med <b>hajtænder</b>. En cyklist kommer fra højre.</div>
+        <div class="img" style="background-image:url('../../dist/assets/exam/traffic-q-065-v1.webp')"></div>
+        <div class="q disp">Hvem holder du tilbage for?</div>
+        <div class="st"><span>Holder tilbage for cyklisten</span><div class="yn"><b class="on">Ja</b><b>Nej</b></div></div>
+        <div class="st"><span>Har kun vigepligt for biler</span><div class="yn"><b>Ja</b><b class="on">Nej</b></div></div>
+        <div class="cta disp">Tjek svar</div>
+      </div></div><div class="phone-cap">Spørgsmål: billede først, store mål</div></div>
+
+      <div><div class="phone"><div class="screen n">
+        <div class="bar"><span class="x">✕</span><div class="prog"><i></i></div></div>
+        <div class="img" style="background-image:url('../../dist/assets/exam/traffic-q-065-v1.webp');margin-top:6px"></div>
+        <div class="q disp">Hvem holder du tilbage for?</div>
+        <div class="st" style="outline:2px solid var(--n-coral)"><span>Har kun vigepligt for biler</span><div class="yn"><b class="on" style="background:var(--n-coral)">Ja</b></div></div>
+        <div class="sheet">
+          <h5 class="disp">Næsten! Én ting:</h5>
+          <div class="row"><p>Hajtænder betyder ubetinget vigepligt for <b>alle</b> på tværvejen, også cyklisten. Hvis du er i tvivl: vent.</p><svg data-char="A" data-expr="wrong" viewBox="0 0 200 220"></svg></div>
+          <div class="cta disp">Forstået</div>
+        </div>
+      </div></div><div class="phone-cap">Feedback: karakteren forklarer hvorfor</div></div>
+    </div>
+  </div>
+
+  <div class="ui-dir">
+    <div class="ui-meta">
+      <div class="card"><h3>UI 2 · Dagkørsel</h3>Lys, varm creme, dansk vejblå og skiltegul, chunky knapper med fysisk tryk. Bricolage Grotesque ExtraBold og Figtree. Mest Duolingo-energi, men med egne farver fra den danske vej. Natvisning følger som sekundært tema. <b>Passer bedst med B eller C.</b></div>
+    </div>
+    <div class="phones">
+      <div><div class="phone"><div class="screen d">
+        <div class="home-top"><span class="chip y">🔥 4 dage</span><span class="chip">Prøve om 23 dage</span></div>
+        <div class="hello"><svg data-char="B" data-expr="idle" viewBox="0 0 200 220"></svg><div class="bubble">Du først! … Nej, seriøst. I dag er det vigepligt.</div></div>
+        <div class="ready"><div class="ring"><b>34%</b></div><div><b class="disp" style="font-size:18px">Prøveklar</b><small>Stærk: skilte · Svag: vigepligt</small></div></div>
+        <div class="path">
+          <div class="node done"><i>✓</i><div>Bilen før turen<small>5/5 lektioner</small></div></div>
+          <div class="node now"><i>2</i><div>Vigepligt i kryds<small>Fortsæt · 6 min</small></div></div>
+          <div class="node"><i>3</i><div>Cyklister og højresving<small>Låst op</small></div></div>
+        </div>
+        <div class="cta">Fortsæt</div>
+        <div class="tabs"><span class="on">Hjem</span><span>Atlas</span><span>Prøve</span><span>Mig</span></div>
+      </div></div><div class="phone-cap">Hjem</div></div>
+
+      <div><div class="phone"><div class="screen d">
+        <div class="bar"><span class="x">✕</span><div class="prog"><i></i></div></div>
+        <div class="cond">Du vil lige over et kryds med <b>hajtænder</b>. En cyklist kommer fra højre.</div>
+        <div class="img" style="background-image:url('../../dist/assets/exam/traffic-q-065-v1.webp')"></div>
+        <div class="q disp">Hvem holder du tilbage for?</div>
+        <div class="st"><span>Holder tilbage for cyklisten</span><div class="yn"><b class="on">Ja</b><b>Nej</b></div></div>
+        <div class="st"><span>Har kun vigepligt for biler</span><div class="yn"><b>Ja</b><b class="on">Nej</b></div></div>
+        <div class="cta">Tjek svar</div>
+      </div></div><div class="phone-cap">Spørgsmål</div></div>
+
+      <div><div class="phone"><div class="screen d">
+        <div class="bar"><span class="x">✕</span><div class="prog"><i style="width:66%"></i></div></div>
+        <div class="img" style="background-image:url('../../dist/assets/exam/traffic-q-065-v1.webp');margin-top:6px"></div>
+        <div class="q disp">Hvem holder du tilbage for?</div>
+        <div class="st" style="border-color:var(--d-green)"><span>Holder tilbage for cyklisten</span><div class="yn"><b class="on" style="border-color:var(--d-green);color:var(--d-green);background:#E8F7EF">Ja ✓</b></div></div>
+        <div class="sheet">
+          <h5>Præcis!</h5>
+          <div class="row"><p>Hajtænder = ubetinget vigepligt for <b>alle</b> på tværvejen, også cyklister. Vig er stolt.</p><svg data-char="B" data-expr="correct" viewBox="0 0 200 220"></svg></div>
+          <div class="cta">Næste</div>
+        </div>
+      </div></div><div class="phone-cap">Feedback, korrekt</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="ask">
+    <h2>Det skal du vælge</h2>
+    <ol>
+      <li><b>Karakter:</b> A Glim, B Skiltebanden, C Pløk, eller et mix (fx Pløk som hovedperson og Skiltebanden som støttecast).</li>
+      <li><b>UI:</b> 1 Varm nat eller 2 Dagkørsel. Den anden bliver det sekundære tema.</li>
+      <li><b>Brainrot-humoren og MØTRIK-MADS:</b> beholde den som slå-til/fra-lag, eller lade den nye karakter overtage humoren?</li>
+      <li><b>3D-nattebyen og Trafiklab:</b> beholde dem som én “Kør selv”-indgang under Atlas (min anbefaling), eller fjerne dem?</li>
+    </ol>
+    <p style="margin-bottom:0">Derefter bygger jeg designsystem, karakter (SVG og Rive-states) og alle skærme, og kører Playwright, axe og Lighthouse mod baselinen.</p>
+  </div>
+</section>
+
+<footer>Alle karakterer er originale skitser lavet til Natkørsel. Ingen assets er hentet fra Duolingo, Tolan eller andre referencer. Skitserne er retning, ikke final art.</footer>
+</div>
+
+<script>
+// Original character sketches, drawn from primitives so they can be rigged in Rive later.
+const INK = '#1A1640';
+function eyes(cx1, cx2, cy, e, o = {}) {
+  const r = o.r || 15, ry = o.ry || 18, pr = o.pr || 8, look = o.look || 0;
+  if (e === 'correct' || e === 'passed') {
+    return [cx1, cx2].map(cx => `<path d="M${cx - r + 2} ${cy + 4} Q${cx} ${cy - 14} ${cx + r - 2} ${cy + 4}" fill="none" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>`).join('');
+  }
+  let s = '';
+  for (const cx of [cx1, cx2]) {
+    const pry = e === 'nervous' ? pr * 0.55 : pr;
+    s += `<ellipse cx="${cx}" cy="${cy}" rx="${r}" ry="${e === 'nervous' ? ry + 2 : ry}" fill="#fff"/>`;
+    s += `<circle cx="${cx + (e === 'wrong' ? 4 : look)}" cy="${cy + (e === 'wrong' ? 3 : 2)}" r="${pry}" fill="${INK}"/>`;
+    s += `<circle cx="${cx + (e === 'wrong' ? 4 : look) + 3}" cy="${cy - 2}" r="${e === 'nervous' ? 1.6 : 3}" fill="#fff"/>`;
+  }
+  // Worried-but-kind brows: inner ends raised.
+  if (e === 'wrong') s += [cx1, cx2].map((cx, i) => `<path d="M${cx - 11} ${cy - ry - 4 + (i ? 0 : 5)} L${cx + 11} ${cy - ry - 4 + (i ? 5 : 0)}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`).join('');
+  if (e === 'nervous') s += [cx1, cx2].map((cx, i) => `<path d="M${cx - 11} ${cy - ry - 6 + (i ? 0 : 5)} L${cx + 11} ${cy - ry - 6 + (i ? 5 : 0)}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`).join('');
+  return s;
+}
+function mouth(cx, cy, e, w = 16) {
+  if (e === 'correct' || e === 'passed') return `<path d="M${cx - w} ${cy - 3} Q${cx} ${cy + w + 6} ${cx + w} ${cy - 3} Z" fill="${INK}"/><path d="M${cx - w * .55} ${cy + w * .55} Q${cx} ${cy + w * .2} ${cx + w * .55} ${cy + w * .55} Q${cx} ${cy + w + 2} ${cx - w * .55} ${cy + w * .55}Z" fill="#FF7E8A"/>`;
+  // Encouraging: a small lopsided smile, never a frown.
+  if (e === 'wrong') return `<path d="M${cx - w * .7} ${cy + 1} Q${cx - w * .1} ${cy + w * .7} ${cx + w * .6} ${cy - 3}" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
+  if (e === 'nervous') return `<path d="M${cx - w * .8} ${cy + 2} q${w * .2} -6 ${w * .4} 0 t${w * .4} 0 t${w * .4} 0 t${w * .4} 0" fill="none" stroke="${INK}" stroke-width="4.5" stroke-linecap="round"/>`;
+  return `<path d="M${cx - w * .7} ${cy} Q${cx} ${cy + w * .8} ${cx + w * .7} ${cy}" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
+}
+const sweat = (x, y) => `<path d="M${x} ${y} q-7 12 0 16 q7 -4 0 -16Z" fill="#7FD3FF" stroke="${INK}" stroke-width="2"/>`;
+const confetti = () => [[30, 40, '#FFC857', 15], [170, 50, '#55E0AE', -20], [40, 110, '#FF7E6B', 30], [168, 120, '#7C8CFF', -10], [100, 14, '#FF7E6B', 0]].map(([x, y, c, r]) => `<rect x="${x}" y="${y}" width="10" height="16" rx="3" fill="${c}" transform="rotate(${r} ${x} ${y})"/>`).join('');
+const sparkle = (x, y, s = 1, c = '#FFC857') => `<path transform="translate(${x} ${y}) scale(${s})" d="M0 -12 C2 -3 3 -2 12 0 C3 2 2 3 0 12 C-2 3 -3 2 -12 0 C-3 -2 -2 -3 0 -12Z" fill="${c}"/>`;
+
+const CHARS = {
+  // A — Glim, natlyset
+  A(e) {
+    const bright = e === 'correct' || e === 'passed', dim = e === 'wrong' || e === 'nervous';
+    const bulb = bright ? '#FFE08A' : dim ? '#C9A24E' : '#FFC857';
+    const arms = (e === 'correct' || e === 'passed')
+      ? `<path d="M44 128 Q22 104 26 84" stroke="#5B55E0" stroke-width="14" stroke-linecap="round" fill="none"/><path d="M156 128 Q178 104 174 84" stroke="#5B55E0" stroke-width="14" stroke-linecap="round" fill="none"/>`
+      : e === 'nervous' ? `<path d="M46 140 Q60 156 78 150" stroke="#5B55E0" stroke-width="14" stroke-linecap="round" fill="none"/><path d="M154 140 Q140 156 122 150" stroke="#5B55E0" stroke-width="14" stroke-linecap="round" fill="none"/>`
+      : `<path d="M44 140 Q30 152 32 166" stroke="#5B55E0" stroke-width="14" stroke-linecap="round" fill="none"/><path d="M156 140 Q170 152 168 166" stroke="#5B55E0" stroke-width="14" stroke-linecap="round" fill="none"/>`;
+    return `
+      <defs><radialGradient id="ga${e}" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFC857" stop-opacity="${bright ? .55 : dim ? .12 : .3}"/><stop offset="1" stop-color="#FFC857" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="100" cy="120" r="${bright ? 100 : 86}" fill="url(#ga${e})"/>
+      ${e === 'passed' ? confetti() : ''}
+      <path d="M80 66 Q70 40 ${e === 'wrong' ? 52 : 60} ${e === 'wrong' ? 34 : 24}" stroke="#4A44C4" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M120 66 Q130 40 ${e === 'nervous' ? 146 : 140} ${e === 'nervous' ? 32 : 24}" stroke="#4A44C4" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <circle cx="${e === 'wrong' ? 52 : 60}" cy="${e === 'wrong' ? 34 : 24}" r="${bright ? 14 : 11}" fill="${bulb}"/>
+      <circle cx="${e === 'nervous' ? 146 : 140}" cy="${e === 'nervous' ? 32 : 24}" r="${bright ? 14 : 11}" fill="${bulb}"/>
+      ${arms}
+      <rect x="70" y="182" width="24" height="22" rx="11" fill="#4A44C4"/><rect x="106" y="182" width="24" height="22" rx="11" fill="#4A44C4"/>
+      <path d="M100 58 C146 58 166 100 164 136 C162 172 136 194 100 194 C64 194 38 172 36 136 C34 100 54 58 100 58Z" fill="#5B55E0"/>
+      <ellipse cx="100" cy="158" rx="40" ry="30" fill="${bright ? '#FFE08A' : dim ? '#E6B65A' : '#FFC857'}"/>
+      ${eyes(78, 122, 112, e)}
+      ${mouth(100, 140, e, 14)}
+      ${e === 'nervous' ? sweat(150, 92) : ''}
+      ${e === 'correct' ? sparkle(30, 70, 1) + sparkle(176, 64, .8, '#55E0AE') : ''}`;
+  },
+  // B — Vig (vigepligt)
+  B(e) {
+    const arms = (e === 'correct' || e === 'passed')
+      ? `<path d="M40 70 Q18 54 20 30" stroke="#C42634" stroke-width="12" stroke-linecap="round" fill="none"/><path d="M160 70 Q182 54 180 30" stroke="#C42634" stroke-width="12" stroke-linecap="round" fill="none"/>`
+      : e === 'wrong' ? `<path d="M48 96 Q30 110 44 124" stroke="#C42634" stroke-width="12" stroke-linecap="round" fill="none"/><path d="M152 96 Q176 92 178 72" stroke="#C42634" stroke-width="12" stroke-linecap="round" fill="none"/>`
+      : `<path d="M48 96 Q30 112 34 132" stroke="#C42634" stroke-width="12" stroke-linecap="round" fill="none"/><path d="M152 96 Q170 112 166 132" stroke="#C42634" stroke-width="12" stroke-linecap="round" fill="none"/>`;
+    return `
+      ${e === 'passed' ? confetti() : ''}
+      ${arms}
+      <path d="M88 168 L82 206" stroke="#C42634" stroke-width="11" stroke-linecap="round"/><path d="M112 168 L118 206" stroke="#C42634" stroke-width="11" stroke-linecap="round"/>
+      <ellipse cx="78" cy="208" rx="13" ry="7" fill="${INK}"/><ellipse cx="122" cy="208" rx="13" ry="7" fill="${INK}"/>
+      <path d="M36 44 L164 44 L100 176 Z" fill="#E63946" stroke="#E63946" stroke-width="26" stroke-linejoin="round"/>
+      <path d="M66 62 L134 62 L100 136 Z" fill="#fff" stroke="#fff" stroke-width="16" stroke-linejoin="round"/>
+      ${eyes(84, 116, 74, e, { r: 11, ry: 13, pr: 6 })}
+      ${mouth(100, 98, e, 10)}
+      ${e === 'nervous' ? sweat(150, 30) : ''}
+      ${e === 'correct' ? sparkle(26, 120, .9, '#FFD23F') + sparkle(176, 128, .7, '#1F5FBF') : ''}`;
+  },
+  // B2 — Stop
+  B2() {
+    const pts = [...Array(8)].map((_, i) => { const a = Math.PI / 8 + i * Math.PI / 4; return `${100 + 62 * Math.cos(a)},${104 + 62 * Math.sin(a)}`; }).join(' ');
+    return `<path d="M86 160 L82 204" stroke="#A51D29" stroke-width="11" stroke-linecap="round"/><path d="M114 160 L118 204" stroke="#A51D29" stroke-width="11" stroke-linecap="round"/>
+      <ellipse cx="78" cy="206" rx="13" ry="7" fill="${INK}"/><ellipse cx="122" cy="206" rx="13" ry="7" fill="${INK}"/>
+      <polygon points="${pts}" fill="#C8202F" stroke="#C8202F" stroke-width="14" stroke-linejoin="round"/>
+      <path d="M70 76 L94 84 M130 76 L106 84" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+      <ellipse cx="82" cy="98" rx="11" ry="12" fill="#fff"/><ellipse cx="118" cy="98" rx="11" ry="12" fill="#fff"/>
+      <circle cx="84" cy="100" r="6" fill="${INK}"/><circle cx="116" cy="100" r="6" fill="${INK}"/>
+      <path d="M84 128 L116 128" stroke="#fff" stroke-width="6" stroke-linecap="round"/>`;
+  },
+  // B3 — Rund (påbud)
+  B3() {
+    return `<path d="M88 160 L84 204" stroke="#123F86" stroke-width="11" stroke-linecap="round"/><path d="M112 160 L116 204" stroke="#123F86" stroke-width="11" stroke-linecap="round"/>
+      <ellipse cx="80" cy="206" rx="13" ry="7" fill="${INK}"/><ellipse cx="120" cy="206" rx="13" ry="7" fill="${INK}"/>
+      <circle cx="100" cy="104" r="64" fill="#1F5FBF"/>
+      <circle cx="100" cy="104" r="64" fill="none" stroke="#fff" stroke-width="6" stroke-dasharray="0 0" opacity=".9"/>
+      <circle cx="82" cy="98" r="15" fill="none" stroke="#fff" stroke-width="5"/><circle cx="118" cy="98" r="15" fill="none" stroke="#fff" stroke-width="5"/><path d="M97 98 L103 98" stroke="#fff" stroke-width="5"/>
+      <circle cx="84" cy="100" r="6" fill="#fff"/><circle cx="120" cy="100" r="6" fill="#fff"/>
+      <path d="M86 128 Q100 138 114 128" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>`;
+  },
+  // B4 — Info
+  B4() {
+    return `<path d="M88 166 L84 204" stroke="#123F86" stroke-width="11" stroke-linecap="round"/><path d="M112 166 L116 204" stroke="#123F86" stroke-width="11" stroke-linecap="round"/>
+      <ellipse cx="80" cy="206" rx="13" ry="7" fill="${INK}"/><ellipse cx="120" cy="206" rx="13" ry="7" fill="${INK}"/>
+      <rect x="40" y="44" width="120" height="124" rx="22" fill="#1F5FBF"/>
+      <rect x="54" y="58" width="92" height="96" rx="12" fill="none" stroke="#fff" stroke-width="5"/>
+      <path d="M72 100 Q82 92 92 100 M108 100 Q118 92 128 100" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+      <path d="M84 124 Q100 136 116 124" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>`;
+  },
+  // C — Pløk, medkursisten
+  C(e) {
+    const tilt = e === 'wrong' ? -12 : e === 'nervous' ? 10 : e === 'passed' ? -24 : 0;
+    const hatY = e === 'passed' ? -14 : 0;
+    const cy = 112;
+    let eye;
+    if (e === 'correct' || e === 'passed') eye = `<path d="M74 ${cy + 6} Q100 ${cy - 22} 126 ${cy + 6}" fill="none" stroke="${INK}" stroke-width="7" stroke-linecap="round"/><ellipse cx="62" cy="${cy + 20}" rx="10" ry="6" fill="#FF4F6D" opacity=".45"/><ellipse cx="138" cy="${cy + 20}" rx="10" ry="6" fill="#FF4F6D" opacity=".45"/>`;
+    else {
+      const R = e === 'nervous' ? 30 : 27, pr = e === 'nervous' ? 7 : 13;
+      eye = `<circle cx="100" cy="${cy}" r="${R}" fill="#fff"/><circle cx="${100 + (e === 'wrong' ? 7 : 0)}" cy="${cy + 3}" r="${pr}" fill="${INK}"/><circle cx="${106 + (e === 'wrong' ? 7 : 0)}" cy="${cy - 3}" r="${e === 'nervous' ? 2 : 4.5}" fill="#fff"/>`;
+      if (e === 'wrong' || e === 'nervous') eye += `<path d="M76 ${cy - 34} Q100 ${cy - 46} 124 ${cy - 34}" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
+    }
+    const arms = (e === 'correct' || e === 'passed')
+      ? `<path d="M46 136 Q24 120 26 96" stroke="#E5603F" stroke-width="13" stroke-linecap="round" fill="none"/><path d="M154 136 Q176 120 174 96" stroke="#E5603F" stroke-width="13" stroke-linecap="round" fill="none"/>`
+      : e === 'nervous' ? `<path d="M48 146 Q66 160 84 152" stroke="#E5603F" stroke-width="13" stroke-linecap="round" fill="none"/><path d="M152 146 Q134 160 116 152" stroke="#E5603F" stroke-width="13" stroke-linecap="round" fill="none"/>`
+      : `<path d="M46 144 Q30 158 36 172" stroke="#E5603F" stroke-width="13" stroke-linecap="round" fill="none"/><path d="M154 144 Q170 158 164 172" stroke="#E5603F" stroke-width="13" stroke-linecap="round" fill="none"/>`;
+    return `
+      ${e === 'passed' ? confetti() : ''}
+      ${arms}
+      <ellipse cx="78" cy="198" rx="16" ry="10" fill="#E5603F"/><ellipse cx="122" cy="198" rx="16" ry="10" fill="#E5603F"/>
+      <path d="M100 64 C142 64 166 104 166 146 C166 182 138 198 100 198 C62 198 34 182 34 146 C34 104 58 64 100 64Z" fill="#FF7A59"/>
+      <g transform="translate(0 ${hatY}) rotate(${tilt} 100 56)">
+        <rect x="94" y="52" width="12" height="14" rx="3" fill="#123F86"/>
+        <rect x="58" y="26" width="84" height="30" rx="9" fill="#FFF4D6" stroke="#1F5FBF" stroke-width="4"/>
+        <text x="100" y="47" text-anchor="middle" font-family="Figtree,Arial,sans-serif" font-weight="800" font-size="15" fill="#1F5FBF" letter-spacing="1">SKOLE</text>
+      </g>
+      ${eye}
+      ${mouth(100, 154, e, 13)}
+      ${e === 'nervous' ? sweat(150, 92) : ''}
+      ${e === 'correct' ? sparkle(28, 60, 1, '#FFC857') + sparkle(176, 70, .8, '#1F5FBF') : ''}
+      ${e === 'passed' ? sparkle(100, 6, .9, '#FFC857') : ''}`;
+  }
+};
+document.querySelectorAll('svg[data-char]').forEach(svg => {
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', `${svg.dataset.char} ${svg.dataset.expr || ''}`);
+  svg.innerHTML = CHARS[svg.dataset.char](svg.dataset.expr || 'idle');
+});
+</script>
+</body>
+</html>
