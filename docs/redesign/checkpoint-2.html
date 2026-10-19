@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Natkørsel karakterer · runde 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;800&family=Rubik:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F3EE;--surface:#fff;--ink:#1C1B22;--muted:#5E5B68;--line:#E3DED5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Figtree,system-ui,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header.top{padding:56px 0 24px}
+.kicker{font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:800 clamp(34px,6vw,62px)/1.03 "Bricolage Grotesque",sans-serif;margin:8px 0 14px;letter-spacing:-.02em}
+h2{font:800 clamp(30px,4.4vw,48px)/1.05 "Bricolage Grotesque",sans-serif;margin:4px 0 6px;letter-spacing:-.015em}
+h3{font:800 14px/1.3 Figtree;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.lede{font-size:19px;max-width:780px;color:#34323C}
+.rules{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.rules span{font-size:14px;font-weight:600;padding:6px 12px;border-radius:99px;background:#fff;border:1px solid var(--line)}
+section.char{padding:40px 0;border-top:1px solid var(--line)}
+.one{font-size:20px;max-width:760px;margin:0 0 20px;color:#34323C}
+.stage{display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:18px;align-items:stretch}
+.hero{border-radius:28px;display:grid;place-items:center;padding:18px;min-height:380px}
+.hero img{width:100%;max-width:380px;aspect-ratio:1;display:block}
+.poses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.poses figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:8px 8px 10px;text-align:center}
+.poses img{width:100%;aspect-ratio:1;display:block}
+.poses figcaption{font-size:13px;font-weight:600;color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px}
+.card p{margin:0 0 10px} .card p:last-child{margin:0}
+.lines{display:flex;flex-direction:column;gap:8px}
+.line{background:#F4F1EB;border-radius:16px 16px 16px 4px;padding:10px 12px;font-size:15px}
+.line small{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.sw{display:flex;flex-wrap:wrap;gap:8px}
+.sw span{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:4px 10px 4px 4px;border-radius:99px;background:#F4F2EE}
+.sw i{width:22px;height:22px;border-radius:50%;display:block;border:1px solid rgba(0,0,0,.08)}
+.tests{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+.tests .sil img{filter:brightness(0);height:72px;width:72px}
+.tests .tiny{display:flex;gap:10px;align-items:flex-end;padding:10px 12px;border-radius:14px}
+.tests .tiny.l{background:#F6F3EE}.tests .tiny.d{background:#16142B}
+.why{margin-top:16px;font-size:15px;color:#34323C;background:#fff;border:1px dashed #CFC8BB;border-radius:16px;padding:14px 16px}
+.mock{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start;margin-top:18px}
+.phone{width:290px;height:600px;border-radius:40px;padding:10px;background:#111;flex:0 0 auto;box-shadow:0 20px 40px -22px rgba(0,0,0,.4)}
+.screen{width:100%;height:100%;border-radius:31px;overflow:hidden;display:flex;flex-direction:column}
+.screen .bar{display:flex;align-items:center;gap:10px;padding:18px 18px 10px}
+.screen .x{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:14px}
+.screen .prog{flex:1;height:10px;border-radius:99px;overflow:hidden}
+.screen .prog i{display:block;height:100%;width:62%;border-radius:99px}
+.screen .img{margin:0 16px;border-radius:16px;height:110px;background:#333 center/cover}
+.screen .q{margin:12px 16px 8px;font-size:18px;line-height:1.2}
+.screen .st{margin:0 16px;padding:10px 12px;border-radius:14px;display:flex;align-items:center;gap:10px;font-size:14px}
+.screen .st span{flex:1}
+.screen .st b{font-size:13px;padding:6px 10px;border-radius:10px}
+.screen .sheet{margin-top:auto;padding:14px 16px 18px;border-radius:26px 26px 0 0;position:relative}
+.screen .sheet .who{display:flex;align-items:flex-end;gap:8px;margin-top:-62px}
+.screen .sheet .who img{width:104px;height:104px}
+.screen .sheet h5{margin:6px 0 4px;font-size:19px}
+.screen .sheet p{margin:0 0 12px;font-size:14px;line-height:1.45}
+.screen .cta{padding:13px;border-radius:16px;text-align:center;font-weight:800;font-size:16px}
+.night{background:#15132B;color:#F5F2FF;font-family:"Atkinson Hyperlegible",sans-serif}
+.night .disp{font-family:Rubik,sans-serif;font-weight:800}
+.night .x{background:#211E40;color:#B9B3D9}.night .prog{background:#2C2852}.night .prog i{background:#FFB547}
+.night .st{background:#211E40;outline:2px solid #FF7E6B}.night .st b{background:#FF7E6B;color:#2B0C07}
+.night .sheet{background:#211E40;border-top:3px solid #FF7E6B}.night .sheet h5{color:#FF9A8A}
+.night .cta{background:#FF7E6B;color:#2B0C07;box-shadow:0 4px 0 #B84A3B}
+.day{background:#FFF8EC;color:#1B1F3B;font-family:Figtree,sans-serif}
+.day .disp{font-family:"Bricolage Grotesque",sans-serif;font-weight:800}
+.day .x{border:2px solid #E9E1D2;color:#5A5F7A}.day .prog{background:#EFE6D4}.day .prog i{background:#1F5FBF}
+.day .st{background:#fff;border:2px solid #E63946}.day .st b{border:2px solid #E63946;color:#E63946;background:#FDECEE}
+.day .sheet{background:#FFF0E6}.day .sheet h5{color:#B4231F}
+.day .cta{background:#1F5FBF;color:#fff;box-shadow:0 5px 0 #123F86}
+.mock-note{max-width:420px;font-size:15px;color:#34323C}
+.ask{background:var(--ink);color:#fff;border-radius:24px;padding:28px;margin:40px 0}
+.ask h2{color:#fff;font-size:34px}
+.ask ol{margin:10px 0 0;padding-left:22px}.ask li{margin:8px 0}
+.jury{font-size:15px}
+.jury td,.jury th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.jury table{border-collapse:collapse;width:100%;background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+footer{padding:10px 0 60px;color:var(--muted);font-size:14px}
+@media (max-width:860px){
+  .stage{grid-template-columns:1fr}
+  .cols{grid-template-columns:1fr}
+  .hero{min-height:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="kicker">Natkørsel · karakterer · runde 2</div>
+  <h1>Tre væsner med deres egen verden. Ikke ét rat i sigte.</h1>
+  <p class="lede">Runde 1 blev afvist, fordi figurerne var for generiske og handlede om kørsel. Duo handler ikke om sprog, og Tolan handler ikke om AI. Derfor er de her valgt ud fra personlighed, silhuet og en verden, man har lyst til at være i.</p>
+  <div class="rules"><span>12 koncepter fra 6 vinkler</span><span>3 dommere: originalitet · målgruppe 17–30 · håndværk</span><span>Ingen biler, skilte, lygter eller skole</span></div>
+  <p class="why" style="max-width:780px"><b>Status på tegningerne:</b> det er første udkast, tegnet og renderet af hver sin illustrator. Kritikerrunderne blev afbrudt af et brugsloft. <b>Knur</b> og <b>Mira</b> er ikke reviewet endnu. <b>Tordis</b> fik 5/10 af kritikeren, fordi kronen læses som en plante og ikke som flint. Vælg retningen ud fra idéen og silhuetten. Den valgte karakter får derefter den fulde polering.</p>
+</header>
+
+<!-- MIRA -->
+<section class="char" id="mira">
+  <div class="kicker">Retning 1</div>
+  <h2>Mira Muld</h2>
+  <p class="one">En stjernemuldvarp, der aldrig har set himlen, og som er helt sikker på, at hun er undergrundens bedste astronom.</p>
+  <div class="stage">
+    <div class="hero" style="background:radial-gradient(circle at 50% 40%,#2B2550 0,#15132B 72%)"><img src="characters-v2/mira/hero.svg" alt="Mira Muld, hero-pose"></div>
+    <div class="poses">
+      <figure><img src="characters-v2/mira/idle.svg" alt=""><figcaption>Tomgang</figcaption></figure>
+      <figure><img src="characters-v2/mira/thinking.svg" alt=""><figcaption>Tænker</figcaption></figure>
+      <figure><img src="characters-v2/mira/correct.svg" alt=""><figcaption>Korrekt</figcaption></figure>
+      <figure><img src="characters-v2/mira/wrong.svg" alt=""><figcaption>Forkert, opmuntrende</figcaption></figure>
+      <figure><img src="characters-v2/mira/nervous.svg" alt=""><figcaption>Prøvenerver</figcaption></figure>
+      <figure><img src="characters-v2/mira/passed.svg" alt=""><figcaption>Bestået</figcaption></figure>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="card"><h3>Personlighed</h3><p>Hun er selvsikker langt ud over beviserne og helt i fred med det. Hun er varm og nørdet, taler med hænderne og bliver pludselig betaget midt i en sætning (“…det er smukt”).</p><p>Hun tager fejl om himlen hele tiden og skammer sig aldrig. Det er præcis den holdning til fejl, en elev har brug for. Jokes om hendes øjne er forbudt.</p></div>
+    <div class="card"><h3>Verden og fremskridt</h3><p>Hun bor under en plæne i Risskov. Hver nat stikker hun stjernen op for at <i>mærke</i> himlen og trykker så småsten op i loftet af sin gang, Himmelloftet.</p><p><b>I appen:</b> du bliver hendes assisterende astronom. Hver lektion sætter en ny sten op, og hvert emne fuldender et stjernebillede (“Den Store Regnorm”, “Onsdag”). Når du består, kravler hun op sammen med dig og mærker den rigtige nattehimmel for første gang.</p></div>
+    <div class="card"><h3>Stemme</h3><div class="lines">
+      <div class="line"><small>Forkert svar</small>Forkert. Jeg har engang kaldt en regnorm for Jupiter, så du er i godt selskab.</div>
+      <div class="line"><small>Rigtigt svar</small>Rigtigt. Den hænger jeg op.</div>
+      <div class="line"><small>Aftenen før prøven</small>Jeg har aldrig set en eneste stjerne, og jeg har lavet hele himlen. Du ved mere, end du tror. Sov nu.</div>
+    </div></div>
+    <div class="card"><h3>Støttecast</h3><p><b>Gunnar</b> er en regnorm og hendes nervøse bedste ven, der slår knude på sig selv. Hver mandag fornyer Mira løftet om ikke at spise ham, og det fungerer også som ugens påmindelse.</p><p><b>Else</b> er en 23 år gammel vinbjergsnegl og pensioneret astronom med halvmånebriller. Hun står for den ugentlige opsummering.</p></div>
+    <div class="card"><h3>Palet</h3><div class="sw"><span><i style="background:#7A6496"></i>Fløjlsviolet</span><span><i style="background:#B7A6D6"></i>Månesheen</span><span><i style="background:#E8608A"></i>Stjernerosa</span><span><i style="background:#E8B04B"></i>Småstensguld</span><span><i style="background:#2A2140"></i>Muldmørk</span></div></div>
+    <div class="card"><h3>Silhuet og små størrelser</h3><div class="tests"><span class="sil"><img src="characters-v2/mira/idle.svg" alt=""></span><span class="tiny l"><img src="characters-v2/mira/idle.svg" width="32" height="32" alt=""><img src="characters-v2/mira/idle.svg" width="64" height="64" alt=""></span><span class="tiny d"><img src="characters-v2/mira/idle.svg" width="32" height="32" alt=""><img src="characters-v2/mira/idle.svg" width="64" height="64" alt=""></span></div></div>
+  </div>
+  <div class="mock">
+    <div class="phone"><div class="screen night">
+      <div class="bar"><span class="x">✕</span><div class="prog"><i></i></div></div>
+      <div class="img" style="background-image:url('../../dist/assets/exam/traffic-q-065-v1.webp')"></div>
+      <div class="q disp">Hvem holder du tilbage for?</div>
+      <div class="st"><span>Har kun vigepligt for biler</span><b>Ja</b></div>
+      <div class="sheet"><div class="who"><img src="characters-v2/mira/wrong.svg" alt=""></div>
+        <h5 class="disp">Forkert. Godt selskab.</h5>
+        <p>Hajtænder betyder ubetinget vigepligt for <b>alle</b> på tværvejen, også cyklisten. Den sten sætter vi op i morgen.</p>
+        <div class="cta disp">Forstået</div></div>
+    </div></div>
+    <p class="mock-note"><b>I appen:</b> hun passer til den varme natvisning (UI 1). Natkørsel får en mening, der ikke har noget med bilen at gøre: det er natten, hun drømmer om.</p>
+  </div>
+</section>
+
+<!-- KNUR -->
+<section class="char" id="knur">
+  <div class="kicker">Retning 2</div>
+  <h2>Knur</h2>
+  <p class="one">En rød knurhane fra Kattegat. Ansigtet siger “nå”. Vingerne siger “JAAA”.</p>
+  <div class="stage">
+    <div class="hero" style="background:linear-gradient(180deg,#DCEFF0,#BFE0E2)"><img src="characters-v2/knur/hero.svg" alt="Knur, hero-pose"></div>
+    <div class="poses">
+      <figure><img src="characters-v2/knur/idle.svg" alt=""><figcaption>Tomgang</figcaption></figure>
+      <figure><img src="characters-v2/knur/thinking.svg" alt=""><figcaption>Tænker</figcaption></figure>
+      <figure><img src="characters-v2/knur/correct.svg" alt=""><figcaption>Korrekt</figcaption></figure>
+      <figure><img src="characters-v2/knur/wrong.svg" alt=""><figcaption>Forkert, opmuntrende</figcaption></figure>
+      <figure><img src="characters-v2/knur/nervous.svg" alt=""><figcaption>Prøvenerver</figcaption></figure>
+      <figure><img src="characters-v2/knur/passed.svg" alt=""><figcaption>Bestået</figcaption></figure>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="card"><h3>Personlighed</h3><p>Han er deadpan, fåmælt og knurrende, med jysk underdrivelse: “Det ku' ha' været værre” er den højeste ros, han kan give. Skarpheden går altid ud over universet (koldt vand, vandmænd) og aldrig over dig.</p><p>Han er hemmelig romantiker. Hans ros føles fortjent, og det betyder noget for unge, der er allergiske over for falsk hype.</p></div>
+    <div class="card"><h3>Verden og fremskridt</h3><p>Han bor på en sandbanke 30 meter nede, hvor der altid er blåt tusmørke, og er “Kattegats strengeste anmelder”. Han giver karakter med én til seks fingre, og intet har nogensinde fået seks.</p><p><b>I appen:</b> han gemmer i hemmelighed én skal i vingefolderne for hver lektion, du gennemfører, og benægter det. Når du består, folder han vingerne ud, og du ser dem alle.</p></div>
+    <div class="card"><h3>Stemme</h3><div class="lines">
+      <div class="line"><small>Forkert svar</small>Nej. Men det spørgsmål var formuleret af en vandmand. Igen.</div>
+      <div class="line"><small>Rigtigt svar</small>Det ku' ha' været værre.</div>
+      <div class="line"><small>Aftenen før prøven</small>Jeg siger ikke, at du er klar. Kig på mine vinger.</div>
+    </div></div>
+    <div class="card"><h3>Støttecast</h3><p><b>Bent</b> er en eremitkrebs, der er besat af boligmarkedet. Han hilser dig velkommen tilbage efter en pause: “Jeg er flyttet igen. Du er her stadig. Respekt.”</p><p><b>Rikke</b> er en hestereje og en hype-maskine, der taler alt for hurtigt. Hun er vært for hurtige runder og streak-fejringer.</p></div>
+    <div class="card"><h3>Palet</h3><div class="sw"><span><i style="background:#E2553A"></i>Knurrød</span><span><i style="background:#1A9483"></i>Vingeturkis</span><span><i style="background:#4F7CFF"></i>Elektrisk blå</span><span><i style="background:#FFD2B3"></i>Bugfersken</span><span><i style="background:#1E1B36"></i>Dybblæk</span></div></div>
+    <div class="card"><h3>Silhuet og små størrelser</h3><div class="tests"><span class="sil"><img src="characters-v2/knur/idle.svg" alt=""></span><span class="tiny l"><img src="characters-v2/knur/idle.svg" width="32" height="32" alt=""><img src="characters-v2/knur/idle.svg" width="64" height="64" alt=""></span><span class="tiny d"><img src="characters-v2/knur/idle.svg" width="32" height="32" alt=""><img src="characters-v2/knur/idle.svg" width="64" height="64" alt=""></span></div></div>
+  </div>
+  <div class="mock">
+    <div class="phone"><div class="screen day">
+      <div class="bar"><span class="x">✕</span><div class="prog"><i></i></div></div>
+      <div class="img" style="background-image:url('../../dist/assets/exam/traffic-q-065-v1.webp')"></div>
+      <div class="q disp">Hvem holder du tilbage for?</div>
+      <div class="st"><span>Har kun vigepligt for biler</span><b>Ja</b></div>
+      <div class="sheet"><div class="who"><img src="characters-v2/knur/wrong.svg" alt=""></div>
+        <h5 class="disp">Nej. Vandmand-formuleret.</h5>
+        <p>Hajtænder betyder ubetinget vigepligt for <b>alle</b> på tværvejen, også cyklisten. Det ku' du godt.</p>
+        <div class="cta">Forstået</div></div>
+    </div></div>
+    <p class="mock-note"><b>I appen:</b> han står stærkest i den lyse dagvisning (UI 2). Den røde krop og turkise vinger giver appen en farvesignatur, som ingen konkurrent har.</p>
+  </div>
+</section>
+
+<!-- TORDIS -->
+<section class="char" id="tordis">
+  <div class="kicker">Retning 3</div>
+  <h2>Tordis</h2>
+  <p class="one">En 66 millioner år gammel tordensten fra Stevns Klint, der overlevede meteoren og tager lynet for dig, når panikken slår ned.</p>
+  <div class="stage">
+    <div class="hero" style="background:linear-gradient(180deg,#F3EEE2,#E4DCC8)"><img src="characters-v2/tordis/hero.svg" alt="Tordis, hero-pose"></div>
+    <div class="poses">
+      <figure><img src="characters-v2/tordis/idle.svg" alt=""><figcaption>Tomgang</figcaption></figure>
+      <figure><img src="characters-v2/tordis/thinking.svg" alt=""><figcaption>Tænker</figcaption></figure>
+      <figure><img src="characters-v2/tordis/correct.svg" alt=""><figcaption>Korrekt</figcaption></figure>
+      <figure><img src="characters-v2/tordis/wrong.svg" alt=""><figcaption>Forkert, opmuntrende</figcaption></figure>
+      <figure><img src="characters-v2/tordis/nervous.svg" alt=""><figcaption>Prøvenerver</figcaption></figure>
+      <figure><img src="characters-v2/tordis/passed.svg" alt=""><figcaption>Bestået</figcaption></figure>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="card"><h3>Personlighed</h3><p>Hun er en udødelig hypokonder: hun går i panik over et loading-ikon, men trækker på skuldrene af meteoren (“den var værre”). Hun er tørt dramatisk og kalder kærligt mennesker “pattedyr”.</p><p>Fordi hun selv er nervøs hele tiden, prædiker hun aldrig. Hendes trøst er perspektiv: hun er flint udenpå og kridt indeni.</p></div>
+    <div class="card"><h3>Verden og fremskridt</h3><p>Hun var et hjertesøpindsvin i kridthavet, blev til flint og lå og tænkte i 66 millioner år. En fisker lagde hende i vindueskarmen som tordensten, og hun tog jobbet dødsensalvorligt. De fem gnistrende riller er arrene efter lynene.</p><p><b>I appen:</b> streak uden skyld. Springer du dage over, forstener hun langsomt, men hun kan aldrig dø. Kronen åbner sig, jo mere klar du bliver.</p></div>
+    <div class="card"><h3>Stemme</h3><div class="lines">
+      <div class="line"><small>Forkert svar</small>Forkert. Okay. Jeg har overlevet en meteor, så vi overlever også spørgsmål 14.</div>
+      <div class="line"><small>Rigtigt svar</small>Rigtigt?! …Jeg mener: naturligvis. Jeg var slet ikke nervøs.</div>
+      <div class="line"><small>Aftenen før prøven</small>Du kan ikke dø af en prøve, pattedyr. Det har jeg tjekket. I 66 millioner år. Sov.</div>
+    </div></div>
+    <div class="card"><h3>Støttecast</h3><p><b>Kile</b> er en forstenet belemnit (“tordenkile”), hyperaktiv og utålmodig. Han er vært for hurtige runder og den eneste, der får Tordis til at virke rolig.</p><p><b>Ragna</b> er en ravklump, der vogter gentagelseskøen, for rav glemmer intet. Små indkapslede prikker i hende er spørgsmål, du skal se igen, og de lyser, når de er klar.</p></div>
+    <div class="card"><h3>Palet</h3><div class="sw"><span><i style="background:#5F7D72"></i>Flintgrøn</span><span><i style="background:#EFE6D2"></i>Kridt</span><span><i style="background:#CFF24A"></i>Lynlime</span><span><i style="background:#8A4B3A"></i>Fiskeler</span><span><i style="background:#1F2226"></i>Natflint</span></div></div>
+    <div class="card"><h3>Silhuet og små størrelser</h3><div class="tests"><span class="sil"><img src="characters-v2/tordis/idle.svg" alt=""></span><span class="tiny l"><img src="characters-v2/tordis/idle.svg" width="32" height="32" alt=""><img src="characters-v2/tordis/idle.svg" width="64" height="64" alt=""></span><span class="tiny d"><img src="characters-v2/tordis/idle.svg" width="32" height="32" alt=""><img src="characters-v2/tordis/idle.svg" width="64" height="64" alt=""></span></div></div>
+  </div>
+  <div class="mock">
+    <div class="phone"><div class="screen day">
+      <div class="bar"><span class="x">✕</span><div class="prog"><i></i></div></div>
+      <div class="img" style="background-image:url('../../dist/assets/exam/traffic-q-065-v1.webp')"></div>
+      <div class="q disp">Hvem holder du tilbage for?</div>
+      <div class="st"><span>Har kun vigepligt for biler</span><b>Ja</b></div>
+      <div class="sheet"><div class="who"><img src="characters-v2/tordis/wrong.svg" alt=""></div>
+        <h5 class="disp">Forkert. Vi overlever.</h5>
+        <p>Hajtænder betyder ubetinget vigepligt for <b>alle</b> på tværvejen, også cyklisten. Meteoren var værre.</p>
+        <div class="cta">Forstået</div></div>
+    </div></div>
+    <p class="mock-note"><b>I appen:</b> hun er den mest danske af de tre (Stevns Klint og tordensten er ægte folketro) og den stærkeste mod prøvenerver. Flintgrøn og lime virker både lyst og mørkt.</p>
+  </div>
+</section>
+
+<section class="jury" id="jury" style="padding:30px 0;border-top:1px solid var(--line)">
+  <h3>Juryens samlede score (3 linser, maks. 30)</h3>
+  <table><thead><tr><th>Koncept</th><th>Score</th><th>Status</th></tr></thead><tbody>
+    <tr><td>Mira Muld (stjernemuldvarp)</td><td>22</td><td>Valgt</td></tr>
+    <tr><td>Knur (knurhane)</td><td>22</td><td>Valgt</td></tr>
+    <tr><td>Tordis (tordensten)</td><td>20</td><td>Valgt; personlighed podet fra Mos (bjørnedyr, 20)</td></tr>
+    <tr><td>Skår (levende keramikskår med guldsøm)</td><td>20</td><td>Fravalgt: kintsugi er en wellness-kliché, og silhuetten læses som et skjold</td></tr>
+    <tr><td>Mos (bjørnedyr)</td><td>20</td><td>Fravalgt: allerede et internet-meme; personligheden lever videre i Tordis</td></tr>
+    <tr><td>Bodil (rokke) · Knud (snog)</td><td>19 · 19</td><td>Fravalgt: ligner Mr. Ray/Mantine, og slanger giver fobi-risiko</td></tr>
+    <tr><td>Skrub · Plet (fladfisk)</td><td>18 · 15</td><td>Fravalgt: læses som et blad ved 32 px og ligner Stunfisk</td></tr>
+    <tr><td>Blære (blæretang) · Tamp (reb-knude) · Knud (nervebundt)</td><td>17 · 17 · 14</td><td>Fravalgt: svage silhuetter, uheldige associationer, for barnligt</td></tr>
+  </tbody></table>
+</section>
+
+<div class="ask">
+  <h2>Det skal du vælge</h2>
+  <ol>
+    <li><b>Hovedkarakter:</b> Mira, Knur eller Tordis.</li>
+    <li><b>Støttecast:</b> karakterens eget cast, eller en blanding (fx Tordis med Ragna som gentagelseskø og Knur som gæst).</li>
+    <li><b>Visning:</b> hovedkarakteren afgør, om natvisningen (UI 1) eller dagvisningen (UI 2) bliver primær.</li>
+  </ol>
+  <p style="margin-bottom:0">Derefter laver jeg det fulde udtryksark (også streak, level-up og savnet-en-dag), opsætningen til Rive-rig og integrationen i appen.</p>
+</div>
+<footer>Alle figurer er originale og tegnet i SVG til Natkørsel. Ingen assets er hentet fra referencerne. Tegningerne er retningsskitser i høj kvalitet og endnu ikke færdig produktionsgrafik.</footer>
+</div>
+</body>
+</html>
