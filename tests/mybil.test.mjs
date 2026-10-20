@@ -39,6 +39,23 @@ test('earnings never drop when the app trims old exam history', () => {
   assert.equal(balance(after, garage), BOOSTER_RATES.examPass);
 });
 
+test('colours are free once unlocked, plates are filtered, extras toggle without paying twice', async () => {
+  const { setColor, cleanPlate, setPlate, buyOrToggleExtra, EXTRAS } = await import('../dist/mybil.js');
+  const g = emptyGarage();
+  assert.equal(setColor(g, 'paint', '#14e0f0').garage.style.scooter.paint, '#14E0F0');
+  assert.equal(setColor(g, 'paint', 'red').ok, false);
+  assert.equal(cleanPlate(' boost-42! '), 'BOOST42');
+  assert.equal(cleanPlate('ÆBLE ØL'), 'ÆBLE ØL');
+  assert.equal(setPlate(g, 'fuck').ok, false);
+  const rich = { journey: { events: [] }, history: [{ id: 'a', errors: 0 }] }; // 5.000
+  const bought = buyOrToggleExtra(g, rich, 'neon');
+  assert.equal(bought.ok, true);
+  assert.equal(bought.garage.spent, EXTRAS.neon.price);
+  const off = buyOrToggleExtra(bought.garage, rich, 'neon');
+  assert.equal(off.garage.spent, EXTRAS.neon.price);
+  assert.equal(off.garage.style.scooter.neonOn, false);
+});
+
 test('garage survives a storage round trip and ignores junk', () => {
   const store = memory();
   const g = { ...emptyGarage(), spent: 1234, bases: ['scooter', 'bigcar', 'nope'], active: 'bigcar' };

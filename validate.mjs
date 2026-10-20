@@ -12,6 +12,7 @@ import { validateVoicePack } from './voice-validation.mjs';
 import { buildVoiceCatalog } from './scripts/build-voice-catalog.mjs';
 import { ART_ASSETS } from './dist/art.js';
 import { CAST } from './dist/cast.js';
+import { BASES as CAR_BASES } from './dist/mybil-catalog.js';
 import { createHash } from 'node:crypto';
 import {EXAM_PHOTOS} from './dist/exam-photos.js';
 import {validateExamVisuals} from './visual-validation.mjs';
@@ -246,6 +247,12 @@ for (const [id, member] of Object.entries(CAST)) {
   if (!fs.existsSync(file)) continue;
   const head = fs.readFileSync(file).subarray(0, 16);
   check(head.subarray(0, 4).toString('ascii') === 'RIFF' && head.subarray(8, 12).toString('ascii') === 'WEBP', `${id}: castfilen er ikke WebP`);
+}
+
+// Min bil: every base, split layer and approved part in the catalog must exist as a WebP.
+for (const base of CAR_BASES) {
+  const files = ['base', ...(base.split ? ['body', 'wheels'] : []), ...base.parts];
+  for (const name of files) inspectAsset(path.join(dist, 'assets', 'mybil', base.id, `${name}.webp`));
 }
 
 const pixelProbes=JSON.parse(execFileSync('python',['-X','utf8',path.join(root,'scripts/probe-exam-pixels.py')],{encoding:'utf8',maxBuffer:2e6}));

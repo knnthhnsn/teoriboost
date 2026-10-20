@@ -11,8 +11,19 @@ manifest = json.load(open(os.path.join(ASSETS, 'manifest.json')))
 parts = [p for p in manifest[base_id]['parts'] if not prefixes or any(p.startswith(x) for x in prefixes)]
 base = Image.open(os.path.join(ASSETS, base_id, 'base.webp')).convert('RGBA')
 tiles = [('base', base)]
+TEST = {'paint': (255, 60, 200), 'stripe': (20, 224, 240), 'windows': (40, 44, 52)}
+tint = manifest[base_id].get('tint', {})
+
+def tinted(layer, rgb):
+    """What the app does: colour x mask luminance (white -> the colour, grey shade -> darker colour)."""
+    from PIL import ImageChops
+    col = Image.new('RGB', layer.size, rgb)
+    out = ImageChops.multiply(layer.convert('RGB'), col).convert('RGBA'); out.putalpha(layer.getchannel('A')); return out
+
 for p in parts:
-    c = base.copy(); c.alpha_composite(Image.open(os.path.join(ASSETS, base_id, p + '.webp')).convert('RGBA')); tiles.append((p, c))
+    layer = Image.open(os.path.join(ASSETS, base_id, p + '.webp')).convert('RGBA')
+    if p in tint: layer = tinted(layer, TEST[tint[p]])
+    c = base.copy(); c.alpha_composite(layer); tiles.append((p + (' (testfarve)' if p in tint else ''), c))
 # common crop: union of everything drawn, plus a margin
 box = None
 for _, t in tiles:

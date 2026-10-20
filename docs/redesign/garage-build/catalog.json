@@ -160,16 +160,6 @@
         1.05,
         0.55
       ]
-    },
-    "face": {
-      "name": "Ansigt",
-      "z": 17,
-      "region": [
-        0.3,
-        0,
-        1,
-        0.95
-      ]
     }
   },
   "parts": [
@@ -580,48 +570,6 @@
       "name": "LED-bryn",
       "price": 3500,
       "v": 1
-    },
-    {
-      "id": "face-classic",
-      "slot": "face",
-      "name": "Klassisk",
-      "price": 3000,
-      "edit": "give the vehicle a friendly face: big eyes, brows and a small smile (no mustache), in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
-    },
-    {
-      "id": "face-mustache",
-      "slot": "face",
-      "name": "Overskæg",
-      "price": 4000,
-      "edit": "give the vehicle a friendly face: big eyes, brows, a bushy mustache and a small smile, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
-    },
-    {
-      "id": "face-angry",
-      "slot": "face",
-      "name": "Sur",
-      "price": 4000,
-      "edit": "give the vehicle an angry face: big eyes with angled angry brows, a bushy mustache and gritted white teeth, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
-    },
-    {
-      "id": "face-nervous",
-      "slot": "face",
-      "name": "Nervøs",
-      "price": 3500,
-      "edit": "give the vehicle a nervous face: wide eyes with tiny pupils, worried brows, small blue sweat drops and a small round o mouth, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
-    },
-    {
-      "id": "face-cool",
-      "slot": "face",
-      "name": "Cool",
-      "price": 5000,
-      "edit": "give the vehicle a cool face: black sunglasses over the eyes, a bushy mustache and a smirk, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
-    },
-    {
-      "id": "face-happy",
-      "slot": "face",
-      "name": "Glad",
-      "price": 3000,
-      "edit": "give the vehicle a laughing face: closed happy curved eyes, brows, a bushy mustache and a big open laughing mouth, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
     }
   ],
   "split": {

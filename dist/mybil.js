@@ -2,50 +2,26 @@
  * "Min bil": personal vehicle customisation paid with Boosters.
  * Boosters are earned only by learning and are derived from the progress the app already stores
  * (journey events and exam history), so they cannot be farmed or bought. Only spending is stored here.
- * Vehicles are a base image plus transparent part layers on the same canvas (generated with Codex,
- * see docs/redesign/garage-build).
+ * A vehicle is a base image plus transparent part layers on one shared canvas (generated with Codex, see
+ * docs/redesign/garage-v5). Paint, stripes and window tint are white masks the app colours freely.
  */
+import { SLOTS, PARTS, BASES } from './mybil-catalog.js';
+
+export { SLOTS, PARTS, BASES };
 export const BOOSTER_RATES = Object.freeze({ lesson: 1000, dailyGoal: 1500, examPass: 5000 });
+// Extras that are not image parts: unlocked once per vehicle, then free to change.
+export const EXTRAS = Object.freeze({ neon: { name: 'Neon under bilen', price: 4000 }, lower: { name: 'Sænkning', price: 5000 } });
+export const COLOR_PRESETS = Object.freeze(['#FF3CC8', '#14E0F0', '#D5FF62', '#FF4B4B', '#FF9600', '#FFD23F', '#58CC02', '#1CB0F6', '#8A5CF6', '#1F2328', '#FFFFFF', '#9AA3AD']);
+const DEFAULT_COLORS = { paint: '#FF3CC8', stripe: '#FFFFFF', windows: '#1F2328', neon: '#B66DFF' };
 const STORE_KEY = 'teoriboost.mybil.v1';
 const ROOT = 'assets/mybil/';
 
-export const BASES = Object.freeze([
-  { id: 'scooter', name: 'Ødelagt scooter', price: 0 },
-  { id: 'smallcar', name: 'Slidt lille bil', price: 25000 },
-  { id: 'bigcar', name: 'Stor slidt bil', price: 60000 },
-  { id: 'racecar', name: 'Ødelagt racerbil', price: 120000 },
-]);
-
-// Slots stack in this order on top of the base.
-export const SLOTS = Object.freeze([
-  { id: 'paint', name: 'Lak', z: 1 },
-  { id: 'decal', name: 'Dekor', z: 2 },
-  { id: 'wheels', name: 'Fælge', z: 3 },
-  { id: 'front', name: 'Front', z: 4 },
-  { id: 'top', name: 'Top', z: 5 },
-]);
-
-export const PARTS = Object.freeze([
-  { id: 'paint-mint', slot: 'paint', name: 'Mintgrøn', price: 6000 },
-  { id: 'paint-pink', slot: 'paint', name: 'Pastelpink', price: 6000 },
-  { id: 'paint-black', slot: 'paint', name: 'Mat sort', price: 8000 },
-  { id: 'paint-red', slot: 'paint', name: 'Racerrød', price: 8000 },
-  { id: 'decal-hearts', slot: 'decal', name: 'Hjerter', price: 2000 },
-  { id: 'decal-flames', slot: 'decal', name: 'Flammer', price: 3000 },
-  { id: 'decal-stripes', slot: 'decal', name: 'Racerstriber', price: 3000 },
-  { id: 'wheels-pastel', slot: 'wheels', name: 'Pastelfælge', price: 4000 },
-  { id: 'wheels-sport', slot: 'wheels', name: 'Sportsfælge', price: 5000 },
-  { id: 'wheels-chrome', slot: 'wheels', name: 'Kromfælge', price: 7000 },
-  { id: 'front-lashes', slot: 'front', name: 'Vipper', price: 2500 },
-  { id: 'front-led', slot: 'front', name: 'LED-bryn', price: 3500 },
-  { id: 'top-bow', slot: 'top', name: 'Sløjfe', price: 2500 },
-  { id: 'top-spoiler', slot: 'top', name: 'Spoiler', price: 5000 },
-]);
-
 const partById = id => PARTS.find(part => part.id === id);
 const baseById = id => BASES.find(base => base.id === id);
+const slotOf = id => SLOTS.find(s => s.id === partById(id)?.slot);
 export const partSrc = (baseId, partId) => `${ROOT}${baseId}/${partId}.webp`;
 export const baseSrc = baseId => `${ROOT}${baseId}/base.webp`;
+export const partsFor = baseId => (baseById(baseId)?.parts || []).map(partById).filter(Boolean);
 
 /** Boosters earned from stored progress. */
 export function boostersEarned({ journey, history } = {}) {
@@ -61,7 +37,7 @@ export function boostersEarned({ journey, history } = {}) {
 }
 
 export function emptyGarage() {
-  return { spent: 0, earnedSeen: 0, owned: [], bases: ['scooter'], active: 'scooter', equipped: {} };
+  return { spent: 0, earnedSeen: 0, owned: [], bases: ['scooter'], active: 'scooter', equipped: {}, style: {} };
 }
 export function loadGarage(storage = globalThis.localStorage) {
   try {
@@ -74,6 +50,7 @@ export function loadGarage(storage = globalThis.localStorage) {
     g.bases = Array.isArray(raw.bases) ? [...new Set(['scooter', ...raw.bases.filter(id => baseById(id))])] : ['scooter'];
     g.active = g.bases.includes(raw.active) ? raw.active : 'scooter';
     g.equipped = raw.equipped && typeof raw.equipped === 'object' ? raw.equipped : {};
+    g.style = raw.style && typeof raw.style === 'object' ? raw.style : {};
     return g;
   } catch { return emptyGarage(); }
 }
@@ -85,6 +62,8 @@ export function saveGarage(garage, storage = globalThis.localStorage) {
 export const totalEarned = (progress, garage) => Math.max(boostersEarned(progress), garage?.earnedSeen || 0);
 export const balance = (progress, garage) => Math.max(0, totalEarned(progress, garage) - (garage?.spent || 0));
 export const withEarnings = (garage, progress) => ({ ...garage, earnedSeen: totalEarned(progress, garage) });
+const owns = (garage, key) => garage.owned.includes(`${garage.active}:${key}`);
+const styleOf = garage => ({ ...DEFAULT_COLORS, plate: '', neonOn: false, lowered: false, ...(garage.style?.[garage.active] || {}) });
 
 /** Pure state transitions; each returns { garage, ok, message }. */
 export function buyBase(garage, progress, baseId) {
@@ -96,18 +75,52 @@ export function buyBase(garage, progress, baseId) {
 }
 export function buyOrEquipPart(garage, progress, partId) {
   const part = partById(partId);
-  if (!part) return { garage, ok: false, message: 'Ukendt del.' };
-  const key = `${garage.active}:${partId}`;
-  const slotKey = `${garage.active}`;
+  if (!part || !partsFor(garage.active).includes(part)) return { garage, ok: false, message: 'Den del passer ikke til dette køretøj.' };
+  const slotKey = garage.active;
   const equipped = { ...garage.equipped, [slotKey]: { ...(garage.equipped[slotKey] || {}) } };
-  if (garage.owned.includes(key)) {
+  if (owns(garage, partId)) {
     const current = equipped[slotKey][part.slot];
     if (current === partId) delete equipped[slotKey][part.slot]; else equipped[slotKey][part.slot] = partId;
     return { garage: { ...garage, equipped }, ok: true, message: current === partId ? `${part.name} er taget af.` : `${part.name} er monteret.` };
   }
   if (balance(progress, garage) < part.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu.' };
   equipped[slotKey][part.slot] = partId;
-  return { garage: { ...garage, spent: garage.spent + part.price, owned: [...garage.owned, key], equipped }, ok: true, message: `${part.name} er købt og monteret.` };
+  return { garage: { ...garage, spent: garage.spent + part.price, owned: [...garage.owned, `${slotKey}:${partId}`], equipped }, ok: true, message: `${part.name} er købt og monteret.` };
+}
+export function buyOrToggleExtra(garage, progress, extraId) {
+  const extra = EXTRAS[extraId];
+  if (!extra) return { garage, ok: false, message: 'Ukendt ekstraudstyr.' };
+  if (extraId === 'lower' && !baseById(garage.active)?.split) return { garage, ok: false, message: 'Dette køretøj kan ikke sænkes endnu.' };
+  const key = `extra-${extraId}`, flag = extraId === 'neon' ? 'neonOn' : 'lowered';
+  const style = { ...styleOf(garage) };
+  if (owns(garage, key)) {
+    style[flag] = !style[flag];
+    return { garage: { ...garage, style: { ...garage.style, [garage.active]: style } }, ok: true, message: `${extra.name} er ${style[flag] ? 'slået til' : 'slået fra'}.` };
+  }
+  if (balance(progress, garage) < extra.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu.' };
+  style[flag] = true;
+  return { garage: { ...garage, spent: garage.spent + extra.price, owned: [...garage.owned, `${garage.active}:${key}`], style: { ...garage.style, [garage.active]: style } }, ok: true, message: `${extra.name} er købt.` };
+}
+
+const HEX = /^#[0-9a-f]{6}$/i;
+/** Free colour choice for paint, stripes, windows and neon. Changing colour is free once unlocked. */
+export function setColor(garage, kind, color) {
+  if (!['paint', 'stripe', 'windows', 'neon'].includes(kind) || !HEX.test(color)) return { garage, ok: false, message: 'Ugyldig farve.' };
+  const style = { ...styleOf(garage), [kind]: color.toUpperCase() };
+  return { garage: { ...garage, style: { ...garage.style, [garage.active]: style } }, ok: true, message: '' };
+}
+
+const BLOCKED = ['FUCK', 'KUSSE', 'PIK', 'LUDER', 'NAZI', 'NEGER', 'HORE', 'SEX', 'PORNO', 'SS'];
+/** Licence plate text: letters, digits and space, max 7, a small list of words not allowed. */
+export function cleanPlate(text) {
+  const t = String(text || '').toUpperCase().replace(/[^A-ZÆØÅ0-9 ]/g, '').replace(/\s+/g, ' ').trim().slice(0, 7);
+  return BLOCKED.some(w => t.replace(/ /g, '').includes(w)) ? '' : t;
+}
+export function setPlate(garage, text) {
+  const plate = cleanPlate(text);
+  if (text && !plate) return { garage, ok: false, message: 'Den tekst kan ikke bruges på pladen.' };
+  const style = { ...styleOf(garage), plate };
+  return { garage: { ...garage, style: { ...garage.style, [garage.active]: style } }, ok: true, message: plate ? `Pladen siger ${plate}.` : '' };
 }
 
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -121,36 +134,76 @@ export function boosterCount(amount) {
   return `${boosterIcon()}<b>${fmt(amount)}</b><span class="sr-only"> Boosters</span>`;
 }
 
+/** Layers of the active vehicle, in stacking order. Masks are tinted: a coloured shape plus the grey shading multiplied on top. */
 export function vehicleLayers(garage, baseId = garage.active) {
+  const base = baseById(baseId);
+  const style = { ...styleOf(garage), ...(garage.style?.[baseId] || {}) };
   const equipped = garage.equipped?.[baseId] || {};
-  const parts = SLOTS.map(slot => equipped[slot.id]).filter(Boolean);
-  return [`<img src="${baseSrc(baseId)}" alt="" style="z-index:0">`,
-    ...parts.map(id => `<img src="${partSrc(baseId, id)}" alt="" style="z-index:${SLOTS.find(s => s.id === partById(id).slot).z}">`)].join('');
+  const lowered = style.lowered && base?.split;
+  const img = (src, z) => `<img src="${escape(src)}" alt="" style="z-index:${z}">`;
+  const tinted = (src, z, color, cls = '') => `<span class="mybil-tint ${cls}" style="z-index:${z};--src:url('${escape(src)}');background:${escape(color)}"></span><img class="mybil-shade ${cls}" src="${escape(src)}" alt="" style="z-index:${z}">`;
+  const body = [img(lowered ? `${ROOT}${baseId}/body.webp` : baseSrc(baseId), 0)];
+  const wheels = [];
+  for (const slot of SLOTS) {
+    const id = equipped[slot.id]; const part = id && partById(id);
+    if (!part || !(base?.parts || []).includes(id)) continue;
+    const src = partSrc(baseId, id);
+    const html = part.tint ? tinted(src, slot.z, style[part.tint], part.tint === 'windows' ? 'is-glass' : '') : img(src, slot.z);
+    (slot.id === 'wheels' ? wheels : body).push(html);
+  }
+  if (lowered && !equipped.wheels) wheels.push(img(`${ROOT}${baseId}/wheels.webp`, 14));
+  const [x0, , x1, y1] = base?.bbox || [0.1, 0, 0.9, 0.85];
+  const neon = style.neonOn ? `<span class="mybil-neon" style="left:${x0 * 100 + 6}%;right:${(1 - x1) * 100 + 6}%;top:${y1 * 100 - 5}%;background:${escape(style.neon)}"></span>` : '';
+  const p = base?.plate; const showPlate = p && equipped.plate === 'plate-blank' && style.plate;
+  const plate = showPlate ? `<span class="mybil-plate" style="left:${p[0] * 100}%;top:${p[1] * 100}%;width:${(p[2] - p[0]) * 100}%;height:${(p[3] - p[1]) * 100}%;z-index:30;--n:${Math.max(3, [...style.plate].length)}"><b>${escape(style.plate)}</b></span>` : '';
+  return `${neon}<div class="mybil-body${lowered ? ' is-lowered' : ''}">${body.join('')}${plate}</div>${wheels.join('')}`;
+}
+
+function colorPicker(kind, value) {
+  return `<div class="mybil-colors" role="group" aria-label="Vælg farve">${COLOR_PRESETS.map(c => `<button type="button" class="mybil-swatch${c === value ? ' is-on' : ''}" style="background:${c}" data-mybil-color="${kind}" data-value="${c}" aria-label="Farve ${c}" aria-pressed="${c === value}"></button>`).join('')}<label class="mybil-custom"><input type="color" value="${escape(value)}" data-mybil-color-input="${kind}" aria-label="Vælg din egen farve"><span>Egen farve</span></label></div>`;
 }
 
 export function renderMyCar({ garage, progress, slot = 'paint', message = '' }) {
   const coins = balance(progress, garage);
   const active = baseById(garage.active);
   const equipped = garage.equipped?.[garage.active] || {};
+  const style = styleOf(garage);
+  const available = partsFor(garage.active);
+  const usedSlots = SLOTS.filter(s => available.some(p => p.slot === s.id));
+  const tabs = [...usedSlots.map(s => [s.id, s.name]), ['extra', 'Ekstra']]
+    .map(([id, name]) => `<button type="button" role="tab" class="mybil-tab ${id === slot ? 'is-active' : ''}" data-mybil-slot="${id}" aria-selected="${id === slot}">${escape(name)}</button>`).join('');
+  const price = n => `${boosterIcon(14)} ${fmt(n)}`;
+  let panel;
+  if (slot === 'extra') {
+    const extra = id => {
+      const e = EXTRAS[id], has = owns(garage, `extra-${id}`), on = id === 'neon' ? style.neonOn : style.lowered;
+      const disabled = id === 'lower' && !active.split;
+      return `<button type="button" class="mybil-item mybil-extra ${on ? 'is-on' : ''}" data-mybil-extra="${id}" aria-pressed="${on}" ${disabled ? 'disabled' : ''}><span class="mybil-item-name">${escape(e.name)}</span><small>${has ? (on ? 'Slået til' : 'Slået fra') : price(e.price)}</small></button>`;
+    };
+    panel = `<div class="mybil-grid">${extra('neon')}${extra('lower')}</div>${owns(garage, 'extra-neon') ? `<h3 class="mybil-subtitle">Neonfarve</h3>${colorPicker('neon', style.neon)}` : ''}`;
+  } else {
+    const items = available.filter(p => p.slot === slot).map(part => {
+      const has = owns(garage, part.id), on = equipped[part.slot] === part.id;
+      const thumb = part.tint ? `<span class="mybil-tint" style="--src:url('${partSrc(garage.active, part.id)}');background:${style[part.tint]}"></span><img class="mybil-shade" src="${partSrc(garage.active, part.id)}" alt="" loading="lazy">` : `<img src="${partSrc(garage.active, part.id)}" alt="" loading="lazy">`;
+      return `<button type="button" class="mybil-item ${on ? 'is-on' : ''} ${!has && coins < part.price ? 'is-short' : ''}" data-mybil-part="${part.id}" aria-pressed="${on}"><span class="mybil-thumb"><img src="${baseSrc(garage.active)}" alt="" loading="lazy">${thumb}</span><span class="mybil-item-name">${escape(part.name)}</span><small>${on ? 'Monteret' : has ? 'Montér' : price(part.price)}</small></button>`;
+    }).join('');
+    const tintKind = available.find(p => p.slot === slot && p.tint)?.tint;
+    const tintOwned = tintKind && available.some(p => p.slot === slot && p.tint && owns(garage, p.id));
+    const plateOwned = slot === 'plate' && owns(garage, 'plate-blank');
+    panel = `<div class="mybil-grid">${items}</div>`
+      + (tintOwned ? `<h3 class="mybil-subtitle">Vælg farve</h3>${colorPicker(tintKind, style[tintKind])}` : '')
+      + (plateOwned ? `<label class="mybil-plate-input"><span>Din tekst (op til 7 tegn)</span><input type="text" maxlength="7" value="${escape(style.plate)}" data-mybil-plate autocomplete="off" spellcheck="false"></label>` : '');
+  }
   const bases = BASES.map(base => {
     const owned = garage.bases.includes(base.id);
-    const label = owned ? (base.id === garage.active ? 'Valgt' : 'Vælg') : `${boosterIcon(16)} ${fmt(base.price)}`;
-    return `<button type="button" class="mybil-base ${base.id === garage.active ? 'is-active' : ''} ${owned ? '' : 'is-locked'}" data-mybil-base="${base.id}" aria-pressed="${base.id === garage.active}"><img src="${baseSrc(base.id)}" alt="" loading="lazy"><span>${escape(base.name)}</span><small>${label}</small></button>`;
-  }).join('');
-  const tabs = SLOTS.map(s => `<button type="button" role="tab" class="mybil-tab ${s.id === slot ? 'is-active' : ''}" data-mybil-slot="${s.id}" aria-selected="${s.id === slot}">${escape(s.name)}</button>`).join('');
-  const items = PARTS.filter(p => p.slot === slot).map(part => {
-    const owned = garage.owned.includes(`${garage.active}:${part.id}`);
-    const on = equipped[part.slot] === part.id;
-    const affordable = coins >= part.price;
-    const label = on ? 'Monteret' : owned ? 'Montér' : `${boosterIcon(16)} ${fmt(part.price)}`;
-    return `<button type="button" class="mybil-item ${on ? 'is-on' : ''} ${!owned && !affordable ? 'is-short' : ''}" data-mybil-part="${part.id}" aria-pressed="${on}"><span class="mybil-thumb"><img src="${baseSrc(garage.active)}" alt="" loading="lazy"><img src="${partSrc(garage.active, part.id)}" alt="" loading="lazy"></span><span class="mybil-item-name">${escape(part.name)}</span><small>${label}</small></button>`;
+    return `<button type="button" class="mybil-base ${base.id === garage.active ? 'is-active' : ''} ${owned ? '' : 'is-locked'}" data-mybil-base="${base.id}" aria-pressed="${base.id === garage.active}"><img src="${baseSrc(base.id)}" alt="" loading="lazy"><span>${escape(base.name)}</span><small>${owned ? (base.id === garage.active ? 'Valgt' : 'Vælg') : price(base.price)}</small></button>`;
   }).join('');
   return `<section class="mybil" aria-labelledby="mybil-title">
     <header class="mybil-head"><div><span class="eyebrow">MIN BIL</span><h1 id="mybil-title">${escape(active.name)}</h1></div><div class="booster-chip booster-chip--big">${boosterCount(coins)}</div></header>
-    <div class="mybil-stage" role="img" aria-label="${escape(active.name)} med dine dele">${vehicleLayers(garage)}</div>
-    ${message ? `<p class="mybil-message" role="status">${escape(message)}</p>` : '<p class="mybil-message" role="status"></p>'}
-    <div class="mybil-tabs" role="tablist" aria-label="Dele">${tabs}</div>
-    <div class="mybil-grid">${items}</div>
+    <div class="mybil-stage" role="img" aria-label="${escape(active.name)} med dine valg">${vehicleLayers(garage)}</div>
+    <p class="mybil-message" role="status">${escape(message)}</p>
+    <div class="mybil-tabs" role="tablist" aria-label="Tuning">${tabs}</div>
+    ${panel}
     <h2 class="mybil-subtitle">Dine køretøjer</h2>
     <div class="mybil-bases">${bases}</div>
     <p class="mybil-earn">Boosters tjenes kun ved at lære: ${fmt(BOOSTER_RATES.lesson)} pr. lektion, ${fmt(BOOSTER_RATES.dailyGoal)} for dagens mål og ${fmt(BOOSTER_RATES.examPass)} for en bestået øveprøve.</p>
