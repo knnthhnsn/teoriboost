@@ -46,11 +46,11 @@ a.text-link,.text-link{color:var(--blue-ink)}
 .exam-content p{font-size:14px!important}
 
 /* Chrome */
-.topbar{background:rgba(255,255,255,.94);border-bottom:2px solid var(--line)}
+.topbar{background:#fff!important;border-bottom:2px solid var(--line)}
 .brand{font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;color:var(--ink)}
-/* Keep the yellow logo: yellow marks on a graphite tile so it reads on white. */
-.brand-mark{color:var(--accent)!important;background:var(--ink);border-radius:10px;padding:2px 10px 2px 6px;transform:none!important;line-height:1}
-.brand-dot{background:var(--accent);color:var(--accent-ink)}
+/* The logo stays exactly as before: yellow, skewed /// in the original typeface (styles.css). */
+@font-face{font-family:LogoBarlow;src:url('assets/fonts/heading-bold.ttf') format('truetype');font-weight:800;font-display:swap}
+.brand-mark{font-family:LogoBarlow,Impact,sans-serif!important}
 .sidebar{border-right:2px solid var(--line);background:#fff}
 .nav-item{border-radius:14px;color:var(--muted);border:2px solid transparent}
 .nav-item:hover{background:var(--panel2)}
@@ -159,7 +159,7 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
 
 /* Narrow phones: Rubik is wider than the old condensed face. */
 @media (max-width:400px){
-  .brand{font-size:17px!important;gap:5px!important}.brand-mark{font-size:22px!important}.topbar{gap:6px;padding:0 10px}
+  .brand{font-size:17px!important;gap:5px!important}.topbar{gap:6px;padding:0 10px}
   .top-actions{gap:6px}.top-actions .mode-toggle{padding:6px 8px}
   .exam-art .display{font-size:clamp(56px,22vw,96px)!important}
   .exam-art .display small,.exam-art .display span{white-space:normal}
