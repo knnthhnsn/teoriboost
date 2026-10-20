@@ -140,23 +140,24 @@ export function vehicleLayers(garage, baseId = garage.active) {
   const style = { ...styleOf(garage), ...(garage.style?.[baseId] || {}) };
   const equipped = garage.equipped?.[baseId] || {};
   const lowered = style.lowered && base?.split;
-  const img = (src, z) => `<img src="${escape(src)}" alt="" style="z-index:${z}">`;
-  const tinted = (src, z, color, cls = '') => `<span class="mybil-tint ${cls}" style="z-index:${z};--src:url('${escape(src)}');background:${escape(color)}"></span><img class="mybil-shade ${cls}" src="${escape(src)}" alt="" style="z-index:${z}">`;
-  const body = [img(lowered ? `${ROOT}${baseId}/body.webp` : baseSrc(baseId), 0)];
+  const img = (src, z, id = '') => `<img src="${escape(src)}" alt="" style="z-index:${z}"${id ? ` data-layer="${escape(id)}"` : ''}>`;
+  const tinted = (src, z, color, cls = '', id = '') => `<span class="mybil-tint ${cls}" data-layer="${escape(id)}" style="z-index:${z};--src:url('${escape(src)}');background:${escape(color)}"></span><img class="mybil-shade ${cls}" src="${escape(src)}" alt="" style="z-index:${z}">`;
+  const split = !!base?.split;
+  const body = [img(split ? `${ROOT}${baseId}/body.webp` : baseSrc(baseId), 0)];
   const wheels = [];
   for (const slot of SLOTS) {
     const id = equipped[slot.id]; const part = id && partById(id);
     if (!part || !(base?.parts || []).includes(id)) continue;
     const src = partSrc(baseId, id);
-    const html = part.tint ? tinted(src, slot.z, style[part.tint], part.tint === 'windows' ? 'is-glass' : '') : img(src, slot.z);
+    const html = part.tint ? tinted(src, slot.z, style[part.tint], part.tint === 'windows' ? 'is-glass' : '', id) : img(src, slot.z, id);
     (slot.id === 'wheels' ? wheels : body).push(html);
   }
-  if (lowered && !equipped.wheels) wheels.push(img(`${ROOT}${baseId}/wheels.webp`, 14));
+  if (split && !equipped.wheels) wheels.push(img(`${ROOT}${baseId}/wheels.webp`, 14));
   const [x0, , x1, y1] = base?.bbox || [0.1, 0, 0.9, 0.85];
   const neon = style.neonOn ? `<span class="mybil-neon" style="left:${x0 * 100 + 6}%;right:${(1 - x1) * 100 + 6}%;top:${y1 * 100 - 5}%;background:${escape(style.neon)}"></span>` : '';
   const p = base?.plate; const showPlate = p && equipped.plate === 'plate-blank' && style.plate;
   const plate = showPlate ? `<span class="mybil-plate" style="left:${p[0] * 100}%;top:${p[1] * 100}%;width:${(p[2] - p[0]) * 100}%;height:${(p[3] - p[1]) * 100}%;z-index:30;--n:${Math.max(3, [...style.plate].length)}"><b>${escape(style.plate)}</b></span>` : '';
-  return `${neon}<div class="mybil-body${lowered ? ' is-lowered' : ''}">${body.join('')}${plate}</div>${wheels.join('')}`;
+  return `<span class="mybil-rig">${neon}<span class="mybil-body${lowered ? ' is-lowered' : ''}${split ? ' is-sprung' : ''}">${body.join('')}${plate}</span><span class="mybil-wheels">${wheels.join('')}</span></span>`;
 }
 
 function colorPicker(kind, value) {
@@ -200,7 +201,7 @@ export function renderMyCar({ garage, progress, slot = 'paint', message = '' }) 
   }).join('');
   return `<section class="mybil" aria-labelledby="mybil-title">
     <header class="mybil-head"><div><span class="eyebrow">MIN BIL</span><h1 id="mybil-title">${escape(active.name)}</h1></div><div class="booster-chip booster-chip--big">${boosterCount(coins)}</div></header>
-    <div class="mybil-stage" role="img" aria-label="${escape(active.name)} med dine valg">${vehicleLayers(garage)}</div>
+    <button type="button" class="mybil-stage" data-mybil-rev data-base="${escape(garage.active)}" aria-label="${escape(active.name)} med dine valg. Tryk for at give gas"><span class="mybil-floor" aria-hidden="true"></span>${vehicleLayers(garage)}<span class="mybil-sheen" aria-hidden="true" style="--src:url('${baseSrc(garage.active)}')"></span></button>
     <p class="mybil-message" role="status">${escape(message)}</p>
     <div class="mybil-tabs" role="tablist" aria-label="Tuning">${tabs}</div>
     ${panel}
@@ -208,4 +209,16 @@ export function renderMyCar({ garage, progress, slot = 'paint', message = '' }) 
     <div class="mybil-bases">${bases}</div>
     <p class="mybil-earn">Boosters tjenes kun ved at lære: ${fmt(BOOSTER_RATES.lesson)} pr. lektion, ${fmt(BOOSTER_RATES.dailyGoal)} for dagens mål og ${fmt(BOOSTER_RATES.examPass)} for en bestået øveprøve.</p>
   </section>`;
+}
+
+/** Home loop: your own tuned vehicle out on a sunny road, scenery scrolling past in parallax. */
+export function renderRoadLoop(garage, progress) {
+  const base = baseById(garage.active);
+  if (!base) return '';
+  return `<a class="road-loop" href="#minbil" aria-label="${escape(base.name)}. Åbn Min bil">`
+    + '<span class="road-sun" aria-hidden="true"></span><span class="road-clouds" aria-hidden="true"></span>'
+    + '<span class="road-hills road-hills--far" aria-hidden="true"></span><span class="road-hills road-hills--near" aria-hidden="true"></span>'
+    + '<span class="road-trees" aria-hidden="true"></span><span class="road-asphalt" aria-hidden="true"><span class="road-dashes"></span></span>'
+    + `<span class="road-car" aria-hidden="true">${vehicleLayers(garage)}</span><span class="road-speed" aria-hidden="true"></span>`
+    + `<span class="road-label"><small>DIN BIL</small><strong>${escape(base.name)}</strong><span class="booster-chip-mini">${boosterCount(balance(progress, garage))}</span></span></a>`;
 }

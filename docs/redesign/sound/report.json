@@ -1,0 +1,210 @@
+{
+ "select": {
+  "category": "ui",
+  "seconds": 0.119,
+  "loudness": -26.0,
+  "truePeak": -12.7,
+  "phoneLoss": -0.4,
+  "bytes": 2239
+ },
+ "nav": {
+  "category": "ui",
+  "seconds": 0.123,
+  "loudness": -26.0,
+  "truePeak": -14.1,
+  "phoneLoss": -0.0,
+  "bytes": 2239
+ },
+ "node": {
+  "category": "ui",
+  "seconds": 0.478,
+  "loudness": -26.0,
+  "truePeak": -17.5,
+  "phoneLoss": 0.0,
+  "bytes": 6627
+ },
+ "card-advance": {
+  "category": "ui",
+  "seconds": 0.431,
+  "loudness": -26.0,
+  "truePeak": -16.6,
+  "phoneLoss": -0.0,
+  "bytes": 6000
+ },
+ "toggle-on": {
+  "category": "ui",
+  "seconds": 0.143,
+  "loudness": -26.0,
+  "truePeak": -15.4,
+  "phoneLoss": -0.0,
+  "bytes": 2552
+ },
+ "toggle-off": {
+  "category": "ui",
+  "seconds": 0.143,
+  "loudness": -26.0,
+  "truePeak": -16.7,
+  "phoneLoss": -0.0,
+  "bytes": 2552
+ },
+ "color": {
+  "category": "ui",
+  "seconds": 0.138,
+  "loudness": -26.0,
+  "truePeak": -15.9,
+  "phoneLoss": -0.0,
+  "bytes": 2552
+ },
+ "step": {
+  "category": "feedback",
+  "seconds": 0.602,
+  "loudness": -21.0,
+  "truePeak": -11.3,
+  "phoneLoss": -0.0,
+  "bytes": 8195
+ },
+ "correct": {
+  "category": "feedback",
+  "seconds": 0.803,
+  "loudness": -21.0,
+  "truePeak": -12.8,
+  "phoneLoss": 0.0,
+  "bytes": 10389
+ },
+ "repair": {
+  "category": "feedback",
+  "seconds": 0.641,
+  "loudness": -21.0,
+  "truePeak": -10.9,
+  "phoneLoss": -0.3,
+  "bytes": 8508
+ },
+ "paint": {
+  "category": "foley",
+  "seconds": 1.131,
+  "loudness": -22.0,
+  "truePeak": -11.8,
+  "phoneLoss": 0.0,
+  "bytes": 14464
+ },
+ "part": {
+  "category": "foley",
+  "seconds": 0.643,
+  "loudness": -22.0,
+  "truePeak": -9.6,
+  "phoneLoss": -4.1,
+  "bytes": 8508
+ },
+ "wheels": {
+  "category": "foley",
+  "seconds": 0.826,
+  "loudness": -22.0,
+  "truePeak": -9.4,
+  "phoneLoss": -5.7,
+  "bytes": 10703
+ },
+ "neon": {
+  "category": "foley",
+  "seconds": 0.894,
+  "loudness": -22.0,
+  "truePeak": -6.2,
+  "phoneLoss": -0.6,
+  "bytes": 11643
+ },
+ "lower": {
+  "category": "foley",
+  "seconds": 0.815,
+  "loudness": -22.0,
+  "truePeak": -9.8,
+  "phoneLoss": -2.7,
+  "bytes": 10703
+ },
+ "plate": {
+  "category": "foley",
+  "seconds": 0.401,
+  "loudness": -22.0,
+  "truePeak": -8.7,
+  "phoneLoss": -7.3,
+  "bytes": 5687
+ },
+ "booster": {
+  "category": "reward",
+  "seconds": 1.105,
+  "loudness": -19.0,
+  "truePeak": -9.7,
+  "phoneLoss": -0.0,
+  "bytes": 14151
+ },
+ "buy": {
+  "category": "reward",
+  "seconds": 1.336,
+  "loudness": -19.0,
+  "truePeak": -5.7,
+  "phoneLoss": -2.2,
+  "bytes": 16972
+ },
+ "complete": {
+  "category": "reward",
+  "seconds": 1.624,
+  "loudness": -19.0,
+  "truePeak": -10.5,
+  "phoneLoss": -0.0,
+  "bytes": 20420
+ },
+ "milestone": {
+  "category": "reward",
+  "seconds": 2.214,
+  "loudness": -19.0,
+  "truePeak": -10.0,
+  "phoneLoss": 0.0,
+  "bytes": 27316
+ },
+ "exam-pass": {
+  "category": "reward",
+  "seconds": 2.214,
+  "loudness": -19.0,
+  "truePeak": -10.9,
+  "phoneLoss": 0.0,
+  "bytes": 27316
+ },
+ "exam-fail": {
+  "category": "feedback",
+  "seconds": 1.431,
+  "loudness": -21.0,
+  "truePeak": -9.9,
+  "phoneLoss": -0.4,
+  "bytes": 17912
+ },
+ "rev-scooter": {
+  "category": "engine",
+  "seconds": 1.563,
+  "loudness": -20.0,
+  "truePeak": -9.0,
+  "phoneLoss": -4.9,
+  "bytes": 19480
+ },
+ "rev-smallcar": {
+  "category": "engine",
+  "seconds": 1.658,
+  "loudness": -20.0,
+  "truePeak": -8.3,
+  "phoneLoss": -1.9,
+  "bytes": 20734
+ },
+ "rev-bigcar": {
+  "category": "engine",
+  "seconds": 1.877,
+  "loudness": -20.0,
+  "truePeak": -8.6,
+  "phoneLoss": -3.3,
+  "bytes": 23241
+ },
+ "rev-racecar": {
+  "category": "engine",
+  "seconds": 1.666,
+  "loudness": -20.0,
+  "truePeak": -8.1,
+  "phoneLoss": -5.1,
+  "bytes": 20734
+ }
+}

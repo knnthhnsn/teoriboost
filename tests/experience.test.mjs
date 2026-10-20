@@ -1,78 +1,81 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CUES, createExperienceAudio } from '../dist/experience.js';
+import { existsSync, statSync } from 'node:fs';
+import { CUES, cueUrl, createExperienceAudio } from '../dist/experience.js';
 import { blankState, restoreState } from '../dist/core.js';
 
 function audioFixture() {
-  const oscillators = [], gains = [];
-  const parameter = () => ({ calls: [], setValueAtTime(...args) { this.calls.push(['set', ...args]); }, linearRampToValueAtTime(...args) { this.calls.push(['linear', ...args]); }, exponentialRampToValueAtTime(...args) { this.calls.push(['exponential', ...args]); }, cancelScheduledValues(...args) { this.calls.push(['cancel', ...args]); } });
+  const sources = [], fetched = [];
+  const parameter = (value = 1) => ({ value, calls: [], setValueAtTime(...a) { this.calls.push(['set', ...a]); }, linearRampToValueAtTime(...a) { this.calls.push(['linear', ...a]); }, cancelScheduledValues(...a) { this.calls.push(['cancel', ...a]); } });
+  const node = extra => ({ connect() {}, disconnect() { this.disconnected = true; }, ...extra });
   const context = {
     state: 'running', currentTime: 5, destination: {}, closed: false,
     resume: async () => {}, close: async () => { context.closed = true; },
-    createOscillator() { const osc = { frequency: parameter(), starts: [], stops: [], connect() {}, disconnect() { this.disconnected = true; }, start(at) { this.starts.push(at); }, stop(at) { this.stops.push(at); } }; oscillators.push(osc); return osc; },
-    createGain() { const gain = { gain: parameter(), connect() {}, disconnect() { this.disconnected = true; } }; gains.push(gain); return gain; }
+    decodeAudioData: async data => ({ duration: 0.5, data }),
+    createGain: () => node({ gain: parameter() }),
+    createDynamicsCompressor: () => node({ threshold: parameter(), knee: parameter(), ratio: parameter(), attack: parameter(), release: parameter() }),
+    createBufferSource() { const s = node({ playbackRate: parameter(), starts: [], stops: [], start(at) { this.starts.push(at); }, stop(at) { this.stops.push(at); } }); sources.push(s); return s; }
   };
-  return { context, oscillators, gains };
+  const fetchCue = async cue => { fetched.push(cue); return { cue }; };
+  return { context, sources, fetched, fetchCue };
 }
 
-test('fresh profile enables earcons; explicit saved mute and motion preferences survive', () => {
+test('fresh profile enables sounds; explicit saved mute and motion preferences survive', () => {
   assert.equal(blankState().settings.sound, true);
   const saved = { ...blankState(), settings: { sound: false, motion: false, humor: false } };
   assert.deepEqual(restoreState(saved).settings, saved.settings);
 });
 
-test('mount and play requests cannot create audio before an explicit arm', async () => {
-  let created = 0; const fixture = audioFixture();
-  const sound = createExperienceAudio({ createContext: () => { created++; return fixture.context; } });
+test('nothing is created or fetched before an explicit arm', async () => {
+  let created = 0; const f = audioFixture();
+  const sound = createExperienceAudio({ createContext: () => { created++; return f.context; }, fetchCue: f.fetchCue });
   assert.equal(await sound.play('complete'), false);
-  assert.equal(created, 0); assert.equal(fixture.oscillators.length, 0);
+  assert.equal(created, 0); assert.equal(f.fetched.length, 0);
   sound.arm(); assert.equal(created, 1);
   assert.equal(await sound.play('select'), true);
-  assert.equal(fixture.oscillators.length, 1);
+  assert.equal(f.sources.length, 1);
 });
 
-test('mute and active-exam suppression prevent arming and synthesis', async () => {
-  let muted = true, exam = false, created = 0; const fixture = audioFixture();
-  const sound = createExperienceAudio({ enabled: () => !muted, suppressed: () => exam, createContext: () => { created++; return fixture.context; } });
+test('mute and active-exam suppression prevent arming and playback', async () => {
+  let muted = true, exam = false, created = 0; const f = audioFixture();
+  const sound = createExperienceAudio({ enabled: () => !muted, suppressed: () => exam, createContext: () => { created++; return f.context; }, fetchCue: f.fetchCue });
   sound.arm(); assert.equal(created, 0);
   muted = false; exam = true; sound.arm(); assert.equal(created, 0);
   exam = false; sound.arm(); assert.equal(created, 1);
   exam = true; assert.equal(await sound.play('correct'), false);
   exam = false; muted = true; assert.equal(await sound.play('complete'), false);
-  assert.equal(fixture.oscillators.length, 0);
+  assert.equal(f.sources.length, 0);
 });
 
-test('pending context resume cannot queue a cue after stop or mute', async () => {
-  const fixture = audioFixture(); let settle;
-  fixture.context.state = 'suspended';
-  fixture.context.resume = () => new Promise(resolve => { settle = resolve; });
-  const sound = createExperienceAudio({ createContext: () => fixture.context });
-  sound.arm(); const pending = sound.play('complete');
-  sound.stop(); settle();
-  assert.equal(await pending, false); assert.equal(fixture.oscillators.length, 0);
+test('a pending load cannot play after stop', async () => {
+  const f = audioFixture(); let settle;
+  const sound = createExperienceAudio({ createContext: () => f.context, fetchCue: () => new Promise(r => { settle = r; }) });
+  sound.arm(); const pending = sound.play('milestone');
+  sound.stop(); await new Promise(r => setTimeout(r, 5)); settle({});
+  assert.equal(await pending, false); assert.equal(f.sources.length, 0);
 });
 
-test('fast duplicate presses are coalesced and new cues stop earlier voices', async () => {
-  const fixture = audioFixture(); let stamp = 100;
-  const sound = createExperienceAudio({ createContext: () => fixture.context, now: () => stamp });
-  sound.arm(); assert.equal(await sound.play('select'), true);
-  assert.equal(await sound.play('select'), false); assert.equal(fixture.oscillators.length, 1);
-  stamp += 100; assert.equal(await sound.play('correct'), true);
-  assert.equal(fixture.oscillators[0].stops.length, 2);
-  assert.equal(fixture.oscillators[0].disconnected, true);
-  assert.equal(fixture.oscillators.length, 4);
+test('duplicate presses coalesce; taps never cut a celebration, celebrations replace taps', async () => {
+  const f = audioFixture(); let stamp = 100;
+  const sound = createExperienceAudio({ createContext: () => f.context, fetchCue: f.fetchCue, now: () => stamp });
+  sound.arm();
+  assert.equal(await sound.play('select'), true);
+  assert.equal(await sound.play('select'), false);
+  stamp += 100; assert.equal(await sound.play('complete'), true);
+  assert.equal(f.sources[0].stops.length, 1, 'the tap fades out under the celebration');
+  stamp += 100; assert.equal(await sound.play('select'), true);
+  assert.equal(f.sources[1].stops.length, 0, 'a tap leaves the celebration ringing');
 });
 
-test('all earcons are bounded, gain-envelope synthesis ends, and dispose is final', async () => {
-  for (const notes of Object.values(CUES)) for (const [hz, delay, duration, gain] of notes) {
-    assert.ok(hz >= 300 && hz <= 1100); assert.ok(delay + duration < .8);
-    assert.ok(gain > 0 && gain <= .05);
+test('every cue ships as a small mastered file, and dispose is final', async () => {
+  for (const [cue, priority] of Object.entries(CUES)) {
+    const file = new URL('../dist/' + cueUrl(cue), import.meta.url);
+    assert.ok(existsSync(file), cue + ' is missing');
+    assert.ok(statSync(file).size > 1000 && statSync(file).size < 40000, cue + ' size');
+    assert.ok([1, 2, 3].includes(priority));
   }
-  const fixture = audioFixture(); const sound = createExperienceAudio({ createContext: () => fixture.context });
+  const f = audioFixture(); const sound = createExperienceAudio({ createContext: () => f.context, fetchCue: f.fetchCue });
   sound.arm(); assert.equal(await sound.play('complete'), true);
-  assert.equal(fixture.oscillators.length, 4);
-  for (const oscillator of fixture.oscillators) assert.ok(oscillator.stops[0] > oscillator.starts[0]);
   sound.dispose(); sound.dispose(); sound.arm();
-  assert.equal(await sound.play('select'), false); assert.equal(fixture.context.closed, true);
-  assert.ok(fixture.gains.every(gain => gain.gain.calls.some(call => call[0] === 'cancel')));
+  assert.equal(await sound.play('select'), false); assert.equal(f.context.closed, true);
 });
