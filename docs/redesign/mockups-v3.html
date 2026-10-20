@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TeoriBoost · hovedskærme</title>
+<style>
+@font-face{font-family:Rubik;src:url('../../dist/assets/fonts/rubik-var.woff2') format('woff2');font-weight:300 900}
+@font-face{font-family:Atkinson;src:url('../../dist/assets/fonts/atkinson-400.woff2') format('woff2');font-weight:400}
+@font-face{font-family:Atkinson;src:url('../../dist/assets/fonts/atkinson-700.woff2') format('woff2');font-weight:700}
+@font-face{font-family:LogoBarlow;src:url('../../dist/assets/fonts/heading-bold.ttf') format('truetype');font-weight:800}
+:root{--ink:#1F2328;--muted:#5F656D;--line:#E3E5E8;--soft:#F4F5F7;--lime:#D5FF62;--lime-d:#9BC42A;--lime-bg:#F3FFD6;
+  --good:#58CC02;--good-d:#46A302;--good-bg:#E8FBD5;--good-ink:#2F6F00;--bad:#FF4B4B;--bad-d:#D42F2F;--bad-bg:#FFE5E5;
+  --blue:#1CB0F6;--blue-ink:#0A7BBF;--orange:#FF9600;--purple:#A560E8;--d:Rubik,Arial,sans-serif;--t:Atkinson,Verdana,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#EEF0F3;color:var(--ink);font:15px/1.5 var(--t)}
+.board{max-width:1500px;margin:0 auto;padding:40px 24px 80px}
+.board>header h1{font:800 46px/1.05 var(--d);margin:0 0 10px;letter-spacing:-.01em}
+.board>header p{max-width:820px;color:#3d4249;font-size:18px;margin:0}
+.sec{margin-top:48px}
+.sec h2{font:800 28px var(--d);margin:0 0 4px}
+.sec>p{color:var(--muted);margin:0 0 18px;max-width:760px}
+.row{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+.cap{font:700 14px var(--d);margin:10px 4px 0;text-align:center}
+.cap small{display:block;font:400 13px var(--t);color:var(--muted)}
+/* phone */
+.ph{width:340px;height:720px;border-radius:44px;background:#111;padding:9px;box-shadow:0 24px 40px -24px rgba(0,0,0,.35)}
+.sc{position:relative;width:100%;height:100%;border-radius:36px;background:#fff;overflow:hidden;display:flex;flex-direction:column}
+.scroll{flex:1;overflow:hidden;padding:0 16px}
+/* chrome */
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 14px 10px;border-bottom:2px solid var(--line)}
+.logo{display:flex;align-items:center;gap:6px;font:800 18px var(--d)}
+.logo i{font:800 26px LogoBarlow;color:var(--lime);letter-spacing:-5px;transform:skew(-12deg);font-style:normal;margin-right:6px;-webkit-text-stroke:.6px #9BC42A}
+.logo sup{font:400 11px var(--t);color:var(--muted)}
+.chips{display:flex;gap:8px;align-items:center}
+.bst{display:inline-flex;align-items:center;gap:5px;height:36px;padding:0 10px 0 6px;border-radius:99px;border:2px solid var(--line);box-shadow:0 3px 0 var(--line);font:800 14px var(--d);background:#fff}
+.ico{width:36px;height:36px;border-radius:12px;border:2px solid var(--line);display:grid;place-items:center;box-shadow:0 3px 0 var(--line)}
+.tabs{display:flex;justify-content:space-around;border-top:2px solid var(--line);padding:8px 6px 14px;background:#fff}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;font:700 11px var(--t);color:var(--muted);padding:4px 10px;border-radius:14px}
+.tab svg{width:24px;height:24px}
+.tab.on{color:var(--ink);background:var(--lime-bg);box-shadow:inset 0 0 0 2px var(--lime-d)}
+/* components */
+.card{border:2px solid var(--line);border-radius:18px;box-shadow:0 4px 0 var(--line);padding:14px;background:#fff}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:16px;font:800 16px var(--d);background:var(--lime);box-shadow:0 5px 0 var(--lime-d);color:var(--ink)}
+.btn.ghost{background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.btn.good{background:var(--good);box-shadow:0 5px 0 var(--good-d);color:#fff}
+.btn.bad{background:var(--bad);box-shadow:0 5px 0 var(--bad-d);color:#fff}
+.eyebrow{font:700 12px var(--t);letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.h1{font:800 26px/1.1 var(--d);margin:6px 0 8px}
+.h2{font:800 20px/1.15 var(--d);margin:4px 0 6px}
+.muted{color:var(--muted)}
+.bubble{background:#fff;border:2px solid var(--line);border-radius:18px 18px 18px 6px;padding:9px 12px;box-shadow:0 3px 0 var(--line);font-size:14px}
+.bubble b{display:block;font:700 12px var(--d);color:var(--blue-ink)}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:99px;border:2px solid var(--line);font:700 13px var(--t);background:#fff}
+.bar{height:12px;border-radius:99px;background:var(--soft);overflow:hidden}.bar i{display:block;height:100%;background:var(--good);border-radius:99px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.cta-fixed{padding:12px 16px 16px;border-top:2px solid var(--line);background:#fff}
+.x{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:var(--muted);font-weight:700}
+.skip{font:700 13px var(--t);color:var(--blue-ink);white-space:nowrap}
+.prog{display:flex;align-items:center;gap:10px;padding:16px 16px 8px}.prog .bar{flex:1}
+/* path */
+.unit{background:var(--good);color:#fff;border-radius:18px;padding:12px 14px;box-shadow:0 4px 0 var(--good-d);display:flex;justify-content:space-between;align-items:center}
+.unit small{opacity:.9;display:block;font:700 12px var(--t);letter-spacing:.05em}
+.unit b{font:800 18px var(--d)}
+.path{position:relative;height:300px}
+.node{position:absolute;width:62px;height:58px;border-radius:50%;display:grid;place-items:center;font:800 18px var(--d);border:3px solid var(--line);background:#fff;color:var(--muted);box-shadow:0 5px 0 var(--line)}
+.node.done{background:var(--good);border-color:var(--good-d);color:#fff;box-shadow:0 5px 0 var(--good-d)}
+.node.now{background:var(--lime);border-color:var(--lime-d);color:var(--ink);box-shadow:0 5px 0 var(--lime-d);width:72px;height:66px}
+.node.lock{opacity:.6}
+.start-tag{position:absolute;font:800 13px var(--d);background:#fff;border:2px solid var(--line);border-radius:12px;padding:5px 10px;box-shadow:0 3px 0 var(--line);color:var(--ink)}
+/* question */
+.cond{background:var(--soft);border-radius:14px;padding:10px 12px;font-size:14px}
+.photo{height:150px;border-radius:16px;background:#ddd center/cover;border:2px solid var(--line)}
+.st{display:flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:14px;padding:9px 10px;box-shadow:0 3px 0 var(--line);font-size:14px}
+.st span{flex:1}
+.yn{display:flex;gap:6px}.yn b{min-width:44px;height:36px;display:grid;place-items:center;border-radius:10px;border:2px solid var(--line);box-shadow:0 3px 0 var(--line);font:800 13px var(--d)}
+.yn b.on{background:#EAF7FF;border-color:var(--blue);box-shadow:0 3px 0 var(--blue);color:var(--blue-ink)}
+.st.ok{border-color:var(--good);background:var(--good-bg);box-shadow:0 3px 0 var(--good)}
+.st.no{border-color:var(--bad);background:var(--bad-bg);box-shadow:0 3px 0 var(--bad)}
+.sheet{position:absolute;left:0;right:0;bottom:0;padding:16px;border-radius:24px 24px 0 0}
+.sheet.bad{background:var(--bad-bg);border-top:3px solid var(--bad)}
+.sheet.good{background:var(--good-bg);border-top:3px solid var(--good)}
+.sheet h4{margin:0 0 4px;font:800 21px var(--d)}
+.cast{width:96px;height:96px;object-fit:contain}
+/* intro */
+.hero-bg{background:linear-gradient(180deg,#F3FFD6 0,#fff 62%)}
+.lineup{position:relative;height:214px;margin:2px -16px 0}
+.lineup img{position:absolute;object-fit:contain}
+.dots{display:flex;gap:6px;justify-content:center;margin:10px 0}.dots i{width:8px;height:8px;border-radius:99px;background:var(--line)}.dots i.on{width:22px;background:var(--ink)}
+.opt{display:flex;align-items:center;justify-content:space-between;border:2px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 4px 0 var(--line);font:700 16px var(--d)}
+.opt.on{border-color:var(--blue);background:#EAF7FF;box-shadow:0 4px 0 var(--blue)}
+.opt small{font:400 13px var(--t);color:var(--muted)}
+/* car */
+.stage{position:relative;height:210px;border-radius:22px;background:radial-gradient(70% 60% at 50% 65%,var(--lime-bg) 0,#fff 72%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);overflow:hidden}
+.stage img{position:absolute;inset:-14% -6%;width:112%;height:128%;object-fit:contain}
+.glow{position:absolute;left:18%;right:18%;bottom:20%;height:18px;border-radius:50%;background:#B66DFF;filter:blur(10px);opacity:.75}
+.plate{position:absolute;left:61%;top:58%;transform:translateX(-50%);background:#fff;border:2px solid #1E1B36;border-radius:4px;font:800 10px var(--d);padding:0 4px;letter-spacing:.06em}
+.ctabs{display:flex;gap:8px;overflow:hidden}.ctabs b{flex:none;padding:8px 13px;border-radius:99px;border:2px solid var(--line);font:700 13px var(--d)}.ctabs b.on{background:var(--lime);border-color:var(--lime-d);box-shadow:0 3px 0 var(--lime-d)}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.item{border:2px solid var(--line);border-radius:14px;box-shadow:0 3px 0 var(--line);padding:5px;text-align:center;font:700 12px var(--d)}
+.item .th{position:relative;height:74px;overflow:hidden}.item .th img{position:absolute;left:-40%;top:-48%;width:180%;height:180%;object-fit:contain}
+.item small{display:flex;justify-content:center;align-items:center;gap:3px;font:700 11px var(--t);color:var(--muted)}
+.item.on{border-color:var(--good);background:var(--good-bg);box-shadow:0 3px 0 var(--good)}
+.item.on small{color:var(--good-ink)}
+/* lists */
+.li{display:flex;align-items:center;gap:12px}
+.li .em{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font:800 18px var(--d);flex:none}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font:700 11px var(--t);color:var(--muted)}
+.cal i{display:block;height:30px;border-radius:10px;background:var(--soft);margin-top:4px}
+.cal i.d{background:var(--orange)}.cal i.t{background:#fff;border:2px solid var(--orange)}
+.timer{font:800 15px var(--d);background:var(--soft);padding:6px 10px;border-radius:10px}
+.nums{display:grid;grid-template-columns:repeat(9,1fr);gap:5px}.nums b{height:28px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;font:700 11px var(--d)}
+.nums b.a{background:#EAF7FF;border-color:var(--blue)}.nums b.c{background:var(--lime);border-color:var(--lime-d)}.nums b.f{border-color:var(--orange);background:#FFF4E5}
+.big{font:800 64px/1 var(--d)}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:22px}
+.notes div{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px;font-size:14px}
+.notes b{font-family:var(--d)}
+</style>
+</head>
+<body>
+<div class="board">
+<header>
+  <h1>TeoriBoost · alle hovedskærme</h1>
+  <p>Mobile-first redesign med ét komponentsystem: hvide kort med tryk-kant, chunky knapper, logoets gule som primærfarve, klare signalfarver og castet med en rolle hver. Fire faner: <b>Lær · Øv · Prøve · Min bil</b>.</p>
+</header>
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-learn" viewBox="0 0 24 24"><path d="M4 18c2-6 5-9 8-9s6 3 8 9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="6" r="2.6" fill="currentColor"/></symbol>
+  <symbol id="i-train" viewBox="0 0 24 24"><rect x="3" y="9" width="4" height="6" rx="1.5" fill="currentColor"/><rect x="17" y="9" width="4" height="6" rx="1.5" fill="currentColor"/><rect x="7" y="11" width="10" height="2" rx="1" fill="currentColor"/></symbol>
+  <symbol id="i-exam" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M9 9h6M9 13h6M9 17h3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M3 15l2-5c.5-1.2 1.4-2 2.8-2h8.4c1.4 0 2.3.8 2.8 2l2 5v3H3z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><circle cx="7.5" cy="18" r="2" fill="currentColor"/><circle cx="16.5" cy="18" r="2" fill="currentColor"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M5.5 18.5l2.1-2.1M16.4 7.6l2.1-2.1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-bst" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#D5FF62" stroke="#1F2328" stroke-width="2"/><path d="M13.5 4.5 7.5 13h4l-1 6.5 6-8.5h-4z" fill="#1F2328"/></symbol>
+</svg>
+
+<!-- ===================== A. START + INTRO ===================== -->
+<section class="sec">
+  <h2>A · Startside og brugerintro</h2>
+  <p>Første møde skal føles som et spil, ikke en formular. Castet byder velkommen, tre korte spørgsmål laver en personlig plan, og eleven har svaret på sit første spørgsmål inden for 60 sekunder.</p>
+  <div class="row">
+
+    <div><div class="ph"><div class="sc hero-bg">
+      <div class="top" style="border:0"><div class="logo"><i>///</i>TeoriBoost</div><span class="pill">Log ind</span></div>
+      <div class="scroll" style="text-align:center">
+        <div class="lineup">
+          <img src="../../dist/assets/cast/sneglen.webp" style="left:-2%;top:78px;width:36%">
+          <img src="../../dist/assets/cast/bobbel.webp" style="left:31%;top:30px;width:38%">
+          <img src="../../dist/assets/cast/kegle.webp" style="right:0;top:84px;width:28%">
+          <img src="../../dist/assets/cast/blink.webp" style="left:4%;top:4px;width:26%">
+          <img src="../../dist/assets/cast/daek.webp" style="right:6%;top:0;width:24%">
+        </div>
+        <div class="h1" style="font-size:28px;margin-top:2px">Bestå teoriprøven.<br>Med et smil.</div>
+        <p class="muted" style="margin:0 6px 10px;font-size:14px">5 minutter om dagen. Rigtige prøvesituationer. Et cast, der heppe på dig, og en bil, du bygger op, mens du lærer.</p>
+        <div class="row" style="justify-content:center;gap:6px;margin-bottom:8px"><span class="pill" style="font-size:12px;padding:4px 9px">83 situationer</span><span class="pill" style="font-size:12px;padding:4px 9px">58 lektioner</span><span class="pill" style="font-size:12px;padding:4px 9px">Oplæsning</span></div>
+      </div>
+      <div class="cta-fixed" style="border:0;background:transparent"><div class="btn">Kom i gang · gratis</div><div class="btn ghost" style="margin-top:12px;height:46px;font-size:15px">Jeg har prøvet det før</div><p class="muted" style="text-align:center;margin:8px 0 0;font-size:13px">Ingen konto nødvendig for at starte</p></div>
+    </div></div><div class="cap">Startside<small>Hele castet, ét løfte, én knap</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="prog"><span class="x">←</span><div class="bar"><i style="width:25%"></i></div><span class="skip">Spring over</span></div>
+      <div class="scroll">
+        <div style="display:flex;gap:10px;align-items:flex-end;margin:8px 0 16px"><img class="cast" src="../../dist/assets/cast/sneglen.webp"><div class="bubble"><b>Sneglen</b>Hej! Hvornår skal du til teoriprøve?</div></div>
+        <div class="stack">
+          <div class="opt">Inden for 2 uger<small>Turbo-plan</small></div>
+          <div class="opt on">Om ca. 1 måned<small>Rolig plan</small></div>
+          <div class="opt">Om 2–3 måneder<small>God tid</small></div>
+          <div class="opt">Ved ikke endnu<small>Vi starter blødt</small></div>
+        </div>
+      </div>
+      <div class="cta-fixed"><div class="btn">Fortsæt</div></div>
+    </div></div><div class="cap">Intro 1 · Prøvedato<small>Planen tæller ned mod din dag</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="prog"><span class="x">←</span><div class="bar"><i style="width:55%"></i></div><span class="skip">Spring over</span></div>
+      <div class="scroll">
+        <div style="display:flex;gap:10px;align-items:flex-end;margin:8px 0 16px"><img class="cast" src="../../dist/assets/cast/blink.webp"><div class="bubble"><b>Blink</b>Hvor meget vil du øve om dagen?</div></div>
+        <div class="stack">
+          <div class="opt">5 min<small>Afslappet</small></div>
+          <div class="opt on">10 min<small>Fast vane</small></div>
+          <div class="opt">15 min<small>Seriøs</small></div>
+          <div class="opt">20 min<small>Intens</small></div>
+        </div>
+        <p class="muted" style="font-size:13px;margin-top:14px">Du kan altid ændre det. Ingen straf, hvis du springer en dag over.</p>
+      </div>
+      <div class="cta-fixed"><div class="btn">Fortsæt</div></div>
+    </div></div><div class="cap">Intro 2 · Dagligt mål<small>Lavt startbesvær</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="prog"><span class="x">←</span><div class="bar"><i style="width:80%"></i></div><span class="skip">Spring over</span></div>
+      <div class="scroll">
+        <div class="eyebrow" style="margin-top:6px">Din første bil</div>
+        <div class="h1">Mød din scooter. Den har set bedre dage.</div>
+        <div class="stage" style="margin:10px 0 12px"><img src="../../dist/assets/mybil/scooter/base.webp" onerror="this.src='../../dist/assets/mybil/smallcar/base.webp'"></div>
+        <div class="card" style="display:flex;gap:10px;align-items:center"><svg width="34" height="34"><use href="#i-bst"/></svg><div><b style="font-family:var(--d)">Tjen Boosters ved at lære</b><div class="muted" style="font-size:13px">1.000 pr. lektion · 1.500 for dagens mål · 5.000 for en bestået øveprøve</div></div></div>
+        <p class="muted" style="font-size:13px">Byg den op med lak, fælge og spoiler, eller spar op til en rigtig bil.</p>
+      </div>
+      <div class="cta-fixed"><div class="btn">Den er min!</div></div>
+    </div></div><div class="cap">Intro 3 · Mød din bil<small>Grund til at komme igen</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="scroll" style="padding-top:30px;text-align:center">
+        <img src="../../dist/assets/cast/bobbel.webp" style="width:170px">
+        <div class="h1">Din plan er klar</div>
+        <div class="card" style="text-align:left;margin:12px 0" >
+          <div class="li" style="margin-bottom:10px"><span class="em" style="background:var(--lime-bg)">📅</span><div><b>Teoriprøve om ca. 1 måned</b><div class="muted" style="font-size:13px">58 lektioner · ca. 2 om dagen</div></div></div>
+          <div class="li" style="margin-bottom:10px"><span class="em" style="background:#FFF4E5">⏱</span><div><b>10 minutter om dagen</b><div class="muted" style="font-size:13px">Påmindelse kl. 19.00</div></div></div>
+          <div class="li"><span class="em" style="background:#EAF7FF">🎯</span><div><b>Første lektion: Indstilling og udsyn</b><div class="muted" style="font-size:13px">Svar på et rigtigt prøvebillede</div></div></div>
+        </div>
+      </div>
+      <div class="cta-fixed"><div class="btn">Start første lektion</div></div>
+    </div></div><div class="cap">Din plan<small>Direkte ind i første spørgsmål</small></div></div>
+
+  </div>
+</section>
+
+<!-- ===================== B. LÆR ===================== -->
+<section class="sec">
+  <h2>B · Lær</h2>
+  <p>Læringsstien er hjemmet: én næste handling, en sti man kan se sig selv rykke frem på, og gentagelser når de er klar. Atlas ligger som "Alle emner" i toppen af stien.</p>
+  <div class="row">
+
+    <div><div class="ph"><div class="sc">
+      <div class="top"><div class="logo"><i>///</i>TeoriBoost<sup>B</sup></div><div class="chips"><span class="bst"><svg width="20" height="20"><use href="#i-bst"/></svg>12.500</span><span class="ico"><svg width="20" height="20"><use href="#i-gear"/></svg></span></div></div>
+      <div class="scroll" style="padding-top:12px">
+        <div class="row" style="gap:8px;margin-bottom:10px"><span class="pill">🔥 4 dage</span><span class="pill">📅 Prøve om 26 dage</span></div>
+        <div class="unit"><div><small>EMNE 2 · ALLE EMNER ▾</small><b>Vigepligt i kryds</b></div><span style="font:800 13px var(--d)">3/6</span></div>
+        <div class="path">
+          <span class="node done" style="left:130px;top:14px">✓</span>
+          <span class="node done" style="left:70px;top:86px">✓</span>
+          <span class="node done" style="left:118px;top:158px">✓</span>
+          <span class="start-tag" style="left:104px;top:236px">Start! →</span>
+          <span class="node now" style="left:190px;top:222px">4</span>
+          <img src="../../dist/assets/cast/sneglen.webp" style="position:absolute;left:-6px;top:130px;width:96px">
+        </div>
+        <div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><b style="font-family:var(--d)">3 regler er klar til gentagelse</b><div class="muted" style="font-size:13px">Tager ca. 4 min</div></div><span class="btn ghost" style="height:40px;padding:0 12px;font-size:14px">Gentag</span></div>
+      </div>
+      <div class="tabs"><span class="tab on"><svg><use href="#i-learn"/></svg>Lær</span><span class="tab"><svg><use href="#i-train"/></svg>Øv</span><span class="tab"><svg><use href="#i-exam"/></svg>Prøve</span><span class="tab"><svg><use href="#i-car"/></svg>Min bil</span></div>
+    </div></div><div class="cap">Lær · stien<small>Én tydelig næste node</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="prog"><span class="x">✕</span><div class="bar"><i style="width:30%"></i></div></div>
+      <div class="scroll">
+        <div class="eyebrow">Kort 1 af 3 · Forstå</div>
+        <div class="h1">Byg fra sædet</div>
+        <p style="font-size:16px">Indstil først sæde og ryglæn, så pedaler og rat kan betjenes uden at strække kroppen. Indstil derefter spejlene fra den færdige siddestilling.</p>
+        <div class="card" style="background:var(--soft);border-style:dashed;box-shadow:none"><b style="font-family:var(--d)">Huskeregel</b><div class="muted" style="font-size:14px">Flytter du sædet bagefter, ændrer du også det, spejlene viser.</div></div>
+        <div class="row" style="gap:8px;margin-top:12px"><span class="pill">🔊 Lyt</span><span class="pill" style="color:var(--blue-ink)">Kilde: Færdselsstyrelsen ↗</span></div>
+      </div>
+      <div class="cta-fixed"><div class="btn">Næste kort</div></div>
+    </div></div><div class="cap">Lektion · kort<small>Kort tekst, lyt, kilde, én knap</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="prog"><span class="x">✕</span><div class="bar"><i style="width:62%"></i></div><span style="font:800 13px var(--d)">❤ ∞</span></div>
+      <div class="scroll">
+        <div class="cond">Du vil lige over et kryds med <b>hajtænder</b>. En cyklist kommer fra højre.</div>
+        <div class="photo" style="margin:10px 0;background-image:url('../../dist/assets/exam/traffic-q-065-v1.webp')"></div>
+        <div class="h2">Hvem holder du tilbage for?</div>
+        <div class="stack" style="gap:8px">
+          <div class="st"><span>Holder tilbage for cyklisten</span><div class="yn"><b class="on">Ja</b><b>Nej</b></div></div>
+          <div class="st"><span>Har kun vigepligt for biler</span><div class="yn"><b>Ja</b><b class="on">Nej</b></div></div>
+          <div class="st"><span>Kører først, fordi jeg er større</span><div class="yn"><b>Ja</b><b>Nej</b></div></div>
+        </div>
+      </div>
+      <div class="cta-fixed"><div class="btn" style="opacity:.55">Tjek svar</div></div>
+    </div></div><div class="cap">Spørgsmål<small>Betingelse, billede, store Ja/Nej</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="prog"><span class="x">✕</span><div class="bar"><i style="width:62%"></i></div></div>
+      <div class="scroll">
+        <div class="photo" style="height:120px;margin-bottom:10px;background-image:url('../../dist/assets/exam/traffic-q-065-v1.webp')"></div>
+        <div class="stack" style="gap:8px">
+          <div class="st ok"><span>Holder tilbage for cyklisten</span><b style="color:var(--good-ink)">✓</b></div>
+          <div class="st no"><span>Har kun vigepligt for biler</span><b style="color:var(--bad-d)">✕</b></div>
+        </div>
+      </div>
+      <div class="sheet bad">
+        <div style="display:flex;gap:10px;align-items:flex-end"><img class="cast" src="../../dist/assets/cast/kegle.webp" style="width:84px;height:84px"><div><h4 style="color:var(--bad-d)">Næsten!</h4><div style="font-size:14px">Hajtænder = ubetinget vigepligt for <b>alle</b> på tværvejen, også cyklister.</div></div></div>
+        <div class="row" style="gap:8px;margin:10px 0"><span class="pill">🔊 Lyt</span><span class="pill">Se reglen</span></div>
+        <div class="btn bad">Prøv igen</div>
+      </div>
+    </div></div><div class="cap">Feedback · forkert<small>Kegle forklarer hvorfor, ingen skyld</small></div></div>
+
+    <div><div class="ph"><div class="sc" style="background:linear-gradient(180deg,#E8FBD5 0,#fff 55%)">
+      <div class="scroll" style="text-align:center;padding-top:34px">
+        <img src="../../dist/assets/cast/bobbel.webp" style="width:190px">
+        <div class="h1" style="color:var(--good-ink)">Lektion klaret!</div>
+        <p class="muted" style="margin:0 0 14px">Indstilling og udsyn sidder nu. Den kommer tilbage om 2 dage.</p>
+        <div class="row" style="gap:10px;justify-content:center">
+          <div class="card" style="width:130px"><div class="eyebrow">Boosters</div><div style="font:800 24px var(--d);display:flex;gap:6px;justify-content:center;align-items:center"><svg width="24" height="24" style="width:24px;height:24px;flex:none"><use href="#i-bst"/></svg>+1.000</div></div>
+          <div class="card" style="width:130px"><div class="eyebrow">Rigtige</div><div style="font:800 24px var(--d)">3/4</div></div>
+        </div>
+        <div class="card" style="margin-top:12px;background:var(--lime-bg);border-color:var(--lime-d);box-shadow:0 4px 0 var(--lime-d)"><b style="font-family:var(--d)">🎯 Dagens mål nået · +1.500</b></div>
+      </div>
+      <div class="cta-fixed" style="background:transparent;border:0"><div class="btn">Fortsæt</div></div>
+    </div></div><div class="cap">Lektion klaret<small>Boosters + dagens mål</small></div></div>
+
+  </div>
+</section>
+
+<!-- ===================== C. ØV + PRØVE ===================== -->
+<section class="sec">
+  <h2>C · Øv og Prøve</h2>
+  <p>"Øv" samler alt det, der før lå spredt: gentagelser, korte missioner og de tre spil. "Prøve" er den officielle-format-træning med Dæk som rolig træner.</p>
+  <div class="row">
+
+    <div><div class="ph"><div class="sc">
+      <div class="top"><div class="logo"><i>///</i>TeoriBoost<sup>B</sup></div><div class="chips"><span class="bst"><svg width="20" height="20"><use href="#i-bst"/></svg>12.500</span><span class="ico"><svg width="20" height="20"><use href="#i-gear"/></svg></span></div></div>
+      <div class="scroll" style="padding-top:12px">
+        <div class="h1">Øv</div>
+        <div class="card" style="display:flex;gap:10px;align-items:center;background:var(--lime-bg);border-color:var(--lime-d);box-shadow:0 4px 0 var(--lime-d);margin-bottom:12px"><img src="../../dist/assets/cast/blink.webp" style="width:70px"><div><b style="font-family:var(--d)">Gentag 3 svage regler</b><div class="muted" style="font-size:13px">Vigepligt · Hajtænder · Fodgængere</div></div></div>
+        <div class="eyebrow" style="margin:4px 0 8px">Korte missioner</div>
+        <div class="stack" style="gap:8px;margin-bottom:12px">
+          <div class="card li" style="padding:10px"><span class="em" style="background:#FFE5E5;color:var(--bad-d)">⛔</span><div><b style="font-family:var(--d)">Stop. Ikke slow.</b><div class="muted" style="font-size:13px">3 situationer + genkaldelse</div></div></div>
+          <div class="card li" style="padding:10px"><span class="em" style="background:#EAF7FF;color:var(--blue-ink)">🚲</span><div><b style="font-family:var(--d)">Blinklys ≠ force field</b><div class="muted" style="font-size:13px">3 situationer + genkaldelse</div></div></div>
+        </div>
+        <div class="eyebrow" style="margin:4px 0 8px">Spil</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+          <div class="card" style="padding:10px"><b style="font-family:var(--d);font-size:14px">Du er kørelæreren</b><div class="muted" style="font-size:12px">Find fejlen</div></div>
+          <div class="card" style="padding:10px"><b style="font-family:var(--d);font-size:14px">Trafiklab</b><div class="muted" style="font-size:12px">Et blink. To baner.</div></div>
+        </div>
+      </div>
+      <div class="tabs"><span class="tab"><svg><use href="#i-learn"/></svg>Lær</span><span class="tab on"><svg><use href="#i-train"/></svg>Øv</span><span class="tab"><svg><use href="#i-exam"/></svg>Prøve</span><span class="tab"><svg><use href="#i-car"/></svg>Min bil</span></div>
+    </div></div><div class="cap">Øv-hubben<small>Alt træning ét sted</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="top"><div class="logo"><i>///</i>TeoriBoost<sup>B</sup></div><div class="chips"><span class="bst"><svg width="20" height="20"><use href="#i-bst"/></svg>12.500</span><span class="ico"><svg width="20" height="20"><use href="#i-gear"/></svg></span></div></div>
+      <div class="scroll" style="padding-top:14px">
+        <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:12px"><img class="cast" src="../../dist/assets/cast/daek.webp"><div class="bubble"><b>Dæk</b>Ro på. 25 situationer, én ad gangen.</div></div>
+        <div class="card" style="text-align:center;margin-bottom:12px">
+          <div class="row" style="justify-content:space-around;gap:6px"><div><div style="font:800 26px var(--d)">25</div><div class="muted" style="font-size:12px">situationer</div></div><div><div style="font:800 26px var(--d)">25 min</div><div class="muted" style="font-size:12px">tid</div></div><div><div style="font:800 26px var(--d)">≤ 5</div><div class="muted" style="font-size:12px">fejl</div></div></div>
+        </div>
+        <div class="btn" style="margin-bottom:14px">Start øveprøve</div>
+        <div class="eyebrow" style="margin-bottom:8px">Dine prøver</div>
+        <div class="stack" style="gap:8px">
+          <div class="card li" style="padding:10px"><span class="em" style="background:var(--good-bg);color:var(--good-ink)">3</span><div><b style="font-family:var(--d)">Inden for grænsen</b><div class="muted" style="font-size:13px">I går · 22 rigtige</div></div></div>
+          <div class="card li" style="padding:10px"><span class="em" style="background:var(--bad-bg);color:var(--bad-d)">8</span><div><b style="font-family:var(--d)">Næsten</b><div class="muted" style="font-size:13px">Mandag · 17 rigtige</div></div></div>
+        </div>
+      </div>
+      <div class="tabs"><span class="tab"><svg><use href="#i-learn"/></svg>Lær</span><span class="tab"><svg><use href="#i-train"/></svg>Øv</span><span class="tab on"><svg><use href="#i-exam"/></svg>Prøve</span><span class="tab"><svg><use href="#i-car"/></svg>Min bil</span></div>
+    </div></div><div class="cap">Prøve · start<small>Format, historik, én knap</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="prog"><span class="x">✕</span><span style="font:800 14px var(--d)">7 / 25</span><div class="bar"><i style="width:28%;background:var(--blue)"></i></div><span class="timer">18:42</span></div>
+      <div class="scroll">
+        <div class="photo" style="height:170px;margin-bottom:10px;background-image:url('../../dist/assets/exam/traffic-q-002-v2.webp')"></div>
+        <div class="h2">Hvad gør du nu?</div>
+        <div class="stack" style="gap:8px">
+          <div class="st"><span>Sænker farten</span><div class="yn"><b class="on">Ja</b><b>Nej</b></div></div>
+          <div class="st"><span>Overhaler før svinget</span><div class="yn"><b>Ja</b><b class="on">Nej</b></div></div>
+          <div class="st"><span>Holder til højre</span><div class="yn"><b>Ja</b><b>Nej</b></div></div>
+          <div class="st"><span>Bruger hornet</span><div class="yn"><b>Ja</b><b>Nej</b></div></div>
+        </div>
+      </div>
+      <div class="cta-fixed"><div class="row" style="gap:8px"><span class="btn ghost" style="flex:1">⚑ Markér</span><span class="btn" style="flex:1.4">Næste</span></div></div>
+    </div></div><div class="cap">Prøve · i gang<small>Tid, nummer, markér, næste</small></div></div>
+
+    <div><div class="ph"><div class="sc" style="background:linear-gradient(180deg,#E8FBD5 0,#fff 50%)">
+      <div class="scroll" style="text-align:center;padding-top:26px">
+        <img src="../../dist/assets/cast/bobbel.webp" style="width:150px">
+        <div class="big" style="color:var(--good-ink)">3 fejl</div>
+        <div class="h2">Inden for grænsen!</div>
+        <p class="muted" style="margin:0 0 12px;font-size:14px">Det er appens øvebedømmelse, ikke en garanti for den rigtige prøve.</p>
+        <div class="card" style="display:flex;justify-content:center;gap:8px;align-items:center;font:800 22px var(--d);margin-bottom:12px"><svg width="26" height="26"><use href="#i-bst"/></svg>+5.000</div>
+        <div class="card" style="text-align:left"><b style="font-family:var(--d)">Gå dine 3 fejl igennem</b><div class="nums" style="margin-top:8px"><b>1</b><b>2</b><b style="border-color:var(--bad);background:var(--bad-bg)">3</b><b>4</b><b>5</b><b>6</b><b style="border-color:var(--bad);background:var(--bad-bg)">7</b><b>8</b><b>9</b></div></div>
+      </div>
+      <div class="cta-fixed" style="background:transparent;border:0"><div class="btn">Se forklaringerne</div></div>
+    </div></div><div class="cap">Prøve · resultat<small>Ærlig, belønnende, næste skridt</small></div></div>
+
+  </div>
+</section>
+
+<!-- ===================== D. MIN BIL + PROFIL ===================== -->
+<section class="sec">
+  <h2>D · Min bil, Atlas og Profil</h2>
+  <p>Min bil er belønningen. Atlas ("Alle emner") og Profil er rolige oversigter uden konkurrence om opmærksomheden.</p>
+  <div class="row">
+
+    <div><div class="ph"><div class="sc">
+      <div class="top"><div class="logo"><i>///</i>TeoriBoost<sup>B</sup></div><div class="chips"><span class="bst"><svg width="20" height="20"><use href="#i-bst"/></svg>12.500</span><span class="ico"><svg width="20" height="20"><use href="#i-gear"/></svg></span></div></div>
+      <div class="scroll" style="padding-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="eyebrow">Min bil</div><div class="h2">Slidt lille bil</div></div><span class="pill">Skift ▾</span></div>
+        <div class="stage" style="margin:8px 0 10px">
+          <span class="glow"></span>
+          <img src="../../dist/assets/mybil/smallcar/base.webp"><img src="../../dist/assets/mybil/smallcar/paint-mint.webp"><img src="../../dist/assets/mybil/smallcar/decal-stripes.webp"><img src="../../dist/assets/mybil/smallcar/wheels-chrome.webp"><img src="../../dist/assets/mybil/smallcar/top-spoiler.webp">
+        </div>
+        <div class="ctabs" style="margin-bottom:10px"><b>Lak</b><b class="on">Fælge</b><b>Striber</b><b>Spejle</b><b>Neon</b></div>
+        <div class="grid">
+          <div class="item"><div class="th"><img src="../../dist/assets/mybil/smallcar/base.webp"><img src="../../dist/assets/mybil/smallcar/wheels-pastel.webp"></div>Pastel<small><svg width="12" height="12"><use href="#i-bst"/></svg>4.000</small></div>
+          <div class="item"><div class="th"><img src="../../dist/assets/mybil/smallcar/base.webp"><img src="../../dist/assets/mybil/smallcar/wheels-sport.webp"></div>Sport<small><svg width="12" height="12"><use href="#i-bst"/></svg>5.000</small></div>
+          <div class="item on"><div class="th"><img src="../../dist/assets/mybil/smallcar/base.webp"><img src="../../dist/assets/mybil/smallcar/wheels-chrome.webp"></div>Krom<small>Monteret</small></div>
+        </div>
+      </div>
+      <div class="tabs"><span class="tab"><svg><use href="#i-learn"/></svg>Lær</span><span class="tab"><svg><use href="#i-train"/></svg>Øv</span><span class="tab"><svg><use href="#i-exam"/></svg>Prøve</span><span class="tab on"><svg><use href="#i-car"/></svg>Min bil</span></div>
+    </div></div><div class="cap">Min bil<small>Bilen først, dele i faner</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="prog"><span class="x">←</span><span style="font:800 18px var(--d)">Alle emner</span></div>
+      <div class="scroll">
+        <div class="stack" style="gap:8px">
+          <div class="card li" style="padding:10px"><span class="em" style="background:var(--good);color:#fff">1</span><div style="flex:1"><b style="font-family:var(--d)">Bilen før turen</b><div class="bar" style="height:8px;margin-top:6px"><i style="width:100%"></i></div></div></div>
+          <div class="card li" style="padding:10px;border-color:var(--lime-d);box-shadow:0 4px 0 var(--lime-d)"><span class="em" style="background:var(--lime)">2</span><div style="flex:1"><b style="font-family:var(--d)">Grundmanøvrer</b><div class="bar" style="height:8px;margin-top:6px"><i style="width:50%"></i></div></div></div>
+          <div class="card li" style="padding:10px"><span class="em" style="background:var(--soft)">3</span><div style="flex:1"><b style="font-family:var(--d)">Køretøjer omkring dig</b><div class="bar" style="height:8px;margin-top:6px"><i style="width:0"></i></div></div></div>
+          <div class="card li" style="padding:10px"><span class="em" style="background:var(--soft)">4</span><div style="flex:1"><b style="font-family:var(--d)">Mennesket bag rattet</b><div class="bar" style="height:8px;margin-top:6px"><i style="width:0"></i></div></div></div>
+          <div class="card li" style="padding:10px"><span class="em" style="background:var(--soft)">5</span><div style="flex:1"><b style="font-family:var(--d)">Vej, vejr og udsyn</b><div class="bar" style="height:8px;margin-top:6px"><i style="width:0"></i></div></div></div>
+          <div class="card li" style="padding:10px"><span class="em" style="background:var(--soft)">6</span><div style="flex:1"><b style="font-family:var(--d)">Grundregler og anvisninger</b><div class="bar" style="height:8px;margin-top:6px"><i style="width:0"></i></div></div></div>
+          <div class="card li" style="padding:10px"><span class="em" style="background:var(--soft)">7</span><div style="flex:1"><b style="font-family:var(--d)">Kryds og sårbare trafikanter</b><div class="bar" style="height:8px;margin-top:6px"><i style="width:0"></i></div></div></div>
+        </div>
+      </div>
+    </div></div><div class="cap">Alle emner (Atlas)<small>Fra stiens top, ikke en fane</small></div></div>
+
+    <div><div class="ph"><div class="sc">
+      <div class="prog"><span class="x">←</span><span style="font:800 18px var(--d)">Din profil</span></div>
+      <div class="scroll">
+        <div class="row" style="gap:10px;margin-bottom:12px">
+          <div class="card" style="flex:1;text-align:center"><div style="font:800 26px var(--d);color:var(--orange)">🔥 4</div><div class="muted" style="font-size:12px">dage i træk</div></div>
+          <div class="card" style="flex:1;text-align:center"><div style="font:800 26px var(--d)">12/58</div><div class="muted" style="font-size:12px">lektioner</div></div>
+        </div>
+        <div class="card" style="margin-bottom:12px"><b style="font-family:var(--d)">Denne uge</b><div class="cal" style="margin-top:8px"><span>Ma<i class="d"></i></span><span>Ti<i class="d"></i></span><span>On<i class="d"></i></span><span>To<i class="t"></i></span><span>Fr<i></i></span><span>Lø<i></i></span><span>Sø<i></i></span></div></div>
+        <div class="card" style="margin-bottom:12px"><b style="font-family:var(--d)">Styrker og svagheder</b><div style="font-size:13px;margin-top:6px"><div>Skilte <div class="bar" style="height:8px"><i style="width:82%"></i></div></div><div style="margin-top:6px">Vigepligt <div class="bar" style="height:8px"><i style="width:41%;background:var(--orange)"></i></div></div></div></div>
+        <div class="stack" style="gap:8px"><div class="opt" style="padding:10px 12px;font-size:14px">Prøvedato<small>20. november</small></div><div class="opt" style="padding:10px 12px;font-size:14px">Lyd og oplæsning<small>Til</small></div><div class="opt" style="padding:10px 12px;font-size:14px">Humor i forklaringer<small>Til</small></div></div>
+      </div>
+    </div></div><div class="cap">Profil<small>Fremgang + indstillinger samlet</small></div></div>
+
+  </div>
+
+  <div class="notes">
+    <div><b>Navigation.</b> 4 faner i bunden. Topbar viser kun logo, Boosters og indstillinger. Lektioner og prøven er fuldskærm med ✕ og fremskridtsbar.</div>
+    <div><b>Komponenter.</b> Kort, knapper (primær/sekundær/rigtigt/forkert), chips, fremskridtsbar, figurboble, Ja/Nej, bundark til feedback. Bruges ens på alle skærme.</div>
+    <div><b>Cast-roller.</b> Sneglen guider, Blink lyser op ved rigtige svar og gentagelser, Kegle ved fejl, Dæk ved prøven, Bobbel fejrer, Krabbe byder velkommen tilbage.</div>
+    <div><b>Tone.</b> Varm, kort, dansk. Ingen "brainrot", ingen skyld. Ærlig om at øvebedømmelsen ikke er den rigtige prøve.</div>
+  </div>
+</section>
+</div>
+</body>
+</html>
