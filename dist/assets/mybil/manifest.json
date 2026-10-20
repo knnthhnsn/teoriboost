@@ -36,7 +36,13 @@
    "charm-tree",
    "charm-heart",
    "front-lashes",
-   "front-led"
+   "front-led",
+   "face-classic",
+   "face-mustache",
+   "face-angry",
+   "face-nervous",
+   "face-cool",
+   "face-happy"
   ],
   "split": true
  },
@@ -148,7 +154,13 @@
    "charm-tree",
    "charm-heart",
    "front-lashes",
-   "front-led"
+   "front-led",
+   "face-classic",
+   "face-mustache",
+   "face-angry",
+   "face-nervous",
+   "face-cool",
+   "face-happy"
   ],
   "split": true
  },
@@ -198,7 +210,13 @@
    "charm-tree",
    "charm-heart",
    "front-lashes",
-   "front-led"
+   "front-led",
+   "face-classic",
+   "face-mustache",
+   "face-angry",
+   "face-nervous",
+   "face-cool",
+   "face-happy"
   ],
   "split": true
  }
