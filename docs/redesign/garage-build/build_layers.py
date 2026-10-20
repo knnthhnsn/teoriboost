@@ -46,7 +46,10 @@ def _score(a, b):
 
 def align(edited, base):
     """Translation-only alignment (no scaling): added parts like spoilers enlarge the outline, so matching
-    bounding boxes would distort the vehicle. Coarse search at 1/4 scale, then refine at full scale."""
+    bounding boxes would distort the vehicle. Coarse search at 1/4 scale, then refine at full scale.
+    The image model sometimes returns another canvas size (e.g. 1254 px); the whole canvas is scaled first."""
+    if edited.size != base.size:
+        edited = edited.resize(base.size, Image.LANCZOS)
     small = (base.width // 4, base.height // 4)
     b4, e4 = base.convert('L').resize(small), edited.convert('L').resize(small)
     best = min(((_score(b4, ImageChops.offset(e4, dx, dy)), dx, dy) for dx in range(-8, 9) for dy in range(-8, 9)))

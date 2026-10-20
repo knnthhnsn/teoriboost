@@ -1,88 +1,631 @@
 {
   "note": "Single source of truth for 'Min bil'. slot regions are fractions of the vehicle bounding box (x0,y0,x1,y1); vehicles face right, so the rear is on the left. 'bases' limits a part to some vehicles. Prices in Boosters.",
   "slots": {
-    "paint":   { "name": "Lak",            "z": 1,  "region": [0, 0, 1, 1] },
-    "kit":     { "name": "Bodykit",        "z": 2,  "region": [0, 0.45, 1, 1] },
-    "stripe":  { "name": "Fartstriber",    "z": 3,  "region": [0, 0, 1, 0.92] },
-    "decal":   { "name": "Dekor",          "z": 4,  "region": [0, 0.1, 1, 0.9] },
-    "windows": { "name": "Ruder",          "z": 5,  "region": [0.12, 0, 0.88, 0.58] },
-    "cabin":   { "name": "Kabine",         "z": 6,  "region": [0.12, 0, 0.88, 0.62] },
-    "audio":   { "name": "Anlæg",          "z": 7,  "region": [0, 0, 0.62, 0.75] },
-    "charm":   { "name": "Bakspejl",       "z": 8,  "region": [0.35, 0, 0.85, 0.6] },
-    "roof":    { "name": "Soltag",         "z": 9,  "region": [0.08, 0, 0.82, 0.38] },
-    "mirrors": { "name": "Sidespejle",     "z": 10, "region": [0.28, 0.1, 0.9, 0.62] },
-    "bar":     { "name": "Kofangerbøjle",  "z": 11, "region": [0.55, 0.3, 1, 1] },
-    "lights":  { "name": "Ekstra lygter",  "z": 12, "region": [0, 0, 1, 0.85] },
-    "exhaust": { "name": "Udstødning",     "z": 13, "region": [0, 0.45, 0.5, 1] },
-    "wheels":  { "name": "Fælge og dæk",   "z": 14, "region": [0, 0.5, 1, 1] },
-    "front":   { "name": "Front",          "z": 15, "region": [0.45, 0.05, 1, 0.8] },
-    "top":     { "name": "Top",            "z": 16, "region": [0, 0, 1, 0.55] }
+    "paint": {
+      "name": "Lak",
+      "z": 1,
+      "region": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "kit": {
+      "name": "Bodykit",
+      "z": 2,
+      "region": [
+        -0.1,
+        0.4,
+        1.1,
+        1.1
+      ]
+    },
+    "stripe": {
+      "name": "Fartstriber",
+      "z": 3,
+      "region": [
+        0,
+        0,
+        1,
+        0.92
+      ]
+    },
+    "decal": {
+      "name": "Dekor",
+      "z": 4,
+      "region": [
+        0,
+        0.1,
+        1,
+        0.9
+      ]
+    },
+    "windows": {
+      "name": "Ruder",
+      "z": 5,
+      "region": [
+        0.12,
+        0,
+        0.88,
+        0.58
+      ]
+    },
+    "cabin": {
+      "name": "Kabine",
+      "z": 6,
+      "region": [
+        0.12,
+        0,
+        0.88,
+        0.62
+      ]
+    },
+    "audio": {
+      "name": "Anlæg",
+      "z": 7,
+      "region": [
+        0,
+        0,
+        0.62,
+        0.75
+      ]
+    },
+    "charm": {
+      "name": "Bakspejl",
+      "z": 8,
+      "region": [
+        0.35,
+        0,
+        0.85,
+        0.6
+      ]
+    },
+    "roof": {
+      "name": "Soltag",
+      "z": 9,
+      "region": [
+        0.05,
+        -0.15,
+        0.85,
+        0.4
+      ]
+    },
+    "mirrors": {
+      "name": "Sidespejle",
+      "z": 10,
+      "region": [
+        0.2,
+        -0.45,
+        1.05,
+        0.7
+      ]
+    },
+    "bar": {
+      "name": "Kofangerbøjle",
+      "z": 11,
+      "region": [
+        0.55,
+        0.3,
+        1,
+        1
+      ]
+    },
+    "lights": {
+      "name": "Ekstra lygter",
+      "z": 12,
+      "region": [
+        -0.05,
+        -0.6,
+        1.08,
+        0.85
+      ]
+    },
+    "exhaust": {
+      "name": "Udstødning",
+      "z": 13,
+      "region": [
+        -0.35,
+        0.4,
+        0.5,
+        1.1
+      ]
+    },
+    "wheels": {
+      "name": "Fælge og dæk",
+      "z": 14,
+      "region": [
+        0,
+        0.5,
+        1,
+        1
+      ]
+    },
+    "front": {
+      "name": "Front",
+      "z": 15,
+      "region": [
+        0.45,
+        0.05,
+        1,
+        0.8
+      ]
+    },
+    "top": {
+      "name": "Top",
+      "z": 16,
+      "region": [
+        -0.05,
+        -0.8,
+        1.05,
+        0.55
+      ]
+    },
+    "face": {
+      "name": "Ansigt",
+      "z": 17,
+      "region": [
+        0.3,
+        0,
+        1,
+        0.95
+      ]
+    }
   },
   "parts": [
-    { "id": "paint-mint",   "slot": "paint", "name": "Mintgrøn",       "price": 6000,  "v": 1 },
-    { "id": "paint-pink",   "slot": "paint", "name": "Pastelpink",     "price": 6000,  "v": 1 },
-    { "id": "paint-black",  "slot": "paint", "name": "Mat sort",       "price": 8000,  "v": 1 },
-    { "id": "paint-red",    "slot": "paint", "name": "Racerrød",       "price": 8000,  "v": 1 },
-    { "id": "paint-purple", "slot": "paint", "name": "Metallic lilla", "price": 9000,  "edit": "repair all rust, dents and damage and repaint the whole body in glossy metallic purple (#8A5CF6) with a subtle sparkle" },
-    { "id": "paint-pearl",  "slot": "paint", "name": "Perlemor",       "price": 10000, "edit": "repair all rust, dents and damage and repaint the whole body in pearlescent white with a soft pink-blue shimmer" },
-    { "id": "paint-yellow", "slot": "paint", "name": "Solgul",         "price": 8000,  "edit": "repair all rust, dents and damage and repaint the whole body in fresh glossy sunny yellow (#FFD23F)" },
-
-    { "id": "decal-hearts",  "slot": "decal", "name": "Hjerter",  "price": 2000, "v": 1 },
-    { "id": "decal-flames",  "slot": "decal", "name": "Flammer",  "price": 3000, "v": 1 },
-
-    { "id": "decal-stripes",  "slot": "stripe", "name": "Hvide striber", "price": 3000, "v": 1 },
-    { "id": "stripe-black",   "slot": "stripe", "name": "Sorte striber", "price": 3000, "edit": "add only two bold black racing stripes along the body" },
-    { "id": "stripe-pink",    "slot": "stripe", "name": "Pink striber",  "price": 3000, "edit": "add only two bold hot-pink racing stripes along the body" },
-    { "id": "stripe-neon",    "slot": "stripe", "name": "Neonstriber",   "price": 4000, "edit": "add only two bold neon-green (#B6FF3B) racing stripes along the body" },
-
-    { "id": "wheels-pastel", "slot": "wheels", "name": "Pastelfælge",  "price": 4000,  "v": 1 },
-    { "id": "wheels-sport",  "slot": "wheels", "name": "Sportsfælge",  "price": 5000,  "v": 1 },
-    { "id": "wheels-chrome", "slot": "wheels", "name": "Kromfælge",    "price": 7000,  "v": 1 },
-    { "id": "wheels-flower", "slot": "wheels", "name": "Blomsterfælge","price": 6000,  "edit": "replace only the wheel rims with cute white rims shaped like a flower with pastel petals" },
-    { "id": "wheels-flame",  "slot": "wheels", "name": "Flammefælge",  "price": 6000,  "edit": "replace only the wheel rims with black rims with orange flame graphics" },
-    { "id": "wheels-big",    "slot": "wheels", "name": "Kæmpe alufælge","price": 9000, "edit": "replace only the wheels with huge shiny multi-spoke aluminium rims with thin low-profile tyres, filling the wheel arches" },
-    { "id": "tires-big",     "slot": "wheels", "name": "Store dæk",    "price": 9000,  "edit": "replace only the wheels with big chunky off-road tyres with deep tread on dark rims, slightly larger than the originals" },
-
-    { "id": "kit-street",  "slot": "kit", "name": "Street-kit",  "price": 8000,  "bases": ["smallcar", "bigcar", "racecar"], "edit": "add only a sporty body kit: a low front lip spoiler, side skirts along the bottom between the wheels and a rear diffuser" },
-    { "id": "kit-extreme", "slot": "kit", "name": "Ekstremt kit","price": 12000, "bases": ["smallcar", "bigcar", "racecar"], "edit": "add only an extreme wide body kit: big flared wheel arches, a huge front splitter and very low side skirts" },
-
-    { "id": "bar-chrome", "slot": "bar", "name": "Kofangerbøjle krom", "price": 6000, "bases": ["smallcar", "bigcar"], "edit": "add only a chrome bull bar on the front bumper" },
-    { "id": "bar-black",  "slot": "bar", "name": "Kofangerbøjle sort", "price": 6000, "bases": ["smallcar", "bigcar"], "edit": "add only a matte black off-road bull bar on the front bumper" },
-
-    { "id": "top-spoiler", "slot": "top", "name": "Spoiler",        "price": 5000, "v": 1 },
-    { "id": "top-bow",     "slot": "top", "name": "Sløjfe",         "price": 2500, "v": 1 },
-    { "id": "top-wing",    "slot": "top", "name": "Racervinge",     "price": 9000, "bases": ["smallcar", "bigcar", "racecar"], "edit": "add only a huge GT racing wing on tall stands on the rear" },
-
-    { "id": "lights-roofbar", "slot": "lights", "name": "Lygtebøjle på taget", "price": 7000, "bases": ["smallcar", "bigcar", "racecar"], "edit": "add only a roof light bar with four round extra lights on top of the roof" },
-    { "id": "lights-fog",     "slot": "lights", "name": "Tågelygter",          "price": 4000, "edit": "add only two round yellow fog lights low on the front bumper" },
-
-    { "id": "exhaust-big", "slot": "exhaust", "name": "Kæmperør",  "price": 5000, "edit": "add only one huge oversized chrome exhaust pipe sticking out at the rear" },
-    { "id": "exhaust-2",   "slot": "exhaust", "name": "2 rør",     "price": 4000, "edit": "add only two chrome exhaust pipes at the rear" },
-    { "id": "exhaust-4",   "slot": "exhaust", "name": "4 rør",     "price": 6000, "edit": "add only four chrome exhaust pipes at the rear" },
-    { "id": "exhaust-6",   "slot": "exhaust", "name": "6 rør",     "price": 8000, "bases": ["smallcar", "bigcar", "racecar"], "edit": "add only six chrome exhaust pipes in a row at the rear" },
-
-    { "id": "mirrors-cat",  "slot": "mirrors", "name": "Katteører-spejle", "price": 5000, "edit": "replace only the side mirrors with big cute side mirrors shaped like cat ears" },
-    { "id": "mirrors-dog",  "slot": "mirrors", "name": "Hundeører-spejle", "price": 5000, "edit": "replace only the side mirrors with big floppy side mirrors shaped like dog ears" },
-    { "id": "mirrors-race", "slot": "mirrors", "name": "Racerspejle",      "price": 4000, "edit": "replace only the side mirrors with sleek aerodynamic carbon racing mirrors" },
-
-    { "id": "windows-tint",    "slot": "windows", "name": "Mørke ruder",    "price": 4000, "bases": ["smallcar", "bigcar", "racecar"], "edit": "make only the windows dark tinted (smoky black glass), keep frames identical" },
-    { "id": "windows-flowers", "slot": "windows", "name": "Blomsterruder",  "price": 4000, "bases": ["smallcar", "bigcar", "racecar"], "edit": "add only cute pastel flower decals on the side windows" },
-    { "id": "windows-rainbow", "slot": "windows", "name": "Regnbueruder",   "price": 5000, "bases": ["smallcar", "bigcar", "racecar"], "edit": "make only the windows a shimmering rainbow-tinted glass" },
-
-    { "id": "roof-sunroof", "slot": "roof", "name": "Soltag", "price": 7000, "bases": ["smallcar", "bigcar"], "edit": "add only a glass sunroof panel on the roof" },
-
-    { "id": "cabin-sportseats", "slot": "cabin", "name": "Sportssæder", "price": 6000, "bases": ["smallcar", "bigcar", "racecar"], "edit": "replace only the seats visible through the windows with bucket racing seats in red and black" },
-
-    { "id": "audio-subwoofer", "slot": "audio", "name": "Kæmpe subwoofer", "price": 8000, "bases": ["smallcar", "bigcar", "racecar"], "edit": "add only a huge glowing subwoofer and speaker box visible through the rear window in the back of the car" },
-    { "id": "audio-speaker",   "slot": "audio", "name": "Højttalere",      "price": 5000, "bases": ["scooter"], "edit": "add only a chunky retro boombox speaker strapped behind the seat" },
-
-    { "id": "charm-dice",    "slot": "charm", "name": "Plysterninger", "price": 2000, "edit": "add only fluffy pink plush dice hanging from the rear-view mirror (for the scooter: hanging from the handlebar)" },
-    { "id": "charm-yinyang", "slot": "charm", "name": "Yin-yang",      "price": 2000, "edit": "add only a small yin-yang charm hanging from the rear-view mirror (for the scooter: from the handlebar)" },
-    { "id": "charm-tree",    "slot": "charm", "name": "Duft-træ",      "price": 1500, "edit": "add only a small green air-freshener tree hanging from the rear-view mirror (for the scooter: from the handlebar)" },
-    { "id": "charm-heart",   "slot": "charm", "name": "Hjerte",        "price": 1500, "edit": "add only a small red plush heart hanging from the rear-view mirror (for the scooter: from the handlebar)" },
-
-    { "id": "front-lashes", "slot": "front", "name": "Vipper",   "price": 2500, "v": 1 },
-    { "id": "front-led",    "slot": "front", "name": "LED-bryn", "price": 3500, "v": 1 }
+    {
+      "id": "paint-mint",
+      "slot": "paint",
+      "name": "Mintgrøn",
+      "price": 6000,
+      "v": 1
+    },
+    {
+      "id": "paint-pink",
+      "slot": "paint",
+      "name": "Pastelpink",
+      "price": 6000,
+      "v": 1
+    },
+    {
+      "id": "paint-black",
+      "slot": "paint",
+      "name": "Mat sort",
+      "price": 8000,
+      "v": 1
+    },
+    {
+      "id": "paint-red",
+      "slot": "paint",
+      "name": "Racerrød",
+      "price": 8000,
+      "v": 1
+    },
+    {
+      "id": "paint-purple",
+      "slot": "paint",
+      "name": "Metallic lilla",
+      "price": 9000,
+      "edit": "repair all rust, dents and damage and repaint the whole body in glossy metallic purple (#8A5CF6) with a subtle sparkle"
+    },
+    {
+      "id": "paint-pearl",
+      "slot": "paint",
+      "name": "Perlemor",
+      "price": 10000,
+      "edit": "repair all rust, dents and damage and repaint the whole body in pearlescent white with a soft pink-blue shimmer"
+    },
+    {
+      "id": "paint-yellow",
+      "slot": "paint",
+      "name": "Solgul",
+      "price": 8000,
+      "edit": "repair all rust, dents and damage and repaint the whole body in fresh glossy sunny yellow (#FFD23F)"
+    },
+    {
+      "id": "decal-hearts",
+      "slot": "decal",
+      "name": "Hjerter",
+      "price": 2000,
+      "v": 1
+    },
+    {
+      "id": "decal-flames",
+      "slot": "decal",
+      "name": "Flammer",
+      "price": 3000,
+      "v": 1
+    },
+    {
+      "id": "decal-stripes",
+      "slot": "stripe",
+      "name": "Hvide striber",
+      "price": 3000,
+      "v": 1
+    },
+    {
+      "id": "stripe-black",
+      "slot": "stripe",
+      "name": "Sorte striber",
+      "price": 3000,
+      "edit": "add only two bold black racing stripes along the body"
+    },
+    {
+      "id": "stripe-pink",
+      "slot": "stripe",
+      "name": "Pink striber",
+      "price": 3000,
+      "edit": "add only two bold hot-pink racing stripes along the body"
+    },
+    {
+      "id": "stripe-neon",
+      "slot": "stripe",
+      "name": "Neonstriber",
+      "price": 4000,
+      "edit": "add only two bold neon-green (#B6FF3B) racing stripes along the body"
+    },
+    {
+      "id": "wheels-pastel",
+      "slot": "wheels",
+      "name": "Pastelfælge",
+      "price": 4000,
+      "v": 1
+    },
+    {
+      "id": "wheels-sport",
+      "slot": "wheels",
+      "name": "Sportsfælge",
+      "price": 5000,
+      "v": 1
+    },
+    {
+      "id": "wheels-chrome",
+      "slot": "wheels",
+      "name": "Kromfælge",
+      "price": 7000,
+      "v": 1
+    },
+    {
+      "id": "wheels-flower",
+      "slot": "wheels",
+      "name": "Blomsterfælge",
+      "price": 6000,
+      "edit": "replace only the wheel rims with cute white rims shaped like a flower with pastel petals"
+    },
+    {
+      "id": "wheels-flame",
+      "slot": "wheels",
+      "name": "Flammefælge",
+      "price": 6000,
+      "edit": "replace only the wheel rims with black rims with orange flame graphics"
+    },
+    {
+      "id": "wheels-big",
+      "slot": "wheels",
+      "name": "Kæmpe alufælge",
+      "price": 9000,
+      "edit": "replace only the wheels with huge shiny multi-spoke aluminium rims with thin low-profile tyres, filling the wheel arches"
+    },
+    {
+      "id": "tires-big",
+      "slot": "wheels",
+      "name": "Store dæk",
+      "price": 9000,
+      "edit": "replace only the wheels with big chunky off-road tyres with deep tread on dark rims, slightly larger than the originals"
+    },
+    {
+      "id": "kit-street",
+      "slot": "kit",
+      "name": "Street-kit",
+      "price": 8000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "add only a sporty body kit: a low front lip spoiler, side skirts along the bottom between the wheels and a rear diffuser"
+    },
+    {
+      "id": "kit-extreme",
+      "slot": "kit",
+      "name": "Ekstremt kit",
+      "price": 12000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "add only an extreme wide body kit: big flared wheel arches, a huge front splitter and very low side skirts"
+    },
+    {
+      "id": "bar-chrome",
+      "slot": "bar",
+      "name": "Kofangerbøjle krom",
+      "price": 6000,
+      "bases": [
+        "smallcar",
+        "bigcar"
+      ],
+      "edit": "add only a chrome bull bar on the front bumper"
+    },
+    {
+      "id": "bar-black",
+      "slot": "bar",
+      "name": "Kofangerbøjle sort",
+      "price": 6000,
+      "bases": [
+        "smallcar",
+        "bigcar"
+      ],
+      "edit": "add only a matte black off-road bull bar on the front bumper"
+    },
+    {
+      "id": "top-spoiler",
+      "slot": "top",
+      "name": "Spoiler",
+      "price": 5000,
+      "v": 1
+    },
+    {
+      "id": "top-bow",
+      "slot": "top",
+      "name": "Sløjfe",
+      "price": 2500,
+      "v": 1
+    },
+    {
+      "id": "top-wing",
+      "slot": "top",
+      "name": "Racervinge",
+      "price": 9000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "add only a huge GT racing wing on tall stands on the rear"
+    },
+    {
+      "id": "lights-roofbar",
+      "slot": "lights",
+      "name": "Lygtebøjle på taget",
+      "price": 7000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "add only a roof light bar with four round extra lights on top of the roof"
+    },
+    {
+      "id": "lights-fog",
+      "slot": "lights",
+      "name": "Tågelygter",
+      "price": 4000,
+      "edit": "add only two round yellow fog lights low on the front bumper"
+    },
+    {
+      "id": "exhaust-big",
+      "slot": "exhaust",
+      "name": "Kæmperør",
+      "price": 5000,
+      "edit": "add only one huge oversized chrome exhaust pipe sticking out at the rear"
+    },
+    {
+      "id": "exhaust-2",
+      "slot": "exhaust",
+      "name": "2 rør",
+      "price": 4000,
+      "edit": "add only two chrome exhaust pipes at the rear"
+    },
+    {
+      "id": "exhaust-4",
+      "slot": "exhaust",
+      "name": "4 rør",
+      "price": 6000,
+      "edit": "add only four chrome exhaust pipes at the rear"
+    },
+    {
+      "id": "exhaust-6",
+      "slot": "exhaust",
+      "name": "6 rør",
+      "price": 8000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "add only six chrome exhaust pipes in a row at the rear"
+    },
+    {
+      "id": "mirrors-cat",
+      "slot": "mirrors",
+      "name": "Katteører-spejle",
+      "price": 5000,
+      "edit": "replace only the side mirrors with big cute side mirrors shaped like cat ears"
+    },
+    {
+      "id": "mirrors-dog",
+      "slot": "mirrors",
+      "name": "Hundeører-spejle",
+      "price": 5000,
+      "edit": "replace only the side mirrors with big floppy side mirrors shaped like dog ears"
+    },
+    {
+      "id": "mirrors-race",
+      "slot": "mirrors",
+      "name": "Racerspejle",
+      "price": 4000,
+      "edit": "replace only the side mirrors with sleek aerodynamic carbon racing mirrors"
+    },
+    {
+      "id": "windows-tint",
+      "slot": "windows",
+      "name": "Mørke ruder",
+      "price": 4000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "make only the windows dark tinted (smoky black glass), keep frames identical"
+    },
+    {
+      "id": "windows-flowers",
+      "slot": "windows",
+      "name": "Blomsterruder",
+      "price": 4000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "add only cute pastel flower decals on the side windows"
+    },
+    {
+      "id": "windows-rainbow",
+      "slot": "windows",
+      "name": "Regnbueruder",
+      "price": 5000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "make only the windows a shimmering rainbow-tinted glass"
+    },
+    {
+      "id": "roof-sunroof",
+      "slot": "roof",
+      "name": "Soltag",
+      "price": 7000,
+      "bases": [
+        "smallcar",
+        "bigcar"
+      ],
+      "edit": "add only a glass sunroof panel on the roof"
+    },
+    {
+      "id": "cabin-sportseats",
+      "slot": "cabin",
+      "name": "Sportssæder",
+      "price": 6000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "replace only the seats visible through the windows with bucket racing seats in red and black"
+    },
+    {
+      "id": "audio-subwoofer",
+      "slot": "audio",
+      "name": "Kæmpe subwoofer",
+      "price": 8000,
+      "bases": [
+        "smallcar",
+        "bigcar",
+        "racecar"
+      ],
+      "edit": "add only a huge glowing subwoofer and speaker box visible through the rear window in the back of the car"
+    },
+    {
+      "id": "audio-speaker",
+      "slot": "audio",
+      "name": "Højttalere",
+      "price": 5000,
+      "bases": [
+        "scooter"
+      ],
+      "edit": "add only a chunky retro boombox speaker strapped behind the seat"
+    },
+    {
+      "id": "charm-dice",
+      "slot": "charm",
+      "name": "Plysterninger",
+      "price": 2000,
+      "edit": "add only fluffy pink plush dice hanging from the rear-view mirror (for the scooter: hanging from the handlebar)"
+    },
+    {
+      "id": "charm-yinyang",
+      "slot": "charm",
+      "name": "Yin-yang",
+      "price": 2000,
+      "edit": "add only a small yin-yang charm hanging from the rear-view mirror (for the scooter: from the handlebar)"
+    },
+    {
+      "id": "charm-tree",
+      "slot": "charm",
+      "name": "Duft-træ",
+      "price": 1500,
+      "edit": "add only a small green air-freshener tree hanging from the rear-view mirror (for the scooter: from the handlebar)"
+    },
+    {
+      "id": "charm-heart",
+      "slot": "charm",
+      "name": "Hjerte",
+      "price": 1500,
+      "edit": "add only a small red plush heart hanging from the rear-view mirror (for the scooter: from the handlebar)"
+    },
+    {
+      "id": "front-lashes",
+      "slot": "front",
+      "name": "Vipper",
+      "price": 2500,
+      "v": 1
+    },
+    {
+      "id": "front-led",
+      "slot": "front",
+      "name": "LED-bryn",
+      "price": 3500,
+      "v": 1
+    },
+    {
+      "id": "face-classic",
+      "slot": "face",
+      "name": "Klassisk",
+      "price": 3000,
+      "edit": "give the vehicle a friendly face: big eyes, brows and a small smile (no mustache), in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
+    },
+    {
+      "id": "face-mustache",
+      "slot": "face",
+      "name": "Overskæg",
+      "price": 4000,
+      "edit": "give the vehicle a friendly face: big eyes, brows, a bushy mustache and a small smile, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
+    },
+    {
+      "id": "face-angry",
+      "slot": "face",
+      "name": "Sur",
+      "price": 4000,
+      "edit": "give the vehicle an angry face: big eyes with angled angry brows, a bushy mustache and gritted white teeth, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
+    },
+    {
+      "id": "face-nervous",
+      "slot": "face",
+      "name": "Nervøs",
+      "price": 3500,
+      "edit": "give the vehicle a nervous face: wide eyes with tiny pupils, worried brows, small blue sweat drops and a small round o mouth, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
+    },
+    {
+      "id": "face-cool",
+      "slot": "face",
+      "name": "Cool",
+      "price": 5000,
+      "edit": "give the vehicle a cool face: black sunglasses over the eyes, a bushy mustache and a smirk, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
+    },
+    {
+      "id": "face-happy",
+      "slot": "face",
+      "name": "Glad",
+      "price": 3000,
+      "edit": "give the vehicle a laughing face: closed happy curved eyes, brows, a bushy mustache and a big open laughing mouth, in EXACTLY the face style of the attached Bobbel model sheet (flat white oval eyes with solid black pupils, flat dark-green brows, bushy dark-green mustache, simple flat mouth shapes). Draw the face LARGE across the front of the vehicle so it clearly reads as a character face (eyes roughly a third of the front height). NO arms, NO hands, mirrors stay normal mirrors"
+    }
   ],
-  "split": { "id": "nowheels", "edit": "remove only the wheels and tyres completely so the wheel arches are empty; keep the body exactly where it is" }
+  "split": {
+    "id": "nowheels",
+    "edit": "remove only the wheels and tyres completely so the wheel arches are empty; keep the body exactly where it is"
+  }
 }
