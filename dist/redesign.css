@@ -106,6 +106,15 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
   .exam-art .display{font-size:clamp(52px,17vw,72px)!important}
 }
 
+/* Missions: no glow bleeding into the cards; the STOP sign keeps its condensed sign lettering. */
+.stop-sign{font-family:LogoBarlow,Impact,sans-serif!important;filter:none!important;overflow:hidden}
+.mission-card::before,.mission-card::after,.mission-card .card-art::before,.mission-card .card-art::after{background:none!important;box-shadow:none!important;filter:none!important}
+.mission-card .card-art,.mission-card .card-art *{filter:none!important}
+.mission-card .card-art{background:none!important}
+.mission-card .card-arrow,.chapter-card .card-arrow,.mission-card .card-art strong,.mission-card .card-art svg{color:color-mix(in srgb,var(--card-color,#1F2328) 55%,#101418)!important}
+.section-head{flex-wrap:wrap;gap:6px 12px}
+.section-head .text-link{font-family:var(--font-text)!important;font-weight:700;font-size:14px!important;white-space:nowrap}
+
 /* Chapter colours are bright neons; as text on white they are darkened to stay readable. */
 .chapter-card .chapter-number,.chapter-card .mono{color:color-mix(in srgb,var(--card-color,#1F2328) 50%,#101418)!important}
 .mobile-nav .nav-item.active .nav-label,.mobile-nav .nav-item[aria-current="page"] .nav-label{color:var(--ink)!important}
@@ -120,6 +129,7 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
 .cast{margin:0;display:flex;flex-wrap:wrap;align-items:flex-end;gap:4px 12px;min-width:0;max-width:100%}
 .art-scene:has(.cast){position:static!important;inset:auto!important;width:auto!important;height:auto!important;transform:none!important;opacity:1!important;margin:0 0 14px}
 .art-note:has(.cast){display:block}
+.art-scene .cast--md .cast-img{width:clamp(110px,32vw,150px)}
 .cast-img{display:block;height:auto;flex:none;filter:drop-shadow(0 6px 8px rgba(31,35,40,.14))}
 .cast--xs .cast-img{width:56px}.cast--sm .cast-img{width:96px}.cast--md .cast-img{width:150px}.cast--lg .cast-img{width:min(240px,52vw)}
 .cast-bubble{position:relative;margin:0 0 14px;background:#fff;color:var(--ink);border:2px solid var(--line);
@@ -184,6 +194,42 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
   .chapter-card>div{min-width:0}.chapter-card h3{font-size:20px!important;overflow-wrap:anywhere}
   .chapter-card .chapter-number{font-size:34px!important}
 }
+
+/* ---------- Boosters + Min bil ---------- */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.booster-chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px 0 8px;border-radius:999px;background:#fff;border:2px solid var(--line);
+  box-shadow:0 3px 0 var(--line);color:var(--ink);font-family:var(--font-display);font-weight:800;font-size:16px;text-decoration:none;white-space:nowrap}
+.booster-chip b{font-weight:800}
+.booster-chip:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.booster-chip--big{font-size:20px;padding:6px 16px 6px 10px}
+.booster-chip--big .booster-icon{width:26px;height:26px}
+/* Mobile-first top bar: logo, Boosters, settings. Humour and sound live in settings. */
+@media (max-width:700px){#humor-toggle,#sound-toggle{display:none!important}}
+
+.mybil{max-width:760px;margin:0 auto}
+.mybil-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.mybil-stage{position:relative;aspect-ratio:1/1;max-height:min(70vw,420px);margin:0 auto;border-radius:24px;
+  background:radial-gradient(70% 55% at 50% 62%,#F3FFD6 0,#fff 70%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);overflow:hidden}
+.mybil-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.mybil-message{min-height:24px;margin:10px 0 4px;text-align:center;font-weight:700;color:var(--good-ink)}
+.mybil-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
+.mybil-tab{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-display);font-weight:700}
+.mybil-tab.is-active{background:var(--accent);border-color:var(--accent-shadow);box-shadow:0 3px 0 var(--accent-shadow)}
+.mybil-grid,.mybil-bases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:560px){.mybil-grid,.mybil-bases{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.mybil-item,.mybil-base{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 8px 10px;border-radius:18px;background:#fff;border:2px solid var(--line);
+  box-shadow:0 4px 0 var(--line);color:var(--ink);text-align:center;min-height:44px}
+.mybil-item small,.mybil-base small{display:inline-flex;align-items:center;gap:4px;font-weight:700;color:var(--muted);font-size:13px}
+.mybil-item.is-on,.mybil-base.is-active{border-color:var(--good);box-shadow:0 4px 0 var(--good);background:var(--good-bg)}
+.mybil-item.is-on small,.mybil-base.is-active small{color:var(--good-ink)}
+.mybil-item.is-short{opacity:.65}
+.mybil-base.is-locked img{filter:grayscale(1) opacity(.55)}
+.mybil-thumb{position:relative;display:block;width:100%;aspect-ratio:1/1}
+.mybil-thumb img,.mybil-base img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.mybil-base{position:relative}.mybil-base img{position:static;height:auto;aspect-ratio:1/1}
+.mybil-item-name,.mybil-base span{font-family:var(--font-display);font-weight:700;font-size:15px}
+.mybil-subtitle{margin:22px 0 10px}
+.mybil-earn{margin:18px 0 0;color:var(--muted);font-size:14px}
 
 /* ---------- Exam ---------- */
 .exam-cast{margin:0 0 18px}
