@@ -154,12 +154,12 @@ export function createJourneyPlayer({
     const currentIndex = Math.max(0, currentStep.cardsRead.findIndex(read => !read));
     const card = currentStep.cards[currentIndex] ?? currentStep.cards[2];
     const audioView = ui.audioCards
-      ? `<div class="journey-audio-cards" aria-label="Alle tre kort, som oplæsningen dækker"><p>${esc(lesson.lead)}</p><p>Oplæsningen dækker alle tre kort:</p>${currentStep.cards.map((item, index) => `<article class="${index === currentIndex ? 'current' : ''}"><span>0${index + 1}</span><div><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p></div></article>`).join('')}</div>`
+      ? `<div class="journey-audio-cards" aria-label="Alle tre kort, som oplæsningen dækker"><p>${esc(lesson.lead)}</p><p>Oplæsningen dækker alle tre kort:</p>${currentStep.cards.map((item, index) => `<article class="${index === currentIndex ? 'current' : ''}"><span>${index + 1}</span><div><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p></div></article>`).join('')}</div>`
       : '';
     return `<section class="journey-card-step">
       <div class="journey-step-intro journey-step-intro--compact"><span class="journey-kicker">KORT ${currentIndex + 1} AF 3</span>${voiceButton('lesson', 'Lyt til alle tre kort')}</div>
       ${audioView}
-      <article class="journey-focus-card"><span class="lesson-number">0${currentIndex + 1}</span><div><h2>${esc(card.title)}</h2><p>${esc(card.body)}</p>${refs(card.sourceIds, card.sourceLocator)}</div></article>
+      <article class="journey-focus-card"><span class="lesson-number">${currentIndex + 1}</span><div><h2>${esc(card.title)}</h2><p>${esc(card.body)}</p>${refs(card.sourceIds, card.sourceLocator)}</div></article>
       <div class="journey-control-dock"><p>${session.kind === 'review' ? 'Læs forklaringen efter dit kolde forsøg.' : 'Ét kort ad gangen.'}</p><button class="btn btn-primary" type="button" data-journey-card="${currentIndex}">${currentIndex === 2 ? 'Brug reglen →' : 'Næste kort →'}</button></div>
     </section>`;
   }
@@ -168,7 +168,7 @@ export function createJourneyPlayer({
     const statement = question.statements[index];
     const answer = ui.answers[index];
     return `<article class="journey-statement" data-statement-index="${index}">
-      <span class="statement-index">0${index + 1}</span><p>${esc(statement.text)}</p>
+      <span class="statement-index">${index + 1}</span><p>${esc(statement.text)}</p>
       <div class="journey-choice-pair" role="group" aria-label="Udsagn ${index + 1}: ${esc(statement.text)}">
         <button type="button" class="journey-tactile-choice journey-yes ${answer === true ? 'selected' : ''}" data-journey-choice="${index}" data-value="true" aria-pressed="${answer === true}" ${disabled ? 'disabled' : ''}>JA</button>
         <button type="button" class="journey-tactile-choice journey-no ${answer === false ? 'selected' : ''}" data-journey-choice="${index}" data-value="false" aria-pressed="${answer === false}" ${disabled ? 'disabled' : ''}>NEJ</button>

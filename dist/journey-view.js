@@ -26,7 +26,7 @@ function nodeLabel(node) {
   return `Start ${node.title}`;
 }
 function unitSelector(units, activeUnitId) {
-  return `<label class="journey-unit-control"><span>Emne</span><select data-journey-unit aria-label="Vælg blandt 10 emner">${units.map(unit => `<option value="${escape(unit.id)}"${unit.id === activeUnitId ? ' selected' : ''}>${escape(String(unit.chapterIndex + 1).padStart(2, '0'))} · ${escape(unit.title)}</option>`).join('')}</select></label>`;
+  return `<label class="journey-unit-control"><span>Emne</span><select data-journey-unit aria-label="Vælg blandt 10 emner">${units.map(unit => `<option value="${escape(unit.id)}"${unit.id === activeUnitId ? ' selected' : ''}>${escape(String(unit.chapterIndex + 1))} · ${escape(unit.title)}</option>`).join('')}</select></label>`;
 }
 function calendar(daily) {
   return `<div class="journey-week" aria-label="Din syv-dages øvekalender">${(daily?.week || []).map(day => { const label = escape(day.day?.slice(-2) || ''); const state = day.completed ? 'journey-day--done' : day.today ? 'journey-day--today' : ''; return `<span class="journey-day ${state}"${day.today ? ' aria-current="date"' : ''}><small>${escape(new Intl.DateTimeFormat('da-DK', { weekday: 'short' }).format(new Date(`${day.day}T12:00:00`)).slice(0, 2))}</small><b>${label}</b></span>`; }).join('')}</div>`;
@@ -37,7 +37,7 @@ function dailyDetails(daily) {
   return `<details class="journey-details"><summary>Indstil mål og se kalender</summary><div class="journey-details-body"><div class="journey-goals" role="group" aria-label="Vælg antal øvesessioner pr. dag">${[1, 2, 3].map(value => `<button type="button" class="journey-goal ${value === goal ? 'journey-goal--active' : ''}" data-journey-goal="${value}" aria-pressed="${value === goal}">${value}<small>${value === 1 ? 'øvesession' : 'øvesessioner'}</small></button>`).join('')}</div>${calendar(daily)}<ul class="journey-quests" aria-label="Dagens små mål">${quest('lesson', 'Gennemfør en lektion')}${quest('delayedReview', 'Gentag med lidt afstand')}${quest('repair', 'Reparér en fejl')}</ul></div></details>`;
 }
 function moreLinks() { return `<details class="journey-details"><summary>Flere øveveje</summary><nav class="journey-links" aria-label="Flere øveveje"><a href="#trafiklab">Trafiklab: Et blink. To baner. ${icon('arrow')}</a><a href="#judge">Beslutningskørsel ${icon('arrow')}</a><a href="#theory">Teoriatlas ${icon('arrow')}</a><a href="#garage">Garagen ${icon('arrow')}</a><a href="#exam">Øveprøve ${icon('arrow')}</a></nav></details>`; }
-function glyph(node, completed) { if (completed) return icon('check'); if (node.status === 'needs-repair') return icon('repair'); if (node.status === 'needs-practice' || node.status === 'review-due') return icon('review'); return escape(String((node.routeIndex ?? 0) + 1).padStart(2, '0')); }
+function glyph(node, completed) { if (completed) return icon('check'); if (node.status === 'needs-repair') return icon('repair'); if (node.status === 'needs-practice' || node.status === 'review-due') return icon('review'); return escape(String((node.routeIndex ?? 0) + 1)); }
 function routeNode(node, active, index, humor) {
   const completed = node.lessonComplete; const state = node.status || (completed ? 'lesson-complete' : 'ready'); const label = `${escape(node.title)} — ${nodeStatus(node)}`;
   const coach = active ? `<aside class="journey-coach" aria-label="Din næste anbefaling"><span>${escape(recommendationWhy(node))}</span></aside>` : '';
