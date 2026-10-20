@@ -11,6 +11,7 @@ import { VOICE_PACK } from './dist/voice-pack.js';
 import { validateVoicePack } from './voice-validation.mjs';
 import { buildVoiceCatalog } from './scripts/build-voice-catalog.mjs';
 import { ART_ASSETS } from './dist/art.js';
+import { CAST } from './dist/cast.js';
 import { createHash } from 'node:crypto';
 import {EXAM_PHOTOS} from './dist/exam-photos.js';
 import {validateExamVisuals} from './visual-validation.mjs';
@@ -237,6 +238,14 @@ for (const [id, asset] of Object.entries(ART_ASSETS)) {
   check(buffer[25] === 6 && record.mode === 'RGBA' && record.alphaMin === 0 && record.alphaMax === 255, `${id}: mangler ægte RGBA-transparens`);
   check(record.transparentPixels > record.width * record.height / 4 && record.corners?.length === 4 && record.corners.every(alpha => alpha <= 15), `${id}: mangler fri transparent baggrund`);
   check(record.bytes === buffer.length && createHash('sha256').update(buffer).digest('hex') === record.sha256, `${id}: billedfilen er ændret siden alpha/decode-kontrollen`);
+}
+
+for (const [id, member] of Object.entries(CAST)) {
+  const file = path.join(dist, member.src);
+  inspectAsset(file);
+  if (!fs.existsSync(file)) continue;
+  const head = fs.readFileSync(file).subarray(0, 16);
+  check(head.subarray(0, 4).toString('ascii') === 'RIFF' && head.subarray(8, 12).toString('ascii') === 'WEBP', `${id}: castfilen er ikke WebP`);
 }
 
 const pixelProbes=JSON.parse(execFileSync('python',['-X','utf8',path.join(root,'scripts/probe-exam-pixels.py')],{encoding:'utf8',maxBuffer:2e6}));

@@ -1,13 +1,13 @@
 /* The lesson owns the screen; global chrome becomes a small, quiet control bar. */
-.journey-surface{--bg:#101b2b;--panel:#18273a;--panel2:#21344b;--line:#35465a;--muted:#b0bdcc;background:var(--bg)}
-.journey-surface .topbar{height:66px;background:#101b2bf5;border-color:#2a3b51}
+.journey-surface{--bg:#edeef1;--panel:#e6e8eb;--panel2:#21344b;--line:#d5d7da;--muted:#b0bdcc;background:var(--bg)}
+.journey-surface .topbar{height:66px;background:rgba(237,238,241,0.961);border-color:#dadde0}
 .journey-surface .sidebar{top:66px;height:calc(100vh - 66px);width:190px;padding:23px 14px}
 .journey-surface .sidebar-label,.journey-surface .small-license,.journey-surface .sidebar-note{display:none}
 .journey-surface .nav-item{min-height:48px;border-radius:12px;font-size:13px}
 .journey-surface #main{padding-top:24px}
 .journey-surface .top-strap{display:none}
-.journey-surface .icon-btn,.journey-surface .mode-toggle{border-radius:12px;background:#1b2b40;border-color:#3b4d64;box-shadow:0 3px 0 #080f1b}
-.journey-surface .icon-btn:active,.journey-surface .mode-toggle:active{transform:translateY(2px);box-shadow:0 1px 0 #080f1b}
+.journey-surface .icon-btn,.journey-surface .mode-toggle{border-radius:12px;background:#e3e6e9;border-color:#d0d3d6;box-shadow:0 3px 0 rgba(8,15,27,0.25)}
+.journey-surface .icon-btn:active,.journey-surface .mode-toggle:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(8,15,27,0.25)}
 .sound-btn[aria-pressed=true]{color:var(--cyan)}
 .sound-btn[aria-pressed=false]{color:var(--muted)}
 .sound-btn[aria-pressed=false] .sound-wave{display:none}
@@ -15,9 +15,9 @@
 .journey-road:before{display:none}
 .journey-road-line{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .journey-road-line path{fill:none;stroke:var(--cyan);stroke-width:3;stroke-dasharray:6 9;stroke-linecap:round;opacity:.45}
-.journey-surface .journey-node__circle{background:linear-gradient(145deg,#23374e,#1b2b40);border-color:#526981;box-shadow:0 5px 0 #080f1b,0 0 0 6px var(--panel),inset 0 2px 0 #ffffff0d}
-.journey-surface .journey-step--active .journey-node__circle{background:linear-gradient(145deg,#e7ff99,#caff47);color:#213313;border-color:#d5ff62;box-shadow:0 6px 0 #789e38,0 0 0 7px var(--panel),0 0 30px #d5ff6213}
-.journey-surface .journey-step--lesson-complete .journey-node__circle{background:#293d37;border-color:var(--acid);color:var(--acid)}
+.journey-surface .journey-node__circle{background:linear-gradient(145deg,#dde0e3,#e3e6e9);border-color:#c2c5c8;box-shadow:0 5px 0 rgba(8,15,27,0.25),0 0 0 6px var(--panel),inset 0 2px 0 rgba(255,255,255,0.013)}
+.journey-surface .journey-step--active .journey-node__circle{background:linear-gradient(145deg,#e7ff99,#caff47);color:#213313;border-color:#d5ff62;box-shadow:0 6px 0 rgba(120,158,56,0.25),0 0 0 7px var(--panel),0 0 30px rgba(213,255,98,0.018)}
+.journey-surface .journey-step--lesson-complete .journey-node__circle{background:#e2e4e4;border-color:var(--acid);color:var(--acid)}
 .journey-surface .journey-step--review-due .journey-node__circle{border-color:var(--cyan);color:var(--cyan)}
 .journey-surface .journey-step--needs-repair .journey-node__circle{border-color:var(--pink);color:var(--pink)}
 .journey-surface .journey-step--needs-practice .journey-node__circle{border-color:var(--amber);color:var(--amber)}
@@ -45,17 +45,17 @@
 .journey-focus .experience-status{margin-top:8px}
 .journey-focus.calm .journey-done-art{display:none}
 .journey-lesson-done .journey-control-dock .btn-primary{order:-1}
-.journey-surface .mobile-nav{background:#101b2bf7;border-color:#35465a}
+.journey-surface .mobile-nav{background:rgba(237,238,241,0.969);border-color:#d5d7da}
 .journey-surface .mobile-nav a{border-radius:13px;min-height:48px}
-.journey-surface .mobile-nav a.active{background:#d5ff6213}
-.journey-surface .btn-primary{box-shadow:0 4px 0 #74993b;border-radius:12px;min-height:50px}
-.journey-surface .btn-primary:active{transform:translateY(3px);box-shadow:0 1px 0 #74993b}
+.journey-surface .mobile-nav a.active{background:rgba(213,255,98,0.075)}
+.journey-surface .btn-primary{box-shadow:0 4px 0 rgba(116,153,59,0.25);border-radius:12px;min-height:50px}
+.journey-surface .btn-primary:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(116,153,59,0.25)}
 .journey-surface .btn-primary:hover{transform:translateY(-1px)}
-.journey-surface .btn-secondary{border-radius:12px;box-shadow:0 3px 0 #0b1321;min-height:46px}
-.journey-surface .btn-secondary:active{transform:translateY(2px);box-shadow:0 1px 0 #0b1321}
+.journey-surface .btn-secondary{border-radius:12px;box-shadow:0 3px 0 rgba(11,19,33,0.25);min-height:46px}
+.journey-surface .btn-secondary:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(11,19,33,0.25)}
 .journey-surface .btn:focus-visible{outline:3px solid var(--cyan);outline-offset:5px}
 .no-motion *, .no-motion *:before,.no-motion *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-@media(max-width:860px){.journey-jump{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;padding:10px 13px;margin:0 0 12px;border:1px solid #749e38;border-radius:12px;background:#cfff5a;color:#213313;box-shadow:0 4px 0 #749e38}.journey-jump small{font:9px Plex;display:block;margin-bottom:3px}.journey-jump strong{font:700 13px/1.35 DM;display:block}.journey-jump b{font-size:23px}.journey-jump:active{transform:translateY(3px);box-shadow:0 1px 0 #749e38}}
+@media(max-width:860px){.journey-jump{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;padding:10px 13px;margin:0 0 12px;border:1px solid #c5cbbd;border-radius:12px;background:#cfff5a;color:#213313;box-shadow:0 4px 0 rgba(116,158,56,0.25)}.journey-jump small{font:9px Plex;display:block;margin-bottom:3px}.journey-jump strong{font:700 13px/1.35 DM;display:block}.journey-jump b{font-size:23px}.journey-jump:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(116,158,56,0.25)}}
 @media(max-width:700px){
   .top-actions{gap:6px}.top-actions .mode-toggle{padding:9px;gap:5px}
   .top-actions .mode-toggle .mode-text{display:none}.top-actions .mode-toggle b{margin-left:0}

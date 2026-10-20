@@ -58,9 +58,16 @@ if "adjust" in opt:
 bpy.context.view_layer.update()
 dg = bpy.context.evaluated_depsgraph_get()
 pts = []
+# --frame body: ignore arm/hand vertices so every pose of a character gets identical framing.
+arm_only = opt.get("frame") == "body"
 for o in [o for o in scene.objects if o.type == "MESH"]:
+    arm_ids = {g.index for g in o.vertex_groups if any(k in g.name for k in ("Arm", "Hand"))} if arm_only else set()
     ev = o.evaluated_get(dg); me = ev.to_mesh()
-    pts += [ev.matrix_world @ v.co for v in me.vertices]; ev.to_mesh_clear()
+    for v, src_v in zip(me.vertices, o.data.vertices):
+        if arm_ids and sum(g.weight for g in src_v.groups if g.group in arm_ids) > 0.5:
+            continue
+        pts.append(ev.matrix_world @ v.co)
+    ev.to_mesh_clear()
 lo = Vector((min(p.x for p in pts), min(p.y for p in pts), min(p.z for p in pts)))
 hi = Vector((max(p.x for p in pts), max(p.y for p in pts), max(p.z for p in pts)))
 center, dims = (lo + hi) / 2, hi - lo

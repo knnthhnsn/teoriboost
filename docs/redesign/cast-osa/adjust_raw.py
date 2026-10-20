@@ -1,28 +1,29 @@
 # Natkørsel cast, "almost raw": original geometry, faces and texture colours untouched.
-# Only a soft matte material response and a character pose. Executed by render.py via --adjust.
+# Only a soft matte material response and a pose. Executed by render.py via --adjust (--char, --pose).
 # Mixamo bones: rotating an arm bone around local Z swings it up/down in the frontal plane.
 # Left side: +Z lowers the arm; right side: -Z lowers it. Values are degrees (X, Y, Z).
 
 POSES = {
-    "cone": {  # friendly wave
+    "wave": {  # greeting
         "LeftArm": (0, 0, 72), "LeftForeArm": (0, 0, 10),
         "RightArm": (0, 0, 10), "RightForeArm": (0, 0, 95), "Head": (0, 0, -8),
     },
-    "board": {  # relaxed lean
-        "LeftArm": (0, 0, 70), "RightArm": (0, 0, -66), "RightForeArm": (0, 0, -20),
-        "Spine": (0, 0, 6), "Head": (0, 0, -7),
-    },
-    "turtle": {  # hands on hips
+    "akimbo": {  # hands on hips: confident coach
         "LeftArm": (0, 0, 48), "LeftForeArm": (0, 0, 105),
         "RightArm": (0, 0, -48), "RightForeArm": (0, 0, -105), "Head": (0, 0, 6),
     },
-    "penguin": {  # chill: one hand on hip, head tilted
-        "LeftArm": (0, 0, 70), "LeftForeArm": (0, 0, 8),
-        "RightArm": (0, 0, -48), "RightForeArm": (0, 0, -105), "Head": (0, 0, 9),
-    },
-    "trash": {  # cheering
+    "cheer": {  # correct / passed
         "LeftArm": (0, 0, -35), "LeftForeArm": (0, 0, -30),
         "RightArm": (0, 0, 35), "RightForeArm": (0, 0, 30), "Head": (0, 0, 0),
+    },
+    "wobble": {  # wrong answer: off balance but still standing
+        "LeftArm": (0, 0, 15), "LeftForeArm": (0, 0, -25),
+        "RightArm": (0, 0, -40), "RightForeArm": (0, 0, 20),
+        "Spine": (0, 0, 7), "Head": (0, 0, 12),
+    },
+    "hip": {  # chill: one hand on hip, head tilted
+        "LeftArm": (0, 0, 70), "LeftForeArm": (0, 0, 8),
+        "RightArm": (0, 0, -48), "RightForeArm": (0, 0, -105), "Head": (0, 0, 9),
     },
 }
 
@@ -39,7 +40,7 @@ for o in body:
     bpy.context.view_layer.objects.active = o
     bpy.ops.object.shade_smooth()
 
-for bone, (x, y, z) in POSES[opt.get("char", "cone")].items():
+for bone, (x, y, z) in POSES[opt.get("pose", "wave")].items():
     pb = arm.pose.bones.get("mixamorig:" + bone)
     if pb:
         pb.rotation_mode = "XYZ"

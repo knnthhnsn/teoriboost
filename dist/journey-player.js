@@ -2,6 +2,7 @@ import { CHAPTERS, QUESTIONS, SOURCES } from './content.js';
 import { LESSONS } from './lessons.js';
 import { renderQuestionVisual, mountQuestionVisual } from './exam-photo-view.js';
 import { renderArt } from './art.js';
+import { renderCast, castLine } from './cast.js';
 import { createVoiceCue } from './voice-cues.js';
 import {
   questionVoiceParts, questionFeedbackParts, lessonVoiceParts, lessonCaseVoiceParts,
@@ -188,6 +189,7 @@ export function createJourneyPlayer({
     const feedback = ui.feedback;
     const repair = !feedback.correct;
     return `<aside class="journey-feedback-tray ${repair ? 'repair' : 'correct'}" role="status">
+      <div class="feedback-cast">${renderCast(repair ? 'kegle' : 'blink', { size: 'sm', mood: repair ? 'wrong' : 'correct', line: castLine(repair ? 'wrong' : 'correct', question.id) })}</div>
       <div class="journey-feedback-summary"><span aria-hidden="true">${repair ? '↻' : '✓'}</span><div><strong>${repair ? 'Find reglen og prøv igen' : 'Godt set'}</strong><p>${repair ? 'Se det afgørende, og reparér vurderingen.' : 'Alle fire udsagn er vurderet korrekt.'}</p></div></div>
       ${state()?.settings?.humor === true && question.gag ? `<p class="journey-feedback-gag">${esc(question.gag)}</p>` : ''}
       <details><summary>Se forklaring og alle fire svar</summary><p>${esc(question.explanation)}</p>

@@ -155,7 +155,7 @@ export function getJudgeCases() {
 export function renderJudge() {
   return `<section class="judge" data-judge-root aria-label="Du er kørelæreren">
     <header class="judge__header">
-      <div class="judge__heading"><p class="judge__eyebrow">NATKØRSEL · DIN FØRSTE VAGT</p><h1 class="judge__title" data-judge-title>Du er kørelæreren</h1></div>
+      <div class="judge__heading"><p class="judge__eyebrow">TEORIBOOST · DIN FØRSTE VAGT</p><h1 class="judge__title" data-judge-title>Du er kørelæreren</h1></div>
       <div class="judge__welcome-mascot art-scene">${renderArt('koerelys-brain',{variant:'reaction',priority:true,humorOnly:true})}</div>
       <div class="judge__toggles" data-judge-toggles aria-label="Visning" hidden>
         <button class="judge__toggle" type="button" data-judge-humor aria-pressed="true">Humor</button>

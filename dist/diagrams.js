@@ -327,11 +327,11 @@ function diagramBody(type, q, uid) {
     case 'child-seat':
       return `${neutralFrame()}${person(205,165,C.coral,1.3)}${dimension(145,236,265,236,'120 cm')}${rect(378,103,100,132,C.road2,16,C.muted,3)}${path('M 392 127 h 72 v 92 h -72 z','none',C.muted,4)}${txt(428,258,'Stol i anden bil',10,C.muted,'middle')}`;
     case 'home-study':
-      return `${neutralFrame()}${rect(105,90,220,145,C.dark,10,C.muted,3)}${txt(215,120,'NATKØRSEL',14,C.mint,'middle',850)}${rect(130,145,170,12,C.road2,6)}${rect(130,145,170,12,C.mint,6)}${txt(215,188,'Kapitler gennemført',11,C.white,'middle')}${panelCard(375,105,145,100,'KØRELÆRER','ikke registreret',C.coral)}`;
+      return `${neutralFrame()}${rect(105,90,220,145,C.dark,10,C.muted,3)}${txt(215,120,'TEORIBOOST',14,C.mint,'middle',850)}${rect(130,145,170,12,C.road2,6)}${rect(130,145,170,12,C.mint,6)}${txt(215,188,'Kapitler gennemført',11,C.white,'middle')}${panelCard(375,105,145,100,'KØRELÆRER','ikke registreret',C.coral)}`;
     case 'exam-format':
       return `${neutralFrame()}${rect(90,82,460,155,C.dark,10,C.muted,3)}${txt(125,112,'KATEGORI B',11,C.mint)}${txt(500,112,'25',22,C.white,'end',850)}${txt(505,112,' situationer',10,C.muted)}${rect(125,135,340,15,C.road2,5)}${rect(125,165,340,15,C.road2,5)}${rect(125,195,340,15,C.road2,5)}${circle(490,142,7,C.white)}${circle(490,172,7,C.white)}${circle(490,202,7,C.white)}`;
     case 'exam-review':
-      return `${neutralFrame()}${rect(88,82,464,160,C.dark,10,C.muted,3)}${txt(120,113,'NATKØRSEL · SITUATION 8',12,C.white)}${rect(120,135,180,18,C.road2,5)}${rect(120,165,180,18,C.road2,5)}${rect(120,195,180,18,C.road2,5)}${rect(360,132,145,34,C.yellow,7)}${txt(432,154,'MARKERET',11,C.dark,'middle',850)}${txt(432,204,'Tid tilbage',11,C.mint,'middle')}`;
+      return `${neutralFrame()}${rect(88,82,464,160,C.dark,10,C.muted,3)}${txt(120,113,'TEORIBOOST · SITUATION 8',12,C.white)}${rect(120,135,180,18,C.road2,5)}${rect(120,165,180,18,C.road2,5)}${rect(120,195,180,18,C.road2,5)}${rect(360,132,145,34,C.yellow,7)}${txt(432,154,'MARKERET',11,C.dark,'middle',850)}${txt(432,204,'Tid tilbage',11,C.mint,'middle')}`;
     case 'clock-trip':
       return `${neutralFrame()}${clock(205,163,'19.45')}${path('M 270 163 H 370','none',C.yellow,4,'8 6')}<path d="M 370 163 l -12 -8 v 16 z" fill="${C.yellow}"/>${clock(435,163,'20.10')}${txt(320,245,'Ingen ledsager',11,C.coral,'middle')}`;
     case 'new-driver':
