@@ -34,9 +34,10 @@ const out = (rgb, a) => a >= 1 ? '#' + rgb.map(v => v.toString(16).padStart(2, '
 function mapColor([r, g, b, a], kind) {
   const [h, s, l] = rgbToHsl(r, g, b);
   if (kind === 'shadow') return out([r, g, b], a * 0.5);
-  if (kind === 'surface') {
+  if (kind === 'surface' || kind === 'line') {
     if (l >= 0.5) return out([r, g, b], a);                       // already light (accent fills)
-    return out(hslToRgb(h, s * 0.25, 1 - l * 0.55), a);           // dark panel -> light neutral
+    // dark panel -> near-white (white app, mobile-first); dark line -> visible light-grey line
+    return out(hslToRgb(h, s * 0.15, kind === 'line' ? 1 - l * 0.6 : 1 - l * 0.22), a);
   }
   // text-like
   if (l > 0.72 && s < 0.35) return out(hslToRgb(h, s * 0.3, 0.1 + (1 - l) * 0.4), a); // white-ish text -> ink
@@ -46,13 +47,17 @@ function mapColor([r, g, b, a], kind) {
 function kindOf(prop) {
   if (/shadow/.test(prop)) return 'shadow';
   if (/^(color|fill|stroke|caret-color|-webkit-text-fill-color|text-decoration-color|accent-color)$/.test(prop)) return 'text';
-  if (/^(background|background-color|background-image|border|border-.*|outline|outline-color|--.*)$/.test(prop)) return 'surface';
+  if (/^--/.test(prop)) return /ink|text|muted|fg|lime|cyan|orange|blue|pink|amber|acid|mint/.test(prop) ? 'text' : /line|border|rule/.test(prop) ? 'line' : 'surface';
+  if (/^(border|border-.*|outline|outline-color)$/.test(prop)) return 'line';
+  if (/^(background|background-color|background-image)$/.test(prop)) return 'surface';
   return null;
 }
+// Theme variables that meant "light text" or "dark text on an accent" in the dark design.
+const TEXT_VARS = { 'var(--acid)': 'var(--acid-text)', 'var(--bg)': 'var(--on-accent)', 'var(--amber)': 'var(--amber-text)' };
 function convertValue(prop, value) {
   const kind = kindOf(prop);
   if (!kind) return value;
-  // drop-shadow() inside filter is handled as shadow even under other properties
+  if (kind === 'text' && !prop.startsWith('--')) for (const [from, to] of Object.entries(TEXT_VARS)) value = value.split(from).join(to);
   return value
     .replace(hexRe, m => mapColor(parseHex(m), kind))
     .replace(rgbRe, (m, r, g, b, a) => mapColor([+r, +g, +b, a === undefined ? 1 : a.endsWith('%') ? parseFloat(a) / 100 : +a], kind));
@@ -64,7 +69,7 @@ for (const file of process.argv.slice(2)) {
   const css = fs.readFileSync(file, 'utf8');
   let n = 0;
   // Declarations: prop:value up to ; or } (skips selectors, keeps @media structure intact).
-  const next = css.replace(/([{;]\s*)([-a-z]+)\s*:\s*([^;{}]+)/gi, (m, pre, prop, value) => {
+  const next = css.replace(/([{;]\s*)([-a-z0-9]+)\s*:\s*([^;{}]+)/gi, (m, pre, prop, value) => {
     const v = convertValue(prop.toLowerCase(), value);
     if (v !== value) n++;
     return `${pre}${prop}:${v}`;

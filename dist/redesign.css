@@ -7,10 +7,12 @@
 /* Many older rules name Barlow/DM/Plex directly. Re-pointing those family names to the new files swaps the
    type everywhere at once (later @font-face rules win for the same family and weight). */
 @font-face{font-family:Barlow;src:url('assets/fonts/rubik-var.woff2') format('woff2');font-weight:300 900;font-display:swap}
-@font-face{font-family:DM;src:url('assets/fonts/atkinson-400.woff2') format('woff2');font-weight:400 600;font-display:swap}
-@font-face{font-family:DM;src:url('assets/fonts/atkinson-700.woff2') format('woff2');font-weight:700 900;font-display:swap}
-@font-face{font-family:Plex;src:url('assets/fonts/atkinson-400.woff2') format('woff2');font-weight:400 600;font-display:swap}
-@font-face{font-family:Plex;src:url('assets/fonts/atkinson-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:DM;src:url('assets/fonts/atkinson-400.woff2') format('woff2');font-weight:100 600;font-display:swap}
+@font-face{font-family:DM;src:url('assets/fonts/atkinson-700.woff2') format('woff2');font-weight:601 1000;font-display:swap}
+@font-face{font-family:Plex;src:url('assets/fonts/atkinson-400.woff2') format('woff2');font-weight:100 600;font-display:swap}
+@font-face{font-family:Plex;src:url('assets/fonts/atkinson-700.woff2') format('woff2');font-weight:601 1000;font-display:swap}
+/* Anything still asking for a monospace face gets the text face (no typewriter labels in the new design). */
+code,kbd,samp,.mono,[class*="mono"],.turn-entry small,.turn-kicker,.turn-replay-status,.turn-scene-tag,.turn-shell b,.journey-week small{font-family:var(--font-text)!important}
 
 :root{
   color-scheme:light;
@@ -23,6 +25,8 @@
   --bad:#FF4B4B;--bad-ink:#D42F2F;--bad-bg:#FFE5E5;
   --blue:#1CB0F6;--blue-ink:#0A7BBF;--orange:#FF9600;--purple:#A560E8;
   --pink:var(--bad-ink);--cyan:var(--blue-ink);--amber:var(--orange);
+  /* text-safe stand-ins for theme colours the old dark design used as text */
+  --acid-text:#2F6F00;--on-accent:#1F2328;--amber-text:#B45309;
   --radius:18px;
   --font-display:Rubik,'Arial Rounded MT Bold',Arial,sans-serif;
   --font-text:Atkinson,Verdana,Arial,sans-serif;
@@ -89,6 +93,19 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
 .journey-surface{--bg:#fff;--panel:#fff;--panel2:var(--panel2-root,#F4F5F7);--line:#E3E5E8;--muted:#5F656D;--ink:#1F2328;background:#fff}
 .garage-page{--garage-orange:#C2410C;--garage-blue:#1D6FB8;--garage-ink:#1F2328}
 .turn-shell{--turn-lime:#4C7A00;--turn-cyan:#0A7BBF}
+/* "Du er kørelæreren": its --judge-white was the text colour on the dark scene. */
+.judge.judge{--judge-white:#1F2328;--judge-coral:#D42F2F;--judge-yellow:#B45309;--judge-mint:#2F6F00}
+.judge__intro p{background:#fff!important;color:var(--ink)!important;border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.judge__start{background:var(--accent)!important;color:var(--accent-ink)!important;box-shadow:0 4px 0 var(--accent-shadow)!important;border:0!important;font-family:var(--font-display);font-weight:700}
+
+/* Mobile-first type scale: big display headings were sized for desktop. */
+@media (max-width:700px){
+  #main h1{font-size:clamp(28px,8.5vw,36px)!important;line-height:1.08}
+  #main h2{font-size:clamp(22px,6.8vw,28px)!important;line-height:1.12}
+  #main h3{font-size:clamp(18px,5.2vw,21px)!important}
+  .exam-art .display{font-size:clamp(52px,17vw,72px)!important}
+}
+
 /* Chapter colours are bright neons; as text on white they are darkened to stay readable. */
 .chapter-card .chapter-number,.chapter-card .mono{color:color-mix(in srgb,var(--card-color,#1F2328) 50%,#101418)!important}
 .mobile-nav .nav-item.active .nav-label,.mobile-nav .nav-item[aria-current="page"] .nav-label{color:var(--ink)!important}
