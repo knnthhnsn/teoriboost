@@ -1,7 +1,7 @@
 // Start page and first-run intro. The hero is a "glow-up machine": each vehicle rolls in rusty,
 // a scan line restores and repaints it, then its tuning parts pop on one by one.
 import { renderCast } from './cast.js';
-import { vehicleLayers, boosterIcon, BOOSTER_RATES, BASES } from './mybil.js';
+import { vehicleLayers, boosterIcon, BOOSTER_RATES, BASES, baseSrc } from './mybil.js';
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const fmt = n => Number(n).toLocaleString('da-DK');
@@ -164,8 +164,9 @@ export function renderStart(step, { intro, counts, plan }) {
   if (!step) return hero({ counts });
   if (step === 1) return shell(1, `<h1 id="step-title" class="sr-only">Hvornår skal du til teoriprøve?</h1>${talk('sneglen', 'Hej! Hvornår skal du til teoriprøve?')}${options('when', WHEN, intro.when || '1m')}`, 'Fortsæt');
   if (step === 2) return shell(2, `<h1 id="step-title" class="sr-only">Hvor meget vil du øve om dagen?</h1>${talk('blink', 'Hvor meget vil du øve om dagen?')}${options('goal', GOALS, intro.goal || 2)}<p class="step-note">Du kan altid ændre det. Ingen straf, hvis du springer en dag over.</p>`, 'Fortsæt');
-  if (step === 3) return shell(3, `<p class="eyebrow step-eyebrow">DIN FØRSTE BIL</p><h1 id="step-title" class="step-title">Mød din scooter. <span>Den har set bedre dage.</span></h1>
-      <div class="step-garage">${glowUp(['scooter'], { loop: false, label: true })}<button type="button" class="step-replay" data-start-replay hidden>Se forvandlingen igen</button></div>
+  if (step === 3) return shell(3, `<p class="eyebrow step-eyebrow">DIT MÅL</p><h1 id="step-title" class="step-title">Start med en rusten scooter. <span>Byg dig op til racerbilen.</span></h1>
+      <div class="step-garage">${glowUp(['bigcar', 'racecar'], { loop: true, label: true })}</div>
+      <div class="step-first"><img src="${baseSrc('scooter')}" alt="" width="64" height="64"><div><strong>Din første: Rusten scooter</strong><small>Den er din fra start. Alt andet tjener du dig til.</small></div></div>
       <div class="step-earn"><span class="step-earn-icon">${boosterIcon(28)}</span><div><strong>Tjen Boosters ved at lære</strong><small>${fmt(BOOSTER_RATES.lesson)} pr. lektion · ${fmt(BOOSTER_RATES.dailyGoal)} for dagens mål · ${fmt(BOOSTER_RATES.examPass)} for en bestået øveprøve</small></div></div>
       <p class="step-note">Restaurér den, lakér den, giv den fælge og neon. Eller spar op til en rigtig bil.</p>`, 'Den er min!', { ctaAttr: 'data-start-claim' });
   const whenText = { '2w': 'Teoriprøve inden for 2 uger', '1m': 'Teoriprøve om ca. 1 måned', '3m': 'Teoriprøve om 2–3 måneder', '?': 'Ingen dato endnu' }[intro.when || '1m'];

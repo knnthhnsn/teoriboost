@@ -172,8 +172,47 @@ dialog[open]::backdrop{animation:fade-in .3s ease}
   border:2px solid var(--line);box-shadow:0 4px 0 var(--line);color:var(--ink);text-decoration:none;
   background:linear-gradient(#BFF3FF 0,#E9FBFF 58%,#fff 58%)}
 .road-loop > span{position:absolute;display:block}
-.road-sun{right:12%;top:14px;width:46px;height:46px;border-radius:50%;background:#FFE14D;box-shadow:0 0 0 8px rgba(255,225,77,.25);animation:sun 6s var(--in-out) infinite}
-@keyframes sun{50%{box-shadow:0 0 0 14px rgba(255,225,77,.18)}}
+/* time of day: --n 0 (noon) -> 1 (night), set from the scroll position by motion.js */
+.road-loop{--n:0;--sunset:0;--dusk:0;--dark:0;--moon:0;--lamps:0}
+.road-dusk{inset:0 0 42% 0;background:linear-gradient(#5B4BB7 0,#E86A8E 45%,#FFB36B 85%,#FFD38A 100%);opacity:var(--dusk)}
+.road-night{inset:0 0 42% 0;background:linear-gradient(#0B1330 0,#1B2752 55%,#2E3B6E 100%);opacity:var(--dark)}
+.road-stars{inset:0 0 50% 0;opacity:calc(var(--dark) * var(--dark));
+  background:radial-gradient(1.6px 1.6px at 12% 22%,#fff 99%,transparent),radial-gradient(1.2px 1.2px at 28% 48%,#fff 99%,transparent),radial-gradient(1.8px 1.8px at 41% 14%,#fff 99%,transparent),
+    radial-gradient(1.2px 1.2px at 57% 36%,#fff 99%,transparent),radial-gradient(1.6px 1.6px at 69% 18%,#fff 99%,transparent),radial-gradient(1.2px 1.2px at 83% 44%,#fff 99%,transparent),
+    radial-gradient(1.4px 1.4px at 92% 12%,#fff 99%,transparent),radial-gradient(1.2px 1.2px at 6% 58%,#fff 99%,transparent),radial-gradient(1.4px 1.4px at 50% 62%,#fff 99%,transparent);
+  animation:twinkle 3.2s var(--in-out) infinite}
+@keyframes twinkle{50%{filter:brightness(.55)}}
+/* the sun: a warm halo that grows and reddens as it sinks behind the hills */
+.road-sun{right:12%;top:calc(14px + var(--sunset) * 96px);width:calc(46px + var(--sunset) * 10px);height:calc(46px + var(--sunset) * 10px);border-radius:50%;
+  background:color-mix(in oklab,#FFE14D,#FF4E3A calc(var(--sunset) * 100%));
+  box-shadow:0 0 0 calc(7px + var(--sunset) * 4px) color-mix(in oklab,rgba(255,229,110,.45),rgba(255,110,60,.4) calc(var(--sunset) * 100%)),
+    0 0 calc(34px + var(--sunset) * 26px) calc(12px + var(--sunset) * 10px) color-mix(in oklab,rgba(255,214,77,.6),rgba(255,90,50,.55) calc(var(--sunset) * 100%));
+  animation:sun-pulse 4.5s var(--in-out) infinite}
+.road-sun::before{content:"";position:absolute;inset:-120%;border-radius:50%;
+  background:radial-gradient(closest-side,color-mix(in oklab,rgba(255,236,140,.55),rgba(255,120,70,.5) calc(var(--sunset) * 100%)),transparent);animation:sun-halo 4.5s var(--in-out) infinite}
+@keyframes sun-pulse{50%{scale:1.04}}
+@keyframes sun-halo{50%{scale:1.12;opacity:.8}}
+/* the moon: rises on the left with a cooler, smaller glow */
+.road-moon{right:7%;top:calc(132px - var(--moon) * 112px);width:30px;height:30px;border-radius:50%;opacity:calc(.25 + var(--moon) * .75);
+  background:radial-gradient(5px 5px at 62% 34%,#D9D4BF 99%,transparent),radial-gradient(4px 4px at 36% 62%,#D9D4BF 99%,transparent),radial-gradient(3px 3px at 66% 70%,#DCD7C3 99%,transparent),#F6F2DE;
+  box-shadow:0 0 0 5px rgba(220,230,255,.18),0 0 22px 7px rgba(205,220,255,.42)}
+.road-moon::before{content:"";position:absolute;inset:-90%;border-radius:50%;background:radial-gradient(closest-side,rgba(200,215,255,.32),transparent);animation:sun-halo 6s var(--in-out) infinite}
+/* the land darkens; the asphalt goes deep blue-grey */
+.road-clouds,.road-hills,.road-trees{filter:brightness(calc(1 - var(--dark) * .55)) saturate(calc(1 - var(--dark) * .35))}
+.road-clouds{opacity:calc(.95 - var(--dark) * .55)}
+.road-asphalt{filter:brightness(calc(1 - var(--dark) * .45))}
+.road-speed{opacity:calc(.55 - var(--dark) * .3)}
+.road-car .mybil-rig{filter:brightness(calc(1 - var(--dark) * .38)) saturate(calc(1 - var(--dark) * .2))}
+/* lamps: they fade on as it gets dark; the beams reach forward over the road */
+.road-lamps{position:absolute;inset:0;z-index:40;pointer-events:none;opacity:var(--lamps)}
+.road-lamps i{position:absolute;display:block}
+.rl-head{width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:radial-gradient(circle,#FFFDF0 0 30%,rgba(255,240,170,.9) 45%,rgba(255,226,120,0) 72%);
+  box-shadow:0 0 14px 6px rgba(255,236,150,.55);animation:lamp-on .9s steps(1) 1}
+.rl-beam{width:130px;height:46px;margin:-23px 0 0 0;mix-blend-mode:screen;
+  background:linear-gradient(90deg,rgba(255,244,190,.85),rgba(255,236,160,.35) 55%,rgba(255,236,160,0));
+  clip-path:polygon(0 42%,100% 0,100% 100%,0 58%);filter:blur(1.5px);transform-origin:0 50%;rotate:6deg}
+.rl-tail{width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:radial-gradient(circle,#FF6B6B 0 30%,rgba(255,40,40,0) 72%);box-shadow:0 0 12px 5px rgba(255,50,50,.45)}
+@keyframes lamp-on{0%{opacity:0}30%{opacity:1}45%{opacity:.2}60%{opacity:1}}
 .road-clouds{inset:0 0 auto;height:70px;opacity:.95;
   background:radial-gradient(18px 10px at 20px 30px,#fff 98%,transparent),radial-gradient(26px 14px at 44px 24px,#fff 98%,transparent),radial-gradient(16px 9px at 70px 31px,#fff 98%,transparent);
   background-size:260px 70px;background-repeat:repeat-x;animation:scroll-x 40s linear infinite;--w:260px}

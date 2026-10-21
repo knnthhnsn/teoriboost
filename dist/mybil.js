@@ -215,13 +215,29 @@ export function renderMyCar({ garage, progress, slot = '', message = '' }) {
 }
 
 /** Home loop: your own tuned vehicle out on a sunny road, scenery scrolling past in parallax. */
+/** Where each vehicle's lamps sit, as fractions of its square layer canvas (measured on base.webp). */
+const LAMPS = {
+  scooter: { head: [[0.717, 0.319]], tail: [0.121, 0.473] },
+  smallcar: { head: [[0.695, 0.604], [0.893, 0.586]], tail: [0.107, 0.54] },
+  bigcar: { head: [[0.674, 0.58], [0.906, 0.58]], tail: [0.113, 0.528] },
+  racecar: { head: [[0.698, 0.578], [0.852, 0.556]], tail: [0.151, 0.515] },
+};
+function roadLamps(garage, base) {
+  const L = LAMPS[base.id]; if (!L) return '';
+  const drop = styleOf(garage).lowered && base.split ? 2.2 : 0;
+  const at = ([x, y], cls) => `<i class="${cls}" style="left:${(x * 100).toFixed(1)}%;top:${(y * 100 + drop).toFixed(1)}%"></i>`;
+  return `<span class="road-lamps">${L.head.map(h => at(h, 'rl-beam')).join('')}${L.head.map(h => at(h, 'rl-head')).join('')}${at(L.tail, 'rl-tail')}</span>`;
+}
+
+/** Home loop: your own vehicle on a sunny road. Scrolling down turns day into night (see motion.js). */
 export function renderRoadLoop(garage, progress) {
   const base = baseById(garage.active);
   if (!base) return '';
   return `<a class="road-loop" href="#minbil" aria-label="${escape(base.name)}. Åbn Min bil">`
-    + '<span class="road-sun" aria-hidden="true"></span><span class="road-clouds" aria-hidden="true"></span>'
+    + '<span class="road-dusk" aria-hidden="true"></span><span class="road-night" aria-hidden="true"></span><span class="road-stars" aria-hidden="true"></span>'
+    + '<span class="road-sun" aria-hidden="true"></span><span class="road-moon" aria-hidden="true"></span><span class="road-clouds" aria-hidden="true"></span>'
     + '<span class="road-hills road-hills--far" aria-hidden="true"></span><span class="road-hills road-hills--near" aria-hidden="true"></span>'
     + '<span class="road-trees" aria-hidden="true"></span><span class="road-asphalt" aria-hidden="true"><span class="road-dashes"></span></span>'
-    + `<span class="road-car" aria-hidden="true">${vehicleLayers(garage)}</span><span class="road-speed" aria-hidden="true"></span>`
+    + `<span class="road-car" aria-hidden="true">${vehicleLayers(garage)}${roadLamps(garage, base)}</span><span class="road-speed" aria-hidden="true"></span>`
     + `<span class="road-label"><small>DIN BIL</small><strong>${escape(base.name)}</strong><span class="booster-chip-mini">${boosterCount(balance(progress, garage))}</span></span></a>`;
 }

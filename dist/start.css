@@ -178,3 +178,10 @@ body.start-mode{background:#fff}
   background:#F3FFD6;color:var(--ink);font:800 15px var(--font-display);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}
 .mybil-dream::before{content:"✨";animation:bolt-glint 3.5s var(--in-out) infinite}
 .dream-modal .gu{width:min(76vw,380px)}
+
+.step-first{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:18px;background:#FFF8EC;border:2px solid #F3DDB8;box-shadow:0 4px 0 #F3DDB8;animation:reveal .5s .45s var(--out) backwards}
+.step-first img{width:64px;height:64px;object-fit:contain;flex:none;animation:idle-wobble 3.4s var(--in-out) infinite}
+.step-first strong{display:block;font:800 16px var(--font-display)}.step-first small{color:var(--muted);font-size:14px}
+/* cars drive in and out of the machine: never let that widen the page */
+.step-garage,.dream-modal{overflow:hidden}
+.start-step,.start-hero{overflow-x:clip}

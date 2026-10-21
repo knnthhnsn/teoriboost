@@ -27,3 +27,27 @@ export function initMotion() {
   const sync = () => document.documentElement.classList.toggle('is-hidden', document.hidden);
   document.addEventListener('visibilitychange', sync); sync();
 }
+
+/** Home road loop: the further you scroll, the later it gets. The sun sinks and warms to red, the sky
+ *  goes through dusk to night, the moon rises with a softer glow, and the vehicle switches its lamps on.
+ *  Everything is driven by CSS variables on the loop, so it follows the finger exactly, both ways. */
+const ramp = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+export function mountDayNight(el) {
+  if (!el) return () => {};
+  let range = 1, raf = 0;
+  const measure = () => {
+    const top = el.getBoundingClientRect().top + scrollY, max = document.documentElement.scrollHeight - innerHeight;
+    range = Math.max(1, Math.min(Math.max(220, top - innerHeight * .1), max)); // full night when the loop nears the top
+  };
+  const apply = () => {
+    raf = 0; const n = Math.min(1, Math.max(0, scrollY / range));
+    const set = (k, v) => el.style.setProperty(k, v.toFixed(3));
+    set('--n', n); set('--sunset', ramp(0, .8, n)); set('--dusk', Math.max(0, 1 - Math.abs(n - .42) / .3));
+    set('--dark', ramp(.3, .85, n)); set('--moon', ramp(.42, 1, n)); set('--lamps', ramp(.48, .8, n));
+  };
+  const onScroll = () => { if (!raf) raf = requestAnimationFrame(apply); };
+  const onResize = () => { measure(); onScroll(); };
+  measure(); apply();
+  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onResize);
+  return () => { removeEventListener('scroll', onScroll); removeEventListener('resize', onResize); cancelAnimationFrame(raf); };
+}
