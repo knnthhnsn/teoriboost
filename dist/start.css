@@ -223,14 +223,34 @@ body.start-mode{background:#fff}
 .start-show::before{background:repeating-linear-gradient(90deg,rgba(31,35,40,.11) 0 1px,transparent 1px 44px),repeating-linear-gradient(0deg,rgba(31,35,40,.11) 0 1px,transparent 1px 44px)}
 .step-garage .gu::before,.dream-modal .gu::before{inset:-2% -8% 2% -8%}
 
-/* ---------- v3: the hero stands in a tuner workshop (Codex illustration, same art style as the vehicles) ---------- */
-.start-hero{background:linear-gradient(180deg,rgba(255,255,255,0) 0,rgba(255,255,255,0) 46%,rgba(255,255,255,.92) 62%,#fff 74%),
-  url(assets/start/garage-tall.webp) center top / 100% auto no-repeat,#fff}
-.start-hero .start-show::before,.start-hero .start-show::after,.start-hero .gu::before{display:none}
-.start-hero .gu-ring{box-shadow:0 8px 0 -2px #CFC9C0,0 18px 26px -8px rgba(31,35,40,.22)}
-.start-top{background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));margin:-12px -16px 0;padding:12px 16px 6px}
-@media (min-width:900px){
-  .start-hero{background:linear-gradient(90deg,#fff 0,rgba(255,255,255,.94) 30%,rgba(255,255,255,.55) 44%,rgba(255,255,255,0) 58%),
-    url(assets/start/garage-wide.webp) center 30% / cover no-repeat,#fff}
-  .start-top{margin:-20px -48px 0;padding:20px 48px 8px}
-}
+/* ---------- v4: poster style, straight from the style reference ----------
+   A flat, saturated colour field and a flat organic colour blob under the vehicle. No place, no props,
+   no outlines on the background: the vehicle and the type carry the image. The colours follow the vehicle. */
+.gu[data-active="scooter"]{--poster:#22D3EE;--blob:#9B3FD6}
+.gu[data-active="smallcar"]{--poster:#FFD43B;--blob:#FF5FA2}
+.gu[data-active="bigcar"]{--poster:#4DD9AC;--blob:#FF5FA2}
+.gu[data-active="racecar"]{--poster:#FF6FB0;--blob:#7B2CBF}
+.start-hero:has(.gu[data-active="scooter"]),.step-garage:has(.gu[data-active="scooter"]),.dream-modal:has(.gu[data-active="scooter"]){--poster:#22D3EE}
+.start-hero:has(.gu[data-active="smallcar"]),.step-garage:has(.gu[data-active="smallcar"]),.dream-modal:has(.gu[data-active="smallcar"]){--poster:#FFD43B}
+.start-hero:has(.gu[data-active="bigcar"]),.step-garage:has(.gu[data-active="bigcar"]),.dream-modal:has(.gu[data-active="bigcar"]){--poster:#4DD9AC}
+.start-hero:has(.gu[data-active="racecar"]),.step-garage:has(.gu[data-active="racecar"]),.dream-modal:has(.gu[data-active="racecar"]){--poster:#FF6FB0}
+.start-hero{background:var(--poster,#22D3EE)!important;transition:background-color .7s var(--in-out)}
+body.start-mode{background:#fff}
+.start-hero .start-top{background:none!important}
+.step-garage{background:var(--poster,#22D3EE)!important;border-color:#1F2328!important;box-shadow:0 4px 0 #1F2328!important;transition:background-color .7s var(--in-out)}
+.dream-modal{background:var(--poster,#22D3EE);border-radius:20px;padding:8px 0 4px;transition:background-color .7s var(--in-out)}
+.gu::before,.start-show::before,.start-show::after{display:none!important}
+/* the blob: flat, borderless, slightly irregular, breathing very slowly */
+.gu-ring{left:0;right:0;bottom:9%;height:24%;background:var(--blob,#9B3FD6)!important;border:0!important;box-shadow:none!important;
+  border-radius:46% 54% 41% 59% / 58% 46% 54% 42%;transition:background-color .7s var(--in-out);animation:blob 9s var(--in-out) infinite}
+.gu-ring::after{display:none}
+.gu.is-done .gu-ring{box-shadow:none!important}
+@keyframes blob{50%{border-radius:55% 45% 58% 42% / 44% 58% 42% 56%;scale:1.03 .97}}
+/* type and button speak the same language as the art: ink and a thick black outline */
+.start-hero .start-lead{color:#1F2328}
+.start-hero .kw-smile{color:#1F2328}
+.start-hero .kw-smile path{stroke:#fff}
+.start-cta{border:3px solid #1F2328!important;box-shadow:0 5px 0 #1F2328!important}
+.start-cta:active{box-shadow:0 1px 0 #1F2328!important}
+.start-hero .start-skip{color:#1F2328;text-decoration:underline;text-underline-offset:3px}
+.gu-label{border-color:#1F2328;box-shadow:0 3px 0 #1F2328}

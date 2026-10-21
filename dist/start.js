@@ -39,6 +39,7 @@ export function mountGlowUp(host, { sound = () => {}, onDone = () => {} } = {}) 
   const from = root.querySelector('.gu-from'), to = root.querySelector('.gu-to');
   function show(base) {
     const d = DREAMS[base];
+    root.dataset.active = base; // the poster colour behind the machine follows the vehicle
     stage.innerHTML = `<div class="gu-car" data-base="${base}"><div class="gu-before">${vehicleLayers(garageFor(base, false))}</div><div class="gu-after">${vehicleLayers(garageFor(base, true))}</div><i class="gu-scan"></i></div>`;
     if (from) { from.textContent = d.from; to.textContent = d.to; root.classList.remove('is-done'); }
     const after = stage.querySelector('.gu-after'), car = stage.querySelector('.gu-car');
