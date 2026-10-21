@@ -1,0 +1,145 @@
+/* Lessons, questions, feedback, exam and result (mockups B + C). One look: ✕ + progress on top,
+   chunky Ja/Nej pills, a coloured bottom sheet for feedback, one big button at the bottom. */
+
+/* ---------- top bar of a lesson / exam ---------- */
+.jp-top,.exam-top{display:flex!important;align-items:center;gap:12px;margin:0 0 12px;padding:0;border:0;background:none}
+.jp-close{flex:none;display:grid!important;place-items:center;width:44px;height:44px;border-radius:12px;color:#8A9199!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
+.jp-close svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round}
+.jp-top .journey-progress{flex:1;position:relative;height:16px!important;margin:0!important;border-radius:999px;background:#E9ECEF!important;overflow:hidden}
+.jp-top .journey-progress i{position:absolute;inset:0 auto 0 0;width:var(--journey-progress)!important;border-radius:999px;background:var(--good,#58CC02)!important;transition:width .5s var(--spring,ease)}
+.jp-top .journey-progress i::after,.exam-bar i::after{content:"";position:absolute;left:10px;right:10px;top:4px;height:4px;border-radius:4px;background:rgba(255,255,255,.35)}
+.jp-top .journey-player-count{font:800 14px var(--font-display);color:var(--muted);min-width:34px;text-align:right}
+.jp-title{margin:0 0 14px}
+.jp-title span{display:block;font:800 12px var(--font-display);letter-spacing:.08em;color:var(--muted)}
+#main .jp-title h1{margin:2px 0 0;font:800 18px/1.2 var(--font-display)!important;color:var(--muted)}
+
+/* ---------- lesson card ---------- */
+.journey-focus-card{display:block!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
+.journey-focus-card .lesson-number{display:none}
+#main .journey-focus-card h2{margin:0 0 10px;font:800 clamp(28px,8vw,36px)/1.1 var(--font-display)!important;letter-spacing:-.01em}
+.journey-focus-card p{font-size:18px;line-height:1.55;color:var(--ink)}
+.journey-step-intro--compact{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.journey-kicker{font:800 12px var(--font-display);letter-spacing:.08em;color:var(--muted)}
+.voice-read,.audio-btn,[data-voice-kind]{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:2px solid var(--line);background:#fff;box-shadow:0 2px 0 var(--line);font:700 14px var(--font-display);color:var(--ink)}
+.source-badges a,.journey-focus-card .source-badges a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:#fff;font:700 13px var(--font-display);color:var(--blue-ink,#0A66C2)}
+
+/* the one big button at the bottom of every step */
+.journey-control-dock{position:sticky;bottom:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:18px -2px 0;padding:12px 2px calc(10px + env(safe-area-inset-bottom));
+  background:linear-gradient(rgba(255,255,255,0),#fff 28%);border:0!important}
+.journey-control-dock > p{flex-basis:100%;margin:0;color:var(--muted);font-size:14px}
+.journey-control-dock .btn-primary,.exam-dock .btn-primary,.result-actions .btn-primary{flex:1;min-height:56px;border-radius:16px!important;background:var(--accent,#D5FF62)!important;color:#1F2328!important;border:0!important;
+  box-shadow:0 5px 0 var(--accent-shadow,#9BC42A)!important;font:800 18px var(--font-display)!important;justify-content:center}
+.journey-control-dock .btn-primary:disabled{background:#EEF4DD!important;color:#9AA38A!important;box-shadow:0 5px 0 #DCE5C4!important}
+.journey-control-dock .btn-secondary,.exam-dock .btn-secondary{min-height:56px;border-radius:16px!important;background:#fff!important;border:2px solid var(--line)!important;box-shadow:0 4px 0 var(--line)!important;font:800 16px var(--font-display)!important;color:var(--ink)!important}
+
+/* ---------- questions: context box, photo, prompt, Ja/Nej pills ---------- */
+.question-context{padding:12px 14px;border-radius:16px;background:#F3F5F7;font-size:15px;line-height:1.45;color:var(--ink)}
+#main .journey-exercise-context h2,#main .question-panel h2{font:800 clamp(22px,6.4vw,28px)/1.15 var(--font-display)!important;margin:10px 0}
+.journey-statement,.statement{display:grid!important;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:10px 10px 10px 14px!important;border-radius:16px!important;
+  background:#fff!important;border:2px solid var(--line)!important;box-shadow:0 3px 0 var(--line)!important;margin:0 0 8px}
+.journey-statement .statement-index,.statement .statement-index{display:none}
+.journey-statement p,.statement .statement-text{margin:0;font-size:16px;line-height:1.35;color:var(--ink)}
+.journey-choice-pair,.statement .yes-no{display:flex;gap:6px}
+.journey-tactile-choice,.statement .choice-btn{min-width:56px;min-height:44px;padding:0 10px;border-radius:12px!important;border:2px solid var(--line)!important;background:#fff!important;
+  box-shadow:0 3px 0 var(--line)!important;font:800 15px var(--font-display)!important;color:var(--ink)!important;text-transform:none;letter-spacing:0}
+.journey-tactile-choice.selected,.statement .choice-btn.selected{border-color:#1CB0F6!important;background:#DDF4FF!important;box-shadow:0 3px 0 #1899D6!important;color:#0B5E87!important}
+.journey-tactile-choice:active,.statement .choice-btn:active{translate:0 2px;box-shadow:0 1px 0 var(--line)!important}
+.statement.correct{border-color:var(--good,#58CC02)!important;box-shadow:0 3px 0 #46A302!important;background:#F2FCE8!important}
+.statement.incorrect{border-color:#FF4B4B!important;box-shadow:0 3px 0 #E03A3A!important;background:#FFF1F1!important}
+.answer-note{font:800 12px var(--font-display);letter-spacing:.06em;color:var(--muted)}
+.journey-statement-dots button{min-width:36px;min-height:36px;border-radius:50%}
+
+/* ---------- feedback: a coloured sheet from the bottom ---------- */
+.journey-feedback-tray{position:relative;margin:14px -16px 0!important;padding:18px 16px calc(14px + env(safe-area-inset-bottom))!important;border:0!important;border-radius:24px 24px 0 0!important;box-shadow:none!important}
+.journey-feedback-tray.correct{background:#D7FFB8!important}
+.journey-feedback-tray.repair{background:#FFDFE0!important}
+.journey-feedback-tray .feedback-cast{float:left;margin:0 12px 6px 0}
+.journey-feedback-tray .feedback-cast .cast-img{width:84px!important}
+.journey-feedback-tray .feedback-cast .cast-bubble{display:none}
+.journey-feedback-summary{display:block!important}
+.journey-feedback-summary > span{display:none}
+.journey-feedback-summary strong{display:block;font:800 24px/1.1 var(--font-display)}
+.journey-feedback-tray.correct .journey-feedback-summary strong{color:#3A8700}
+.journey-feedback-tray.repair .journey-feedback-summary strong{color:#D93030}
+.journey-feedback-summary p{margin:4px 0 0;font-size:15px;color:#3E454D}
+.journey-feedback-tray details{clear:both;margin:10px 0 4px}
+.journey-feedback-tray summary{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;background:#fff;border:2px solid rgba(0,0,0,.08);font:800 14px var(--font-display);cursor:pointer;list-style:none}
+.journey-feedback-tray summary::-webkit-details-marker{display:none}
+.jp-feedback-go{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:10px;border-radius:16px!important;border:0!important;font:800 18px var(--font-display)!important}
+.journey-feedback-tray.correct .jp-feedback-go{background:var(--good,#58CC02)!important;color:#fff!important;box-shadow:0 5px 0 #46A302!important}
+.journey-feedback-tray.repair .jp-feedback-go{background:#FF4B4B!important;color:#fff!important;box-shadow:0 5px 0 #D93030!important}
+.journey-answer-review > div.right{color:#2F6F00}.journey-answer-review > div.wrong{color:#B42318}
+
+/* ---------- lesson done ---------- */
+.journey-lesson-done{text-align:center;padding:12px 0 0;border-radius:24px;background:radial-gradient(90% 60% at 50% 20%,#F1FFC9,#fff 70%)}
+.journey-done-art{display:flex;justify-content:center}.journey-done-art .cast-img{width:min(46vw,190px)!important}
+#main .jp-done-title{margin:8px 0 4px;font:800 clamp(30px,9vw,40px)/1.05 var(--font-display)!important;color:#3A8700}
+.jp-done-lead{margin:0 auto 14px;max-width:34ch;color:#3E454D;font-size:16px}
+.jp-done-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 10px}
+.jp-done-stats > div{padding:12px;border-radius:18px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.jp-done-stats small{display:block;font:800 11px var(--font-display);letter-spacing:.1em;color:var(--muted)}
+.jp-done-stats strong{display:block;font:800 26px/1.2 var(--font-display)}
+.jp-done-stats em{display:block;font-style:normal;font-size:12px;color:var(--muted)}
+.jp-done-goal{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:10px 16px;border-radius:16px;background:#fff;border:2px solid var(--line);font:800 15px var(--font-display)}
+.jp-done-goal.is-met{background:#F3FFD6;border-color:var(--accent-shadow,#9BC42A);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}
+.jp-done-goal span{font-weight:700;color:var(--muted)}
+.journey-lesson-done .journey-control-dock{background:none}
+.journey-lesson-done .journey-control-dock .btn-secondary{flex:1}
+
+/* ---------- exam in progress ---------- */
+.exam-count{font:800 15px var(--font-display);white-space:nowrap}
+.exam-bar{flex:1;position:relative;height:14px;border-radius:999px;background:#E9ECEF;overflow:hidden}
+.exam-bar i{position:absolute;inset:0;border-radius:999px;background:#1CB0F6;transform-origin:0 50%;scale:var(--p) 1;transition:scale .4s var(--out,ease)}
+.exam-top .exam-timer{flex:none;min-width:auto!important;padding:6px 12px!important;border-radius:12px!important;background:#F3F5F7!important;border:0!important;font:800 16px var(--font-display)!important;color:var(--ink)!important;font-variant-numeric:tabular-nums}
+.exam-dock{position:sticky;bottom:0;z-index:5;display:flex;gap:10px;margin-top:16px;padding:12px 0 calc(10px + env(safe-area-inset-bottom));background:linear-gradient(rgba(255,255,255,0),#fff 28%)}
+.exam-dock .exam-flag{flex:0 0 auto;padding:0 16px}
+.exam-flag.is-on{border-color:#FF9600!important;box-shadow:0 4px 0 #E08600!important;color:#9A5300!important}
+.exam-all{margin-top:6px}.exam-all summary{min-height:44px;display:flex;align-items:center;font:800 14px var(--font-display);color:var(--muted);cursor:pointer}
+.exam-all .jump-btn.flagged{box-shadow:inset 0 0 0 2px #FF9600}
+.exam-submit-early{margin-top:10px}
+body.exam-active .exam-selection-note{font-size:13px;color:var(--muted)}
+
+/* ---------- exam result ---------- */
+.result-hero{text-align:center;padding:20px 12px 18px;border-radius:24px}
+.result-hero.is-pass{background:radial-gradient(90% 60% at 50% 15%,#E3FFC7,#fff 72%)}
+.result-hero.is-fail{background:radial-gradient(90% 60% at 50% 15%,#FFF0D6,#fff 72%)}
+.result-hero .cast{justify-content:center}.result-hero .cast-img{width:min(44vw,180px)!important}
+.result-mark{font:800 clamp(52px,16vw,76px)/1 var(--font-display)!important;-webkit-text-stroke:0!important;color:#3A8700!important;margin:6px 0 4px}
+.result-hero.is-fail .result-mark{color:#C25E00!important}
+#main .result-hero h1{font:800 clamp(24px,7vw,32px)/1.1 var(--font-display)!important;margin:4px 0 6px}
+.result-boost{display:inline-flex;align-items:center;gap:6px;margin:6px 0 4px;padding:12px 20px;border-radius:18px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);font:800 20px var(--font-display)}
+.result-boost b{font-size:26px}
+.result-review{margin:14px 0 4px;padding:14px;border-radius:18px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);text-align:left}
+#main .result-review h2{margin:0 0 10px;font:800 17px var(--font-display)!important}
+.result-chips{display:flex;flex-wrap:wrap;gap:6px}
+.res-chip{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;border:2px solid var(--line);background:#fff;font:800 14px var(--font-display);color:var(--muted);text-decoration:none}
+.res-chip.is-wrong{border-color:#FF4B4B;background:#FFF1F1;color:#B42318}
+.result-actions{display:flex;flex-direction:column;gap:10px}
+/* fixes after the first render pass */
+.journey-statement{min-height:0!important;text-align:left}
+.journey-statement-stage{min-height:0!important}
+.journey-statement-panel{border:0!important;background:none!important;box-shadow:none!important;padding:0!important}
+.journey-done-art{height:auto!important;display:flex!important}
+.journey-done-art .cast-img{width:min(40vw,160px)!important;height:auto}
+.result-hero .cast-img{width:min(38vw,150px)!important;height:auto}
+.journey-feedback-summary,.journey-feedback-tray{text-align:left}
+body.exam-active .question-actions{display:none}
+.exam-dock .exam-prev{flex:0 0 56px;padding:0!important;justify-content:center}
+.exam-dock .exam-prev svg{width:22px;height:22px}
+.journey-statement > p{grid-column:1!important}
+.journey-statement .journey-choice-pair{grid-column:2!important;align-self:center!important;display:flex!important}
+/* long screens (a question, an exam situation): the buttons follow the content instead of floating over it,
+   so they can never cover a Ja/Nej pill */
+.journey-assessment-dock,.exam-dock{position:static!important;background:none!important}
+.journey-focus-card > div{margin:0!important;padding:0!important}
+#main .journey-focus-card h2{margin-left:0!important;padding:0!important}
+.journey-feedback-summary{overflow:hidden}
+.journey-feedback-summary > div,.journey-feedback-summary strong,.journey-feedback-summary p{text-align:left!important;justify-self:start!important;margin-left:0!important}
+.result-mark{white-space:nowrap;height:auto!important;min-height:0!important;line-height:1!important;font-size:clamp(44px,13vw,70px)!important;margin:4px 0 10px!important}
+.journey-feedback-tray{display:block!important}
+.journey-feedback-tray .feedback-cast{display:block!important;width:auto!important;float:left}
+.journey-feedback-summary{display:block!important;min-height:84px}
+.journey-feedback-summary p{display:block!important}
+/* white text needs deeper colours than the bright brand green/red (WCAG 4.5:1) */
+.journey-feedback-tray.correct .jp-feedback-go{background:#2F7D00!important;box-shadow:0 5px 0 #1F5A00!important}
+.journey-feedback-tray.repair .jp-feedback-go{background:#D92D20!important;box-shadow:0 5px 0 #A51F15!important}

@@ -1,4 +1,5 @@
 import { CHAPTERS, QUESTIONS, SOURCES } from './content.js';
+import { BOOSTER_RATES } from './mybil.js';
 import { LESSONS } from './lessons.js';
 import { renderQuestionVisual, mountQuestionVisual } from './exam-photo-view.js';
 import { renderArt } from './art.js';
@@ -140,12 +141,12 @@ export function createJourneyPlayer({
     const shownStage = ui?.feedback?.stage || session.stage;
     const progress = stageProgress(shownStage);
     return `<article class="journey-player" data-journey-session="${esc(session.sessionId)}">
-      <header class="journey-player-head">
-        <a class="back-btn" href="#home" aria-label="Gem lektionen og gå til din rute">←</a>
-        <div class="journey-player-title"><span>${session.kind === 'review' ? 'REVIEW' : 'LEKTION'} · ${esc(progress.label)}</span><h1>${esc(section.title)}</h1></div>
+      <header class="journey-player-head jp-top">
+        <a class="back-btn jp-close" href="#home" aria-label="Gem lektionen og gå til din rute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
+        <div class="journey-progress" role="progressbar" aria-label="Lektionens fremskridt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progress.percent)}"><i style="--journey-progress:${progress.percent}%"></i></div>
         <span class="journey-player-count">${progress.count}</span>
       </header>
-      <div class="journey-progress" role="progressbar" aria-label="Lektionens fremskridt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progress.percent)}"><i style="--journey-progress:${progress.percent}%"></i></div>
+      <div class="journey-player-title jp-title"><span>${session.kind === 'review' ? 'GENTAGELSE' : 'LEKTION'} · ${esc(progress.label)}</span><h1>${esc(section.title)}</h1></div>
       <div class="journey-player-body">${body}</div>
     </article>`;
   }
@@ -190,13 +191,13 @@ export function createJourneyPlayer({
     const repair = !feedback.correct;
     return `<aside class="journey-feedback-tray ${repair ? 'repair' : 'correct'}" role="status">
       <div class="feedback-cast">${renderCast(repair ? 'kegle' : 'blink', { size: 'sm', mood: repair ? 'wrong' : 'correct', line: castLine(repair ? 'wrong' : 'correct', question.id) })}</div>
-      <div class="journey-feedback-summary"><span aria-hidden="true">${repair ? '↻' : '✓'}</span><div><strong>${repair ? 'Find reglen og prøv igen' : 'Godt set'}</strong><p>${repair ? 'Se det afgørende, og reparér vurderingen.' : 'Alle fire udsagn er vurderet korrekt.'}</p></div></div>
+      <div class="journey-feedback-summary"><span aria-hidden="true">${repair ? '↻' : '✓'}</span><div><strong>${repair ? 'Næsten!' : 'Godt set!'}</strong><p>${repair ? 'Se det afgørende, og vurdér de fire udsagn igen.' : 'Alle fire udsagn er vurderet korrekt.'}</p></div></div>
       ${state()?.settings?.humor === true && question.gag ? `<p class="journey-feedback-gag">${esc(question.gag)}</p>` : ''}
-      <details><summary>Se forklaring og alle fire svar</summary><p>${esc(question.explanation)}</p>
+      <details><summary>Se reglen og alle fire svar</summary><p>${esc(question.explanation)}</p>
         <div class="journey-answer-review">${question.statements.map((statement, index) => `<div class="${feedback.answers[index] === statement.correct ? 'right' : 'wrong'}"><span>${feedback.answers[index] === statement.correct ? '✓' : '↻'}</span><p>${esc(statement.text)}</p><b>${statement.correct ? 'JA' : 'NEJ'}</b></div>`).join('')}</div>
         ${refs(question.sourceIds)}${voiceButton('feedback', 'Lyt til forklaringen')}
       </details>
-      <button class="btn btn-primary" data-journey-continue-feedback type="button">${repair ? 'Prøv de fire igen ↻' : 'Videre →'}</button>
+      <button class="btn btn-primary jp-feedback-go" data-journey-continue-feedback type="button">${repair ? 'Prøv igen' : 'Videre'}</button>
     </aside>`;
   }
 
@@ -281,12 +282,17 @@ export function createJourneyPlayer({
         ? `<a class="btn btn-secondary" href="${nextLink}">${next ? nextLabel : 'Åbn min rute'}</a><a class="btn btn-primary" href="#home">Til min rute →</a>`
         : `<a class="btn btn-secondary" href="#home">Til min rute</a><a class="btn btn-primary" href="${nextLink}">${nextLabel}</a>`)
       : '<button class="btn btn-primary" type="button" data-journey-finish>Gem lektionen →</button>';
+    // Boosters come once per lesson per day: before saving, this lesson earns them if it has no event today yet
+    const todays = (currentState.journey?.events || []).filter(e => e.kind === 'lesson' && e.sectionId === section.id && e.day === daily.day).length;
+    const earns = session.finalizedAt ? todays === 1 : todays === 0;
+    const firstTry = [evidence.apply, evidence.checkpoint].filter(x => x && !x.hadWrong).length;
     return `<section class="journey-lesson-done ${session.finalizedAt ? 'is-finalized' : ''}">
       <div class="journey-celebration" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="journey-done-art">${renderArt(repaired ? 'omkamp-cone' : 'koerelys-brain', { variant: 'result', humorOnly: true })}</div>
-      <span class="journey-kicker">LEKTION GENNEMFØRT</span><h2>${repaired ? 'Fejlen blev repareret.' : 'Løbet er gennemført.'}</h2>
-      <p>Du har vurderet fire udsagn, brugt reglen og sammenlignet din genkaldelse.</p>
-      <div class="journey-daily-result"><strong>${daily.completedSessions} / ${daily.dailyGoal}</strong><span>${daily.goalMet ? 'Dagens mål er nået' : 'gennemførte sessioner i dag'}</span>${streak}</div>
+      <div class="journey-done-art">${renderCast(repaired ? 'kegle' : 'bobbel', { size: 'md', mood: 'correct', priority: true })}</div>
+      <h2 class="jp-done-title">${repaired ? 'Repareret og klaret!' : 'Lektion klaret!'}</h2>
+      <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den, og det er sådan, det sætter sig.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>
+      <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${earns ? `⚡ +${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '⚡ 0'}</strong>${earns ? '' : '<em>Tjent i dag allerede</em>'}</div><div><small>FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
+      <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">🎯 ${daily.goalMet ? `Dagens mål nået · +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')}` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? ` · ${streak}` : ''}</div>
       ${lesson.practicalNote ? `<details class="journey-practical-note"><summary>Tag det med til kørelæreren</summary><p>${esc(lesson.practicalNote)}</p></details>` : ''}
       <div class="journey-control-dock">${completionActions}</div>
     </section>`;
