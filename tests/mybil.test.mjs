@@ -67,3 +67,22 @@ test('garage survives a storage round trip and ignores junk', () => {
   store.setItem('teoriboost.mybil.v1', '{broken');
   assert.deepEqual(loadGarage(store), emptyGarage());
 });
+
+test('any tuning can be taken off again, one part or all of it, without losing what you own', async () => {
+  const { unequipSlot, unequipAll } = await import('../dist/mybil.js');
+  const rich = { journey: { events: [] }, history: Array.from({ length: 6 }, (_, i) => ({ id: 'u' + i, errors: 0 })) };
+  let g = buyOrEquipPart(emptyGarage(), rich, 'paint-mask').garage;
+  g = buyOrEquipPart(g, rich, 'wheels-chrome').garage;
+  const spent = g.spent;
+  const one = unequipSlot(g, 'wheels');
+  assert.equal(one.garage.equipped.scooter.wheels, undefined);
+  assert.equal(one.garage.equipped.scooter.paint, 'paint-mask');
+  assert.equal(one.garage.spent, spent);
+  assert.ok(one.garage.owned.includes('scooter:wheels-chrome'));
+  const all = unequipAll({ ...one.garage, style: { scooter: { neonOn: true, lowered: true, paint: '#FF5FA2' } } });
+  assert.deepEqual(all.garage.equipped.scooter, {});
+  assert.equal(all.garage.style.scooter.neonOn, false);
+  assert.equal(all.garage.style.scooter.lowered, false);
+  assert.equal(all.garage.style.scooter.paint, '#FF5FA2', 'colours are kept');
+  assert.equal(buyOrEquipPart(all.garage, { journey: { events: [] }, history: [] }, 'wheels-chrome').garage.equipped.scooter.wheels, 'wheels-chrome', 'putting it back is free');
+});

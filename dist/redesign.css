@@ -212,7 +212,7 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
   background:radial-gradient(70% 55% at 50% 62%,#F3FFD6 0,#fff 70%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);overflow:hidden}
 .mybil-stage img,.road-car img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .mybil-stage{display:block;width:min(100%,70vw,420px);max-height:none;padding:0;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.mybil-message{min-height:24px;margin:10px 0 4px;text-align:center;font-weight:700;color:var(--good-ink)}
+.mybil-message{min-height:24px;margin:10px 0 4px;text-align:center;font-weight:700;color:var(--acid-text)}
 .mybil-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
 .mybil-tab{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-display);font-weight:700}
 .mybil-tab.is-active{background:var(--accent);border-color:var(--accent-shadow);box-shadow:0 3px 0 var(--accent-shadow)}
@@ -260,3 +260,15 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
   .brand-dot{display:none}
   .topbar .brand{min-width:0}
 }
+
+/* Min bil: what is on the car right now, each with an ✕; and the stock tile first in every tab */
+.mybil-on{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:12px auto 0;max-width:520px}
+.mybil-on-label{flex-basis:100%;text-align:center;font:800 12px var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mybil-on-empty{color:var(--muted);font-size:14px}
+.on-chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 6px 0 12px;border-radius:999px;background:#fff;border:2px solid var(--line);box-shadow:0 2px 0 var(--line);font:700 14px var(--font-display);color:var(--ink);cursor:pointer}
+.on-chip i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#F1F3F5;font-style:normal;font-size:12px;color:var(--muted)}
+.on-chip:hover i,.on-chip:focus-visible i{background:#FFE3E3;color:#B42318}
+.on-clear{min-height:36px;padding:0 12px;border-radius:999px;border:2px dashed #E3B4B4;background:#FFF7F7;color:#B42318;font:700 14px var(--font-display);cursor:pointer}
+.mybil-stock .mybil-thumb img{filter:saturate(.9)}
+.mybil-stock.is-on{border-color:var(--ink);box-shadow:0 4px 0 var(--ink);background:#fff}
+.mybil-stock.is-on small{color:var(--ink)}

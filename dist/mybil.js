@@ -87,6 +87,19 @@ export function buyOrEquipPart(garage, progress, partId) {
   equipped[slotKey][part.slot] = partId;
   return { garage: { ...garage, spent: garage.spent + part.price, owned: [...garage.owned, `${slotKey}:${partId}`], equipped }, ok: true, message: `${part.name} er købt og monteret.` };
 }
+/** Take one part off. It stays owned, so putting it back on is free. */
+export function unequipSlot(garage, slot) {
+  const eq = { ...(garage.equipped?.[garage.active] || {}) };
+  const id = eq[slot];
+  if (!id) return { garage, ok: true, message: '' };
+  delete eq[slot];
+  return { garage: { ...garage, equipped: { ...garage.equipped, [garage.active]: eq } }, ok: true, message: `${partById(id)?.name || 'Delen'} er taget af. Den ligger klar i garagen.` };
+}
+/** Back to stock: every part off, neon off, raised again. Parts and colours are kept. */
+export function unequipAll(garage) {
+  const style = { ...(garage.style?.[garage.active] || {}), neonOn: false, lowered: false };
+  return { garage: { ...garage, equipped: { ...garage.equipped, [garage.active]: {} }, style: { ...garage.style, [garage.active]: style } }, ok: true, message: 'Al tuning er taget af. Dine dele og farver ligger klar i garagen.' };
+}
 export function buyOrToggleExtra(garage, progress, extraId) {
   const extra = EXTRAS[extraId];
   if (!extra) return { garage, ok: false, message: 'Ukendt ekstraudstyr.' };
@@ -185,10 +198,12 @@ export function renderMyCar({ garage, progress, slot = '', message = '' }) {
     };
     panel = `<div class="mybil-grid">${extra('neon')}${extra('lower')}</div>${owns(garage, 'extra-neon') ? `<h3 class="mybil-subtitle">Neonfarve</h3>${colorPicker('neon', style.neon)}` : ''}`;
   } else {
-    const items = available.filter(p => p.slot === slot).map(part => {
+    const stockOn = !equipped[slot];
+    const stock = `<button type="button" class="mybil-item mybil-stock ${stockOn ? 'is-on' : ''}" data-mybil-unequip="${slot}" aria-pressed="${stockOn}"><span class="mybil-thumb"><img src="${baseSrc(garage.active)}" alt="" loading="lazy"></span><span class="mybil-item-name">${slot === 'restore' ? 'Som den er' : 'Standard'}</span><small>${stockOn ? 'Valgt' : 'Tag af'}</small></button>`;
+    const items = stock + available.filter(p => p.slot === slot).map(part => {
       const has = owns(garage, part.id), on = equipped[part.slot] === part.id;
       const thumb = part.tint ? `<span class="mybil-tint" style="--src:url('${partSrc(garage.active, part.id)}');background:${style[part.tint]}"></span><img class="mybil-shade" src="${partSrc(garage.active, part.id)}" alt="" loading="lazy">` : `<img src="${partSrc(garage.active, part.id)}" alt="" loading="lazy">`;
-      return `<button type="button" class="mybil-item ${on ? 'is-on' : ''} ${!has && coins < part.price ? 'is-short' : ''}" data-mybil-part="${part.id}" aria-pressed="${on}"><span class="mybil-thumb"><img src="${baseSrc(garage.active)}" alt="" loading="lazy">${thumb}</span><span class="mybil-item-name">${escape(part.name)}</span><small>${on ? 'Monteret' : has ? 'Montér' : price(part.price)}</small></button>`;
+      return `<button type="button" class="mybil-item ${on ? 'is-on' : ''} ${!has && coins < part.price ? 'is-short' : ''}" data-mybil-part="${part.id}" aria-pressed="${on}"><span class="mybil-thumb"><img src="${baseSrc(garage.active)}" alt="" loading="lazy">${thumb}</span><span class="mybil-item-name">${escape(part.name)}</span><small>${on ? 'Monteret · tag af' : has ? 'Montér' : price(part.price)}</small></button>`;
     }).join('');
     const tintKind = available.find(p => p.slot === slot && p.tint)?.tint;
     const tintOwned = tintKind && available.some(p => p.slot === slot && p.tint && owns(garage, p.id));
@@ -204,6 +219,7 @@ export function renderMyCar({ garage, progress, slot = '', message = '' }) {
   return `<section class="mybil" aria-labelledby="mybil-title">
     <header class="mybil-head"><div><span class="eyebrow">MIN BIL</span><h1 id="mybil-title">${escape(active.name)}</h1></div><div class="booster-chip booster-chip--big">${boosterCount(coins)}</div></header>
     <button type="button" class="mybil-stage" data-mybil-rev data-base="${escape(garage.active)}" aria-label="${escape(active.name)} med dine valg. Tryk for at give gas"><span class="mybil-floor" aria-hidden="true"></span>${vehicleLayers(garage)}<span class="mybil-sheen" aria-hidden="true" style="--src:url('${baseSrc(garage.active)}')"></span></button>
+    ${installedRow(garage, equipped, style, active)}
     <button type="button" class="mybil-dream" data-mybil-dream>Se hvad den kan blive</button>
     <p class="mybil-message" role="status">${escape(message)}</p>
     <div class="mybil-tabs" role="tablist" aria-label="Tuning">${tabs}</div>
@@ -240,4 +256,14 @@ export function renderRoadLoop(garage, progress) {
     + '<span class="road-trees" aria-hidden="true"></span><span class="road-asphalt" aria-hidden="true"><span class="road-dashes"></span></span>'
     + `<span class="road-car" aria-hidden="true">${vehicleLayers(garage)}${roadLamps(garage, base)}</span><span class="road-speed" aria-hidden="true"></span>`
     + `<span class="road-label"><small>DIN BIL</small><strong>${escape(base.name)}</strong><span class="booster-chip-mini">${boosterCount(balance(progress, garage))}</span></span></a>`;
+}
+
+function installedRow(garage, equipped, style, base) {
+  const chips = SLOTS.filter(s => equipped[s.id] && partById(equipped[s.id])).map(s => {
+    const name = partById(equipped[s.id]).name;
+    return `<button type="button" class="on-chip" data-mybil-unequip="${s.id}" aria-label="Tag ${escape(name)} af">${escape(name)}<i aria-hidden="true">✕</i></button>`;
+  });
+  if (style.neonOn && owns(garage, 'extra-neon')) chips.push('<button type="button" class="on-chip" data-mybil-extra="neon" aria-label="Sluk neon">Neon<i aria-hidden="true">✕</i></button>');
+  if (style.lowered && base?.split && owns(garage, 'extra-lower')) chips.push('<button type="button" class="on-chip" data-mybil-extra="lower" aria-label="Hæv køretøjet igen">Sænket<i aria-hidden="true">✕</i></button>');
+  return `<div class="mybil-on" role="group" aria-label="Monteret nu"><span class="mybil-on-label">Monteret nu</span>${chips.length ? chips.join('') + '<button type="button" class="on-clear" data-mybil-unequip-all>Fjern al tuning</button>' : '<span class="mybil-on-empty">Ingen tuning endnu</span>'}</div>`;
 }
