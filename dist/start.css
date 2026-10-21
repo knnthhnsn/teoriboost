@@ -185,3 +185,52 @@ body.start-mode{background:#fff}
 /* cars drive in and out of the machine: never let that widen the page */
 .step-garage,.dream-modal{overflow:hidden}
 .start-step,.start-hero{overflow-x:clip}
+
+/* ---------- v2: a calm showroom instead of yellow rays and blobs ---------- */
+.start-hero{background:linear-gradient(180deg,#E9EEF3 0,#F3F6F9 38%,#FBFCFD 64%,#fff 100%)}
+.start-blob{display:none}
+/* studio floor: a fine perspective grid that fades into the distance, and soft light from above */
+.start-show{isolation:isolate}
+.start-show::before{content:"";position:absolute;left:-40%;right:-40%;bottom:4%;height:46%;z-index:-3;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(31,35,40,.075) 0 1px,transparent 1px 44px),repeating-linear-gradient(0deg,rgba(31,35,40,.075) 0 1px,transparent 1px 44px);
+  transform:perspective(420px) rotateX(64deg);transform-origin:50% 100%;
+  -webkit-mask:radial-gradient(60% 90% at 50% 100%,#000 25%,transparent 75%);mask:radial-gradient(60% 90% at 50% 100%,#000 25%,transparent 75%)}
+.start-show::after{content:"";position:absolute;left:5%;right:5%;top:-6%;height:80%;z-index:-2;pointer-events:none;
+  background:radial-gradient(55% 60% at 50% 30%,rgba(255,255,255,.95),rgba(255,255,255,0) 70%)}
+/* the machine: no rays, a neutral turntable with a soft contact shadow */
+.gu-rays{display:none}
+.gu-ring{background:radial-gradient(closest-side,#FFFFFF 0,#F1F4F7 65%,#E3E8ED 100%);border:2px solid rgba(255,255,255,.9);
+  box-shadow:0 8px 0 -2px #D5DCE3,0 22px 34px -8px rgba(31,35,40,.18)}
+.gu-ring::after{border:1.5px solid rgba(31,35,40,.08)}
+.gu.is-done .gu-ring{box-shadow:0 8px 0 -2px #D5DCE3,0 22px 34px -8px rgba(31,35,40,.18),0 0 0 4px rgba(213,255,98,.45)}
+/* the restore: a soft-edged reveal sweeping across, with a brief white glint on the car itself */
+.gu-scan{display:none!important}
+.gu-after{clip-path:none;-webkit-mask-image:linear-gradient(90deg,#000 42%,transparent 58%);mask-image:linear-gradient(90deg,#000 42%,transparent 58%);
+  -webkit-mask-size:260% 100%;mask-size:260% 100%;-webkit-mask-position:100% 0;mask-position:100% 0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.gu-car.is-restoring .gu-after{animation:reveal-soft 1s var(--in-out) forwards}
+@keyframes reveal-soft{to{-webkit-mask-position:0 0;mask-position:0 0}}
+.gu-car.is-restored .gu-after{-webkit-mask-image:none;mask-image:none;animation:glint .7s ease-out}
+@keyframes glint{0%{filter:brightness(1.25) saturate(1.1)}100%{filter:none}}
+/* Keglen keeps the car company on the right */
+.sc--kegle{position:absolute;right:-2%;top:50%;width:22%;animation:pop-in .6s .7s var(--spring) both}
+.sc--kegle > .cast{animation:float 4.4s var(--in-out) infinite}
+/* intro step 3 and the dream modal share the calmer stage */
+.step-garage{background:linear-gradient(180deg,#EEF2F6,#fff 75%)!important}
+/* showroom backdrop: a studio wall meets the floor in a soft horizon, faded at the edges so it never reads as a box */
+.gu::before{content:"";position:absolute;inset:-4% -16% 4% -16%;z-index:-3;pointer-events:none;
+  background:linear-gradient(180deg,#D9E1E9 0,#E9EEF3 52%,#DCE3EA 61%,#EEF2F5 62%,#F6F8FA 100%);
+  -webkit-mask:radial-gradient(52% 54% at 50% 56%,#000 55%,transparent 100%);mask:radial-gradient(52% 54% at 50% 56%,#000 55%,transparent 100%)}
+.start-show::before{background:repeating-linear-gradient(90deg,rgba(31,35,40,.11) 0 1px,transparent 1px 44px),repeating-linear-gradient(0deg,rgba(31,35,40,.11) 0 1px,transparent 1px 44px)}
+.step-garage .gu::before,.dream-modal .gu::before{inset:-2% -8% 2% -8%}
+
+/* ---------- v3: the hero stands in a tuner workshop (Codex illustration, same art style as the vehicles) ---------- */
+.start-hero{background:linear-gradient(180deg,rgba(255,255,255,0) 0,rgba(255,255,255,0) 46%,rgba(255,255,255,.92) 62%,#fff 74%),
+  url(assets/start/garage-tall.webp) center top / 100% auto no-repeat,#fff}
+.start-hero .start-show::before,.start-hero .start-show::after,.start-hero .gu::before{display:none}
+.start-hero .gu-ring{box-shadow:0 8px 0 -2px #CFC9C0,0 18px 26px -8px rgba(31,35,40,.22)}
+.start-top{background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));margin:-12px -16px 0;padding:12px 16px 6px}
+@media (min-width:900px){
+  .start-hero{background:linear-gradient(90deg,#fff 0,rgba(255,255,255,.94) 30%,rgba(255,255,255,.55) 44%,rgba(255,255,255,0) 58%),
+    url(assets/start/garage-wide.webp) center 30% / cover no-repeat,#fff}
+  .start-top{margin:-20px -48px 0;padding:20px 48px 8px}
+}

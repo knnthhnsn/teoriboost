@@ -35,8 +35,10 @@ const ramp = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))
 export function mountDayNight(el) {
   if (!el) return () => {};
   let range = 1, raf = 0;
+  const slot = el.closest('.road-top'), bar = document.querySelector('.topbar');
   const measure = () => {
-    const top = el.getBoundingClientRect().top + scrollY, max = document.documentElement.scrollHeight - innerHeight;
+    if (slot) slot.style.setProperty('--stick', (bar?.offsetHeight || 0) + 'px'); // pin right under the top bar
+    const top = slot ? slot.offsetTop : el.getBoundingClientRect().top + scrollY, max = document.documentElement.scrollHeight - innerHeight;
     range = Math.max(1, Math.min(Math.max(220, top - innerHeight * .1), max)); // full night when the loop nears the top
   };
   const apply = () => {

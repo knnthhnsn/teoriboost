@@ -110,8 +110,6 @@ export function confetti({ count = 140, origin = { x: .5, y: .35 } } = {}) {
   })(t0);
 }
 
-const TOPICS = ['Vigepligt', 'Rundkørsel', 'Hastighed', 'Mørkekørsel', 'Overhaling', 'Motorvej', 'Glat føre', 'Skilte', 'Bremselængde', 'Cyklister', 'Parkering', 'Lys', 'Alkohol', 'Vejafmærkning'];
-const ticker = () => { const row = TOPICS.map(t => `<span>${t}</span>`).join(''); return `<div class="start-ticker" aria-hidden="true"><div>${row}${row}</div></div>`; };
 const words = (text, cls = '') => text.split(' ').map((w, i) => `<span class="kw ${cls}" style="--w:${i}">${w}</span>`).join(' ');
 
 function hero({ counts }) {
@@ -119,24 +117,15 @@ function hero({ counts }) {
   return `<section class="start-hero" aria-labelledby="start-title">
     <header class="start-top"><a class="brand start-brand" href="#home" data-start-skip aria-label="TeoriBoost, spring introen over"><span class="brand-mark" aria-hidden="true">///</span><span>TeoriBoost</span></a>
       <a class="start-skip" href="#home" data-start-skip>Spring over</a></header>
-    <span class="start-blob start-blob--a" aria-hidden="true"></span><span class="start-blob start-blob--b" aria-hidden="true"></span><span class="start-blob start-blob--c" aria-hidden="true"></span>
+    
     <div class="start-show">
-      ${glowUp(ORDER, { loop: true })}
-      <div class="start-cast" aria-hidden="true">
-        <span class="sc sc--1">${renderCast('sneglen', { size: 'sm', priority: true })}</span>
-        <span class="sc sc--2">${renderCast('blink', { size: 'sm' })}</span>
-        <span class="sc sc--3">${renderCast('kegle', { size: 'sm' })}</span>
-        <span class="sc sc--4">${renderCast('daek', { size: 'sm' })}</span>
-      </div>
+      ${glowUp(ORDER, { loop: true, label: false })}
+      <div class="start-cast" aria-hidden="true"><span class="sc sc--kegle">${renderCast('kegle', { size: 'sm', priority: true })}</span></div>
     </div>
     <div class="start-copy">
       <h1 id="start-title" class="start-title"><span class="kl">${words('Bestå teoriprøven.')}</span><span class="kl">${words('Med et', 'kw-b')} ${smile}</span></h1>
-      <p class="start-lead">5 minutter om dagen. Rigtige prøvesituationer, et cast der hepper på dig, og en rusten scooter du bygger op til en racerbil, mens du lærer.</p>
-      <ul class="start-chips" aria-label="Indhold"><li><b data-count="${counts.questions}">${counts.questions}</b> situationer</li><li><b data-count="${counts.lessons}">${counts.lessons}</b> lektioner</li><li><b>Oplæsning</b> af alt</li></ul>
-      ${ticker()}
-      <div class="start-actions"><a class="start-cta" href="#start:1" data-start-go>Kom i gang · gratis</a>
-        <a class="start-ghost" href="#home" data-start-skip>Jeg har prøvet det før</a>
-        <p class="start-fine">Ingen konto. Dine fremskridt bliver på din telefon.</p></div>
+      <p class="start-lead">5 minutter om dagen. Byg din bil op, mens du lærer.</p>
+      <div class="start-actions"><a class="start-cta" href="#start:1" data-start-go>Kom i gang · gratis</a></div>
     </div>
   </section>`;
 }

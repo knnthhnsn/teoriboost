@@ -48,14 +48,12 @@ export function renderLearn({ vm, intro, due, unitIndex }) {
   const review = due > 0
     ? `<a class="learn-card learn-card--review" href="#review"><div><strong>${due} ${due === 1 ? 'regel er' : 'regler er'} klar til gentagelse</strong><small>Tager ca. ${Math.max(2, Math.ceil(due * 1.3))} min</small></div><span class="pill-btn">Gentag</span></a>`
     : `<div class="learn-card"><div><strong>Dagens mål: ${Math.min(today, goal)}/${goal} ${goal === 1 ? 'lektion' : 'lektioner'}</strong><small>${today >= goal ? 'Nået. +1.500 Boosters er dine.' : 'Næste lektion tager ca. 5 min.'}</small></div><span class="goal-dots" aria-hidden="true">${Array.from({ length: goal }, (_, k) => `<i class="${k < today ? 'on' : ''}"></i>`).join('')}</span></div>`;
-  return `<section class="learn" aria-labelledby="learn-title">
-    <div class="learn-chips"><span class="chip chip--streak">🔥 <b>${streak}</b> ${streak === 1 ? 'dag' : 'dage'}</span>${days !== null ? `<span class="chip">📅 Prøve om <b>${days}</b> dage</span>` : `<span class="chip">🎯 <b>${goal}</b> om dagen</span>`}</div>
+  return `<div class="learn-chips"><span class="chip chip--streak">🔥 <b>${streak}</b> ${streak === 1 ? 'dag' : 'dage'}</span>${days !== null ? `<span class="chip">📅 Prøve om <b>${days}</b> dage</span>` : `<span class="chip">🎯 <b>${goal}</b> om dagen</span>`}</div><div id="road-slot" class="road-top"></div><section class="learn" aria-labelledby="learn-title">
     <a class="unit-banner" href="#theory" aria-label="Emne ${unitIndex + 1}: ${esc(unit.title)}. ${done} af ${nodes.length} lektioner. Se alle emner">
       <span class="unit-kicker">EMNE ${unitIndex + 1} · ALLE EMNER ▾</span><h1 id="learn-title">${esc(unit.title)}</h1><span class="unit-count">${done}/${nodes.length}</span>
       <span class="unit-bar" aria-hidden="true"><i style="--p:${nodes.length ? done / nodes.length : 0}"></i></span></a>
     <div class="learn-path-wrap"><div class="learn-guide" aria-hidden="true">${renderCast(done ? 'sneglen' : 'krabbe', { size: 'sm', priority: true })}</div><ol class="learn-path">${path}</ol></div>
     ${review}
-    <div id="road-slot"></div>
   </section>`;
 }
 

@@ -143,3 +143,24 @@ body.exam-active .question-actions{display:none}
 /* white text needs deeper colours than the bright brand green/red (WCAG 4.5:1) */
 .journey-feedback-tray.correct .jp-feedback-go{background:#2F7D00!important;box-shadow:0 5px 0 #1F5A00!important}
 .journey-feedback-tray.repair .jp-feedback-go{background:#D92D20!important;box-shadow:0 5px 0 #A51F15!important}
+
+/* ---------- no accent stripes: every left-border callout becomes a real component ---------- */
+.garage-joke,.journey-checkpoint-note,.journey-feedback-gag,.journey-case-context,.journey-model-answer,.lesson-practical,
+.question-context,.turn-instruction,.turn-own-answer,.voice-player{border-left:0!important}
+/* the joke after an answer: a small speech bubble from the character above it */
+.journey-feedback-gag{position:relative;clear:both;margin:10px 0 2px!important;padding:9px 13px!important;border:2px solid rgba(31,35,40,.07)!important;border-radius:16px!important;
+  background:#fff!important;font-size:14px!important;line-height:1.4;color:#3E454D!important}
+.journey-feedback-gag::before{content:"";position:absolute;left:30px;top:-8px;width:12px;height:12px;background:#fff;border-left:2px solid rgba(31,35,40,.07);border-top:2px solid rgba(31,35,40,.07);rotate:45deg}
+.garage-joke{position:relative;padding:12px 15px!important;border-radius:16px!important;background:#fff!important;border:2px solid var(--line)!important;box-shadow:0 3px 0 var(--line)}
+/* notes become pills */
+.journey-checkpoint-note{display:inline-flex!important;align-items:center;gap:6px;width:auto!important;padding:7px 12px!important;border-radius:999px!important;background:#FFF1DB!important;color:#8A4B00!important;font:700 13px var(--font-display)!important}
+.journey-checkpoint-note::before{content:"↻";font-weight:800}
+/* context: a soft grey card, nothing on the edge */
+.question-context,.journey-case-context,.turn-instruction{border:0!important;border-radius:16px!important;background:#F3F5F7!important}
+.journey-case-context{padding:14px 16px!important;font-size:17px!important}
+.turn-own-answer{border:0!important;border-radius:16px!important;background:#F3F5F7!important;padding:14px 16px!important}
+/* answers and things to take along: chunky cards like the rest of the kit */
+.journey-model-answer,.lesson-practical{border:2px solid var(--line)!important;border-radius:18px!important;background:#fff!important;box-shadow:0 4px 0 var(--line);padding:16px!important}
+.journey-model-answer h3{margin:0 0 4px;font:800 13px var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.journey-model-answer h3 + p{margin:0 0 12px;font-size:16px}
+.voice-player{border:2px solid var(--line)!important;border-radius:18px!important;box-shadow:0 3px 0 var(--line)}

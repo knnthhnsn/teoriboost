@@ -131,3 +131,45 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 .tile-fire{color:#B35400}
 /* top bar = logo, Boosters, settings (mockup D notes). Humour and sound live in Profil now. */
 #humor-toggle,#sound-toggle,.top-strap,.small-license,.sidebar-label{display:none!important}
+/* "Læs" is a pill inside the row, not a segment behind a divider line */
+.topic-cards{border-left:0!important;align-self:center;min-height:40px;margin-right:12px;padding:0 14px!important;border-radius:999px;background:#EEF4FF;min-width:0!important}
+
+/* your car on the road opens Lær, wider than the column: edge to edge on phones */
+.road-top .road-loop{max-width:1100px;margin:0 auto 16px}
+@media (max-width:700px){
+  .road-top .road-loop{width:calc(100% + 32px);margin:0 -16px 16px;border-radius:0;border-left:0;border-right:0;box-shadow:0 4px 0 var(--line);height:190px}
+  .road-top .road-car{width:160px;height:160px;margin-left:-100px}
+}
+@media (min-width:701px){.road-top .road-loop{height:230px}.road-top .road-car{width:210px;height:210px;margin-left:-130px}}
+@media (max-width:360px){.road-top .road-loop{width:calc(100% + 24px);margin-left:-12px;margin-right:-12px}}
+/* the loop pins under the top bar and folds down a little while day turns to night, so you watch the sunset */
+.road-top{position:sticky;top:var(--stick,0px);z-index:6}
+.road-top .road-loop{--h0:190px;height:calc(var(--h0) - var(--n,0) * 64px)!important;transition:none}
+.road-top .road-car{scale:calc(1 - var(--n,0) * .2);transform-origin:50% 100%}
+.road-top .road-label{scale:calc(1 - var(--n,0) * .12);transform-origin:0 0}
+@media (min-width:701px){.road-top .road-loop{--h0:230px}}
+/* streak + goal chips sit at the very top of Lær, above your car */
+#view > .learn-chips{max-width:1100px;margin:0 auto 10px}
+@media (max-width:700px){#view > .learn-chips{margin:0 0 10px}}
+
+/* ---------- menu: colour-coded tabs, chunky active card ---------- */
+[data-tab="home"]{--tile:#E6F8D2;--tint:#2F7D00;--edge:#9BD86A}
+[data-tab="practice"]{--tile:#DDF4FF;--tint:#0B6BA8;--edge:#84CFF5}
+[data-tab="exam"]{--tile:#FFEFD3;--tint:#9A5300;--edge:#F5C27A}
+[data-tab="minbil"]{--tile:#FFE4F1;--tint:#B0236E;--edge:#F3A6CB}
+[data-tab="profil"]{--tile:#EEF1F4;--tint:#3E454D;--edge:#C9D0D7}
+.sidebar{background:#F7F9FB!important;border-right:0!important;padding:22px 14px 18px!important}
+#desktop-nav{display:flex;flex-direction:column;gap:6px}
+.sidebar .nav-item{display:flex;align-items:center;gap:14px;min-height:58px;margin:0;padding:8px 12px;border-radius:18px;border:2px solid transparent;background:none;
+  font:800 16px var(--font-display);color:#3E454D;text-decoration:none;transition:background-color .2s,border-color .2s,translate .16s var(--spring)}
+.sidebar .nav-item .icon{flex:none;width:42px;height:42px;padding:9px;border-radius:13px;background:var(--tile);color:var(--tint);stroke:var(--tint);stroke-width:2.4;transition:background-color .2s,color .2s}
+.sidebar .nav-item:hover{background:#fff;border-color:var(--line);translate:0 -1px}
+.sidebar .nav-item.active{background:#fff!important;color:var(--ink);border-color:var(--edge);box-shadow:0 4px 0 var(--edge)}
+.sidebar .nav-item.active .icon{background:var(--tint);color:#fff;stroke:#fff}
+.sidebar .nav-item .nav-label{display:inline!important}
+.sidebar-bottom{margin-top:auto;display:flex;flex-direction:column;gap:8px}
+.nav-item--profile{border-top:0}
+/* phone tab bar: the chosen tab gets its colour */
+#mobile-nav a.active{color:var(--tint)!important;background:none!important}
+#mobile-nav a.active svg{background:var(--tile);color:var(--tint);stroke:var(--tint);border-radius:12px;padding:3px 10px;box-sizing:content-box}
+.topic-cards{color:#0A4F8F!important}
