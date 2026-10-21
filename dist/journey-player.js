@@ -197,6 +197,7 @@ export function createJourneyPlayer({
         <div class="journey-answer-review">${question.statements.map((statement, index) => `<div class="${feedback.answers[index] === statement.correct ? 'right' : 'wrong'}"><span>${feedback.answers[index] === statement.correct ? '✓' : '↻'}</span><p>${esc(statement.text)}</p><b>${statement.correct ? 'JA' : 'NEJ'}</b></div>`).join('')}</div>
         ${refs(question.sourceIds)}${voiceButton('feedback', 'Lyt til forklaringen')}
       </details>
+      <a class="jp-ask" href="#chat" data-chat-ask="${esc(question.id)}">Spørg Sneglen om det her</a>
       <button class="btn btn-primary jp-feedback-go" data-journey-continue-feedback type="button">${repair ? 'Prøv igen' : 'Videre'}</button>
     </aside>`;
   }

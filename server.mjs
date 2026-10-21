@@ -6,6 +6,9 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), 'dist');
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.ttf': 'font/ttf', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp':'image/webp', '.webmanifest':'application/manifest+json' };
 const server = http.createServer(async (req, res) => {
   try {
+    // /api/<name> runs dist/api/<name>.mjs like a Vercel function (default export (req, res))
+    const api = new URL(req.url, 'http://localhost').pathname.match(/^\/api\/([a-z0-9-]+)$/);
+    if (api) { const mod = await import(new URL('./dist/api/' + api[1] + '.mjs', import.meta.url).href + '?t=' + Date.now()); await mod.default(req, res); return; }
     const name = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
     const file = path.resolve(root, '.' + (name === '/' ? '/index.html' : name));
     if (file !== root && !file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
