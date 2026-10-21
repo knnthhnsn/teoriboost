@@ -223,7 +223,7 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
 .mybil-item small,.mybil-base small{display:inline-flex;align-items:center;gap:4px;font-weight:700;color:var(--muted);font-size:13px}
 .mybil-item.is-on,.mybil-base.is-active{border-color:var(--good);box-shadow:0 4px 0 var(--good);background:var(--good-bg)}
 .mybil-item.is-on small,.mybil-base.is-active small{color:var(--acid-text)}
-.mybil-item.is-short{opacity:.65}
+.mybil-item.is-short .mybil-thumb{opacity:.5}
 .mybil-base.is-locked img{filter:grayscale(1) opacity(.55)}
 .mybil-thumb{position:relative;display:block;width:100%;aspect-ratio:1/1}
 .mybil-thumb img,.mybil-base img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
