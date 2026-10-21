@@ -1,6 +1,6 @@
 // "Spørg Sneglen": the chat screen. Streams answers from /api/chat (Server-Sent Events) and renders the
 // agent's actions (rule cards, quizzes, next steps) as cards. History stays on this device only.
-import { renderCast, CAST } from './cast.js';
+import { renderCast } from './cast.js';
 import { QUESTIONS } from './content.js';
 
 const KEY = 'teoriboost.chat.v1';
@@ -12,11 +12,8 @@ const ICON = {
   fresh: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>',
   check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
 };
-const SUGGEST = [
-  ['🔺', 'Hvornår har jeg ubetinget vigepligt?'], ['🦈', 'Forklar hajtænder på 20 sekunder'],
-  ['🎯', 'Hvad skal jeg øve mere på?'], ['📝', 'Hvor mange fejl må jeg have til teoriprøven?'],
-  ['🔄', 'Quiz mig i rundkørsler'], ['🌧️', 'Hvorfor bremser bilen længere på våd vej?'],
-];
+const SUGGEST = ['Hvornår har jeg ubetinget vigepligt?', 'Forklar hajtænder på 20 sekunder', 'Hvad skal jeg øve mere på?',
+  'Hvor mange fejl må jeg have til teoriprøven?', 'Quiz mig i rundkørsler', 'Hvorfor bremser bilen længere på våd vej?'];
 
 export function loadChat(store = globalThis.localStorage) { try { const v = JSON.parse(store.getItem(KEY)); return Array.isArray(v) ? v : []; } catch { return []; } }
 export function saveChat(list, store = globalThis.localStorage) { try { store.setItem(KEY, JSON.stringify(list.slice(-30))); } catch {} }
@@ -36,7 +33,7 @@ export function md(text) {
   return out.join('');
 }
 
-const avatar = () => `<span class="chat-ava" aria-hidden="true"><img src="${esc(CAST.sneglen.src)}" alt="" width="40" height="40"></span>`;
+const avatar = () => `<span class="chat-ava" aria-hidden="true"><img src="assets/cast/sneglen-face.webp" alt="" width="40" height="40"></span>`;
 
 function actionHtml(a, i) {
   if (a.type === 'rule') return `<article class="chat-rule"><span class="chat-kicker">${esc(a.chapter)}</span><h3>${esc(a.title)}</h3>
@@ -67,7 +64,7 @@ export function renderChat({ history }) {
     <div class="chat-hero">${renderCast('sneglen', { size: 'md', priority: true })}</div>
     <h1 class="chat-hello">Hej! Jeg er Sneglen.</h1>
     <p class="chat-sub">Spørg mig om alt i køreteori. Jeg svarer ud fra appens regelkort, tjekker Færdselsstyrelsen og kan quizze dig.</p>
-    <div class="chat-suggest">${SUGGEST.map(([e, t], i) => `<button type="button" class="chat-chip" style="--i:${i}" data-chat-suggest="${esc(t)}"><span aria-hidden="true">${e}</span>${esc(t)}</button>`).join('')}</div>
+    <div class="chat-suggest">${SUGGEST.map((t, i) => `<button type="button" class="chat-chip" style="--i:${i}" data-chat-suggest="${esc(t)}">${esc(t)}</button>`).join('')}</div>
   </div>`;
   return `<section class="chat" aria-label="Spørg Sneglen">
     <header class="chat-top"><a class="chat-x" href="#home" aria-label="Luk chatten">${ICON.close}</a>

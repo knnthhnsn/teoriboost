@@ -5,6 +5,7 @@
  * A vehicle is a base image plus transparent part layers on one shared canvas (generated with Codex, see
  * docs/redesign/garage-v5). Paint, stripes and window tint are white masks the app colours freely.
  */
+import { ico } from './ui-icons.js';
 import { SLOTS, PARTS, BASES } from './mybil-catalog.js';
 
 export { SLOTS, PARTS, BASES };
@@ -261,9 +262,9 @@ export function renderRoadLoop(garage, progress) {
 function installedRow(garage, equipped, style, base) {
   const chips = SLOTS.filter(s => equipped[s.id] && partById(equipped[s.id])).map(s => {
     const name = partById(equipped[s.id]).name;
-    return `<button type="button" class="on-chip" data-mybil-unequip="${s.id}" aria-label="Tag ${escape(name)} af">${escape(name)}<i aria-hidden="true">✕</i></button>`;
+    return `<button type="button" class="on-chip" data-mybil-unequip="${s.id}" aria-label="Tag ${escape(name)} af">${escape(name)}<i aria-hidden="true">${ico('x')}</i></button>`;
   });
-  if (style.neonOn && owns(garage, 'extra-neon')) chips.push('<button type="button" class="on-chip" data-mybil-extra="neon" aria-label="Sluk neon">Neon<i aria-hidden="true">✕</i></button>');
-  if (style.lowered && base?.split && owns(garage, 'extra-lower')) chips.push('<button type="button" class="on-chip" data-mybil-extra="lower" aria-label="Hæv køretøjet igen">Sænket<i aria-hidden="true">✕</i></button>');
+  if (style.neonOn && owns(garage, 'extra-neon')) chips.push('<button type="button" class="on-chip" data-mybil-extra="neon" aria-label="Sluk neon">Neon<i aria-hidden="true">' + ico('x') + '</i></button>');
+  if (style.lowered && base?.split && owns(garage, 'extra-lower')) chips.push('<button type="button" class="on-chip" data-mybil-extra="lower" aria-label="Hæv køretøjet igen">Sænket<i aria-hidden="true">' + ico('x') + '</i></button>');
   return `<div class="mybil-on" role="group" aria-label="Monteret nu"><span class="mybil-on-label">Monteret nu</span>${chips.length ? chips.join('') + '<button type="button" class="on-clear" data-mybil-unequip-all>Fjern al tuning</button>' : '<span class="mybil-on-empty">Ingen tuning endnu</span>'}</div>`;
 }

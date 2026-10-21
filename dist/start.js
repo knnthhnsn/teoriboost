@@ -1,5 +1,6 @@
 // Start page and first-run intro. The hero is a "glow-up machine": each vehicle rolls in rusty,
 // a scan line restores and repaints it, then its tuning parts pop on one by one.
+import { ico } from './ui-icons.js';
 import { renderCast } from './cast.js';
 import { vehicleLayers, boosterIcon, BOOSTER_RATES, BASES, baseSrc } from './mybil.js';
 
@@ -174,9 +175,9 @@ export function renderStart(step, ctx) {
   const goal = Number(intro.goal || 2);
   return shell(4, `<div class="plan-hero">${renderCast('bobbel', { size: 'md', priority: true, mood: 'correct' })}<h1 id="step-title" class="step-title plan-title">Din plan er klar</h1></div>
     <ol class="plan-list">
-      <li style="--i:0"><span class="plan-ico" aria-hidden="true">📅</span><div><strong>${esc(whenText)}</strong><small>${counts.lessons} lektioner · med ${goal} om dagen er du igennem på ca. ${Math.ceil(counts.lessons / goal)} dage</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
-      <li style="--i:1"><span class="plan-ico" aria-hidden="true">⏱️</span><div><strong>${goal} ${goal === 1 ? 'lektion' : 'lektioner'} om dagen</strong><small>${goal * 5} minutter · dagens mål giver ${fmt(BOOSTER_RATES.dailyGoal)} Boosters</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
-      <li style="--i:2"><span class="plan-ico" aria-hidden="true">🎯</span><div><strong>Første lektion: ${esc(plan.firstTitle)}</strong><small>Du svarer på dit første rigtige spørgsmål om 30 sekunder</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+      <li style="--i:0"><span class="plan-ico">${ico('calendar')}</span><div><strong>${esc(whenText)}</strong><small>${counts.lessons} lektioner · med ${goal} om dagen er du igennem på ca. ${Math.ceil(counts.lessons / goal)} dage</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+      <li style="--i:1"><span class="plan-ico">${ico('clock')}</span><div><strong>${goal} ${goal === 1 ? 'lektion' : 'lektioner'} om dagen</strong><small>${goal * 5} minutter · dagens mål giver ${fmt(BOOSTER_RATES.dailyGoal)} Boosters</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+      <li style="--i:2"><span class="plan-ico">${ico('target')}</span><div><strong>Første lektion: ${esc(plan.firstTitle)}</strong><small>Du svarer på dit første rigtige spørgsmål om 30 sekunder</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
     </ol>`, 'Start første lektion', { ctaAttr: 'data-start-finish', ctaHref: plan.firstHref });
 }
 

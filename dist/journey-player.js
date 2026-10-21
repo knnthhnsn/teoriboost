@@ -1,3 +1,4 @@
+import { ico } from './ui-icons.js';
 import { CHAPTERS, QUESTIONS, SOURCES } from './content.js';
 import { BOOSTER_RATES } from './mybil.js';
 import { LESSONS } from './lessons.js';
@@ -191,10 +192,10 @@ export function createJourneyPlayer({
     const repair = !feedback.correct;
     return `<aside class="journey-feedback-tray ${repair ? 'repair' : 'correct'}" role="status">
       <div class="feedback-cast">${renderCast(repair ? 'kegle' : 'blink', { size: 'sm', mood: repair ? 'wrong' : 'correct', line: castLine(repair ? 'wrong' : 'correct', question.id) })}</div>
-      <div class="journey-feedback-summary"><span aria-hidden="true">${repair ? '↻' : '✓'}</span><div><strong>${repair ? 'Næsten!' : 'Godt set!'}</strong><p>${repair ? 'Se det afgørende, og vurdér de fire udsagn igen.' : 'Alle fire udsagn er vurderet korrekt.'}</p></div></div>
+      <div class="journey-feedback-summary"><span aria-hidden="true">${repair ? ico('repeat') : ico('check')}</span><div><strong>${repair ? 'Næsten!' : 'Godt set!'}</strong><p>${repair ? 'Se det afgørende, og vurdér de fire udsagn igen.' : 'Alle fire udsagn er vurderet korrekt.'}</p></div></div>
       ${state()?.settings?.humor === true && question.gag ? `<p class="journey-feedback-gag">${esc(question.gag)}</p>` : ''}
       <details><summary>Se reglen og alle fire svar</summary><p>${esc(question.explanation)}</p>
-        <div class="journey-answer-review">${question.statements.map((statement, index) => `<div class="${feedback.answers[index] === statement.correct ? 'right' : 'wrong'}"><span>${feedback.answers[index] === statement.correct ? '✓' : '↻'}</span><p>${esc(statement.text)}</p><b>${statement.correct ? 'JA' : 'NEJ'}</b></div>`).join('')}</div>
+        <div class="journey-answer-review">${question.statements.map((statement, index) => `<div class="${feedback.answers[index] === statement.correct ? 'right' : 'wrong'}"><span>${feedback.answers[index] === statement.correct ? ico('check') : ico('repeat')}</span><p>${esc(statement.text)}</p><b>${statement.correct ? 'JA' : 'NEJ'}</b></div>`).join('')}</div>
         ${refs(question.sourceIds)}${voiceButton('feedback', 'Lyt til forklaringen')}
       </details>
       <a class="jp-ask" href="#chat" data-chat-ask="${esc(question.id)}">Spørg Sneglen om det her</a>
@@ -292,8 +293,8 @@ export function createJourneyPlayer({
       <div class="journey-done-art">${renderCast(repaired ? 'kegle' : 'bobbel', { size: 'md', mood: 'correct', priority: true })}</div>
       <h2 class="jp-done-title">${repaired ? 'Repareret og klaret!' : 'Lektion klaret!'}</h2>
       <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den, og det er sådan, det sætter sig.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>
-      <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${earns ? `⚡ +${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '⚡ 0'}</strong>${earns ? '' : '<em>Tjent i dag allerede</em>'}</div><div><small>FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
-      <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">🎯 ${daily.goalMet ? `Dagens mål nået · +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')}` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? ` · ${streak}` : ''}</div>
+      <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${ico('bolt')} ${earns ? `+${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '0'}</strong>${earns ? '' : '<em>Tjent i dag allerede</em>'}</div><div><small>FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
+      <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">${ico('target')} ${daily.goalMet ? `Dagens mål nået · +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')}` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? ` · ${streak}` : ''}</div>
       ${lesson.practicalNote ? `<details class="journey-practical-note"><summary>Tag det med til kørelæreren</summary><p>${esc(lesson.practicalNote)}</p></details>` : ''}
       <div class="journey-control-dock">${completionActions}</div>
     </section>`;

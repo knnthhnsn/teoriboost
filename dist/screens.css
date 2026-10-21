@@ -186,3 +186,20 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 .road-top .road-loop{height:var(--h0)!important}
 .road-top .road-car{scale:none}
 .road-top .road-label{scale:none}
+
+/* the app's own line icons instead of emojis */
+.ui-ico{flex:none;width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.18em}
+.chip .ui-ico{width:18px;height:18px}
+.chip--streak .ui-ico,.tile-fire .ui-ico{color:#E8590C}
+.chip--date .ui-ico{color:#0B6BA8}.chip--goal .ui-ico{color:#C2255C}.chip--ready .ui-ico{color:#2F7D00}
+.tile-fire{display:inline-flex;align-items:center;gap:6px;justify-content:center}.tile-fire .ui-ico{width:26px;height:26px}
+.row-ico .ui-ico{width:24px;height:24px;color:#1F2328}
+.game-ico{display:grid;place-items:center;width:44px;height:44px;margin-bottom:6px;border-radius:13px;background:#F3F5F7}
+.game-card:first-child .game-ico{background:#FFE7C2}
+.game-ico .ui-ico{width:26px;height:26px;color:#1F2328}
+.plan-ico .ui-ico{width:24px;height:24px;color:#1F2328}
+.result-boost .ui-ico,.jp-done-stats .ui-ico{color:#5C8A00}
+.jp-done-goal .ui-ico{color:#C2255C}
+.on-chip i .ui-ico{width:14px;height:14px}
+/* the chat tab: its own colour, like the other tabs */
+[data-tab="chat"]{--tile:#EDE7FF;--tint:#5B3CC4;--edge:#B9A6F5}

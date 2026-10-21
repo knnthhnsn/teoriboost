@@ -261,7 +261,7 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
   .topbar .brand{min-width:0}
 }
 
-/* Min bil: what is on the car right now, each with an ✕; and the stock tile first in every tab */
+/* Min bil: what is on the car right now, each with an x; and the stock tile first in every tab */
 .mybil-on{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:12px auto 0;max-width:520px}
 .mybil-on-label{flex-basis:100%;text-align:center;font:800 12px var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .mybil-on-empty{color:var(--muted);font-size:14px}

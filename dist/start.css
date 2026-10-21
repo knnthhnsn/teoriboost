@@ -176,7 +176,7 @@ body.start-mode{background:#fff}
 /* Min bil: the dream-build button and modal */
 .mybil-dream{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 0;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid var(--accent-shadow,#9BC42A);
   background:#F3FFD6;color:var(--ink);font:800 15px var(--font-display);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}
-.mybil-dream::before{content:"✨";animation:bolt-glint 3.5s var(--in-out) infinite}
+.mybil-dream::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 13.7 9 19 10.7 13.7 12.4 12 18 10.3 12.4 5 10.7 10.3 9Z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 13.7 9 19 10.7 13.7 12.4 12 18 10.3 12.4 5 10.7 10.3 9Z'/%3E%3C/svg%3E") center/contain no-repeat;animation:bolt-glint 3.5s var(--in-out) infinite}
 .dream-modal .gu{width:min(76vw,380px)}
 
 .step-first{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:18px;background:#FFF8EC;border:2px solid #F3DDB8;box-shadow:0 4px 0 #F3DDB8;animation:reveal .5s .45s var(--out) backwards}
