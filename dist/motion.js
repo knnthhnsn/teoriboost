@@ -39,7 +39,8 @@ export function mountDayNight(el) {
   const measure = () => {
     if (slot) slot.style.setProperty('--stick', (bar?.offsetHeight || 0) + 'px'); // pin right under the top bar
     const top = slot ? slot.offsetTop : el.getBoundingClientRect().top + scrollY, max = document.documentElement.scrollHeight - innerHeight;
-    range = Math.max(1, Math.min(Math.max(220, top - innerHeight * .1), max)); // full night when the loop nears the top
+    const h = el.offsetHeight || 190;
+    range = Math.max(1, Math.min(Math.max(top + h * .75, 220), max)); // full night as the loop scrolls out of view
   };
   const apply = () => {
     raf = 0; const n = Math.min(1, Math.max(0, scrollY / range));
