@@ -118,6 +118,8 @@ export function confetti({ count = 140, origin = { x: .5, y: .35 } } = {}) {
   })(t0);
 }
 
+const TOPICS = ['Vigepligt', 'Rundkørsel', 'Hastighed', 'Mørkekørsel', 'Overhaling', 'Motorvej', 'Glat føre', 'Skilte', 'Bremselængde', 'Cyklister', 'Parkering', 'Lys', 'Alkohol', 'Vejafmærkning'];
+const ticker = () => { const row = TOPICS.map(t => `<span>${t}</span>`).join(''); return `<div class="start-ticker" aria-hidden="true"><div>${row}${row}</div></div>`; };
 const words = (text, cls = '') => text.split(' ').map((w, i) => `<span class="kw ${cls}" style="--w:${i}">${w}</span>`).join(' ');
 
 function hero({ counts }) {
@@ -133,6 +135,7 @@ function hero({ counts }) {
     <div class="start-copy">
       <h1 id="start-title" class="start-title"><span class="kl">${words('Bestå teoriprøven.')}</span><span class="kl">${words('Med et', 'kw-b')} ${smile}</span></h1>
       <p class="start-lead">5 minutter om dagen. Byg din bil op, mens du lærer.</p>
+      ${ticker()}
       <div class="start-actions"><a class="start-cta" href="#start:1" data-start-go>Kom i gang · gratis</a></div>
     </div>
   </section>`;
