@@ -120,7 +120,7 @@ export function confetti({ count = 140, origin = { x: .5, y: .35 } } = {}) {
 
 const words = (text, cls = '') => text.split(' ').map((w, i) => `<span class="kw ${cls}" style="--w:${i}">${w}</span>`).join(' ');
 
-function hero({ counts }) {
+function hero({ counts, sample }) {
   const smile = `<span class="kw kw-smile" style="--w:4">smil.<svg viewBox="0 0 120 24" aria-hidden="true"><path d="M4 14 C 30 26, 80 26, 116 8"/></svg></span>`;
   return `<section class="start-hero" aria-labelledby="start-title">
     <header class="start-top"><a class="brand start-brand" href="#home" data-start-skip aria-label="TeoriBoost, spring introen over"><span class="brand-mark" aria-hidden="true">///</span><span>TeoriBoost</span></a>
@@ -133,7 +133,7 @@ function hero({ counts }) {
     <div class="start-copy">
       <h1 id="start-title" class="start-title"><span class="kl">${words('Bestå teoriprøven.')}</span><span class="kl">${words('Med et', 'kw-b')} ${smile}</span></h1>
       <p class="start-lead">5 minutter om dagen. Byg din bil op, mens du lærer.</p>
-      <div class="start-actions"><a class="start-cta" href="#start:1" data-start-go>Kom i gang · gratis</a></div>
+      <div class="start-actions"><a class="start-cta" href="#start:1" data-start-go>Kom i gang · gratis</a>${sample ? '<button type="button" class="start-try-link" data-try-scroll>eller prøv et rigtigt spørgsmål først ↓</button>' : ''}</div>
     </div>
   </section>`;
 }
@@ -157,8 +157,9 @@ function options(name, list, chosen) {
     `<button type="button" role="radio" class="step-option ${String(v) === String(chosen) ? 'is-on' : ''}" style="--i:${i}" data-start-pick="${name}" data-value="${v}" aria-checked="${String(v) === String(chosen)}"><strong>${a}</strong><small>${b}</small><i aria-hidden="true"></i></button>`).join('')}</div>`;
 }
 
-export function renderStart(step, { intro, counts, plan }) {
-  if (!step) return hero({ counts });
+export function renderStart(step, ctx) {
+  const { intro, counts, plan } = ctx;
+  if (!step) return hero({ counts, sample: ctx.sample }) + (ctx.sample ? tryQuestion(ctx.sample, ctx.sampleVisual || '') : '');
   if (step === 1) return shell(1, `<h1 id="step-title" class="sr-only">Hvornår skal du til teoriprøve?</h1>${talk('sneglen', 'Hej! Hvornår skal du til teoriprøve?')}${options('when', WHEN, intro.when || '1m')}`, 'Fortsæt');
   if (step === 2) return shell(2, `<h1 id="step-title" class="sr-only">Hvor meget vil du øve om dagen?</h1>${talk('blink', 'Hvor meget vil du øve om dagen?')}${options('goal', GOALS, intro.goal || 2)}<p class="step-note">Du kan altid ændre det. Ingen straf, hvis du springer en dag over.</p>`, 'Fortsæt');
   if (step === 3) return shell(3, `<p class="eyebrow step-eyebrow">DIT MÅL</p><h1 id="step-title" class="step-title">Start med en rusten scooter. <span>Byg dig op til racerbilen.</span></h1>
@@ -195,3 +196,24 @@ export function countUps(root) {
   }
 }
 export { ORDER as START_ORDER, BASES };
+
+/** A real exam-style situation, no login, no intro: answer four statements and see why. */
+function tryQuestion(q, visual) {
+  return `<section class="start-try" id="proev" aria-labelledby="try-title">
+    <p class="eyebrow">PRØV ET RIGTIGT SPØRGSMÅL · INGEN KONTO</p>
+    <h2 id="try-title">${esc(q.prompt)}</h2>
+    <p class="question-context">${esc(q.context)}</p>
+    ${visual}
+    <p class="try-hint">Vurdér alle fire udsagn. Flere kan være rigtige.</p>
+    <div class="statements">${q.statements.map((s, i) => `<div class="statement" data-try-row="${i}"><span class="statement-text">${esc(s.text)}</span>
+      <div class="yes-no" role="group" aria-label="Udsagn ${i + 1}: ${esc(s.text)}"><button type="button" class="choice-btn" data-try="${i}" data-value="true" aria-pressed="false">Ja</button><button type="button" class="choice-btn" data-try="${i}" data-value="false" aria-pressed="false">Nej</button></div></div>`).join('')}</div>
+    <button type="button" class="big-btn" data-try-check disabled>Tjek svar</button>
+    <div class="try-result" role="status" hidden></div>
+    <p class="try-source">Spørgsmålene bygger på Færdselsstyrelsens undervisningsplan for kategori B og gældende færdselsregler.</p>
+  </section>`;
+}
+/** Grade the sample: which statements were right, plus the explanation. Pure, so it can be tested. */
+export function gradeTry(q, answers) {
+  const rows = q.statements.map((s, i) => answers[i] === s.correct);
+  return { rows, right: rows.filter(Boolean).length, all: rows.every(Boolean), explanation: q.explanation };
+}

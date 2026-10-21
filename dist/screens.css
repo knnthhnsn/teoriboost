@@ -173,3 +173,11 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 #mobile-nav a.active{color:var(--tint)!important;background:none!important}
 #mobile-nav a.active svg{background:var(--tile);color:var(--tint);stroke:var(--tint);border-radius:12px;padding:3px 10px;box-sizing:content-box}
 .topic-cards{color:#0A4F8F!important}
+
+/* readiness: a chip on Lær and an explained meter in Profil */
+.chip--ready{color:var(--ink);text-decoration:none}
+.ready-row{display:flex;align-items:center;gap:12px}
+.ready-row b{font:800 30px var(--font-display);min-width:76px}
+.ready-bar{flex:1;height:14px;border-radius:999px;background:#EEF0F2;overflow:hidden}
+.ready-bar i{display:block;height:100%;border-radius:999px;background:var(--good,#58CC02);transform-origin:0 50%;scale:var(--p) 1;transition:scale .8s var(--out)}
+.ready-panel p{margin:10px 0 4px;font-size:15px;color:#3E454D}.ready-panel small{color:var(--muted);font-size:13px}

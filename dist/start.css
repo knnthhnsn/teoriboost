@@ -279,3 +279,18 @@ body.start-mode{background:#fff}
 /* the type now sits on the pale end of the gradient: "smil." gets its green and lime underline back */
 .start-hero .kw-smile{color:var(--acid-text,#2F6F00)}
 .start-hero .kw-smile path{stroke:var(--accent,#D5FF62)}
+
+/* ---------- "Prøv uden barriere": one real situation under the hero ---------- */
+.start-try-link{align-self:center;min-height:44px;padding:0 8px;border:0;background:none;font:700 15px var(--font-display);color:#1F2328;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.start-try{max-width:560px;margin:0 auto;padding:28px 16px 40px;display:flex;flex-direction:column;gap:12px}
+.start-try h2{margin:0;font:800 clamp(24px,7vw,30px)/1.15 var(--font-display)}
+.try-hint{margin:4px 0 0;font:700 13px var(--font-display);color:var(--muted)}
+.start-try .statements{display:flex;flex-direction:column}
+.start-try .big-btn:disabled{background:#EEF4DD;color:#7C8570;box-shadow:0 5px 0 #DCE5C4;cursor:default}
+.try-result{padding:16px;border-radius:20px;display:flex;flex-direction:column;gap:8px;animation:tray-up .45s var(--spring) both}
+.try-result.is-right{background:#D7FFB8}.try-result.is-near{background:#FFE3D6}
+.try-result strong{font:800 22px var(--font-display)}
+.try-result.is-right strong{color:#2F6F00}.try-result.is-near strong{color:#A3300F}
+.try-result p{margin:0;font-size:16px;line-height:1.45}
+.try-source{margin:6px 0 0;font-size:13px;color:var(--muted)}
+@media (min-width:900px){.start-try{padding:48px 16px 64px}}

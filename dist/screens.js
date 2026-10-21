@@ -25,7 +25,7 @@ function nodeState(node, nextId) {
   if (node.lessonComplete) return 'done';
   return 'open';
 }
-export function renderLearn({ vm, intro, due, unitIndex }) {
+export function renderLearn({ vm, intro, due, unitIndex, ready }) {
   const units = vm.units || [];
   const next = vm.recommendations?.recommended || vm.recommendations?.next || units.flatMap(u => u.nodes || [])[0];
   const unit = units.find(u => u.id === vm.activeUnitId) || units.find(u => (u.nodes || []).some(n => n.id === next?.id)) || units[0];
@@ -48,7 +48,7 @@ export function renderLearn({ vm, intro, due, unitIndex }) {
   const review = due > 0
     ? `<a class="learn-card learn-card--review" href="#review"><div><strong>${due} ${due === 1 ? 'regel er' : 'regler er'} klar til gentagelse</strong><small>Tager ca. ${Math.max(2, Math.ceil(due * 1.3))} min</small></div><span class="pill-btn">Gentag</span></a>`
     : `<div class="learn-card"><div><strong>Dagens mål: ${Math.min(today, goal)}/${goal} ${goal === 1 ? 'lektion' : 'lektioner'}</strong><small>${today >= goal ? 'Nået. +1.500 Boosters er dine.' : 'Næste lektion tager ca. 5 min.'}</small></div><span class="goal-dots" aria-hidden="true">${Array.from({ length: goal }, (_, k) => `<i class="${k < today ? 'on' : ''}"></i>`).join('')}</span></div>`;
-  return `<div class="learn-chips"><span class="chip chip--streak">🔥 <b>${streak}</b> ${streak === 1 ? 'dag' : 'dage'}</span>${days !== null ? `<span class="chip">📅 Prøve om <b>${days}</b> dage</span>` : `<span class="chip">🎯 <b>${goal}</b> om dagen</span>`}</div><div id="road-slot" class="road-top"></div><section class="learn" aria-labelledby="learn-title">
+  return `<div class="learn-chips"><span class="chip chip--streak">🔥 <b>${streak}</b> ${streak === 1 ? 'dag' : 'dage'}</span>${days !== null ? `<span class="chip">📅 Prøve om <b>${days}</b> dage</span>` : `<span class="chip">🎯 <b>${goal}</b> om dagen</span>`}${ready ? `<a class="chip chip--ready" href="#profil" aria-label="Du er ${ready.pct} procent klar. Se hvordan vi regner">📈 <b>${ready.pct} %</b> klar</a>` : ''}</div><div id="road-slot" class="road-top"></div><section class="learn" aria-labelledby="learn-title">
     <a class="unit-banner" href="#theory" aria-label="Emne ${unitIndex + 1}: ${esc(unit.title)}. ${done} af ${nodes.length} lektioner. Se alle emner">
       <span class="unit-kicker">EMNE ${unitIndex + 1} · ALLE EMNER ▾</span><h1 id="learn-title">${esc(unit.title)}</h1><span class="unit-count">${done}/${nodes.length}</span>
       <span class="unit-bar" aria-hidden="true"><i style="--p:${nodes.length ? done / nodes.length : 0}"></i></span></a>
@@ -111,7 +111,7 @@ export function renderTopics({ units, chapters, activeUnitId }) {
 
 /* ---------------- Profil ---------------- */
 const WHEN_TEXT = { '2w': 'Inden for 2 uger', '1m': 'Om ca. 1 måned', '3m': 'Om 2–3 måneder', '?': 'Ikke valgt' };
-export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, intro, settings, examDays }) {
+export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, intro, settings, examDays, ready }) {
   const week = (daily?.week || []).map(d => `<li class="${d.completed ? 'on' : ''} ${d.today ? 'today' : ''}"><small>${['Ma', 'Ti', 'On', 'To', 'Fr', 'Lø', 'Sø'][(new Date(d.day + 'T12:00').getDay() + 6) % 7]}</small><i role="img" aria-label="${d.completed ? 'øvet' : 'ikke øvet'}${d.today ? ', i dag' : ''}"></i></li>`).join('');
   const bars = strengths.length
     ? strengths.map(s => `<li><span>${esc(s.title)}</span><span class="sw-bar ${s.score >= .6 ? 'good' : 'weak'}"><i style="--p:${s.score.toFixed(2)}"></i></span></li>`).join('')
@@ -119,6 +119,8 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
   const toggle = (key, title) => `<label class="set-row"><span>${title}</span><input type="checkbox" role="switch" data-setting="${key}" ${settings[key] ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
   return `<section class="profile" aria-labelledby="profile-title"><header class="screen-head"><a class="back-round" href="#home" aria-label="Tilbage">${ICON.back}</a><h1 id="profile-title">Din profil</h1></header>
     <div class="tile-row"><div class="tile"><b class="tile-fire">🔥 ${daily?.currentStreak || 0}</b><small>dage i træk</small></div><div class="tile"><b>${lessonsDone}/${lessonsTotal}</b><small>lektioner</small></div></div>
+    ${ready ? `<div class="panel ready-panel"><h2>Hvor klar er du?</h2><div class="ready-row"><b>${ready.pct} %</b><span class="ready-bar" role="img" aria-label="${ready.pct} procent klar"><i style="--p:${ready.pct / 100}"></i></span></div>
+      <p>${ready.ok} af ${ready.total} regelkort sidder: dit seneste svar på dem var rigtigt. ${ready.passes >= 2 ? 'Og du har bestået mindst 2 af dine 3 seneste øveprøver.' : 'Bestå 2 af 3 øveprøver i træk, så er du også klar til prøveformatet.'}</p><small>Appens egen vurdering, ikke en garanti for den rigtige prøve.</small></div>` : ''}
     <div class="panel"><h2>Denne uge</h2><ol class="week">${week}</ol></div>
     <div class="panel"><h2>Styrker og svagheder</h2><ul class="sw">${bars}</ul></div>
     <a class="set-row set-row--link" href="#start:1"><span>Prøvedato</span><small>${esc(WHEN_TEXT[intro?.when] || 'Vælg')}${examDays !== null ? ` · ${examDays} dage` : ''}</small></a>
