@@ -8,12 +8,12 @@
   "bytes": 2239
  },
  "nav": {
-  "category": "ui",
-  "seconds": 0.123,
-  "loudness": -26.0,
-  "truePeak": -14.1,
-  "phoneLoss": -0.0,
-  "bytes": 2239
+  "category": "nav",
+  "seconds": 0.097,
+  "loudness": -28.9,
+  "truePeak": -13.0,
+  "phoneLoss": -1.5,
+  "bytes": 1925
  },
  "node": {
   "category": "ui",

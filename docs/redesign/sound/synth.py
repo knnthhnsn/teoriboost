@@ -191,7 +191,24 @@ def cue_select():
     return tail(mix(0.12, (0, click(5200, 0.005), 0.25), (0, mallet(hz('D6'), 0.12, 0.6, 0.05), 0.5), (0, thump(220, 120, 0.05, 0.015), 0.35)), 0.03)
 
 def cue_nav():
-    return tail(mix(0.14, (0, click(3600, 0.004, 2), 0.18), (0.005, sweep_noise(0.12, 2500, 6000, 1.2, env_exp(0.12, 0.04, 0.01)), 0.18), (0.01, mallet(hz('A5'), 0.1, 0.3, 0.04), 0.25)), 0.03)
+    # Heard on every tab and page change, so it must almost disappear: a soft wooden 'tok'.
+    # No noise at all (the old hiss read as static); a short felt mallet on D5 with a warm body
+    # an octave down, a tiny pitch-dropping thump for touch, everything above 3.5 kHz rolled off.
+    x = mix(0.11, (0, mallet(hz('D5'), 0.1, 0.25, 0.028, 0.35), 0.6), (0, mallet(hz('D4'), 0.1, 0.15, 0.03, 0.2), 0.3),
+            (0, thump(190, 120, 0.06, 0.016), 0.45))
+    return tail(lp(x, 3500, 2), 0.02)
+
+def cue_nav_bubble():
+    # alternative B: a round water-drop blip, a fifth upward glide in 25 ms
+    dur = 0.09; t = t_axis(dur); f = hz('A4') * 2 ** (np.minimum(1, t / 0.025) * 7 / 12)
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    x = (np.sin(ph) + 0.18 * np.sin(2 * ph)) * env_exp(dur, 0.03, 0.002)
+    return tail(lp(x, 4000), 0.02)
+
+def cue_nav_kalimba():
+    # alternative C: two quiet kalimba plucks, A5 then D6, like flicking a page
+    x = mix(0.13, (0, kalimba(hz('A5'), 0.1, 0.03), 0.5), (0.035, kalimba(hz('D6'), 0.1, 0.035), 0.5))
+    return tail(lp(x, 5000), 0.02)
 
 def cue_node():
     return room(mix(0.4, (0, mallet(hz('A5'), 0.3, 0.5, 0.12), 0.6), (0.065, mallet(hz('D6'), 0.32, 0.5, 0.14), 0.6)), 0.25, 0.12)
@@ -360,7 +377,7 @@ ENGINES = {
 
 CUES = {
     # name: (renderer, category)
-    'select': (cue_select, 'ui'), 'nav': (cue_nav, 'ui'), 'node': (cue_node, 'ui'), 'card-advance': (cue_card_advance, 'ui'),
+    'select': (cue_select, 'ui'), 'nav': (cue_nav, 'nav'), 'node': (cue_node, 'ui'), 'card-advance': (cue_card_advance, 'ui'),
     'toggle-on': (cue_toggle_on, 'ui'), 'toggle-off': (cue_toggle_off, 'ui'), 'color': (cue_color, 'ui'),
     'step': (cue_step, 'feedback'), 'correct': (cue_correct, 'feedback'), 'repair': (cue_repair, 'feedback'),
     'paint': (cue_paint, 'foley'), 'part': (cue_part, 'foley'), 'wheels': (cue_wheels, 'foley'), 'neon': (cue_neon, 'foley'),
@@ -372,7 +389,9 @@ for base, kw in ENGINES.items():
     CUES['rev-' + base] = ((lambda kw=kw: room(engine(**kw), 0.3, 0.08, 5000)), 'engine')
 
 # Loudness targets (K-weighted, LUFS over the loud part). UI sits under the voice; rewards stand out.
-TARGET = {'ui': -26, 'feedback': -21, 'foley': -22, 'reward': -19, 'engine': -20}
+# nav plays on every tab and page change: it sits under the other UI sounds
+VARIANTS = {'nav-a-tok': cue_nav, 'nav-b-bobbel': cue_nav_bubble, 'nav-c-kalimba': cue_nav_kalimba}
+TARGET = {'nav': -29, 'ui': -26, 'feedback': -21, 'foley': -22, 'reward': -19, 'engine': -20}
 
 def k_weight(x):
     # ITU-R BS.1770 pre-filter (high shelf + RLB high-pass) at 44.1 kHz
@@ -445,6 +464,15 @@ if __name__ == '__main__':
         report[name] = {'category': cat, 'seconds': round(len(x) / SR, 3), 'loudness': round(loudness(x), 1), 'truePeak': round(tp, 1), 'phoneLoss': round(phone_check(x), 1), 'bytes': os.path.getsize(mp3)}
         rendered.append((name, x, f"{report[name]['loudness']} LU  pk {report[name]['truePeak']}"))
         print(name, report[name])
+    if not only or 'variants' in only:  # candidates to compare by ear; not shipped with the app
+        vd = os.path.join(HERE, 'variants'); os.makedirs(vd, exist_ok=True)
+        for name, fn in VARIANTS.items():
+            x = master(fn(), TARGET['nav']); w = os.path.join(WAV, name + '.wav'); write_wav(w, x)
+            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', w, '-codec:a', 'libmp3lame', '-b:a', '96k', '-ac', '1', os.path.join(vd, name + '.mp3')], check=True)
+            rendered.append((name, x, f"{round(loudness(x), 1)} LU  phone {round(phone_check(x), 1)}"))
+            print(name, round(len(x) / SR, 3), 's', round(loudness(x), 1), 'LU phoneLoss', round(phone_check(x), 1))
+    if only:  # a partial run keeps the other cues' report entries
+        old = json.load(open(os.path.join(HERE, 'report.json'))); old.update(report); report = old
     json.dump(report, open(os.path.join(HERE, 'report.json'), 'w'), indent=1)
-    sheet(rendered, os.path.join(HERE, 'spectrograms.png'))
+    sheet(rendered, os.path.join(HERE, 'spectrograms-' + '-'.join(only) + '.png' if only else 'spectrograms.png'))
     print('total kB', sum(r['bytes'] for r in report.values()) // 1024)
