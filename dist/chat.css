@@ -102,3 +102,6 @@ body.chat-mode{background:#fff}
 .chat-suggest{grid-template-columns:repeat(2,minmax(0,1fr))}
 .chat-chip{min-width:0;overflow-wrap:anywhere;hyphens:auto}
 @media (max-width:340px){.chat-suggest{grid-template-columns:1fr}}
+/* the app's legacy strong/li colours must not tint the chat */
+.chat strong,.chat-who strong,.chat-rule h3,.chat-rule li,.chat-rule li span{color:var(--ink)}
+.chat-msg--me .chat-bubble strong{color:#fff}

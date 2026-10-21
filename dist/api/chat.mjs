@@ -118,7 +118,6 @@ function offlineAnswer(question, emit) {
   const top = hits[0];
   emit('text', { t: `AI-svar er ikke slået til endnu, så her er det, regelkortet **${top.title}** siger:\n\n${top.facts.slice(0, 3).map(f => '- ' + f).join('\n')}\n\nKilde: ${top.sources[0]?.label || 'appens regelkort'}.` });
   emit('action', { type: 'rule', sectionId: top.sectionId, title: top.title, chapter: top.chapter, facts: top.facts.slice(0, 4), sources: top.sources.slice(0, 2), route: '#journey:' + top.sectionId });
-  emit('action', { type: 'step', label: 'Tag lektionen', route: '#journey:' + top.sectionId });
 }
 
 function clean(input) {
