@@ -375,15 +375,124 @@ ENGINES = {
     'racecar': dict(rpm_curve=[(0, 1100), (0.1, 1300), (0.35, 7600), (0.55, 9200), (0.8, 3800), (1.3, 1300), (1.6, 1150)], cylinders=6, dur=1.6, bright=1.1, rasp=0.6, pipe=(140, 640, 2300), turbo=1.0, pops=5),
 }
 
+# ---------- car sounds: every UI and feedback cue now comes from a car ----------
+def ring(f, q, dur, exc=0.003):
+    """A struck resonance: a tiny noise kick that rings at f for a while (relays, latches, buckles)."""
+    x = np.zeros(int(dur * SR)); n = int(exc * SR)
+    x[:n] = noise(exc) * env_exp(exc, exc / 4, 0.0001)
+    return resonator(x, f, q) * (q / 2)
+
+def relay(tick=True):
+    """Turn-signal relay: the 'tik' and the slightly darker 'tok' of a blinker."""
+    hi, lo, th = (2900, 1250, 300) if tick else (2250, 930, 240)
+    return mix(0.08, (0, ring(hi, 18, 0.08), 0.55), (0, ring(lo, 10, 0.08), 0.8), (0, thump(th, 150, 0.035, 0.007), 0.35))
+
+def horn(freqs=(660, 830), dur=0.12):
+    """A small car horn: two detuned buzzy tones a third apart, through the horn's tin-can formant."""
+    t = t_axis(dur); x = np.zeros_like(t)
+    for f in freqs:
+        for det in (-1.5, 1.5):
+            x += signal.sawtooth(2 * np.pi * (f + det) * t, 0.5) * 0.5
+    x = bp(x, 380, 3200, 2); x = peak_eq(x, 1500, 1.4, 6)
+    a = int(0.006 * SR); r = int(0.03 * SR); x[:a] *= np.linspace(0, 1, a); x[-r:] *= np.linspace(1, 0, r)
+    return np.tanh(x * 1.6)
+
+def chirp(f0=2300, f1=3300, dur=0.06):
+    """Key-fob lock chirp: a quick electronic sweep, the 'bip' of a car locking."""
+    t = t_axis(dur); f = np.geomspace(f0, f1, len(t))
+    x = signal.square(2 * np.pi * np.cumsum(f) / SR) * 0.4 + np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.6
+    return lp(x, 6000) * np.minimum(1, t / 0.004) * np.minimum(1, (dur - t) / 0.01)
+
+def latch(click_in=True):
+    """Seat-belt buckle: a short slide, then the double click of the latch (or the release with a spring)."""
+    if click_in:
+        slide = bp(noise(0.03), 2500, 6000) * env_exp(0.03, 0.012, 0.004)
+        return mix(0.12, (0, slide, 0.25), (0.03, ring(4700, 22, 0.06), 0.5), (0.038, ring(2100, 12, 0.06), 0.6), (0.03, thump(420, 200, 0.04, 0.008), 0.35))
+    t = t_axis(0.12); spring = np.sin(2 * np.pi * np.cumsum(1500 - 600 * np.minimum(1, t / 0.06)) / SR) * env_exp(0.12, 0.03, 0.002)
+    return mix(0.14, (0, ring(3900, 18, 0.06), 0.55), (0.004, spring, 0.18), (0.02, bp(noise(0.05), 2000, 5000) * env_exp(0.05, 0.015), 0.15))
+
+def gear_shift():
+    """Gear lever: a short slide through the gate and the clunk into gear."""
+    slide = bp(noise(0.07), 900, 3200) * env_exp(0.07, 0.03, 0.01)
+    return mix(0.24, (0, slide, 0.2), (0.06, metal_clunk(0.16, 420), 0.45), (0.06, thump(200, 90, 0.08, 0.02), 0.45))
+
+def dash_chime(notes=(('E5', 0), ('C#5', 0.17)), decay=0.28):
+    """Dashboard warning chime: soft, round electronic bongs, never a harsh buzzer."""
+    items = []
+    for n, at in notes:
+        f = hz(n); t = t_axis(0.6)
+        tone = (np.sin(2 * np.pi * f * t) + 0.18 * np.sin(2 * np.pi * 2 * f * t) + 0.05 * np.sin(2 * np.pi * 3.01 * f * t)) * env_exp(0.6, decay, 0.004)
+        items.append((at, tone, 0.6))
+    return mix(0.9, *items)
+
+def starter(dur=0.6):
+    """Starter motor cranking: a whining electric motor pulsing with each compression stroke."""
+    t = t_axis(dur); pulse = 0.55 + 0.45 * np.abs(np.sin(np.pi * 9.5 * t)) ** 0.6
+    f = 165 * (1 + 0.07 * np.sin(2 * np.pi * 9.5 * t))
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    tone = sum(np.sin(k * ph) / k for k in range(1, 7)) * 0.5
+    whine = np.sin(2 * np.pi * np.cumsum(780 * (1 + 0.04 * np.sin(2 * np.pi * 9.5 * t))) / SR) * 0.18
+    x = (tone + whine + bp(noise(dur), 700, 3000) * 0.08) * pulse
+    x = hp(x, 140); x = peak_eq(x, 1100, 1.0, 5)
+    return x * np.minimum(1, t / 0.02) * np.minimum(1, (dur - t) / 0.03)
+
+def turbo(spool=0.42, blow=0.4):
+    """Turbo: the whistle spooling up, then the blow-off valve's 'pssh'."""
+    t = t_axis(spool); f = 1400 + 5200 * (t / spool) ** 1.6
+    whistle = np.sin(2 * np.pi * np.cumsum(f) / SR) * (t / spool) ** 1.4 * 0.35
+    rush = bp(noise(spool), 1500, 6000) * (t / spool) ** 2 * 0.18
+    tb = t_axis(blow)
+    pssh = sweep_noise(blow, 6500, 2200, 1.1, np.minimum(1, tb / 0.008) * np.exp(-tb / 0.12))
+    return mix(spool + blow + 0.05, (0, whistle + rush, 1.0), (spool, pssh, 0.6), (spool, ring(3200, 8, 0.05), 0.15))
+
+def car_engine(curve, dur, kind='smallcar'):
+    kw = dict(ENGINES[kind]); kw.update(rpm_curve=curve, dur=dur)
+    return engine(**kw)
+
+def sputter_stall():
+    """Engine coughs a few times and stalls: a shrug, not a sad trombone."""
+    dur = 1.15
+    x = car_engine([(0, 950), (0.25, 880), (0.5, 700), (0.75, 480), (0.95, 260), (1.15, 150)], dur)
+    t = t_axis(dur); gate = np.ones_like(t)
+    for a, b in [(0.32, 0.38), (0.55, 0.63), (0.8, 0.9)]: gate[int(a * SR):int(b * SR)] = 0.12
+    gate = np.convolve(gate, np.ones(220) / 220, 'same') * np.minimum(1, (dur - t) / 0.25)
+    return mix(1.35, (0, x * gate, 1.0), (1.05, metal_clunk(0.2, 180), 0.25))
+
+def car_select(): return tail(relay(True), 0.02)
+def car_nav(): return tail(lp(relay(False), 5000), 0.02)
+def car_node(): return tail(mix(0.2, (0, relay(True), 1.0), (0.1, relay(False), 0.9)), 0.03)
+def car_card(): return tail(gear_shift(), 0.03)
+def car_step(): return room(car_engine([(0, 900), (0.06, 900), (0.18, 3400), (0.34, 1500), (0.5, 950)], 0.55), 0.22, 0.06, 5000)
+def car_correct(): return room(mix(0.42, (0, horn((660, 830), 0.1), 0.8), (0.16, horn((660, 830), 0.14), 0.9)), 0.25, 0.1)
+def car_repair(): return room(dash_chime(), 0.3, 0.12)
+def car_toggle_on(): return tail(latch(True), 0.03)
+def car_toggle_off(): return tail(latch(False), 0.03)
+def car_color(): return tail(chirp(2300, 3200, 0.06), 0.03)
+def car_booster(): return room(turbo(), 0.3, 0.1)
+def car_buy():
+    lock = mix(0.3, (0, metal_clunk(0.12, 520), 0.35), (0.07, metal_clunk(0.12, 470), 0.35), (0.14, chirp(2300, 3300, 0.07), 0.5))
+    start = mix(1.6, (0, starter(0.42), 0.55), (0.38, car_engine([(0, 900), (0.1, 2600), (0.3, 3600), (0.6, 1300), (0.9, 900)], 1.1), 1.0))
+    return room(mix(2.0, (0, lock, 1.0), (0.32, start, 1.0)), 0.3, 0.08)
+def car_complete():
+    return room(mix(1.9, (0, chirp(1800, 2400, 0.05), 0.25), (0.08, starter(0.55), 0.55),
+                    (0.58, car_engine([(0, 900), (0.12, 3200), (0.32, 4600), (0.62, 1600), (1.0, 950)], 1.25), 1.0)), 0.3, 0.08)
+def car_milestone():
+    rev = car_engine([(0, 1100), (0.1, 1400), (0.4, 8200), (0.62, 9000), (0.85, 3200), (1.2, 1200)], 1.25, 'racecar')
+    return room(mix(2.4, (0, rev, 1.0), (0.82, turbo(0.0001, 0.38), 0.55), (1.5, horn((660, 830), 0.1), 0.6), (1.66, horn((660, 830), 0.16), 0.7)), 0.35, 0.1)
+def car_exam_fail(): return room(sputter_stall(), 0.3, 0.08)
+def car_plate():
+    clicks = [(k * 0.05, ring(3300 + 80 * k, 16, 0.04), 0.4) for k in range(3)]
+    return room(mix(0.45, *clicks, (0.17, metal_clunk(0.2, 300), 0.4), (0.17, thump(180, 80, 0.1, 0.03), 0.4)), 0.22, 0.08)
+
 CUES = {
-    # name: (renderer, category)
-    'select': (cue_select, 'ui'), 'nav': (cue_nav, 'nav'), 'node': (cue_node, 'ui'), 'card-advance': (cue_card_advance, 'ui'),
-    'toggle-on': (cue_toggle_on, 'ui'), 'toggle-off': (cue_toggle_off, 'ui'), 'color': (cue_color, 'ui'),
-    'step': (cue_step, 'feedback'), 'correct': (cue_correct, 'feedback'), 'repair': (cue_repair, 'feedback'),
+    # name: (renderer, category). Every cue is a car sound now (see the car section above).
+    'select': (car_select, 'ui'), 'nav': (car_nav, 'nav'), 'node': (car_node, 'ui'), 'card-advance': (car_card, 'ui'),
+    'toggle-on': (car_toggle_on, 'ui'), 'toggle-off': (car_toggle_off, 'ui'), 'color': (car_color, 'ui'),
+    'step': (car_step, 'feedback'), 'correct': (car_correct, 'feedback'), 'repair': (car_repair, 'feedback'),
     'paint': (cue_paint, 'foley'), 'part': (cue_part, 'foley'), 'wheels': (cue_wheels, 'foley'), 'neon': (cue_neon, 'foley'),
-    'lower': (cue_lower, 'foley'), 'plate': (cue_plate, 'foley'),
-    'booster': (cue_booster, 'reward'), 'buy': (cue_buy, 'reward'), 'complete': (cue_complete, 'reward'), 'milestone': (cue_milestone, 'reward'),
-    'exam-pass': (cue_exam_pass, 'reward'), 'exam-fail': (cue_exam_fail, 'feedback'),
+    'lower': (cue_lower, 'foley'), 'plate': (car_plate, 'foley'),
+    'booster': (car_booster, 'reward'), 'buy': (car_buy, 'reward'), 'complete': (car_complete, 'reward'), 'milestone': (car_milestone, 'reward'),
+    'exam-pass': (car_milestone, 'reward'), 'exam-fail': (car_exam_fail, 'feedback'),
 }
 for base, kw in ENGINES.items():
     CUES['rev-' + base] = ((lambda kw=kw: room(engine(**kw), 0.3, 0.08, 5000)), 'engine')
@@ -474,5 +583,5 @@ if __name__ == '__main__':
     if only:  # a partial run keeps the other cues' report entries
         old = json.load(open(os.path.join(HERE, 'report.json'))); old.update(report); report = old
     json.dump(report, open(os.path.join(HERE, 'report.json'), 'w'), indent=1)
-    sheet(rendered, os.path.join(HERE, 'spectrograms-' + '-'.join(only) + '.png' if only else 'spectrograms.png'))
+    sheet(rendered, os.path.join(HERE, ('spectrograms-' + '-'.join(only) + '.png') if only and len(only) <= 3 else ('spectrograms-partial.png' if only else 'spectrograms.png')))
     print('total kB', sum(r['bytes'] for r in report.values()) // 1024)

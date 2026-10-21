@@ -1,210 +1,210 @@
 {
  "select": {
   "category": "ui",
-  "seconds": 0.119,
-  "loudness": -26.0,
-  "truePeak": -12.7,
-  "phoneLoss": -0.4,
-  "bytes": 2239
+  "seconds": 0.032,
+  "loudness": -21.1,
+  "truePeak": -5.5,
+  "phoneLoss": -0.7,
+  "bytes": 1298
  },
  "nav": {
   "category": "nav",
-  "seconds": 0.097,
-  "loudness": -28.9,
-  "truePeak": -13.0,
-  "phoneLoss": -1.5,
-  "bytes": 1925
+  "seconds": 0.031,
+  "loudness": -24.0,
+  "truePeak": -7.3,
+  "phoneLoss": -1.2,
+  "bytes": 1298
  },
  "node": {
   "category": "ui",
-  "seconds": 0.478,
+  "seconds": 0.131,
   "loudness": -26.0,
-  "truePeak": -17.5,
-  "phoneLoss": 0.0,
-  "bytes": 6627
+  "truePeak": -5.7,
+  "phoneLoss": -0.3,
+  "bytes": 2552
  },
  "card-advance": {
   "category": "ui",
-  "seconds": 0.431,
+  "seconds": 0.218,
   "loudness": -26.0,
-  "truePeak": -16.6,
-  "phoneLoss": -0.0,
-  "bytes": 6000
+  "truePeak": -11.6,
+  "phoneLoss": -0.9,
+  "bytes": 3493
  },
  "toggle-on": {
   "category": "ui",
-  "seconds": 0.143,
-  "loudness": -26.0,
-  "truePeak": -15.4,
-  "phoneLoss": -0.0,
-  "bytes": 2552
+  "seconds": 0.066,
+  "loudness": -24.2,
+  "truePeak": -8.2,
+  "phoneLoss": -0.2,
+  "bytes": 1612
  },
  "toggle-off": {
   "category": "ui",
-  "seconds": 0.143,
+  "seconds": 0.121,
   "loudness": -26.0,
-  "truePeak": -16.7,
+  "truePeak": -11.9,
   "phoneLoss": -0.0,
-  "bytes": 2552
+  "bytes": 2239
  },
  "color": {
   "category": "ui",
-  "seconds": 0.138,
-  "loudness": -26.0,
-  "truePeak": -15.9,
+  "seconds": 0.06,
+  "loudness": -24.6,
+  "truePeak": -23.8,
   "phoneLoss": -0.0,
-  "bytes": 2552
+  "bytes": 1612
  },
  "step": {
   "category": "feedback",
-  "seconds": 0.602,
+  "seconds": 0.567,
   "loudness": -21.0,
-  "truePeak": -11.3,
-  "phoneLoss": -0.0,
-  "bytes": 8195
+  "truePeak": -10.2,
+  "phoneLoss": -7.0,
+  "bytes": 7568
  },
  "correct": {
   "category": "feedback",
-  "seconds": 0.803,
+  "seconds": 0.493,
   "loudness": -21.0,
-  "truePeak": -12.8,
-  "phoneLoss": 0.0,
-  "bytes": 10389
+  "truePeak": -16.4,
+  "phoneLoss": -0.0,
+  "bytes": 6627
  },
  "repair": {
   "category": "feedback",
-  "seconds": 0.641,
+  "seconds": 0.944,
   "loudness": -21.0,
-  "truePeak": -10.9,
-  "phoneLoss": -0.3,
-  "bytes": 8508
+  "truePeak": -13.2,
+  "phoneLoss": -0.0,
+  "bytes": 12270
  },
  "paint": {
   "category": "foley",
   "seconds": 1.131,
   "loudness": -22.0,
-  "truePeak": -11.8,
-  "phoneLoss": 0.0,
+  "truePeak": -12.6,
+  "phoneLoss": -0.0,
   "bytes": 14464
  },
  "part": {
   "category": "foley",
-  "seconds": 0.643,
+  "seconds": 0.66,
   "loudness": -22.0,
-  "truePeak": -9.6,
-  "phoneLoss": -4.1,
-  "bytes": 8508
+  "truePeak": -9.2,
+  "phoneLoss": -3.3,
+  "bytes": 8822
  },
  "wheels": {
   "category": "foley",
-  "seconds": 0.826,
+  "seconds": 0.852,
   "loudness": -22.0,
-  "truePeak": -9.4,
-  "phoneLoss": -5.7,
-  "bytes": 10703
+  "truePeak": -8.5,
+  "phoneLoss": -4.3,
+  "bytes": 11016
  },
  "neon": {
   "category": "foley",
-  "seconds": 0.894,
+  "seconds": 0.881,
   "loudness": -22.0,
-  "truePeak": -6.2,
-  "phoneLoss": -0.6,
-  "bytes": 11643
+  "truePeak": -5.1,
+  "phoneLoss": -0.8,
+  "bytes": 11329
  },
  "lower": {
   "category": "foley",
-  "seconds": 0.815,
+  "seconds": 0.83,
   "loudness": -22.0,
-  "truePeak": -9.8,
-  "phoneLoss": -2.7,
+  "truePeak": -9.0,
+  "phoneLoss": -2.6,
   "bytes": 10703
  },
  "plate": {
   "category": "foley",
-  "seconds": 0.401,
+  "seconds": 0.432,
   "loudness": -22.0,
-  "truePeak": -8.7,
-  "phoneLoss": -7.3,
-  "bytes": 5687
+  "truePeak": -8.5,
+  "phoneLoss": -2.6,
+  "bytes": 6000
  },
  "booster": {
   "category": "reward",
-  "seconds": 1.105,
+  "seconds": 0.941,
   "loudness": -19.0,
-  "truePeak": -9.7,
+  "truePeak": -11.2,
   "phoneLoss": -0.0,
-  "bytes": 14151
+  "bytes": 12270
  },
  "buy": {
   "category": "reward",
-  "seconds": 1.336,
+  "seconds": 1.874,
   "loudness": -19.0,
-  "truePeak": -5.7,
-  "phoneLoss": -2.2,
-  "bytes": 16972
+  "truePeak": -7.0,
+  "phoneLoss": -0.4,
+  "bytes": 23241
  },
  "complete": {
   "category": "reward",
-  "seconds": 1.624,
+  "seconds": 1.909,
   "loudness": -19.0,
-  "truePeak": -10.5,
-  "phoneLoss": -0.0,
-  "bytes": 20420
+  "truePeak": -7.5,
+  "phoneLoss": -4.3,
+  "bytes": 23868
  },
  "milestone": {
   "category": "reward",
-  "seconds": 2.214,
+  "seconds": 2.099,
   "loudness": -19.0,
-  "truePeak": -10.0,
-  "phoneLoss": 0.0,
-  "bytes": 27316
+  "truePeak": -8.3,
+  "phoneLoss": -3.2,
+  "bytes": 26063
  },
  "exam-pass": {
   "category": "reward",
-  "seconds": 2.214,
+  "seconds": 2.095,
   "loudness": -19.0,
-  "truePeak": -10.9,
-  "phoneLoss": 0.0,
-  "bytes": 27316
+  "truePeak": -8.4,
+  "phoneLoss": -2.0,
+  "bytes": 26063
  },
  "exam-fail": {
   "category": "feedback",
-  "seconds": 1.431,
+  "seconds": 1.343,
   "loudness": -21.0,
-  "truePeak": -9.9,
-  "phoneLoss": -0.4,
-  "bytes": 17912
+  "truePeak": -6.9,
+  "phoneLoss": -4.6,
+  "bytes": 16972
  },
  "rev-scooter": {
   "category": "engine",
-  "seconds": 1.563,
+  "seconds": 1.566,
   "loudness": -20.0,
-  "truePeak": -9.0,
-  "phoneLoss": -4.9,
+  "truePeak": -8.1,
+  "phoneLoss": -4.7,
   "bytes": 19480
  },
  "rev-smallcar": {
   "category": "engine",
-  "seconds": 1.658,
+  "seconds": 1.669,
   "loudness": -20.0,
-  "truePeak": -8.3,
-  "phoneLoss": -1.9,
+  "truePeak": -8.2,
+  "phoneLoss": -2.4,
   "bytes": 20734
  },
  "rev-bigcar": {
   "category": "engine",
-  "seconds": 1.877,
+  "seconds": 1.863,
   "loudness": -20.0,
-  "truePeak": -8.6,
-  "phoneLoss": -3.3,
+  "truePeak": -10.4,
+  "phoneLoss": -3.5,
   "bytes": 23241
  },
  "rev-racecar": {
   "category": "engine",
-  "seconds": 1.666,
+  "seconds": 1.66,
   "loudness": -20.0,
-  "truePeak": -8.1,
-  "phoneLoss": -5.1,
+  "truePeak": -10.2,
+  "phoneLoss": -5.0,
   "bytes": 20734
  }
 }
