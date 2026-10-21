@@ -17,6 +17,10 @@ const P = {
   x: '<path d="M7 7l10 10M17 7 7 17"/>',
   repeat: '<path d="M4 12a8 8 0 0 1 14-5.3M20 4v4h-4M20 12a8 8 0 0 1-14 5.3M4 20v-4h4"/>',
   bolt: '<path d="M13 2.5 5 13.5h6l-1 8 8-11h-6Z"/>',
+  up: '<path d="m6 14 6-6 6 6"/>',
+  down: '<path d="m6 10 6 6 6-6"/>',
+  grip: '<circle cx="9" cy="6.5" r="1.2" fill="currentColor"/><circle cx="15" cy="6.5" r="1.2" fill="currentColor"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><circle cx="9" cy="17.5" r="1.2" fill="currentColor"/><circle cx="15" cy="17.5" r="1.2" fill="currentColor"/>',
+  list: '<path d="M9 6.5h11M9 12h11M9 17.5h11"/><path d="M4.5 5.5h1v2M4.3 11h1.6l-1.6 2h1.6M4.3 16.5h1.5l-.8 1 .8 1H4.3"/>',
 };
 /** Inline SVG icon. Decorative by default (aria-hidden); pass a label to make it meaningful. */
 export function ico(name, { cls = '', label = '' } = {}) {

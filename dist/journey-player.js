@@ -1,3 +1,4 @@
+import { sequenceFor } from './sequences.js';
 import { ico } from './ui-icons.js';
 import { CHAPTERS, QUESTIONS, SOURCES } from './content.js';
 import { BOOSTER_RATES } from './mybil.js';
@@ -294,6 +295,7 @@ export function createJourneyPlayer({
       <h2 class="jp-done-title">${repaired ? 'Repareret og klaret!' : 'Lektion klaret!'}</h2>
       <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den, og det er sådan, det sætter sig.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>
       <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${ico('bolt')} ${earns ? `+${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '0'}</strong>${earns ? '' : '<em>Tjent i dag allerede</em>'}</div><div><small>FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
+      ${sequenceFor(section.id) ? `<a class="jp-order" href="#order:${esc(sequenceFor(section.id).id)}">${ico('list')}<span><strong>Sæt det i rækkefølge</strong><small>${esc(sequenceFor(section.id).title)} · ${sequenceFor(section.id).steps.length} trin</small></span></a>` : ''}
       <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">${ico('target')} ${daily.goalMet ? `Dagens mål nået · +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')}` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? ` · ${streak}` : ''}</div>
       ${lesson.practicalNote ? `<details class="journey-practical-note"><summary>Tag det med til kørelæreren</summary><p>${esc(lesson.practicalNote)}</p></details>` : ''}
       <div class="journey-control-dock">${completionActions}</div>

@@ -1,5 +1,6 @@
 // The four tabs (Lær, Øv, Prøve, Min bil) plus Alle emner and Profil, after docs/redesign/mockups-v3.
 // Short, game-like screens built around one next action. Data comes in from app.js; nothing here mutates state.
+import { SEQUENCES } from './sequences.js';
 import { ico } from './ui-icons.js';
 import { renderCast } from './cast.js';
 
@@ -70,6 +71,7 @@ export function renderPractice({ weak, due, missions }) {
   return `<section class="practice" aria-labelledby="practice-title"><h1 id="practice-title" class="screen-title">Øv</h1>
     ${hero}
     <h2 class="list-label">KORTE MISSIONER</h2><div class="row-list">${miss}<a class="row-card row-card--plain" href="#missions"><div><strong>Vælg selv et emne</strong><small>Alle 10 emner, 3 situationer ad gangen</small></div><span class="row-go" aria-hidden="true">${ICON.chev}</span></a></div>
+    <h2 class="list-label">RÆKKEFØLGE</h2><div class="row-list">${SEQUENCES.slice(0, 3).map(s => `<a class="row-card" href="#order:${s.id}"><span class="row-ico" style="--c:#EDE7FF">${ico('list')}</span><div><strong>${s.title}</strong><small>Sæt ${s.steps.length} trin i rækkefølge</small></div><span class="row-go" aria-hidden="true">${ICON.chev}</span></a>`).join('')}<a class="row-card row-card--plain" href="#order"><div><strong>Alle rækkefølger</strong><small>${SEQUENCES.length} procedurer fra regelkortene</small></div><span class="row-go" aria-hidden="true">${ICON.chev}</span></a></div>
     <h2 class="list-label">SPIL</h2><div class="game-grid">${games}</div></section>`;
 }
 
