@@ -296,3 +296,9 @@ body.start-mode{background:#fff}
   background:radial-gradient(closest-side,rgba(11,16,32,.34),rgba(11,16,32,0))}
 .sc--kegle > .cast{animation:none}
 @media (min-width:900px){.sc--kegle{bottom:7%;right:8%;width:16%}}
+/* the scooter keeps its original size and place; the cars grow to match it on the scooter's ground line */
+.gu-car[data-base="scooter"] :is(.gu-before,.gu-after){scale:1;translate:0 0}
+.gu-car[data-base="smallcar"] :is(.gu-before,.gu-after){transform-origin:50% 78.4%;scale:1.205;translate:0 9.9%}
+.gu-car[data-base="bigcar"] :is(.gu-before,.gu-after){transform-origin:50% 74.4%;scale:1.213;translate:0 13.9%}
+.gu-car[data-base="racecar"] :is(.gu-before,.gu-after){transform-origin:50% 68.7%;scale:1.349;translate:0 19.6%}
+.gu-ring{bottom:7.5%!important}
