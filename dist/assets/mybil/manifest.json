@@ -1,6 +1,7 @@
 {
  "scooter": {
   "parts": [
+   "restore",
    "paint-mask",
    "stripe-racing",
    "stripe-side",

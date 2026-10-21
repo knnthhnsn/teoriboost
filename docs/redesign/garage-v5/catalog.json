@@ -1,6 +1,16 @@
 {
   "note": "v5: new art style; tint = colour chosen in the app",
   "slots": {
+    "restore": {
+      "z": 1,
+      "name": "Restaurering",
+      "region": [
+        -0.05,
+        -0.05,
+        1.05,
+        1.05
+      ]
+    },
     "paint": {
       "name": "Lak",
       "z": 1,
@@ -173,6 +183,16 @@
     }
   },
   "parts": [
+    {
+      "id": "restore",
+      "slot": "restore",
+      "name": "Restaurering",
+      "price": 4000,
+      "bases": [
+        "scooter"
+      ],
+      "edit": "fully restore to showroom condition: no rust, new glossy seat, polished chrome (see brief-restored.md)"
+    },
     {
       "id": "paint-mask",
       "slot": "paint",

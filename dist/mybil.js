@@ -164,13 +164,15 @@ function colorPicker(kind, value) {
   return `<div class="mybil-colors" role="group" aria-label="Vælg farve">${COLOR_PRESETS.map(c => `<button type="button" class="mybil-swatch${c === value ? ' is-on' : ''}" style="background:${c}" data-mybil-color="${kind}" data-value="${c}" aria-label="Farve ${c}" aria-pressed="${c === value}"></button>`).join('')}<label class="mybil-custom"><input type="color" value="${escape(value)}" data-mybil-color-input="${kind}" aria-label="Vælg din egen farve"><span>Egen farve</span></label></div>`;
 }
 
-export function renderMyCar({ garage, progress, slot = 'paint', message = '' }) {
+export function renderMyCar({ garage, progress, slot = '', message = '' }) {
   const coins = balance(progress, garage);
   const active = baseById(garage.active);
   const equipped = garage.equipped?.[garage.active] || {};
   const style = styleOf(garage);
   const available = partsFor(garage.active);
   const usedSlots = SLOTS.filter(s => available.some(p => p.slot === s.id));
+  // open on the vehicle's first step (the scooter starts with its restoration), or keep the chosen tab if this vehicle has it
+  if (slot !== 'extra' && !usedSlots.some(s => s.id === slot)) slot = usedSlots[0]?.id || 'extra';
   const tabs = [...usedSlots.map(s => [s.id, s.name]), ['extra', 'Ekstra']]
     .map(([id, name]) => `<button type="button" role="tab" class="mybil-tab ${id === slot ? 'is-active' : ''}" data-mybil-slot="${id}" aria-selected="${id === slot}">${escape(name)}</button>`).join('');
   const price = n => `${boosterIcon(14)} ${fmt(n)}`;
@@ -202,6 +204,7 @@ export function renderMyCar({ garage, progress, slot = 'paint', message = '' }) 
   return `<section class="mybil" aria-labelledby="mybil-title">
     <header class="mybil-head"><div><span class="eyebrow">MIN BIL</span><h1 id="mybil-title">${escape(active.name)}</h1></div><div class="booster-chip booster-chip--big">${boosterCount(coins)}</div></header>
     <button type="button" class="mybil-stage" data-mybil-rev data-base="${escape(garage.active)}" aria-label="${escape(active.name)} med dine valg. Tryk for at give gas"><span class="mybil-floor" aria-hidden="true"></span>${vehicleLayers(garage)}<span class="mybil-sheen" aria-hidden="true" style="--src:url('${baseSrc(garage.active)}')"></span></button>
+    <button type="button" class="mybil-dream" data-mybil-dream>Se hvad den kan blive</button>
     <p class="mybil-message" role="status">${escape(message)}</p>
     <div class="mybil-tabs" role="tablist" aria-label="Tuning">${tabs}</div>
     ${panel}

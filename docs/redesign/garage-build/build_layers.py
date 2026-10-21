@@ -157,6 +157,8 @@ def build(base_id):
             tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, approved, rejects, tiles); continue
         diff = ImageChops.difference(base, edited).convert('L').point(lambda v: 255 if v > 38 else 0)
         diff = diff.filter(ImageFilter.MedianFilter(5)).filter(ImageFilter.MaxFilter(5))
+        if part['slot'] == 'restore' and wheel_mask is not None:  # the body layer must not carry wheels when lowered
+            diff = ImageChops.multiply(diff, ImageChops.invert(wheel_mask))
         if part['slot'] == 'wheels' and wheel_mask is not None:  # similar-looking rims only differ in specks
             diff = ImageChops.lighter(diff, ImageChops.multiply(wheel_mask, region))
         outside = count(ImageChops.multiply(diff, ImageChops.invert(region))) / vehicle_area
