@@ -24,6 +24,13 @@ const garageFor = (base, dream) => ({ spent: 0, earnedSeen: 0, owned: [], bases:
 
 export function glowUp(bases = ORDER, { loop = true, label = true } = {}) {
   return `<div class="gu" data-glowup="${bases.join(',')}" data-loop="${loop ? 1 : 0}" role="img" aria-label="${esc(DREAMS[bases[0]].from)} bliver til ${esc(DREAMS[bases[0]].to)}, del for del">
+    <svg class="gu-scene" viewBox="0 0 400 400" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <rect class="sc-open" x="46" y="34" width="308" height="250" rx="22"/>
+      <path class="sc-door" d="M46 56a22 22 0 0 1 22-22h264a22 22 0 0 1 22 22v62H46Z"/>
+      <path class="sc-slat" d="M46 74h308M46 94h308"/>
+      <path class="sc-road" d="M176 246h48l176 154H0Z"/>
+      <g class="sc-dashes"><path d="M197 258h6l2 16h-10Z"/><path d="M194 292h12l4 30h-20Z"/><path d="M188 348h24l7 52h-38Z"/></g>
+    </svg>
     <span class="gu-rays" aria-hidden="true"></span><span class="gu-ring" aria-hidden="true"></span>
     <div class="gu-stage" aria-hidden="true"></div>
     ${label ? '<div class="gu-label" aria-hidden="true"><span class="gu-from"></span><b class="gu-arrow">→</b><span class="gu-to"></span></div>' : ''}
