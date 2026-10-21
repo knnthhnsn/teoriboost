@@ -294,3 +294,18 @@ body.start-mode{background:#fff}
 .try-result p{margin:0;font-size:16px;line-height:1.45}
 .try-source{margin:6px 0 0;font-size:13px;color:var(--muted)}
 @media (min-width:900px){.start-try{padding:48px 16px 64px}}
+/* no coloured blob: just a soft contact shadow so the vehicle stands on the road */
+.gu-ring{background:radial-gradient(closest-side,rgba(11,16,32,.38),rgba(11,16,32,.16) 55%,rgba(11,16,32,0))!important;
+  left:12%;right:12%;bottom:12%;height:9%;border-radius:50%!important;animation:none!important;opacity:1}
+/* same visual size and the same ground line for every vehicle (sizes from manifest bboxes) */
+.gu-car[data-base="scooter"] :is(.gu-before,.gu-after){transform-origin:50% 88.3%;scale:0.771;translate:0 -8.3%}
+.gu-car[data-base="smallcar"] :is(.gu-before,.gu-after){transform-origin:50% 78.4%;scale:0.951;translate:0 1.6%}
+.gu-car[data-base="bigcar"] :is(.gu-before,.gu-after){transform-origin:50% 74.4%;scale:1.060;translate:0 5.6%}
+.gu-car[data-base="racecar"] :is(.gu-before,.gu-after){transform-origin:50% 68.7%;scale:1.220;translate:0 11.3%}
+.gu-ring{bottom:15.5%!important}
+/* Keglen stands on the floor in front of the vehicle, with its own little shadow */
+.sc--kegle{top:auto!important;bottom:5%;right:6%;width:19%;z-index:4}
+.sc--kegle::after{content:"";position:absolute;left:8%;right:8%;bottom:-2%;height:12%;z-index:-1;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(11,16,32,.34),rgba(11,16,32,0))}
+.sc--kegle > .cast{animation:none}
+@media (min-width:900px){.sc--kegle{bottom:7%;right:8%;width:16%}}
