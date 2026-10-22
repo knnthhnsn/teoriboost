@@ -84,7 +84,11 @@ function runTool(name, input, emit) {
 async function streamRound(body, emit) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
+    headers: {
+      'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01',
+      // a key that is not tied to a workspace has to name one (ANTHROPIC_WORKSPACE_ID in Vercel)
+      ...(process.env.ANTHROPIC_WORKSPACE_ID ? { 'anthropic-workspace-id': process.env.ANTHROPIC_WORKSPACE_ID } : {}),
+    },
     body: JSON.stringify({ ...body, stream: true }),
   });
   if (!r.ok || !r.body) { const text = (await r.text().catch(() => '')).slice(0, 300); throw Object.assign(new Error('upstream ' + r.status + ' ' + text), { status: r.status, text }); }

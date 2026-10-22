@@ -136,3 +136,16 @@ test('if this web search version is refused, it answers from the rule cards inst
     assert.equal(events.filter(e => e.ev === 'text').map(e => e.data.t).join(''), 'Svar fra regelkortene.');
   } finally { globalThis.fetch = realFetch; delete process.env.ANTHROPIC_API_KEY; }
 });
+
+test('the workspace header is sent only when ANTHROPIC_WORKSPACE_ID is set', async () => {
+  process.env.ANTHROPIC_API_KEY = 'test-key-not-real';
+  const heads = [], realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, opts) => { heads.push(opts.headers); return textTurn('Ok.'); };
+  try {
+    await call({ messages: [{ role: 'user', content: 'hej' }] });
+    process.env.ANTHROPIC_WORKSPACE_ID = 'wrkspc_test';
+    await call({ messages: [{ role: 'user', content: 'hej' }] });
+    assert.equal(heads[0]['anthropic-workspace-id'], undefined);
+    assert.equal(heads[1]['anthropic-workspace-id'], 'wrkspc_test');
+  } finally { globalThis.fetch = realFetch; delete process.env.ANTHROPIC_API_KEY; delete process.env.ANTHROPIC_WORKSPACE_ID; }
+});
