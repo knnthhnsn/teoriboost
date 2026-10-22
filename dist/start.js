@@ -126,7 +126,7 @@ const words = (text, cls = '') => text.split(' ').map((w, i) => `<span class="kw
 function hero({ counts }) {
   const smile = `<span class="kw kw-smile" style="--w:4">smil.<svg viewBox="0 0 120 24" aria-hidden="true"><path d="M4 14 C 30 26, 80 26, 116 8"/></svg></span>`;
   return `<section class="start-hero" aria-labelledby="start-title">
-    <header class="start-top"><a class="brand start-brand" href="#home" data-start-skip aria-label="TeoriBoost, spring introen over"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><rect width="64" height="64" rx="15" fill="#d5ff62"/><path d="M15 49 28 15M28 49 41 15M41 49 54 15" stroke="#101614" stroke-width="6"/></svg></span><span>TeoriBoost</span></a>
+    <header class="start-top"><a class="brand start-brand" href="#home" data-start-skip aria-label="TeoriBoost, spring introen over"><span class="brand-mark" aria-hidden="true"><span>///</span></span><span>TeoriBoost</span></a>
       <a class="start-skip" href="#home" data-start-skip>Spring over</a></header>
     
     <div class="start-show">
