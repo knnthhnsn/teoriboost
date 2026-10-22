@@ -1,0 +1,128 @@
+/* Lær hero: the rear-view mirror */
+.mh{--dx:0;--dy:0;position:relative;isolation:isolate;max-width:1100px;margin:0 auto 14px;display:grid;gap:10px;padding:0 18px 20px;border-radius:26px;overflow:hidden;
+  background:linear-gradient(180deg,#E3F1FC 0,#F3F9FE 38%,#fff 78%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+/* the top edge of the card is the windscreen; a faint sheen runs across it */
+.mh::before{content:'';position:absolute;inset:0 0 auto;height:46%;z-index:-1;pointer-events:none;
+  background:linear-gradient(100deg,transparent 18%,rgba(255,255,255,.75) 30%,transparent 42%,transparent 64%,rgba(255,255,255,.5) 72%,transparent 80%)}
+
+/* mount and mirror */
+.mh-rig{position:relative;display:grid;justify-items:center}
+.mh-mount{position:relative;width:46px;height:12px;border-radius:0 0 12px 12px;background:linear-gradient(180deg,#3A4148,#22272C)}
+.mh-mount::after{content:'';position:absolute;left:50%;top:10px;width:9px;height:16px;margin-left:-4.5px;border-radius:0 0 5px 5px;background:linear-gradient(90deg,#2B3137,#4A525A 45%,#2B3137)}
+.mh-mirror{position:relative;width:min(100%,520px);margin-top:20px;padding:7px;border-radius:24px 24px 34px 34px/24px 24px 40px 40px;
+  background:linear-gradient(180deg,#3A4148 0,#1D2125 60%,#15181B 100%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.22),inset 0 -2px 0 rgba(0,0,0,.4),0 14px 26px -12px rgba(19,32,48,.55),0 3px 0 #0E1114;
+  transform-origin:50% -20px;transform:perspective(800px) rotateX(calc(var(--dy) * -5deg)) rotateY(calc(var(--dx) * 7deg));transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.mh-mirror::before{content:'';position:absolute;left:50%;top:-9px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6B747C,#262B30 70%)}
+.mh-led{position:absolute;right:28px;bottom:2px;width:5px;height:5px;border-radius:50%;background:#7CE04A;box-shadow:0 0 6px #7CE04A}
+
+.mh-glass{position:relative;height:122px;border-radius:18px 18px 28px 28px/18px 18px 34px 34px;overflow:hidden;cursor:pointer;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 8px 18px rgba(0,0,0,.35)}
+
+/* what the mirror sees: the road behind you, running into a low sun */
+.mh-scene{position:absolute;inset:0;
+  background:linear-gradient(180deg,#0B1A2C 0,#173554 34%,#4A4F78 48%,#E39A62 57%,#F6C27A 58.5%,#1F242D 59%,#14181F 100%)}
+.mh-sun{position:absolute;left:50%;top:58.5%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;
+  background:radial-gradient(circle,#FFF4D6 0 30%,#FFD58A 42%,rgba(255,170,90,.45) 62%,transparent 72%);box-shadow:0 0 40px 18px rgba(255,170,90,.35);
+  translate:calc(var(--dx) * -10px) 0;transition:translate .45s ease}
+.mh-hills{position:absolute;left:0;right:0;top:44%;height:15%;background:#232A38;
+  clip-path:polygon(0 70%,9% 40%,18% 62%,28% 30%,37% 66%,44% 86%,56% 86%,63% 58%,72% 22%,81% 52%,90% 34%,100% 60%,100% 100%,0 100%)}
+.mh-ground{position:absolute;left:0;right:0;top:59%;bottom:0;perspective:44px;perspective-origin:50% 0;overflow:hidden}
+.mh-road{position:absolute;left:50%;bottom:0;width:150px;height:900px;margin-left:-75px;transform-origin:50% 100%;transform:rotateX(90deg);
+  background:linear-gradient(90deg,#8A93A3 0 3%,#3A414E 3% 97%,#8A93A3 97%)}
+.mh-road i{position:absolute;left:50%;top:0;bottom:0;width:7px;margin-left:-3.5px;
+  background:repeating-linear-gradient(0deg,#FFD866 0 26px,transparent 26px 58px);animation:mh-dash .8s linear infinite}
+@keyframes mh-dash{to{background-position:0 -58px}}
+
+/* the mirror's display */
+.mh-hud{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px}
+.mh-stats{display:grid;gap:6px}
+.mh-stat{display:flex;align-items:center;gap:8px;margin:0;padding:5px 11px 5px 6px;border-radius:14px;
+  background:rgba(8,16,28,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:#fff}
+.mh-stat>span:last-child{display:grid;line-height:1.05}
+.mh-stat b{font:800 18px var(--font-display);font-variant-numeric:tabular-nums;color:#fff}
+.mh-stat small{display:flex;align-items:center;gap:6px;font:700 11.5px var(--font-display);color:#D5DEE8;white-space:nowrap}
+.mh-ico{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1)}
+.mh-ico .duo{width:18px;height:18px}.mh-ico .duo .d{opacity:.35}
+.mh-stat--streak .mh-ico{color:#FFA94D;box-shadow:0 0 14px rgba(255,150,60,.45)}
+.mh-stat--streak.is-zero .mh-ico{color:#C2CCD6;box-shadow:none}
+.mh-stat--goal .mh-ico{color:#FF8FB1}
+.mh-dots{display:inline-flex;gap:3px}
+.mh-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22)}
+.mh-dots i.on{background:#FF8FB1;box-shadow:0 0 6px rgba(255,143,177,.8)}
+
+.mh-ring{position:relative;flex:none;display:grid;place-items:center;width:92px;height:92px;border-radius:50%;color:#fff;text-decoration:none;
+  background:rgba(8,16,28,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.mh-ring svg{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);rotate:-90deg;overflow:visible}
+.mh-ring circle{fill:none;stroke-width:6.5;stroke-linecap:round}
+.mh-track{stroke:rgba(255,255,255,.14)}
+.mh-val{stroke:url(#mh-g);stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--p));filter:drop-shadow(0 0 4px rgba(150,230,80,.7))}
+.mh-ring>span{display:grid;justify-items:center;line-height:1}
+.mh-ring b{font:800 22px var(--font-display);font-variant-numeric:tabular-nums}
+.mh-ring small{font:700 11px var(--font-display);color:#D5DEE8;margin-top:2px}
+.mh-ring:focus-visible{outline:3px solid #fff;outline-offset:2px}
+
+/* light on the glass: a fixed sheen and a glint that sweeps across now and then */
+.mh-sheen,.mh-glint{position:absolute;inset:0;pointer-events:none}
+.mh-sheen{background:linear-gradient(168deg,rgba(255,255,255,.2) 0,rgba(255,255,255,.04) 30%,transparent 46%);
+  translate:calc(var(--dx) * 12%) calc(var(--dy) * 6%);transition:translate .45s ease}
+.mh-glint{inset:-10% -60%;background:linear-gradient(104deg,transparent 42%,rgba(255,255,255,.05) 45%,rgba(255,255,255,.42) 49%,rgba(255,255,255,.1) 52%,transparent 56%);
+  mix-blend-mode:screen;translate:-70% 0;animation:mh-glint 8s 1.6s cubic-bezier(.45,.05,.3,1) infinite}
+@keyframes mh-glint{0%{translate:-70% 0}18%,100%{translate:70% 0}}
+
+/* the sun's light thrown back by the glass, landing on the card under the mirror */
+.mh-cast{position:absolute;left:50%;top:calc(100% - 14px);width:min(70%,380px);height:70px;z-index:-1;pointer-events:none;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,196,110,.5),rgba(255,196,110,0));filter:blur(4px);
+  translate:calc(-50% + var(--dx) * -40px) calc(var(--dy) * -8px);transition:translate .45s ease;animation:mh-cast 8s 1.6s ease-in-out infinite}
+@keyframes mh-cast{0%,100%{opacity:.55;scale:1}9%{opacity:1;scale:1.12}}
+
+/* the adjusting hand: the mirror swings in from askew and settles */
+.mh.is-adjusting .mh-mirror{animation:mh-adjust 1.5s cubic-bezier(.3,.7,.2,1) both}
+@keyframes mh-adjust{
+  0%{transform:perspective(800px) rotateZ(-9deg) rotateY(26deg) rotateX(8deg)}
+  42%{transform:perspective(800px) rotateZ(2.6deg) rotateY(-7deg) rotateX(-2deg)}
+  66%{transform:perspective(800px) rotateZ(-1deg) rotateY(2.5deg) rotateX(.5deg)}
+  84%{transform:perspective(800px) rotateZ(.3deg) rotateY(-.6deg)}
+  100%{transform:perspective(800px) rotateZ(0) rotateY(0) rotateX(0)}}
+.mh.is-adjusting .mh-glint{animation:mh-glint .9s 1.05s cubic-bezier(.45,.05,.3,1) both}
+.mh.is-adjusting .mh-cast{animation:mh-cast-in 1.6s ease both}
+@keyframes mh-cast-in{0%{opacity:0}70%{opacity:1;scale:1.15}100%{opacity:.55;scale:1}}
+.mh.is-adjusting .mh-val{animation:mh-ring 1.2s .5s cubic-bezier(.3,.8,.2,1) both}
+@keyframes mh-ring{from{stroke-dashoffset:100}}
+.mh.is-adjusting .mh-dots i.on{animation:mh-dot .4s calc(.9s + var(--k) * .12s) cubic-bezier(.3,1.6,.5,1) both}
+@keyframes mh-dot{from{scale:0}}
+
+/* copy */
+.mh-copy{text-align:center;padding:4px 4px 0}
+.mh-eyebrow{margin:0 0 6px;font:800 12px var(--font-display);letter-spacing:.12em;color:#0F6CA3}
+#main .mh-title{margin:0;font:800 clamp(24px,6.4vw,38px)/1.1 var(--font-display)!important;letter-spacing:-.01em;color:#1F2328;text-wrap:balance}
+.mh-text{margin:8px auto 0;max-width:46ch;font-size:16px;line-height:1.45;color:#46505A;text-wrap:pretty}
+
+@media (min-width:860px){
+  .mh{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:28px;padding:0 30px 26px}
+  .mh-copy{order:-1;text-align:left;padding:26px 0 0}
+  .mh-text{margin-left:0}
+  .mh-rig{align-self:start}
+  .mh-glass{height:150px}
+  .mh-hud{padding:14px 18px}
+  .mh-stat b{font-size:21px}.mh-stat small{font-size:12.5px}
+  .mh-ring{width:112px;height:112px}.mh-ring b{font-size:27px}
+}
+@media (max-width:700px){#view > .mh{margin:0 0 12px}}
+@media (max-width:379px){
+  .mh{padding:0 12px 18px}
+  .mh-hud{padding:8px}
+  .mh-stat{padding:4px 8px 4px 4px;gap:6px}
+  .mh-ico{width:24px;height:24px}.mh-ico .duo{width:15px;height:15px}
+  .mh-stat b{font-size:16px}.mh-stat small{font-size:10.5px}
+  .mh-ring{width:80px;height:80px}.mh-ring b{font-size:19px}
+}
+
+/* still: everything in its place, no loops */
+body.no-motion .mh-mirror,body.no-motion .mh-road i,body.no-motion .mh-glint,body.no-motion .mh-cast,body.no-motion .mh-val,body.no-motion .mh-dots i{animation:none!important}
+body.no-motion .mh-glint{opacity:0}
+@media (prefers-reduced-motion:reduce){.mh-mirror,.mh-road i,.mh-glint,.mh-cast,.mh-val,.mh-dots i{animation:none!important}.mh-glint{opacity:0}}
+.mh-ring.is-zero .mh-val{opacity:0}
+/* the sheen is larger than the glass, so moving it never shows an edge; the lean stays small so the display stays sharp */
+.mh-sheen{inset:-30%;background:linear-gradient(168deg,transparent 18%,rgba(255,255,255,.18) 24%,rgba(255,255,255,.04) 40%,transparent 52%)}
+.mh-mirror{transform:perspective(900px) rotateX(calc(var(--dy) * -3deg)) rotateY(calc(var(--dx) * 4deg))}
