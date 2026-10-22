@@ -1,0 +1,34 @@
+/* Dark theme. html[data-theme="dark"] is set before the first paint (index.html) and by theme.js.
+   Same brand: the lime stays lime with dark ink on it; surfaces become graphite, text becomes light. */
+/* .journey-surface (body on Lær) re-declares the palette, so the dark values go there too */
+html[data-theme="dark"],html[data-theme="dark"] .journey-surface{
+  color-scheme:dark;
+  --bg:#0F1215;--panel:#171B20;--panel2:#1E242A;--ink:#E8ECEF;--muted:#A3ADB6;--line:#2A3138;--line-strong:#37414B;
+  --accent:#D5FF62;--accent-ink:#141A0A;--accent-shadow:#8DB423;--acid:#D5FF62;--on-accent:#141A0A;
+  --good:#6BD62A;--good-ink:#8BE35A;--good-bg:#17301A;
+  --bad:#FF5C5C;--bad-ink:#FF8A8A;--bad-bg:#3A1C1F;
+  --blue:#38BDF8;--blue-ink:#7DD3FC;--orange:#FFA53D;--purple:#C08CF5;
+  --acid-text:#B6E86A;--amber-text:#FFB25C;
+  --surface:#171B20;--surface-2:#1E242A;--surface-3:#252C33;
+}
+html[data-theme="dark"] body{background:var(--bg)!important;color:var(--ink)}
+
+/* lime stays lime, so whatever sits on it keeps dark ink (light rules use var(--ink) there) */
+html[data-theme="dark"] .pn--next .pn-btn,html[data-theme="dark"] .topic.is-active .topic-n,html[data-theme="dark"] .mybil-tab.is-active,
+html[data-theme="dark"] .seg input:checked + span,html[data-theme="dark"] .sidebar .nav-item.active .nav-tile,html[data-theme="dark"] #mobile-nav a.active .nav-tile,
+html[data-theme="dark"] .big-btn,html[data-theme="dark"] .btn-primary,html[data-theme="dark"] .chat-send,html[data-theme="dark"] .toast{color:var(--accent-ink)!important}
+
+/* icon tiles tinted by an inline --c pastel: keep a hint of the tint on graphite */
+html[data-theme="dark"] .row-ico{background:color-mix(in oklab,var(--c,#EEF1F4) 16%,var(--panel2))!important;color:var(--ink)}
+
+/* the "Din bil" label sits on the bright road scene, so it stays a light card */
+html[data-theme="dark"] .road-label{background:rgba(255,255,255,.92)!important;border-color:rgba(255,255,255,.6)!important;color:#1F2328}
+html[data-theme="dark"] .road-label *{color:#1F2328}
+html[data-theme="dark"] .road-label small,html[data-theme="dark"] .road-label .eyebrow{color:#4C5560}
+
+/* the start page is a poster in both themes */
+html[data-theme="dark"] body.start-mode{background:#fff!important;color:#1F2328}
+html[data-theme="dark"] .start-hero,html[data-theme="dark"] .start-step,html[data-theme="dark"] .dream-modal{
+  color-scheme:light;color:#1F2328;
+  --bg:#FFFFFF;--panel:#FFFFFF;--panel2:#F4F5F7;--ink:#1F2328;--muted:#5F656D;--line:#E3E5E8;--line-strong:#D3D6DB;
+  --accent-ink:#1F2328;--accent-shadow:#9BC42A;--on-accent:#1F2328;--good-ink:#3B8A00;--bad-ink:#D42F2F;--blue-ink:#0A7BBF;--acid-text:#2F6F00}

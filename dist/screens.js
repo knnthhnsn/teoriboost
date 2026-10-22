@@ -3,6 +3,7 @@
 import { SEQUENCES } from './sequences.js';
 import { ico, duo } from './ui-icons.js';
 import { renderMirrorHero } from './mirror-hero.js';
+import { themePref, THEME_CHOICES } from './theme.js';
 import { renderCast } from './cast.js';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -129,6 +130,7 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
     <div class="panel"><h2>Styrker og svagheder</h2><ul class="sw">${bars}</ul></div>
     <a class="set-row set-row--link" href="#start:1"><span>Prøvedato</span><small>${esc(WHEN_TEXT[intro?.when] || 'Vælg')}${examDays !== null ? ` · ${examDays} dage` : ''}</small></a>
     ${toggle('sound', 'Lyd og oplæsning')}${toggle('humor', 'Humor i forklaringer')}${toggle('motion', 'Bevægelse og animationer')}
+    <div class="set-row set-row--theme" role="radiogroup" aria-labelledby="theme-label"><span id="theme-label">Udseende</span><span class="seg">${THEME_CHOICES.map(([v, label]) => `<label><input type="radio" name="theme" value="${v}" ${themePref() === v ? 'checked' : ''}><span>${label}</span></label>`).join('')}</span></div>
     <a class="set-row set-row--link" href="#progress"><span>Alle vurderinger og prøver</span><small>${ICON.chev}</small></a>
     <a class="set-row set-row--link" href="#start"><span>Se introen igen</span><small>${ICON.chev}</small></a>
     <button class="set-row set-row--link" data-action="sources"><span>Kilder og faglig status</span><small>${ICON.chev}</small></button>

@@ -3,5 +3,5 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "scripts": { "dev": "node server.mjs", "test": "node --test tests/*.test.mjs", "build": "node validate.mjs", "content:lessons": "node integrate-lessons.mjs", "content:garage": "node integrate-garage.mjs" }
+  "scripts": { "dev": "node server.mjs", "test": "node --test tests/*.test.mjs", "build": "node tools/theme/build-dark.mjs && node validate.mjs", "theme": "node tools/theme/build-dark.mjs", "content:lessons": "node integrate-lessons.mjs", "content:garage": "node integrate-garage.mjs" }
 }

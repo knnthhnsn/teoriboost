@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#FFFFFF">
+  <script>(function(){var d=false;try{var p=localStorage.getItem('teoriboost.theme')||'system';d=p==='dark'||(p==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);}catch(e){}document.documentElement.dataset.theme=d?'dark':'light';if(d)document.querySelector('meta[name="theme-color"]').setAttribute('content','#0F1215');})();</script>
   <meta name="description" content="Træn dansk køreteori i korte missioner. Lær af dine fejl, genkald reglerne og øv prøveformatet.">
   <title>TeoriBoost — din hjerne. Dit kørekort.</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
@@ -28,12 +29,14 @@
 <link rel="stylesheet" href="chat.css">
 <link rel="stylesheet" href="order.css">
 <link rel="stylesheet" href="mirror-hero.css">
+<link rel="stylesheet" href="dark-gen.css">
+<link rel="stylesheet" href="dark.css">
 <link rel="preload" href="assets/fonts/rubik-var.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
   <a class="skip-link" href="#main">Spring til indhold</a>
   <header class="topbar">
-    <a class="brand" href="#home" aria-label="TeoriBoost, hjem"><span class="brand-mark" aria-hidden="true"><span>///</span></span><span>TeoriBoost<span class="brand-dot">B</span></span></a>
+    <a class="brand" href="#home" aria-label="TeoriBoost, hjem"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M9.8 46.8h6.8l16-29.6h-6.8zM20.6 46.8h6.8l16-29.6h-6.8zM31.4 46.8h6.8l16-29.6h-6.8z"/></svg></span><span>TeoriBoost<span class="brand-dot">B</span></span></a>
     <div class="top-strap mono">KATEGORI B <span>/</span> DANMARK <span>/</span> LÆR. KØR. GENTAG.</div>
     <div class="top-actions"><a id="booster-chip" class="booster-chip" href="#minbil" hidden aria-label="Dine Boosters. Åbn Min bil"></a><button id="humor-toggle" class="mode-toggle" aria-pressed="true" aria-label="Brainrot og huskekroge"><span class="mode-led"></span><span class="mode-text">BRAINROT</span><b>ON</b></button><button id="sound-toggle" class="icon-btn sound-btn" aria-pressed="true" aria-label="Små lyde"></button><button id="settings-btn" class="icon-btn" aria-label="Indstillinger"></button></div>
   </header>

@@ -305,7 +305,16 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 #mobile-nav a.active{color:#1F2328!important}
 #mobile-nav a.active .nav-tile{color:#1F2328;background:var(--accent,#D5FF62);box-shadow:inset 0 0 0 1.5px var(--accent-shadow,#9BC42A)}
 
-/* the logo: the original skewed /// in the logo typeface, black on the yellow tile */
-.brand-mark{display:inline-grid;place-items:center;flex:none;width:1.45em;height:1.45em;margin-right:2px;padding:0!important;border-radius:.34em;
-  background:#D5FF62!important;color:#101614!important;font-size:inherit!important;letter-spacing:0!important;transform:none!important;line-height:1;overflow:hidden}
-.brand-mark>span{display:block;font:800 .95em/1 LogoBarlow,Impact,sans-serif;letter-spacing:-.19em;transform:skew(-12deg);margin-right:-.19em;translate:0 .04em}
+/* the logo: the original /// stripes (measured from the logo typeface), black on the yellow tile, always centred */
+.brand-mark{display:inline-block;flex:none;width:1.45em;height:1.45em;margin-right:2px;padding:0!important;border-radius:.34em;
+  background:#D5FF62!important;color:#101614!important;font-size:inherit!important;letter-spacing:0!important;transform:none!important;line-height:0}
+.brand-mark svg{display:block;width:100%;height:100%;fill:currentColor}
+
+/* Udseende: a small segmented control (Følg enheden / Lys / Mørk) */
+.set-row--theme{flex-wrap:wrap;gap:10px;height:auto!important;min-height:0;padding-top:12px!important;padding-bottom:14px!important}
+.seg{display:inline-flex;gap:3px;padding:3px;border-radius:999px;background:var(--panel2);box-shadow:inset 0 0 0 1.5px var(--line)}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:block;padding:7px 12px;border-radius:999px;font:700 14px var(--font-display);color:var(--muted);white-space:nowrap;transition:background-color .2s,color .2s}
+.seg input:checked + span{background:var(--accent,#D5FF62);color:var(--accent-ink,#1F2328);box-shadow:0 2px 0 var(--accent-shadow,#9BC42A)}
+.seg input:focus-visible + span{outline:3px solid #1CB0F6;outline-offset:2px}
