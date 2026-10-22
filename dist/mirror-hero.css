@@ -105,11 +105,10 @@
 #main .mh-title{margin:0;font:800 clamp(24px,6.4vw,38px)/1.1 var(--font-display)!important;letter-spacing:-.01em;color:#1F2328;text-wrap:balance}
 .mh-text{margin:8px auto 0;max-width:46ch;font-size:16px;line-height:1.45;color:#46505A;text-wrap:pretty}
 
+/* wide screens: same order as on the phone (mirror on top, text under it), just a bigger mirror */
 @media (min-width:860px){
-  .mh{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:28px;padding:0 30px 26px}
-  .mh-copy{order:-1;text-align:left;padding:26px 0 0}
-  .mh-text{margin-left:0}
-  .mh-rig{align-self:start}
+  .mh{gap:14px;padding:0 30px 26px}
+  .mh-mirror{width:min(100%,600px)}
   .mh-glass{height:150px}
   .mh-hud{padding:14px 18px}
   .mh-stat b{font-size:21px}.mh-stat small{font-size:12.5px}
