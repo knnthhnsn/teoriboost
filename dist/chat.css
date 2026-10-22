@@ -114,3 +114,12 @@ body.chat-mode{background:#fff}
   .ask-fab .chat-ava{width:48px;height:48px}
   .ask-fab-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
+/* desktop and tablet: the chat is a tab like the others, so the menu stays */
+@media (min-width:701px){
+  body.chat-mode .topbar{display:flex!important}
+  body.chat-mode .sidebar{display:flex!important}
+  body.chat-mode{background:var(--bg,#fff)}
+  body.chat-mode .chat{min-height:calc(100svh - 78px)}
+  body.chat-mode .chat-top{top:78px}
+  body.chat-mode .chat-x{display:none}
+}

@@ -1,7 +1,7 @@
 // The four tabs (Lær, Øv, Prøve, Min bil) plus Alle emner and Profil, after docs/redesign/mockups-v3.
 // Short, game-like screens built around one next action. Data comes in from app.js; nothing here mutates state.
 import { SEQUENCES } from './sequences.js';
-import { ico } from './ui-icons.js';
+import { ico, duo } from './ui-icons.js';
 import { renderCast } from './cast.js';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -50,7 +50,7 @@ export function renderLearn({ vm, intro, due, unitIndex, ready }) {
   const review = due > 0
     ? `<a class="learn-card learn-card--review" href="#review"><div><strong>${due} ${due === 1 ? 'regel er' : 'regler er'} klar til gentagelse</strong><small>Tager ca. ${Math.max(2, Math.ceil(due * 1.3))} min</small></div><span class="pill-btn">Gentag</span></a>`
     : `<div class="learn-card"><div><strong>Dagens mål: ${Math.min(today, goal)}/${goal} ${goal === 1 ? 'lektion' : 'lektioner'}</strong><small>${today >= goal ? 'Nået. +1.500 Boosters er dine.' : 'Næste lektion tager ca. 5 min.'}</small></div><span class="goal-dots" aria-hidden="true">${Array.from({ length: goal }, (_, k) => `<i class="${k < today ? 'on' : ''}"></i>`).join('')}</span></div>`;
-  return `<div class="learn-chips"><span class="chip chip--streak">${ico('flame')} <b>${streak}</b> ${streak === 1 ? 'dag' : 'dage'}</span>${days !== null ? `<span class="chip chip--date">${ico('calendar')} Prøve om <b>${days}</b> dage</span>` : `<span class="chip chip--goal">${ico('target')} <b>${goal}</b> om dagen</span>`}${ready ? `<a class="chip chip--ready" href="#profil" aria-label="Du er ${ready.pct} procent klar. Se hvordan vi regner">${ico('trend')} <b>${ready.pct} %</b> klar</a>` : ''}</div><div id="road-slot" class="road-top"></div><section class="learn" aria-labelledby="learn-title">
+  return `<div class="learn-chips"><span class="chip chip--streak"><span class="chip-ico">${duo('flame')}</span><span class="chip-t"><b>${streak} ${streak === 1 ? 'dag' : 'dage'}</b> <small>i træk</small></span></span>${days !== null ? `<span class="chip chip--date"><span class="chip-ico">${duo('calendar')}</span><span class="chip-t"><b>${days} ${days === 1 ? 'dag' : 'dage'}</b> <small>til prøven</small></span></span>` : `<span class="chip chip--goal"><span class="chip-ico">${duo('target')}</span><span class="chip-t"><b>${goal}</b> <small>om dagen</small></span></span>`}${ready ? `<a class="chip chip--ready" href="#profil" aria-label="Du er ${ready.pct} procent klar. Se hvordan vi regner"><span class="chip-ico">${duo('trend')}</span><span class="chip-t"><b>${ready.pct} %</b> <small>klar</small></span></a>` : ''}</div><div id="road-slot" class="road-top"></div><section class="learn" aria-labelledby="learn-title">
     <a class="unit-banner" href="#theory" aria-label="Emne ${unitIndex + 1}: ${esc(unit.title)}. ${done} af ${nodes.length} lektioner. Se alle emner">
       <span class="unit-kicker">EMNE ${unitIndex + 1} · ALLE EMNER ▾</span><h1 id="learn-title">${esc(unit.title)}</h1><span class="unit-count">${done}/${nodes.length}</span>
       <span class="unit-bar" aria-hidden="true"><i style="--p:${nodes.length ? done / nodes.length : 0}"></i></span></a>
@@ -121,7 +121,7 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
     : '<li class="empty-note">Kommer, når du har øvet et par emner.</li>';
   const toggle = (key, title) => `<label class="set-row"><span>${title}</span><input type="checkbox" role="switch" data-setting="${key}" ${settings[key] ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
   return `<section class="profile" aria-labelledby="profile-title"><header class="screen-head"><a class="back-round" href="#home" aria-label="Tilbage">${ICON.back}</a><h1 id="profile-title">Din profil</h1></header>
-    <div class="tile-row"><div class="tile"><b class="tile-fire">${ico('flame')} ${daily?.currentStreak || 0}</b><small>dage i træk</small></div><div class="tile"><b>${lessonsDone}/${lessonsTotal}</b><small>lektioner</small></div></div>
+    <div class="tile-row"><div class="tile"><b class="tile-fire"><span class="chip-ico">${duo('flame')}</span>${daily?.currentStreak || 0}</b><small>dage i træk</small></div><div class="tile"><b>${lessonsDone}/${lessonsTotal}</b><small>lektioner</small></div></div>
     ${ready ? `<div class="panel ready-panel"><h2>Hvor klar er du?</h2><div class="ready-row"><b>${ready.pct} %</b><span class="ready-bar" role="img" aria-label="${ready.pct} procent klar"><i style="--p:${ready.pct / 100}"></i></span></div>
       <p>${ready.ok} af ${ready.total} regelkort sidder: dit seneste svar på dem var rigtigt. ${ready.passes >= 2 ? 'Og du har bestået mindst 2 af dine 3 seneste øveprøver.' : 'Bestå 2 af 3 øveprøver i træk, så er du også klar til prøveformatet.'}</p><small>Appens egen vurdering, ikke en garanti for den rigtige prøve.</small></div>` : ''}
     <div class="panel"><h2>Denne uge</h2><ol class="week">${week}</ol></div>

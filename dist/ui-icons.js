@@ -28,3 +28,35 @@ export function ico(name, { cls = '', label = '' } = {}) {
   return `<svg class="ui-ico ${cls}" viewBox="0 0 24 24" ${label ? `role="img" aria-label="${label}"` : 'aria-hidden="true"'}>${body}</svg>`;
 }
 export const ICON_NAMES = Object.keys(P);
+
+// Duotone icons for the menu and chips: a soft filled shape (.d) behind a clean outline (.s).
+// The fill takes the same colour at low opacity, so an icon reads as one shape in any tint, and as
+// white-on-colour when its tile is active.
+const DUO = {
+  book: { d: '<path d="M2.8 5.6c3.4-1 6.4-.6 9.2 1.4V20c-2.8-1.9-5.8-2.4-9.2-1.4Z"/><path d="M21.2 5.6c-3.4-1-6.4-.6-9.2 1.4V20c2.8-1.9 5.8-2.4 9.2-1.4Z"/>',
+          s: '<path d="M2.8 5.6c3.4-1 6.4-.6 9.2 1.4 2.8-2 5.8-2.4 9.2-1.4v13c-3.4-1-6.4-.5-9.2 1.4-2.8-1.9-5.8-2.4-9.2-1.4Z"/><path d="M12 7v13"/><path d="M15.6 5.5v5.2l1.7-1.2 1.7 1.2V5.3"/>' },
+  wheel: { d: '<circle cx="12" cy="12" r="9"/>',
+           s: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.6"/><path d="M3.3 10.6c2.9.9 5.8 1.4 8.7 1.4s5.8-.5 8.7-1.4"/><path d="M12 14.6v6.3"/>' },
+  exam: { d: '<rect x="4.5" y="4" width="15" height="17.5" rx="3"/>',
+          s: '<rect x="4.5" y="4" width="15" height="17.5" rx="3"/><path d="M9 2.8h6a1 1 0 0 1 1 1V6H8V3.8a1 1 0 0 1 1-1Z"/><path d="m8.4 13.4 2.4 2.4 4.8-5"/>' },
+  car: { d: '<path d="M3.5 12.6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v4.6h-17Z"/>',
+         s: '<path d="M5.2 10.6 7 6.4A2.2 2.2 0 0 1 9 5h6a2.2 2.2 0 0 1 2 1.4l1.8 4.2"/><path d="M3.5 12.6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v4.6h-17Z"/><path d="M6 17.2v2.3M18 17.2v2.3"/><circle cx="7.6" cy="13.9" r="1.2"/><circle cx="16.4" cy="13.9" r="1.2"/>' },
+  ai: { d: '<path d="M4 7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-5.5L7 20.6V17a3 3 0 0 1-3-3Z"/>',
+        s: '<path d="M4 7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-5.5L7 20.6V17a3 3 0 0 1-3-3Z"/><path d="M12 7.2 13 9.7l2.5 1-2.5 1L12 14.2l-1-2.5-2.5-1 2.5-1Z"/>' },
+  profile: { d: '<circle cx="12" cy="8.2" r="4"/><path d="M4.5 20.2a7.5 7.5 0 0 1 15 0Z"/>',
+             s: '<circle cx="12" cy="8.2" r="4"/><path d="M4.5 20.2a7.5 7.5 0 0 1 15 0"/>' },
+  flame: { d: '<path d="M12 21.2c-4 0-6.7-2.7-6.7-6.3 0-3.3 2.3-5.5 3.7-7.2.4 1.8 1.3 3 2.5 3.6C11.5 7.9 12.6 4.8 15.3 2.8c-.1 2.7 1 4.6 2.4 6.2 1 1.3 1.8 3 1.8 5.1 0 4.3-3.1 7.1-7.5 7.1Z"/>',
+           s: '<path d="M12 21.2c-4 0-6.7-2.7-6.7-6.3 0-3.3 2.3-5.5 3.7-7.2.4 1.8 1.3 3 2.5 3.6C11.5 7.9 12.6 4.8 15.3 2.8c-.1 2.7 1 4.6 2.4 6.2 1 1.3 1.8 3 1.8 5.1 0 4.3-3.1 7.1-7.5 7.1Z"/><path d="M12 21.2c-1.8 0-3-1.2-3-2.9 0-1.8 1.4-2.8 2.4-4 .3 1.1 1 1.8 1.9 2.1.6.3 1.6 1 1.6 2.2 0 1.5-1.2 2.6-2.9 2.6Z"/>' },
+  target: { d: '<circle cx="12" cy="12" r="9"/>',
+            s: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3"/>' },
+  trend: { d: '<path d="M3.5 18.5 9 12.5l3.5 3.5 7-7.5v10Z"/>',
+           s: '<path d="M3.5 17.5 9 12l3.5 3.5 7-7.5"/><path d="M15 8h4.5v4.5"/>' },
+  calendar: { d: '<path d="M3.5 8a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3v2h-17Z"/>',
+              s: '<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h2M14 14h2M8 17h2"/>' },
+};
+/** Duotone icon (menu, chips). */
+export function duo(name, { cls = '' } = {}) {
+  const i = DUO[name]; if (!i) return '';
+  return `<svg class="duo ${cls}" viewBox="0 0 24 24" aria-hidden="true"><g class="d">${i.d}</g><g class="s">${i.s}</g></svg>`;
+}
+export const DUO_NAMES = Object.keys(DUO);
