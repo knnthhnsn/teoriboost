@@ -132,3 +132,6 @@ body.no-motion .mh-glint{opacity:0}
 /* the sheen is larger than the glass, so moving it never shows an edge; the lean stays small so the display stays sharp */
 .mh-sheen{inset:-30%;background:linear-gradient(168deg,transparent 18%,rgba(255,255,255,.18) 24%,rgba(255,255,255,.04) 40%,transparent 52%)}
 .mh-mirror{transform:perspective(900px) rotateX(calc(var(--dy) * -3deg)) rotateY(calc(var(--dx) * 4deg))}
+/* breathing room between the mirror and the text under it */
+.mh{row-gap:24px}
+@media (min-width:860px){.mh{row-gap:30px}}
