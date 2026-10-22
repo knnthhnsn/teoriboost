@@ -63,8 +63,9 @@ test('with a key it runs the agent loop: search, show a card, answer, and reject
     const { events } = await call({ messages: [{ role: 'user', content: 'Forklar hajtænder' }], context: { readiness: 40, weak: ['Højre vigepligt'], questionId: 'q-031' } });
     assert.deepEqual(events[0], { ev: 'mode', data: { ai: true } });
     assert.equal(sent.length, 4, 'four model rounds');
-    assert.match(sent[0].system, /Svage regler lige nu: Højre vigepligt/);
-    assert.match(sent[0].system, /Hvornår kan du køre\?/, 'the lesson question is in context');
+    const sys = sent[0].system.map(b => b.text).join('\n');
+    assert.match(sys, /Svage regler lige nu: Højre vigepligt/);
+    assert.match(sys, /Hvornår kan du køre\?/, 'the lesson question is in context');
     const firstResult = JSON.parse(sent[1].messages.at(-1).content[0].content);
     assert.equal(firstResult[0].sectionId, 'ubetinget', 'search results go back to the model');
     assert.ok(events.some(e => e.ev === 'action' && e.data.type === 'rule' && e.data.sectionId === 'ubetinget'));
@@ -78,4 +79,60 @@ test('with a key it runs the agent loop: search, show a card, answer, and reject
 test('bad requests are refused and history is trimmed', async () => {
   assert.equal((await call({ messages: [] })).status, 400);
   assert.equal((await call({ messages: [{ role: 'assistant', content: 'hej' }] })).status, 400);
+});
+
+const thinkingToolTurn = (id, name, input) => sse([
+  { type: 'message_start' }, { type: 'content_block_start', index: 0, content_block: { type: 'thinking', thinking: '', signature: '' } },
+  { type: 'content_block_delta', index: 0, delta: { type: 'signature_delta', signature: 'sig-abc' } }, { type: 'content_block_stop', index: 0 },
+  { type: 'content_block_start', index: 1, content_block: { type: 'tool_use', id, name, input: {} } },
+  { type: 'content_block_delta', index: 1, delta: { type: 'input_json_delta', partial_json: JSON.stringify(input) } },
+  { type: 'content_block_stop', index: 1 }, { type: 'message_delta', delta: { stop_reason: 'tool_use' } }, { type: 'message_stop' }]);
+
+test('Haiku settings: effort, caching, thinking blocks go back whole, no sampling params', async () => {
+  process.env.ANTHROPIC_API_KEY = 'test-key-not-real';
+  const sent = [], turns = [thinkingToolTurn('t1', 'search_rules', { query: 'promille' }), textTurn('Grænsen er **0,5**.')];
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, opts) => { sent.push(JSON.parse(opts.body)); return turns.shift(); };
+  try {
+    const { events } = await call({ messages: [{ role: 'user', content: 'Hvad er promillegrænsen?' }] });
+    assert.equal(sent[0].model, 'claude-haiku-5-5');
+    assert.deepEqual(sent[0].output_config, { effort: 'medium' });
+    assert.deepEqual(sent[0].cache_control, { type: 'ephemeral' });
+    assert.deepEqual(sent[0].system[0].cache_control, { type: 'ephemeral' }, 'tools + fixed prompt are cached');
+    assert.ok(!sent[0].system[0].text.includes('ELEVEN'), 'nothing per-learner in the cached part');
+    assert.equal(sent[0].temperature, undefined); assert.equal(sent[0].thinking, undefined);
+    assert.ok(sent[0].max_tokens >= 2000, 'room for thinking');
+    const thought = sent[1].messages.at(-2).content[0];
+    assert.equal(thought.type, 'thinking'); assert.equal(thought.signature, 'sig-abc', 'signature is kept for the next round');
+    assert.equal(JSON.stringify(sent[0].system), JSON.stringify(sent[1].system), 'same prefix every round');
+    assert.ok(events.some(e => e.ev === 'status' && e.data.text === 'Tænker…'));
+  } finally { globalThis.fetch = realFetch; delete process.env.ANTHROPIC_API_KEY; }
+});
+
+test('a refusal or an empty turn still gives the learner a reply', async () => {
+  process.env.ANTHROPIC_API_KEY = 'test-key-not-real';
+  const realFetch = globalThis.fetch;
+  const refusal = () => sse([{ type: 'message_start' }, { type: 'message_delta', delta: { stop_reason: 'refusal' } }, { type: 'message_stop' }]);
+  const empty = () => sse([{ type: 'message_start' }, { type: 'message_delta', delta: { stop_reason: 'max_tokens' } }, { type: 'message_stop' }]);
+  try {
+    globalThis.fetch = async () => refusal();
+    let { events } = await call({ messages: [{ role: 'user', content: 'noget' }] });
+    assert.match(events.filter(e => e.ev === 'text').map(e => e.data.t).join(''), /kan jeg ikke hjælpe med/);
+    globalThis.fetch = async () => empty();
+    ({ events } = await call({ messages: [{ role: 'user', content: 'noget' }] }));
+    assert.match(events.filter(e => e.ev === 'text').map(e => e.data.t).join(''), /nåede ikke frem/);
+  } finally { globalThis.fetch = realFetch; delete process.env.ANTHROPIC_API_KEY; }
+});
+
+test('if this web search version is refused, it answers from the rule cards instead', async () => {
+  process.env.ANTHROPIC_API_KEY = 'test-key-not-real';
+  const sent = [], realFetch = globalThis.fetch;
+  const bad = new Response(JSON.stringify({ type: 'error', error: { type: 'invalid_request_error', message: 'tools.6: web_search_20250305 is not supported on this model' } }), { status: 400 });
+  const turns = [bad, textTurn('Svar fra regelkortene.')];
+  globalThis.fetch = async (url, opts) => { sent.push(JSON.parse(opts.body)); return turns.shift(); };
+  try {
+    const { events } = await call({ messages: [{ role: 'user', content: 'Hvad koster en fartbøde?' }] });
+    assert.equal(sent.length, 2); assert.ok(!sent[1].tools.some(t => t.name === 'web_search'));
+    assert.equal(events.filter(e => e.ev === 'text').map(e => e.data.t).join(''), 'Svar fra regelkortene.');
+  } finally { globalThis.fetch = realFetch; delete process.env.ANTHROPIC_API_KEY; }
 });
