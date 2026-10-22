@@ -304,3 +304,8 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 #mobile-nav .nav-tile{background:none;box-shadow:none;color:#5B6670}
 #mobile-nav a.active{color:#1F2328!important}
 #mobile-nav a.active .nav-tile{color:#1F2328;background:var(--accent,#D5FF62);box-shadow:inset 0 0 0 1.5px var(--accent-shadow,#9BC42A)}
+
+/* the logo: black marks on the yellow tile, drawn from the same shape as the app icon (assets/icon.svg) */
+.brand-mark{display:inline-block;flex:none;width:1.45em;height:1.45em;margin-right:2px;padding:0!important;background:none!important;
+  font-size:inherit!important;letter-spacing:0!important;transform:none!important;line-height:0}
+.brand-mark svg{display:block;width:100%;height:100%}
