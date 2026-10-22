@@ -287,3 +287,20 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
   .sidebar .nav-item,.sidebar-bottom .nav-item{justify-content:center;width:66px;min-height:66px;padding:9px;border-radius:20px}
   .sidebar .nav-item .nav-label{display:none!important}
 }
+
+/* ---------- menu v3: one accent, the app's own lime (same as the big buttons) ---------- */
+[data-tab]{--tile:#F4F6F8;--tint:#3A434C;--edge:#E2E6EA}
+.nav-tile{background:linear-gradient(180deg,#fff 0,#F4F6F8 100%);color:#3A434C;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1.5px #E6E9ED,0 3px 0 #E2E6EA}
+.duo .d{opacity:.16}
+.sidebar .nav-item{gap:12px;padding-right:10px;color:#2B3138}
+.sidebar .nav-item .nav-label{white-space:nowrap}
+.sidebar .nav-item:hover .nav-tile{color:#1F2328}
+.sidebar .nav-item.active{background:#fff!important;border-color:var(--accent-shadow,#9BC42A);box-shadow:0 4px 0 var(--accent-shadow,#9BC42A);color:#1F2328}
+.sidebar .nav-item.active .nav-tile{color:var(--accent-ink,#1F2328);background:var(--accent,#D5FF62);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 3px 0 var(--accent-shadow,#9BC42A)}
+.sidebar .nav-item.active .duo .d{opacity:.28}
+#mobile-nav a{color:#5B6670!important}
+#mobile-nav .nav-tile{background:none;box-shadow:none;color:#5B6670}
+#mobile-nav a.active{color:#1F2328!important}
+#mobile-nav a.active .nav-tile{color:#1F2328;background:var(--accent,#D5FF62);box-shadow:inset 0 0 0 1.5px var(--accent-shadow,#9BC42A)}
