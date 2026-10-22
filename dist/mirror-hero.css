@@ -20,15 +20,22 @@
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 8px 18px rgba(0,0,0,.35)}
 
 /* what the mirror sees: the road behind you, running into a low sun */
-.mh-scene{position:absolute;inset:0;
-  background:linear-gradient(180deg,#0B1A2C 0,#173554 34%,#4A4F78 48%,#E39A62 57%,#F6C27A 58.5%,#1F242D 59%,#14181F 100%)}
-.mh-sun{position:absolute;left:50%;top:58.5%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;
-  background:radial-gradient(circle,#FFF4D6 0 30%,#FFD58A 42%,rgba(255,170,90,.45) 62%,transparent 72%);box-shadow:0 0 40px 18px rgba(255,170,90,.35);
+/* horizon at 58%: the sky glows warm toward it, the sun sits half below it, the ground covers its lower half */
+.mh-scene{--hz:58%;position:absolute;inset:0;
+  background:radial-gradient(60% 46% at 50% var(--hz),rgba(255,190,120,.55),rgba(255,160,100,0) 70%),
+    linear-gradient(180deg,#0B1A2C 0,#163252 30%,#3E4A72 44%,#A9757A 52%,#F0B07A var(--hz))}
+.mh-sun{position:absolute;left:50%;top:var(--hz);width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;
+  background:radial-gradient(circle closest-side,#FFF8E6 0 38%,#FFE0A3 58%,rgba(255,200,120,.5) 76%,rgba(255,180,100,0) 100%);
   translate:calc(var(--dx) * -10px) 0;transition:translate .45s ease}
-.mh-hills{position:absolute;left:0;right:0;top:44%;height:15%;background:#232A38;
-  clip-path:polygon(0 70%,9% 40%,18% 62%,28% 30%,37% 66%,44% 86%,56% 86%,63% 58%,72% 22%,81% 52%,90% 34%,100% 60%,100% 100%,0 100%)}
-.mh-ground{position:absolute;left:0;right:0;top:59%;bottom:0;perspective:44px;perspective-origin:50% 0;overflow:hidden}
-.mh-road{position:absolute;left:50%;bottom:0;width:150px;height:900px;margin-left:-75px;transform-origin:50% 100%;transform:rotateX(90deg);
+/* two low ridges that open toward the middle, so nothing crosses the sun */
+.mh-hills{position:absolute;left:0;right:0;bottom:calc(100% - var(--hz));height:13%;background:#2A2F42;
+  clip-path:polygon(0 35%,8% 20%,17% 48%,26% 30%,35% 70%,42% 100%,58% 100%,65% 62%,73% 26%,82% 50%,91% 22%,100% 42%,100% 100%,0 100%)}
+.mh-ground{position:absolute;left:0;right:0;top:var(--hz);bottom:0;perspective:44px;perspective-origin:50% 0;overflow:hidden;
+  background:linear-gradient(180deg,#5A4549 0,#2C2C36 22%,#1A1E26 60%,#13161C 100%)}
+/* haze where the road meets the sky, so it melts into the light instead of ending in an edge */
+.mh-ground::after{content:'';position:absolute;inset:0 0 auto;height:34%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(240,176,122,.7),rgba(240,176,122,0))}
+.mh-road{position:absolute;left:50%;bottom:0;width:150px;height:4000px;margin-left:-75px;transform-origin:50% 100%;transform:rotateX(90deg);
   background:linear-gradient(90deg,#8A93A3 0 3%,#3A414E 3% 97%,#8A93A3 97%)}
 .mh-road i{position:absolute;left:50%;top:0;bottom:0;width:7px;margin-left:-3.5px;
   background:repeating-linear-gradient(0deg,#FFD866 0 26px,transparent 26px 58px);animation:mh-dash .8s linear infinite}
