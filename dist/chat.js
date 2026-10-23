@@ -94,7 +94,7 @@ export function mountChat(root, { context = () => ({}), sound = () => {}, initia
     history.push({ role: 'user', content: text });
     const ai = { role: 'assistant', content: '', actions: [], sources: [] }; history.push(ai);
     log.insertAdjacentHTML('beforeend', messageHtml(history[history.length - 2]));
-    log.insertAdjacentHTML('beforeend', `<div class="chat-msg chat-msg--ai is-live">${avatar()}<div class="chat-col"><span class="chat-status"><i></i><b>Tænker</b></span></div></div>`);
+    log.insertAdjacentHTML('beforeend', `<div class="chat-msg chat-msg--ai is-live">${avatar()}<div class="chat-col"><span class="chat-status"><i data-rive="traffic"></i><b>Tænker</b></span></div></div>`);
     const live = log.lastElementChild, col = live.querySelector('.chat-col');
     const paint = (statusText) => { col.innerHTML = (ai.offline ? '<span class="chat-mode">AI er ikke slået til endnu · svarer fra regelkortene</span>' : '') + (ai.content ? `<div class="chat-bubble">${md(ai.content)}<i class="chat-caret" aria-hidden="true"></i></div>` : '') + ai.actions.map(actionHtml).join('') + (statusText ? `<span class="chat-status"><i></i><b>${esc(statusText)}</b></span>` : ''); scroll(); };
     input.value = ''; grow(); scroll(); sound('select'); busy(true);

@@ -12,7 +12,7 @@ const T = { // typeKey
   PointsPath: 16, StraightVertex: 5, CubicMirroredVertex: 35,
   Fill: 20, Stroke: 24, SolidColor: 18, LinearGradient: 22, RadialGradient: 17, GradientStop: 19,
   LinearAnimation: 31, KeyedObject: 25, KeyedProperty: 26, KeyFrameDouble: 30, KeyFrameColor: 37,
-  CubicEaseInterpolator: 28, TrimPath: 47,
+  CubicEaseInterpolator: 28, ElasticInterpolator: 174, TrimPath: 47, BlendState1DInput: 76, BlendAnimation1D: 75,
   StateMachine: 53, StateMachineLayer: 57, StateMachineTrigger: 58, StateMachineBool: 59, StateMachineNumber: 56,
   AnimationState: 61, EntryState: 63, AnyState: 62, ExitState: 64, StateTransition: 65,
   TransitionTriggerCondition: 68, TransitionBoolCondition: 71, TransitionNumberCondition: 70,
@@ -35,6 +35,8 @@ export const P = {
   smName: [138, 's'], boolValue: [141, 'b'], numberValue: [140, 'd'],
   animationId: [149, 'u'], stateToId: [151, 'u'], flags: [152, 'u'], tDuration: [158, 'u'], exitTime: [160, 'u'],
   inputId: [155, 'u'], opValue: [156, 'u'], condValue: [157, 'd'],
+  blendInputId: [167, 'u'], blendAnimationId: [165, 'u'], blendValue: [166, 'd'],
+  easingValue: [405, 'u'], amplitude: [406, 'd'], period: [407, 'd'],
   trimStart: [114, 'd'], trimEnd: [115, 'd'], trimOffset: [116, 'd'], trimMode: [117, 'u'],
 };
 // property keys that animations target (KeyedProperty.propertyKey)
@@ -77,6 +79,13 @@ export class Artboard {
     if (!this.interpolators.has(key)) { this.items.push({ type: 'CubicEaseInterpolator', props: { x1, y1, x2, y2 }, noParent: true }); this.interpolators.set(key, this.items.length - 1); }
     return this.interpolators.get(key);
   }
+  /** a spring-like ease: { elastic: 'in' | 'out' | 'inOut', amplitude = 1, period = .5 } */
+  elastic({ elastic = 'out', amplitude = 1, period = .5 }) {
+    const key = ['elastic', elastic, amplitude, period].join(',');
+    if (!this.interpolators.has(key)) { this.items.push({ type: 'ElasticInterpolator', props: { easingValue: { in: 0, out: 1, inOut: 2 }[elastic], amplitude, period }, noParent: true }); this.interpolators.set(key, this.items.length - 1); }
+    return this.interpolators.get(key);
+  }
+  interpolator(ease) { return ease && ease.elastic ? this.elastic(ease) : this.ease(...ease); }
   /**
    * animation(name, { fps, duration (frames), loop: 'oneShot'|'loop'|'pingPong', tracks: [{ object, prop, keys: [[frame, value, ease?]] }] })
    * value is a number, or a '#hex' colour for prop 'color'. ease is [x1,y1,x2,y2], 'hold' or omitted (linear).
@@ -125,7 +134,7 @@ export function writeRiv(artboards, { fileId = 0 } = {}) {
   writeObject(w, 'Backboard', {});
   for (const ab of artboards) {
     // interpolators live in the artboard's object list, so register every ease before writing it
-    for (const a of ab.animations) for (const t of a.tracks) for (const k of t.keys) if (Array.isArray(k[2])) ab.ease(...k[2]);
+    for (const a of ab.animations) for (const t of a.tracks) for (const k of t.keys) if (Array.isArray(k[2]) || k[2]?.elastic) ab.interpolator(k[2]);
     ab.items.forEach((it, i) => {
       const props = { ...it.props }; if (i === 0 || it.noParent) delete props.parentId;
       writeObject(w, it.type, props);
@@ -140,7 +149,7 @@ export function writeRiv(artboards, { fileId = 0 } = {}) {
         for (const t of tracks) {
           writeObject(w, 'KeyedProperty', { propertyKey: K[t.prop] ?? t.prop });
           for (const [frame, value, ease] of t.keys) {
-            const interp = ease === 'hold' ? { interpolationType: 0 } : Array.isArray(ease) ? { interpolationType: 2, interpolatorId: ab.ease(...ease) } : { interpolationType: 1 };
+            const interp = ease === 'hold' ? { interpolationType: 0 } : (Array.isArray(ease) || ease?.elastic) ? { interpolationType: 2, interpolatorId: ab.interpolator(ease) } : { interpolationType: 1 };
             if (t.prop === 'color') writeObject(w, 'KeyFrameColor', { frame, kfColor: color(value), ...interp });
             else writeObject(w, 'KeyFrameDouble', { frame, kfValue: value, ...interp });
           }
@@ -178,7 +187,13 @@ export function writeRiv(artboards, { fileId = 0 } = {}) {
         writeObject(w, 'EntryState', {}); writeTransitions('entry');
         writeObject(w, 'AnyState', {}); writeTransitions('any');
         writeObject(w, 'ExitState', {}); writeTransitions('exit');
-        for (const s of layer.states) { writeObject(w, 'AnimationState', { animationId: s.animation }); writeTransitions(s.name); }
+        for (const s of layer.states) {
+          if (s.blend) {
+            writeObject(w, 'BlendState1DInput', { blendInputId: inputIndex.get(s.blend.input) });
+            for (const b of s.blend.animations) writeObject(w, 'BlendAnimation1D', { blendAnimationId: b.animation, blendValue: b.value });
+          } else writeObject(w, 'AnimationState', { animationId: s.animation });
+          writeTransitions(s.name);
+        }
       }
     }
   }

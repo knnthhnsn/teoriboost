@@ -6,12 +6,20 @@
 //   flame:lit | flame:out | flame:boost   the streak flame; boost flares it once
 //   celebrate                         badge, ring burst and confetti
 //   confetti                          the burst without the badge, around a character
+//   gauge:<0-100>                     a speedometer; the needle swings to the number
+//   traffic                           a traffic light running the Danish sequence (waiting)
+//   bolt | bolt:earn                  the Booster bolt; glints now and then, jumps on earn
+//   target:open | target:met          today's goal; a dart lands when it is met
 const BASE = 'assets/rive/';
 const BOARDS = {
   feedback: { artboard: 'Feedback', machine: 'Feedback' },
   flame: { artboard: 'Flame', machine: 'Flame' },
   celebrate: { artboard: 'Celebrate', machine: 'Celebrate' },
   confetti: { artboard: 'Confetti', machine: 'Confetti' },
+  gauge: { artboard: 'Gauge', machine: 'Gauge' },
+  traffic: { artboard: 'TrafficLight', machine: 'TrafficLight' },
+  bolt: { artboard: 'Bolt', machine: 'Bolt' },
+  target: { artboard: 'Target', machine: 'Target' },
 };
 let runtime = null, file = null;
 const live = new Map(); // element -> Rive instance
@@ -58,12 +66,26 @@ async function mount(el) {
         const input = n => inputs.find(i => i.name === n);
         if (name === 'feedback' && input(state)) setTimeout(() => input(state)?.fire(), 60);
         if (name === 'flame') { if (input('lit')) input('lit').value = state !== 'out'; if (state === 'boost') setTimeout(() => input('boost')?.fire(), 250); }
+        if (name === 'gauge' && input('pct')) swing(input('pct'), Math.max(0, Math.min(100, Number(state) || 0)));
+        if (name === 'target' && state === 'met') setTimeout(() => { if (input('met')) input('met').value = true; }, 350);
+        if (name === 'bolt' && state === 'earn') setTimeout(() => input('earn')?.fire(), 450);
       },
     });
     live.set(el, inst);
   } catch (e) {
     delete el.dataset.riveOn; console.warn('rive-fx:', e?.message || e); // the element's own icon stays
   }
+}
+
+/** the needle swings up to the value with a little overshoot, like a real gauge settling */
+function swing(input, to) {
+  const t0 = performance.now(), dur = 1300;
+  const tick = t => {
+    const k = Math.min(1, (t - t0) / dur), settle = 1 - Math.pow(1 - k, 3);
+    input.value = to * settle + Math.sin(k * Math.PI * 3) * (1 - k) * Math.min(10, to * .25 + 3);
+    if (k < 1) requestAnimationFrame(tick); else input.value = to;
+  };
+  requestAnimationFrame(tick);
 }
 
 function sweep() {

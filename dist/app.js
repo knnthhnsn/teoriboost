@@ -205,7 +205,7 @@ route();
 var myCarSlot='',myCarMessage=''; // var: the first route() runs above this line
 function carProgress(){return {journey:state.journey,history:state.history};}
 function myCarView(){const g=withEarnings(loadGarage(),carProgress());saveGarage(g);const html=renderMyCar({garage:g,progress:carProgress(),slot:myCarSlot,message:myCarMessage||''});myCarMessage='';return html;}
-function updateBoosterChipText(){const el=document.getElementById('booster-chip');if(el){el.innerHTML=boosterCount(balance(carProgress(),loadGarage()));el.hidden=false;}}
+function updateBoosterChipText(rive='bolt'){const el=document.getElementById('booster-chip');if(el){el.innerHTML=boosterCount(balance(carProgress(),loadGarage()),rive);el.hidden=false;}}
 function applyCar(r){if(r){saveGarage(r.garage);myCarMessage=r.message;}const y=scrollY;$('view').innerHTML=myCarView();scrollTo(0,y);updateBoosterChip();}
 document.addEventListener('click',e=>{const stage=e.target.closest('[data-mybil-rev]');if(stage){revCar(stage);return;}const b=e.target.closest('[data-mybil-base],[data-mybil-part],[data-mybil-slot],[data-mybil-extra],[data-mybil-color],[data-mybil-unequip],[data-mybil-unequip-all]');if(!b)return;const progress=carProgress();const g0=withEarnings(loadGarage(),progress);let r=null;if(b.hasAttribute('data-mybil-unequip'))r=unequipSlot(g0,b.dataset.mybilUnequip);else if(b.hasAttribute('data-mybil-unequip-all'))r=unequipAll(g0);else if(b.dataset.mybilSlot){myCarSlot=b.dataset.mybilSlot;void experience.play('nav');}else if(b.dataset.mybilBase)r=buyBase(g0,progress,b.dataset.mybilBase);else if(b.dataset.mybilExtra)r=buyOrToggleExtra(g0,progress,b.dataset.mybilExtra);else if(b.dataset.mybilColor)r=setColor(g0,b.dataset.mybilColor,b.dataset.value);else r=buyOrEquipPart(g0,progress,b.dataset.mybilPart);carSound(b,g0,r);applyCar(r);if(r?.ok)carMoment(b,g0,r);});
 document.addEventListener('change',e=>{const c=e.target.closest('[data-mybil-color-input]');const t=e.target.closest('[data-mybil-plate]');if(!c&&!t)return;const g0=withEarnings(loadGarage(),carProgress());const r=c?setColor(g0,c.dataset.mybilColorInput,c.value):setPlate(g0,t.value);void experience.play(!r?.ok?'repair':c?'color':'plate');applyCar(r);if(r?.ok&&t)carMoment(null,g0,r,'plate');});
@@ -254,8 +254,8 @@ function puffs(stage){
 }
 /** Booster chip: counts up and sparkles when you earn, dips when you spend. */
 function updateBoosterChip(){
-  updateBoosterChipText();const el=document.getElementById('booster-chip');if(!el)return;
   const now=balance(carProgress(),loadGarage());
+  updateBoosterChipText(lastBoosters!=null&&now>lastBoosters?'bolt:earn':'bolt');const el=document.getElementById('booster-chip');if(!el)return;
   if(lastBoosters!=null&&now!==lastBoosters){
     const up=now>lastBoosters;
     if(up)void experience.play('booster',{delay:.6});

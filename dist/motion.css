@@ -275,3 +275,21 @@ html.is-hidden *,html.is-hidden *::before,html.is-hidden *::after{animation-play
 .journey-celebration[data-rive]{position:absolute;left:50%;top:0;width:260px;height:260px;translate:-50% -30px;pointer-events:none;z-index:0}
 .journey-celebration[data-rive-on="on"] i{display:none}
 .journey-lesson-done>:not(.journey-celebration){position:relative;z-index:1}
+
+/* elements whose own content stays visible on top of the Rive canvas */
+[data-rive-on="on"]>.rive-keep{visibility:visible;position:relative;z-index:1}
+/* Lær: the readiness ring as a speedometer; the number sits in the gap at the bottom of the dial */
+.mh-ring[data-rive-on="on"]{background:rgba(8,16,28,.62)}
+.mh-ring[data-rive-on="on"]>.mh-ring-num{position:absolute;left:0;right:0;bottom:7%;display:grid;justify-items:center;line-height:1}
+.mh-ring[data-rive-on="on"] .mh-ring-num b{font-size:17px}
+.mh-ring[data-rive-on="on"] .mh-ring-num small{font-size:9.5px;margin-top:0}
+@media (min-width:860px){.mh-ring[data-rive-on="on"] .mh-ring-num b{font-size:21px}.mh-ring[data-rive-on="on"] .mh-ring-num small{font-size:11px}}
+.mh-ico[data-rive^="target"] .rive-canvas{inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px)}
+/* Profil: a small dark dial next to the percentage */
+.ready-gauge{display:none;flex:none;width:76px;height:76px;border-radius:18px;background:#1B2330}
+.ready-gauge[data-rive-on]{display:block}
+/* Spørg AI: a traffic light while waiting for the first word */
+.chat-status i[data-rive-on="on"]{display:inline-block;width:12px;height:28px;vertical-align:middle;border:0;border-radius:0;background:none;animation:none}
+/* the Booster bolt in the top bar */
+.bolt-rive{display:inline-grid;place-items:center}
+.bolt-rive .rive-canvas{inset:-9px;width:calc(100% + 18px);height:calc(100% + 18px)}

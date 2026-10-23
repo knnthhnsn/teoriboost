@@ -677,6 +677,8 @@ html[data-theme="dark"] .fb-badge{background:var(--good,#58CC02);color:#fff}
 html[data-theme="dark"] .fb-badge[data-rive$="wrong"]{background:var(--bad,#FF4B4B)}
 html[data-theme="dark"] .fb-badge[data-rive-on="on"]{background:none}
 html[data-theme="dark"] .judge__done-ico[data-rive-on="on"],html[data-theme="dark"] .chip-ico[data-rive-on="on"]{background:none!important;box-shadow:none!important}
+html[data-theme="dark"] .ready-gauge{background:#1B2330}
+html[data-theme="dark"] .chat-status i[data-rive-on="on"]{border:0;background:none}
 
 /* start.css */
 html[data-theme="dark"] .mybil-dream{border:2px solid var(--accent-shadow,#9BC42A);background:#37421b;color:var(--ink);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}

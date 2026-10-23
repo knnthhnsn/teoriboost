@@ -3,11 +3,13 @@
 //   Flame     - state machine "Flame", bool lit + trigger boost: the streak flame burns, goes grey at 0, flares up
 //   Celebrate - state machine "Celebrate", trigger play (also plays on load): badge, ring burst and confetti
 //   Confetti  - the same burst without the badge, to play around a character
+//   Gauge (number pct), TrafficLight, Bolt (trigger earn), Target (bool met): see boards-more.mjs
 // Colours are the app's palette. Run: node tools/rive/build-teoriboost.mjs
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { Artboard, writeRiv } from './riv.mjs';
+import { gauge, trafficLight, bolt, target } from './boards-more.mjs';
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), '../../dist/assets/rive/teoriboost.riv');
 const C = { lime: '#D5FF62', limeEdge: '#8DB423', green: '#58CC02', red: '#FF4B4B', ink: '#141A0A', white: '#FFFFFF', blue: '#38BDF8', orange: '#FF9600', yellow: '#FFC800', grey: '#A3ADB6', greyLight: '#D9DEE3' };
@@ -216,6 +218,6 @@ function celebrate(withBadge = true) {
 }
 
 mkdirSync(dirname(OUT), { recursive: true });
-const bytes = writeRiv([feedback(), flameBoard(), celebrate(), celebrate(false)], { fileId: 1 });
+const bytes = writeRiv([feedback(), flameBoard(), celebrate(), celebrate(false), gauge(), trafficLight(), bolt(), target()], { fileId: 1 });
 writeFileSync(OUT, bytes);
 console.log('teoriboost.riv', bytes.length, 'bytes');

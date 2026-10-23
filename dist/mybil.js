@@ -144,8 +144,8 @@ const fmt = n => new Intl.NumberFormat('da-DK').format(n);
 export function boosterIcon(size = 20) {
   return `<svg class="booster-icon" viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="#D5FF62" stroke="#1F2328" stroke-width="2"/><path d="M13.5 4.5 7.5 13h4l-1 6.5 6-8.5h-4z" fill="#1F2328"/></svg>`;
 }
-export function boosterCount(amount) {
-  return `${boosterIcon()}<b>${fmt(amount)}</b><span class="sr-only"> Boosters</span>`;
+export function boosterCount(amount, rive = '') {
+  return `${rive ? `<span class="bolt-rive" data-rive="${rive}">${boosterIcon()}</span>` : boosterIcon()}<b>${fmt(amount)}</b><span class="sr-only"> Boosters</span>`;
 }
 
 /** Layers of the active vehicle, in stacking order. Masks are tinted: a coloured shape plus the grey shading multiplied on top. */

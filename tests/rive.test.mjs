@@ -19,8 +19,8 @@ test('the .riv writer produces a version 7 runtime file', () => {
   assert.equal(color('#D5FF62'), 0xFFD5FF62);
 });
 
-test('teoriboost.riv has the four artboards and their inputs', () => {
+test('teoriboost.riv has all the artboards and their inputs', () => {
   const text = ascii(readFileSync(new URL('../dist/assets/rive/teoriboost.riv', import.meta.url)));
   assert.ok(text.startsWith('RIVE'));
-  for (const name of ['Feedback', 'Flame', 'Celebrate', 'Confetti', 'right', 'wrong', 'lit', 'boost', 'play']) assert.ok(text.includes(name), name);
+  for (const name of ['Feedback', 'Flame', 'Celebrate', 'Confetti', 'Gauge', 'TrafficLight', 'Bolt', 'Target', 'right', 'wrong', 'lit', 'boost', 'play', 'pct', 'earn', 'met']) assert.ok(text.includes(name), name);
 });
