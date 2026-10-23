@@ -271,7 +271,7 @@ html.is-hidden *,html.is-hidden *::before,html.is-hidden *::after{animation-play
 .judge__done-ico[data-rive-on="on"],.mh-ico[data-rive-on="on"],.chip-ico[data-rive-on="on"]{background:none!important;box-shadow:none!important}
 .judge__done-ico .rive-canvas{inset:-10px;width:calc(100% + 20px);height:calc(100% + 20px)}
 .rive-hero{height:190px;margin:-6px 0 -10px}
-.rive-hero:not([data-rive-on]){display:none}
+.rive-hero:not([data-rive-on]),.rive-hero[data-rive-on="off"]{display:none}
 .journey-celebration[data-rive]{position:absolute;left:50%;top:0;width:260px;height:260px;translate:-50% -30px;pointer-events:none;z-index:0}
 .journey-celebration[data-rive-on="on"] i{display:none}
 .journey-lesson-done>:not(.journey-celebration){position:relative;z-index:1}
@@ -287,9 +287,17 @@ html.is-hidden *,html.is-hidden *::before,html.is-hidden *::after{animation-play
 .mh-ico[data-rive^="target"] .rive-canvas{inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px)}
 /* Profil: a small dark dial next to the percentage */
 .ready-gauge{display:none;flex:none;width:76px;height:76px;border-radius:18px;background:#1B2330}
-.ready-gauge[data-rive-on]{display:block}
+.ready-gauge[data-rive-on]:not([data-rive-on="off"]){display:block}
 /* Spørg AI: a traffic light while waiting for the first word */
 .chat-status i[data-rive-on="on"]{display:inline-block;width:12px;height:28px;vertical-align:middle;border:0;border-radius:0;background:none;animation:none}
 /* the Booster bolt in the top bar */
 .bolt-rive{display:inline-grid;place-items:center}
 .bolt-rive .rive-canvas{inset:-9px;width:calc(100% + 18px);height:calc(100% + 18px)}
+
+/* Min bil: the dream-build show on its dark stage; the CSS glow-up underneath is the fallback */
+.dream-rive{position:relative;width:min(100%,520px);aspect-ratio:1/1;margin:0 auto;display:grid;place-items:center}
+.dream-rive[data-rive-on="on"]>.gu{position:absolute;inset:0}
+.dream-modal:has(.dream-rive[data-rive-on="on"]){background:#0B0D15!important;padding:0 0 16px}
+.dream-modal:has(.dream-rive[data-rive-on="on"]) .fine-print{color:#C9CFDB;border:0;margin:4px 0 0;padding:0 18px;text-align:center}
+.dream-modal .btn.dream-replay{display:flex;margin:12px auto 0;background:#1E2236!important;color:#F4F6FA!important;border:2px solid #3A4060!important;box-shadow:0 4px 0 #05060A}
+.dream-modal .btn.dream-replay[hidden]{display:none}

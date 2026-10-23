@@ -1,4 +1,4 @@
-import {initRiveFx} from './rive-fx.js';
+import {initRiveFx,riveFire} from './rive-fx.js';
 import {createAccount} from './account.js';
 import {FIREBASE_CONFIG} from './firebase-config.js';
 import {mergeIntro,mergeGarage,mergeOrder} from './cloud-merge.js';
@@ -301,10 +301,21 @@ document.addEventListener('click',e=>{
 });
 
 // Min bil: watch the dream build of your own vehicle, part by part
-document.addEventListener('click',e=>{if(!e.target.closest('[data-mybil-dream]'))return;const g=loadGarage();
-  openModal('Sådan kan den blive',`<div class="dream-modal">${glowUp([g.active],{loop:false})}<p class="fine-print">Alt her kan du købe for Boosters. Farverne vælger du selv.</p></div>`);
-  let stop=mountGlowUp($('modal-content'),{sound:cue=>void experience.play(cue)});
-  $('modal').addEventListener('close',()=>{stop?.();stop=null;},{once:true});});
+// The Rive show (glowup-<base>.riv) plays when it can; the CSS glow-up runs if Rive is off or fails.
+const DREAM_CUES=base=>[[1150,'rev-'+base],[2080,'paint'],[3420,'booster'],[3620,'neon'],[3850,'lower']];
+document.addEventListener('click',e=>{
+  const again=e.target.closest('[data-dream-replay]');
+  if(again){const stage=$('modal-content').querySelector('.dream-rive');riveFire(stage,'play');dreamSounds?.(stage.dataset.rive.split(':')[1]);return;}
+  if(!e.target.closest('[data-mybil-dream]'))return;const g=loadGarage();
+  openModal('Sådan kan den blive',`<div class="dream-modal"><div class="dream-rive" data-rive="glowup:${g.active}">${glowUp([g.active],{loop:false})}</div><p class="fine-print">Alt her kan du købe for Boosters. Farverne vælger du selv.</p><button type="button" class="btn btn-secondary dream-replay" data-dream-replay hidden>Se igen</button></div>`);
+  const host=$('modal-content'),stage=host.querySelector('.dream-rive');let stop=null,timers=[];
+  const fallback=()=>{if(!stop)stop=mountGlowUp(host,{sound:cue=>void experience.play(cue)});};
+  dreamSounds=base=>{timers.forEach(clearTimeout);timers=DREAM_CUES(base).map(([ms,cue])=>setTimeout(()=>void experience.play(cue),ms));};
+  stage.addEventListener('rive-on',()=>{host.querySelector('[data-dream-replay]').hidden=false;dreamSounds(g.active);},{once:true});
+  stage.addEventListener('rive-off',fallback,{once:true});
+  if(document.body.classList.contains('no-motion')||reduceMotion.matches)fallback();
+  $('modal').addEventListener('close',()=>{stop?.();stop=null;timers.forEach(clearTimeout);dreamSounds=null;},{once:true});});
+var dreamSounds=null;
 
 var dayNightDispose; // no initialiser: the first route() already set it
 

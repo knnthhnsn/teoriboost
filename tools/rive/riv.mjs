@@ -1,5 +1,6 @@
 // A small writer for Rive's runtime format (.riv, major 7). It knows only the objects TeoriBoost needs:
-// shapes, fills/strokes, keyframe animations and state machines with triggers/booleans/numbers.
+// shapes, fills/strokes, gradients, embedded images, clipping, blend modes, keyframe animations and
+// state machines with triggers/booleans/numbers.
 // Type and property numbers come from rive-runtime's generated headers (include/rive/generated/*_base.hpp).
 //
 // Structure of the file: "RIVE", major, minor, file id, a list of property keys the runtime might not know
@@ -16,8 +17,9 @@ const T = { // typeKey
   StateMachine: 53, StateMachineLayer: 57, StateMachineTrigger: 58, StateMachineBool: 59, StateMachineNumber: 56,
   AnimationState: 61, EntryState: 63, AnyState: 62, ExitState: 64, StateTransition: 65,
   TransitionTriggerCondition: 68, TransitionBoolCondition: 71, TransitionNumberCondition: 70,
+  ImageAsset: 105, FileAssetContents: 106, Image: 100, ClippingShape: 42,
 };
-// property key -> [key, type]  type: u=varuint, d=float32, s=string, b=bool, c=color(uint32)
+// property key -> [key, type]  type: u=varuint, d=float32, s=string, b=bool, c=color(uint32), y=bytes
 export const P = {
   name: [4, 's'], parentId: [5, 'u'],
   width: [7, 'd'], height: [8, 'd'], originX: [11, 'd'], originY: [12, 'd'], clip: [196, 'b'],
@@ -38,7 +40,13 @@ export const P = {
   blendInputId: [167, 'u'], blendAnimationId: [165, 'u'], blendValue: [166, 'd'],
   easingValue: [405, 'u'], amplitude: [406, 'd'], period: [407, 'd'],
   trimStart: [114, 'd'], trimEnd: [115, 'd'], trimOffset: [116, 'd'], trimMode: [117, 'u'],
+  blendModeValue: [23, 'u'], gradientOpacity: [46, 'd'],
+  assetName: [203, 's'], fileAssetId: [204, 'u'], assetWidth: [208, 'd'], assetHeight: [207, 'd'], bytes: [212, 'y'],
+  imageAssetId: [206, 'u'], imageOriginX: [380, 'd'], imageOriginY: [381, 'd'],
+  sourceId: [92, 'u'], clipFillRule: [93, 'u'], clipVisible: [94, 'b'],
 };
+// Drawable.blendModeValue (rive/shapes/paint/blend_mode.hpp)
+export const BLEND = { srcOver: 3, additive: 12, screen: 14, overlay: 15, darken: 16, lighten: 17, colorDodge: 18, hardLight: 20, softLight: 21, multiply: 24 };
 // property keys that animations target (KeyedProperty.propertyKey)
 export const K = { x: 13, y: 14, rotation: 15, scaleX: 16, scaleY: 17, opacity: 18, width: 20, height: 21, color: 37, thickness: 47, cornerRadius: 31, trimStart: 114, trimEnd: 115, trimOffset: 116 };
 
@@ -49,7 +57,7 @@ class Writer {
   f32(v) { const b = new DataView(new ArrayBuffer(4)); b.setFloat32(0, v, true); for (let i = 0; i < 4; i++) this.byte(b.getUint8(i)); }
   u32(v) { const b = new DataView(new ArrayBuffer(4)); b.setUint32(0, v >>> 0, true); for (let i = 0; i < 4; i++) this.byte(b.getUint8(i)); }
   str(s) { const e = new TextEncoder().encode(s); this.varuint(e.length); e.forEach(x => this.byte(x)); }
-  value(t, v) { ({ u: () => this.varuint(v), d: () => this.f32(v), s: () => this.str(v), b: () => this.byte(v ? 1 : 0), c: () => this.u32(v) })[t](); }
+  value(t, v) { ({ u: () => this.varuint(v), d: () => this.f32(v), s: () => this.str(v), b: () => this.byte(v ? 1 : 0), c: () => this.u32(v), y: () => { this.varuint(v.length); for (const x of v) this.byte(x); } })[t](); }
 }
 
 /** '#RRGGBB' or '#RRGGBBAA' -> ARGB uint32 */
@@ -112,6 +120,10 @@ const RENAME = {
   CubicMirroredVertex: { x: 'vx', y: 'vy', rotation: 'vrotation', distance: 'vdistance' },
   GradientStop: { color: 'stopColor', position: 'stopPosition' },
   SolidColor: { color: 'colorValue' },
+  LinearGradient: { opacity: 'gradientOpacity' }, RadialGradient: { opacity: 'gradientOpacity' },
+  // Image: assetId is the index of the asset in writeRiv's assets list; the image is centred on its origin
+  Image: { assetId: 'imageAssetId', originX: 'imageOriginX', originY: 'imageOriginY' },
+  ClippingShape: { fillRule: 'clipFillRule', isVisible: 'clipVisible' },
 };
 
 function writeObject(w, type, props) {
@@ -126,12 +138,20 @@ function writeObject(w, type, props) {
   w.varuint(0);
 }
 
-export function writeRiv(artboards, { fileId = 0 } = {}) {
+/**
+ * assets: [{ name, width, height, bytes }] embedded images (png/webp/jpeg bytes). They belong to the backboard,
+ * so they come right after it; an Image refers to one by its index in this list.
+ */
+export function writeRiv(artboards, { fileId = 0, assets = [] } = {}) {
   const w = new Writer();
   'RIVE'.split('').forEach(c => w.byte(c.charCodeAt(0)));
   w.varuint(7); w.varuint(4); w.varuint(fileId);
   w.varuint(0); // no unknown property keys -> no field-type table
   writeObject(w, 'Backboard', {});
+  assets.forEach((a, i) => {
+    writeObject(w, 'ImageAsset', { assetName: a.name, fileAssetId: i, assetWidth: a.width, assetHeight: a.height });
+    writeObject(w, 'FileAssetContents', { bytes: a.bytes });
+  });
   for (const ab of artboards) {
     // interpolators live in the artboard's object list, so register every ease before writing it
     for (const a of ab.animations) for (const t of a.tracks) for (const k of t.keys) if (Array.isArray(k[2]) || k[2]?.elastic) ab.interpolator(k[2]);

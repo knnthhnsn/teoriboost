@@ -1,4 +1,4 @@
-// Rive animations (assets/rive/teoriboost.riv, built by tools/rive/build-teoriboost.mjs).
+// Rive animations (assets/rive/teoriboost.riv, built by tools/rive/build-teoriboost.mjs; glowup-<base>.riv by build-glowup.mjs).
 // Any element with data-rive="<name>[:<state>]" gets a Rive canvas on top of its own content, which stays as the
 // fallback: it shows while Rive loads, if it fails, and always when motion is off. The runtime (~2.6 MB) is
 // fetched only the first time such an element appears.
@@ -10,6 +10,8 @@
 //   traffic                           a traffic light running the Danish sequence (waiting)
 //   bolt | bolt:earn                  the Booster bolt; glints now and then, jumps on earn
 //   target:open | target:met          today's goal; a dart lands when it is met
+//   glowup:<base>                     the dream-build show for scooter | smallcar | bigcar | racecar
+// The element gets a bubbling 'rive-on' event when its animation is running, 'rive-off' when it will not run.
 const BASE = 'assets/rive/';
 const BOARDS = {
   feedback: { artboard: 'Feedback', machine: 'Feedback' },
@@ -20,8 +22,9 @@ const BOARDS = {
   traffic: { artboard: 'TrafficLight', machine: 'TrafficLight' },
   bolt: { artboard: 'Bolt', machine: 'Bolt' },
   target: { artboard: 'Target', machine: 'Target' },
+  glowup: { artboard: 'GlowUp', machine: 'GlowUp', file: base => `glowup-${base}.riv`, states: ['scooter', 'smallcar', 'bigcar', 'racecar'] },
 };
-let runtime = null, file = null;
+let runtime = null; const files = new Map(); // file name -> its bytes
 const live = new Map(); // element -> Rive instance
 
 const still = () => document.body.classList.contains('no-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -42,26 +45,29 @@ function loadRuntime() {
   });
   return runtime;
 }
-// the file's bytes are fetched once; each animation parses its own copy (12 KB). A shared RiveFile is released
+// each file's bytes are fetched once; each animation parses its own copy. A shared RiveFile is released
 // by the runtime when the last animation using it is cleaned up, which breaks the next page.
-function loadFile() {
-  file ||= fetch(BASE + 'teoriboost.riv').then(res => { if (!res.ok) throw new Error('teoriboost.riv ' + res.status); return res.arrayBuffer(); });
-  return file;
+function loadFile(name) {
+  if (!files.has(name)) files.set(name, fetch(BASE + name).then(res => { if (!res.ok) throw new Error(name + ' ' + res.status); return res.arrayBuffer(); }));
+  return files.get(name);
 }
+const signal = (el, type) => el.dispatchEvent(new CustomEvent(type, { bubbles: true }));
 
 async function mount(el) {
-  const [name, state = ''] = el.dataset.rive.split(':'); const spec = BOARDS[name]; if (!spec) return;
+  const [name, state = ''] = el.dataset.rive.split(':'); const spec = BOARDS[name];
+  if (!spec || (spec.states && !spec.states.includes(state))) { el.dataset.riveOn = 'off'; signal(el, 'rive-off'); return; }
   el.dataset.riveOn = 'loading';
   try {
-    const r = await loadRuntime(); const bytes = await loadFile();
-    if (!el.isConnected || still()) { delete el.dataset.riveOn; return; }
+    const r = await loadRuntime(); const bytes = await loadFile(spec.file ? spec.file(state) : 'teoriboost.riv');
+    if (!el.isConnected || still()) { delete el.dataset.riveOn; signal(el, 'rive-off'); return; }
     const canvas = document.createElement('canvas'); canvas.className = 'rive-canvas'; canvas.setAttribute('aria-hidden', 'true');
     el.append(canvas);
     const inst = new r.Rive({
       buffer: bytes.slice(0), canvas, artboard: spec.artboard, stateMachine: spec.machine, autoplay: true,
       layout: new r.Layout({ fit: r.Fit.Contain, alignment: r.Alignment.Center }),
       onLoad: () => {
-        inst.resizeDrawingSurfaceToCanvas(); el.dataset.riveOn = 'on';
+        inst.resizeDrawingSurfaceToCanvas(); el.dataset.riveOn = 'on'; signal(el, 'rive-on');
+        requestAnimationFrame(() => inst.resizeDrawingSurfaceToCanvas()); // 'on' styles can change the element's size
         const inputs = inst.stateMachineInputs(spec.machine) || [];
         const input = n => inputs.find(i => i.name === n);
         if (name === 'feedback' && input(state)) setTimeout(() => input(state)?.fire(), 60);
@@ -73,7 +79,7 @@ async function mount(el) {
     });
     live.set(el, inst);
   } catch (e) {
-    delete el.dataset.riveOn; console.warn('rive-fx:', e?.message || e); // the element's own icon stays
+    el.dataset.riveOn = 'off'; signal(el, 'rive-off'); console.warn('rive-fx:', e?.message || e); // the element's own icon stays
   }
 }
 
