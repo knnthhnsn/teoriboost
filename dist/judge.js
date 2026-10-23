@@ -3,6 +3,7 @@ import { createJudgeWorld } from './judge-world.js';
 import {createVoiceCue} from './voice-cues.js';
 import {renderArt} from './art.js';
 import {judgeVoiceParts,JUDGE_INTRO_VOICE} from './voice-texts.js';
+import { ico } from './ui-icons.js';
 
 const SOURCE_BY_ID = new Map(SOURCES.map(source => [source.id, source]));
 const SHORT_SOURCE = Object.freeze({
@@ -153,9 +154,12 @@ export function getJudgeCases() {
 }
 
 export function renderJudge() {
-  return `<section class="judge" data-judge-root aria-label="Du er kørelæreren">
+  return `<section class="judge" data-judge-root aria-labelledby="judge-title">
+    <div class="game-top"><a class="game-close" href="#practice" aria-label="Luk spillet og gå til Øv">${ico('x')}</a>
+      <div class="game-cases" aria-hidden="true">${CASES.map(() => '<i></i>').join('')}</div>
+      <span class="game-count" data-judge-progress>Du er kørelæreren</span></div>
     <header class="judge__header">
-      <div class="judge__heading"><p class="judge__eyebrow">TEORIBOOST · DIN FØRSTE VAGT</p><h1 class="judge__title" data-judge-title>Du er kørelæreren</h1></div>
+      <div class="judge__heading"><p class="judge__eyebrow" data-judge-eyebrow>DU ER KØRELÆREREN</p><h1 class="judge__title" id="judge-title" data-judge-title>Du er kørelæreren</h1></div>
       <div class="judge__welcome-mascot art-scene">${renderArt('koerelys-brain',{variant:'reaction',priority:true,humorOnly:true})}</div>
       <div class="judge__toggles" data-judge-toggles aria-label="Visning" hidden>
         <button class="judge__toggle" type="button" data-judge-humor aria-pressed="true">Humor</button>
@@ -177,7 +181,7 @@ export function renderJudge() {
       <div class="judge__legend" data-judge-legend hidden><span><i class="judge__legend-blue"></i>Din rettelse</span><span><i class="judge__legend-gray"></i>Fejlklippet</span></div>
     </div>
     <div class="judge__workspace" data-judge-workspace hidden>
-      <div class="judge__step"><span data-judge-step>Trin 1 af 4</span><div class="judge__stepbar" aria-hidden="true"><i data-judge-stepbar></i></div></div>
+      <div class="judge__step"><span class="sr-only" data-judge-step>Trin 1 af 4</span><ol class="judge__track" aria-hidden="true">${['Find', 'Regel', 'Placér', 'Feedback'].map(t => `<li>${t}</li>`).join('')}</ol><i data-judge-stepbar hidden></i></div>
       <p class="judge__setup" data-judge-setup></p>
       <details class="judge__description" data-judge-description><summary>Beskriv klippet med tekst</summary><p data-judge-description-text></p></details>
       <blockquote class="judge__excuse" data-judge-excuse hidden></blockquote>
@@ -246,16 +250,17 @@ export function mountJudge(container, options={}) {
     }[c.id];
     return `<aside class="judge__receipt" aria-label="Stop og Søn kvittering"><div class="judge__receipt-head"><strong>STOP &amp; SØN</strong><span>KVITTERING FOR ET W</span></div><p>UNDSKYLDNING: AFVIST</p><p>${escapeHtml(wheelLine)}</p><p>MANØVRE: RETTET · PRIS: 0 KR</p><small>Ingen bøde. Bare en bedre beslutning.</small></aside>`;
   }
-  function calmWrong(){
-    caseFirstTry=false;
+  function mark(id,cls){root.querySelectorAll(`[data-choice="${CSS.escape(id)}"]`).forEach(b=>{b.classList.remove('is-wrong','is-right');void b.offsetWidth;b.classList.add(cls);if(cls==='is-wrong')b.setAttribute('aria-disabled','true');});}
+  function calmWrong(id){
+    caseFirstTry=false;mark(id,'is-wrong');options.onSound?.('repair');
     els.status.dataset.tone='retry';
     els.status.textContent='Ikke helt. Se på den trafikant eller markering, som direkte ændrer førerens pligt, og prøv igen.';
   }
   function choose(list,id){
     if(transitioning)return;
     const choice=list.find(item=>item.id===id);if(!choice)return;
-    if(!choice.correct){calmWrong();return;}
-    transitioning=true;
+    if(!choice.correct){calmWrong(id);return;}
+    transitioning=true;mark(id,'is-right');options.onSound?.('correct');
     els.status.dataset.tone='ok';els.status.textContent='Korrekt set. Næste trin er klar.';
     const placementDelay=phase===3?world.place(choice.id):0;
     phase=Math.min(4,phase+1);window.setTimeout(()=>{transitioning=false;if(!disposed)paint();},Math.max(260,placementDelay+80));
@@ -268,12 +273,15 @@ export function mountJudge(container, options={}) {
     buttons.forEach(button=>button.addEventListener('click',()=>choose(kind==='issue'?currentCase().issue:currentCase().places,button.dataset.choice)));
     world.bindHotspots(items,buttons);
     els.answers.classList.add('judge__answers--spatial');
-    els.answers.innerHTML=items.map((item,index)=>`<button type="button" class="judge__answer" aria-label="Valg ${index+1}: ${escapeHtml(item.label)}" data-choice="${escapeHtml(item.id)}"><b>${index+1}</b>${escapeHtml(item.label)}</button>`).join('');
+    els.answers.innerHTML=items.map((item,index)=>`<button type="button" class="judge__answer" aria-label="Valg ${index+1}: ${escapeHtml(item.label)}" data-choice="${escapeHtml(item.id)}"><b>${index+1}</b><span>${escapeHtml(item.label)}</span></button>`).join('');
+    // pointing at a row lights up its marker in the scene, and the other way round
+    const pair=id=>root.querySelectorAll(`[data-choice="${CSS.escape(id)}"]`);
+    root.querySelectorAll('.judge__answer[data-choice], .judge__hotspot[data-choice]').forEach(el=>{const on=v=>()=>pair(el.dataset.choice).forEach(x=>x.classList.toggle('is-hot',v));el.addEventListener('pointerenter',on(true));el.addEventListener('pointerleave',on(false));el.addEventListener('focus',on(true));el.addEventListener('blur',on(false));});
     els.answers.querySelectorAll('[data-choice]').forEach(button=>button.addEventListener('click',()=>choose(kind==='issue'?currentCase().issue:currentCase().places,button.dataset.choice)));
   }
   function makeRuleButtons(items){
     items=orderedChoices(items);
-    els.answers.innerHTML=items.map(item=>`<button type="button" class="judge__answer" data-choice="${escapeHtml(item.id)}">${escapeHtml(item.label)}</button>`).join('');
+    els.answers.innerHTML=items.map((item,index)=>`<button type="button" class="judge__answer judge__answer--rule" data-choice="${escapeHtml(item.id)}"><b>${'ABC'[index]}</b><span>${escapeHtml(item.label)}</span></button>`).join('');
     els.answers.querySelectorAll('[data-choice]').forEach(button=>button.addEventListener('click',()=>choose(currentCase().rules,button.dataset.choice)));
   }
   function completeCase(){
@@ -284,17 +292,22 @@ export function mountJudge(container, options={}) {
       completed.add(c.id);if(caseFirstTry)correctFirst++;
       if(typeof options.onCaseComplete==='function') options.onCaseComplete({caseId:c.id,sectionId:c.sectionId,firstTry:caseFirstTry,ruleSourceIds:[...c.sourceIds],explanation:c.explanation});
     }
-    if(caseIndex<CASES.length-1){caseIndex++;phase=1;caseFirstTry=true;world.setCase(currentCase());paint();advancing=false;root.scrollIntoView({block:'start',behavior:'instant'});return;}
+    if(caseIndex<CASES.length-1){caseIndex++;phase=1;caseFirstTry=true;options.onSound?.('step');world.setCase(currentCase());paint();advancing=false;root.scrollIntoView({block:'start',behavior:'instant'});return;}
     if(!finishedCalled){finishedCalled=true;if(typeof options.onFinished==='function')options.onFinished({correctFirst,total:CASES.length});}
-    els.hotspots.innerHTML='';els.answers.innerHTML='';els.prompt.textContent='Alle fire situationer er gennemgået.';
-    els.feedback.hidden=false;els.feedback.innerHTML=`<p><strong>${correctFirst} af ${CASES.length}</strong> blev løst korrekt i første forsøg.</p><p>Du kan afspille det sidste klip igen eller vende tilbage til teorien.</p>`;
+    els.hotspots.innerHTML='';els.answers.innerHTML='';els.prompt.textContent='Vagten er slut. Godt kørt.';options.onSound?.('correct');
+    root.querySelectorAll('.game-cases i').forEach(seg=>{seg.className='is-done';seg.style.setProperty('--p',1);});root.querySelectorAll('.judge__track li').forEach(li=>li.className='is-done');
+    els.feedback.hidden=false;els.feedback.innerHTML=`<div class="judge__done is-first"><span class="judge__done-ico">${ico('check')}</span><div><strong>${correctFirst} af ${CASES.length} i første forsøg</strong><small>Alle fire fejlklip er rettet.</small></div></div><div class="judge__actions"><a class="big-btn big-btn--ghost" href="#practice">Tilbage til Øv</a><button type="button" class="big-btn" data-judge-again>Spil igen</button></div>`;
+    els.feedback.querySelector('[data-judge-again]').addEventListener('click',()=>{location.hash='judge';window.dispatchEvent(new HashChangeEvent('hashchange'));});
     els.status.textContent='';els.step.textContent='Færdig';els.stepbar.style.width='100%';els.score.textContent=`Førstevalg: ${correctFirst}/${CASES.length}`;
   }
   function paint(){
     options.onNarrationStop?.();
     const c=currentCase();
     els.title.textContent=phase===1?['Et kryds i nattebyen','En vej med tværtrafik','Et sving i nattebyen','En tur forbi feltet'][caseIndex]:c.title;
-    els.progress.textContent=phase===1?`Klip ${caseIndex+1} af ${CASES.length}`:`Case ${caseIndex+1} af ${CASES.length} · ${c.short}`;
+    els.progress.textContent=`${caseIndex+1} / ${CASES.length}`;
+    root.querySelector('[data-judge-eyebrow]').textContent=`FEJLKLIP ${caseIndex+1} · ${c.short}`;
+    root.querySelectorAll('.game-cases i').forEach((seg,i)=>{seg.className=i<caseIndex||completed.has(CASES[i].id)?'is-done':i===caseIndex?'is-now':'';seg.style.setProperty('--p',i===caseIndex?(phase-1)/4:i<caseIndex?1:0);});
+    root.querySelectorAll('.judge__track li').forEach((li,i)=>{li.className=i<phase-1?'is-done':i===phase-1?'is-now':'';});
     els.score.hidden=completed.size===0;
     els.score.textContent=`Første forsøg: ${correctFirst}/${completed.size} gennemgået`;
     els.clip.textContent=phase===4?'Din rettede placering':`Fejlklip ${caseIndex+1} · se efter`;
@@ -313,7 +326,7 @@ export function mountJudge(container, options={}) {
       els.feedback.hidden=false;
       const picture=world.snapshot(),placeLabel=c.places.find(x=>x.correct)?.label||'Korrekt placering';
       const thumb=picture?`<figure class="judge__correct-thumb"><img src="${escapeHtml(picture)}" alt="Din rettede bilplacering: ${escapeHtml(placeLabel)}"><figcaption>${escapeHtml(placeLabel)}</figcaption></figure>`:'';
-      els.feedback.innerHTML=`${thumb}<p class="judge__rule"><span>REGEL</span>${escapeHtml(c.explanation)}</p><div class="judge__sources">${sourceLinks(c)}</div>${receipt(c)}<button type="button" class="judge__compare" data-judge-corrected>Se det korrekte forløb</button><button type="button" class="judge__confirm" data-judge-confirm>${caseIndex===CASES.length-1?'Afslut forløbet':'Kvitter og gå til næste case'}</button>`;
+      els.feedback.innerHTML=`<div class="judge__done${caseFirstTry?' is-first':''}"><span class="judge__done-ico">${ico('check')}</span><div><strong>${caseFirstTry?'Klaret i første forsøg':'Klaret'}</strong><small>Du har rettet ${escapeHtml(c.short==='STOP'?'STOP-fejlen':'fejlen')}. Her er reglen.</small></div></div>${thumb}<p class="judge__rule"><span>REGEL</span>${escapeHtml(c.explanation)}</p><div class="judge__sources">${sourceLinks(c)}</div>${receipt(c)}<div class="judge__actions"><button type="button" class="big-btn big-btn--ghost judge__compare" data-judge-corrected>Se det korrekte forløb</button><button type="button" class="big-btn judge__confirm" data-judge-confirm>${caseIndex===CASES.length-1?'Afslut forløbet':'Næste case'}</button></div>`;
       els.feedback.querySelector('[data-judge-corrected]').addEventListener('click',correctedReplay);
       els.feedback.querySelector('[data-judge-confirm]').addEventListener('click',completeCase);
     }

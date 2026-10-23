@@ -1,0 +1,134 @@
+/* ---------- "Du er kørelæreren", in the app's own look ----------
+   Full-screen like a lesson: a top bar (close, one bar per case, count), the scene, then the step.
+   Colours come from the app's tokens, so the dark theme follows on its own; overlays on the
+   night scene keep fixed light-on-dark colours. */
+.judge.judge{
+  --judge-bg:transparent;--judge-panel:var(--panel);--judge-line:var(--line);--judge-white:var(--ink);
+  --judge-muted:var(--muted);--judge-mint:var(--good-ink,#3B8A00);--judge-coral:var(--bad-ink,#D42F2F);--judge-yellow:var(--accent);
+  width:min(100%,1180px);margin:0 auto;padding:0;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;
+  color:var(--ink);font-family:var(--font-body,inherit)}
+
+/* top bar */
+.game-top{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+.game-close{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;color:var(--muted);text-decoration:none}
+.game-close:hover{background:var(--panel2)}
+.game-close .ui-ico{width:24px;height:24px}
+.game-cases{flex:1;display:flex;gap:6px}
+.game-cases i{position:relative;flex:1;height:14px;border-radius:999px;background:var(--panel2);box-shadow:inset 0 0 0 1.5px var(--line);overflow:hidden}
+.game-cases i::after{content:'';position:absolute;inset:0;border-radius:inherit;background:var(--good,#58CC02);transform-origin:0 50%;scale:var(--p,0) 1;transition:scale .45s var(--out,ease)}
+.game-cases i.is-done::after{scale:1 1}
+.game-count{flex:none;min-width:44px;text-align:right;font:800 15px var(--font-display);color:var(--muted)}
+
+/* heading */
+.judge.judge .judge__header{padding:4px 2px 12px;background:none;align-items:center}
+.judge.judge .judge__eyebrow{margin:0 0 4px;color:var(--blue-ink,#0A7BBF);font:800 12px var(--font-display);letter-spacing:.1em}
+#main .judge.judge .judge__title{font:800 clamp(24px,4.2vw,34px)/1.1 var(--font-display)!important;letter-spacing:-.01em;color:var(--ink)}
+.judge.judge .judge__meta{display:none!important}
+.judge.judge .judge__welcome-mascot{width:76px;flex:none}
+
+/* the scene */
+.judge.judge .judge__stage{border-radius:22px;overflow:hidden;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);background:#1a2430}
+.judge.judge .judge__intro{background:linear-gradient(180deg,rgba(10,18,28,.05) 30%,rgba(10,18,28,.78) 100%)!important;align-content:end;padding:26px 22px 28px}
+.judge.judge .judge__intro p{background:rgba(255,255,255,.95)!important;color:#1F2328!important;border:0!important;box-shadow:0 6px 20px rgba(0,0,0,.25)!important;border-radius:16px;font-size:17px;padding:14px 18px}
+.judge.judge .judge__start{min-height:54px;padding:0 26px;border-radius:16px;font:800 17px var(--font-display)!important}
+.judge.judge .judge__intro .judge__voice{background:rgba(255,255,255,.14);color:#fff;border:2px solid rgba(255,255,255,.35);box-shadow:none}
+/* overlays on the night scene */
+.judge.judge .judge__clip-label,.judge.judge .judge__replay,.judge.judge .judge__legend{color:#fff;background:rgba(12,20,30,.72);border:1.5px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.judge.judge .judge__clip-label{border-radius:999px;padding:7px 13px;font:700 13px var(--font-display)}
+.judge.judge .judge__replay{border-radius:999px;min-height:40px;padding:0 15px;font:700 14px var(--font-display)}
+.judge.judge .judge__replay:hover{background:rgba(12,20,30,.86)}
+.judge.judge .judge__legend{border-radius:12px;font-size:13px}
+
+/* markers: lime with the number; the name shows on hover/focus, or when its row is pointed at */
+.judge.judge .judge__hotspot{width:40px;height:40px;min-width:40px;min-height:40px;border:3px solid #fff;background:var(--accent,#D5FF62);color:#141A0A;
+  box-shadow:0 0 0 5px rgba(213,255,98,.25),0 6px 16px rgba(0,0,0,.35);transition:scale .18s var(--spring,ease),box-shadow .18s}
+.judge.judge .judge__hotspot::before{font:800 16px var(--font-display)}
+.judge.judge .judge__hotspot--place{background:#7DD3FC;box-shadow:0 0 0 5px rgba(125,211,252,.25),0 6px 16px rgba(0,0,0,.35)}
+.judge.judge .judge__hotspot span{display:block!important;opacity:0;translate:0 -4px;color:#fff;background:rgba(12,20,30,.88);border:0;border-radius:10px;padding:6px 10px;font:700 12px var(--font-display);transition:opacity .15s,translate .15s}
+.judge.judge .judge__hotspot:hover span,.judge.judge .judge__hotspot:focus-visible span,.judge.judge .judge__hotspot.is-hot span{opacity:1;translate:0 0}
+.judge.judge .judge__hotspot:hover,.judge.judge .judge__hotspot.is-hot{scale:1.14;transform:translate(-50%,-50%)}
+.judge.judge .judge__hotspot.is-wrong{background:#FF8A8A;animation:judge-shake .4s ease}
+.judge.judge .judge__hotspot.is-right{background:#8BE35A}
+
+/* the step card */
+.judge.judge .judge__workspace{margin-top:14px;padding:18px;border:2px solid var(--line);border-radius:22px;background:var(--panel);box-shadow:0 4px 0 var(--line)}
+.judge.judge .judge__step{display:block;font:inherit}
+.judge__track{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0;padding:0;list-style:none;counter-reset:jt}
+.judge__track li{counter-increment:jt;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:0 6px;border-radius:999px;background:var(--panel2);color:var(--muted);font:700 13px var(--font-display);white-space:nowrap}
+.judge__track li::before{content:counter(jt);display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--line);color:var(--ink);font:800 11px var(--font-display)}
+.judge__track li.is-now{background:var(--accent,#D5FF62);color:var(--accent-ink,#1F2328);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}
+.judge__track li.is-now::before{background:rgba(255,255,255,.65);color:#141A0A}
+.judge__track li.is-done{background:var(--good-bg,#E8FBD5);color:var(--good-ink,#3B8A00)}
+.judge__track li.is-done::before{content:'✓';background:var(--good,#58CC02);color:#fff}
+.judge.judge .judge__setup{margin:14px 0 0;color:var(--muted);font-size:16px}
+.judge.judge .judge__description{margin:12px 0 0;font-size:14px;color:var(--muted)}
+.judge.judge .judge__prompt{margin:16px 0 10px;font:800 21px/1.25 var(--font-display);color:var(--ink)}
+.judge.judge .judge__voice{display:inline-flex;align-items:center;min-height:40px;margin:0 0 12px;padding:0 14px;border:2px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);font:700 14px var(--font-display);box-shadow:0 2px 0 var(--line);cursor:pointer}
+.judge.judge .judge__voice[aria-pressed="true"]{border-color:var(--blue-ink,#0A7BBF);color:var(--blue-ink,#0A7BBF)}
+
+/* answers: chunky cards; right turns green, wrong turns red and shakes */
+.judge.judge .judge__answers{display:grid;grid-template-columns:1fr;gap:10px}
+.judge.judge .judge__answer{display:flex;align-items:center;gap:12px;min-height:56px;padding:12px 14px;border:2px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);
+  box-shadow:0 4px 0 var(--line);font:600 16px/1.35 var(--font-body,inherit);text-align:left;cursor:pointer;transition:border-color .15s,background-color .15s,translate .12s}
+.judge.judge .judge__answer b{display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:var(--panel2);color:var(--ink);box-shadow:inset 0 0 0 2px var(--line);font:800 14px var(--font-display)}
+.judge.judge .judge__answers--spatial .judge__answer b{background:var(--accent,#D5FF62);color:#141A0A;box-shadow:none}
+.judge.judge .judge__answer:hover,.judge.judge .judge__answer.is-hot{border-color:var(--blue-ink,#0A7BBF);box-shadow:0 4px 0 var(--blue-ink,#0A7BBF)}
+.judge.judge .judge__answer:active{translate:0 3px;box-shadow:0 1px 0 var(--line)}
+.judge.judge .judge__answer.is-right{border-color:var(--good,#58CC02);background:var(--good-bg,#E8FBD5);box-shadow:0 4px 0 var(--good,#58CC02);color:var(--ink)}
+.judge.judge .judge__answer.is-right b{background:var(--good,#58CC02);color:#fff;font-size:0}
+.judge.judge .judge__answer.is-right b::before{content:'✓';font-size:16px}
+.judge.judge .judge__answer.is-wrong{border-color:var(--bad,#FF4B4B);background:var(--bad-bg,#FFE5E5);box-shadow:0 4px 0 var(--bad,#FF4B4B);animation:judge-shake .4s ease;cursor:default}
+.judge.judge .judge__answer.is-wrong b{background:var(--bad,#FF4B4B);color:#fff;font-size:0}
+.judge.judge .judge__answer.is-wrong b::before{content:'✕';font-size:14px}
+@keyframes judge-shake{20%{translate:-6px 0}40%{translate:6px 0}60%{translate:-4px 0}80%{translate:3px 0}}
+.judge.judge .judge__status{min-height:0;margin:12px 0 0;font:600 14px var(--font-body,inherit)}
+.judge.judge .judge__status:empty{display:none}
+.judge.judge .judge__status[data-tone="retry"]{padding:10px 12px;border-radius:12px;background:var(--bad-bg,#FFE5E5);color:#B42318}
+.judge.judge .judge__status[data-tone="ok"]{padding:10px 12px;border-radius:12px;background:var(--good-bg,#E8FBD5);color:#2B6A00}
+
+/* the driver's excuse: a speech bubble, not a striped block */
+.judge.judge .judge__excuse{margin:14px 0 0;padding:0;border:0;border-radius:0;background:none;color:var(--ink)}
+.judge.judge .judge__driver{margin:0 0 8px}
+.judge.judge .judge__driver svg{width:46px;height:46px;border-radius:12px}
+.judge.judge .judge__driver strong{font:800 17px var(--font-display);color:var(--ink)}
+.judge.judge .judge__driver span{color:var(--muted);font-size:13px}
+.judge.judge .judge__excuse p{position:relative;margin:0;padding:12px 14px;border-radius:4px 16px 16px 16px;background:var(--panel2);border:2px solid var(--line);font-size:16px;font-style:italic;line-height:1.45}
+
+/* feedback */
+.judge.judge .judge__feedback{padding:0;border:0;background:none;display:grid;gap:14px}
+.judge__done{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--good-bg,#E8FBD5);border:2px solid var(--good,#58CC02);animation:judge-pop .45s var(--spring,ease)}
+.judge__done-ico{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:var(--good,#58CC02);color:#fff}
+.judge__done-ico .ui-ico{width:24px;height:24px}
+.judge__done strong{display:block;font:800 18px var(--font-display);color:var(--ink)}
+.judge__done small{display:block;color:var(--muted);font-size:14px}
+@keyframes judge-pop{from{scale:.94;opacity:0}}
+/* the scene above already shows the corrected placement */
+.judge.judge .judge__correct-thumb{display:none}
+.judge.judge .judge__correct-thumb figcaption{color:var(--ink);font:700 14px var(--font-display);background:var(--panel2)}
+.judge.judge .judge__rule{margin:0;padding:14px;border-radius:16px;background:var(--panel2);color:var(--ink)}
+.judge.judge .judge__rule span{color:var(--blue-ink,#0A7BBF);font:800 12px var(--font-display);letter-spacing:.1em}
+.judge.judge .judge__sources{margin:0}
+.judge.judge .judge__source{min-height:40px;border:2px solid var(--line);border-radius:999px;background:var(--panel);color:var(--blue-ink,#0A7BBF);font:700 13px var(--font-display)}
+.judge.judge .judge__receipt{margin:0;border-color:var(--line);background:var(--panel2);color:var(--ink);box-shadow:none}
+.judge.judge .judge__receipt p{color:var(--ink)}
+.judge__actions{display:flex;flex-wrap:wrap;gap:10px}
+.judge__actions .big-btn{flex:1 1 200px;width:auto;margin:0;min-height:54px}
+.judge.judge .judge__confirm,.judge.judge .judge__compare{border-radius:16px;font:800 16px var(--font-display);text-align:center}
+
+/* wide screens: scene and step side by side */
+@media (min-width:1050px){
+  .judge--started.judge--started{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:0 18px;align-items:start}
+  .judge--started .game-top,.judge--started .judge__header{grid-column:1/-1}
+  .judge--started.judge--started .judge__stage{position:sticky;top:12px;min-height:440px;height:calc(100vh - 170px);max-height:640px}
+  .judge--started.judge--started .judge__workspace{margin-top:0;border-left:2px solid var(--line)}
+}
+@media (max-width:640px){
+  .judge.judge .judge__stage{border-radius:18px;min-height:260px;aspect-ratio:4/3.4}
+  .judge.judge .judge__workspace{padding:16px 14px}
+  .judge__track li{font-size:0;gap:0}
+  .judge__track li::before{width:22px;height:22px;font-size:12px}
+  .judge__track li.is-now{font-size:13px;gap:6px}
+  .judge.judge .judge__hotspot{width:38px;height:38px;min-width:38px;min-height:38px}
+}
+body.no-motion .judge.judge *,body.no-motion .judge__done{animation:none!important}
+@media (prefers-reduced-motion:reduce){.judge.judge *,.judge__done{animation:none!important}}
