@@ -1,0 +1,29 @@
+rules_version = '2';
+// TeoriBoost: one document per signed-in learner, readable and writable only by that learner.
+// Anonymous sessions never sync (their progress stays on the device), so they get no access.
+// Paste this into Firebase console > Firestore Database > Rules, and Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owner(uid) {
+      return request.auth != null && request.auth.uid == uid
+        && request.auth.token.firebase.sign_in_provider != 'anonymous';
+    }
+    function smallString(data, key, max) {
+      return !(key in data) || (data[key] is string && data[key].size() <= max);
+    }
+    match /users/{uid} {
+      allow read, delete: if owner(uid);
+      allow create, update: if owner(uid)
+        && request.resource.data.keys().hasOnly(['v', 'updatedAt', 'learning', 'intro', 'mybil', 'order'])
+        && request.resource.data.v == 1
+        && request.resource.data.updatedAt == request.time
+        && smallString(request.resource.data, 'learning', 700000)
+        && smallString(request.resource.data, 'intro', 20000)
+        && smallString(request.resource.data, 'mybil', 50000)
+        && smallString(request.resource.data, 'order', 20000);
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

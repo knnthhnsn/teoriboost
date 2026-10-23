@@ -16,7 +16,7 @@ html[data-theme="dark"] body{background:var(--bg)!important;color:var(--ink)}
 /* lime stays lime, so whatever sits on it keeps dark ink (light rules use var(--ink) there) */
 html[data-theme="dark"] .pn--next .pn-btn,html[data-theme="dark"] .topic.is-active .topic-n,html[data-theme="dark"] .mybil-tab.is-active,
 html[data-theme="dark"] .seg input:checked + span,html[data-theme="dark"] .sidebar .nav-item.active .nav-tile,html[data-theme="dark"] #mobile-nav a.active .nav-tile,
-html[data-theme="dark"] .big-btn,html[data-theme="dark"] .btn-primary,html[data-theme="dark"] .chat-send,html[data-theme="dark"] .toast{color:var(--accent-ink)!important}
+html[data-theme="dark"] .big-btn:not(.big-btn--ghost):not(.acc-danger),html[data-theme="dark"] .btn-primary,html[data-theme="dark"] .chat-send,html[data-theme="dark"] .toast{color:var(--accent-ink)!important}
 
 /* icon tiles tinted by an inline --c pastel: keep a hint of the tint on graphite */
 html[data-theme="dark"] .row-ico{background:color-mix(in oklab,var(--c,#EEF1F4) 16%,var(--panel2))!important;color:var(--ink)}
@@ -32,3 +32,5 @@ html[data-theme="dark"] .start-hero,html[data-theme="dark"] .start-step,html[dat
   color-scheme:light;color:#1F2328;
   --bg:#FFFFFF;--panel:#FFFFFF;--panel2:#F4F5F7;--ink:#1F2328;--muted:#5F656D;--line:#E3E5E8;--line-strong:#D3D6DB;
   --accent-ink:#1F2328;--accent-shadow:#9BC42A;--on-accent:#1F2328;--good-ink:#3B8A00;--bad-ink:#D42F2F;--blue-ink:#0A7BBF;--acid-text:#2F6F00}
+html[data-theme="dark"] .big-btn--ghost{color:var(--ink)}
+html[data-theme="dark"] .acc-error{color:var(--bad-ink)}

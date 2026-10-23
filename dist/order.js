@@ -7,6 +7,7 @@ import { ico } from './ui-icons.js';
 const KEY = 'teoriboost.order.v1';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 export function loadOrderResults(store = globalThis.localStorage) { try { return JSON.parse(store.getItem(KEY)) || {}; } catch { return {}; } }
+export function saveOrderResults(results, store = globalThis.localStorage) { try { store.setItem(KEY, JSON.stringify(results)); } catch {} }
 function saveResult(id, all, store = globalThis.localStorage) { try { const r = loadOrderResults(store); r[id] = { done: (r[id]?.done || false) || all, at: Date.now() }; store.setItem(KEY, JSON.stringify(r)); } catch {} }
 const sectionOf = id => CHAPTERS.flatMap(c => c.sections.map(s => ({ ...s, chapter: c.title }))).find(s => s.id === id);
 

@@ -116,13 +116,45 @@ export function renderTopics({ units, chapters, activeUnitId }) {
 
 /* ---------------- Profil ---------------- */
 const WHEN_TEXT = { '2w': 'Inden for 2 uger', '1m': 'Om ca. 1 måned', '3m': 'Om 2–3 måneder', '?': 'Ikke valgt' };
-export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, intro, settings, examDays, ready }) {
+// Google's own "G" (their sign-in button guidelines ask for it) and a line envelope
+const GOOGLE_G = '<svg class="acc-g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+const MAIL = '<svg class="acc-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg>';
+
+/** "Gem din fremgang" / "Din konto" on the profile. Empty while login is not set up. */
+export function renderAccountPanel(s) {
+  if (!s || s.state === 'off') return '';
+  const err = s.error ? `<p class="acc-error" role="alert">${esc(s.error)}</p>` : '';
+  if (s.state === 'user') {
+    const synced = s.syncing ? 'Gemmer …' : s.syncedAt ? `Gemt i din konto kl. ${new Date(s.syncedAt).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' })}` : 'Forbinder …';
+    const confirm = s.ui === 'signout'
+      ? `<div class="acc-confirm"><p>Din fremgang ligger i kontoen og fjernes fra denne enhed.</p><div class="acc-actions"><button type="button" class="big-btn" data-account="signout-yes"${s.busy ? ' disabled' : ''}>Log ud</button><button type="button" class="big-btn big-btn--ghost" data-account="cancel">Annullér</button></div></div>`
+      : s.ui === 'delete'
+        ? `<div class="acc-confirm acc-confirm--danger"><p>Kontoen og al gemt fremgang slettes for altid, også på denne enhed.</p><div class="acc-actions"><button type="button" class="big-btn acc-danger" data-account="delete-yes"${s.busy ? ' disabled' : ''}>Slet for altid</button><button type="button" class="big-btn big-btn--ghost" data-account="cancel">Annullér</button></div></div>`
+        : `<div class="acc-links"><button type="button" class="acc-link" data-account="signout">Log ud</button><button type="button" class="acc-link acc-link--danger" data-account="delete">Slet konto</button></div>`;
+    return `<section class="panel account-panel" aria-labelledby="acc-title"><h2 id="acc-title">Din konto</h2>
+      <p class="acc-who"><b>${esc(s.email || 'Logget ind')}</b><small>via ${esc(s.provider || '')}</small></p>
+      <p class="acc-sync" aria-live="polite">${synced}</p>${err}${confirm}</section>`;
+  }
+  const body = s.state === 'loading' ? '<p class="acc-sync">Forbinder …</p>'
+    : s.ui === 'sent' ? `<p class="acc-note" role="status">Tjek din indbakke. Vi har sendt et login-link til <b>${esc(s.sentTo)}</b>. Åbn linket på denne enhed.</p><button type="button" class="acc-link" data-account="email">Send et nyt link</button>`
+    : s.ui === 'email' || s.ui === 'finish'
+      ? `<form class="acc-form" data-account-form="${s.ui === 'finish' ? 'finish' : 'send'}" novalidate><label for="acc-email">${s.ui === 'finish' ? 'Skriv den e-mail, du fik linket på' : 'Din e-mail'}</label>
+          <div class="acc-row"><input id="acc-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="navn@eksempel.dk"><button type="submit" class="big-btn"${s.busy ? ' disabled' : ''}>${s.ui === 'finish' ? 'Log ind' : 'Send link'}</button></div>
+          ${s.ui === 'email' ? '<button type="button" class="acc-link" data-account="cancel">Annullér</button>' : ''}</form>`
+      : `<div class="acc-actions acc-actions--stack"><button type="button" class="big-btn big-btn--ghost acc-google" data-account="google">${GOOGLE_G}<span>Fortsæt med Google</span></button><button type="button" class="big-btn big-btn--ghost" data-account="email">${MAIL}<span>Få et login-link på e-mail</span></button></div>`;
+  return `<section class="panel account-panel" aria-labelledby="acc-title"><h2 id="acc-title">Gem din fremgang</h2>
+    <p class="acc-lead">Lige nu gemmes alt kun på denne enhed. Log ind, så kan du fortsætte på både telefon og computer.</p>${err}${body}
+    <p class="acc-fine">Logger du ind, gemmes din fremgang i din konto hos Google Firebase (database i EU). Chatten med Sneglen bliver på enheden.</p></section>`;
+}
+
+export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, intro, settings, examDays, ready, account }) {
   const week = (daily?.week || []).map(d => `<li class="${d.completed ? 'on' : ''} ${d.today ? 'today' : ''}"><small>${['Ma', 'Ti', 'On', 'To', 'Fr', 'Lø', 'Sø'][(new Date(d.day + 'T12:00').getDay() + 6) % 7]}</small><i role="img" aria-label="${d.completed ? 'øvet' : 'ikke øvet'}${d.today ? ', i dag' : ''}"></i></li>`).join('');
   const bars = strengths.length
     ? strengths.map(s => `<li><span>${esc(s.title)}</span><span class="sw-bar ${s.score >= .6 ? 'good' : 'weak'}"><i style="--p:${s.score.toFixed(2)}"></i></span></li>`).join('')
     : '<li class="empty-note">Kommer, når du har øvet et par emner.</li>';
   const toggle = (key, title) => `<label class="set-row"><span>${title}</span><input type="checkbox" role="switch" data-setting="${key}" ${settings[key] ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
   return `<section class="profile" aria-labelledby="profile-title"><header class="screen-head"><a class="back-round" href="#home" aria-label="Tilbage">${ICON.back}</a><h1 id="profile-title">Din profil</h1></header>
+    ${renderAccountPanel(account)}
     <div class="tile-row"><div class="tile"><b class="tile-fire"><span class="chip-ico">${duo('flame')}</span>${daily?.currentStreak || 0}</b><small>dage i træk</small></div><div class="tile"><b>${lessonsDone}/${lessonsTotal}</b><small>lektioner</small></div></div>
     ${ready ? `<div class="panel ready-panel"><h2>Hvor klar er du?</h2><div class="ready-row"><b>${ready.pct} %</b><span class="ready-bar" role="img" aria-label="${ready.pct} procent klar"><i style="--p:${ready.pct / 100}"></i></span></div>
       <p>${ready.ok} af ${ready.total} regelkort sidder: dit seneste svar på dem var rigtigt. ${ready.passes >= 2 ? 'Og du har bestået mindst 2 af dine 3 seneste øveprøver.' : 'Bestå 2 af 3 øveprøver i træk, så er du også klar til prøveformatet.'}</p><small>Appens egen vurdering, ikke en garanti for den rigtige prøve.</small></div>` : ''}

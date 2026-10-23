@@ -318,3 +318,32 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 .seg span{display:block;padding:7px 12px;border-radius:999px;font:700 14px var(--font-display);color:var(--muted);white-space:nowrap;transition:background-color .2s,color .2s}
 .seg input:checked + span{background:var(--accent,#D5FF62);color:var(--accent-ink,#1F2328);box-shadow:0 2px 0 var(--accent-shadow,#9BC42A)}
 .seg input:focus-visible + span{outline:3px solid #1CB0F6;outline-offset:2px}
+
+/* ---------- account: "Gem din fremgang" / "Din konto" ---------- */
+.account-panel{display:grid;gap:12px}
+.account-panel h2{margin:0}
+.acc-lead,.acc-note{margin:0;font-size:15px;line-height:1.45;color:var(--ink)}
+.acc-fine{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
+.acc-actions{display:flex;flex-wrap:wrap;gap:10px}
+.acc-actions--stack{flex-direction:column}
+.acc-actions .big-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px}
+.acc-actions:not(.acc-actions--stack) .big-btn{width:auto;flex:1 1 140px}
+.acc-g{width:20px;height:20px;flex:none}
+.acc-ico{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.acc-form{display:grid;gap:8px}
+.acc-form label{font:700 14px var(--font-display);color:var(--ink)}
+.acc-row{display:flex;gap:8px;flex-wrap:wrap}
+.acc-row input{flex:1 1 200px;min-height:52px;padding:0 14px;border-radius:14px;border:2px solid var(--line);background:var(--panel);color:var(--ink);font:500 16px var(--font-body,inherit)}
+.acc-row input:focus-visible{outline:3px solid #1CB0F6;outline-offset:1px;border-color:transparent}
+.acc-row .big-btn{flex:0 0 auto;min-height:52px;padding:0 20px}
+.acc-who{display:grid;gap:2px;margin:0}
+.acc-who b{font:800 17px var(--font-display);overflow-wrap:anywhere}
+.acc-who small,.acc-sync{color:var(--muted);font-size:14px;margin:0}
+.acc-links{display:flex;gap:18px;flex-wrap:wrap}
+.acc-link{justify-self:start;padding:6px 0;border:0;background:none;font:700 15px var(--font-display);color:var(--blue-ink,#0A7BBF);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.acc-link--danger{color:var(--bad-ink,#D42F2F)}
+.acc-confirm{display:grid;gap:10px;padding:14px;border-radius:16px;background:var(--panel2);border:2px solid var(--line)}
+.acc-confirm p{margin:0;font-size:15px}
+.acc-confirm--danger{border-color:var(--bad-ink,#D42F2F)}
+.big-btn.acc-danger{background:#C62828;color:#fff;box-shadow:0 4px 0 #8E1B1B}
+.acc-error{margin:0;padding:10px 12px;border-radius:12px;background:var(--bad-bg,#FFE5E5);color:#B42318;font-weight:600;font-size:14px}
