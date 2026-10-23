@@ -4,8 +4,8 @@
 // GlowUp ("Sådan kan den blive" in Min bil), on a dark stage:
 //   0.0s  the stage light flickers on, the wreck drops in and lands with a squash, dust and a camera shake
 //   1.2s  it coughs: the body shakes and smoke puffs out at the back
-//   2.0s  a lime scanner beam sweeps across while the camera pushes in; behind it the wreck becomes the repaint
-//   3.4s  the beam flares: flash, rings, confetti, light rays, the car jumps and lands lowered with tyre smoke
+//   2.0s  a soft white light sweeps across while the camera pushes in; behind it the wreck becomes the repaint
+//   3.4s  the light flares: flash, rings, confetti, light rays, the car jumps and lands lowered with tyre smoke
 //   4.0s  the tuning parts slam on one by one, each with a spark, the plate flips in
 //   5.6s  the underglow flickers on, light glints on the roof line; then idle: rays turn, the suspension bobs
 // Hero (the start page): the same show without the stage, at the app's own vehicle position over the garage
@@ -33,7 +33,7 @@ const ASSET = { wreckWheels: 0, wreckBody: 1, dreamWheels: 2, dreamBody: 3, part
  * The vehicle: car (position) > rig (squash, shake) > wheels and a body node (suspension) holding the body and parts.
  * dream: also the dream build; wreck: also the wreck. Parts get a node each so they can fly on.
  */
-function vehicle(ab, parent, m, { s, x, y, wreck = true, dream = true, clips = {} }) {
+function vehicle(ab, parent, m, { s, x, y, wreck = true, dream = true, clips = {}, feather = [] }) {
   const H = m.h * s;
   const car = ab.add('Node', { parent, name: 'car', x, y });
   const rig = ab.add('Node', { parent: car, name: 'rig' });
@@ -54,6 +54,14 @@ function vehicle(ab, parent, m, { s, x, y, wreck = true, dream = true, clips = {
     ab.add('Image', { parent: body, name: state + '-body-img', assetId: state === 'dream' ? ASSET.dreamBody : ASSET.wreckBody, y: -H / 2, scaleX: s, scaleY: s });
   };
   if (dream) layer('dream', clips.dream);
+  // a soft edge for the reveal: narrow bands just ahead of it show the dream build half see-through over the wreck
+  feather.forEach(({ clip, opacity }, k) => {
+    const band = ab.add('Node', { parent: rig, name: 'feather' + k, opacity });
+    ab.add('ClippingShape', { parent: band, sourceId: clip, fillRule: 0, isVisible: true });
+    ab.add('Image', { parent: band, name: 'feather-wheels' + k, assetId: ASSET.dreamWheels, y: -H / 2, scaleX: s, scaleY: s });
+    const body = ab.add('Node', { parent: band, name: 'feather-body' + k }); bodies.push(body);
+    ab.add('Image', { parent: body, name: 'feather-body-img' + k, assetId: ASSET.dreamBody, y: -H / 2, scaleX: s, scaleY: s });
+  });
   if (wreck) layer('wreck', clips.wreck);
   return { car, rig, bodies, parts, H, W: m.w * s };
 }
@@ -80,7 +88,7 @@ function showBoard(base, kind) {
   const flash = shape(ab, 0, 'flash', { x: SIZE / 2, y: SIZE / 2, opacity: 0, blendModeValue: BLEND.screen });
   ab.add('Rectangle', { parent: flash, width: SIZE, height: SIZE });
   gradient(ab, flash, 'radial', [cx - SIZE / 2, CY - SIZE / 2, cx - SIZE / 2 + (hero ? 220 : 300), CY - SIZE / 2],
-    [[alpha(WHITE, 1), 0], [alpha(WHITE, .7), .35], [alpha(LIME, .35), .7], [alpha(LIME, 0), 1]]);
+    [[alpha(WHITE, 1), 0], [alpha(WHITE, .6), .35], [alpha(WHITE, .2), .7], [alpha(WHITE, 0), 1]]);
   T(flash, 'opacity', [[0, 0, 'hold'], [POP, 0, OUT], [POP + 4, hero ? .8 : 1, OUT], [POP + 34, 0]]);
 
   /* ---- camera: everything else hangs under it, pivoting on the car ---- */
@@ -125,32 +133,29 @@ function showBoard(base, kind) {
     }
   });
 
-  /* ---- scanner beam ---- */
+  /* ---- the light sweep: a soft white band of light, like a studio light passing over (no hard line) ---- */
   const BH = H + 70, X0 = cx - W / 2 - 6, X1 = cx + W / 2 + 6;
-  const beam = ab.add('Node', { parent: world, name: 'beam', x: X0, y: CY, opacity: 0 });
-  for (let i = 0; i < 16; i++) { // sparks fly off behind the beam
-    const sp = shape(ab, beam, 'spark' + i, { opacity: 0, blendModeValue: BLEND.screen });
-    const d = 2.5 + rnd() * 3; ab.add('Ellipse', { parent: sp, width: d, height: d });
-    solid(ab, sp, [WHITE, LIME, '#FFE58A'][i % 3]);
+  const beam = ab.add('Node', { parent: world, name: 'sweep', x: X0, y: CY, opacity: 0 });
+  for (let i = 0; i < 8; i++) { // a few warm glints drift off behind it
+    const sp = shape(ab, beam, 'glint-dust' + i, { opacity: 0, blendModeValue: BLEND.screen });
+    const d = 2 + rnd() * 2; ab.add('Ellipse', { parent: sp, width: d, height: d });
+    solid(ab, sp, i % 2 ? WHITE : '#FFF1D6');
     const keysX = [[0, 0, 'hold']], keysY = [[0, 0, 'hold']], keysO = [[0, 0, 'hold']];
-    for (let t = SCAN0 + Math.round(rnd() * 14), life = 0; t < SCAN1 - 6; t += life + 2 + Math.round(rnd() * 5)) {
-      const y0 = (rnd() - .5) * H * .9; life = 14 + Math.round(rnd() * 6);
-      keysX.push([t, 0, OUT], [t + life, -(14 + rnd() * 34), 'hold']);
-      keysY.push([t, y0, OUT], [t + life, y0 + (rnd() - .3) * 26, 'hold']);
-      keysO.push([t, 1], [t + life, 0, 'hold']);
+    for (let t = SCAN0 + Math.round(rnd() * 20), life = 0; t < SCAN1 - 10; t += life + 6 + Math.round(rnd() * 8)) {
+      const y0 = (rnd() - .5) * H * .8; life = 18 + Math.round(rnd() * 8);
+      keysX.push([t, 0, OUT], [t + life, -(10 + rnd() * 22), 'hold']);
+      keysY.push([t, y0, OUT], [t + life, y0 - 4 - rnd() * 10, 'hold']);
+      keysO.push([t, .9], [t + life, 0, 'hold']);
     }
     T(sp, 'x', keysX); T(sp, 'y', keysY); T(sp, 'opacity', keysO);
   }
-  rect(ab, beam, 'core', { w: 3, h: BH, r: 1.5, color: WHITE });
-  for (const end of [-1, 1]) glow(ab, beam, 'head' + end, { d: 26, color: WHITE, a: 1, y: end * BH / 2 });
-  const band = rect(ab, beam, 'band', { w: 64, h: BH, props: { blendModeValue: BLEND.screen } });
-  gradient(ab, band, 'linear', [-32, 0, 32, 0], [[alpha(LIME, 0), 0], [alpha(LIME, .95), .5], [alpha(LIME, 0), 1]]);
-  // a soft oval of light around the beam (a circle squashed by its node, so the glow has no hard ends)
-  const haze = ab.add('Node', { parent: beam, name: 'haze', scaleX: .55, scaleY: (BH + 60) / 200 });
-  glow(ab, haze, 'haze-light', { d: 200, color: LIME, a: .38 });
-  T(beam, 'opacity', [[0, 0, 'hold'], [BEAM, 0, OUT], [BEAM + 10, 1, 'hold'], [SCAN1, 1, OUT], [POP + 9, 0]]);
-  T(beam, 'scaleY', [[0, 0, 'hold'], [BEAM, 0, OUT_BACK], [BEAM + 12, 1, 'hold'], [SCAN1, 1, OUT], [POP + 14, 1.6]]);
-  T(beam, 'scaleX', [[0, 1, 'hold'], [SCAN1, 1, OUT], [POP + 14, 4]]);
+  // two layers of light: a brighter narrow middle and a wide soft falloff, both ovals so nothing has an edge
+  const haze = ab.add('Node', { parent: beam, name: 'sweep-wide', scaleX: .5, scaleY: (BH + 80) / 200 });
+  glow(ab, haze, 'sweep-wide-light', { d: 200, color: WHITE, a: .42 });
+  const mid = ab.add('Node', { parent: beam, name: 'sweep-mid', scaleX: .12, scaleY: (BH + 20) / 200 });
+  glow(ab, mid, 'sweep-mid-light', { d: 200, color: WHITE, a: .75 });
+  T(beam, 'opacity', [[0, 0, 'hold'], [BEAM, 0, IN_OUT], [SCAN0, 1, 'hold'], [SCAN1 - 6, 1, IN_OUT], [POP + 10, 0]]);
+  T(beam, 'scaleX', [[0, 1, 'hold'], [SCAN1 - 6, 1, OUT], [POP + 10, 2.2]]); // it opens up as it reaches the end
   T(beam, 'x', [[0, X0, 'hold'], [SCAN0, X0, IN_OUT], [SCAN1, X1]]);
 
   /* ---- smoke (the cough), dust (landing) and tyre smoke (the lowered landing) ---- */
@@ -181,7 +186,12 @@ function showBoard(base, kind) {
   /* ---- the car: the repaint revealed left of the beam, the wreck right of it ---- */
   const dreamClip = shape(ab, world, 'dreamClip', { x: 0, y: SIZE / 2 }); ab.add('Rectangle', { parent: dreamClip, width: 0, height: SIZE * 3, originX: 0, originY: .5 });
   const wreckClip = shape(ab, world, 'wreckClip', { x: 0, y: SIZE / 2 }); ab.add('Rectangle', { parent: wreckClip, width: SIZE * 3, height: SIZE * 3, originX: 0, originY: .5 });
-  const v = vehicle(ab, world, m, { s, x: cx, y: ground, clips: { dream: dreamClip, wreck: wreckClip } });
+  const FB = 9, feather = [.72, .45, .2].map((opacity, k) => {
+    const clip = shape(ab, world, 'featherClip' + k, { x: -SIZE * 2, y: SIZE / 2 }); ab.add('Rectangle', { parent: clip, width: FB, height: SIZE * 3, originX: 0, originY: .5 });
+    T(clip, 'x', [[0, -SIZE * 2, 'hold'], [SCAN0 - 1, -SIZE * 2, 'hold'], [SCAN0, X0 + k * FB, IN_OUT], [SCAN1, X1 + k * FB, 'hold'], [SCAN1 + 1, SIZE * 3]]);
+    return { clip, opacity };
+  });
+  const v = vehicle(ab, world, m, { s, x: cx, y: ground, clips: { dream: dreamClip, wreck: wreckClip }, feather });
   T(dreamClip + 1, 'width', [[0, 0, 'hold'], [SCAN0, X0, IN_OUT], [SCAN1, X1, 'hold'], [SCAN1 + 1, SIZE * 3]]);
   T(wreckClip, 'x', [[0, -SIZE, 'hold'], [SCAN0 - 1, -SIZE, 'hold'], [SCAN0, X0, IN_OUT], [SCAN1, X1, 'hold'], [SCAN1 + 1, SIZE * 3]]);
 
