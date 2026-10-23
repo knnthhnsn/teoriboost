@@ -354,6 +354,6 @@ var account=createAccount({config:FIREBASE_CONFIG,adapters:{
   },
   clear:()=>{state=blankState();for(const k of [STORE,PROTECTED_STORE,'teoriboost.intro.v1','teoriboost.mybil.v1','teoriboost.order.v1','teoriboost.chat.v1'])try{localStorage.removeItem(k);}catch{}},
 }});
-account.subscribe(s=>{const el=document.querySelector('.account-panel');if(!el)return;el.outerHTML=renderAccountPanel(s);if(s.ui==='email'||s.ui==='finish')document.getElementById('acc-email')?.focus();});
+account.subscribe(s=>{const el=document.querySelector('.account-panel'),head=document.querySelector('.profile .screen-head');if(el)el.outerHTML=renderAccountPanel(s);else if(head)head.insertAdjacentHTML('afterend',renderAccountPanel(s));else return;/* the profile may have been drawn before login started */if(s.ui==='email'||s.ui==='finish')document.getElementById('acc-email')?.focus();});
 document.addEventListener('submit',e=>{const f=e.target.closest('[data-account-form]');if(!f)return;e.preventDefault();const email=f.elements.email.value;if(f.dataset.accountForm==='finish')account.confirmEmail(email);else account.sendEmailLink(email);});
 account.init();
