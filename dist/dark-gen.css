@@ -528,8 +528,6 @@ html[data-theme="dark"] .turn-viewbar{background:#212323;border:1px solid #3c3f4
 html[data-theme="dark"] .turn-viewbar button{border:0;background:transparent;color:#cfd3d4}
 html[data-theme="dark"] .turn-viewbar button[aria-pressed=true]{background:#d8ff62;color:#17230d;box-shadow:0 3px 12px rgba(216,255,98,0.028)}
 html[data-theme="dark"] .turn-canvas-wrap{border:1px solid #424546;background:linear-gradient(#22262a,#81a4af);box-shadow:0 30px 80px rgba(0,0,0,0.084)}
-html[data-theme="dark"] .turn-scene-tag{background:rgba(32,34,34,0.851);border:1px solid rgba(80,84,84,0.4);color:#d5dbd9}
-html[data-theme="dark"] .turn-scene-tag>span{background:#7de6e5}
 html[data-theme="dark"] .turn-stage figcaption{color:#b9c5ce}
 html[data-theme="dark"] .turn-kicker{color:var(--turn-cyan)}
 html[data-theme="dark"] .turn-body h1 em{color:var(--turn-lime)}
@@ -1074,3 +1072,50 @@ html[data-theme="dark"] .judge.judge .judge__receipt p{color:var(--ink)}
 @media (min-width:1050px){
 html[data-theme="dark"] .judge--started.judge--started .judge__workspace{border-left:2px solid var(--line)}
 }
+html[data-theme="dark"] .turn-shell.turn-shell{color:var(--ink);background:none}
+html[data-theme="dark"] .turn-shell .game-top{border:0;background:none}
+html[data-theme="dark"] .turn-shell .turn-meter{background:var(--panel2);box-shadow:inset 0 0 0 1.5px var(--line)}
+html[data-theme="dark"] .turn-shell .turn-meter span{background:var(--good,#58CC02)}
+html[data-theme="dark"] .turn-shell .turn-listen{border:2px solid var(--line);background:var(--panel);color:var(--ink);box-shadow:0 2px 0 var(--line)}
+html[data-theme="dark"] .turn-shell .turn-listen svg{fill:none;stroke:currentColor}
+html[data-theme="dark"] .turn-title{color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-viewbar{background:var(--panel2);box-shadow:inset 0 0 0 1.5px var(--line);border:0}
+html[data-theme="dark"] .turn-shell .turn-viewbar button{border:0;background:none;color:var(--muted);box-shadow:none}
+html[data-theme="dark"] .turn-shell .turn-viewbar button[aria-pressed="true"]{background:var(--accent,#D5FF62);color:#141A0A;box-shadow:0 2px 0 var(--accent-shadow,#9BC42A)}
+html[data-theme="dark"] .turn-shell .turn-canvas-wrap{border:2px solid var(--line);box-shadow:0 4px 0 var(--line);background:#0B1220}
+html[data-theme="dark"] .turn-shell .turn-stage figcaption{color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-body{border:2px solid var(--line);background:var(--panel);box-shadow:0 4px 0 var(--line)}
+html[data-theme="dark"] .turn-shell .turn-kicker{color:var(--blue-ink,#7fc4ed)}
+html[data-theme="dark"] #main .turn-shell .turn-body h1{color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-body h1 em{color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-lead{color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-instruction,html[data-theme="dark"] .turn-shell .turn-point-hint{background:var(--panel2)!important;color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-choice{border:2px solid var(--line);background:var(--panel);color:var(--ink);box-shadow:0 4px 0 var(--line)}
+html[data-theme="dark"] .turn-shell .turn-choice small{color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-choice b{color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-choice:hover{border-color:var(--blue-ink,#0A7BBF);box-shadow:0 4px 0 var(--blue-ink,#0A7BBF)}
+html[data-theme="dark"] .turn-shell .turn-choice:active{box-shadow:0 1px 0 var(--line)}
+html[data-theme="dark"] .turn-shell .turn-primary{border:0;background:var(--accent,#D5FF62);color:#141A0A;box-shadow:0 4px 0 var(--accent-shadow,#9BC42A);text-decoration:none}
+html[data-theme="dark"] .turn-shell .turn-primary:active:not(:disabled){box-shadow:0 1px 0 var(--accent-shadow,#9BC42A)}
+html[data-theme="dark"] .turn-shell .turn-text-btn{border:0;background:none;color:var(--blue-ink,#7fc4ed);text-decoration:underline}
+html[data-theme="dark"] .turn-shell .turn-feedback{border:2px solid var(--good,#58CC02);background:var(--good-bg,#31451c);color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-feedback--repair{border-color:var(--orange,#FF9600);background:color-mix(in oklab,var(--orange,#FF9600) 12%,var(--panel))}
+html[data-theme="dark"] .turn-shell .turn-feedback>span{background:var(--good,#58CC02);color:#fff}
+html[data-theme="dark"] .turn-shell .turn-feedback--repair>span{background:var(--orange,#FF9600)}
+html[data-theme="dark"] .turn-shell .turn-feedback p{color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-rule{border:0;background:var(--panel2);color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-gag{color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-source,html[data-theme="dark"] .turn-shell .turn-text-alternative{color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-source summary,html[data-theme="dark"] .turn-shell .turn-text-alternative summary{color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-source a{color:var(--blue-ink,#7fc4ed)}
+html[data-theme="dark"] .turn-shell .turn-replay-status{color:var(--muted)}
+html[data-theme="dark"] .turn-shell textarea{border:2px solid var(--line)!important;background:var(--panel)!important;color:var(--ink)!important}
+html[data-theme="dark"] .turn-shell .turn-recall-label{color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-review-note{color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-own-answer{border:2px solid var(--line)!important;background:var(--panel2)!important;color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-evidence li{background:var(--panel2)}
+html[data-theme="dark"] .turn-shell .game-top>a.game-close{border:0;color:var(--muted)}
+html[data-theme="dark"] .turn-shell .turn-feedback strong,html[data-theme="dark"] .turn-shell .turn-feedback--repair strong{color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-feedback>span,html[data-theme="dark"] .turn-shell .turn-feedback--repair>span{color:#fff}
+html[data-theme="dark"] .turn-shell .turn-rule>b{color:var(--ink)}
+html[data-theme="dark"] .turn-shell .turn-rule p{color:var(--ink)}

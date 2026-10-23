@@ -11,7 +11,7 @@ const PREFIX = 'html[data-theme="dark"]';
 
 // scenes and art that are drawn, not UI, keep their colours in both themes;
 // so does the start page, a poster with dark type on its own bright colours
-const KEEP = /\.(start-|step-|plan-|tw\b|road-|judge__(hotspot|clip-label|replay|legend|intro)|mh-(glass|scene|sun|hills|ground|road|hud|stat|ring|sheen|glint|cast|led|mount|dots|ico)|gu\b|gu-|sc-|sc\b|start-hero|start-show|start-ticker|dn-|cast-art|kw\b|kw-|kl\b|fx-|confetti|brand-mark|stop-sign|world|scene-photo-stage|exam-art|night-)|#city|#question-scene/;
+const KEEP = /\.(start-|step-|plan-|tw\b|road-|judge__(hotspot|clip-label|replay|legend|intro)|turn-scene-tag|mh-(glass|scene|sun|hills|ground|road|hud|stat|ring|sheen|glint|cast|led|mount|dots|ico)|gu\b|gu-|sc-|sc\b|start-hero|start-show|start-ticker|dn-|cast-art|kw\b|kw-|kl\b|fx-|confetti|brand-mark|stop-sign|world|scene-photo-stage|exam-art|night-)|#city|#question-scene/;
 
 const BG_PROPS = /^(background(-color|-image)?|border(-(top|right|bottom|left))?(-color)?|outline(-color)?|box-shadow|column-rule(-color)?)$/;
 const FG_PROPS = /^(color|fill|stroke|caret-color|text-decoration(-color)?|-webkit-text-fill-color)$/;

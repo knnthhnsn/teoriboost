@@ -132,3 +132,77 @@
 }
 body.no-motion .judge.judge *,body.no-motion .judge__done{animation:none!important}
 @media (prefers-reduced-motion:reduce){.judge.judge *,.judge__done{animation:none!important}}
+
+/* ---------- Trafiklab, in the app's own look ---------- */
+.turn-shell.turn-shell{max-width:1180px;margin:0 auto;padding:0;color:var(--ink);background:none}
+.turn-shell .game-top{margin:0 0 6px;padding:0;border:0;background:none}
+.turn-shell .turn-meter{flex:1;position:relative;height:14px;margin:0;border-radius:999px;background:var(--panel2);box-shadow:inset 0 0 0 1.5px var(--line);overflow:hidden}
+.turn-shell .turn-meter span{position:absolute;inset:0 auto 0 0;height:100%;border-radius:999px;background:var(--good,#58CC02);transition:width .45s var(--out,ease)}
+.turn-shell .turn-listen{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border:2px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);box-shadow:0 2px 0 var(--line);font:700 14px var(--font-display);cursor:pointer}
+.turn-shell .turn-listen svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.turn-title{margin:0 0 12px 56px;color:var(--muted);font:700 13px var(--font-display)}
+.turn-shell .turn-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);gap:18px;align-items:start;margin:0}
+.turn-shell .turn-layout--recall{grid-template-columns:minmax(0,720px);justify-content:center}
+@media (max-width:900px){.turn-shell .turn-layout{grid-template-columns:1fr}.turn-title{margin-left:0}}
+
+/* the scene: a segmented view switch above it, a dark pill on it */
+.turn-shell .turn-stage{margin:0;position:sticky;top:12px}
+.turn-shell .turn-viewbar{display:flex;gap:4px;margin:0 0 10px;padding:4px;border-radius:999px;background:var(--panel2);box-shadow:inset 0 0 0 1.5px var(--line);border:0}
+.turn-shell .turn-viewbar button{flex:1;min-height:40px;border:0;border-radius:999px;background:none;color:var(--muted);font:700 14px var(--font-display);box-shadow:none;cursor:pointer}
+.turn-shell .turn-viewbar button[aria-pressed="true"]{background:var(--accent,#D5FF62);color:#141A0A;box-shadow:0 2px 0 var(--accent-shadow,#9BC42A)}
+.turn-shell .turn-canvas-wrap{border-radius:22px;overflow:hidden;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);background:#0B1220}
+.turn-shell .turn-scene-tag{left:12px;bottom:12px;top:auto;padding:7px 13px;border:1.5px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(12,20,30,.72);color:#fff;backdrop-filter:blur(8px)}
+.turn-shell .turn-scene-tag b{font:700 13px var(--font-display)!important;letter-spacing:0;text-transform:none}
+.turn-shell .turn-stage figcaption{margin-top:8px;color:var(--muted);font-size:13px}
+
+/* the step card */
+.turn-shell .turn-body{padding:18px;border:2px solid var(--line);border-radius:22px;background:var(--panel);box-shadow:0 4px 0 var(--line)}
+.turn-shell .turn-kicker{display:block;margin:0 0 6px;color:var(--blue-ink,#0A7BBF);font:800 13px var(--font-display)!important;letter-spacing:.02em}
+#main .turn-shell .turn-body h1{margin:0;font:800 clamp(24px,3.6vw,32px)/1.12 var(--font-display)!important;letter-spacing:-.01em;color:var(--ink);text-transform:none}
+.turn-shell .turn-body h1 em{font-style:normal;color:var(--ink)}
+.turn-shell .turn-lead{margin:10px 0 0;color:var(--muted);font-size:16px;line-height:1.5}
+.turn-shell .turn-instruction,.turn-shell .turn-point-hint{display:flex;align-items:center;gap:10px;margin:14px 0 0;padding:12px 14px;border-radius:16px!important;background:var(--panel2)!important;color:var(--ink);font-size:15px}
+.turn-shell .turn-instruction p{margin:0}
+.turn-shell .turn-choices{display:grid;gap:10px;margin:16px 0 0}
+.turn-shell .turn-choice{position:relative;display:grid;grid-template-columns:1fr auto;column-gap:10px;align-items:center;min-height:60px;padding:12px 14px;border:2px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);box-shadow:0 4px 0 var(--line);text-align:left;cursor:pointer;transition:border-color .15s,translate .12s}
+.turn-shell .turn-choice span{font:700 16px/1.3 var(--font-display)}
+.turn-shell .turn-choice small{grid-column:1;color:var(--muted);font-size:14px;line-height:1.4}
+.turn-shell .turn-choice b{grid-row:1/span 2;grid-column:2;color:var(--muted)}
+.turn-shell .turn-choice b .ui-ico{width:20px;height:20px}
+.turn-shell .turn-choice:hover{border-color:var(--blue-ink,#0A7BBF);box-shadow:0 4px 0 var(--blue-ink,#0A7BBF)}
+.turn-shell .turn-choice:active{translate:0 3px;box-shadow:0 1px 0 var(--line)}
+.turn-shell .turn-primary{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:54px;margin:16px 0 0;padding:0 20px;border:0;border-radius:16px;background:var(--accent,#D5FF62);color:#141A0A;box-shadow:0 4px 0 var(--accent-shadow,#9BC42A);font:800 16px var(--font-display);text-decoration:none;cursor:pointer}
+.turn-shell .turn-primary:disabled{opacity:.45;cursor:not-allowed}
+.turn-shell .turn-primary:active:not(:disabled){translate:0 3px;box-shadow:0 1px 0 var(--accent-shadow,#9BC42A)}
+.turn-shell .turn-text-btn{margin:12px 0 0;padding:6px 0;border:0;background:none;color:var(--blue-ink,#0A7BBF);font:700 15px var(--font-display);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.turn-shell .turn-feedback{display:flex;align-items:flex-start;gap:12px;margin:16px 0 0;padding:12px 14px;border-radius:16px;border:2px solid var(--good,#58CC02);background:var(--good-bg,#E8FBD5);color:var(--ink)}
+.turn-shell .turn-feedback--repair{border-color:var(--orange,#FF9600);background:color-mix(in oklab,var(--orange,#FF9600) 12%,var(--panel))}
+.turn-shell .turn-feedback>span{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;background:var(--good,#58CC02);color:#fff}
+.turn-shell .turn-feedback--repair>span{background:var(--orange,#FF9600)}
+.turn-shell .turn-feedback strong{display:block;font:800 17px var(--font-display)}
+.turn-shell .turn-feedback p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.turn-shell .turn-rule{margin:16px 0 0;padding:14px;border:0;border-radius:16px;background:var(--panel2);color:var(--ink)}
+.turn-shell .turn-rule b{display:block;font:800 17px var(--font-display)}
+.turn-shell .turn-gag{margin:12px 0 0;color:var(--muted);font-style:italic}
+.turn-shell .turn-source,.turn-shell .turn-text-alternative{margin:14px 0 0;color:var(--muted);font-size:14px}
+.turn-shell .turn-source summary,.turn-shell .turn-text-alternative summary{cursor:pointer;padding:6px 0;font:700 14px var(--font-display);color:var(--ink)}
+.turn-shell .turn-source a{color:var(--blue-ink,#0A7BBF)}
+.turn-shell .turn-replay-status{margin:14px 0 0;color:var(--muted);font-size:14px}
+.turn-shell textarea{width:100%;min-height:110px;margin:8px 0 0;padding:14px;border:2px solid var(--line)!important;border-radius:16px;background:var(--panel)!important;color:var(--ink)!important;font:500 16px/1.45 var(--font-body,inherit)}
+.turn-shell .turn-recall-label{display:block;margin:16px 0 0;font:700 14px var(--font-display);color:var(--ink)}
+.turn-shell .turn-review-note{margin:10px 0 0;color:var(--muted);font-size:14px}
+.turn-shell .turn-own-answer{margin:14px 0 0;border:2px solid var(--line)!important;background:var(--panel2)!important;color:var(--ink)}
+.turn-shell .turn-evidence{display:grid;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.turn-shell .turn-evidence li{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:14px;background:var(--panel2);font-size:15px}
+.turn-shell .turn-evidence b{font:700 14px var(--font-display);text-align:right}
+.turn-shell .turn-done-art{display:flex;justify-content:center;margin:0 0 10px}
+@media (max-width:900px){.turn-shell .turn-stage{position:static}}
+/* old Trafiklab rules that reach into the new top bar and cards */
+.turn-shell .game-top>a.game-close{width:44px;height:44px;border:0;border-radius:12px;font-size:0;color:var(--muted)}
+.turn-shell .game-top>span.game-count{flex:none}
+.turn-shell .game-top .turn-meter{margin:0;height:14px}
+.turn-shell .turn-feedback strong,.turn-shell .turn-feedback--repair strong{color:var(--ink)}
+.turn-shell .turn-feedback>span,.turn-shell .turn-feedback--repair>span{font-size:0;color:#fff}
+.turn-shell .turn-feedback>span .ui-ico{width:22px;height:22px}
+.turn-shell .turn-rule>b{color:var(--ink)}
+.turn-shell .turn-rule p{margin:6px 0 0;color:var(--ink);font-size:15px;line-height:1.5}
