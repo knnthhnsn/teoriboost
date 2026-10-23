@@ -19,7 +19,7 @@ html[data-theme="dark"] .seg input:checked + span,html[data-theme="dark"] .sideb
 html[data-theme="dark"] .big-btn:not(.big-btn--ghost):not(.acc-danger),html[data-theme="dark"] .btn-primary,html[data-theme="dark"] .chat-send,html[data-theme="dark"] .toast{color:var(--accent-ink)!important}
 
 /* icon tiles tinted by an inline --c pastel: keep a hint of the tint on graphite */
-html[data-theme="dark"] .row-ico{background:color-mix(in oklab,var(--c,#EEF1F4) 16%,var(--panel2))!important;color:var(--ink)}
+html[data-theme="dark"] .feature-ico,html[data-theme="dark"] .row-ico{background:color-mix(in oklab,var(--c,#EEF1F4) 16%,var(--panel2))!important;color:var(--ink)}
 
 /* the "Din bil" label sits on the bright road scene, so it stays a light card */
 html[data-theme="dark"] .road-label{background:rgba(255,255,255,.92)!important;border-color:rgba(255,255,255,.6)!important;color:#1F2328}

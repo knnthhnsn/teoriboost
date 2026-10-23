@@ -347,3 +347,35 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 .acc-confirm--danger{border-color:var(--bad-ink,#D42F2F)}
 .big-btn.acc-danger{background:#C62828;color:#fff;box-shadow:0 4px 0 #8E1B1B}
 .acc-error{margin:0;padding:10px 12px;border-radius:12px;background:var(--bad-bg,#FFE5E5);color:#B42318;font-weight:600;font-size:14px}
+
+/* ---------- Missioner ---------- */
+.mission-intro{display:flex;align-items:center;gap:14px;margin:0 0 12px;padding:14px 16px;border:2px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:0 4px 0 var(--line)}
+.mission-intro .cast-img{flex:none;width:72px!important}
+.mission-intro strong{display:block;font:800 18px var(--font-display);color:var(--ink)}
+.mission-intro small{display:block;margin-top:4px;color:var(--muted);font-size:15px;line-height:1.45}
+.mission-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 6px;padding:0;list-style:none}
+.mission-steps li{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 10px;border-radius:14px;background:var(--panel2);color:var(--ink);font:700 14px var(--font-display)}
+.mission-steps b{display:grid;place-items:center;flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent,#D5FF62);color:#141A0A;font:800 12px var(--font-display)}
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.feature-card{position:relative;display:flex;flex-direction:column;gap:6px;padding:16px;border:2px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:0 4px 0 var(--line);color:var(--ink);text-decoration:none;transition:translate .15s,border-color .15s}
+.feature-card:hover{translate:0 -2px;border-color:var(--blue-ink,#0A7BBF)}
+.feature-card:active{translate:0 2px;box-shadow:0 2px 0 var(--line)}
+.feature-ico{display:grid;place-items:center;width:56px;height:56px;margin-bottom:4px;border-radius:16px;background:var(--c)}
+.feature-ico .ui-ico{width:30px;height:30px}
+.feature-tag{position:absolute;top:16px;right:16px;padding:4px 9px;border-radius:999px;background:var(--panel2);color:var(--muted);font:800 11px var(--font-display);letter-spacing:.06em}
+.feature-card strong{font:800 19px/1.2 var(--font-display)}
+.feature-card small{color:var(--muted);font-size:15px;line-height:1.4}
+.feature-meta{margin-top:auto;padding-top:8px;color:var(--blue-ink,#0A7BBF);font:700 13px var(--font-display)}
+.topic-cards--go{background:var(--accent,#D5FF62)!important;color:#141A0A!important;border-color:var(--accent-shadow,#9BC42A)!important;box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)!important}
+@media (max-width:860px){.feature-grid{grid-template-columns:1fr}.mission-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:380px){.mission-intro{align-items:flex-start}.mission-intro .cast-img{width:56px!important}}
+.mission-intro .cast{flex:none;margin:0}
+#main .missions h2.list-label{margin:22px 0 10px;font-size:12px!important;line-height:1.2}
+/* phones: the recommended missions as compact rows, icon beside the text */
+@media (max-width:860px){
+  .feature-card{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:14px;row-gap:3px;align-items:start;padding:14px}
+  .feature-ico{grid-row:1/span 4;width:52px;height:52px;margin:0}
+  .feature-tag{position:static;justify-self:start;grid-column:2;padding:3px 8px;font-size:10px}
+  .feature-card strong,.feature-card small,.feature-meta{grid-column:2}
+  .feature-meta{padding-top:4px}
+}

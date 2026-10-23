@@ -831,6 +831,19 @@ html[data-theme="dark"] .acc-confirm{background:var(--panel2);border:2px solid v
 html[data-theme="dark"] .acc-confirm--danger{border-color:var(--bad-ink,#D42F2F)}
 html[data-theme="dark"] .big-btn.acc-danger{background:#C62828;color:#fff;box-shadow:0 4px 0 #8E1B1B}
 html[data-theme="dark"] .acc-error{background:var(--bad-bg,#391717);color:#ed857e}
+html[data-theme="dark"] .mission-intro{border:2px solid var(--line);background:var(--panel);box-shadow:0 4px 0 var(--line)}
+html[data-theme="dark"] .mission-intro strong{color:var(--ink)}
+html[data-theme="dark"] .mission-intro small{color:var(--muted)}
+html[data-theme="dark"] .mission-steps li{background:var(--panel2);color:var(--ink)}
+html[data-theme="dark"] .mission-steps b{background:var(--accent,#D5FF62);color:#141A0A}
+html[data-theme="dark"] .feature-card{border:2px solid var(--line);background:var(--panel);box-shadow:0 4px 0 var(--line);color:var(--ink);text-decoration:none}
+html[data-theme="dark"] .feature-card:hover{border-color:var(--blue-ink,#0A7BBF)}
+html[data-theme="dark"] .feature-card:active{box-shadow:0 2px 0 var(--line)}
+html[data-theme="dark"] .feature-ico{background:var(--c)}
+html[data-theme="dark"] .feature-tag{background:var(--panel2);color:var(--muted)}
+html[data-theme="dark"] .feature-card small{color:var(--muted)}
+html[data-theme="dark"] .feature-meta{color:var(--blue-ink,#7fc4ed)}
+html[data-theme="dark"] .topic-cards--go{background:var(--accent,#D5FF62)!important;color:#141A0A!important;border-color:var(--accent-shadow,#9BC42A)!important;box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)!important}
 
 /* play.css */
 html[data-theme="dark"] .jp-top,html[data-theme="dark"] .exam-top{border:0;background:none}

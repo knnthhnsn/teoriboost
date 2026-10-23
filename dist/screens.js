@@ -77,6 +77,26 @@ export function renderPractice({ weak, due, missions }) {
     <h2 class="list-label">SPIL</h2><div class="game-grid">${games}</div></section>`;
 }
 
+/* ---------------- Missioner: pick what to practise ---------------- */
+export function renderMissions({ missions, chapters, practised, due }) {
+  const steps = ['Se situationen', 'Vælg dit svar', 'Forstå reglen', 'Husk den senere'].map((s, i) => `<li><b>${i + 1}</b>${s}</li>`).join('');
+  const featured = missions.map(m => `<a class="feature-card" href="#mission:${esc(m.section)}"><span class="feature-ico" style="--c:${m.tint}">${ico(m.icon)}</span>
+      <span class="feature-tag">${esc(m.tag)}</span><strong>${esc(m.title)}</strong><small>${esc(m.description)}</small><span class="feature-meta">3 situationer + genkaldelse</span></a>`).join('');
+  const rows = chapters.map((c, i) => {
+    const total = c.sections.length, done = c.sections.filter(s => practised(s.id)).length;
+    return `<li class="topic ${done === total ? 'is-done' : ''}"><a href="#mission:${esc(c.sections[0].id)}"><span class="topic-n">${i + 1}</span><div><strong>${esc(c.title)}</strong><span class="topic-bar"><i style="--p:${total ? done / total : 0}"></i></span><small>${esc(c.tagline)} · ${done}/${total} øvet</small></div></a><a class="topic-cards topic-cards--go" href="#mission:${esc(c.sections[0].id)}" aria-label="Øv ${esc(c.title)}">Øv</a></li>`;
+  }).join('');
+  return `<section class="missions" aria-labelledby="missions-title"><header class="screen-head"><a class="back-round" href="#practice" aria-label="Tilbage til Øv">${ICON.back}</a><h1 id="missions-title">Vælg en mission</h1></header>
+    <div class="mission-intro">${renderCast('blink', { size: 'sm', priority: true })}<div><strong>Korte runder. Lange eftervirkninger.</strong><small>Hver mission er tre situationer og én genkaldelse. Du får forklaringen efter hvert svar, og det, du er usikker på, kommer igen senere. Ingen point for fart.</small></div></div>
+    <ol class="mission-steps" aria-label="Sådan virker en mission">${steps}</ol>
+    <h2 class="list-label">ANBEFALET</h2><div class="feature-grid">${featured}</div>
+    <h2 class="list-label">ALLE EMNER</h2><ol class="topic-list">${rows}</ol>
+    <h2 class="list-label">MERE</h2><div class="row-list">
+      <a class="row-card" href="#review"><span class="row-ico" style="--c:#EDE7FF">${ico('repeat')}</span><div><strong>Mine gentagelser</strong><small>${due ? `${due} ${due === 1 ? 'regel er' : 'regler er'} klar til at blive gentaget` : 'Ingen regler venter lige nu'}</small></div><span class="row-go" aria-hidden="true">${ICON.chev}</span></a>
+      <a class="row-card" href="#drive"><span class="row-ico" style="--c:#FFF1D6">${ico('gauge')}</span><div><strong>Gas og bremse</strong><small>Mærk vejen: tre situationer i nattebyen</small></div><span class="row-go" aria-hidden="true">${ICON.chev}</span></a>
+    </div></section>`;
+}
+
 /* ---------------- Prøve: start + your history ---------------- */
 function when(at, now = Date.now()) {
   const d = new Date(at), n = new Date(now), day = 864e5;
