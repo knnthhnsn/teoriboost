@@ -19,55 +19,12 @@
 // Remember: Rive draws the first drawable on top, so the top layer is added first.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { Artboard, writeRiv, BLEND } from './riv.mjs';
+import { OUT_BACK, OUT, IN_OUT, IN, FALL, SPRING, TAU, LIME, WHITE, CONFETTI, reseed, rnd, shape, solid, gradient, alpha, glow, rect, scale, shake, merge, repeat, replayable } from './helpers.mjs';
 
 const ART = new URL('./glowup-art/', import.meta.url);
 const META = JSON.parse(readFileSync(new URL('meta.json', ART)));
 const NEON = { scooter: '#B44CFF', smallcar: '#FF2D9B', bigcar: '#14E0F0', racecar: '#39FF14' }; // DREAMS[base].style.neon in start.js
-const LIME = '#D5FF62', WHITE = '#FFFFFF';
-const CONFETTI = ['#D5FF62', '#FFD400', '#14E0F0', '#FF5FA2', '#B44CFF', '#58CC02', '#FFFFFF'];
 const FIREWORK = ['#FFD400', '#14E0F0', '#FF5FA2', '#D5FF62', '#B44CFF'];
-
-const OUT_BACK = [0.34, 1.56, 0.64, 1], OUT = [0.22, 1, 0.36, 1], IN_OUT = [0.45, 0, 0.55, 1], IN = [0.55, 0, 1, 0.45], FALL = [0.5, 0, 1, 0.7];
-const SPRING = { elastic: 'out', amplitude: 1, period: .35 };
-const TAU = Math.PI * 2;
-
-// a seeded random, so every build of the file is the same
-let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
-
-function shape(ab, parent, name, props = {}) { return ab.add('Shape', { parent, name, ...props }); }
-function solid(ab, s, color) { const f = ab.add('Fill', { parent: s }); return ab.add('SolidColor', { parent: f, color }); }
-/** gradient fill: kind 'linear' | 'radial', from/to in the shape's own space, stops [[color, position]] */
-function gradient(ab, s, kind, [sx, sy, ex, ey], stops) {
-  const f = ab.add('Fill', { parent: s });
-  const g = ab.add(kind === 'radial' ? 'RadialGradient' : 'LinearGradient', { parent: f, startX: sx, startY: sy, endX: ex, endY: ey });
-  for (const [color, position] of stops) ab.add('GradientStop', { parent: g, color, position });
-  return f;
-}
-const hex2 = a => Math.round(a * 255).toString(16).padStart(2, '0').toUpperCase();
-const alpha = (c, a) => c + hex2(a);
-/** a soft glow: a circle whose radial gradient fades from colour to nothing */
-function glow(ab, parent, name, { d, color, a = 1, x = 0, y = 0, blend = BLEND.screen }) {
-  const s = shape(ab, parent, name, { x, y, blendModeValue: blend });
-  ab.add('Ellipse', { parent: s, width: d, height: d });
-  gradient(ab, s, 'radial', [0, 0, d / 2, 0], [[alpha(color, a), 0], [alpha(color, a * .35), .45], [alpha(color, 0), 1]]);
-  return s;
-}
-function rect(ab, parent, name, { w, h, x = 0, y = 0, r = 0, color, ox, oy, props = {} }) {
-  const s = shape(ab, parent, name, { x, y, ...props });
-  ab.add('Rectangle', { parent: s, width: w, height: h, cornerRadiusTL: r, linkCornerRadius: true, originX: ox, originY: oy });
-  if (color) solid(ab, s, color);
-  return s;
-}
-/** both scale axes keyed alike */
-const scale = (object, keys) => [{ object, prop: 'scaleX', keys }, { object, prop: 'scaleY', keys }];
-/** a shake: values alternate around 0 and die out, as keyframes from t0 */
-function shake(t0, frames, amp, step = 3, base = 0) {
-  const keys = [[t0, base]];
-  for (let t = t0 + step, k = 0; t < t0 + frames; t += step, k++) keys.push([t, base + (k % 2 ? -1 : 1) * amp * (1 - (t - t0) / frames)]);
-  keys.push([t0 + frames, base]); return keys;
-}
-/** merges keyframe lists of the same property into one, in frame order */
-const merge = (...lists) => lists.flat().sort((a, b) => a[0] - b[0]).filter((k, i, all) => i === 0 || k[0] !== all[i - 1][0]);
 
 // image assets in every file: 0 wreck wheels, 1 wreck body, 2 dream wheels, 3 dream body, 4.. the parts in meta order
 const ASSET = { wreckWheels: 0, wreckBody: 1, dreamWheels: 2, dreamBody: 3, part: i => 4 + i };
@@ -357,16 +314,6 @@ function showBoard(base, kind) {
   return { ab, ms: Math.round((hero ? HEND : END) / 60 * 1000) };
 }
 
-/** entry -> show -> idle; trigger "play" runs the show again. Rive will not move a state into itself, so a replay
- *  during the show goes through a twin state ("again"). */
-function replayable(ab, name, show, idle, frames) {
-  const exitTime = Math.round(frames / 60 * 1000);
-  const layers = [{ name: 'Main', states: [{ name: 'show', animation: show }, { name: 'again', animation: show }, { name: 'idle', animation: idle }],
-    transitions: [{ from: 'entry', to: 'show' }, { from: 'show', to: 'idle', exitTime }, { from: 'again', to: 'idle', exitTime },
-      { from: 'idle', to: 'show', when: [{ input: 'play' }] }, { from: 'show', to: 'again', when: [{ input: 'play' }] }, { from: 'again', to: 'show', when: [{ input: 'play' }] }] }];
-  ab.stateMachine(name, { inputs: [{ name: 'play', type: 'trigger' }], layers });
-}
-
 /* ======================= Pass ======================= */
 function passBoard(base) {
   const m = META[base], neon = NEON[base], SW = 400, SH = 300, GROUND = 262, LINE = 74;
@@ -517,8 +464,7 @@ function passBoard(base) {
 
   // the flag and the stars run through both animations (a second state-machine layer stopped the show playing),
   // so their 60-frame cycle is repeated: 3 times in the show, 4 times in the idle loop, and the hand-over is seamless
-  const repeat = (keys, times) => Array.from({ length: times }, (_, k) => keys.filter(([t]) => k === times - 1 || t < 60).map(([t, v, e]) => [t + k * 60, v, e])).flat();
-  for (const w of wave) { tracks.push({ ...w, keys: repeat(w.keys, 3) }); idle.push({ ...w, keys: repeat(w.keys, 4) }); }
+  for (const w of wave) { tracks.push({ ...w, keys: repeat(w.keys, 60, 3) }); idle.push({ ...w, keys: repeat(w.keys, 60, 4) }); }
   const show = ab.animation('show', { duration: END, tracks });
   const loop = ab.animation('idle', { duration: 240, loop: 'loop', tracks: idle });
   replayable(ab, 'Pass', show, loop, END);
@@ -529,7 +475,7 @@ const OUT_DIR = new URL('../../dist/assets/rive/', import.meta.url);
 mkdirSync(OUT_DIR, { recursive: true });
 const timings = {};
 for (const base of Object.keys(NEON)) {
-  seed = 7;
+  reseed(7);
   const m = META[base];
   const img = (k, w = m.w, h = m.h) => ({ name: `${base}-${k}`, width: w, height: h, bytes: readFileSync(new URL(`${base}-${k}.webp`, ART)) });
   const assets = [img('wreck-wheels'), img('wreck-body'), img('dream-wheels'), img('dream-body'), ...m.parts.map(p => img('part-' + p.id, p.w, p.h))];

@@ -683,6 +683,11 @@ html[data-theme="dark"] .dream-modal:has(.dream-rive[data-rive-on="on"]){backgro
 html[data-theme="dark"] .dream-modal:has(.dream-rive[data-rive-on="on"]) .fine-print{color:#C9CFDB;border:0}
 html[data-theme="dark"] .dream-modal .btn.dream-replay{background:#1E2236!important;color:#F4F6FA!important;border:2px solid #3A4060!important;box-shadow:0 4px 0 #05060A}
 html[data-theme="dark"] .pass-rive{background:#0B0D1F}
+html[data-theme="dark"] .logo-intro{background:#0B0D15}
+html[data-theme="dark"] .logo-intro__name{color:#F4F6FA}
+html[data-theme="dark"] .streak-modal{background:#0B0D15;color:#F4F6FA}
+html[data-theme="dark"] .streak-big b{color:#D5FF62}
+html[data-theme="dark"] .streak-line{color:#C9CFDB}
 
 /* start.css */
 html[data-theme="dark"] .mybil-dream{border:2px solid var(--accent-shadow,#9BC42A);background:#37421b;color:var(--ink);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}

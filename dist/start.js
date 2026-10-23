@@ -137,7 +137,7 @@ function hero({ counts }) {
       <h1 id="start-title" class="start-title"><span class="kl">${words('Bestå teoriprøven.')}</span><span class="kl">${words('Med et', 'kw-b')} ${smile}</span></h1>
       <p class="start-lead">5 minutter om dagen. Byg din bil op, mens du lærer.</p>
       ${ticker()}
-      <div class="start-actions"><a class="start-cta" href="#start:1" data-start-go>Kom i gang · gratis</a></div>
+      <div class="start-actions"><span class="cta-rive" data-rive="cta"><a class="start-cta rive-keep" href="#start:1" data-start-go>Kom i gang · gratis</a></span></div>
     </div>
   </section>`;
 }

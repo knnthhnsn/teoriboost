@@ -307,3 +307,27 @@ html.is-hidden *,html.is-hidden *::before,html.is-hidden *::after{animation-play
 .pass-rive{display:none;width:min(100%,460px);aspect-ratio:4/3;margin:0 auto 14px;border-radius:20px;overflow:hidden;background:#0B0D1F}
 .pass-rive[data-rive-on="on"]{display:block}
 .result-hero:has(.pass-rive[data-rive-on="on"])>.cast{display:none}
+/* the logo intro (once per visit) */
+.logo-intro{position:fixed;inset:0;z-index:1000;display:grid;place-content:center;justify-items:center;gap:4px;background:#0B0D15;transition:opacity .35s ease,visibility .35s}
+.logo-intro.is-out{opacity:0;visibility:hidden}
+.logo-intro__mark{position:relative;width:min(70vw,320px);aspect-ratio:1/1}
+.logo-intro__mark .brand-mark{position:absolute;inset:23.3%;width:auto;height:auto;margin:0;border-radius:24%}
+.logo-intro__name{font:800 30px var(--font-display);color:#F4F6FA;margin-top:-18px;opacity:0;translate:0 10px;transition:opacity .45s .7s,translate .45s .7s}
+.logo-intro.is-on .logo-intro__name{opacity:1;translate:0}
+/* the intro's start button: the canvas is laid over the button with a margin (fit Fill on a 480x140 board, button 360x58) */
+.cta-rive{position:relative;display:flex}
+.cta-rive>.start-cta{flex:1}
+.cta-rive .rive-canvas{left:-16.667%;width:133.333%;top:-70.69%;height:241.38%}
+.start-cta.is-launch{animation:cta-launch .62s cubic-bezier(.5,0,.9,.4) forwards!important;pointer-events:none}
+@keyframes cta-launch{0%{translate:0 0}20%{translate:-12px 0}100%{translate:130vw 0}}
+/* a streak milestone */
+.streak-modal{text-align:center;background:#0B0D15;border-radius:20px;color:#F4F6FA;padding:6px 18px 18px}
+.streak-rive{display:none;width:min(100%,320px);aspect-ratio:1/1;margin:0 auto -10px}
+.streak-rive[data-rive-on="on"]{display:block}
+.streak-big{margin:8px 0 2px;font:800 22px var(--font-display)}
+.streak-big b{display:block;font-size:64px;line-height:1;color:#D5FF62}
+.streak-line{margin:0 0 16px;color:#C9CFDB}
+/* a lesson is done: the green-light show replaces the character once it runs */
+.lesson-rive{display:none;width:min(100%,420px);aspect-ratio:5/3;margin:0 auto 4px}
+.lesson-rive[data-rive-on="on"]{display:block}
+.journey-lesson-done:has(.lesson-rive[data-rive-on="on"]) .journey-done-art{display:none!important} /* play.css forces flex */

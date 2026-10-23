@@ -1,4 +1,5 @@
-// Rive animations (assets/rive/teoriboost.riv, built by tools/rive/build-teoriboost.mjs; glowup-<base>.riv by build-glowup.mjs).
+// Rive animations (assets/rive/teoriboost.riv, built by tools/rive/build-teoriboost.mjs; glowup-<base>.riv by build-glowup.mjs;
+// brand.riv by build-brand.mjs).
 // Any element with data-rive="<name>[:<state>]" gets a Rive canvas on top of its own content, which stays as the
 // fallback: it shows while Rive loads, if it fails, and always when motion is off. The runtime (~2.6 MB) is
 // fetched only the first time such an element appears.
@@ -13,6 +14,10 @@
 //   glowup:<base>                     the dream-build show for scooter | smallcar | bigcar | racecar
 //   hero:<base>                       the start page's glow-up: drives in, transforms, drives off (riveSwap for the next)
 //   pass:<base>                       a passed practice test: the dream build crosses the finish line, fireworks
+//   logo                              the logo intro: lane markings race in and click into place as ///
+//   streak:3 | streak:7 | streak:30   a streak milestone: a wheel of fire and a bronze, silver or gold medal
+//   lessondone                        a lesson is done: green light, the road rolls out, stars fill a bar
+//   cta                               the intro's start button: bool "hover" lights it, trigger "press" launches it
 // The element gets a bubbling 'rive-on' event when its animation is running, 'rive-off' when it will not run.
 const BASE = 'assets/rive/';
 const BOARDS = {
@@ -27,6 +32,10 @@ const BOARDS = {
   glowup: { artboard: 'GlowUp', machine: 'GlowUp', file: base => `glowup-${base}.riv`, states: ['scooter', 'smallcar', 'bigcar', 'racecar'] },
   hero: { artboard: 'Hero', machine: 'Hero', file: base => `glowup-${base}.riv`, states: ['scooter', 'smallcar', 'bigcar', 'racecar'] },
   pass: { artboard: 'Pass', machine: 'Pass', file: base => `glowup-${base}.riv`, states: ['scooter', 'smallcar', 'bigcar', 'racecar'] },
+  logo: { artboard: 'Logo', machine: 'Logo', file: () => 'brand.riv' },
+  streak: { artboard: days => 'Streak' + days, machine: 'Streak', file: () => 'brand.riv', states: ['3', '7', '30'] },
+  lessondone: { artboard: 'LessonDone', machine: 'LessonDone', file: () => 'brand.riv' },
+  cta: { artboard: 'Cta', machine: 'Cta', file: () => 'brand.riv', fit: 'Fill' }, // the canvas is laid over the button exactly
 };
 let runtime = null; const files = new Map(); // file name -> its bytes
 const live = new Map(); // element -> Rive instance
@@ -67,8 +76,8 @@ async function mount(el) {
     const canvas = document.createElement('canvas'); canvas.className = 'rive-canvas'; canvas.setAttribute('aria-hidden', 'true');
     el.append(canvas);
     const inst = new r.Rive({
-      buffer: bytes.slice(0), canvas, artboard: spec.artboard, stateMachine: spec.machine, autoplay: true,
-      layout: new r.Layout({ fit: r.Fit.Contain, alignment: r.Alignment.Center }),
+      buffer: bytes.slice(0), canvas, artboard: typeof spec.artboard === 'function' ? spec.artboard(state) : spec.artboard, stateMachine: spec.machine, autoplay: true,
+      layout: new r.Layout({ fit: r.Fit[spec.fit || 'Contain'], alignment: r.Alignment.Center }),
       onLoad: () => {
         inst.resizeDrawingSurfaceToCanvas(); el.dataset.riveOn = 'on'; signal(el, 'rive-on');
         requestAnimationFrame(() => inst.resizeDrawingSurfaceToCanvas()); // 'on' styles can change the element's size
@@ -102,6 +111,12 @@ function sweep() {
   for (const [el, inst] of live) if (!el.isConnected) { inst.cleanup(); live.delete(el); }
   if (still()) return;
   document.querySelectorAll('[data-rive]:not([data-rive-on])').forEach(el => void mount(el));
+}
+
+/** Sets a bool or number input on a running element. */
+export function riveSet(el, input, value) {
+  const inst = live.get(el); if (!inst) return;
+  const i = inst.stateMachineInputs(BOARDS[el.dataset.rive.split(':')[0]].machine)?.find(x => x.name === input); if (i) i.value = value;
 }
 
 /** Points an element at another board/state (data-rive value) and mounts it again. */

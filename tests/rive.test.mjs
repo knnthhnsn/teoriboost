@@ -34,3 +34,9 @@ test('each glowup-<base>.riv holds the GlowUp, Hero and Pass shows and the vehic
     assert.equal(text.split('WEBPVP8').length - 1, 4 + meta[base].parts.length, `${base}: four layers plus one image per part`);
   }
 });
+
+test('brand.riv holds the logo intro, the streak medals, the lesson finish and the start button', () => {
+  const text = ascii(readFileSync(new URL('../dist/assets/rive/brand.riv', import.meta.url)));
+  assert.ok(text.startsWith('RIVE'));
+  for (const name of ['Logo', 'Streak3', 'Streak7', 'Streak30', 'Streak', 'LessonDone', 'Cta', 'hover', 'press', 'play']) assert.ok(text.includes(name), name);
+});
