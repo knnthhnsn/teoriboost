@@ -7,7 +7,7 @@
 //   3.4s  the beam flares: flash, rings, confetti, the car jumps and lands lowered, underglow and light rays come on
 //   4.8s  idle: rays turn, the underglow breathes, the suspension bobs, light glints on the roof line
 //
-// State machine "GlowUp": plays the show on load; trigger "play" runs it again.
+// State machine "GlowUp": plays the show on load; trigger "play" runs it again, also halfway through.
 // Remember: Rive draws the first drawable on top, so the top layer is added first.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { Artboard, writeRiv, BLEND } from './riv.mjs';
@@ -251,9 +251,11 @@ function board(base) {
   const loop = ab.animation('idle', { duration: IDLE, loop: 'loop', tracks: idle });
   ab.stateMachine('GlowUp', {
     inputs: [{ name: 'play', type: 'trigger' }],
-    layers: [{ name: 'Main', states: [{ name: 'show', animation: show }, { name: 'idle', animation: loop }],
-      transitions: [{ from: 'entry', to: 'show' }, { from: 'show', to: 'idle', exitTime: Math.round(END / 60 * 1000) },
-        { from: 'any', to: 'show', when: [{ input: 'play' }] }] }],
+    // Rive will not move a state into itself, so a replay during the show goes through a twin state ("again")
+    layers: [{ name: 'Main', states: [{ name: 'show', animation: show }, { name: 'again', animation: show }, { name: 'idle', animation: loop }],
+      transitions: [{ from: 'entry', to: 'show' },
+        { from: 'show', to: 'idle', exitTime: Math.round(END / 60 * 1000) }, { from: 'again', to: 'idle', exitTime: Math.round(END / 60 * 1000) },
+        { from: 'idle', to: 'show', when: [{ input: 'play' }] }, { from: 'show', to: 'again', when: [{ input: 'play' }] }, { from: 'again', to: 'show', when: [{ input: 'play' }] }] }],
   });
   return ab;
 }
