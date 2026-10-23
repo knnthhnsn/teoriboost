@@ -25,11 +25,12 @@ test('teoriboost.riv has all the artboards and their inputs', () => {
   for (const name of ['Feedback', 'Flame', 'Celebrate', 'Confetti', 'Gauge', 'TrafficLight', 'Bolt', 'Target', 'right', 'wrong', 'lit', 'boost', 'play', 'pct', 'earn', 'met']) assert.ok(text.includes(name), name);
 });
 
-test('each glowup-<base>.riv holds the show, its trigger and the four vehicle images', () => {
+test('each glowup-<base>.riv holds the GlowUp, Hero and Pass shows and the vehicle images', () => {
+  const meta = JSON.parse(readFileSync(new URL('../tools/rive/glowup-art/meta.json', import.meta.url)));
   for (const base of ['scooter', 'smallcar', 'bigcar', 'racecar']) {
     const text = ascii(readFileSync(new URL(`../dist/assets/rive/glowup-${base}.riv`, import.meta.url)));
     assert.ok(text.startsWith('RIVE'), base);
-    for (const name of ['GlowUp', 'show', 'idle', 'play', `${base}-wreck-body`, `${base}-dream-body`]) assert.ok(text.includes(name), `${base}: ${name}`);
-    assert.equal(text.split('WEBPVP8').length - 1, 4, `${base}: four embedded webp images`);
+    for (const name of ['GlowUp', 'Hero', 'Pass', 'show', 'idle', 'play', `${base}-wreck-body`, `${base}-dream-body`]) assert.ok(text.includes(name), `${base}: ${name}`);
+    assert.equal(text.split('WEBPVP8').length - 1, 4 + meta[base].parts.length, `${base}: four layers plus one image per part`);
   }
 });

@@ -301,3 +301,9 @@ html.is-hidden *,html.is-hidden *::before,html.is-hidden *::after{animation-play
 .dream-modal:has(.dream-rive[data-rive-on="on"]) .fine-print{color:#C9CFDB;border:0;margin:4px 0 0;padding:0 18px;text-align:center}
 .dream-modal .btn.dream-replay{display:flex;margin:12px auto 0;background:#1E2236!important;color:#F4F6FA!important;border:2px solid #3A4060!important;box-shadow:0 4px 0 #05060A}
 .dream-modal .btn.dream-replay[hidden]{display:none}
+/* Start page: the glow-up machine's car area runs the Rive Hero; the garage scene and poster stay CSS */
+.gu-stage[data-rive]{position:absolute;inset:0}
+/* a passed practice test: the finish-line show replaces the character once it runs */
+.pass-rive{display:none;width:min(100%,460px);aspect-ratio:4/3;margin:0 auto 14px;border-radius:20px;overflow:hidden;background:#0B0D1F}
+.pass-rive[data-rive-on="on"]{display:block}
+.result-hero:has(.pass-rive[data-rive-on="on"])>.cast{display:none}

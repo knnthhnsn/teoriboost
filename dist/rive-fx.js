@@ -11,6 +11,8 @@
 //   bolt | bolt:earn                  the Booster bolt; glints now and then, jumps on earn
 //   target:open | target:met          today's goal; a dart lands when it is met
 //   glowup:<base>                     the dream-build show for scooter | smallcar | bigcar | racecar
+//   hero:<base>                       the start page's glow-up: drives in, transforms, drives off (riveSwap for the next)
+//   pass:<base>                       a passed practice test: the dream build crosses the finish line, fireworks
 // The element gets a bubbling 'rive-on' event when its animation is running, 'rive-off' when it will not run.
 const BASE = 'assets/rive/';
 const BOARDS = {
@@ -23,6 +25,8 @@ const BOARDS = {
   bolt: { artboard: 'Bolt', machine: 'Bolt' },
   target: { artboard: 'Target', machine: 'Target' },
   glowup: { artboard: 'GlowUp', machine: 'GlowUp', file: base => `glowup-${base}.riv`, states: ['scooter', 'smallcar', 'bigcar', 'racecar'] },
+  hero: { artboard: 'Hero', machine: 'Hero', file: base => `glowup-${base}.riv`, states: ['scooter', 'smallcar', 'bigcar', 'racecar'] },
+  pass: { artboard: 'Pass', machine: 'Pass', file: base => `glowup-${base}.riv`, states: ['scooter', 'smallcar', 'bigcar', 'racecar'] },
 };
 let runtime = null; const files = new Map(); // file name -> its bytes
 const live = new Map(); // element -> Rive instance
@@ -98,6 +102,18 @@ function sweep() {
   for (const [el, inst] of live) if (!el.isConnected) { inst.cleanup(); live.delete(el); }
   if (still()) return;
   document.querySelectorAll('[data-rive]:not([data-rive-on])').forEach(el => void mount(el));
+}
+
+/** Points an element at another board/state (data-rive value) and mounts it again. */
+export function riveSwap(el, value) {
+  const inst = live.get(el); if (inst) { inst.cleanup(); live.delete(el); }
+  el.querySelector('canvas.rive-canvas')?.remove(); el.dataset.rive = value; delete el.dataset.riveOn;
+  if (!still()) void mount(el);
+}
+/** Starts fetching the file behind a data-rive value, so a later swap to it is quick. */
+export function rivePreload(value) {
+  const [name, state = ''] = value.split(':'); const spec = BOARDS[name];
+  if (spec && !still()) loadFile(spec.file ? spec.file(state) : 'teoriboost.riv').catch(() => {});
 }
 
 /** Replays a feedback/celebrate element in place (for content that is reused, not re-rendered). */

@@ -682,6 +682,7 @@ html[data-theme="dark"] .chat-status i[data-rive-on="on"]{border:0;background:no
 html[data-theme="dark"] .dream-modal:has(.dream-rive[data-rive-on="on"]){background:#0B0D15!important}
 html[data-theme="dark"] .dream-modal:has(.dream-rive[data-rive-on="on"]) .fine-print{color:#C9CFDB;border:0}
 html[data-theme="dark"] .dream-modal .btn.dream-replay{background:#1E2236!important;color:#F4F6FA!important;border:2px solid #3A4060!important;box-shadow:0 4px 0 #05060A}
+html[data-theme="dark"] .pass-rive{background:#0B0D1F}
 
 /* start.css */
 html[data-theme="dark"] .mybil-dream{border:2px solid var(--accent-shadow,#9BC42A);background:#37421b;color:var(--ink);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}
