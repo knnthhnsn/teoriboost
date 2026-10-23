@@ -673,6 +673,10 @@ html[data-theme="dark"] .mybil-sheen{background:linear-gradient(105deg,transpare
 html[data-theme="dark"] .rl-head{background:radial-gradient(circle,#29281e 0 30%,rgba(93,83,38,0.9) 45%,rgba(255,226,120,0) 72%);box-shadow:0 0 14px 6px rgba(105,94,43,0.55)}
 html[data-theme="dark"] .rl-beam{background:linear-gradient(90deg,rgba(81,73,33,0.85),rgba(99,87,40,0.35) 55%,rgba(255,236,160,0))}
 html[data-theme="dark"] .rl-tail{background:radial-gradient(circle,#833535 0 30%,rgba(255,40,40,0) 72%);box-shadow:0 0 12px 5px rgba(255,50,50,.45)}
+html[data-theme="dark"] .fb-badge{background:var(--good,#58CC02);color:#fff}
+html[data-theme="dark"] .fb-badge[data-rive$="wrong"]{background:var(--bad,#FF4B4B)}
+html[data-theme="dark"] .fb-badge[data-rive-on="on"]{background:none}
+html[data-theme="dark"] .judge__done-ico[data-rive-on="on"],html[data-theme="dark"] .chip-ico[data-rive-on="on"]{background:none!important;box-shadow:none!important}
 
 /* start.css */
 html[data-theme="dark"] .mybil-dream{border:2px solid var(--accent-shadow,#9BC42A);background:#37421b;color:var(--ink);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}

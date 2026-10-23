@@ -1,0 +1,4 @@
+@rive-app/canvas 2.44.1 (rive.js, rive.wasm, rive_fallback.wasm) - https://rive.app
+License: MIT (as declared in the package's package.json, "license": "MIT").
+
+teoriboost.riv is original to TeoriBoost, written from code by tools/rive/build-teoriboost.mjs.

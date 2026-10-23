@@ -290,7 +290,7 @@ export function createJourneyPlayer({
     const earns = session.finalizedAt ? todays === 1 : todays === 0;
     const firstTry = [evidence.apply, evidence.checkpoint].filter(x => x && !x.hadWrong).length;
     return `<section class="journey-lesson-done ${session.finalizedAt ? 'is-finalized' : ''}">
-      <div class="journey-celebration" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="journey-celebration" aria-hidden="true" data-rive="confetti"><i></i><i></i><i></i></div>
       <div class="journey-done-art">${renderCast(repaired ? 'kegle' : 'bobbel', { size: 'md', mood: 'correct', priority: true })}</div>
       <h2 class="jp-done-title">${repaired ? 'Repareret og klaret!' : 'Lektion klaret!'}</h2>
       <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den, og det er sådan, det sætter sig.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>

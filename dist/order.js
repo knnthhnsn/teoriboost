@@ -92,7 +92,7 @@ export function mountOrder(root, { sound = () => {} } = {}) {
       const sec = sectionOf(seq.sectionId), src = (sec?.sourceIds || []).map(id => SOURCES.find(s => s.id === id)).filter(Boolean)[0];
       const next = SEQUENCES[SEQUENCES.indexOf(seq) + 1];
       result.className = 'ord-result ' + (g.all ? 'is-right' : 'is-near'); result.hidden = false; check.hidden = true;
-      result.innerHTML = `<strong>${g.all ? 'Helt rigtig rækkefølge!' : `${g.right} af ${seq.steps.length} på rette plads`}</strong>
+      result.innerHTML = `<div class="ord-head"><span class="fb-badge" data-rive="feedback:${g.all ? 'right' : 'wrong'}">${ico(g.all ? 'check' : 'x')}</span><strong>${g.all ? 'Helt rigtig rækkefølge!' : `${g.right} af ${seq.steps.length} på rette plads`}</strong></div>
         ${g.all ? '' : `<ol class="ord-answer">${seq.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>`}
         <p>${esc(seq.explanation)}</p>
         ${src ? `<a class="ord-src" href="${esc(src.url)}" target="_blank" rel="noopener noreferrer">${esc(src.label.split(':')[0])} ↗</a>` : ''}

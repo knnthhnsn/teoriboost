@@ -4,6 +4,13 @@ import { duo } from './ui-icons.js';
 
 const plural = (n, one, many) => (n === 1 ? one : many);
 
+/** lit, out (no streak) or boost (the streak grew since the hero was last shown on this device) */
+function flameState(streak, store = globalThis.localStorage) {
+  let seen = streak;
+  try { seen = Number(store.getItem('teoriboost.streakSeen') ?? streak); store.setItem('teoriboost.streakSeen', String(streak)); } catch {}
+  return streak === 0 ? 'out' : streak > seen ? 'boost' : 'lit';
+}
+
 /** Headline and line under it, from where the learner is right now. */
 export function heroCopy({ streak = 0, days = null, goal = 1, today = 0, pct = 0 }) {
   const left = Math.max(0, goal - today);
@@ -29,7 +36,7 @@ export function renderMirrorHero({ streak = 0, days = null, goal = 1, today = 0,
         <div class="mh-scene" aria-hidden="true"><i class="mh-sun"></i><i class="mh-hills"></i><div class="mh-ground"><div class="mh-road"><i></i></div></div></div>
         <div class="mh-hud">
           <div class="mh-stats">
-            <p class="mh-stat mh-stat--streak${streak ? '' : ' is-zero'}"><span class="mh-ico">${duo('flame')}</span><span><b data-count="${streak}">${streak}</b><small>${plural(streak, 'dag', 'dage')} i træk</small></span></p>
+            <p class="mh-stat mh-stat--streak${streak ? '' : ' is-zero'}"><span class="mh-ico" data-rive="flame:${flameState(streak)}">${duo('flame')}</span><span><b data-count="${streak}">${streak}</b><small>${plural(streak, 'dag', 'dage')} i træk</small></span></p>
             <p class="mh-stat mh-stat--goal"><span class="mh-ico">${duo('target')}</span><span><b>${got}/${goal}</b><small>i dag <span class="mh-dots" aria-hidden="true">${Array.from({ length: Math.min(goal, 6) }, (_, k) => `<i class="${k < got ? 'on' : ''}" style="--k:${k}"></i>`).join('')}</span></small></span></p>
           </div>
           <a class="mh-ring${pct ? '' : ' is-zero'}" href="#profil" style="--p:${pct}" aria-label="Du er ${pct} procent klar. Se hvordan vi regner">
