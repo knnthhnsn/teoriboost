@@ -303,6 +303,8 @@ html.is-hidden *,html.is-hidden *::before,html.is-hidden *::after{animation-play
 .dream-modal .btn.dream-replay[hidden]{display:none}
 /* Start page: the glow-up machine's car area runs the Rive Hero; the garage scene and poster stay CSS */
 .gu-stage[data-rive]{position:absolute;inset:0}
+/* Rive draws its own shadow under the tyres, so the CSS car's shadow blob goes */
+.gu:has(>.gu-stage[data-rive-on="on"]) .gu-ring{display:none!important}
 /* a passed practice test: the finish-line show replaces the character once it runs */
 .pass-rive{display:none;width:min(100%,460px);aspect-ratio:4/3;margin:0 auto 14px;border-radius:20px;overflow:hidden;background:#0B0D1F}
 .pass-rive[data-rive-on="on"]{display:block}
