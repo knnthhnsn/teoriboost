@@ -842,6 +842,10 @@ html[data-theme="dark"] .feature-tag{background:var(--panel2);color:var(--muted)
 html[data-theme="dark"] .feature-card small{color:var(--muted)}
 html[data-theme="dark"] .feature-meta{color:var(--blue-ink,#7fc4ed)}
 html[data-theme="dark"] .topic-cards--go{background:var(--accent,#D5FF62)!important;color:#141A0A!important;border-color:var(--accent-shadow,#9BC42A)!important;box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)!important}
+html[data-theme="dark"] .row-ico,html[data-theme="dark"] .feature-ico,html[data-theme="dark"] .game-ico{background:linear-gradient(180deg,var(--panel) 0,var(--panel2) 100%)!important;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line),0 2px 0 var(--line)}
+html[data-theme="dark"] .row-ico .ui-ico,html[data-theme="dark"] .feature-ico .ui-ico,html[data-theme="dark"] .game-ico .ui-ico{color:var(--ink)}
+html[data-theme="dark"] .row-ico.is-done{background:var(--good-bg,#31451c)!important;box-shadow:inset 0 0 0 1.5px var(--good,#58CC02)}
+html[data-theme="dark"] .row-ico.is-done .ui-ico{color:var(--good-ink,#c1f19d)}
 
 /* play.css */
 html[data-theme="dark"] .jp-top,html[data-theme="dark"] .exam-top{border:0;background:none}

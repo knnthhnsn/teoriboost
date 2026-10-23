@@ -379,3 +379,10 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
   .feature-card strong,.feature-card small,.feature-meta{grid-column:2}
   .feature-meta{padding-top:4px}
 }
+
+/* icon tiles: one neutral tile everywhere, like the menu; only "done" gets the green of success */
+.row-ico,.feature-ico,.game-ico{background:linear-gradient(180deg,var(--panel) 0,var(--panel2) 100%)!important;color:var(--ink);
+  box-shadow:inset 0 0 0 1.5px var(--line),0 2px 0 var(--line)}
+.row-ico .ui-ico,.feature-ico .ui-ico,.game-ico .ui-ico{color:var(--ink)}
+.row-ico.is-done{background:var(--good-bg,#E8FBD5)!important;box-shadow:inset 0 0 0 1.5px var(--good,#58CC02)}
+.row-ico.is-done .ui-ico{color:var(--good-ink,#3B8A00)}
