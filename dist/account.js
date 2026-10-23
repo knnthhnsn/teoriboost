@@ -113,7 +113,7 @@ export function createAccount({ config, adapters, load = loadFirebase, storage =
   async function signInGoogle() {
     if (!auth) return; set({ error: null });
     try { await replaceAnonymous(() => fb.signInWithPopup(auth, new fb.GoogleAuthProvider())); }
-    catch (e) { if (!CANCELLED.includes(e?.code)) set({ error: friendly(e) }); }
+    catch (e) { console.warn('account: Google sign-in ended:', e?.code || e?.message); if (!CANCELLED.includes(e?.code)) set({ error: friendly(e) }); }
   }
   async function sendEmailLink(email) {
     if (!auth) return; email = String(email || '').trim(); set({ error: null, busy: true });

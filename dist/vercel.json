@@ -1,5 +1,8 @@
 {
   "functions": {
     "api/chat.mjs": { "maxDuration": 60 }
-  }
+  },
+  "rewrites": [
+    { "source": "/__/auth/:path*", "destination": "https://teoriboost.firebaseapp.com/__/auth/:path*" }
+  ]
 }
