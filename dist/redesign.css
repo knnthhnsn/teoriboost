@@ -1,5 +1,5 @@
 /* Redesign layer: bright, white, Duolingo-like. Loaded last; it re-tokens the existing styles and adds the cast.
-   The yellow logo colour (#D5FF62) is the primary; signal colours are bright and saturated.
+   The yellow logo colour (#FFD60A) is the primary; signal colours are bright and saturated.
    Fonts: Rubik (display) and Atkinson Hyperlegible (text), both SIL OFL, served locally. */
 @font-face{font-family:Rubik;src:url('assets/fonts/rubik-var.woff2') format('woff2');font-weight:300 900;font-display:swap}
 @font-face{font-family:Atkinson;src:url('assets/fonts/atkinson-400.woff2') format('woff2');font-weight:400;font-display:swap}
@@ -19,7 +19,7 @@ code,kbd,samp,.mono,[class*="mono"],.turn-entry small,.turn-kicker,.turn-replay-
   /* neutrals */
   --bg:#FFFFFF;--panel:#FFFFFF;--panel2:#F4F5F7;--ink:#1F2328;--muted:#5F656D;--line:#E3E5E8;--line-strong:#D3D6DB;
   /* brand: the logo's yellow is the primary fill; text on it is ink */
-  --accent:#D5FF62;--accent-ink:#1F2328;--accent-shadow:#9BC42A;--acid:#D5FF62;
+  --accent:#FFD60A;--accent-ink:#1F2328;--accent-shadow:#C9A200;--acid:#FFD60A;
   /* signals (text-safe variants on white) */
   --good:#58CC02;--good-ink:#3B8A00;--good-bg:#E8FBD5;
   --bad:#FF4B4B;--bad-ink:#D42F2F;--bad-bg:#FFE5E5;
@@ -58,9 +58,9 @@ a.text-link,.text-link{color:var(--blue-ink)}
 .sidebar{border-right:2px solid var(--line);background:#fff}
 .nav-item{border-radius:14px;color:var(--muted);border:2px solid transparent}
 .nav-item:hover{background:var(--panel2)}
-.nav-item.active,.nav-item[aria-current="page"]{background:#F3FFD6;color:var(--ink);border-color:var(--accent-shadow)}
+.nav-item.active,.nav-item[aria-current="page"]{background:#FFF5CC;color:var(--ink);border-color:var(--accent-shadow)}
 .mobile-nav{background:#fff;border-top:2px solid var(--line)}
-.mobile-nav .nav-item.active,.mobile-nav .nav-item[aria-current="page"]{background:#F3FFD6}
+.mobile-nav .nav-item.active,.mobile-nav .nav-item[aria-current="page"]{background:#FFF5CC}
 .icon-btn,.mode-toggle{background:#fff!important;border:2px solid var(--line)!important;color:var(--ink)!important}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!important;border-radius:12px}
@@ -123,7 +123,7 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
 .journey-step--active .journey-node__title small,.journey-node__title small{color:#2F6F00!important}
 .journey-step:not(.journey-step--active) .journey-node__title small{color:var(--muted)!important}
 .exam-art .display,.exam-art .display span{color:var(--ink)!important}
-.exam-art{background:#F3FFD6!important;border-color:var(--accent-shadow)!important;box-shadow:0 4px 0 var(--accent-shadow)!important}
+.exam-art{background:#FFF5CC!important;border-color:var(--accent-shadow)!important;box-shadow:0 4px 0 var(--accent-shadow)!important}
 
 /* ---------- Cast ---------- */
 .cast{margin:0;display:flex;flex-wrap:wrap;align-items:flex-end;gap:4px 12px;min-width:0;max-width:100%}
@@ -146,7 +146,7 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
 
 /* ---------- Home ---------- */
 .home-hello{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;margin:4px 0 18px;padding:20px 22px 0;
-  background:linear-gradient(160deg,#F3FFD6 0,#fff 60%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);border-radius:24px;overflow:hidden}
+  background:linear-gradient(160deg,#FFF5CC 0,#fff 60%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);border-radius:24px;overflow:hidden}
 .home-hello .cast{align-items:flex-end}
 .home-hello .cast-bubble{margin-bottom:28px}
 .home-stats{display:flex;flex-direction:column;gap:10px;align-self:center;padding-bottom:20px}
@@ -209,7 +209,7 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
 .mybil{max-width:760px;margin:0 auto}
 .mybil-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:12px}
 .mybil-stage{position:relative;aspect-ratio:1/1;max-height:min(70vw,420px);margin:0 auto;border-radius:24px;
-  background:radial-gradient(70% 55% at 50% 62%,#F3FFD6 0,#fff 70%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);overflow:hidden}
+  background:radial-gradient(70% 55% at 50% 62%,#FFF5CC 0,#fff 70%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);overflow:hidden}
 .mybil-stage img,.road-car img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .mybil-stage{display:block;width:min(100%,70vw,420px);max-height:none;padding:0;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .mybil-message{min-height:24px;margin:10px 0 4px;text-align:center;font-weight:700;color:var(--acid-text)}

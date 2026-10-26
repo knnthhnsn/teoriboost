@@ -5,12 +5,12 @@ body.start-mode{background:#fff}
 
 /* ---------- hero ---------- */
 .start-hero{position:relative;min-height:100svh;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;padding:12px 16px 20px;
-  background:radial-gradient(120% 60% at 50% 18%,#F1FFC9 0,#fff 62%)}
+  background:radial-gradient(120% 60% at 50% 18%,#FFF1B8 0,#fff 62%)}
 .start-top{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
 .start-brand{font-size:20px!important;text-decoration:none;color:var(--ink)}
 .start-skip{font:700 14px var(--font-display);color:var(--blue-ink,#0A66C2);text-decoration:none;padding:12px 4px;min-height:44px;display:inline-flex;align-items:center}
 .start-blob{position:absolute;z-index:-1;border-radius:50%;filter:blur(40px);opacity:.55;pointer-events:none}
-.start-blob--a{width:260px;height:260px;background:#D5FF62;left:-80px;top:60px;animation:blob-a 14s var(--in-out) infinite}
+.start-blob--a{width:260px;height:260px;background:#FFD60A;left:-80px;top:60px;animation:blob-a 14s var(--in-out) infinite}
 .start-blob--b{width:220px;height:220px;background:#7FE8F5;right:-70px;top:220px;opacity:.4;animation:blob-b 17s var(--in-out) infinite}
 .start-blob--c{width:200px;height:200px;background:#FFB3D4;left:30%;bottom:-60px;opacity:.35;animation:blob-a 19s var(--in-out) infinite reverse}
 @keyframes blob-a{50%{translate:60px 40px;scale:1.15}}
@@ -25,9 +25,9 @@ body.start-mode{background:#fff}
 .kw{display:inline-block;animation:word-rise .8s var(--spring) both;animation-delay:calc(var(--w) * 70ms + 250ms)}
 .kl:nth-child(2) .kw{animation-delay:calc(var(--w) * 70ms + 520ms)}
 @keyframes word-rise{from{opacity:0;translate:0 .55em;rotate:4deg;filter:blur(4px)}}
-.kw-smile{position:relative;color:var(--acid-text,#2F6F00)}
+.kw-smile{position:relative;color:#1F2328}
 .kw-smile svg{position:absolute;left:-2%;bottom:-.22em;width:104%;height:.4em;overflow:visible}
-.kw-smile path{fill:none;stroke:var(--accent,#D5FF62);stroke-width:7;stroke-linecap:round;stroke-dasharray:140;stroke-dashoffset:140;animation:draw .7s 1.25s var(--out) forwards}
+.kw-smile path{fill:none;stroke:var(--accent,#FFD60A);stroke-width:7;stroke-linecap:round;stroke-dasharray:140;stroke-dashoffset:140;animation:draw .7s 1.25s var(--out) forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 .start-lead{margin:0 auto;max-width:36ch;color:var(--muted);font-size:16px;line-height:1.5;animation:fade-up .7s .9s var(--out) both}
 @keyframes fade-up{from{opacity:0;translate:0 12px}}
@@ -41,15 +41,15 @@ body.start-mode{background:#fff}
 .start-ticker{overflow:hidden;margin:2px -16px;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);animation:fade-up .7s 1.3s var(--out) both}
 .start-ticker > div{display:flex;gap:8px;width:max-content;animation:ticker 36s linear infinite}
 .start-ticker span{padding:5px 11px;border-radius:999px;background:#F3F5F7;color:#3E454D;font:700 13px var(--font-display);white-space:nowrap}
-.start-ticker span:nth-child(3n){background:#ECFFC2}.start-ticker span:nth-child(4n){background:#E3FAFD}
+.start-ticker span:nth-child(3n){background:#FFEFAD}.start-ticker span:nth-child(4n){background:#E3FAFD}
 @keyframes ticker{to{translate:-50% 0}}
 
 .start-actions{display:flex;flex-direction:column;gap:10px;margin-top:6px;animation:fade-up .7s 1.4s var(--out) both}
 .start-cta{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;justify-content:center;min-height:58px;border-radius:18px;
-  background:var(--accent,#D5FF62);color:#1F2328;font:800 19px var(--font-display);text-decoration:none;border:0;
-  box-shadow:0 5px 0 var(--accent-shadow,#9BC42A);animation:cta-breathe 2.6s 2.2s var(--in-out) infinite}
+  background:var(--accent,#FFD60A);color:#1F2328;font:800 19px var(--font-display);text-decoration:none;border:0;
+  box-shadow:0 5px 0 var(--accent-shadow,#C9A200);animation:cta-breathe 2.6s 2.2s var(--in-out) infinite}
 .start-cta::after{content:"";position:absolute;inset:-30% auto -30% -40%;width:28%;z-index:-1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-18deg);animation:shine 3.6s 2s var(--in-out) infinite}
-.start-cta:active{translate:0 4px;box-shadow:0 1px 0 var(--accent-shadow,#9BC42A);animation:none}
+.start-cta:active{translate:0 4px;box-shadow:0 1px 0 var(--accent-shadow,#C9A200);animation:none}
 @keyframes cta-breathe{0%,100%{scale:1}50%{scale:1.025}}
 .start-ghost{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:18px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);
   color:var(--ink);font:800 16px var(--font-display);text-decoration:none}
@@ -58,13 +58,13 @@ body.start-mode{background:#fff}
 /* ---------- the glow-up machine ---------- */
 .gu{position:relative;width:min(84vw,400px);aspect-ratio:1/1;margin:0 auto;isolation:isolate}
 .gu-rays{position:absolute;inset:-8%;z-index:-2;border-radius:50%;opacity:.8;
-  background:repeating-conic-gradient(from 0deg,rgba(213,255,98,.55) 0 9deg,transparent 9deg 24deg);
+  background:repeating-conic-gradient(from 0deg,rgba(255,214,10,.55) 0 9deg,transparent 9deg 24deg);
   -webkit-mask:radial-gradient(closest-side,#000 20%,transparent 70%);mask:radial-gradient(closest-side,#000 20%,transparent 70%);animation:spot-turn 30s linear infinite}
 .gu.is-done .gu-rays{animation-duration:12s;opacity:1}
 .gu-ring{position:absolute;left:6%;right:6%;bottom:13%;height:17%;z-index:-1;border-radius:50%;
   background:radial-gradient(closest-side,#fff 0,#F4F7F9 70%,#E5E9ED 100%);border:3px solid #fff;box-shadow:0 10px 0 -2px #DDE3E8,0 18px 30px rgba(31,35,40,.12)}
 .gu-ring::after{content:"";position:absolute;inset:10%;border-radius:50%;border:2px dashed rgba(31,35,40,.12);animation:spot-turn 16s linear infinite}
-.gu.is-done .gu-ring{box-shadow:0 10px 0 -2px #DDE3E8,0 0 0 6px rgba(213,255,98,.5),0 18px 40px rgba(155,196,42,.35)}
+.gu.is-done .gu-ring{box-shadow:0 10px 0 -2px #DDE3E8,0 0 0 6px rgba(255,214,10,.5),0 18px 40px rgba(155,196,42,.35)}
 .gu-stage{position:absolute;inset:0}
 .gu-car,.gu-before,.gu-after{position:absolute;inset:0}
 .gu img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
@@ -75,7 +75,7 @@ body.start-mode{background:#fff}
 .gu-car.is-restored .gu-before{opacity:0;transition:opacity .2s}
 @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
 .gu-scan{position:absolute;top:10%;bottom:14%;left:0;width:10px;margin-left:-5px;border-radius:8px;opacity:0;z-index:50;
-  background:linear-gradient(#fff,#D5FF62 30%,#9BFF3A 70%,#fff);box-shadow:0 0 18px 6px rgba(213,255,98,.85),0 0 40px 14px rgba(255,255,255,.7)}
+  background:linear-gradient(#fff,#FFD60A 30%,#9BFF3A 70%,#fff);box-shadow:0 0 18px 6px rgba(255,214,10,.85),0 0 40px 14px rgba(255,255,255,.7)}
 .gu-car.is-restoring .gu-scan{animation:scan .95s var(--in-out) forwards}
 @keyframes scan{0%{left:4%;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:96%;opacity:0}}
 .gu-car.is-in{animation:drive-in .75s var(--spring) both}
@@ -98,7 +98,7 @@ body.start-mode{background:#fff}
 .gu-arrow{color:var(--muted)}
 .gu-to{opacity:.25;transition:opacity .3s}
 .gu.is-done .gu-to{opacity:1;color:var(--acid-text,#2F6F00);animation:pop-in .5s var(--spring)}
-.gu.is-done .gu-label{border-color:var(--accent-shadow,#9BC42A);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}
+.gu.is-done .gu-label{border-color:var(--accent-shadow,#C9A200);box-shadow:0 3px 0 var(--accent-shadow,#C9A200)}
 
 /* the cast floats around the machine */
 .start-cast{position:absolute;inset:0;pointer-events:none;z-index:3}
@@ -138,7 +138,7 @@ body.start-mode{background:#fff}
 .step-eyebrow{margin:6px 0 0}
 .step-title{margin:0;font:800 clamp(26px,7.6vw,40px)/1.08 var(--font-display);letter-spacing:-.01em}
 .step-title span{display:block;color:var(--muted)}
-.step-garage{position:relative;padding:8px 0 4px;border-radius:24px;background:radial-gradient(70% 60% at 50% 60%,#F3FFD6,#fff 70%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.step-garage{position:relative;padding:8px 0 4px;border-radius:24px;background:radial-gradient(70% 60% at 50% 60%,#FFF5CC,#fff 70%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
 .step-garage .gu{width:min(78vw,340px)}
 .step-replay{display:block;margin:6px auto 4px;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:#fff;font:700 14px var(--font-display);color:var(--ink)}
 .step-earn{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);animation:reveal .5s .6s var(--out) backwards}
@@ -174,8 +174,8 @@ body.start-mode{background:#fff}
 @media (max-width:360px){.start-title{font-size:32px}.start-lead{font-size:15px}.step-option{min-height:56px}}
 
 /* Min bil: the dream-build button and modal */
-.mybil-dream{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 0;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid var(--accent-shadow,#9BC42A);
-  background:#F3FFD6;color:var(--ink);font:800 15px var(--font-display);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}
+.mybil-dream{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 0;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid var(--accent-shadow,#C9A200);
+  background:#FFF5CC;color:var(--ink);font:800 15px var(--font-display);box-shadow:0 3px 0 var(--accent-shadow,#C9A200)}
 .mybil-dream::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 13.7 9 19 10.7 13.7 12.4 12 18 10.3 12.4 5 10.7 10.3 9Z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 13.7 9 19 10.7 13.7 12.4 12 18 10.3 12.4 5 10.7 10.3 9Z'/%3E%3C/svg%3E") center/contain no-repeat;animation:bolt-glint 3.5s var(--in-out) infinite}
 .dream-modal .gu{width:min(76vw,380px)}
 
@@ -202,7 +202,7 @@ body.start-mode{background:#fff}
 .gu-ring{background:radial-gradient(closest-side,#FFFFFF 0,#F1F4F7 65%,#E3E8ED 100%);border:2px solid rgba(255,255,255,.9);
   box-shadow:0 8px 0 -2px #D5DCE3,0 22px 34px -8px rgba(31,35,40,.18)}
 .gu-ring::after{border:1.5px solid rgba(31,35,40,.08)}
-.gu.is-done .gu-ring{box-shadow:0 8px 0 -2px #D5DCE3,0 22px 34px -8px rgba(31,35,40,.18),0 0 0 4px rgba(213,255,98,.45)}
+.gu.is-done .gu-ring{box-shadow:0 8px 0 -2px #D5DCE3,0 22px 34px -8px rgba(31,35,40,.18),0 0 0 4px rgba(255,214,10,.45)}
 /* the restore: a soft-edged reveal sweeping across, with a brief white glint on the car itself */
 .gu-scan{display:none!important}
 .gu-after{clip-path:none;-webkit-mask-image:linear-gradient(90deg,#000 42%,transparent 58%);mask-image:linear-gradient(90deg,#000 42%,transparent 58%);
@@ -276,9 +276,9 @@ body.start-mode{background:#fff}
 .sc-open,.sc-door,.sc-slat,.sc-road,.sc-dashes path{transition:fill .8s var(--in-out),stroke .8s var(--in-out)}
 /* the blob now reads as the vehicle's shadow on the road */
 .gu-ring{bottom:10%;height:20%;opacity:.95}
-/* the type now sits on the pale end of the gradient: "smil." gets its green and lime underline back */
-.start-hero .kw-smile{color:var(--acid-text,#2F6F00)}
-.start-hero .kw-smile path{stroke:var(--accent,#D5FF62)}
+/* the type now sits on the pale end of the gradient: "smil." is ink with the yellow underline */
+.start-hero .kw-smile{color:#1F2328}
+.start-hero .kw-smile path{stroke:var(--accent,#FFD60A)}
 
 
 /* no coloured blob: just a soft contact shadow so the vehicle stands on the road */

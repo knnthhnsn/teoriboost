@@ -27,9 +27,9 @@
 .journey-control-dock{position:sticky;bottom:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:18px -2px 0;padding:12px 2px calc(10px + env(safe-area-inset-bottom));
   background:linear-gradient(rgba(255,255,255,0),#fff 28%);border:0!important}
 .journey-control-dock > p{flex-basis:100%;margin:0;color:var(--muted);font-size:14px}
-.journey-control-dock .btn-primary,.exam-dock .btn-primary,.result-actions .btn-primary{flex:1;min-height:56px;border-radius:16px!important;background:var(--accent,#D5FF62)!important;color:#1F2328!important;border:0!important;
-  box-shadow:0 5px 0 var(--accent-shadow,#9BC42A)!important;font:800 18px var(--font-display)!important;justify-content:center}
-.journey-control-dock .btn-primary:disabled{background:#EEF4DD!important;color:#9AA38A!important;box-shadow:0 5px 0 #DCE5C4!important}
+.journey-control-dock .btn-primary,.exam-dock .btn-primary,.result-actions .btn-primary{flex:1;min-height:56px;border-radius:16px!important;background:var(--accent,#FFD60A)!important;color:#1F2328!important;border:0!important;
+  box-shadow:0 5px 0 var(--accent-shadow,#C9A200)!important;font:800 18px var(--font-display)!important;justify-content:center}
+.journey-control-dock .btn-primary:disabled{background:#F7F2DD!important;color:#9AA38A!important;box-shadow:0 5px 0 #E8DFBF!important}
 .journey-control-dock .btn-secondary,.exam-dock .btn-secondary{min-height:56px;border-radius:16px!important;background:#fff!important;border:2px solid var(--line)!important;box-shadow:0 4px 0 var(--line)!important;font:800 16px var(--font-display)!important;color:var(--ink)!important}
 
 /* ---------- questions: context box, photo, prompt, Ja/Nej pills ---------- */
@@ -71,7 +71,7 @@
 .journey-answer-review > div.right{color:#2F6F00}.journey-answer-review > div.wrong{color:#B42318}
 
 /* ---------- lesson done ---------- */
-.journey-lesson-done{text-align:center;padding:12px 0 0;border-radius:24px;background:radial-gradient(90% 60% at 50% 20%,#F1FFC9,#fff 70%)}
+.journey-lesson-done{text-align:center;padding:12px 0 0;border-radius:24px;background:radial-gradient(90% 60% at 50% 20%,#FFF1B8,#fff 70%)}
 .journey-done-art{display:flex;justify-content:center}.journey-done-art .cast-img{width:min(46vw,190px)!important}
 #main .jp-done-title{margin:8px 0 4px;font:800 clamp(30px,9vw,40px)/1.05 var(--font-display)!important;color:#3A8700}
 .jp-done-lead{margin:0 auto 14px;max-width:34ch;color:#3E454D;font-size:16px}
@@ -81,7 +81,7 @@
 .jp-done-stats strong{display:block;font:800 26px/1.2 var(--font-display)}
 .jp-done-stats em{display:block;font-style:normal;font-size:12px;color:var(--muted)}
 .jp-done-goal{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:10px 16px;border-radius:16px;background:#fff;border:2px solid var(--line);font:800 15px var(--font-display)}
-.jp-done-goal.is-met{background:#F3FFD6;border-color:var(--accent-shadow,#9BC42A);box-shadow:0 3px 0 var(--accent-shadow,#9BC42A)}
+.jp-done-goal.is-met{background:#FFF5CC;border-color:var(--accent-shadow,#C9A200);box-shadow:0 3px 0 var(--accent-shadow,#C9A200)}
 .jp-done-goal span{font-weight:700;color:var(--muted)}
 .journey-lesson-done .journey-control-dock{background:none}
 .journey-lesson-done .journey-control-dock .btn-secondary{flex:1}

@@ -297,7 +297,7 @@ function ctaBoard() {
   all(flame, 'scaleX', [[0, 1]], [[0, 1]], [[0, .4, 'hold'], [2, .4, OUT_BACK], [10, 1.4], [22, .6]]);
   // speed lines drawn across the button's path as the button (HTML) shoots off to the right, then fading
   for (let i = 0; i < 6; i++) {
-    const y = BY - 20 + i * 8, t0 = 6 + i % 3 * 2, color = i % 2 ? INK : '#8DB423';
+    const y = BY - 20 + i * 8, t0 = 6 + i % 3 * 2, color = i % 2 ? INK : '#B38F00';
     const l = rect(ab, 0, 'streak' + i, { w: 0, h: 3, r: 1.5, x: BX0 + 10, y, ox: 0, props: { opacity: 0 } });
     gradient(ab, l, 'linear', [0, 0, BX1 - BX0 + 40, 0], [[alpha(color, 0), 0], [alpha(color, .75), .6], [alpha(color, 0), 1]]);
     all(l, 'opacity', [[0, 0]], [[0, 0]], [[0, 0, 'hold'], [t0, 1, 'hold'], [t0 + 22, 1], [t0 + 40, 0]]);

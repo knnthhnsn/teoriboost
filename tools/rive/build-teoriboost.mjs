@@ -12,7 +12,7 @@ import { Artboard, writeRiv } from './riv.mjs';
 import { gauge, trafficLight, bolt, target } from './boards-more.mjs';
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), '../../dist/assets/rive/teoriboost.riv');
-const C = { lime: '#D5FF62', limeEdge: '#8DB423', green: '#58CC02', red: '#FF4B4B', ink: '#141A0A', white: '#FFFFFF', blue: '#38BDF8', orange: '#FF9600', yellow: '#FFC800', grey: '#A3ADB6', greyLight: '#D9DEE3' };
+const C = { lime: '#FFD60A', limeEdge: '#B38F00', green: '#58CC02', red: '#FF4B4B', ink: '#1A1605', white: '#FFFFFF', blue: '#38BDF8', orange: '#FF9600', yellow: '#FFC800', grey: '#A3ADB6', greyLight: '#D9DEE3' };
 const OUT_BACK = [0.34, 1.56, 0.64, 1];   // overshoot, then settle
 const OUT_SOFT = [0.22, 1, 0.36, 1];      // fast out, slow in
 const IN_OUT = [0.45, 0, 0.55, 1];

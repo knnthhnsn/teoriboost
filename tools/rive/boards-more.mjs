@@ -2,7 +2,7 @@
 // Remember: Rive draws the first drawable on top, so every board adds its top layer first.
 import { Artboard } from './riv.mjs';
 
-const C = { lime: '#D5FF62', limeEdge: '#8DB423', green: '#58CC02', red: '#FF4B4B', yellow: '#FFC800', ink: '#1F2328', inkDeep: '#141A0A',
+const C = { lime: '#FFD60A', limeEdge: '#B38F00', green: '#58CC02', red: '#FF4B4B', yellow: '#FFC800', ink: '#1F2328', inkDeep: '#1A1605',
   white: '#FFFFFF', pink: '#FF8FB1', sky: '#BFE9FF', lamp: '#FFE58A', grey: '#D3D6DB', greyDark: '#3A414A', hub: '#E3E5E8', spoke: '#9AA3AD' };
 const OUT_BACK = [0.34, 1.56, 0.64, 1], OUT_SOFT = [0.22, 1, 0.36, 1], IN_OUT = [0.45, 0, 0.55, 1], IN = [0.55, 0, 1, 0.45];
 const SPRING = { elastic: 'out', amplitude: 1, period: .32 };

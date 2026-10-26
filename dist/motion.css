@@ -103,12 +103,12 @@ dialog[open]::backdrop{animation:fade-in .3s ease}
 /* ---------- Boosters ---------- */
 .booster-icon{transform-origin:50% 50%}
 .booster-chip .booster-icon{animation:bolt-glint 6s 2s var(--in-out) infinite}
-@keyframes bolt-glint{0%,88%,100%{rotate:0deg;scale:1;filter:none}92%{rotate:-14deg;scale:1.18;filter:drop-shadow(0 0 4px #D5FF62)}96%{rotate:8deg;scale:1}}
+@keyframes bolt-glint{0%,88%,100%{rotate:0deg;scale:1;filter:none}92%{rotate:-14deg;scale:1.18;filter:drop-shadow(0 0 4px #FFD60A)}96%{rotate:8deg;scale:1}}
 .booster-chip{position:relative}
 .booster-chip.is-earned{animation:chip-earn .8s var(--spring)}
 .booster-chip.is-earned .booster-icon{animation:bolt-spin .8s var(--spring)}
 .booster-chip.is-spent{animation:chip-spend .5s var(--spring)}
-@keyframes chip-earn{0%{scale:1}25%{scale:1.18;box-shadow:0 0 0 6px rgba(213,255,98,.6),0 3px 0 var(--line)}100%{scale:1}}
+@keyframes chip-earn{0%{scale:1}25%{scale:1.18;box-shadow:0 0 0 6px rgba(255,214,10,.6),0 3px 0 var(--line)}100%{scale:1}}
 @keyframes chip-spend{0%{scale:1}30%{scale:.9;translate:0 2px}100%{scale:1}}
 @keyframes bolt-spin{from{rotate:-360deg;scale:.4}}
 
@@ -128,7 +128,7 @@ dialog[open]::backdrop{animation:fade-in .3s ease}
 @keyframes floor-breathe{0%,100%{scale:1 1}50%{scale:.96 .9}}
 .mybil-stage::before{content:"";position:absolute;inset:-20%;z-index:-2;pointer-events:none;opacity:.7;
   -webkit-mask:radial-gradient(closest-side,#000 30%,transparent 72%);mask:radial-gradient(closest-side,#000 30%,transparent 72%);
-  background:conic-gradient(from 0deg at 50% 60%,transparent 0 40deg,rgba(213,255,98,.28) 55deg,transparent 70deg 170deg,rgba(20,224,240,.16) 185deg,transparent 200deg 300deg,rgba(255,95,162,.16) 315deg,transparent 330deg);
+  background:conic-gradient(from 0deg at 50% 60%,transparent 0 40deg,rgba(255,214,10,.28) 55deg,transparent 70deg 170deg,rgba(20,224,240,.16) 185deg,transparent 200deg 300deg,rgba(255,95,162,.16) 315deg,transparent 330deg);
   animation:spot-turn 18s linear infinite}
 @keyframes spot-turn{to{rotate:360deg}}
 /* the body rides its springs over the wheels; the whole rig floats a hair */
@@ -327,7 +327,7 @@ html.is-hidden *,html.is-hidden *::before,html.is-hidden *::after{animation-play
 .streak-rive{display:none;width:min(100%,320px);aspect-ratio:1/1;margin:0 auto -10px}
 .streak-rive[data-rive-on="on"]{display:block}
 .streak-big{margin:8px 0 2px;font:800 22px var(--font-display)}
-.streak-big b{display:block;font-size:64px;line-height:1;color:#D5FF62}
+.streak-big b{display:block;font-size:64px;line-height:1;color:#FFD60A}
 .streak-line{margin:0 0 16px;color:#C9CFDB}
 /* a lesson is done: the green-light show replaces the character once it runs */
 .lesson-rive{display:none;width:min(100%,420px);aspect-ratio:5/3;margin:0 auto 4px}

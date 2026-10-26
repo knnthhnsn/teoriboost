@@ -4,8 +4,8 @@ import { BLEND } from './riv.mjs';
 export const OUT_BACK = [0.34, 1.56, 0.64, 1], OUT = [0.22, 1, 0.36, 1], IN_OUT = [0.45, 0, 0.55, 1], IN = [0.55, 0, 1, 0.45], FALL = [0.5, 0, 1, 0.7];
 export const SPRING = { elastic: 'out', amplitude: 1, period: .35 };
 export const TAU = Math.PI * 2;
-export const LIME = '#D5FF62', WHITE = '#FFFFFF', INK = '#101614';
-export const CONFETTI = ['#D5FF62', '#FFD400', '#14E0F0', '#FF5FA2', '#B44CFF', '#58CC02', '#FFFFFF'];
+export const LIME = '#FFD60A', WHITE = '#FFFFFF', INK = '#101614';
+export const CONFETTI = ['#FFD60A', '#FFD400', '#14E0F0', '#FF5FA2', '#B44CFF', '#58CC02', '#FFFFFF'];
 
 // a seeded random, so every build of a file is the same
 let seed = 7;

@@ -24,7 +24,7 @@ import { OUT_BACK, OUT, IN_OUT, IN, FALL, SPRING, TAU, LIME, WHITE, CONFETTI, re
 const ART = new URL('./glowup-art/', import.meta.url);
 const META = JSON.parse(readFileSync(new URL('meta.json', ART)));
 const NEON = { scooter: '#B44CFF', smallcar: '#FF2D9B', bigcar: '#14E0F0', racecar: '#39FF14' }; // DREAMS[base].style.neon in start.js
-const FIREWORK = ['#FFD400', '#14E0F0', '#FF5FA2', '#D5FF62', '#B44CFF'];
+const FIREWORK = ['#FFD400', '#14E0F0', '#FF5FA2', '#FFD60A', '#B44CFF'];
 
 // image assets in every file: 0 wreck wheels, 1 wreck body, 2 dream wheels, 3 dream body, 4.. the parts in meta order
 const ASSET = { wreckWheels: 0, wreckBody: 1, dreamWheels: 2, dreamBody: 3, part: i => 4 + i };

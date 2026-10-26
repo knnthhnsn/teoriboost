@@ -83,7 +83,7 @@ export function sparks(host, n) {
   for (let i = 0; i < n; i++) {
     const s = document.createElement('i'), a = Math.PI * 2 * i / n + Math.random() * .5, d = 40 + Math.random() * 90;
     s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(1) + 'px'); s.style.setProperty('--dy', (Math.sin(a) * d * .7 - 20).toFixed(1) + 'px');
-    s.style.setProperty('--h', ['#D5FF62', '#FFD400', '#14E0F0', '#FF5FA2', '#B44CFF'][i % 5]); s.style.animationDelay = (Math.random() * .08).toFixed(2) + 's';
+    s.style.setProperty('--h', ['#FFD60A', '#FFD400', '#14E0F0', '#FF5FA2', '#B44CFF'][i % 5]); s.style.animationDelay = (Math.random() * .08).toFixed(2) + 's';
     box.append(s);
   }
   host.append(box); setTimeout(() => box.remove(), 1100);
@@ -100,7 +100,7 @@ export function confetti({ count = 140, origin = { x: .5, y: .35 } } = {}) {
   const c = document.createElement('canvas'); c.className = 'fx-confetti'; c.setAttribute('aria-hidden', 'true');
   const dpr = Math.min(2, devicePixelRatio || 1); c.width = innerWidth * dpr; c.height = innerHeight * dpr; document.body.append(c);
   const g = c.getContext('2d'); g.scale(dpr, dpr);
-  const colors = ['#D5FF62', '#58CC02', '#FFD400', '#14E0F0', '#FF5FA2', '#7B4DFF', '#FF8A00'];
+  const colors = ['#FFD60A', '#58CC02', '#FFD400', '#14E0F0', '#FF5FA2', '#7B4DFF', '#FF8A00'];
   const ps = Array.from({ length: count }, () => {
     const a = -Math.PI / 2 + (Math.random() - .5) * 1.9, v = 7 + Math.random() * 9;
     return { x: origin.x * innerWidth, y: origin.y * innerHeight, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: Math.random() * 6.28, vr: (Math.random() - .5) * .4,

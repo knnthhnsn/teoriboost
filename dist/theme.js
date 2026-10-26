@@ -13,7 +13,7 @@ export function resolveTheme(pref, systemDark = !!media?.matches) {
 export function applyTheme(pref = themePref()) {
   const theme = resolveTheme(pref), root = document.documentElement;
   root.dataset.theme = theme;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0F1215' : '#FFFFFF');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0F1215' : '#FFD60A');
   return theme;
 }
 export function setThemePref(pref, store = globalThis.localStorage) {
