@@ -51,6 +51,7 @@
 .mh-stat small{display:flex;align-items:center;gap:6px;font:700 11.5px var(--font-display);color:#D5DEE8;white-space:nowrap}
 .mh-ico{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1)}
 .mh-ico .duo{width:18px;height:18px}.mh-ico .duo .d{opacity:.35}
+.mh-ico .flame-art{width:21px;height:21px}
 .mh-stat--streak .mh-ico{color:#FFA94D;box-shadow:0 0 14px rgba(255,150,60,.45)}
 .mh-stat--streak.is-zero .mh-ico{color:#C2CCD6;box-shadow:none}
 .mh-stat--goal .mh-ico{color:#FF8FB1}
@@ -119,7 +120,7 @@
   .mh{padding:0 12px 18px}
   .mh-hud{padding:8px}
   .mh-stat{padding:4px 8px 4px 4px;gap:6px}
-  .mh-ico{width:24px;height:24px}.mh-ico .duo{width:15px;height:15px}
+  .mh-ico{width:24px;height:24px}.mh-ico .duo{width:15px;height:15px}.mh-ico .flame-art{width:18px;height:18px}
   .mh-stat b{font-size:16px}.mh-stat small{font-size:10.5px}
   .mh-ring{width:80px;height:80px}.mh-ring b{font-size:19px}
 }

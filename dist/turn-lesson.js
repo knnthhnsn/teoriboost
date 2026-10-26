@@ -5,7 +5,7 @@ import {renderArt} from './art.js';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const phaseOrder=['observe','risk','decision','consequence','explain','transfer','contrast','recall','done'];
 const choice=(id,title,detail='')=>`<button class="turn-choice" data-turn-answer="${id}"><span>${title}</span>${detail?`<small>${detail}</small>`:''}<b aria-hidden="true">${ico('down',{cls:'rot-right'})}</b></button>`;
-const next=(text,disabled=false)=>`<button class="turn-primary" data-turn-action="next"${disabled?' disabled':''}>${text}<span aria-hidden="true">→</span></button>`;
+const next=(text,disabled=false)=>`<button class="turn-primary" data-turn-action="next"${disabled?' disabled':''}>${text}</button>`;
 const options=()=>choice('wait','Hold tilbage for cyklisten','Orientér dig igen. Drej, når det er frit.')+choice('turn','Drej nu','Du har allerede tændt blinklyset.')+choice('horn','Giv et kort dyt og drej','Så ved cyklisten, at du kommer.');
 export function renderTurnEntry(profile,now=Date.now()) {
   const summary=turnSummary(profile,now);const current=summary.latest;

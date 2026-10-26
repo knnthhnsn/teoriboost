@@ -129,7 +129,7 @@ function overview(zoneId = '') {
   const zone = zones.find(item => item.id === zoneId);
   const topics = zone ? GARAGE.topics.filter(topic => topic.zone === zone.id) : GARAGE.topics;
   return `<section class="garage-page">
-    <div class="screen-head"><a class="back-btn" href="#theory" aria-label="Tilbage til teoriatlaset">←</a><div><div class="eyebrow">BILEN FØR TUREN / VÆRKSTED 1</div><h1>GARAGEN.</h1></div><a class="garage-quick-start" href="#garage:kobling">Prøv kobling →</a></div>
+    <div class="screen-head"><a class="back-btn" href="#theory" aria-label="Tilbage til teoriatlaset">←</a><div><div class="eyebrow">BILEN FØR TUREN / VÆRKSTED 1</div><h1>GARAGEN.</h1></div><a class="garage-quick-start" href="#garage:kobling">Prøv kobling</a></div>
     <div class="garage-overview"><div class="garage-overview-art">${vehicleGraphic(zone?.id)}${zoneLinks(zone?.id)}</div>
       <div class="garage-overview-content"><div class="garage-intro art-note"><div class="art-scene">${renderArt('mads-nut',{variant:'garage',humorOnly:true})}</div><span class="mono acid">INDERSIDEN ER OGSÅ PENSUM</span><h2>En bil har ingen<br>“det går nok”-knap.</h2><p>Tag en beslutning. Se systemet bag. Genkald det, før du tager reglen med til den rigtige bil.</p><div class="garage-inventory"><strong>${GARAGE.topics.length}</strong><span>UNDEROMRÅDER FRA<br>UNDERVISNINGSPLANENS KAPITEL 1</span></div></div>
         <div class="garage-list-head"><h2>${zone ? esc(zone.title) : 'Vælg dit næste system'}</h2>${zone ? '<a href="#garage" class="text-link">Se alle 17 ↗</a>' : ''}</div>
@@ -162,20 +162,20 @@ function topicView(topic) {
     </div><aside class="garage-detail-side">${vehicleGraphic(topic.zone)}
       <section class="garage-practical"><span class="garage-section-label">TAG DET MED TIL BILEN</span><h2>${needsCar ? 'Skal vises i bilen.' : 'Tag forståelsen med.'}</h2><p class="garage-practical-intro">${needsCar ? 'Appen forbereder dig. Udpegning, aflæsning og kontrol trænes med kørelæreren i undervisningsbilen.' : 'Afprøv forståelsen sammen med kørelæreren. Placering og betjening afhænger af bilen.'}</p>${topic.practical.length ? `<ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol>` : ''}<button class="voice-read" type="button" data-garage-voice="practical" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til opgaven i bilen</button><a class="text-link" href="#garage:checklist">Se den samlede biltjekliste ↗</a></section>
     </aside></div>
-    <div class="garage-next"><a class="btn btn-primary" href="#garage:${esc(next.id)}">Næste system: ${esc(next.title)} →</a><a class="text-link" href="#garage">Tilbage til garagen ↗</a></div>
+    <div class="garage-next"><a class="btn btn-primary" href="#garage:${esc(next.id)}">Næste system: ${esc(next.title)}</a><a class="text-link" href="#garage">Tilbage til garagen ↗</a></div>
   </article>`;
 }
 
 function checklistView() {
   const topics = GARAGE.topics.filter(topic => topic.practical.length && topic.objectives.some(physical));
-  return `<article class="garage-page garage-checklist"><div class="screen-head"><a class="back-btn" href="#garage" aria-label="Tilbage til garagen">←</a><div><div class="eyebrow">GARAGEN / TIL NÆSTE KØRETIME</div><h1>Tag kontrollen<br>med til bilen.</h1></div></div><p class="garage-topic-lead">En fælles huskeliste til dig og kørelæreren. Udfør kontrollen i undervisningsbilen efter dens anvisninger. Listen registrerer eller godkender ingen praktisk færdighed.</p><div class="garage-checklist-list">${topics.map(topic => `<section><div class="garage-list-head"><h2>${esc(topic.title)}</h2><a href="#garage:${esc(topic.id)}" class="text-link">Forstå systemet ↗</a></div><ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol></section>`).join('')}</div><a href="#garage" class="btn btn-secondary">Til garagen →</a></article>`;
+  return `<article class="garage-page garage-checklist"><div class="screen-head"><a class="back-btn" href="#garage" aria-label="Tilbage til garagen">←</a><div><div class="eyebrow">GARAGEN / TIL NÆSTE KØRETIME</div><h1>Tag kontrollen<br>med til bilen.</h1></div></div><p class="garage-topic-lead">En fælles huskeliste til dig og kørelæreren. Udfør kontrollen i undervisningsbilen efter dens anvisninger. Listen registrerer eller godkender ingen praktisk færdighed.</p><div class="garage-checklist-list">${topics.map(topic => `<section><div class="garage-list-head"><h2>${esc(topic.title)}</h2><a href="#garage:${esc(topic.id)}" class="text-link">Forstå systemet ↗</a></div><ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol></section>`).join('')}</div><a href="#garage" class="btn btn-secondary">Til garagen</a></article>`;
 }
 
 export function renderGarage(id = '', zone = '') {
   if (id === 'checklist') return checklistView();
   if (id) {
     const topic = topicMap.get(id);
-    return topic ? topicView(topic) : '<div class="empty-state"><h1>Det system findes ikke.</h1><a href="#garage" class="btn btn-primary">Åbn garagen →</a></div>';
+    return topic ? topicView(topic) : '<div class="empty-state"><h1>Det system findes ikke.</h1><a href="#garage" class="btn btn-primary">Åbn garagen</a></div>';
   }
   return overview(zone);
 }

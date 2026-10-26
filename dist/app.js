@@ -46,6 +46,9 @@ const narrator=createNarrator({host:$('voice-panel'),audio:$('voice-audio'),pack
 const experience=createExperienceAudio({enabled:()=>state.settings.sound,suppressed:()=>document.hidden||(location.hash==='#exam'&&!!exam)||!$('voice-audio').paused});
 document.addEventListener('pointerdown',event=>{if(event.isTrusted)experience.arm();},{capture:true});
 document.addEventListener('keydown',event=>{if(event.isTrusted&&['Enter',' ','ArrowLeft','ArrowRight'].includes(event.key))experience.arm();},{capture:true});
+// the yellow main buttons spin their wheels when pressed (a cue a screen plays itself on the same tap wins, see CUES priorities)
+const SPIN_BUTTONS='.btn-primary,.pn--next .pn-btn,.turn-primary,.home-cta,.journey-jump,.judge__start,.mybil-dream,.chat-quiz-check';
+document.addEventListener('click',event=>{if(event.isTrusted&&event.target.closest?.(SPIN_BUTTONS))void experience.play('spin',{gain:.8});},{capture:true});
 $('voice-audio').addEventListener('play',()=>experience.stop());
 const icons={
   chat:'<path d="M4.5 6.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6.5a3 3 0 0 1-3 3H11l-4.5 3.8V16H7.5a3 3 0 0 1-3-3Z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/>',

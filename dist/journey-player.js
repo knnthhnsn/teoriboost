@@ -163,7 +163,7 @@ export function createJourneyPlayer({
       <div class="journey-step-intro journey-step-intro--compact"><span class="journey-kicker">KORT ${currentIndex + 1} AF 3</span>${voiceButton('lesson', 'Lyt til alle tre kort')}</div>
       ${audioView}
       <article class="journey-focus-card"><span class="lesson-number">${currentIndex + 1}</span><div><h2>${esc(card.title)}</h2><p>${esc(card.body)}</p>${refs(card.sourceIds, card.sourceLocator)}</div></article>
-      <div class="journey-control-dock"><p>${session.kind === 'review' ? 'Læs forklaringen efter dit kolde forsøg.' : 'Ét kort ad gangen.'}</p><button class="btn btn-primary" type="button" data-journey-card="${currentIndex}">${currentIndex === 2 ? 'Brug reglen →' : 'Næste kort →'}</button></div>
+      <div class="journey-control-dock"><p>${session.kind === 'review' ? 'Læs forklaringen efter dit kolde forsøg.' : 'Ét kort ad gangen.'}</p><button class="btn btn-primary" type="button" data-journey-card="${currentIndex}">${currentIndex === 2 ? 'Brug reglen' : 'Næste kort'}</button></div>
     </section>`;
   }
 
@@ -184,7 +184,7 @@ export function createJourneyPlayer({
     return `<div class="journey-control-dock journey-assessment-dock">
       <button class="journey-back-statement" aria-label="Tilbage til forrige udsagn" type="button" data-journey-statement-prev ${ui.statementIndex === 0 ? 'disabled' : ''}>← Tilbage</button>
       <div class="journey-statement-dots" aria-label="Fire udsagn">${ui.answers.map((answer, index) => `<button type="button" data-journey-statement="${index}" class="${index === ui.statementIndex ? 'current' : ''} ${answer !== null ? 'answered' : ''}" aria-label="Gå til udsagn ${index + 1}" ${index === ui.statementIndex ? 'aria-current="step"' : ''}>${index + 1}</button>`).join('')}</div>
-      <button class="btn btn-primary" type="button" data-journey-submit ${completed ? '' : 'disabled'}>${completed ? 'Tjek alle fire →' : `${ui.answers.filter(value => value !== null).length}/4 vurderet`}</button>
+      <button class="btn btn-primary" type="button" data-journey-submit ${completed ? '' : 'disabled'}>${completed ? 'Tjek alle fire' : `${ui.answers.filter(value => value !== null).length}/4 vurderet`}</button>
     </div>`;
   }
 
@@ -221,20 +221,20 @@ export function createJourneyPlayer({
 
   function writingForm(stage, label, placeholder) {
     const draft = stage === 'transfer' ? ui.transferDraft : ui.recallDraft;
-    return `<div class="journey-writing-form"><label for="journey-open-answer">${label}</label><textarea id="journey-open-answer" maxlength="${RESPONSE_LIMIT}" rows="4" placeholder="${esc(placeholder)}">${esc(draft)}</textarea><div class="journey-writing-actions"><button type="button" class="btn btn-secondary" data-journey-cancel-writing>Tilbage til mentalt bud</button><button type="button" class="btn btn-primary" data-journey-open-submit ${draft.trim() ? '' : 'disabled'}>Sammenlign →</button></div></div>`;
+    return `<div class="journey-writing-form"><label for="journey-open-answer">${label}</label><textarea id="journey-open-answer" maxlength="${RESPONSE_LIMIT}" rows="4" placeholder="${esc(placeholder)}">${esc(draft)}</textarea><div class="journey-writing-actions"><button type="button" class="btn btn-secondary" data-journey-cancel-writing>Tilbage til mentalt bud</button><button type="button" class="btn btn-primary" data-journey-open-submit ${draft.trim() ? '' : 'disabled'}>Sammenlign</button></div></div>`;
   }
 
   function responseDock(stage, currentStep) {
     if (currentStep.revealed) {
       if (stage === 'recall') {
-        return `<div class="journey-control-dock journey-self-check"><p>Vurdér selv. Dine ord er ikke automatisk bedømt.</p><button class="btn btn-secondary" type="button" data-journey-self-check="needs-review">Genkald igen senere</button><button class="btn btn-primary" type="button" data-journey-self-check="remembered">Jeg havde det centrale med →</button></div>`;
+        return `<div class="journey-control-dock journey-self-check"><p>Vurdér selv. Dine ord er ikke automatisk bedømt.</p><button class="btn btn-secondary" type="button" data-journey-self-check="needs-review">Genkald igen senere</button><button class="btn btn-primary" type="button" data-journey-self-check="remembered">Jeg havde det centrale med</button></div>`;
       }
-      return `<div class="journey-control-dock"><p>Sammenlign handling og begrundelse.</p><button class="btn btn-primary" type="button" data-journey-transfer-next>Til genkaldelse →</button></div>`;
+      return `<div class="journey-control-dock"><p>Sammenlign handling og begrundelse.</p><button class="btn btn-primary" type="button" data-journey-transfer-next>Til genkaldelse</button></div>`;
     }
     if (currentStep.committed) {
-      return `<div class="journey-control-dock"><p>Dit mentale bud er registreret. Det er ikke automatisk bedømt.</p><button class="btn btn-primary" type="button" data-journey-reveal="${stage}">Vis svaret →</button></div>`;
+      return `<div class="journey-control-dock"><p>Dit mentale bud er registreret. Det er ikke automatisk bedømt.</p><button class="btn btn-primary" type="button" data-journey-reveal="${stage}">Vis svaret</button></div>`;
     }
-    return `<div class="journey-control-dock journey-response-choice"><p>Svar mentalt, eller skriv med egne ord.</p><button class="btn btn-secondary" type="button" data-journey-write="${stage}">Skriv mit bud</button><button class="btn btn-primary" type="button" data-journey-mental="${stage}">Jeg har et bud →</button></div>`;
+    return `<div class="journey-control-dock journey-response-choice"><p>Svar mentalt, eller skriv med egne ord.</p><button class="btn btn-secondary" type="button" data-journey-write="${stage}">Skriv mit bud</button><button class="btn btn-primary" type="button" data-journey-mental="${stage}">Jeg har et bud</button></div>`;
   }
 
   function openStepView(currentStep) {
@@ -278,13 +278,13 @@ export function createJourneyPlayer({
     });
     const next = recommendations.recommended;
     const nextLink = next ? `#journey:${esc(next.sectionId)}` : '#home';
-    const nextLabel = next ? `Næste: ${esc(next.title)} →` : 'Til min rute →';
+    const nextLabel = next ? `Næste: ${esc(next.title)}` : 'Til min rute';
     const streak = daily.currentStreak > 0 ? `<span>${daily.currentStreak} ${daily.currentStreak === 1 ? 'dag' : 'dage'} i træk</span>` : '';
     const completionActions = session.finalizedAt
       ? (daily.goalMet
-        ? `<a class="btn btn-secondary" href="${nextLink}">${next ? nextLabel : 'Åbn min rute'}</a><a class="btn btn-primary" href="#home">Til min rute →</a>`
+        ? `<a class="btn btn-secondary" href="${nextLink}">${next ? nextLabel : 'Åbn min rute'}</a><a class="btn btn-primary" href="#home">Til min rute</a>`
         : `<a class="btn btn-secondary" href="#home">Til min rute</a><a class="btn btn-primary" href="${nextLink}">${nextLabel}</a>`)
-      : '<button class="btn btn-primary" type="button" data-journey-finish>Gem lektionen →</button>';
+      : '<button class="btn btn-primary" type="button" data-journey-finish>Gem lektionen</button>';
     // Boosters come once per lesson per day: before saving, this lesson earns them if it has no event today yet
     const todays = (currentState.journey?.events || []).filter(e => e.kind === 'lesson' && e.sectionId === section.id && e.day === daily.day).length;
     const earns = session.finalizedAt ? todays === 1 : todays === 0;

@@ -22,7 +22,14 @@ test('the .riv writer produces a version 7 runtime file', () => {
 test('teoriboost.riv has all the artboards and their inputs', () => {
   const text = ascii(readFileSync(new URL('../dist/assets/rive/teoriboost.riv', import.meta.url)));
   assert.ok(text.startsWith('RIVE'));
-  for (const name of ['Feedback', 'Flame', 'Celebrate', 'Confetti', 'Gauge', 'TrafficLight', 'Bolt', 'Target', 'right', 'wrong', 'lit', 'boost', 'play', 'pct', 'earn', 'met']) assert.ok(text.includes(name), name);
+  for (const name of ['Feedback', 'Celebrate', 'Confetti', 'Gauge', 'TrafficLight', 'Bolt', 'Target', 'right', 'wrong', 'play', 'pct', 'earn', 'met']) assert.ok(text.includes(name), name);
+});
+
+test('flame.riv holds the streak flame: five levels and the smoke, each with its faces, and its inputs', () => {
+  const text = ascii(readFileSync(new URL('../dist/assets/rive/flame.riv', import.meta.url)));
+  assert.ok(text.startsWith('RIVE'));
+  for (const name of ['Flame', 'level', 'boost', 'up', 'dance', 'smoke', 'hop', 'levelup', 'flame-smoke', 'flame-L1-idle', 'flame-L5-joy']) assert.ok(text.includes(name), name);
+  assert.equal(text.split('WEBPVP8').length - 1, 1 + 5 * 3, 'the smoke plus idle, blink and joy for each level');
 });
 
 test('each glowup-<base>.riv holds the GlowUp, Hero and Pass shows and the vehicle images', () => {

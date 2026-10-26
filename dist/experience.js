@@ -4,16 +4,16 @@
 /** cue -> priority. A new cue fades out voices of the same or lower priority, so a tap never
  *  cuts off a celebration, but two celebrations never pile up. */
 export const CUES = Object.freeze({
-  select: 1, nav: 1, node: 1, 'card-advance': 1, 'toggle-on': 1, 'toggle-off': 1, color: 1,
+  select: 1, spin: 1, nav: 1, node: 1, 'card-advance': 1, 'toggle-on': 1, 'toggle-off': 1, color: 1,
   step: 2, correct: 2, repair: 2, 'exam-fail': 2,
   paint: 2, part: 2, wheels: 2, neon: 2, lower: 2, plate: 2,
   'rev-scooter': 2, 'rev-smallcar': 2, 'rev-bigcar': 2, 'rev-racecar': 2,
   booster: 3, buy: 3, complete: 3, milestone: 3, 'exam-pass': 3
 });
 /** Taps get a hair of random pitch so repeated presses sound played, not machine-gunned. */
-const HUMANIZE = new Set(['select', 'nav', 'node', 'card-advance', 'toggle-on', 'toggle-off', 'part', 'paint', 'plate']);
+const HUMANIZE = new Set(['select', 'spin', 'nav', 'node', 'card-advance', 'toggle-on', 'toggle-off', 'part', 'paint', 'plate']);
 /** Fetched right after the first gesture; everything else loads on first use. */
-const WARM = ['select', 'nav', 'correct', 'repair', 'step', 'node', 'card-advance', 'complete'];
+const WARM = ['select', 'spin', 'nav', 'correct', 'repair', 'step', 'node', 'card-advance', 'complete'];
 export const cueUrl = cue => `assets/sfx/${cue}.mp3`;
 
 export function createExperienceAudio({

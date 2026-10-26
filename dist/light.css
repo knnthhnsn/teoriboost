@@ -1,32 +1,24 @@
-/* Light theme: yellow. html[data-theme="light"] is set before the first paint (index.html) and by theme.js.
-   The inverse of the dark theme: the page is the brand yellow, cards a lighter yellow, buttons white with ink,
-   the logo an ink tile with yellow stripes. light-gen.css (built) maps the hard-coded colours; this file sets the
-   palette and the hand-made tweaks. */
-/* .journey-surface (body on Lær) re-declares the palette, so the light values go there too */
-html[data-theme="light"],html[data-theme="light"] .journey-surface{
-  --bg:#FFD60A;--panel:#FFEB85;--panel2:#FFE45C;--ink:#1F2328;--muted:#4A4127;--line:#E8BC00;--line-strong:#D9AE00;
-  --accent:#FFFFFF;--accent-ink:#1F2328;--accent-shadow:#C9A200;--acid:#FFFFFF;--on-accent:#1F2328;
-  --good-ink:#2A6100;--bad-ink:#A3161B;--blue-ink:#07527F;--acid-text:#3D3000;--amber-text:#7A3A00;
-  --surface:#FFEB85;--surface-2:#FFE45C;--surface-3:#FFDD33;
+/* Light theme extras. html[data-theme="light"] is set before the first paint (index.html) and by theme.js.
+   The palette is the design manual's (redesign.css :root): 60 % white and light grey, 25 % signal yellow, 10 % asphalt.
+   This file adds the page gradient (a warm yellow light at the top that fades into white and a cool grey), glass
+   chrome over it. */
+html[data-theme="light"]{
+  --page-glow:radial-gradient(130% 62% at 50% -14%,#FFE45C 0,#FFF0A3 26%,rgba(255,246,199,.55) 46%,rgba(255,246,199,0) 68%);
+  --page-base:linear-gradient(180deg,#FFFFFF 0,#FFFFFF 40%,#F4F5F7 100%);
 }
-html[data-theme="light"] body{background:var(--bg)!important}
+html[data-theme="light"] body,html[data-theme="light"] body.journey-surface{background:var(--page-glow),var(--page-base)!important;background-attachment:fixed!important}
 
-/* the logo: an ink tile with yellow stripes */
+/* the logo: an ink tile with yellow stripes, like the app icon */
 html[data-theme="light"] .brand-mark{background:#1F2328!important;color:#FFD60A!important}
 
-/* the start page and the intro steps are yellow too: the vehicle's poster colour fades into the page yellow */
-html[data-theme="light"] body.start-mode{background:var(--bg)!important}
+/* the chrome is glass over the page gradient */
+html[data-theme="light"] .topbar{background:rgba(255,255,255,.62)!important;backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);border-bottom-color:rgba(31,35,40,.08)}
+html[data-theme="light"] .mobile-nav,html[data-theme="light"] #mobile-nav{background:rgba(255,255,255,.8)!important;backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5)}
+
+/* the start page and the intro steps are a yellow poster: the vehicle's colour fades into the brand yellow */
+html[data-theme="light"] body.start-mode{background:#FFD60A!important}
 html[data-theme="light"] .start-hero{background:linear-gradient(180deg,var(--poster) 0,color-mix(in oklab,var(--poster) 70%,#FFD60A) 34%,color-mix(in oklab,var(--poster) 22%,#FFD60A) 56%,#FFD60A 74%)!important}
 @media (min-width:900px){
   html[data-theme="light"] .start-hero{background:radial-gradient(70% 90% at 72% 42%,var(--poster) 0,color-mix(in oklab,var(--poster) 60%,#FFD60A) 38%,color-mix(in oklab,var(--poster) 16%,#FFD60A) 64%,#FFD60A 86%)!important}
 }
-html[data-theme="light"] .step-foot{background:linear-gradient(rgba(255,214,10,0),var(--bg) 30%)}
-/* the dream modal in Min bil stays a white poster */
-html[data-theme="light"] .dream-modal{
-  --bg:#FFFFFF;--panel:#FFFFFF;--panel2:#F4F5F7;--muted:#5F656D;--line:#E3E5E8;--line-strong:#D3D6DB;
-  --accent:#FFD60A;--accent-shadow:#C9A200;--acid:#FFD60A;--good-ink:#3B8A00;--bad-ink:#D42F2F;--blue-ink:#0A7BBF;--acid-text:#2F6F00}
 
-/* the chrome sits on the page yellow, like the dark theme's chrome sits on the page graphite */
-html[data-theme="light"] .topbar,html[data-theme="light"] .sidebar,html[data-theme="light"] .mobile-nav,html[data-theme="light"] #mobile-nav{background:var(--bg)!important}
-/* the button docks at the bottom of a lesson or a test fade into the page, not into a card */
-html[data-theme="light"] .journey-control-dock:not(.journey-lesson-done *){background:linear-gradient(rgba(255,214,10,0),var(--bg) 28%)}

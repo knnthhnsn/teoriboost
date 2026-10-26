@@ -267,6 +267,7 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 .chip-ico{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;color:var(--chip-ink);
   background:linear-gradient(180deg,#fff,var(--chip-tile));box-shadow:inset 0 0 0 1.5px var(--chip-edge)}
 .chip-ico .duo{width:19px;height:19px}
+.flame-art{display:block;object-fit:contain}.chip-ico .flame-art{width:22px;height:22px}.tile-fire .chip-ico .flame-art{width:30px;height:30px}
 .chip-ico .duo .d{opacity:.28}
 .chip--streak{--chip-tile:#FFE6CC;--chip-edge:#F6C08A;--chip-ink:#E8590C}
 .chip--date{--chip-tile:#DDF2FD;--chip-edge:#9ED3F2;--chip-ink:#1078B5}
@@ -402,3 +403,28 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 .row-ico .ui-ico,.feature-ico .ui-ico,.game-ico .ui-ico{color:var(--ink)}
 .row-ico.is-done{background:var(--good-bg,#E8FBD5)!important;box-shadow:inset 0 0 0 1.5px var(--good,#58CC02)}
 .row-ico.is-done .ui-ico{color:var(--good-ink,#3B8A00)}
+
+/* Yellow surfaces are the design manual's buttons on a hard edge, with a gloss: a light sweep from the top-left
+   corner, like light on lacquer. */
+:root{--gloss:linear-gradient(135deg,rgba(255,255,255,.62) 0,rgba(255,255,255,.18) 34%,rgba(255,255,255,0) 52%)}
+:is(.home-cta,.mybil-tab.is-active,.chip.active,.topic-cards--go,.journey-goal--active,.seg input:checked + span,#mobile-nav a.active .nav-tile,.nav-item.active,.topic.is-active .topic-n,.journey-step--active .journey-node__circle){background-image:var(--gloss)!important}
+/* the yellow main buttons also get the next-step card's light sweep (that card has its own, an ::after): a soft band
+   of light passes over now and then. The band's place is an animated custom property, so the docks' own !important
+   backgrounds cannot pin it, and its colour is a variable, so the dark theme's generator leaves it light.
+   (html body: the rule must outweigh those !important backgrounds) */
+@property --sweep-x{syntax:'<percentage>';inherits:false;initial-value:-20%}
+:root{--sweep-light:rgba(255,255,255,.6)}
+html body :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .turn-primary,.voice-control-primary,.chat-send,.chat-quiz-check,.journey-jump,.mybil-dream){background-image:var(--gloss),linear-gradient(100deg,transparent calc(var(--sweep-x) - 9%),var(--sweep-light) var(--sweep-x),transparent calc(var(--sweep-x) + 9%))!important;
+  animation:btn-shine 5s 1.6s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes btn-shine{0%{--sweep-x:-20%}32%,100%{--sweep-x:120%}}
+@media (prefers-reduced-motion:reduce){:is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .turn-primary,.voice-control-primary,.chat-send,.chat-quiz-check,.journey-jump,.mybil-dream){animation:none}}
+body.no-motion :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .turn-primary,.voice-control-primary,.chat-send,.chat-quiz-check,.journey-jump,.mybil-dream){animation:none}
+/* the next-step card's way forward: a drawn chevron in an asphalt disc, like the topic banner's */
+.home-cta .cta-go{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#1F2328;font-size:0;animation:none}
+.home-cta .cta-go svg{width:22px;height:22px;fill:none;stroke:#FFD60A;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;transition:translate .2s}
+.home-cta:hover .cta-go svg{translate:2px 0}
+
+/* Asphalt grain: fine light and dark specks, like the road surface. On dark plates (the topic banner) and on the
+   dark theme's page; quiet enough to sit behind text. */
+:root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 2.2 0 0 0 -1.25'/%3E%3C/filter%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.4 0 0 0 -1.35'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23a)' opacity='.16'/%3E%3Crect width='180' height='180' filter='url(%23b)' opacity='.3'/%3E%3C/svg%3E")}
+.unit-banner{background-image:var(--grain);background-size:180px 180px}

@@ -480,13 +480,24 @@ def car_milestone():
     rev = car_engine([(0, 1100), (0.1, 1400), (0.4, 8200), (0.62, 9000), (0.85, 3200), (1.2, 1200)], 1.25, 'racecar')
     return room(mix(2.4, (0, rev, 1.0), (0.82, turbo(0.0001, 0.38), 0.55), (1.5, horn((660, 830), 0.1), 0.6), (1.66, horn((660, 830), 0.16), 0.7)), 0.35, 0.1)
 def car_exam_fail(): return room(sputter_stall(), 0.3, 0.08)
+def car_spin():
+    """Wheelspin on a yellow button: a short tyre chirp (a squealing narrow band that wobbles and drops) over grit,
+    with a quick throttle blip underneath. Short and light, because it plays on every main button."""
+    dur = 0.32; t = t_axis(dur)
+    wob = 1 + 0.035 * np.sin(2 * np.pi * 37 * t) + 0.02 * lp(noise(dur), 60) / 0.3
+    f = (2500 - 700 * (t / dur) ** 1.3) * wob
+    squeal = np.sin(2 * np.pi * np.cumsum(f) / SR) + 0.35 * np.sin(2 * np.pi * np.cumsum(f * 2.01) / SR)
+    shape = np.minimum(1, t / 0.012) * np.exp(-t / 0.13)
+    grit = bp(noise(dur), 900, 4200) * shape * 0.5
+    blip = car_engine([(0, 1200), (0.05, 3600), (0.16, 2200), (0.3, 1200)], 0.3)
+    return tail(mix(0.36, (0, squeal * shape * 0.55 + grit, 1.0), (0, blip, 0.35)), 0.03)
 def car_plate():
     clicks = [(k * 0.05, ring(3300 + 80 * k, 16, 0.04), 0.4) for k in range(3)]
     return room(mix(0.45, *clicks, (0.17, metal_clunk(0.2, 300), 0.4), (0.17, thump(180, 80, 0.1, 0.03), 0.4)), 0.22, 0.08)
 
 CUES = {
     # name: (renderer, category). Every cue is a car sound now (see the car section above).
-    'select': (car_select, 'ui'), 'nav': (car_nav, 'nav'), 'node': (car_node, 'ui'), 'card-advance': (car_card, 'ui'),
+    'select': (car_select, 'ui'), 'spin': (car_spin, 'ui'), 'nav': (car_nav, 'nav'), 'node': (car_node, 'ui'), 'card-advance': (car_card, 'ui'),
     'toggle-on': (car_toggle_on, 'ui'), 'toggle-off': (car_toggle_off, 'ui'), 'color': (car_color, 'ui'),
     'step': (car_step, 'feedback'), 'correct': (car_correct, 'feedback'), 'repair': (car_repair, 'feedback'),
     'paint': (cue_paint, 'foley'), 'part': (cue_part, 'foley'), 'wheels': (cue_wheels, 'foley'), 'neon': (cue_neon, 'foley'),

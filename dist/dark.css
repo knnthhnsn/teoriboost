@@ -12,6 +12,8 @@ html[data-theme="dark"],html[data-theme="dark"] .journey-surface{
   --surface:#171B20;--surface-2:#1E242A;--surface-3:#252C33;
 }
 html[data-theme="dark"] body{background:var(--bg)!important;color:var(--ink)}
+/* the page: asphalt grain over a faint yellow light at the top, on graphite that darkens downwards */
+html[data-theme="dark"] body:not(.start-mode){background:var(--grain),radial-gradient(130% 56% at 50% -14%,rgba(255,214,10,.17) 0,rgba(255,214,10,.06) 38%,rgba(255,214,10,0) 64%),linear-gradient(180deg,var(--bg) 0,#0A0C0F 100%)!important;background-attachment:fixed!important;background-size:180px 180px,auto,auto!important}
 
 /* yellow stays yellow, so whatever sits on it keeps dark ink (light rules use var(--ink) there) */
 html[data-theme="dark"] .pn--next .pn-btn,html[data-theme="dark"] .topic.is-active .topic-n,html[data-theme="dark"] .mybil-tab.is-active,
@@ -35,3 +37,8 @@ html[data-theme="dark"] .acc-error{color:var(--bad-ink)}
 
 /* the unit banner is the inverse plate: yellow with ink */
 html[data-theme="dark"] .unit-banner{--ub-bg:#FFD60A;--ub-edge:#B38F00;--ub-fg:#1F2328;--ub-hi:#1F2328;--ub-hi-ink:#FFD60A;--ub-dim:rgba(31,35,40,.14)}
+
+/* the light sweep over the next-step card stays a light sweep (the generator would turn its white dark) */
+html[data-theme="dark"] .home-cta::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent)}
+/* the gloss is a little softer on graphite */
+html[data-theme="dark"]{--gloss:linear-gradient(135deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.14) 34%,rgba(255,255,255,0) 52%)}

@@ -206,5 +206,13 @@
   "truePeak": -10.2,
   "phoneLoss": -5.0,
   "bytes": 20734
+ },
+ "spin": {
+  "category": "ui",
+  "seconds": 0.318,
+  "loudness": -26.0,
+  "truePeak": -17.3,
+  "phoneLoss": -0.2,
+  "bytes": 4747
  }
 }

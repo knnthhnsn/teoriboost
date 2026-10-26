@@ -1,10 +1,11 @@
 // Rive animations (assets/rive/teoriboost.riv, built by tools/rive/build-teoriboost.mjs; glowup-<base>.riv by build-glowup.mjs;
-// brand.riv by build-brand.mjs).
+// brand.riv by build-brand.mjs; flame.riv by build-flame.mjs).
 // Any element with data-rive="<name>[:<state>]" gets a Rive canvas on top of its own content, which stays as the
 // fallback: it shows while Rive loads, if it fails, and always when motion is off. The runtime (~2.6 MB) is
 // fetched only the first time such an element appears.
 //   feedback:right | feedback:wrong   disc pops in, a check or cross draws itself
-//   flame:lit | flame:out | flame:boost   the streak flame; boost flares it once
+//   flame:<0-5>[:up|:boost]           the streak flame, a dancing character at its level (0 is smoke); :up plays the
+//                                     level-up from the level below, :boost a jump of joy (so does a tap)
 //   celebrate                         badge, ring burst and confetti
 //   confetti                          the burst without the badge, around a character
 //   gauge:<0-100>                     a speedometer; the needle swings to the number
@@ -22,7 +23,7 @@
 const BASE = 'assets/rive/';
 const BOARDS = {
   feedback: { artboard: 'Feedback', machine: 'Feedback' },
-  flame: { artboard: 'Flame', machine: 'Flame' },
+  flame: { artboard: 'Flame', machine: 'Flame', file: () => 'flame.riv' },
   celebrate: { artboard: 'Celebrate', machine: 'Celebrate' },
   confetti: { artboard: 'Confetti', machine: 'Confetti' },
   gauge: { artboard: 'Gauge', machine: 'Gauge' },
@@ -84,7 +85,7 @@ async function mount(el) {
         const inputs = inst.stateMachineInputs(spec.machine) || [];
         const input = n => inputs.find(i => i.name === n);
         if (name === 'feedback' && input(state)) setTimeout(() => input(state)?.fire(), 60);
-        if (name === 'flame') { if (input('lit')) input('lit').value = state !== 'out'; if (state === 'boost') setTimeout(() => input('boost')?.fire(), 250); }
+        if (name === 'flame') flame(el, input, Math.max(0, Math.min(5, Number(state) || 0)), el.dataset.rive.split(':')[2]);
         if (name === 'gauge' && input('pct')) swing(input('pct'), Math.max(0, Math.min(100, Number(state) || 0)));
         if (name === 'target' && state === 'met') setTimeout(() => { if (input('met')) input('met').value = true; }, 350);
         if (name === 'bolt' && state === 'earn') setTimeout(() => input('earn')?.fire(), 450);
@@ -96,13 +97,23 @@ async function mount(el) {
   }
 }
 
+/** the streak flame at its level; a level-up starts one level below and switches while the flame is squashed */
+function flame(el, input, level, event) {
+  const lv = input('level'); if (!lv) return;
+  lv.value = event === 'up' ? level - 1 : level;
+  if (event === 'up') setTimeout(() => { input('up')?.fire(); setTimeout(() => { lv.value = level; }, 170); }, 400);
+  if (event === 'boost') setTimeout(() => input('boost')?.fire(), 250);
+  el.addEventListener('click', () => { if (lv.value > 0) input('boost')?.fire(); }); // a tap makes a lit flame jump
+}
+
 /** the needle swings up to the value with a little overshoot, like a real gauge settling */
 function swing(input, to) {
   const t0 = performance.now(), dur = 1300;
   const tick = t => {
     const k = Math.min(1, (t - t0) / dur), settle = 1 - Math.pow(1 - k, 3);
-    input.value = to * settle + Math.sin(k * Math.PI * 3) * (1 - k) * Math.min(10, to * .25 + 3);
-    if (k < 1) requestAnimationFrame(tick); else input.value = to;
+    try { input.value = k < 1 ? to * settle + Math.sin(k * Math.PI * 3) * (1 - k) * Math.min(10, to * .25 + 3) : to; }
+    catch { return; } // the page changed and the animation is gone
+    if (k < 1) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
 }

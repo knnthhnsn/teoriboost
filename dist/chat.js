@@ -38,8 +38,8 @@ const avatar = () => `<span class="chat-ava" aria-hidden="true"><img src="assets
 function actionHtml(a, i) {
   if (a.type === 'rule') return `<article class="chat-rule"><span class="chat-kicker">${esc(a.chapter)}</span><h3>${esc(a.title)}</h3>
     <ul>${(a.facts || []).map(f => `<li>${ICON.check}<span>${esc(f)}</span></li>`).join('')}</ul>
-    <div class="chat-rule-foot">${(a.sources || []).slice(0, 1).map(s => `<a class="chat-src" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label.split(':')[0])} ↗</a>`).join('')}<a class="chat-step" href="${esc(a.route)}">Tag lektionen →</a></div></article>`;
-  if (a.type === 'step') return `<a class="chat-step chat-step--solo" href="${esc(a.route)}">${esc(a.label)} →</a>`;
+    <div class="chat-rule-foot">${(a.sources || []).slice(0, 1).map(s => `<a class="chat-src" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label.split(':')[0])} ↗</a>`).join('')}<a class="chat-step" href="${esc(a.route)}">Tag lektionen</a></div></article>`;
+  if (a.type === 'step') return `<a class="chat-step chat-step--solo" href="${esc(a.route)}">${esc(a.label)}</a>`;
   if (a.type === 'quiz') {
     const q = QUESTIONS.find(x => x.id === a.questionId); if (!q) return '';
     return `<article class="chat-quiz" data-quiz="${esc(q.id)}"><span class="chat-kicker">QUIZ · VURDÉR ALLE FIRE</span><h3>${esc(q.prompt)}</h3><p class="chat-ctx">${esc(q.context)}</p>
@@ -141,7 +141,7 @@ export function mountChat(root, { context = () => ({}), sound = () => {}, initia
       q.statements.forEach((st, k) => { const row = card.querySelector(`[data-st="${k}"]`); const on = row.querySelector('[data-qv].on'); const ok = on && (on.dataset.qv === 'true') === st.correct; if (ok) right++; else wrong.push(st.text);
         row.classList.add(ok ? 'is-right' : 'is-wrong'); row.querySelectorAll('button').forEach(b => b.disabled = true); });
       const res = card.querySelector('.chat-quiz-res'); res.hidden = false; check.hidden = true;
-      res.innerHTML = `<strong>${right === 4 ? 'Alle fire rigtige!' : `${right} af 4 rigtige`}</strong><p>${esc(q.explanation)}</p>${right < 4 ? `<button type="button" class="chat-step chat-step--solo" data-chat-suggest="${esc(`Jeg fik ${right} af 4 rigtige på "${q.prompt}". Forklar kort det, jeg tog fejl i: ${wrong.join(' / ')}`)}">Forklar mine fejl →</button>` : ''}`;
+      res.innerHTML = `<strong>${right === 4 ? 'Alle fire rigtige!' : `${right} af 4 rigtige`}</strong><p>${esc(q.explanation)}</p>${right < 4 ? `<button type="button" class="chat-step chat-step--solo" data-chat-suggest="${esc(`Jeg fik ${right} af 4 rigtige på "${q.prompt}". Forklar kort det, jeg tog fejl i: ${wrong.join(' / ')}`)}">Forklar mine fejl</button>` : ''}`;
       sound(right === 4 ? 'correct' : 'repair'); scroll();
     }
   };
