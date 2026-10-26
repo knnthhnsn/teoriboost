@@ -875,6 +875,7 @@ html[data-theme="dark"] body :is(.btn-primary,.judge__start,.pn--next .pn-btn,.t
 html[data-theme="dark"] .home-cta .cta-go{background:#1F2328}
 html[data-theme="dark"] .home-cta .cta-go svg{fill:none;stroke:#e8d260}
 html[data-theme="dark"] .unit-banner{background-image:var(--grain)}
+html[data-theme="dark"] .tile-fire .chip-ico{background:none;box-shadow:none}
 
 /* play.css */
 html[data-theme="dark"] .jp-top,html[data-theme="dark"] .exam-top{border:0;background:none}

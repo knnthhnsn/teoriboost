@@ -428,3 +428,10 @@ body.no-motion :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .tur
    dark theme's page; quiet enough to sit behind text. */
 :root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 2.2 0 0 0 -1.25'/%3E%3C/filter%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.4 0 0 0 -1.35'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23a)' opacity='.16'/%3E%3Crect width='180' height='180' filter='url(%23b)' opacity='.3'/%3E%3C/svg%3E")}
 .unit-banner{background-image:var(--grain);background-size:180px 180px}
+
+/* the streak flame is a character, so it is shown big: it breaks out of the small icon discs */
+.streak-flame{position:relative;display:inline-block;flex:none;width:38px;height:38px;margin:-8px -2px -8px -4px;vertical-align:middle}
+.streak-flame .flame-art{width:100%;height:100%}
+.journey-streak .streak-flame{grid-row:span 2;width:46px;height:46px;margin:-6px 0}
+.tile-fire .chip-ico{width:64px;height:64px;margin:-10px 0 -6px;background:none;box-shadow:none}
+.tile-fire .chip-ico .flame-art{width:56px;height:56px}
