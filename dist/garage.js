@@ -112,7 +112,7 @@ function vehicleGraphic(zone = '') {
       <g class="garage-callout-labels" font-family="monospace" font-size="14" font-weight="bold"><text x="30" y="153" fill="#bad3ff">1 / COCKPIT</text><text x="457" y="73" fill="#ffcc9b">2 / DRIVLINJE</text><text x="430" y="449" fill="#a4ead1">3 / YDERSIDE</text><text x="480" y="227" fill="#eee0ad">4 / PAPIRER</text></g>
       <path d="M295 22V9m-6 6 6-6 6 6" fill="none" stroke="#cad3ca" stroke-width="1.5"/><text x="315" y="20" fill="#a6b4ad" font-size="10" font-family="monospace">FORAN</text>
     </svg>
-    <label class="garage-xray"><span><strong>Karrosseri → røntgen</strong><output id="garage-xray-value">0%</output></span><input id="garage-xray" type="range" min="0" max="100" value="0" aria-label="Røntgenvisning af bilens drivlinje" aria-valuetext="Karrosseriet er synligt"></label>
+    <label class="garage-xray"><span><strong>Karrosseri til røntgen</strong><output id="garage-xray-value">0%</output></span><input id="garage-xray" type="range" min="0" max="100" value="0" aria-label="Røntgenvisning af bilens drivlinje" aria-valuetext="Karrosseriet er synligt"></label>
     <p class="garage-graphic-note">Skematisk bil med manuel gearkasse. Placering og udstyr varierer—find delene i din bil med kørelæreren.</p>
   </div>`;
 }

@@ -34,7 +34,7 @@ export function glowUp(bases = ORDER, { loop = true, label = true } = {}) {
     </svg>
     <span class="gu-rays" aria-hidden="true"></span><span class="gu-ring" aria-hidden="true"></span>
     <div class="gu-stage" aria-hidden="true"></div>
-    ${label ? '<div class="gu-label" aria-hidden="true"><span class="gu-from"></span><b class="gu-arrow">→</b><span class="gu-to"></span></div>' : ''}
+    ${label ? '<div class="gu-label" aria-hidden="true"><span class="gu-from"></span><b class="gu-arrow"><svg viewBox="0 0 24 24"><path d="m10 6.5 5.5 5.5-5.5 5.5"/></svg></b><span class="gu-to"></span></div>' : ''}
   </div>`;
 }
 

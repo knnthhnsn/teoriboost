@@ -138,7 +138,7 @@ body.start-mode{background:#fff}
 .step-eyebrow{margin:6px 0 0}
 .step-title{margin:0;font:800 clamp(26px,7.6vw,40px)/1.08 var(--font-display);letter-spacing:-.01em}
 .step-title span{display:block;color:var(--muted)}
-.step-garage{position:relative;padding:8px 0 4px;border-radius:24px;background:radial-gradient(70% 60% at 50% 60%,#FFF5CC,#fff 70%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.step-garage{position:relative;padding:8px 0 4px;border-radius:24px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
 .step-garage .gu{width:min(78vw,340px)}
 .step-replay{display:block;margin:6px auto 4px;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:#fff;font:700 14px var(--font-display);color:var(--ink)}
 .step-earn{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);animation:reveal .5s .6s var(--out) backwards}
@@ -314,3 +314,7 @@ body.start-mode{background:#fff}
 @media (max-width:899px){.start-hero .start-copy{margin-top:26px}}
 @media (max-width:899px) and (max-height:700px){.start-hero .start-copy{margin-top:16px}}
 @media (max-width:899px) and (max-height:620px){.start-hero .gu{width:min(72vw,340px)}}
+
+/* the glow-up label's "from ... to": a drawn chevron in an asphalt disc, not a text arrow */
+.gu-arrow{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#1F2328;vertical-align:-4px;margin:0 2px}
+.gu-arrow svg{width:13px;height:13px;fill:none;stroke:#FFD60A;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}

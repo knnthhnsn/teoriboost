@@ -427,7 +427,9 @@ body.no-motion :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .tur
 /* Asphalt grain: fine light and dark specks, like the road surface. On dark plates (the topic banner) and on the
    dark theme's page; quiet enough to sit behind text. */
 :root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 2.2 0 0 0 -1.25'/%3E%3C/filter%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.4 0 0 0 -1.35'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23a)' opacity='.16'/%3E%3Crect width='180' height='180' filter='url(%23b)' opacity='.3'/%3E%3C/svg%3E")}
-.unit-banner{background-image:var(--grain);background-size:180px 180px}
+/* skid marks: two faint white tyre tracks sweeping across a dark plate */
+:root{--skid:url("assets/road/skid.webp")}
+.unit-banner{background-image:var(--skid),var(--grain);background-size:620px auto,180px 180px;background-position:right -120px bottom -60px,0 0;background-repeat:no-repeat,repeat}
 
 /* the streak flame is a character, so it is shown big: it breaks out of the small icon discs */
 .streak-flame{position:relative;display:inline-block;flex:none;width:38px;height:38px;margin:-8px -2px -8px -4px;vertical-align:middle}
@@ -435,3 +437,51 @@ body.no-motion :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .tur
 .journey-streak .streak-flame{grid-row:span 2;width:46px;height:46px;margin:-6px 0}
 .tile-fire .chip-ico{width:64px;height:64px;margin:-10px 0 -6px;background:none;box-shadow:none}
 .tile-fire .chip-ico .flame-art{width:56px;height:56px}
+
+/* The Lær path is a road poster: a signal-yellow panel with a thick asphalt road winding through the lessons
+   (drawn by mountLearnRoad in journey-road.js). The colours are variables so the dark theme keeps the poster. */
+.learn-path-wrap{--poster-yellow:#FFD60A;--road-asphalt:#1F2328;--road-line:#FFFFFF;
+  background:var(--poster-yellow);border-radius:28px;padding:44px 0 40px;margin-top:6px;overflow:hidden;isolation:isolate}
+.learn-road{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:visible}
+.learn-road path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.learn-road-asphalt{stroke:var(--road-asphalt);stroke-width:64px}
+.learn-road-line{stroke:var(--road-line);stroke-width:3px;stroke-dasharray:14 13;opacity:.9}
+/* the lesson names are small white road signs, so they read on the road and on the yellow */
+.learn-path .pn-title{background:var(--road-line);color:var(--road-asphalt);padding:4px 10px;border-radius:999px;margin-top:8px;box-shadow:0 2px 0 rgba(31,35,40,.18)}
+.learn-path .pn--next .pn-title{color:var(--road-asphalt)}
+/* the next lesson keeps its pulse and gets the buttons' light sweep too */
+html body .pn--next .pn-btn{animation:next-pulse 2.4s var(--in-out) infinite,btn-shine 5s 1.6s cubic-bezier(.45,0,.55,1) infinite}
+@media (prefers-reduced-motion:reduce){html body .pn--next .pn-btn{animation:none}}
+/* on wide screens the road swings wider, like the poster */
+@media (min-width:700px){.learn-path .pn{translate:calc(var(--x) * 92px) 0}}
+/* on wide screens the poster gets its headline: the topic's name in giant upright capitals along the right edge,
+   like the type on a motorbike poster */
+.learn-poster-word{display:none}
+.learn-path{position:relative;z-index:1}
+@media (min-width:700px){
+  .learn-poster-word{display:block;position:absolute;top:30px;right:22px;bottom:30px;overflow:hidden;writing-mode:vertical-rl;
+    font:900 clamp(54px,5.4vw,84px)/.84 var(--font-display);letter-spacing:-.02em;text-transform:uppercase;color:var(--road-asphalt);pointer-events:none}
+}
+
+/* Road posters. The colours are variables so the dark theme's generator leaves the posters as they are drawn. */
+.road-poster,.mybil-head{--poster-yellow:#FFD60A;--poster-ink:#1F2328;--poster-line:#FFFFFF}
+/* the exam start: "Retning er vigtigere end fart." beside a tilted yellow road with the car seen from above */
+.road-poster{position:relative;overflow:hidden;min-height:210px;margin:0 0 16px;border-radius:24px;background:var(--panel,#fff);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);isolation:isolate}
+.road-poster-band{position:absolute;top:-40%;bottom:-40%;right:5%;width:96px;background:var(--poster-yellow);rotate:14deg;z-index:-1}
+.road-poster-band::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:4px;margin-left:-2px;background:repeating-linear-gradient(var(--poster-line) 0 22px,transparent 22px 46px)}
+.road-poster-car{position:absolute;left:calc(50% + 5px);top:50%;width:40px;height:auto;translate:0 -50%;filter:drop-shadow(0 6px 6px rgba(31,35,40,.25))}
+.road-poster-words{position:relative;margin:0;padding:26px 0 26px 22px;max-width:62%;font:900 clamp(26px,7.2vw,46px)/.94 var(--font-display);letter-spacing:-.02em;text-transform:uppercase;color:var(--ink)}
+.road-poster-words span{display:inline-block}
+.road-poster-mark{background:var(--poster-yellow);color:var(--poster-ink);padding:2px 8px 0;margin:4px 0;border-radius:6px;box-decoration-break:clone}
+@media (min-width:700px){.road-poster{min-height:250px}.road-poster-band{width:128px;right:16%}.road-poster-car{width:54px;left:calc(50% + 8px)}}
+
+/* Min bil: the header is a yellow panel with a big tyre rolling in from the right edge */
+.mybil-head{position:relative;overflow:hidden;isolation:isolate;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:10px;min-height:150px;
+  padding:22px 22px 20px;border-radius:24px;background:var(--poster-yellow);color:var(--poster-ink)}
+.mybil-head h1,.mybil-head .eyebrow{color:var(--poster-ink)!important;position:relative}
+.mybil-head .eyebrow::before{background:var(--poster-ink)}
+.mybil-head > div{max-width:62%}
+.mybil-head .booster-chip{position:relative}
+.mybil-head-tyre{position:absolute;right:-74px;bottom:-96px;width:250px;height:auto;rotate:-12deg;z-index:-1;pointer-events:none}
+@media (min-width:700px){.mybil-head{min-height:190px;padding:28px}.mybil-head-tyre{width:330px;right:-60px;bottom:-130px}}
+@media (max-width:380px){.mybil-head > div{max-width:60%}.mybil-head-tyre{width:190px;right:-88px;bottom:-78px}}

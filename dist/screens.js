@@ -58,7 +58,7 @@ export function renderLearn({ vm, intro, due, unitIndex, ready }) {
       <span class="unit-text"><span class="unit-kicker">Emne ${unitIndex + 1} af ${units.length}</span><h1 id="learn-title">${esc(unit.title)}</h1></span>
       <span class="unit-all" aria-hidden="true"><span class="unit-all-label">Alle emner</span><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span>
       <span class="unit-road" aria-hidden="true">${nodes.map(n => `<i${n.lessonComplete ? ' class="on"' : ''}></i>`).join('')}<b class="unit-count">${done}/${nodes.length}</b></span></a>
-    <div class="learn-path-wrap"><div class="learn-guide" aria-hidden="true">${renderCast(done ? 'sneglen' : 'krabbe', { size: 'sm', priority: true })}</div><ol class="learn-path">${path}</ol></div>
+    <div class="learn-path-wrap"><span class="learn-poster-word" aria-hidden="true">${esc(unit.title)}</span><div class="learn-guide" aria-hidden="true">${renderCast(done ? 'sneglen' : 'krabbe', { size: 'sm', priority: true })}</div><ol class="learn-path">${path}</ol></div>
     ${review}
   </section>`;
 }
@@ -113,6 +113,7 @@ export function renderExamStart({ history, saved, total = 25, minutes = 25, limi
     return `<li class="exam-row ${ok ? 'is-ok' : near ? 'is-near' : 'is-off'}"><span class="exam-badge">${h.errors}</span><div><strong>${ok ? 'Inden for grænsen' : near ? 'Næsten' : 'Øv videre'}</strong><small>${when(h.at)} · ${Math.max(0, (h.ids?.length || total) - h.errors)} rigtige</small></div></li>`;
   }).join('');
   return `<section class="exam-start" aria-labelledby="exam-title">
+    <div class="road-poster"><span class="road-poster-band" aria-hidden="true"><img class="road-poster-car" src="assets/road/car-top.webp" alt="" decoding="async"></span><p class="road-poster-words"><span>Retning</span> <span class="road-poster-mark">er vigtigere</span> <span>end fart.</span></p></div>
     <div class="exam-talk">${renderCast('daek', { size: 'sm', priority: true })}<p class="talk-bubble"><span class="cast-name">Dæk</span>Ro på. ${total} situationer, én ad gangen.</p></div>
     <h1 id="exam-title" class="sr-only">Øveprøve</h1>
     <div class="exam-facts"><div><b>${total}</b><small>situationer</small></div><div><b>${minutes} min</b><small>tid</small></div><div><b>≤ ${limit}</b><small>fejl</small></div></div>
