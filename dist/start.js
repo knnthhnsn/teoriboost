@@ -14,10 +14,10 @@ export function saveIntro(patch, store = globalThis.localStorage) { const v = { 
 
 /** The "lækker" build of each vehicle, used by the hero loop and by "Se hvad den kan blive". */
 export const DREAMS = {
-  scooter: { from: 'Rusten scooter', to: 'Lækker scooter', equipped: { restore: 'restore', paint: 'paint-mask', stripe: 'stripe-racing', wheels: 'wheels-chrome', mirrors: 'mirrors-cat', charm: 'charm-heart', top: 'top-bow', plate: 'plate-blank' }, style: { paint: '#FF5FA2', stripe: '#FFFFFF', neon: '#B44CFF', neonOn: true, lowered: true, plate: 'LÆKKER' } },
-  smallcar: { from: 'Slidt lille bil', to: 'Lækker lille bil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-chrome', top: 'top-spoiler', lights: 'lights-fog', front: 'front-led', plate: 'plate-blank' }, style: { paint: '#14E0F0', stripe: '#111111', windows: '#2A2D3A', neon: '#FF2D9B', neonOn: true, lowered: true, plate: 'BOOST' } },
-  bigcar: { from: 'Stor slidt bil', to: 'Lækker stor bil', equipped: { paint: 'paint-mask', stripe: 'stripe-side', windows: 'windows-mask', wheels: 'wheels-big', bar: 'bar-chrome', lights: 'lights-roofbar', exhaust: 'exhaust-4', plate: 'plate-blank' }, style: { paint: '#7B4DFF', stripe: '#FFD400', windows: '#1E2230', neon: '#14E0F0', neonOn: true, lowered: true, plate: 'TEORI 1' } },
-  racecar: { from: 'Ødelagt racerbil', to: 'Lækker racerbil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-sport', top: 'top-wing', kit: 'kit-street', exhaust: 'exhaust-6', plate: 'plate-blank' }, style: { paint: '#FFD400', stripe: '#111111', windows: '#202020', neon: '#39FF14', neonOn: true, lowered: true, plate: 'BESTÅET' } },
+  scooter: { from: 'Rusten scooter', to: 'Lækker scooter', equipped: { restore: 'restore', paint: 'paint-mask', stripe: 'stripe-racing', wheels: 'wheels-chrome', mirrors: 'mirrors-cat', charm: 'charm-heart', top: 'top-bow', plate: 'plate-blank' }, style: { paint: '#D9A93A', stripe: '#F1E6CC', neon: '#FFB000', neonOn: true, lowered: true, plate: 'LÆKKER' } },
+  smallcar: { from: 'Slidt lille bil', to: 'Lækker lille bil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-chrome', top: 'top-spoiler', lights: 'lights-fog', front: 'front-led', plate: 'plate-blank' }, style: { paint: '#2F6F78', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#14E0F0', neonOn: true, lowered: true, plate: 'BOOST' } },
+  bigcar: { from: 'Stor slidt bil', to: 'Lækker stor bil', equipped: { paint: 'paint-mask', stripe: 'stripe-side', windows: 'windows-mask', wheels: 'wheels-big', bar: 'bar-chrome', lights: 'lights-roofbar', exhaust: 'exhaust-4', plate: 'plate-blank' }, style: { paint: '#7E8C5A', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#FFB000', neonOn: true, lowered: true, plate: 'TEORI 1' } },
+  racecar: { from: 'Ødelagt racerbil', to: 'Lækker racerbil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-sport', front: 'front-led', kit: 'kit-street', exhaust: 'exhaust-6', plate: 'plate-blank' }, style: { paint: '#E8B530', stripe: '#2B2F33', windows: '#2B2F33', neon: '#FF4B4B', neonOn: true, lowered: true, plate: 'BESTÅET' } },
 };
 const ORDER = ['scooter', 'smallcar', 'bigcar', 'racecar'];
 const garageFor = (base, dream) => ({ spent: 0, earnedSeen: 0, owned: [], bases: [base], active: base,
@@ -134,7 +134,7 @@ function hero({ counts }) {
       <div class="start-cast" aria-hidden="true"><span class="sc sc--kegle">${renderCast('kegle', { size: 'sm', priority: true })}</span></div>
     </div>
     <div class="start-copy">
-      <h1 id="start-title" class="start-title"><span class="kl">${words('Bestå teoriprøven.')}</span><span class="kl">${words('Med et', 'kw-b')} ${smile}</span></h1>
+      <span class="start-kicker">Din hjerne. Dit kørekort.</span><h1 id="start-title" class="start-title"><span class="kl">${words('Bestå teoriprøven.')}</span><span class="kl">${words('Med et', 'kw-b')} ${smile}</span></h1>
       <p class="start-lead">5 minutter om dagen. Byg din bil op, mens du lærer.</p>
       ${ticker()}
       <div class="start-actions"><span class="cta-rive" data-rive="cta"><a class="start-cta rive-keep" href="#start:1" data-start-go>Kom i gang · gratis</a></span></div>

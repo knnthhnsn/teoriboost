@@ -62,8 +62,16 @@ export function mountLearnRoad(host) {
       curve += ` C ${previousX} ${middle}, ${x} ${middle}, ${x} ${y}`;
     }
     asphalt.setAttribute('d', curve); line.setAttribute('d', curve);
+    // the poster's giant word stays on one line: shrink it until it fits the panel's height
+    const word = wrap.querySelector('.learn-poster-word');
+    if (word && getComputedStyle(word).display !== 'none') {
+      let size = 84; word.style.fontSize = size + 'px';
+      while (word.scrollHeight > word.clientHeight + 1 && size > 32) word.style.fontSize = (size -= 4) + 'px';
+    }
   }
   const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(draw) : null;
+  // the stops slide in and the fonts may still be loading: draw again when they settle
+  wrap.addEventListener('animationend', draw); document.fonts?.ready.then(draw);
   observer?.observe(wrap); window.addEventListener('resize', draw); draw();
-  return { dispose() { disposed = true; observer?.disconnect(); window.removeEventListener('resize', draw); svg.remove(); } };
+  return { dispose() { disposed = true; observer?.disconnect(); window.removeEventListener('resize', draw); wrap.removeEventListener('animationend', draw); svg.remove(); } };
 }

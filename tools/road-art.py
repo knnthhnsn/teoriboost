@@ -3,6 +3,7 @@
   tyre.webp     the big tyre, cut out of its magenta background
   skid.webp     the white skid marks, faint: their brightness becomes the alpha (at 18 %), so they lie on any dark
                 surface as a texture
+  skid-ink.webp the same marks in asphalt ink at 10 %, for the light page
 Run: python tools/road-art.py
 """
 import os
@@ -38,8 +39,9 @@ for name, longest in (('car-top', 640), ('tyre', 760)):
     if os.path.exists(src):
         fit(cut(src), longest).save(os.path.join(OUT, name + '.webp'), 'WEBP', quality=86, method=6)
         print(name, 'ok')
-skid = Image.open(os.path.join(SRC, 'skid.png')).convert('L')
-skid = fit(skid, 1600).point(lambda v: round(v * .18))
-white = Image.new('L', skid.size, 255)
-Image.merge('RGBA', (white, white, white, skid)).save(os.path.join(OUT, 'skid.webp'), 'WEBP', quality=80, method=6)
+marks = fit(Image.open(os.path.join(SRC, 'skid.png')).convert('L'), 1600)
+for name, rgb, strength in (('skid', (255, 255, 255), .18), ('skid-ink', (31, 35, 40), .1)):
+    channels = [Image.new('L', marks.size, v) for v in rgb]
+    Image.merge('RGBA', (*channels, marks.point(lambda v: round(v * strength)))).save(os.path.join(OUT, name + '.webp'), 'WEBP', quality=80, method=6)
+skid = marks
 print('skid ok', skid.size)

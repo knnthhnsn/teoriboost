@@ -5,10 +5,11 @@ import { duo, flameArt, flameLevel } from './ui-icons.js';
 const plural = (n, one, many) => (n === 1 ? one : many);
 
 /** the flame's level, with :up when it reached a new level and :boost when the streak grew since the hero was last
- *  shown on this device */
+ *  shown on this device; the comeback flame (5) when a broken streak has started again */
 function flameState(streak, store = globalThis.localStorage) {
   let seen = streak;
   try { seen = Number(store.getItem('teoriboost.streakSeen') ?? streak); store.setItem('teoriboost.streakSeen', String(streak)); } catch {}
+  if (streak > 0 && streak < seen) return '5:boost';
   const level = flameLevel(streak);
   return level > flameLevel(seen) ? `${level}:up` : streak > seen ? `${level}:boost` : String(level);
 }

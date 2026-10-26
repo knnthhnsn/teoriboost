@@ -60,11 +60,11 @@ export function duo(name, { cls = '' } = {}) {
   return `<svg class="duo ${cls}" viewBox="0 0 24 24" aria-hidden="true"><g class="d">${i.d}</g><g class="s">${i.s}</g></svg>`;
 }
 export const DUO_NAMES = Object.keys(DUO);
-/** The streak flame's level: 0 smoke (no streak), 1 Gnist (1-2 days), 2 Flamme (3-6), 3 Baal (7-13), 4 Turbo (14-29),
- *  5 Legende (30+), the same steps as the streak medals. */
-export const flameLevel = streak => streak >= 30 ? 5 : streak >= 14 ? 4 : streak >= 7 ? 3 : streak >= 3 ? 2 : streak >= 1 ? 1 : 0;
+/** The streak flame's level: 0 burnt out (no streak), 1 first days, 2 from 3 days, 3 from a week, 4 from 30 days (the
+ *  streak medals' steps); 5 is the comeback flame, shown when a broken streak starts again (see mirror-hero.js). */
+export const flameLevel = streak => streak >= 30 ? 4 : streak >= 7 ? 3 : streak >= 3 ? 2 : streak >= 1 ? 1 : 0;
 /** The streak flame's drawing for a level (assets/flame; the dancing version is flame.riv). Shown until Rive takes
  *  over, and instead of it with reduced motion. */
 export function flameArt(level = 2) {
-  return `<img class="flame-art" src="assets/flame/${level ? `L${level}-idle` : 'smoke'}.webp" alt="" decoding="async">`;
+  return `<img class="flame-art" src="assets/flame/L${level}-idle.webp" alt="" decoding="async">`;
 }

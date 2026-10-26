@@ -41,7 +41,7 @@
 .learn-guide{position:absolute;left:0;top:20%;width:28%;max-width:120px;pointer-events:none}
 .learn-guide .cast-img{width:100%!important}
 .learn-path{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:18px}
-.pn{position:relative;display:flex;flex-direction:column;align-items:center;translate:calc(var(--x) * 46px) 0;animation:reveal .5s var(--out) backwards;animation-delay:calc(var(--i) * 60ms + 150ms)}
+.pn{position:relative;display:flex;flex-direction:column;align-items:center;left:calc(var(--x) * 46px);animation:reveal .5s var(--out) backwards;animation-delay:calc(var(--i) * 60ms + 150ms)}
 .pn-btn{display:grid;place-items:center;width:72px;height:68px;border-radius:50%;text-decoration:none;font:800 24px var(--font-display);color:#1F2328;
   background:#fff;border:3px solid var(--line);box-shadow:0 6px 0 var(--line)}
 .pn-btn:active{translate:0 4px;box-shadow:0 2px 0 var(--line)}
@@ -63,10 +63,22 @@
 #road-slot + .road-loop{margin-top:4px}
 
 /* ---------- Øv ---------- */
-.practice-hero{display:flex;align-items:center;gap:12px;padding:14px;border-radius:20px;background:#FFF5CC;border:2px solid var(--accent-shadow,#C9A200);box-shadow:0 5px 0 var(--accent-shadow,#C9A200);color:var(--ink);text-decoration:none}
-.practice-hero .cast-img{width:78px!important}
-.practice-hero strong{display:block;font:800 18px/1.2 var(--font-display)}.practice-hero small{color:#4C5560;font-size:14px}
-.practice-hero--calm{background:#fff;border-color:var(--line);box-shadow:0 5px 0 var(--line)}
+/* The Øv hero is an asphalt poster with the traffic light: big white type on grainy asphalt with faint skid marks,
+   the light on the right showing where you stand, and a yellow button. Its colours are fixed: it reads the same in
+   both themes. */
+.practice-signal{--sig-ink:#FFFFFF;--sig-muted:#C2CCD6;--sig-yellow:#FFD60A;--sig-asphalt:#1F2328;position:relative;overflow:hidden;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;min-height:228px;padding:24px 14px 24px 24px;border-radius:24px;text-decoration:none;color:var(--sig-ink);
+  background:var(--skid) left -180px bottom -150px/640px auto no-repeat,var(--asphalt) 0 0/220px 220px,var(--sig-asphalt);box-shadow:0 5px 0 #000}
+.practice-signal-kicker{display:inline-block;padding:5px 11px;border-radius:999px;background:var(--sig-yellow);color:var(--sig-asphalt);font:800 12px/1.2 var(--font-display);letter-spacing:.1em;text-transform:uppercase}
+.practice-signal--red .practice-signal-kicker{background:#FF4B4B;color:#FFFFFF}
+.practice-signal--green .practice-signal-kicker{background:#58CC02;color:var(--sig-asphalt)}
+#main .practice-signal strong,.practice-signal strong{display:block;margin:12px 0 6px;font:900 clamp(26px,7vw,40px)/1.02 var(--font-display)!important;letter-spacing:-.02em;color:var(--sig-ink)!important}
+.practice-signal small{display:block;color:var(--sig-muted);font-size:14px;line-height:1.45;max-width:34ch}
+.practice-signal-go{display:inline-flex;align-items:center;min-height:48px;margin-top:16px;padding:0 22px;border-radius:16px;background:var(--gloss),var(--grain-ink) 0 0/200px 200px,var(--sig-yellow);color:var(--sig-asphalt);font:700 17px var(--font-display);box-shadow:0 4px 0 #C9A200;transition:translate .15s,box-shadow .15s}
+.practice-signal:hover .practice-signal-go{translate:0 -2px;box-shadow:0 6px 0 #C9A200}
+.practice-signal:active .practice-signal-go{translate:0 4px;box-shadow:none}
+.practice-signal-light{position:relative;display:block;width:clamp(108px,30vw,170px);height:clamp(150px,40vw,230px);margin:-12px -6px -12px 0}
+.practice-signal-light img{width:100%;height:100%;object-fit:contain}
+@media (min-width:900px){.practice-signal{min-height:260px;padding:30px 24px 30px 32px}}
 .row-list{display:flex;flex-direction:column;gap:10px}
 .row-card{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);color:var(--ink);text-decoration:none}
 .row-card--plain{grid-template-columns:1fr auto}
@@ -407,14 +419,14 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 /* Yellow surfaces are the design manual's buttons on a hard edge, with a gloss: a light sweep from the top-left
    corner, like light on lacquer. */
 :root{--gloss:linear-gradient(135deg,rgba(255,255,255,.62) 0,rgba(255,255,255,.18) 34%,rgba(255,255,255,0) 52%)}
-:is(.home-cta,.mybil-tab.is-active,.chip.active,.topic-cards--go,.journey-goal--active,.seg input:checked + span,#mobile-nav a.active .nav-tile,.nav-item.active,.topic.is-active .topic-n,.journey-step--active .journey-node__circle){background-image:var(--gloss)!important}
+:is(.home-cta,.mybil-tab.is-active,.chip.active,.topic-cards--go,.journey-goal--active,.seg input:checked + span,#mobile-nav a.active .nav-tile,.nav-item.active,.topic.is-active .topic-n,.journey-step--active .journey-node__circle){background-image:var(--gloss),var(--grain-ink)!important}
 /* the yellow main buttons also get the next-step card's light sweep (that card has its own, an ::after): a soft band
    of light passes over now and then. The band's place is an animated custom property, so the docks' own !important
    backgrounds cannot pin it, and its colour is a variable, so the dark theme's generator leaves it light.
    (html body: the rule must outweigh those !important backgrounds) */
 @property --sweep-x{syntax:'<percentage>';inherits:false;initial-value:-20%}
 :root{--sweep-light:rgba(255,255,255,.6)}
-html body :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .turn-primary,.voice-control-primary,.chat-send,.chat-quiz-check,.journey-jump,.mybil-dream){background-image:var(--gloss),linear-gradient(100deg,transparent calc(var(--sweep-x) - 9%),var(--sweep-light) var(--sweep-x),transparent calc(var(--sweep-x) + 9%))!important;
+html body :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .turn-primary,.voice-control-primary,.chat-send,.chat-quiz-check,.journey-jump,.mybil-dream){background-image:var(--gloss),linear-gradient(100deg,transparent calc(var(--sweep-x) - 9%),var(--sweep-light) var(--sweep-x),transparent calc(var(--sweep-x) + 9%)),var(--grain-ink)!important;
   animation:btn-shine 5s 1.6s cubic-bezier(.45,0,.55,1) infinite}
 @keyframes btn-shine{0%{--sweep-x:-20%}32%,100%{--sweep-x:120%}}
 @media (prefers-reduced-motion:reduce){:is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .turn-primary,.voice-control-primary,.chat-send,.chat-quiz-check,.journey-jump,.mybil-dream){animation:none}}
@@ -424,12 +436,13 @@ body.no-motion :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .tur
 .home-cta .cta-go svg{width:22px;height:22px;fill:none;stroke:#FFD60A;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;transition:translate .2s}
 .home-cta:hover .cta-go svg{translate:2px 0}
 
-/* Asphalt grain: fine light and dark specks, like the road surface. On dark plates (the topic banner) and on the
-   dark theme's page; quiet enough to sit behind text. */
-:root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 2.2 0 0 0 -1.25'/%3E%3C/filter%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.4 0 0 0 -1.35'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23a)' opacity='.16'/%3E%3Crect width='180' height='180' filter='url(%23b)' opacity='.3'/%3E%3C/svg%3E")}
-/* skid marks: two faint white tyre tracks sweeping across a dark plate */
+/* skid marks: two faint white tyre tracks for the dark page (dark.css); the light page has ink ones (light.css) */
 :root{--skid:url("assets/road/skid.webp")}
-.unit-banner{background-image:var(--skid),var(--grain);background-size:620px auto,180px 180px;background-position:right -120px bottom -60px,0 0;background-repeat:no-repeat,repeat}
+/* Asphalt: stones, fine grit and pits in three noise layers (--asphalt, for dark surfaces); --grain-ink is the grit
+   for yellow surfaces, --grain-soft a whisper of it for the light page */
+:root{--asphalt:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'220'%20height%3D'220'%3E%3Cfilter%20id%3D'n0'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.5'%20numOctaves%3D'2'%20seed%3D'3'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%200%200%200%200%201%200%200%200%200%201%203.2%200%200%200%20-2.05'%2F%3E%3C%2Ffilter%3E%3Cfilter%20id%3D'n1'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.95'%20numOctaves%3D'2'%20seed%3D'7'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%200%200%200%200%201%200%200%200%200%201%202.4%200%200%200%20-1.35'%2F%3E%3C%2Ffilter%3E%3Cfilter%20id%3D'n2'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.72'%20numOctaves%3D'2'%20seed%3D'11'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%200%200%200%200%200%200%200%200%200%200%200%202.8%200%200%200%20-1.5'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'220'%20height%3D'220'%20filter%3D'url(%23n0)'%20opacity%3D'0.34'%2F%3E%3Crect%20width%3D'220'%20height%3D'220'%20filter%3D'url(%23n1)'%20opacity%3D'0.24'%2F%3E%3Crect%20width%3D'220'%20height%3D'220'%20filter%3D'url(%23n2)'%20opacity%3D'0.5'%2F%3E%3C%2Fsvg%3E");--grain-ink:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'200'%20height%3D'200'%3E%3Cfilter%20id%3D'n0'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.8'%20numOctaves%3D'2'%20seed%3D'5'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%200%200%200%200%200%200%200%200%200%200%200%202.6%200%200%200%20-1.42'%2F%3E%3C%2Ffilter%3E%3Cfilter%20id%3D'n1'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.9'%20numOctaves%3D'2'%20seed%3D'9'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%200%200%200%200%201%200%200%200%200%201%202.4%200%200%200%20-1.4'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'200'%20height%3D'200'%20filter%3D'url(%23n0)'%20opacity%3D'0.26'%2F%3E%3Crect%20width%3D'200'%20height%3D'200'%20filter%3D'url(%23n1)'%20opacity%3D'0.28'%2F%3E%3C%2Fsvg%3E");--grain-soft:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'200'%20height%3D'200'%3E%3Cfilter%20id%3D'n0'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.8'%20numOctaves%3D'2'%20seed%3D'13'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%200%200%200%200%200%200%200%200%200%200%200%202.6%200%200%200%20-1.45'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'200'%20height%3D'200'%20filter%3D'url(%23n0)'%20opacity%3D'0.08'%2F%3E%3C%2Fsvg%3E")}
+/* the topic banner is asphalt */
+.unit-banner{background-image:var(--asphalt);background-size:220px 220px;background-repeat:repeat}
 
 /* the streak flame is a character, so it is shown big: it breaks out of the small icon discs */
 .streak-flame{position:relative;display:inline-block;flex:none;width:38px;height:38px;margin:-8px -2px -8px -4px;vertical-align:middle}
@@ -441,7 +454,7 @@ body.no-motion :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .tur
 /* The Lær path is a road poster: a signal-yellow panel with a thick asphalt road winding through the lessons
    (drawn by mountLearnRoad in journey-road.js). The colours are variables so the dark theme keeps the poster. */
 .learn-path-wrap{--poster-yellow:#FFD60A;--road-asphalt:#1F2328;--road-line:#FFFFFF;
-  background:var(--poster-yellow);border-radius:28px;padding:44px 0 40px;margin-top:6px;overflow:hidden;isolation:isolate}
+  background:var(--grain-ink) 0 0/200px 200px,var(--poster-yellow);border-radius:28px;padding:44px 0 40px;margin-top:6px;overflow:hidden;isolation:isolate}
 .learn-road{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:visible}
 .learn-road path{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .learn-road-asphalt{stroke:var(--road-asphalt);stroke-width:64px}
@@ -453,14 +466,14 @@ body.no-motion :is(.btn-primary,.judge__start,.pn--next .pn-btn,.turn-shell .tur
 html body .pn--next .pn-btn{animation:next-pulse 2.4s var(--in-out) infinite,btn-shine 5s 1.6s cubic-bezier(.45,0,.55,1) infinite}
 @media (prefers-reduced-motion:reduce){html body .pn--next .pn-btn{animation:none}}
 /* on wide screens the road swings wider, like the poster */
-@media (min-width:700px){.learn-path .pn{translate:calc(var(--x) * 92px) 0}}
+@media (min-width:700px){.learn-path .pn{left:calc(var(--x) * 72px)}}
 /* on wide screens the poster gets its headline: the topic's name in giant upright capitals along the right edge,
    like the type on a motorbike poster */
 .learn-poster-word{display:none}
 .learn-path{position:relative;z-index:1}
 @media (min-width:700px){
-  .learn-poster-word{display:block;position:absolute;top:30px;right:22px;bottom:30px;overflow:hidden;writing-mode:vertical-rl;
-    font:900 clamp(54px,5.4vw,84px)/.84 var(--font-display);letter-spacing:-.02em;text-transform:uppercase;color:var(--road-asphalt);pointer-events:none}
+  .learn-poster-word{display:block;position:absolute;top:30px;right:22px;bottom:30px;overflow:hidden;writing-mode:vertical-rl;white-space:nowrap;
+    font:900 64px/.84 var(--font-display);letter-spacing:-.02em;text-transform:uppercase;color:var(--road-asphalt);pointer-events:none}
 }
 
 /* Road posters. The colours are variables so the dark theme's generator leaves the posters as they are drawn. */
@@ -477,7 +490,7 @@ html body .pn--next .pn-btn{animation:next-pulse 2.4s var(--in-out) infinite,btn
 
 /* Min bil: the header is a yellow panel with a big tyre rolling in from the right edge */
 .mybil-head{position:relative;overflow:hidden;isolation:isolate;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:10px;min-height:150px;
-  padding:22px 22px 20px;border-radius:24px;background:var(--poster-yellow);color:var(--poster-ink)}
+  padding:22px 22px 20px;border-radius:24px;background:var(--grain-ink) 0 0/200px 200px,var(--poster-yellow);color:var(--poster-ink)}
 .mybil-head h1,.mybil-head .eyebrow{color:var(--poster-ink)!important;position:relative}
 .mybil-head .eyebrow::before{background:var(--poster-ink)}
 .mybil-head > div{max-width:62%}
@@ -485,3 +498,22 @@ html body .pn--next .pn-btn{animation:next-pulse 2.4s var(--in-out) infinite,btn
 .mybil-head-tyre{position:absolute;right:-74px;bottom:-96px;width:250px;height:auto;rotate:-12deg;z-index:-1;pointer-events:none}
 @media (min-width:700px){.mybil-head{min-height:190px;padding:28px}.mybil-head-tyre{width:330px;right:-60px;bottom:-130px}}
 @media (max-width:380px){.mybil-head > div{max-width:60%}.mybil-head-tyre{width:190px;right:-88px;bottom:-78px}}
+/* the stops keep clear of the poster word: the road runs in the space to its left */
+@media (min-width:700px){.learn-path{padding-right:104px}}
+/* Desktop: Lær uses the width the mirror and the road above it use. The road poster fills the left; the topic
+   banner and today's card stand in a column on the right that stays in view while the road scrolls. */
+@media (min-width:1100px){
+  .learn{max-width:1100px;display:grid;grid-template-columns:minmax(0,1fr) 340px;grid-template-rows:auto auto 1fr;column-gap:22px;row-gap:14px;align-items:start}
+  .learn > .learn-path-wrap{grid-column:1;grid-row:1 / span 3;margin-top:0}
+  .learn > .unit-banner{grid-column:2;grid-row:1;position:sticky;top:96px}
+  .learn > .learn-card{grid-column:2;grid-row:2;position:sticky;top:290px}
+  .learn-path{padding-right:132px}
+  .learn-path .pn{left:calc(var(--x) * 96px)}
+}
+/* the exam start's status: the poster traffic light beside what it means */
+.exam-signal{--signal-ink:#1F2328;display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:12px 18px 12px 10px;border-radius:20px;background:var(--panel,#fff);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.exam-signal-light{position:relative;flex:none;display:block;width:76px;height:96px}
+.exam-signal-light img{width:100%;height:100%;object-fit:contain}
+.exam-signal-kicker{display:block;font:800 11px/1.2 var(--font-display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.exam-signal strong{display:block;margin:2px 0;font:800 22px/1.1 var(--font-display);color:var(--ink)}
+.exam-signal small{display:block;color:var(--muted);font-size:14px;line-height:1.4}

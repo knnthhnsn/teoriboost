@@ -22,6 +22,15 @@ OUTSIDE_LIMIT = 0.035   # max share of the vehicle area that may change outside 
 CAT = json.load(open(os.path.join(HERE, 'catalog.json'), encoding='utf-8'))
 SLOTS, PARTS = CAT['slots'], CAT['parts']
 
+def largest_island(mask):
+    """bounding box of the biggest connected white area of a mask"""
+    import numpy as np
+    from scipy import ndimage
+    labels, n = ndimage.label(np.asarray(mask) > 128)
+    if not n: return None
+    sizes = ndimage.sum(np.ones_like(labels), labels, range(1, n + 1)); sl = ndimage.find_objects((labels == int(np.argmax(sizes)) + 1).astype(int))[0]
+    return (sl[1].start, sl[0].start, sl[1].stop, sl[0].stop)
+
 def subject_bbox(im, tol=18):
     return im.convert('L').point(lambda v: 255 if v < 255 - tol else 0).getbbox()
 
@@ -101,6 +110,7 @@ def tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, ap
     spread = e.max(2) - e.min(2)
     magenta = (e[..., 0] > 140) & (e[..., 2] > 140) & (e[..., 1] < 90)
     key = ((e.min(2) >= 190) & (spread <= 22)) | magenta
+    key &= np.asarray(base_alpha) > 0  # only on the vehicle: a white panel can touch the white background through a gap in its outline
     changed = np.abs(b - e).max(2) > 16
     lab, n = ndimage.label(key)
     idx = range(1, n + 1)
@@ -188,8 +198,12 @@ def build(base_id):
     info = {'parts': approved, 'split': split, 'tint': tint, 'bbox': frac(bb)}
     plate = os.path.join(d, 'plate-blank.png')
     if os.path.exists(plate):  # a blank licence plate edit: its changed area is where the app writes the text
-        pd = ImageChops.difference(base, align(Image.open(plate).convert('RGB'), base)).convert('L').point(lambda v: 255 if v > 38 else 0)
-        pb = pd.filter(ImageFilter.MedianFilter(5)).getbbox()
+        edited = align(Image.open(plate).convert('RGB'), base)
+        pd = ImageChops.difference(base, edited).convert('L').point(lambda v: 255 if v > 38 else 0)
+        # only the plate itself: changed pixels that are now near white (the model may also nudge shading elsewhere)
+        white = edited.convert('L').point(lambda v: 255 if v > 205 else 0)
+        pd = ImageChops.multiply(pd, white).filter(ImageFilter.MedianFilter(5))
+        pb = largest_island(pd)
         if pb: info['plate'] = frac(pb)
     return info
 

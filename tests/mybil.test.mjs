@@ -86,3 +86,37 @@ test('any tuning can be taken off again, one part or all of it, without losing w
   assert.equal(all.garage.style.scooter.paint, '#FF5FA2', 'colours are kept');
   assert.equal(buyOrEquipPart(all.garage, { journey: { events: [] }, history: [] }, 'wheels-chrome').garage.equipped.scooter.wheels, 'wheels-chrome', 'putting it back is free');
 });
+
+test('try-on shows a part or an extra on the car without buying or saving anything', async () => {
+  const { withTryOn, vehicleLayers } = await import('../dist/mybil.js');
+  const g = emptyGarage();
+  const tried = withTryOn(g, { base: 'scooter', part: 'top-spoiler' });
+  assert.equal(tried.equipped.scooter.top, 'top-spoiler');
+  assert.equal(tried.spent, 0);
+  assert.deepEqual(tried.owned, []);
+  assert.deepEqual(g.equipped, {}, 'the real garage is untouched');
+  assert.match(vehicleLayers(tried), /data-layer="top-spoiler"/);
+  assert.equal(withTryOn(g, { base: 'scooter', extra: 'neon' }).style.scooter.neonOn, true);
+  assert.equal(withTryOn(g, { base: 'smallcar', part: 'top-spoiler' }), g, 'a try-on for another vehicle is ignored');
+  assert.equal(withTryOn(g, null), g);
+});
+
+test('the shuffle is bought once, then rolls a new look from what you own only', async () => {
+  const { buyShuffle, shuffleLook, SHUFFLE } = await import('../dist/mybil.js');
+  const rich = { journey: { events: [] }, history: Array.from({ length: 6 }, (_, i) => ({ id: 'x' + i, errors: 0 })) };
+  const poor = { journey: { events: [] }, history: [] };
+  let g = emptyGarage();
+  assert.equal(shuffleLook(g).ok, false, 'locked until bought');
+  assert.equal(buyShuffle(g, poor).ok, false);
+  g = buyShuffle(g, rich).garage;
+  assert.equal(g.spent, SHUFFLE.price);
+  assert.equal(buyShuffle(g, rich).garage.spent, SHUFFLE.price, 'never charged twice');
+  assert.equal(shuffleLook(g).ok, false, 'needs something to shuffle');
+  for (const id of ['top-spoiler', 'wheels-chrome', 'wheels-sport']) g = buyOrEquipPart(g, rich, id).garage;
+  const spent = g.spent;
+  let seq = 0; const random = () => [0.1, 0.5, 0.95, 0.3][seq++ % 4];
+  const r = shuffleLook(g, random);
+  assert.equal(r.ok, true);
+  assert.equal(r.garage.spent, spent, 'shuffling is free');
+  for (const id of Object.values(r.garage.equipped.scooter)) assert.ok(r.garage.owned.includes('scooter:' + id), id + ' is owned');
+});

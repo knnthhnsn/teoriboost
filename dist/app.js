@@ -19,11 +19,11 @@ import {VOICE_PACK} from './voice-pack.js';
 import {createVoiceCue} from './voice-cues.js';
 import {renderArt} from './art.js';
 import {renderCast,castLine} from './cast.js';
-import {renderMyCar,loadGarage,saveGarage,withEarnings,balance,buyBase,buyOrEquipPart,buyOrToggleExtra,setColor,setPlate,boosterCount,PARTS,renderRoadLoop,unequipSlot,unequipAll} from './mybil.js';
+import {renderMyCar,loadGarage,saveGarage,withEarnings,balance,buyBase,buyOrEquipPart,buyOrToggleExtra,setColor,setPlate,boosterCount,PARTS,renderRoadLoop,unequipSlot,unequipAll,buyShuffle,shuffleLook} from './mybil.js';
 import {revealView,withTransition,initMotion,mountDayNight} from './motion.js';
 import {renderChat,mountChat,loadChat} from './chat.js';
 import {renderLearn,renderPractice,renderMissions,renderExamStart,renderTopics,renderProfile,renderAccountPanel,examCountdown} from './screens.js';
-import {renderStart,mountGlowUp,glowUp,loadIntro,saveIntro,typeBubbles,countUps,confetti,DREAMS} from './start.js';
+import {renderStart,mountGlowUp,loadIntro,saveIntro,typeBubbles,countUps,confetti,DREAMS} from './start.js';
 import {getRouteUnits,getDailySummary,getJourneyRecommendations,completeLesson,setDailyGoal} from './journey-core.js';
 import {mergeJourneyProfile,mergeAssessmentRecords} from './journey-profile.js';
 import {readProtectedProfile,writeProtectedProfile} from './profile-store.js';
@@ -210,12 +210,12 @@ const oldExam=validateExam(state.savedExam,QUESTIONS,{requireSignatures:true});i
 route();
 
 // Min bil: Booster economy and vehicle customisation (see mybil.js).
-var myCarSlot='',myCarMessage=''; // var: the first route() runs above this line
+var myCarSlot='',myCarMessage='',myCarTry=null; // var: the first route() runs above this line; myCarTry: the part or extra being tried on
 function carProgress(){return {journey:state.journey,history:state.history};}
-function myCarView(){const g=withEarnings(loadGarage(),carProgress());saveGarage(g);const html=renderMyCar({garage:g,progress:carProgress(),slot:myCarSlot,message:myCarMessage||''});myCarMessage='';return html;}
+function myCarView(){const g=withEarnings(loadGarage(),carProgress());saveGarage(g);const html=renderMyCar({garage:g,progress:carProgress(),slot:myCarSlot,message:myCarMessage||'',tryOn:myCarTry});myCarMessage='';return html;}
 function updateBoosterChipText(rive='bolt'){const el=document.getElementById('booster-chip');if(el){el.innerHTML=boosterCount(balance(carProgress(),loadGarage()),rive);el.hidden=false;}}
 function applyCar(r){if(r){saveGarage(r.garage);myCarMessage=r.message;}const y=scrollY;$('view').innerHTML=myCarView();scrollTo(0,y);updateBoosterChip();}
-document.addEventListener('click',e=>{const stage=e.target.closest('[data-mybil-rev]');if(stage){revCar(stage);return;}const b=e.target.closest('[data-mybil-base],[data-mybil-part],[data-mybil-slot],[data-mybil-extra],[data-mybil-color],[data-mybil-unequip],[data-mybil-unequip-all]');if(!b)return;const progress=carProgress();const g0=withEarnings(loadGarage(),progress);let r=null;if(b.hasAttribute('data-mybil-unequip'))r=unequipSlot(g0,b.dataset.mybilUnequip);else if(b.hasAttribute('data-mybil-unequip-all'))r=unequipAll(g0);else if(b.dataset.mybilSlot){myCarSlot=b.dataset.mybilSlot;void experience.play('nav');}else if(b.dataset.mybilBase)r=buyBase(g0,progress,b.dataset.mybilBase);else if(b.dataset.mybilExtra)r=buyOrToggleExtra(g0,progress,b.dataset.mybilExtra);else if(b.dataset.mybilColor)r=setColor(g0,b.dataset.mybilColor,b.dataset.value);else r=buyOrEquipPart(g0,progress,b.dataset.mybilPart);carSound(b,g0,r);applyCar(r);if(r?.ok)carMoment(b,g0,r);});
+document.addEventListener('click',e=>{const stage=e.target.closest('[data-mybil-rev]');if(stage){revCar(stage);return;}const b=e.target.closest('[data-mybil-base],[data-mybil-part],[data-mybil-slot],[data-mybil-extra],[data-mybil-color],[data-mybil-unequip],[data-mybil-unequip-all],[data-mybil-buy],[data-mybil-buy-extra],[data-mybil-try-off],[data-mybil-shuffle],[data-mybil-shuffle-buy]');if(!b)return;const progress=carProgress();const g0=withEarnings(loadGarage(),progress);let r=null;const mine=k=>g0.owned.includes(g0.active+':'+k);if(b.hasAttribute('data-mybil-try-off')){myCarTry=null;void experience.play('toggle-off');applyCar(null);return;}const tryKey=b.dataset.mybilPart&&!mine(b.dataset.mybilPart)?{base:g0.active,part:b.dataset.mybilPart}:b.dataset.mybilExtra&&!mine('extra-'+b.dataset.mybilExtra)?{base:g0.active,extra:b.dataset.mybilExtra}:null;if(tryKey){const same=myCarTry&&myCarTry.base===tryKey.base&&myCarTry.part===tryKey.part&&myCarTry.extra===tryKey.extra;myCarTry=same?null:tryKey;void experience.play(same?'toggle-off':'select');applyCar(null);if(!same){carMoment(b,g0,{garage:g0});const st=document.querySelector('.mybil-stage'),r0=st?.getBoundingClientRect();if(r0&&(r0.bottom<80||r0.top>innerHeight-120))st.scrollIntoView({block:'center',behavior:reduceMotion.matches?'auto':'smooth'});}return;}if(b.hasAttribute('data-mybil-shuffle')){r=shuffleLook(g0);carSound(b,g0,r);applyCar(r);if(r.ok)shuffleMoment();return;}if(b.hasAttribute('data-mybil-shuffle-buy'))r=buyShuffle(g0,progress);else if(b.dataset.mybilBuy){r=buyOrEquipPart(g0,progress,b.dataset.mybilBuy);if(r.ok)myCarTry=null;}else if(b.dataset.mybilBuyExtra){r=buyOrToggleExtra(g0,progress,b.dataset.mybilBuyExtra);if(r.ok)myCarTry=null;}else if(b.hasAttribute('data-mybil-unequip'))r=unequipSlot(g0,b.dataset.mybilUnequip);else if(b.hasAttribute('data-mybil-unequip-all'))r=unequipAll(g0);else if(b.dataset.mybilSlot){myCarSlot=b.dataset.mybilSlot;void experience.play('nav');}else if(b.dataset.mybilBase)r=buyBase(g0,progress,b.dataset.mybilBase);else if(b.dataset.mybilExtra)r=buyOrToggleExtra(g0,progress,b.dataset.mybilExtra);else if(b.dataset.mybilColor)r=setColor(g0,b.dataset.mybilColor,b.dataset.value);else r=buyOrEquipPart(g0,progress,b.dataset.mybilPart);carSound(b,g0,r);applyCar(r);if(r?.ok)carMoment(b,g0,r);});
 document.addEventListener('change',e=>{const c=e.target.closest('[data-mybil-color-input]');const t=e.target.closest('[data-mybil-plate]');if(!c&&!t)return;const g0=withEarnings(loadGarage(),carProgress());const r=c?setColor(g0,c.dataset.mybilColorInput,c.value):setPlate(g0,t.value);void experience.play(!r?.ok?'repair':c?'color':'plate');applyCar(r);if(r?.ok&&t)carMoment(null,g0,r,'plate');});
 window.addEventListener('hashchange',updateBoosterChip);updateBoosterChip();
 // ---- sound and motion for Min bil ----
@@ -227,9 +227,12 @@ function carSound(b,g0,r){
   if(b.hasAttribute('data-mybil-unequip')||b.hasAttribute('data-mybil-unequip-all')){void experience.play(b.hasAttribute('data-mybil-unequip-all')?'lower':'toggle-off');return;}
   const bought=r.garage.spent>g0.spent,active=r.garage.active;
   if(b.dataset.mybilBase){void experience.play(bought?'buy':'rev-'+active);if(bought)void experience.play('rev-'+active,{delay:.9});return;}
-  if(b.dataset.mybilExtra){const st=r.garage.style[active]||{};const on=b.dataset.mybilExtra==='neon'?st.neonOn:st.lowered;if(bought)void experience.play('buy');void experience.play(b.dataset.mybilExtra==='lower'?'lower':on?'neon':'toggle-off',{delay:bought?.45:0});return;}
+  if(b.hasAttribute('data-mybil-shuffle')){[0,1,2,3].forEach(i=>void experience.play('part',{delay:i*.09,rate:1+i*.06}));return;}
+  if(b.hasAttribute('data-mybil-shuffle-buy')){void experience.play('buy');return;}
+  const extraId=b.dataset.mybilExtra||b.dataset.mybilBuyExtra;
+  if(extraId){const st=r.garage.style[active]||{};const on=extraId==='neon'?st.neonOn:st.lowered;if(bought)void experience.play('buy');void experience.play(extraId==='lower'?'lower':on?'neon':'toggle-off',{delay:bought?.45:0});return;}
   if(b.dataset.mybilColor){const sw=[...document.querySelectorAll('[data-mybil-color="'+b.dataset.mybilColor+'"]')];const i=Math.max(0,sw.indexOf(b));void experience.play('color',{rate:2**(SCALE[i%12]/12)});return;}
-  const part=PARTS.find(p=>p.id===b.dataset.mybilPart);if(!part)return;
+  const part=PARTS.find(p=>p.id===(b.dataset.mybilPart||b.dataset.mybilBuy));if(!part)return;
   const on=r.garage.equipped?.[active]?.[part.slot]===part.id;
   if(bought)void experience.play('buy');
   void experience.play(on?(SLOT_CUE[part.slot]||'part'):'toggle-off',{delay:bought?.45:0});
@@ -238,7 +241,7 @@ function carSound(b,g0,r){
 function carMoment(b,g0,r,kind){
   if(document.body.classList.contains('no-motion'))return;
   const stage=document.querySelector('.mybil-stage');if(!stage)return;
-  const id=b?.dataset.mybilPart;const layer=id&&stage.querySelector('[data-layer="'+id+'"]');
+  const id=b?.dataset.mybilPart||b?.dataset.mybilBuy;const layer=id&&stage.querySelector('[data-layer="'+id+'"]');
   stage.classList.remove('is-tuned');void stage.offsetWidth;stage.classList.add('is-tuned');
   if(layer)layer.classList.add('is-new');
   const bought=r.garage.spent>g0.spent;if(bought||kind==='plate')sparks(stage,bought?18:8);
@@ -249,6 +252,13 @@ function revCar(stage){
   if(document.body.classList.contains('no-motion'))return;
   stage.classList.remove('is-revving');void stage.offsetWidth;stage.classList.add('is-revving');
   puffs(stage);clearTimeout(revCar.t);revCar.t=setTimeout(()=>stage.classList.remove('is-revving'),1700);
+}
+function shuffleMoment(){
+  if(document.body.classList.contains('no-motion')||reduceMotion.matches)return;
+  const stage=document.querySelector('.mybil-stage');if(!stage)return;
+  stage.classList.remove('is-shuffled');void stage.offsetWidth;stage.classList.add('is-shuffled');
+  stage.querySelectorAll('[data-layer]').forEach((l,i)=>{l.style.animationDelay=(i*70)+'ms';l.classList.add('is-new');});
+  sparks(stage,14);setTimeout(()=>stage.classList.remove('is-shuffled'),900);
 }
 function sparks(host,n){
   const box=document.createElement('div');box.className='fx-sparks';box.setAttribute('aria-hidden','true');
@@ -329,19 +339,6 @@ document.addEventListener('click',e=>{
 // The Rive show (glowup-<base>.riv) plays when it can; the CSS glow-up runs if Rive is off or fails.
 // sound cues on the Rive show's timeline (tools/rive/build-glowup.mjs): cough, scan, pop, landing, five parts, neon
 function dreamCues(base){return [[1150,'rev-'+base],[2080,'paint'],[3420,'booster'],[3830,'lower'],...[0,1,2,3,4].map(i=>[4200+i*283,'part']),[5620,'neon']];} // a declaration: the first route() runs before this line
-document.addEventListener('click',e=>{
-  const again=e.target.closest('[data-dream-replay]');
-  if(again){const stage=$('modal-content').querySelector('.dream-rive');riveFire(stage,'play');dreamSounds?.(stage.dataset.rive.split(':')[1]);return;}
-  if(!e.target.closest('[data-mybil-dream]'))return;const g=loadGarage();
-  openModal('Sådan kan den blive',`<div class="dream-modal"><div class="dream-rive" data-rive="glowup:${g.active}">${glowUp([g.active],{loop:false})}</div><p class="fine-print">Alt her kan du købe for Boosters. Farverne vælger du selv.</p><button type="button" class="btn btn-secondary dream-replay" data-dream-replay hidden>Se igen</button></div>`);
-  const host=$('modal-content'),stage=host.querySelector('.dream-rive');let stop=null,timers=[];
-  const fallback=()=>{if(!stop)stop=mountGlowUp(host,{sound:cue=>void experience.play(cue)});};
-  dreamSounds=base=>{timers.forEach(clearTimeout);timers=dreamCues(base).map(([ms,cue])=>setTimeout(()=>void experience.play(cue),ms));};
-  stage.addEventListener('rive-on',()=>{host.querySelector('[data-dream-replay]').hidden=false;dreamSounds(g.active);},{once:true});
-  stage.addEventListener('rive-off',fallback,{once:true});
-  if(document.body.classList.contains('no-motion')||reduceMotion.matches)fallback();
-  $('modal').addEventListener('close',()=>{stop?.();stop=null;timers.forEach(clearTimeout);dreamSounds=null;},{once:true});});
-var dreamSounds=null;
 
 var dayNightDispose; // no initialiser: the first route() already set it
 

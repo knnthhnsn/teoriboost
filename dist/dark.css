@@ -12,8 +12,8 @@ html[data-theme="dark"],html[data-theme="dark"] .journey-surface{
   --surface:#171B20;--surface-2:#1E242A;--surface-3:#252C33;
 }
 html[data-theme="dark"] body{background:var(--bg)!important;color:var(--ink)}
-/* the page: faint skid marks and asphalt grain on graphite that darkens downwards */
-html[data-theme="dark"] body:not(.start-mode){background:var(--skid) right -160px bottom -80px/1100px auto no-repeat,var(--grain),linear-gradient(180deg,var(--bg) 0,#0A0C0F 100%)!important;background-attachment:fixed!important;background-size:1100px auto,180px 180px,auto!important}
+/* the page is asphalt: faint skid marks and asphalt grain on graphite that darkens downwards */
+html[data-theme="dark"] body:not(.start-mode){background:var(--skid) right -160px bottom -80px/1100px auto no-repeat,var(--asphalt),linear-gradient(180deg,var(--bg) 0,#0A0C0F 100%)!important;background-attachment:fixed!important;background-size:1100px auto,220px 220px,auto!important}
 
 /* yellow stays yellow, so whatever sits on it keeps dark ink (light rules use var(--ink) there) */
 html[data-theme="dark"] .pn--next .pn-btn,html[data-theme="dark"] .topic.is-active .topic-n,html[data-theme="dark"] .mybil-tab.is-active,
@@ -47,3 +47,8 @@ html[data-theme="dark"]{--gloss:linear-gradient(135deg,rgba(255,255,255,.5) 0,rg
 html[data-theme="dark"] .journey-control-dock:not(.journey-lesson-done *){background:linear-gradient(rgba(10,12,15,0),#0A0C0F 34%)!important;border:0!important;box-shadow:none!important;border-radius:0!important}
 /* the Lær road poster stays a poster: the open lessons are white stops on the asphalt, as in the light theme */
 html[data-theme="dark"] .learn-path .pn--open .pn-btn{background:#FFFFFF;color:#1F2328;border-color:#E3E5E8;box-shadow:0 6px 0 #C2CCD6}
+/* the topic banner is yellow here, so it gets the yellow grit instead of the asphalt */
+html[data-theme="dark"] .unit-banner{background-image:var(--grain-ink)!important;background-size:200px 200px}
+/* on the asphalt page the poster needs an edge to stand off it */
+html[data-theme="dark"] .practice-signal{box-shadow:inset 0 0 0 2px rgba(255,214,10,.35),0 5px 0 #000}
+html[data-theme="dark"] .mybil-try{box-shadow:inset 0 0 0 2px rgba(255,214,10,.35),0 4px 0 #000}

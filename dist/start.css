@@ -318,3 +318,53 @@ body.start-mode{background:#fff}
 /* the glow-up label's "from ... to": a drawn chevron in an asphalt disc, not a text arrow */
 .gu-arrow{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#1F2328;vertical-align:-4px;margin:0 2px}
 .gu-arrow svg{width:13px;height:13px;fill:none;stroke:#FFD60A;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---- The intro after the design manual (Figma: Forside, Knapper, Svarkort, Kort, Fremskridt) ----
+   The first screen is the manual's cover: signal yellow with white signal stripes and grit, the big ExtraBold
+   headline, and the dark button, which the manual keeps for yellow surfaces. The steps are white app pages
+   with the manual's components: a yellow progress bar on a grey track, answer cards, cards and the yellow button. */
+body.start-mode .start-hero{background:repeating-linear-gradient(118deg,rgba(255,255,255,.24) 0 56px,rgba(255,255,255,0) 56px 132px),var(--grain-ink) 0 0/200px 200px,#FFD60A!important}
+body.start-mode .start-hero .start-cta{background:#1F2328!important;color:#FFFFFF!important;border:0!important;box-shadow:0 4px 0 rgba(0,0,0,.5)!important;font:700 18px var(--font-display)}
+body.start-mode .start-hero .start-cta:active{translate:0 4px;box-shadow:none!important}
+body.start-mode .start-kicker{display:block;width:max-content;max-width:100%;margin:0 auto 10px;padding:6px 12px;border-radius:999px;background:#1F2328;color:#FFD60A;font:800 12px/1.2 var(--font-display);letter-spacing:.08em;text-transform:uppercase}
+/* the steps: white pages */
+body.start-mode .step-bar{height:12px;background:#E3E5E8}
+body.start-mode .step-bar i{background:#FFD60A;box-shadow:inset 0 -3px 0 #E8BC00}
+body.start-mode .step-bar i::after{background:rgba(255,255,255,.55)}
+/* answer cards (Svarkort): white with a 2 px edge; chosen is light yellow with a yellow edge */
+body.start-mode .step-option{background:#FFFFFF;border:2px solid #E3E5E8;box-shadow:0 4px 0 #E3E5E8;border-radius:18px;padding:16px 18px}
+body.start-mode .step-option.is-on{background:#FFF6C7;border-color:#E8BC00;box-shadow:0 4px 0 #C9A200}
+/* cards (Kort): 2 px Asfalt 200 edge and a 0 4 0 shadow in the same colour */
+body.start-mode :is(.step-first,.step-earn,.plan-list li){background:#FFFFFF;border:2px solid #E3E5E8;box-shadow:0 4px 0 #E3E5E8;border-radius:18px}
+/* the steps' button is the primary yellow button */
+body.start-mode .step-foot .start-cta{background:#FFD60A!important;color:#1F2328!important;border:0!important;box-shadow:0 4px 0 #C9A200!important;font:700 18px var(--font-display)}
+body.start-mode .step-foot .start-cta:active{translate:0 4px;box-shadow:none!important}
+@media (min-width:900px){body.start-mode .start-kicker{margin-left:0}}
+
+/* ---- Min bil: try on before buying, and "Bland min bil" ---- */
+/* the dice: a yellow die with ink pips in the ink coin */
+.mybil-dream-ico svg rect{fill:var(--dream-spark)}
+.mybil-dream-ico svg circle.s{fill:var(--dream-coin);animation:none}
+.mybil-dream[data-mybil-shuffle]:active .mybil-dream-ico svg{animation:dice-roll .5s var(--out)}
+@keyframes dice-roll{from{rotate:-200deg;scale:.7}}
+/* locked: the price under the name, a padlock feel through the muted coin */
+.mybil-dream.is-locked{min-height:56px;padding-right:24px;text-align:left}
+.mybil-dream.is-locked > span:last-child{display:flex;flex-direction:column;line-height:1.15}
+.mybil-dream.is-locked small{display:flex;align-items:center;gap:4px;margin-top:2px;font:700 12px var(--font-text);opacity:.85}
+.mybil-dream:disabled{opacity:.6;cursor:not-allowed;box-shadow:none;translate:none}
+/* the bar under the car while you try something on */
+.mybil-try{display:flex;align-items:center;gap:10px;margin:12px auto 0;max-width:520px;padding:8px 8px 8px 16px;border-radius:18px;background:#1F2328;color:#FFFFFF;box-shadow:0 4px 0 #000;animation:reveal .3s var(--out)}
+.mybil-try-text{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+.mybil-try-text small{font:800 11px/1.2 var(--font-display);letter-spacing:.1em;text-transform:uppercase;color:#FFD60A}
+.mybil-try-text strong{font:800 17px/1.2 var(--font-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mybil-try-buy{display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 18px;border:0;border-radius:14px;background:var(--gloss),#FFD60A;color:#1F2328;font:700 16px var(--font-display);box-shadow:0 4px 0 #C9A200;cursor:pointer;white-space:nowrap}
+.mybil-try-buy:active{translate:0 4px;box-shadow:none}
+.mybil-try-buy:disabled{background:#3A434C;color:#C2CCD6;box-shadow:none;cursor:not-allowed}
+.mybil-try-off{display:grid;place-items:center;flex:none;width:46px;height:46px;border:0;border-radius:14px;background:#3A434C;color:#FFFFFF;cursor:pointer}
+.mybil-try-off svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+/* the part you try on: a dashed yellow edge, so it reads as "not bought yet" */
+.mybil-item.is-trying{outline:3px dashed #E8BC00;outline-offset:-3px}
+/* the dice roll: the car shakes on its springs */
+.mybil-stage.is-shuffled .mybil-rig{animation:shuffle-shake .8s var(--spring)}
+@keyframes shuffle-shake{15%{translate:-6px 0;rotate:-2deg}30%{translate:6px -4px;rotate:2deg}45%{translate:-4px 0;rotate:-1deg}60%{translate:3px -2px;rotate:.5deg}}
+@media (prefers-reduced-motion:reduce){.mybil-try{animation:none}.mybil-stage.is-shuffled .mybil-rig{animation:none}}

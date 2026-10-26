@@ -66,9 +66,11 @@ export function renderLearn({ vm, intro, due, unitIndex, ready }) {
 /* ---------------- Øv: everything to practise in one place ---------------- */
 export function renderPractice({ weak, due, missions }) {
   const names = weak.slice(0, 3).map(w => esc(w.title)).join(' · ');
-  const hero = weak.length
-    ? `<a class="practice-hero" href="#review">${renderCast('blink', { size: 'sm', priority: true })}<div><strong>Gentag ${weak.length} ${weak.length === 1 ? 'svag regel' : 'svage regler'}</strong><small>${names}</small></div></a>`
-    : `<a class="practice-hero practice-hero--calm" href="#review">${renderCast('blink', { size: 'sm', priority: true })}<div><strong>Ingen svage regler lige nu</strong><small>Tag 3 blandede situationer og hold dem varme${due ? ` · ${due} klar` : ''}</small></div></a>`;
+  // the hero is the traffic light: red with many weak rules, amber with a few, green with none
+  const [light, still, kicker, title, line, go] = weak.length >= 5 ? [1, 'red', 'Stop op', `Gentag ${weak.length} svage regler`, names, 'Start gentagelsen']
+    : weak.length ? [4, 'yellow', 'Pas på', `Gentag ${weak.length} ${weak.length === 1 ? 'svag regel' : 'svage regler'}`, names, 'Start gentagelsen']
+    : [3, 'green', 'Kør', 'Ingen svage regler lige nu', `Tag 3 blandede situationer og hold dem varme${due ? ` · ${due} klar` : ''}`, 'Tag 3 situationer'];
+  const hero = `<a class="practice-signal practice-signal--${still}" href="#review"><div class="practice-signal-copy"><span class="practice-signal-kicker">${kicker}</span><strong>${title}</strong><small>${line}</small><span class="practice-signal-go">${go}</span></div><span class="practice-signal-light" data-rive="signal:${light}"><img src="assets/traffic/${still}.webp" alt="" decoding="async"></span></a>`;
   const miss = missions.map(m => `<a class="row-card" href="#mission:${esc(m.section)}"><span class="row-ico" style="--c:${m.tint}">${ico(m.icon)}</span><div><strong>${esc(m.title)}</strong><small>3 situationer + genkaldelse</small></div><span class="row-go" aria-hidden="true">${ICON.chev}</span></a>`).join('');
   const games = [['#judge', 'Du er kørelæreren', 'Find fejlen i en elevs kørsel', 'clipboard'], ['#trafiklab', 'Trafiklab', 'Et blink. To baner.', 'light'], ['#drive', 'Gas og bremse', 'Tre situationer, træn timing', 'gauge']]
     .map(([h, t, d, e]) => `<a class="game-card" href="${h}"><span class="game-ico">${ico(e)}</span><strong>${t}</strong><small>${d}</small></a>`).join('');
@@ -107,6 +109,14 @@ function when(at, now = Date.now()) {
   if (diff < 7) return d.toLocaleDateString('da-DK', { weekday: 'long' }).replace(/^./, c => c.toUpperCase());
   return d.toLocaleDateString('da-DK', { day: 'numeric', month: 'short' });
 }
+/** where the learner stands, as the manual's three-step traffic light: red not started, amber under way, green ready */
+function examSignal(history, limit) {
+  const last = history.at(-1);
+  const [light, still, title, line] = !last ? [1, 'red', 'Ikke startet', 'Tag din første øveprøve, så ved du, hvor du står.']
+    : last.errors <= limit ? [3, 'green', 'Klar', `Din seneste prøve havde ${last.errors} fejl. Grænsen er ${limit}.`]
+    : [4, 'yellow', 'I gang', `Din seneste prøve havde ${last.errors} fejl. Grænsen er ${limit}.`];
+  return `<div class="exam-signal exam-signal--${still}"><span class="exam-signal-light" data-rive="signal:${light}"><img src="assets/traffic/${still}.webp" alt="" decoding="async"></span><div><span class="exam-signal-kicker">Din status</span><strong>${title}</strong><small>${line}</small></div></div>`;
+}
 export function renderExamStart({ history, saved, total = 25, minutes = 25, limit = 5, sourcesHtml = '' }) {
   const rows = [...history].reverse().slice(0, 8).map(h => {
     const ok = h.errors <= limit, near = !ok && h.errors <= limit + 3;
@@ -114,6 +124,7 @@ export function renderExamStart({ history, saved, total = 25, minutes = 25, limi
   }).join('');
   return `<section class="exam-start" aria-labelledby="exam-title">
     <div class="road-poster"><span class="road-poster-band" aria-hidden="true"><img class="road-poster-car" src="assets/road/car-top.webp" alt="" decoding="async"></span><p class="road-poster-words"><span>Retning</span> <span class="road-poster-mark">er vigtigere</span> <span>end fart.</span></p></div>
+    ${examSignal(history, limit)}
     <div class="exam-talk">${renderCast('daek', { size: 'sm', priority: true })}<p class="talk-bubble"><span class="cast-name">Dæk</span>Ro på. ${total} situationer, én ad gangen.</p></div>
     <h1 id="exam-title" class="sr-only">Øveprøve</h1>
     <div class="exam-facts"><div><b>${total}</b><small>situationer</small></div><div><b>${minutes} min</b><small>tid</small></div><div><b>≤ ${limit}</b><small>fejl</small></div></div>

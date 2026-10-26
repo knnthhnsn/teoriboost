@@ -1,5 +1,5 @@
 // Rive animations (assets/rive/teoriboost.riv, built by tools/rive/build-teoriboost.mjs; glowup-<base>.riv by build-glowup.mjs;
-// brand.riv by build-brand.mjs; flame.riv by build-flame.mjs).
+// brand.riv by build-brand.mjs; flame.riv by build-flame.mjs; signal.riv by build-signal.mjs).
 // Any element with data-rive="<name>[:<state>]" gets a Rive canvas on top of its own content, which stays as the
 // fallback: it shows while Rive loads, if it fails, and always when motion is off. The runtime (~2.6 MB) is
 // fetched only the first time such an element appears.
@@ -10,6 +10,7 @@
 //   confetti                          the burst without the badge, around a character
 //   gauge:<0-100>                     a speedometer; the needle swings to the number
 //   traffic                           a traffic light running the Danish sequence (waiting)
+//   signal:<0-4> | signal:cycle       the poster traffic light: off, red, red and amber, green, amber, or the sequence
 //   bolt | bolt:earn                  the Booster bolt; glints now and then, jumps on earn
 //   target:open | target:met          today's goal; a dart lands when it is met
 //   glowup:<base>                     the dream-build show for scooter | smallcar | bigcar | racecar
@@ -24,6 +25,7 @@ const BASE = 'assets/rive/';
 const BOARDS = {
   feedback: { artboard: 'Feedback', machine: 'Feedback' },
   flame: { artboard: 'Flame', machine: 'Flame', file: () => 'flame.riv' },
+  signal: { artboard: 'Signal', machine: 'Signal', file: () => 'signal.riv' },
   celebrate: { artboard: 'Celebrate', machine: 'Celebrate' },
   confetti: { artboard: 'Confetti', machine: 'Confetti' },
   gauge: { artboard: 'Gauge', machine: 'Gauge' },
@@ -85,6 +87,7 @@ async function mount(el) {
         const inputs = inst.stateMachineInputs(spec.machine) || [];
         const input = n => inputs.find(i => i.name === n);
         if (name === 'feedback' && input(state)) setTimeout(() => input(state)?.fire(), 60);
+        if (name === 'signal') { if (input('cycle')) input('cycle').value = state === 'cycle'; if (input('light')) input('light').value = Number(state) || 0; }
         if (name === 'flame') flame(el, input, Math.max(0, Math.min(5, Number(state) || 0)), el.dataset.rive.split(':')[2]);
         if (name === 'gauge' && input('pct')) swing(input('pct'), Math.max(0, Math.min(100, Number(state) || 0)));
         if (name === 'target' && state === 'met') setTimeout(() => { if (input('met')) input('met').value = true; }, 350);

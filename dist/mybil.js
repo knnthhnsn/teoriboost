@@ -12,6 +12,8 @@ export { SLOTS, PARTS, BASES };
 export const BOOSTER_RATES = Object.freeze({ lesson: 1000, dailyGoal: 1500, examPass: 5000 });
 // Extras that are not image parts: unlocked once per vehicle, then free to change.
 export const EXTRAS = Object.freeze({ neon: { name: 'Neon under bilen', price: 4000 }, lower: { name: 'Sænkning', price: 5000 } });
+/** "Bland min bil": rolls a new look from what you already own. Bought once, for every vehicle. */
+export const SHUFFLE = Object.freeze({ key: 'garage:shuffle', name: 'Bland min bil', price: 3000 });
 export const COLOR_PRESETS = Object.freeze(['#FF3CC8', '#14E0F0', '#D5FF62', '#FF4B4B', '#FF9600', '#FFD23F', '#58CC02', '#1CB0F6', '#8A5CF6', '#1F2328', '#FFFFFF', '#9AA3AD']);
 const DEFAULT_COLORS = { paint: '#FF3CC8', stripe: '#FFFFFF', windows: '#1F2328', neon: '#B66DFF' };
 const STORE_KEY = 'teoriboost.mybil.v1';
@@ -125,6 +127,47 @@ export function setColor(garage, kind, color) {
 }
 
 const BLOCKED = ['FUCK', 'KUSSE', 'PIK', 'LUDER', 'NAZI', 'NEGER', 'HORE', 'SEX', 'PORNO', 'SS'];
+/** Try-on: what the vehicle would look like with a part or an extra you do not own yet. Nothing is bought or saved;
+ *  returns the garage to draw, or the garage itself when there is nothing to try. */
+export function withTryOn(garage, tryOn) {
+  if (!tryOn || tryOn.base !== garage.active) return garage;
+  if (tryOn.extra) {
+    const flag = tryOn.extra === 'neon' ? 'neonOn' : 'lowered';
+    return { ...garage, style: { ...garage.style, [garage.active]: { ...styleOf(garage), [flag]: true } } };
+  }
+  const part = partById(tryOn.part);
+  if (!part || !partsFor(garage.active).includes(part)) return garage;
+  return { ...garage, equipped: { ...garage.equipped, [garage.active]: { ...(garage.equipped[garage.active] || {}), [part.slot]: part.id } } };
+}
+export const ownsShuffle = garage => garage.owned.includes(SHUFFLE.key);
+export function buyShuffle(garage, progress) {
+  if (ownsShuffle(garage)) return { garage, ok: true, message: '' };
+  if (balance(progress, garage) < SHUFFLE.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu.' };
+  return { garage: { ...garage, spent: garage.spent + SHUFFLE.price, owned: [...garage.owned, SHUFFLE.key] }, ok: true, message: 'Bland min bil er låst op. Tryk igen for at slå terningerne.' };
+}
+/** A random new look from the parts, colours and extras you own for the active vehicle (free once unlocked). Each slot
+ *  you own something for gets one of your parts, or now and then stock; colours come from the presets. */
+export function shuffleLook(garage, random = Math.random) {
+  if (!ownsShuffle(garage)) return { garage, ok: false, message: 'Lås Bland min bil op først.' };
+  const base = garage.active, mine = partsFor(base).filter(p => owns(garage, p.id));
+  const extras = Object.keys(EXTRAS).filter(id => owns(garage, `extra-${id}`) && (id !== 'lower' || baseById(base)?.split));
+  if (mine.length + extras.length < 2) return { garage, ok: false, message: 'Køb mindst to ting, så er der noget at blande.' };
+  const pick = list => list[Math.floor(random() * list.length) % list.length];
+  const roll = () => {
+    const equipped = {};
+    for (const slot of new Set(mine.map(p => p.slot))) { if (random() < .8) equipped[slot] = pick(mine.filter(p => p.slot === slot)).id; }
+    const style = { ...styleOf(garage) };
+    for (const kind of new Set(mine.map(p => p.tint).filter(Boolean))) style[kind] = pick(COLOR_PRESETS);
+    if (extras.includes('neon')) { style.neonOn = random() < .6; style.neon = pick(COLOR_PRESETS); }
+    if (extras.includes('lower')) style.lowered = random() < .5;
+    return { equipped, style };
+  };
+  const now = JSON.stringify({ e: garage.equipped?.[base] || {}, s: styleOf(garage) });
+  let look = roll();
+  for (let i = 0; i < 6 && JSON.stringify({ e: look.equipped, s: look.style }) === now; i++) look = roll();
+  return { garage: { ...garage, equipped: { ...garage.equipped, [base]: look.equipped }, style: { ...garage.style, [base]: look.style } }, ok: true, message: 'Nyt look! Tryk igen for et andet.' };
+}
+
 /** Licence plate text: letters, digits and space, max 7, a small list of words not allowed. */
 export function cleanPlate(text) {
   const t = String(text || '').toUpperCase().replace(/[^A-ZÆØÅ0-9 ]/g, '').replace(/\s+/g, ' ').trim().slice(0, 7);
@@ -178,7 +221,7 @@ function colorPicker(kind, value) {
   return `<div class="mybil-colors" role="group" aria-label="Vælg farve">${COLOR_PRESETS.map(c => `<button type="button" class="mybil-swatch${c === value ? ' is-on' : ''}" style="background:${c}" data-mybil-color="${kind}" data-value="${c}" aria-label="Farve ${c}" aria-pressed="${c === value}"></button>`).join('')}<label class="mybil-custom"><input type="color" value="${escape(value)}" data-mybil-color-input="${kind}" aria-label="Vælg din egen farve"><span>Egen farve</span></label></div>`;
 }
 
-export function renderMyCar({ garage, progress, slot = '', message = '' }) {
+export function renderMyCar({ garage, progress, slot = '', message = '', tryOn = null }) {
   const coins = balance(progress, garage);
   const active = baseById(garage.active);
   const equipped = garage.equipped?.[garage.active] || {};
@@ -193,18 +236,18 @@ export function renderMyCar({ garage, progress, slot = '', message = '' }) {
   let panel;
   if (slot === 'extra') {
     const extra = id => {
-      const e = EXTRAS[id], has = owns(garage, `extra-${id}`), on = id === 'neon' ? style.neonOn : style.lowered;
+      const e = EXTRAS[id], has = owns(garage, `extra-${id}`), on = id === 'neon' ? style.neonOn : style.lowered, trying = tryOn?.extra === id;
       const disabled = id === 'lower' && !active.split;
-      return `<button type="button" class="mybil-item mybil-extra ${on ? 'is-on' : ''}" data-mybil-extra="${id}" aria-pressed="${on}" ${disabled ? 'disabled' : ''}><span class="mybil-item-name">${escape(e.name)}</span><small>${has ? (on ? 'Slået til' : 'Slået fra') : price(e.price)}</small></button>`;
+      return `<button type="button" class="mybil-item mybil-extra ${on ? 'is-on' : ''} ${trying ? 'is-trying' : ''}" data-mybil-extra="${id}" aria-pressed="${on || trying}" ${disabled ? 'disabled' : ''}><span class="mybil-item-name">${escape(e.name)}</span><small>${has ? (on ? 'Slået til' : 'Slået fra') : trying ? 'Prøver nu' : price(e.price)}</small></button>`;
     };
     panel = `<div class="mybil-grid">${extra('neon')}${extra('lower')}</div>${owns(garage, 'extra-neon') ? `<h3 class="mybil-subtitle">Neonfarve</h3>${colorPicker('neon', style.neon)}` : ''}`;
   } else {
     const stockOn = !equipped[slot];
     const stock = `<button type="button" class="mybil-item mybil-stock ${stockOn ? 'is-on' : ''}" data-mybil-unequip="${slot}" aria-pressed="${stockOn}"><span class="mybil-thumb"><img src="${baseSrc(garage.active)}" alt="" loading="lazy"></span><span class="mybil-item-name">${slot === 'restore' ? 'Som den er' : 'Standard'}</span><small>${stockOn ? 'Valgt' : 'Tag af'}</small></button>`;
     const items = stock + available.filter(p => p.slot === slot).map(part => {
-      const has = owns(garage, part.id), on = equipped[part.slot] === part.id;
+      const has = owns(garage, part.id), on = equipped[part.slot] === part.id, trying = tryOn?.part === part.id;
       const thumb = part.tint ? `<span class="mybil-tint" style="--src:url('${partSrc(garage.active, part.id)}');background:${style[part.tint]}"></span><img class="mybil-shade" src="${partSrc(garage.active, part.id)}" alt="" loading="lazy">` : `<img src="${partSrc(garage.active, part.id)}" alt="" loading="lazy">`;
-      return `<button type="button" class="mybil-item ${on ? 'is-on' : ''} ${!has && coins < part.price ? 'is-short' : ''}" data-mybil-part="${part.id}" aria-pressed="${on}"><span class="mybil-thumb"><img src="${baseSrc(garage.active)}" alt="" loading="lazy">${thumb}</span><span class="mybil-item-name">${escape(part.name)}</span><small>${on ? 'Monteret · tag af' : has ? 'Montér' : price(part.price)}</small></button>`;
+      return `<button type="button" class="mybil-item ${on ? 'is-on' : ''} ${trying ? 'is-trying' : ''} ${!has && coins < part.price ? 'is-short' : ''}" data-mybil-part="${part.id}" aria-pressed="${on || trying}"><span class="mybil-thumb"><img src="${baseSrc(garage.active)}" alt="" loading="lazy">${thumb}</span><span class="mybil-item-name">${escape(part.name)}</span><small>${on ? 'Monteret · tag af' : has ? 'Montér' : trying ? 'Prøver nu' : price(part.price)}</small></button>`;
     }).join('');
     const tintKind = available.find(p => p.slot === slot && p.tint)?.tint;
     const tintOwned = tintKind && available.some(p => p.slot === slot && p.tint && owns(garage, p.id));
@@ -219,9 +262,10 @@ export function renderMyCar({ garage, progress, slot = '', message = '' }) {
   }).join('');
   return `<section class="mybil" aria-labelledby="mybil-title">
     <header class="mybil-head"><img class="mybil-head-tyre" src="assets/road/tyre.webp" alt="" decoding="async"><div><span class="eyebrow">MIN BIL</span><h1 id="mybil-title">${escape(active.name)}</h1></div><div class="booster-chip booster-chip--big">${boosterCount(coins)}</div></header>
-    <button type="button" class="mybil-stage" data-mybil-rev data-base="${escape(garage.active)}" aria-label="${escape(active.name)} med dine valg. Tryk for at give gas"><span class="mybil-floor" aria-hidden="true"></span>${vehicleLayers(garage)}<span class="mybil-sheen" aria-hidden="true" style="--src:url('${baseSrc(garage.active)}')"></span></button>
+    <button type="button" class="mybil-stage" data-mybil-rev data-base="${escape(garage.active)}" aria-label="${escape(active.name)} med dine valg. Tryk for at give gas"><span class="mybil-floor" aria-hidden="true"></span>${vehicleLayers(withTryOn(garage, tryOn))}<span class="mybil-sheen" aria-hidden="true" style="--src:url('${baseSrc(garage.active)}')"></span></button>
     ${installedRow(garage, equipped, style, active)}
-    <button type="button" class="mybil-dream" data-mybil-dream><span class="mybil-dream-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4.5 11.9 10l5.6 1.9-5.6 1.9L10 19.4l-1.9-5.6-5.6-1.9L8.1 10Z"/><path class="s" d="m18.5 2.5.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg></span>Se hvad den kan blive</button>
+    ${tryBar(garage, coins, tryOn)}
+    ${shuffleButton(garage, coins)}
     <p class="mybil-message" role="status">${escape(message)}</p>
     <div class="mybil-tabs" role="tablist" aria-label="Tuning">${tabs}</div>
     ${panel}
@@ -257,6 +301,21 @@ export function renderRoadLoop(garage, progress) {
     + '<span class="road-trees" aria-hidden="true"></span><span class="road-asphalt" aria-hidden="true"><span class="road-dashes"></span></span>'
     + `<span class="road-car" aria-hidden="true">${vehicleLayers(garage)}${roadLamps(garage, base)}</span><span class="road-speed" aria-hidden="true"></span>`
     + `<span class="road-label"><small>DIN BIL</small><strong>${escape(base.name)}</strong><span class="booster-chip-mini">${boosterCount(balance(progress, garage))}</span></span></a>`;
+}
+
+/** Under the stage while you try something on: what it is, and buy it or put it back. */
+function tryBar(garage, coins, tryOn) {
+  if (!tryOn || tryOn.base !== garage.active) return '';
+  const item = tryOn.extra ? EXTRAS[tryOn.extra] : partById(tryOn.part);
+  if (!item) return '';
+  const short = coins < item.price, attr = tryOn.extra ? `data-mybil-buy-extra="${tryOn.extra}"` : `data-mybil-buy="${item.id}"`;
+  return `<div class="mybil-try" role="group" aria-label="Prøv før du køber"><span class="mybil-try-text"><small>Prøver</small><strong>${escape(item.name)}</strong></span><button type="button" class="mybil-try-buy" ${attr} ${short ? 'disabled' : ''}>${short ? `Mangler ${boosterIcon(16)} ${fmt(item.price - coins)}` : `Køb ${boosterIcon(16)} ${fmt(item.price)}`}</button><button type="button" class="mybil-try-off" data-mybil-try-off aria-label="Fjern det, du prøver">${ico('x')}</button></div>`;
+}
+/** "Bland min bil": dice in an ink coin. Locked it shows its price; once bought it rolls a new look. */
+function shuffleButton(garage, coins) {
+  const dice = '<span class="mybil-dream-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><circle class="s" cx="9" cy="9" r="1.6"/><circle class="s" cx="15" cy="15" r="1.6"/><circle class="s" cx="15" cy="9" r="1.6"/><circle class="s" cx="9" cy="15" r="1.6"/><circle class="s" cx="12" cy="12" r="1.6"/></svg></span>';
+  if (ownsShuffle(garage)) return `<button type="button" class="mybil-dream" data-mybil-shuffle>${dice}${escape(SHUFFLE.name)}</button>`;
+  return `<button type="button" class="mybil-dream is-locked" data-mybil-shuffle-buy ${coins < SHUFFLE.price ? 'disabled' : ''}>${dice}<span>Lås op: ${escape(SHUFFLE.name)}<small>${boosterIcon(14)} ${fmt(SHUFFLE.price)} · bland det, du har låst op</small></span></button>`;
 }
 
 function installedRow(garage, equipped, style, base) {

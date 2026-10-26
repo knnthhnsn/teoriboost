@@ -10,6 +10,9 @@ const out = process.argv[2];
 // parts that stay in the repaint itself; every other equipped part flies on afterwards
 const BUILT_IN = /^(restore|paint-mask|windows-mask|wheels-)/;
 const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 900, height: 900 } });
+// skip the intro and keep the page plain: the vehicle is shot on a transparent box, so nothing of the page may show
+await p.addInitScript(() => { sessionStorage.setItem('teoriboost.logoIntro', '1'); localStorage.setItem('teoriboost.theme', 'light');
+  localStorage.setItem('teoriboost.intro.v1', JSON.stringify({ done: true, when: '1m', whenAt: Date.now(), goal: 1 })); });
 await p.goto('http://127.0.0.1:4178/?r#home'); await p.waitForTimeout(1500);
 const info = {};
 const shot = name => p.locator('#rv').screenshot({ path: `${out}/${name}.png`, omitBackground: true });
@@ -36,7 +39,7 @@ for (const base of ['scooter', 'smallcar', 'bigcar', 'racecar']) {
       box.style.cssText = 'position:fixed;left:0;top:0;width:768px;height:768px;z-index:99999;visibility:visible';
       box.innerHTML = vehicleLayers(g); document.body.append(box);
       // the layers stack like they do inside the app's vehicle stages
-      if (!document.querySelector('#rv-style')) document.head.insertAdjacentHTML('beforeend', '<style id="rv-style">#rv img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}</style>');
+      if (!document.querySelector('#rv-style')) document.head.insertAdjacentHTML('beforeend', '<style id="rv-style">html[data-theme],html[data-theme] body,html[data-theme] body.journey-surface,html[data-theme] body:not(.start-mode){background:none!important}body > :not(#rv),body > :not(#rv) *{visibility:hidden!important;animation:none!important}#rv img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}</style>');
       box.querySelector('.mybil-neon')?.remove();
       await Promise.all([...box.querySelectorAll('img')].map(i => i.decode().catch(() => {})));
       await document.fonts.ready; await new Promise(r => setTimeout(r, 300));
