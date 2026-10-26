@@ -174,9 +174,17 @@ body.start-mode{background:#fff}
 @media (max-width:360px){.start-title{font-size:32px}.start-lead{font-size:15px}.step-option{min-height:56px}}
 
 /* Min bil: the dream-build button and modal */
-.mybil-dream{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 0;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid var(--accent-shadow,#C9A200);
-  background:#FFF5CC;color:var(--ink);font:800 15px var(--font-display);box-shadow:0 3px 0 var(--accent-shadow,#C9A200)}
-.mybil-dream::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 13.7 9 19 10.7 13.7 12.4 12 18 10.3 12.4 5 10.7 10.3 9Z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 13.7 9 19 10.7 13.7 12.4 12 18 10.3 12.4 5 10.7 10.3 9Z'/%3E%3C/svg%3E") center/contain no-repeat;animation:bolt-glint 3.5s var(--in-out) infinite}
+/* the dream-build button: the brand button (yellow in the dark theme, white in the light one) with a sparkle on an ink coin */
+.mybil-dream{--dream-coin:#1F2328;--dream-spark:#FFD60A;display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto 0;min-height:50px;padding:0 22px 0 7px;border-radius:999px;border:0;
+  background:var(--accent,#FFD60A);color:var(--accent-ink,#1F2328);font:800 16px var(--font-display);box-shadow:0 4px 0 var(--accent-shadow,#C9A200);
+  transition:translate .12s,box-shadow .12s}
+.mybil-dream:hover{translate:0 -1px;box-shadow:0 5px 0 var(--accent-shadow,#C9A200)}
+.mybil-dream:active{translate:0 3px;box-shadow:0 1px 0 var(--accent-shadow,#C9A200)}
+.mybil-dream-ico{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--dream-coin);color:var(--dream-spark)}
+.mybil-dream-ico svg{width:20px;height:20px;fill:currentColor;animation:dream-twinkle 3.2s var(--in-out) infinite}
+.mybil-dream-ico svg .s{transform-origin:18.5px 5.5px;animation:dream-twinkle 3.2s 1.1s var(--in-out) infinite}
+@keyframes dream-twinkle{0%,70%,100%{scale:1;rotate:0deg}80%{scale:1.22;rotate:20deg}90%{scale:.94;rotate:-6deg}}
+@media (prefers-reduced-motion:reduce){.mybil-dream-ico svg,.mybil-dream-ico svg .s{animation:none}}
 .dream-modal .gu{width:min(76vw,380px)}
 
 .step-first{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:18px;background:#FFF8EC;border:2px solid #F3DDB8;box-shadow:0 4px 0 #F3DDB8;animation:reveal .5s .45s var(--out) backwards}

@@ -54,8 +54,10 @@ export function renderLearn({ vm, intro, due, unitIndex, ready }) {
     : `<div class="learn-card"><div><strong>Dagens mål: ${Math.min(today, goal)}/${goal} ${goal === 1 ? 'lektion' : 'lektioner'}</strong><small>${today >= goal ? 'Nået. +1.500 Boosters er dine.' : 'Næste lektion tager ca. 5 min.'}</small></div><span class="goal-dots" aria-hidden="true">${Array.from({ length: goal }, (_, k) => `<i class="${k < today ? 'on' : ''}"></i>`).join('')}</span></div>`;
   return `${renderMirrorHero({ streak, days, goal, today, pct: ready?.pct || 0 })}<div id="road-slot" class="road-top"></div><section class="learn" aria-labelledby="learn-title">
     <a class="unit-banner" href="#theory" aria-label="Emne ${unitIndex + 1}: ${esc(unit.title)}. ${done} af ${nodes.length} lektioner. Se alle emner">
-      <span class="unit-kicker">EMNE ${unitIndex + 1} · ALLE EMNER ▾</span><h1 id="learn-title">${esc(unit.title)}</h1><span class="unit-count">${done}/${nodes.length}</span>
-      <span class="unit-bar" aria-hidden="true"><i style="--p:${nodes.length ? done / nodes.length : 0}"></i></span></a>
+      <span class="unit-num" aria-hidden="true">${unitIndex + 1}</span>
+      <span class="unit-text"><span class="unit-kicker">Emne ${unitIndex + 1} af ${units.length}</span><h1 id="learn-title">${esc(unit.title)}</h1></span>
+      <span class="unit-all" aria-hidden="true"><span class="unit-all-label">Alle emner</span><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span>
+      <span class="unit-road" aria-hidden="true">${nodes.map(n => `<i${n.lessonComplete ? ' class="on"' : ''}></i>`).join('')}<b class="unit-count">${done}/${nodes.length}</b></span></a>
     <div class="learn-path-wrap"><div class="learn-guide" aria-hidden="true">${renderCast(done ? 'sneglen' : 'krabbe', { size: 'sm', priority: true })}</div><ol class="learn-path">${path}</ol></div>
     ${review}
   </section>`;

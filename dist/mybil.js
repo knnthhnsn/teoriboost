@@ -221,7 +221,7 @@ export function renderMyCar({ garage, progress, slot = '', message = '' }) {
     <header class="mybil-head"><div><span class="eyebrow">MIN BIL</span><h1 id="mybil-title">${escape(active.name)}</h1></div><div class="booster-chip booster-chip--big">${boosterCount(coins)}</div></header>
     <button type="button" class="mybil-stage" data-mybil-rev data-base="${escape(garage.active)}" aria-label="${escape(active.name)} med dine valg. Tryk for at give gas"><span class="mybil-floor" aria-hidden="true"></span>${vehicleLayers(garage)}<span class="mybil-sheen" aria-hidden="true" style="--src:url('${baseSrc(garage.active)}')"></span></button>
     ${installedRow(garage, equipped, style, active)}
-    <button type="button" class="mybil-dream" data-mybil-dream>Se hvad den kan blive</button>
+    <button type="button" class="mybil-dream" data-mybil-dream><span class="mybil-dream-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4.5 11.9 10l5.6 1.9-5.6 1.9L10 19.4l-1.9-5.6-5.6-1.9L8.1 10Z"/><path class="s" d="m18.5 2.5.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg></span>Se hvad den kan blive</button>
     <p class="mybil-message" role="status">${escape(message)}</p>
     <div class="mybil-tabs" role="tablist" aria-label="Tuning">${tabs}</div>
     ${panel}

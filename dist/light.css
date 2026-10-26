@@ -14,9 +14,15 @@ html[data-theme="light"] body{background:var(--bg)!important}
 /* the logo: an ink tile with yellow stripes */
 html[data-theme="light"] .brand-mark{background:#1F2328!important;color:#FFD60A!important}
 
-/* the start page is a poster in both themes: white with yellow buttons */
-html[data-theme="light"] body.start-mode{background:#fff!important}
-html[data-theme="light"] .start-hero,html[data-theme="light"] .start-step,html[data-theme="light"] .dream-modal{
+/* the start page and the intro steps are yellow too: the vehicle's poster colour fades into the page yellow */
+html[data-theme="light"] body.start-mode{background:var(--bg)!important}
+html[data-theme="light"] .start-hero{background:linear-gradient(180deg,var(--poster) 0,color-mix(in oklab,var(--poster) 70%,#FFD60A) 34%,color-mix(in oklab,var(--poster) 22%,#FFD60A) 56%,#FFD60A 74%)!important}
+@media (min-width:900px){
+  html[data-theme="light"] .start-hero{background:radial-gradient(70% 90% at 72% 42%,var(--poster) 0,color-mix(in oklab,var(--poster) 60%,#FFD60A) 38%,color-mix(in oklab,var(--poster) 16%,#FFD60A) 64%,#FFD60A 86%)!important}
+}
+html[data-theme="light"] .step-foot{background:linear-gradient(rgba(255,214,10,0),var(--bg) 30%)}
+/* the dream modal in Min bil stays a white poster */
+html[data-theme="light"] .dream-modal{
   --bg:#FFFFFF;--panel:#FFFFFF;--panel2:#F4F5F7;--muted:#5F656D;--line:#E3E5E8;--line-strong:#D3D6DB;
   --accent:#FFD60A;--accent-shadow:#C9A200;--acid:#FFD60A;--good-ink:#3B8A00;--bad-ink:#D42F2F;--blue-ink:#0A7BBF;--acid-text:#2F6F00}
 

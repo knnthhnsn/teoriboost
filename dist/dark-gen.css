@@ -690,8 +690,11 @@ html[data-theme="dark"] .streak-big b{color:#e8d260}
 html[data-theme="dark"] .streak-line{color:#C9CFDB}
 
 /* start.css */
-html[data-theme="dark"] .mybil-dream{border:2px solid var(--accent-shadow,#C9A200);background:#48401e;color:var(--ink);box-shadow:0 3px 0 var(--accent-shadow,#C9A200)}
-html[data-theme="dark"] .mybil-dream::before{background:currentColor}
+html[data-theme="dark"] .mybil-dream{border:0;background:var(--accent,#FFD60A);color:var(--accent-ink,#1F2328);box-shadow:0 4px 0 var(--accent-shadow,#C9A200)}
+html[data-theme="dark"] .mybil-dream:hover{box-shadow:0 5px 0 var(--accent-shadow,#C9A200)}
+html[data-theme="dark"] .mybil-dream:active{box-shadow:0 1px 0 var(--accent-shadow,#C9A200)}
+html[data-theme="dark"] .mybil-dream-ico{background:var(--dream-coin);color:var(--dream-spark)}
+html[data-theme="dark"] .mybil-dream-ico svg{fill:currentColor}
 html[data-theme="dark"] .dream-modal{background:var(--poster,#22D3EE)}
 html[data-theme="dark"] .dream-modal{background:linear-gradient(180deg,var(--poster) 0,color-mix(in oklab,var(--poster) 45%,#1d1d1d) 100%)!important}
 
@@ -705,10 +708,17 @@ html[data-theme="dark"] .pill-btn{background:#1d1d1d;border:2px solid var(--line
 html[data-theme="dark"] .big-btn{border:0;background:var(--accent,#FFD60A);box-shadow:0 5px 0 var(--accent-shadow,#C9A200);color:#1F2328}
 html[data-theme="dark"] .big-btn:active{box-shadow:0 1px 0 var(--accent-shadow,#C9A200)}
 html[data-theme="dark"] .big-btn--ghost{background:#1d1d1d;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
-html[data-theme="dark"] .unit-banner{background:var(--good,#58CC02);color:#fff;text-decoration:none;box-shadow:0 5px 0 #46A302}
-html[data-theme="dark"] .unit-banner h1{color:#fff}
-html[data-theme="dark"] .unit-bar{background:rgba(29,29,29,0.3)}
-html[data-theme="dark"] .unit-bar i{background:#1d1d1d}
+html[data-theme="dark"] .unit-banner{background:var(--ub-bg);color:var(--ub-fg);text-decoration:none;box-shadow:0 5px 0 var(--ub-edge)}
+html[data-theme="dark"] .unit-banner:active{box-shadow:0 2px 0 var(--ub-edge)}
+html[data-theme="dark"] .unit-num{background:var(--ub-hi);color:var(--ub-hi-ink);box-shadow:inset 0 -4px 0 rgba(0,0,0,.16)}
+html[data-theme="dark"] .unit-kicker{color:var(--ub-hi)}
+html[data-theme="dark"] #main .unit-banner h1,html[data-theme="dark"] .unit-banner h1{color:var(--ub-fg)}
+html[data-theme="dark"] .unit-all{background:var(--ub-dim);color:var(--ub-fg)}
+html[data-theme="dark"] .unit-all svg{fill:none;stroke:currentColor}
+html[data-theme="dark"] .unit-banner:hover .unit-all,html[data-theme="dark"] .unit-banner:focus-visible .unit-all{background:var(--ub-hi);color:var(--ub-hi-ink)}
+html[data-theme="dark"] .unit-road i{background:var(--ub-dim)}
+html[data-theme="dark"] .unit-road i.on{background:var(--ub-hi)}
+html[data-theme="dark"] .unit-count{color:var(--ub-fg)}
 html[data-theme="dark"] .pn-btn{text-decoration:none;color:#d5d9de;background:#1d1d1d;border:3px solid var(--line);box-shadow:0 6px 0 var(--line)}
 html[data-theme="dark"] .pn-btn:active{box-shadow:0 2px 0 var(--line)}
 html[data-theme="dark"] .pn-btn svg{fill:none;stroke:currentColor}
@@ -771,7 +781,6 @@ html[data-theme="dark"] .set-row input:checked + i{background:var(--good,#58CC02
 html[data-theme="dark"] .set-row input:focus-visible + i{outline:3px solid #1CB0F6}
 html[data-theme="dark"] :is(.learn,.practice,.exam-start,.topics,.profile) h2.list-label{color:var(--muted)}
 html[data-theme="dark"] :is(.learn,.practice,.exam-start,.topics,.profile) .panel h2{color:var(--ink)}
-html[data-theme="dark"] .unit-banner{background:#2B7A0B;box-shadow:0 5px 0 #1D5A05}
 html[data-theme="dark"] .tile-fire{color:#eeb98a}
 html[data-theme="dark"] .topic-cards{border-left:0!important;background:#152034}
 html[data-theme="dark"] .sidebar{background:#1e2226!important;border-right:0!important}

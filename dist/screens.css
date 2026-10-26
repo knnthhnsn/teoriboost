@@ -17,12 +17,26 @@
 
 /* ---------- Lær ---------- */
 .learn-chips{display:flex;flex-wrap:wrap;gap:8px}
-.unit-banner{position:relative;display:block;padding:14px 64px 16px 16px;border-radius:18px;background:var(--good,#58CC02);color:#fff;text-decoration:none;box-shadow:0 5px 0 #46A302}
-.unit-kicker{display:block;font:800 11px var(--font-display);letter-spacing:.08em;opacity:.9}
-.unit-banner h1{margin:2px 0 0;font:800 22px/1.15 var(--font-display);color:#fff}
-.unit-count{position:absolute;right:16px;top:50%;translate:0 -50%;font:800 16px var(--font-display)}
-.unit-bar{position:absolute;left:16px;right:16px;bottom:7px;height:4px;border-radius:4px;background:rgba(255,255,255,.3);overflow:hidden}
-.unit-bar i{position:absolute;inset:0;background:#fff;transform-origin:0 50%;scale:var(--p) 1;transition:scale .6s var(--out)}
+/* the unit banner: a brand plate (ink in the light theme, yellow in the dark one) with the unit number,
+   the title, a way to all units and the lessons as lane markings that light up as they are done */
+.unit-banner{--ub-bg:#1F2328;--ub-edge:#000000;--ub-fg:#FFFFFF;--ub-hi:#FFD60A;--ub-hi-ink:#1F2328;--ub-dim:rgba(255,255,255,.16);
+  position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px 14px;padding:14px 14px 14px 14px;
+  border-radius:20px;background:var(--ub-bg);color:var(--ub-fg);text-decoration:none;box-shadow:0 5px 0 var(--ub-edge);transition:translate .12s,box-shadow .12s}
+.unit-banner:active{translate:0 3px;box-shadow:0 2px 0 var(--ub-edge)}
+.unit-num{display:grid;place-items:center;width:52px;height:52px;border-radius:15px;background:var(--ub-hi);color:var(--ub-hi-ink);
+  font:900 30px/1 var(--font-display);box-shadow:inset 0 -4px 0 rgba(0,0,0,.16);rotate:-4deg}
+.unit-text{min-width:0}
+.unit-kicker{display:block;font:800 12px var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--ub-hi)}
+#main .unit-banner h1,.unit-banner h1{margin:3px 0 0;font:800 22px/1.12 var(--font-display)!important;color:var(--ub-fg);overflow-wrap:anywhere}
+.unit-all{display:inline-flex;align-items:center;gap:2px;padding:7px 8px 7px 12px;border-radius:999px;background:var(--ub-dim);
+  color:var(--ub-fg);font:800 13px var(--font-display);white-space:nowrap;transition:background-color .15s,color .15s}
+.unit-all svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.unit-banner:hover .unit-all,.unit-banner:focus-visible .unit-all{background:var(--ub-hi);color:var(--ub-hi-ink)}
+.unit-road{grid-column:1/-1;display:flex;align-items:center;gap:7px}
+.unit-road i{flex:1;height:7px;border-radius:4px;background:var(--ub-dim);transition:background-color .4s}
+.unit-road i.on{background:var(--ub-hi)}
+.unit-count{flex:none;margin-left:5px;font:800 14px var(--font-display);color:var(--ub-fg)}
+@media (max-width:480px){.unit-all-label{display:none}.unit-all{padding:8px}#main .unit-banner h1{font-size:20px!important}}
 .learn-path-wrap{position:relative;padding:10px 0 4px}
 .learn-guide{position:absolute;left:0;top:20%;width:28%;max-width:120px;pointer-events:none}
 .learn-guide .cast-img{width:100%!important}
@@ -127,7 +141,6 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 #main :is(.learn,.practice,.exam-start,.topics,.profile) h2.list-label{font-size:12px!important;line-height:1.2}
 #main :is(.learn,.practice,.exam-start,.topics,.profile) .panel h2{font-size:17px!important;line-height:1.2}
 /* contrast: white text needs a deeper green than the bright brand green; orange numbers get a darker ink */
-.unit-banner{background:#2B7A0B;box-shadow:0 5px 0 #1D5A05}
 .tile-fire{color:#B35400}
 /* top bar = logo, Boosters, settings (mockup D notes). Humour and sound live in Profil now. */
 #humor-toggle,#sound-toggle,.top-strap,.small-license,.sidebar-label{display:none!important}
@@ -262,6 +275,9 @@ body.focus-mode .topbar,body.focus-mode #mobile-nav{display:none!important}
 .chip .ui-ico{display:none}
 .tile-fire{--chip-tile:#FFE6CC;--chip-edge:#F6C08A;--chip-ink:#E8590C}
 .tile-fire .chip-ico{width:36px;height:36px}.tile-fire .chip-ico .duo{width:22px;height:22px}
+/* the flame sits beside the number, both centred (.tile b would otherwise put it on a line of its own) */
+.tile b.tile-fire{display:flex;align-items:center;justify-content:center;gap:6px}
+.tile-fire .chip-ico{position:relative;width:40px;height:40px}
 .chip-t{white-space:nowrap}
 .learn-chips .chip small{font:700 14px var(--font-display);color:#3A434C}
 /* phones: three compact tiles on one row (number on top, label under) */
