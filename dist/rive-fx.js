@@ -1,5 +1,5 @@
 // Rive animations (assets/rive/teoriboost.riv, built by tools/rive/build-teoriboost.mjs; glowup-<base>.riv by build-glowup.mjs;
-// brand.riv by build-brand.mjs; flame.riv by build-flame.mjs; signal.riv by build-signal.mjs; road.riv by build-road.mjs).
+// brand.riv by build-brand.mjs; flame.riv by build-flame.mjs; signal.riv by build-signal.mjs; road.riv by build-road.mjs; cast.riv by build-cast.mjs).
 // Any element with data-rive="<name>[:<state>]" gets a Rive canvas on top of its own content, which stays as the
 // fallback: it shows while Rive loads, if it fails, and always when motion is off. The runtime (~2.6 MB) is
 // fetched only the first time such an element appears.
@@ -12,6 +12,7 @@
 //   traffic                           a traffic light running the Danish sequence (waiting)
 //   signal:<0-4> | signal:cycle       the poster traffic light: off, red, red and amber, green, amber, or the sequence
 //   road                              the Prøve poster's yellow road: the four vehicles from above, both ways
+//   cast:<name>                       a cast character, breathing, moving its own way and blinking; a tap makes it hop
 //   bolt | bolt:earn                  the Booster bolt; glints now and then, jumps on earn
 //   target:open | target:met          today's goal; a dart lands when it is met
 //   glowup:<base>                     the dream-build show for scooter | smallcar | bigcar | racecar
@@ -28,6 +29,7 @@ const BOARDS = {
   flame: { artboard: 'Flame', machine: 'Flame', file: () => 'flame.riv' },
   signal: { artboard: 'Signal', machine: 'Signal', file: () => 'signal.riv' },
   road: { artboard: 'Road', machine: 'Road', file: () => 'road.riv', fit: 'Cover' },
+  cast: { artboard: name => 'Cast-' + name, machine: 'Cast', file: () => 'cast.riv', states: ['sneglen', 'kegle', 'blink', 'bobbel', 'krabbe', 'daek'] },
   celebrate: { artboard: 'Celebrate', machine: 'Celebrate' },
   confetti: { artboard: 'Confetti', machine: 'Confetti' },
   gauge: { artboard: 'Gauge', machine: 'Gauge' },
@@ -69,6 +71,14 @@ function loadFile(name) {
   if (!files.has(name)) files.set(name, fetch(BASE + name).then(res => { if (!res.ok) throw new Error(name + ' ' + res.status); return res.arrayBuffer(); }));
   return files.get(name);
 }
+/** Size the drawing surface from the canvas's layout box (offsetWidth/Height), not its on-screen box: inside a rotated
+ *  or tilted parent (the Prøve poster's road, the mirror) the on-screen box is wider than the canvas, which stretched
+ *  the drawing. */
+function fit(inst) {
+  const c = inst.canvas, dpr = Math.min(3, globalThis.devicePixelRatio || 1);
+  if (!c?.offsetWidth) return;
+  c.width = Math.round(c.offsetWidth * dpr); c.height = Math.round(c.offsetHeight * dpr); inst.resizeToCanvas();
+}
 const signal = (el, type) => el.dispatchEvent(new CustomEvent(type, { bubbles: true }));
 
 async function mount(el) {
@@ -84,11 +94,12 @@ async function mount(el) {
       buffer: bytes.slice(0), canvas, artboard: typeof spec.artboard === 'function' ? spec.artboard(state) : spec.artboard, stateMachine: spec.machine, autoplay: true,
       layout: new r.Layout({ fit: r.Fit[spec.fit || 'Contain'], alignment: r.Alignment.Center }),
       onLoad: () => {
-        inst.resizeDrawingSurfaceToCanvas(); el.dataset.riveOn = 'on'; signal(el, 'rive-on');
-        requestAnimationFrame(() => inst.resizeDrawingSurfaceToCanvas()); // 'on' styles can change the element's size
+        fit(inst); el.dataset.riveOn = 'on'; signal(el, 'rive-on');
+        requestAnimationFrame(() => fit(inst)); // 'on' styles can change the element's size
         const inputs = inst.stateMachineInputs(spec.machine) || [];
         const input = n => inputs.find(i => i.name === n);
         if (name === 'feedback' && input(state)) setTimeout(() => input(state)?.fire(), 60);
+        if (name === 'cast') el.addEventListener('click', () => input('hop')?.fire()); // a tap makes the character hop
         if (name === 'signal') { if (input('cycle')) input('cycle').value = state === 'cycle'; if (input('light')) input('light').value = Number(state) || 0; }
         if (name === 'flame') flame(el, input, Math.max(0, Math.min(5, Number(state) || 0)), el.dataset.rive.split(':')[2]);
         if (name === 'gauge' && input('pct')) swing(input('pct'), Math.max(0, Math.min(100, Number(state) || 0)));
@@ -157,6 +168,6 @@ let queued = 0;
 export function initRiveFx() {
   const schedule = () => { if (!queued) queued = requestAnimationFrame(() => { queued = 0; sweep(); }); };
   new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
-  addEventListener('resize', () => { for (const inst of live.values()) inst.resizeDrawingSurfaceToCanvas(); });
+  addEventListener('resize', () => { for (const inst of live.values()) fit(inst); });
   schedule();
 }

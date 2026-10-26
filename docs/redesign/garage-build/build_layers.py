@@ -31,6 +31,34 @@ def largest_island(mask):
     sizes = ndimage.sum(np.ones_like(labels), labels, range(1, n + 1)); sl = ndimage.find_objects((labels == int(np.argmax(sizes)) + 1).astype(int))[0]
     return (sl[1].start, sl[0].start, sl[1].stop, sl[0].stop)
 
+def clean_wheels(mask):
+    """the wheels only: drop the stray specks and slivers of trim the edit also changed (they float when the body moves)"""
+    import numpy as np
+    from scipy import ndimage
+    m = np.asarray(mask) > 128
+    m = m & ndimage.binary_dilation(ndimage.binary_opening(m, iterations=5), iterations=6)  # no thin streaks
+    labels, n = ndimage.label(m)
+    if n > 1:
+        sizes = ndimage.sum(m, labels, range(1, n + 1)); keep = np.zeros(n + 1, bool); keep[1:] = sizes >= sizes.max() * .15; m = keep[labels]
+    return Image.fromarray((m * 255).astype(np.uint8))
+
+def near_wheels(mask, wheels, reach=26):
+    """only what lies around the base's own wheels (big rims may be a little larger, so reach a bit beyond)"""
+    import numpy as np
+    from scipy import ndimage
+    zone = ndimage.binary_dilation(ndimage.binary_fill_holes(np.asarray(wheels) > 128), iterations=reach)
+    return Image.fromarray(np.where(zone, np.asarray(mask), 0).astype(np.uint8))
+
+def clean_body(alpha, wheels):
+    """the wheel-less body without the thin outlines of the removed wheels the edit left under the arches: inside the
+    wheels' area only solid parts of the body stay (the fenders), not loose lines"""
+    import numpy as np
+    from scipy import ndimage
+    a = np.asarray(alpha); solid = ndimage.binary_opening(a > 128, iterations=4)
+    zone = ndimage.binary_fill_holes(ndimage.binary_dilation(np.asarray(wheels) > 128, iterations=8))
+    keep = ~zone | ndimage.binary_dilation(solid, iterations=2)
+    return Image.fromarray(np.where(keep, a, 0).astype(np.uint8))
+
 def subject_bbox(im, tol=18):
     return im.convert('L').point(lambda v: 255 if v < 255 - tol else 0).getbbox()
 
@@ -100,7 +128,7 @@ def region_mask(size, bb, frac, pad=8):
 def count(mask):
     return sum(1 for v in mask.getdata() if v > 128)
 
-def tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, approved, rejects, tiles):
+def tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, approved, rejects, tiles, wheel_mask=None):
     """A recolourable mask: flat light panels (white/grey, or a magenta key on light vehicles) bounded by the black outlines.
     A panel counts when a good share of it changed from the base, so untouched grey rims and mirrors stay out.
     The saved layer is grey shading only; the app puts the chosen colour under it."""
@@ -122,6 +150,9 @@ def tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, ap
     m = keep[lab] & (np.asarray(base_alpha) > 0) & (np.asarray(region) > 0)
     dark = e.max(2) < 120
     m = m | (ndimage.binary_dilation(m, iterations=3) & dark)  # cover the outline's soft edge, never the background
+    if wheel_mask is not None:  # around the wheels only solid panels: not the loose outlines of the wheels themselves
+        zone = ndimage.binary_fill_holes(ndimage.binary_dilation(np.asarray(wheel_mask) > 128, iterations=8))
+        m = m & (~zone | ndimage.binary_dilation(ndimage.binary_opening(m, iterations=4), iterations=2))
     inside = m.sum() / vehicle_area
     if inside < 0.002:
         rejects.append({'part': part['id'], 'outside': 0, 'inside': round(float(inside), 4)}); return
@@ -149,10 +180,10 @@ def build(base_id):
         diff = diff.filter(ImageFilter.MedianFilter(5)).filter(ImageFilter.MaxFilter(7))
         outside = count(ImageChops.multiply(diff, ImageChops.invert(region_mask(base.size, bb, SLOTS['wheels']['region'])))) / vehicle_area
         if outside <= OUTSIDE_LIMIT:
-            body_rgba = body.convert('RGBA'); body_rgba.putalpha(white_alpha(body)); save(body_rgba, os.path.join(OUT, base_id, 'body.webp'))
-            wheels = base.convert('RGBA'); wheels.putalpha(ImageChops.multiply(ImageChops.multiply(diff, region_mask(base.size, bb, SLOTS['wheels']['region'])), base_alpha))
+            wheel_mask = clean_wheels(ImageChops.multiply(diff, region_mask(base.size, bb, SLOTS['wheels']['region'])))
+            body_rgba = body.convert('RGBA'); body_rgba.putalpha(clean_body(white_alpha(body), wheel_mask)); save(body_rgba, os.path.join(OUT, base_id, 'body.webp'))
+            wheels = base.convert('RGBA'); wheels.putalpha(ImageChops.multiply(wheel_mask, base_alpha))
             save(wheels, os.path.join(OUT, base_id, 'wheels.webp')); split = True
-            wheel_mask = ImageChops.multiply(diff, region_mask(base.size, bb, SLOTS['wheels']['region']))
         else:
             rejects.append({'part': 'nowheels', 'outside': round(outside, 3)})
 
@@ -164,13 +195,15 @@ def build(base_id):
         edited = align(Image.open(p).convert('RGB'), base)
         region = region_mask(base.size, bb, slot['region'])
         if part.get('tint'):
-            tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, approved, rejects, tiles); continue
+            tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, approved, rejects, tiles, wheel_mask); continue
         diff = ImageChops.difference(base, edited).convert('L').point(lambda v: 255 if v > 38 else 0)
         diff = diff.filter(ImageFilter.MedianFilter(5)).filter(ImageFilter.MaxFilter(5))
         if part['slot'] == 'restore' and wheel_mask is not None:  # the body layer must not carry wheels when lowered
             diff = ImageChops.multiply(diff, ImageChops.invert(wheel_mask))
         if part['slot'] == 'wheels' and wheel_mask is not None:  # similar-looking rims only differ in specks
             diff = ImageChops.lighter(diff, ImageChops.multiply(wheel_mask, region))
+        if part['slot'] == 'wheels':  # the wheels themselves, not slivers of trim the edit nudged
+            diff = clean_wheels(near_wheels(diff, wheel_mask) if wheel_mask is not None else diff)
         outside = count(ImageChops.multiply(diff, ImageChops.invert(region))) / vehicle_area
         inside = count(ImageChops.multiply(diff, region)) / vehicle_area
         if outside > OUTSIDE_LIMIT or inside < 0.002:

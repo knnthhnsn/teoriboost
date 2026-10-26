@@ -52,3 +52,6 @@ html[data-theme="dark"] .unit-banner{background-image:var(--grain-ink)!important
 /* on the asphalt page the poster needs an edge to stand off it */
 html[data-theme="dark"] .practice-signal{box-shadow:inset 0 0 0 2px rgba(255,214,10,.35),0 5px 0 #000}
 html[data-theme="dark"] .mybil-try{box-shadow:inset 0 0 0 2px rgba(255,214,10,.35),0 4px 0 #000}
+/* on the asphalt page every card is a slab of asphalt too */
+html[data-theme="dark"] :is(.learn-card,.row-card,.game-card,.tile,.panel,.exam-signal,.avatar-opt,.mybil-item,.mybil-base,.mybil-stage,.road-loop,.mh,.topic,.chat-msg--ai .chat-col,.journey-path,.exam-row){background-image:var(--asphalt);background-size:220px 220px}
+html[data-theme="dark"] .road-poster{box-shadow:inset 0 0 0 2px rgba(255,214,10,.3),0 5px 0 #000}

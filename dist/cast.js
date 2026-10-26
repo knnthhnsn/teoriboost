@@ -47,5 +47,5 @@ export function renderCast(id, { size = 'md', line = '', mood = '', priority = f
   const safeSize = SIZES.has(size) ? size : 'md';
   const loading = priority ? ' fetchpriority="high"' : ' loading="lazy"';
   const bubble = line ? `<p class="cast-bubble"><span class="cast-name">${escape(member.name)}</span>${escape(line)}</p>` : '';
-  return `<figure class="cast cast--${safeSize}${mood ? ` cast--${escape(mood)}` : ''}" data-cast="${escape(id)}"><img class="cast-img" src="${escape(member.src)}" width="${CAST_SIZE}" height="${CAST_SIZE}" alt="" decoding="async"${loading}>${bubble}</figure>`;
+  return `<figure class="cast cast--${safeSize}${mood ? ` cast--${escape(mood)}` : ''}" data-cast="${escape(id)}"><span class="cast-art" data-rive="cast:${escape(id)}"><img class="cast-img" src="${escape(member.src)}" width="${CAST_SIZE}" height="${CAST_SIZE}" alt="" decoding="async"${loading}></span>${bubble}</figure>`;
 }

@@ -63,11 +63,11 @@
 #road-slot + .road-loop{margin-top:4px}
 
 /* ---------- Øv ---------- */
-/* The Øv hero is an asphalt poster with the traffic light: big white type on grainy asphalt with faint skid marks,
+/* The Øv hero is an asphalt poster with the traffic light: big white type on grainy asphalt (the skid marks are the page's),
    the light on the right showing where you stand, and a yellow button. Its colours are fixed: it reads the same in
    both themes. */
 .practice-signal{--sig-ink:#FFFFFF;--sig-muted:#C2CCD6;--sig-yellow:#FFD60A;--sig-asphalt:#1F2328;position:relative;overflow:hidden;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;min-height:228px;padding:24px 14px 24px 24px;border-radius:24px;text-decoration:none;color:var(--sig-ink);
-  background:var(--skid) left -180px bottom -150px/640px auto no-repeat,var(--asphalt) 0 0/220px 220px,var(--sig-asphalt);box-shadow:0 5px 0 #000}
+  background:var(--asphalt) 0 0/220px 220px,var(--sig-asphalt);box-shadow:0 5px 0 #000}
 .practice-signal-kicker{display:inline-block;padding:5px 11px;border-radius:999px;background:var(--sig-yellow);color:var(--sig-asphalt);font:800 12px/1.2 var(--font-display);letter-spacing:.1em;text-transform:uppercase}
 .practice-signal--red .practice-signal-kicker{background:#FF4B4B;color:#FFFFFF}
 .practice-signal--green .practice-signal-kicker{background:#58CC02;color:var(--sig-asphalt)}
@@ -530,3 +530,31 @@ img.ui-ico.icon-art{width:24px;height:24px}
 .avatar-opt img{width:64px;height:64px;object-fit:contain}
 .avatar-opt.is-on{border-color:#E8BC00;background:#FFF6C7;box-shadow:0 4px 0 #C9A200;color:#1F2328}
 .avatar-opt:active{translate:0 4px;box-shadow:none}
+/* More asphalt. The Prøve poster is an asphalt plate like the Øv hero, in both themes */
+.road-poster{background:var(--asphalt) 0 0/220px 220px,#1F2328;border-color:#1F2328;box-shadow:0 5px 0 #000}
+#main .road-poster-words,.road-poster-words{color:#FFFFFF}
+/* the light theme's white cards get a whisper of the same grain, so they feel printed, not flat */
+:is(.learn-card,.row-card,.game-card,.tile,.panel,.exam-signal,.avatar-opt,.mybil-item,.mybil-base){background-image:var(--grain-soft);background-size:200px 200px}
+/* the cast's Rive canvas lies exactly over the drawing; the drawing keeps the size */
+.cast-art{position:relative;display:block;line-height:0}
+/* Din bil's road scene, drawn in the series' style (assets/scene): a muted sky, clouds, the far Danish hills with the
+   farm, church and wind turbines, the near verge with birches and a fence, and an asphalt road. Each strip scrolls at
+   its own speed; --w is the strip's width at its shown height, so the loop is seamless. */
+.road-loop{background:linear-gradient(#8FBCD4 0,#C9DEE2 52%,#E6E2CF 60%)!important}
+.road-loop .road-clouds{inset:6px 0 auto;height:54px;background:url("assets/scene/loop-clouds.webp") 0 0/auto 100% repeat-x;--w:398px;animation:scroll-x 60s linear infinite;opacity:calc(1 - var(--dark) * .55)}
+.road-loop .road-hills--far{bottom:40%;height:100px;opacity:1;background:url("assets/scene/loop-far.webp") 0 100%/auto 100% repeat-x;--w:552px;animation:scroll-x 34s linear infinite}
+.road-loop .road-hills--near{display:none}
+.road-loop .road-trees{bottom:40%;height:72px;background:url("assets/scene/loop-near.webp") 0 100%/auto 100% repeat-x;--w:530px;animation:scroll-x 9s linear infinite}
+.road-loop .road-sun{background:#F3E2A6;box-shadow:0 0 0 2px rgba(43,47,51,.35);animation:none}
+.road-loop .road-sun::before{display:none}
+.road-loop .road-asphalt{background:var(--asphalt) 0 0/220px 220px,#3A3F47}
+.road-loop .road-asphalt::before{height:5px;background:#E8DFC8}
+.road-loop .road-dashes{background:repeating-linear-gradient(90deg,#F1E6CC 0 34px,transparent 34px 70px);background-size:70px 5px}
+.road-loop .road-speed{display:none}
+/* the mirror sees the same countryside behind you at golden hour; the road is laid on top and keeps rolling */
+.mh-scene{background:url("assets/scene/mirror.webp") 50% 58%/cover!important}
+.mh-sun,.mh-hills{display:none}
+.mh-ground{background:none!important}
+.mh-ground::after{display:none}
+.mh-road{background:linear-gradient(90deg,#E8DFC8 0 3%,#3A3F47 3% 97%,#E8DFC8 97%)!important}
+.mh-road i{background:repeating-linear-gradient(0deg,#F1E6CC 0 26px,transparent 26px 58px)!important}

@@ -745,7 +745,7 @@ html[data-theme="dark"] .learn-card{background:#1d1d1d;border:2px solid var(--li
 html[data-theme="dark"] .learn-card small{color:var(--muted)}
 html[data-theme="dark"] .goal-dots i{background:var(--line)}
 html[data-theme="dark"] .goal-dots i.on{background:#FF9600}
-html[data-theme="dark"] .practice-signal{text-decoration:none;color:var(--sig-ink);background:var(--skid) left -180px bottom -150px/640px auto no-repeat,var(--asphalt) 0 0/220px 220px,var(--sig-asphalt);box-shadow:0 5px 0 #000}
+html[data-theme="dark"] .practice-signal{text-decoration:none;color:var(--sig-ink);background:var(--asphalt) 0 0/220px 220px,var(--sig-asphalt);box-shadow:0 5px 0 #000}
 html[data-theme="dark"] .practice-signal-kicker{background:var(--sig-yellow);color:var(--sig-asphalt)}
 html[data-theme="dark"] .practice-signal--red .practice-signal-kicker{background:#FF4B4B;color:#FFFFFF}
 html[data-theme="dark"] .practice-signal--green .practice-signal-kicker{background:#58CC02;color:var(--sig-asphalt)}
@@ -912,6 +912,7 @@ html[data-theme="dark"] .exam-signal small{color:var(--muted)}
 html[data-theme="dark"] .avatar-opt{border:2px solid var(--line);background:var(--panel,#1d1d1d);box-shadow:0 4px 0 var(--line);color:var(--ink)}
 html[data-theme="dark"] .avatar-opt.is-on{border-color:#E8BC00;background:#4b441f;box-shadow:0 4px 0 #C9A200;color:#d5d9de}
 html[data-theme="dark"] .avatar-opt:active{box-shadow:none}
+html[data-theme="dark"] :is(.learn-card,.row-card,.game-card,.tile,.panel,.exam-signal,.avatar-opt,.mybil-item,.mybil-base){background-image:var(--grain-soft)}
 
 /* play.css */
 html[data-theme="dark"] .jp-top,html[data-theme="dark"] .exam-top{border:0;background:none}

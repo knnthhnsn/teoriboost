@@ -12,7 +12,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 CSE = os.path.join(ROOT, 'docs', 'redesign', 'cse')
 OUT = os.path.join(ROOT, 'dist', 'assets', 'cast')
 CAST = {'sneglen': 'split/sneglen-3.png', 'kegle': 'split/kegle-2.png',
-        'blink': 'cast/blink.png', 'bobbel': 'cast/bobbel.png', 'krabbe': 'cast/krabbe.png', 'daek': 'cast/daek.png'}
+        'blink': 'split/blink-1.png', 'bobbel': 'split/bobbel-1.png', 'krabbe': 'split/krabbe-1.png', 'daek': 'split/daek-1.png'}
 SIZE, FILL = 512, .9
 
 def clean(im):

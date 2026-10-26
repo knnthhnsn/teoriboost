@@ -5,7 +5,7 @@ Run: python tools/cse-split.py
 """
 import os
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageFilter
 from scipy import ndimage
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -15,11 +15,19 @@ SHEETS = {  # sheet: (names in reading order, rows)
     'biler.png': (['scooter-wreck', 'smallcar-wreck', 'bigcar-wreck', 'racecar-wreck', 'scooter-dream', 'smallcar-dream', 'bigcar-dream', 'racecar-dream'], 2),
     'streak-flammer.png': (['flame-0', 'flame-1', 'flame-3', 'flame-7', 'flame-30', 'flame-comeback'], 2),
     'sneglen-og-keglen.png': (['sneglen-1', 'sneglen-2', 'sneglen-3', 'kegle-1', 'kegle-2', 'kegle-3'], 2),
+    'cast2/sheet-a.png': (['blink-1', 'blink-2', 'blink-3', 'bobbel-1', 'bobbel-2', 'bobbel-3'], 2),
+    'cast2/sheet-b.png': (['krabbe-1', 'krabbe-2', 'krabbe-3', 'daek-1', 'daek-2', 'daek-3'], 2),
 }
 
 os.makedirs(OUT, exist_ok=True)
 for sheet, (names, rows) in SHEETS.items():
     im = Image.open(os.path.join(SRC, sheet)).convert('RGBA')
+    if np.asarray(im)[:, :, 3].min() == 255:  # drawn on white: the white connected to the border becomes transparent
+        rgb = np.asarray(im)[:, :, :3].astype(int); light = rgb.min(axis=2) > 236
+        lab, _ = ndimage.label(light); edge = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
+        outside = np.isin(lab, edge[edge > 0]); a = np.where(outside, 0, 255).astype(np.uint8)
+        a = np.asarray(Image.fromarray(a).filter(ImageFilter.GaussianBlur(.7)))
+        im = Image.fromarray(np.dstack([rgb.astype(np.uint8), a]), 'RGBA')
     a = np.asarray(im)[:, :, 3] > 24
     # cut the rows apart at the emptiest line near each row boundary, so figures stacked close together stay apart
     load = a.sum(axis=1); cuts = []

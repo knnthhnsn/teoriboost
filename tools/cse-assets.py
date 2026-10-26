@@ -51,3 +51,29 @@ for name, car in cars.items():
     car.save(os.path.join(DIST, 'road', name + '-top.webp'), 'WEBP', quality=88, method=6)
     print('topdown', name, car.size)
 if meta: json.dump(meta, open(os.path.join(art, 'meta.json'), 'w'), indent=1)
+
+# the cast's idle and blink faces, as drawn (512 px, same canvas, so they stay aligned) -> tools/rive/cast-art
+blink = os.path.join(CSE, 'blink'); cast_art = os.path.join(ROOT, 'tools', 'rive', 'cast-art'); os.makedirs(cast_art, exist_ok=True)
+for f in sorted(os.listdir(blink)) if os.path.isdir(blink) else []:
+    if f.endswith('.png'):
+        Image.open(os.path.join(blink, f)).convert('RGBA').resize((512, 512), Image.LANCZOS).save(os.path.join(cast_art, f[:-4] + '.webp'), 'WEBP', quality=88, method=6)
+        print('cast', f)
+
+# the Din bil road scene (strips that scroll sideways) and the mirror view -> dist/assets/scene
+def seamless(im, band=.08):
+    """make a strip tile sideways: its last columns fade into its first, then they are cut off"""
+    a = np.asarray(im).astype(float); w = a.shape[1]; b = int(w * band)
+    t = np.linspace(0, 1, b)[None, :, None]
+    a[:, :b] = a[:, w - b:] * (1 - t) + a[:, :b] * t
+    return Image.fromarray(a[:, :w - b].round().astype(np.uint8), 'RGBA')
+
+scenes = os.path.join(CSE, 'scenes'); out = os.path.join(DIST, 'scene'); os.makedirs(out, exist_ok=True)
+for name, height in (('loop-far', 256), ('loop-near', 192), ('loop-clouds', 160)):
+    path = os.path.join(scenes, name + '.png')
+    if not os.path.exists(path): continue
+    im = seamless(Image.open(path).convert('RGBA'))
+    im = im.resize((round(im.width * height / im.height), height), Image.LANCZOS)
+    im.save(os.path.join(out, name + '.webp'), 'WEBP', quality=84, method=6); print('scene', name, im.size)
+path = os.path.join(scenes, 'mirror.png')
+if os.path.exists(path):
+    Image.open(path).convert('RGB').resize((1152, 384), Image.LANCZOS).save(os.path.join(out, 'mirror.webp'), 'WEBP', quality=84, method=6); print('scene mirror')
