@@ -517,3 +517,16 @@ html body .pn--next .pn-btn{animation:next-pulse 2.4s var(--in-out) infinite,btn
 .exam-signal-kicker{display:block;font:800 11px/1.2 var(--font-display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .exam-signal strong{display:block;margin:2px 0;font:800 22px/1.1 var(--font-display);color:var(--ink)}
 .exam-signal small{display:block;color:var(--muted);font-size:14px;line-height:1.4}
+/* the drawn icons are pictures: they keep their own colours and fill the box the line icons used */
+img.icon-art{display:block;object-fit:contain;flex:none}
+img.ui-ico.icon-art{width:24px;height:24px}
+.mh-stat--goal .mh-ico{background:none;box-shadow:none}.mh-ico img.duo{width:26px;height:26px}
+/* the menu's sticker icons fill their tile; the white sticker border keeps them readable on every background */
+.nav-tile img.nav-art{display:block;width:30px;height:30px;object-fit:contain}
+.sidebar .nav-tile img.nav-art{width:28px;height:28px}
+/* Din profil: pick your profile picture */
+.avatar-pick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.avatar-opt{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px 10px;border-radius:18px;border:2px solid var(--line);background:var(--panel,#fff);box-shadow:0 4px 0 var(--line);color:var(--ink);font:700 13px/1.2 var(--font-display);text-align:center;cursor:pointer}
+.avatar-opt img{width:64px;height:64px;object-fit:contain}
+.avatar-opt.is-on{border-color:#E8BC00;background:#FFF6C7;box-shadow:0 4px 0 #C9A200;color:#1F2328}
+.avatar-opt:active{translate:0 4px;box-shadow:none}

@@ -6,11 +6,11 @@
 const ART_ROOT = 'assets/illustrations/';
 
 export const ART_ASSETS = Object.freeze({
-  'mads-nut': Object.freeze({ src: `${ART_ROOT}mads-nut.png`, width: 1254, height: 1254, role: 'garage' }),
-  natmobil: Object.freeze({ src: `${ART_ROOT}natmobil.png`, width: 1254, height: 1254, role: 'hero' }),
-  'koerelys-brain': Object.freeze({ src: `${ART_ROOT}koerelys-brain.png`, width: 1254, height: 1254, role: 'result' }),
-  'stop-receipt': Object.freeze({ src: `${ART_ROOT}stop-receipt.png`, width: 1254, height: 1254, role: 'reaction' }),
-  'omkamp-cone': Object.freeze({ src: `${ART_ROOT}omkamp-cone.png`, width: 1254, height: 1254, role: 'mission' }),
+  'mads-nut': Object.freeze({ src: `${ART_ROOT}mads-nut.webp`, width: 720, height: 720, role: 'garage' }),
+  natmobil: Object.freeze({ src: `${ART_ROOT}natmobil.webp`, width: 720, height: 720, role: 'hero' }),
+  'koerelys-brain': Object.freeze({ src: `${ART_ROOT}koerelys-brain.webp`, width: 720, height: 720, role: 'result' }),
+  'stop-receipt': Object.freeze({ src: `${ART_ROOT}stop-receipt.webp`, width: 720, height: 720, role: 'reaction' }),
+  'omkamp-cone': Object.freeze({ src: `${ART_ROOT}omkamp-cone.webp`, width: 720, height: 720, role: 'mission' }),
 });
 
 const VARIANTS = new Set(['hero', 'garage', 'mission', 'result', 'reaction']);

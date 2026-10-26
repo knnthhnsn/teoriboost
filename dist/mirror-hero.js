@@ -40,7 +40,7 @@ export function renderMirrorHero({ streak = 0, days = null, goal = 1, today = 0,
         <div class="mh-hud">
           <div class="mh-stats">
             <p class="mh-stat mh-stat--streak${streak ? '' : ' is-zero'}"><span class="mh-ico" data-rive="flame:${flameState(streak)}">${flameArt(flameLevel(streak))}</span><span><b data-count="${streak}">${streak}</b><small>${plural(streak, 'dag', 'dage')} i træk</small></span></p>
-            <p class="mh-stat mh-stat--goal"><span class="mh-ico" data-rive="target:${got >= goal ? 'met' : 'open'}">${duo('target')}</span><span><b>${got}/${goal}</b><small>i dag <span class="mh-dots" aria-hidden="true">${Array.from({ length: Math.min(goal, 6) }, (_, k) => `<i class="${k < got ? 'on' : ''}" style="--k:${k}"></i>`).join('')}</span></small></span></p>
+            <p class="mh-stat mh-stat--goal"><span class="mh-ico">${duo('target')}</span><span><b>${got}/${goal}</b><small>i dag <span class="mh-dots" aria-hidden="true">${Array.from({ length: Math.min(goal, 6) }, (_, k) => `<i class="${k < got ? 'on' : ''}" style="--k:${k}"></i>`).join('')}</span></small></span></p>
           </div>
           <a class="mh-ring${pct ? '' : ' is-zero'}" href="#profil" style="--p:${pct}" data-rive="gauge:${pct}" aria-label="Du er ${pct} procent klar. Se hvordan vi regner">
             <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="mh-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD84A"/><stop offset="1" stop-color="#58CC02"/></linearGradient></defs>

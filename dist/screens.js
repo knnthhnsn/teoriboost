@@ -1,7 +1,7 @@
 // The four tabs (Lær, Øv, Prøve, Min bil) plus Alle emner and Profil, after docs/redesign/mockups-v3.
 // Short, game-like screens built around one next action. Data comes in from app.js; nothing here mutates state.
 import { SEQUENCES } from './sequences.js';
-import { ico, flameArt, flameLevel } from './ui-icons.js';
+import { ico, flameArt, flameLevel, AVATARS, avatarPref } from './ui-icons.js';
 import { renderMirrorHero } from './mirror-hero.js';
 import { themePref, THEME_CHOICES } from './theme.js';
 import { renderCast } from './cast.js';
@@ -123,7 +123,7 @@ export function renderExamStart({ history, saved, total = 25, minutes = 25, limi
     return `<li class="exam-row ${ok ? 'is-ok' : near ? 'is-near' : 'is-off'}"><span class="exam-badge">${h.errors}</span><div><strong>${ok ? 'Inden for grænsen' : near ? 'Næsten' : 'Øv videre'}</strong><small>${when(h.at)} · ${Math.max(0, (h.ids?.length || total) - h.errors)} rigtige</small></div></li>`;
   }).join('');
   return `<section class="exam-start" aria-labelledby="exam-title">
-    <div class="road-poster"><span class="road-poster-band" aria-hidden="true"><img class="road-poster-car" src="assets/road/car-top.webp" alt="" decoding="async"></span><p class="road-poster-words"><span>Retning</span> <span class="road-poster-mark">er vigtigere</span> <span>end fart.</span></p></div>
+    <div class="road-poster"><span class="road-poster-band" aria-hidden="true" data-rive="road"><img class="road-poster-car" src="assets/road/smallcar-top.webp" alt="" decoding="async"></span><p class="road-poster-words"><span>Retning</span> <span class="road-poster-mark">er vigtigere</span> <span>end fart.</span></p></div>
     ${examSignal(history, limit)}
     <div class="exam-talk">${renderCast('daek', { size: 'sm', priority: true })}<p class="talk-bubble"><span class="cast-name">Dæk</span>Ro på. ${total} situationer, én ad gangen.</p></div>
     <h1 id="exam-title" class="sr-only">Øveprøve</h1>
@@ -181,6 +181,12 @@ export function renderAccountPanel(s) {
     <p class="acc-fine">Logger du ind, gemmes din fremgang i din konto hos Google Firebase (database i EU). Chatten med Sneglen bliver på enheden.</p></section>`;
 }
 
+/** Din profil: pick your profile picture */
+function avatarPicker() {
+  const now = avatarPref();
+  return `<div class="panel avatar-panel"><h2 id="avatar-title">Dit profilbillede</h2><div class="avatar-pick" role="radiogroup" aria-labelledby="avatar-title">${AVATARS.map(([id, name]) =>
+    `<button type="button" role="radio" class="avatar-opt${id === now ? ' is-on' : ''}" data-avatar="${id}" aria-checked="${id === now}"><img src="assets/nav/profile-${id}.webp" alt="" decoding="async"><span>${esc(name)}</span></button>`).join('')}</div></div>`;
+}
 export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, intro, settings, examDays, ready, account }) {
   const week = (daily?.week || []).map(d => `<li class="${d.completed ? 'on' : ''} ${d.today ? 'today' : ''}"><small>${['Ma', 'Ti', 'On', 'To', 'Fr', 'Lø', 'Sø'][(new Date(d.day + 'T12:00').getDay() + 6) % 7]}</small><i role="img" aria-label="${d.completed ? 'øvet' : 'ikke øvet'}${d.today ? ', i dag' : ''}"></i></li>`).join('');
   const bars = strengths.length
@@ -188,6 +194,7 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
     : '<li class="empty-note">Kommer, når du har øvet et par emner.</li>';
   const toggle = (key, title) => `<label class="set-row"><span>${title}</span><input type="checkbox" role="switch" data-setting="${key}" ${settings[key] ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
   return `<section class="profile" aria-labelledby="profile-title"><header class="screen-head"><a class="back-round" href="#home" aria-label="Tilbage">${ICON.back}</a><h1 id="profile-title">Din profil</h1></header>
+    ${avatarPicker()}
     ${renderAccountPanel(account)}
     <div class="tile-row"><div class="tile"><b class="tile-fire"><span class="chip-ico" data-rive="flame:${flameLevel(daily?.currentStreak || 0)}">${flameArt(flameLevel(daily?.currentStreak || 0))}</span>${daily?.currentStreak || 0}</b><small>dage i træk</small></div><div class="tile"><b>${lessonsDone}/${lessonsTotal}</b><small>lektioner</small></div></div>
     ${ready ? `<div class="panel ready-panel"><h2>Hvor klar er du?</h2><div class="ready-row"><span class="ready-gauge" data-rive="gauge:${ready.pct}" aria-hidden="true"></span><b>${ready.pct} %</b><span class="ready-bar" role="img" aria-label="${ready.pct} procent klar"><i style="--p:${ready.pct / 100}"></i></span></div>

@@ -1,5 +1,5 @@
 // Rive animations (assets/rive/teoriboost.riv, built by tools/rive/build-teoriboost.mjs; glowup-<base>.riv by build-glowup.mjs;
-// brand.riv by build-brand.mjs; flame.riv by build-flame.mjs; signal.riv by build-signal.mjs).
+// brand.riv by build-brand.mjs; flame.riv by build-flame.mjs; signal.riv by build-signal.mjs; road.riv by build-road.mjs).
 // Any element with data-rive="<name>[:<state>]" gets a Rive canvas on top of its own content, which stays as the
 // fallback: it shows while Rive loads, if it fails, and always when motion is off. The runtime (~2.6 MB) is
 // fetched only the first time such an element appears.
@@ -11,6 +11,7 @@
 //   gauge:<0-100>                     a speedometer; the needle swings to the number
 //   traffic                           a traffic light running the Danish sequence (waiting)
 //   signal:<0-4> | signal:cycle       the poster traffic light: off, red, red and amber, green, amber, or the sequence
+//   road                              the Prøve poster's yellow road: the four vehicles from above, both ways
 //   bolt | bolt:earn                  the Booster bolt; glints now and then, jumps on earn
 //   target:open | target:met          today's goal; a dart lands when it is met
 //   glowup:<base>                     the dream-build show for scooter | smallcar | bigcar | racecar
@@ -26,6 +27,7 @@ const BOARDS = {
   feedback: { artboard: 'Feedback', machine: 'Feedback' },
   flame: { artboard: 'Flame', machine: 'Flame', file: () => 'flame.riv' },
   signal: { artboard: 'Signal', machine: 'Signal', file: () => 'signal.riv' },
+  road: { artboard: 'Road', machine: 'Road', file: () => 'road.riv', fit: 'Cover' },
   celebrate: { artboard: 'Celebrate', machine: 'Celebrate' },
   confetti: { artboard: 'Confetti', machine: 'Confetti' },
   gauge: { artboard: 'Gauge', machine: 'Gauge' },

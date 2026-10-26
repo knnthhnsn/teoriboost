@@ -120,3 +120,15 @@ test('the shuffle is bought once, then rolls a new look from what you own only',
   assert.equal(r.garage.spent, spent, 'shuffling is free');
   for (const id of Object.values(r.garage.equipped.scooter)) assert.ok(r.garage.owned.includes('scooter:' + id), id + ' is owned');
 });
+
+test('the profile picture is one of the three, remembered, and also the menu icon', async () => {
+  const { avatarPref, setAvatarPref, navIcon } = await import('../dist/ui-icons.js');
+  const m = new Map(), store = { getItem: k => m.get(k) ?? null, setItem: (k, v) => m.set(k, String(v)) };
+  assert.equal(avatarPref(store), 'key', 'the key by default');
+  assert.equal(setAvatarPref('helmet', store), true);
+  assert.equal(avatarPref(store), 'helmet');
+  assert.equal(setAvatarPref('nonsense', store), false);
+  assert.equal(avatarPref(store), 'helmet');
+  m.set('teoriboost.avatar', 'junk'); assert.equal(avatarPref(store), 'key');
+  assert.match(navIcon('wheel'), /assets\/nav\/wheel\.webp/);
+});

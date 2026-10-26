@@ -22,8 +22,13 @@ const P = {
   grip: '<circle cx="9" cy="6.5" r="1.2" fill="currentColor"/><circle cx="15" cy="6.5" r="1.2" fill="currentColor"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><circle cx="9" cy="17.5" r="1.2" fill="currentColor"/><circle cx="15" cy="17.5" r="1.2" fill="currentColor"/>',
   list: '<path d="M9 6.5h11M9 12h11M9 17.5h11"/><path d="M4.5 5.5h1v2M4.3 11h1.6l-1.6 2h1.6M4.3 16.5h1.5l-.8 1 .8 1H4.3"/>',
 };
-/** Inline SVG icon. Decorative by default (aria-hidden); pass a label to make it meaningful. */
+/** The drawn icons in the Common Side Effects style (assets/icons, made by tools/cse-assets.py). Content icons use them;
+ *  the small functional glyphs (check, x, arrows, grip, repeat, bolt) stay line icons. */
+export const ICON_ART = new Set(['book', 'wheel', 'exam', 'car', 'ai', 'profile', 'target', 'calendar', 'clock', 'trend', 'gauge', 'list', 'stop', 'bike', 'yield', 'light', 'clipboard']);
+const art = (name, cls, label) => `<img class="icon-art ${cls}" src="assets/icons/${name}.webp" ${label ? `alt="${label}"` : 'alt="" aria-hidden="true"'} decoding="async">`;
+/** Icon: the drawn one when there is one, else an inline SVG. Decorative by default (aria-hidden); pass a label to make it meaningful. */
 export function ico(name, { cls = '', label = '' } = {}) {
+  if (ICON_ART.has(name)) return art(name, `ui-ico ${cls}`, label);
   const body = P[name]; if (!body) return '';
   return `<svg class="ui-ico ${cls}" viewBox="0 0 24 24" ${label ? `role="img" aria-label="${label}"` : 'aria-hidden="true"'}>${body}</svg>`;
 }
@@ -54,8 +59,9 @@ const DUO = {
   calendar: { d: '<path d="M3.5 8a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3v2h-17Z"/>',
               s: '<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h2M14 14h2M8 17h2"/>' },
 };
-/** Duotone icon (menu, chips). */
+/** Menu and chip icon: the drawn one when there is one, else a duotone SVG. */
 export function duo(name, { cls = '' } = {}) {
+  if (ICON_ART.has(name)) return art(name, `duo ${cls}`, '');
   const i = DUO[name]; if (!i) return '';
   return `<svg class="duo ${cls}" viewBox="0 0 24 24" aria-hidden="true"><g class="d">${i.d}</g><g class="s">${i.s}</g></svg>`;
 }
@@ -67,4 +73,19 @@ export const flameLevel = streak => streak >= 30 ? 4 : streak >= 7 ? 3 : streak 
  *  over, and instead of it with reduced motion. */
 export function flameArt(level = 2) {
   return `<img class="flame-art" src="assets/flame/L${level}-idle.webp" alt="" decoding="async">`;
+}
+
+/** The menu's icons: a set of their own, drawn as die-cut stickers so they read on white, graphite and the yellow
+ *  active tab (assets/nav, made by tools/cse-assets.py). */
+export const navIcon = name => `<img class="nav-art" src="assets/nav/${name === 'profile' ? `profile-${avatarPref()}` : name}.webp" alt="" aria-hidden="true" decoding="async">`;
+/** The profile pictures the learner picks between (Din profil); the choice is also the menu's profile icon. */
+export const AVATARS = Object.freeze([['key', 'Bilnøglen'], ['snail', 'Kørekortet med Sneglen'], ['helmet', 'Racerhjelmen']]);
+const AVATAR_KEY = 'teoriboost.avatar';
+export function avatarPref(store = globalThis.localStorage) {
+  try { const v = store?.getItem(AVATAR_KEY); return AVATARS.some(([id]) => id === v) ? v : 'key'; } catch { return 'key'; }
+}
+export function setAvatarPref(id, store = globalThis.localStorage) {
+  if (!AVATARS.some(([a]) => a === id)) return false;
+  try { store?.setItem(AVATAR_KEY, id); } catch { /* storage blocked: the choice lasts this visit */ }
+  return true;
 }

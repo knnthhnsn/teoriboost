@@ -909,6 +909,9 @@ html[data-theme="dark"] .exam-signal{background:var(--panel,#1d1d1d);border:2px 
 html[data-theme="dark"] .exam-signal-kicker{color:var(--muted)}
 html[data-theme="dark"] .exam-signal strong{color:var(--ink)}
 html[data-theme="dark"] .exam-signal small{color:var(--muted)}
+html[data-theme="dark"] .avatar-opt{border:2px solid var(--line);background:var(--panel,#1d1d1d);box-shadow:0 4px 0 var(--line);color:var(--ink)}
+html[data-theme="dark"] .avatar-opt.is-on{border-color:#E8BC00;background:#4b441f;box-shadow:0 4px 0 #C9A200;color:#d5d9de}
+html[data-theme="dark"] .avatar-opt:active{box-shadow:none}
 
 /* play.css */
 html[data-theme="dark"] .jp-top,html[data-theme="dark"] .exam-top{border:0;background:none}
