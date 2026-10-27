@@ -136,6 +136,7 @@ export function createAccount({ config, adapters, load = loadFirebase, storage =
     const user = auth?.currentUser; if (!user || user.isAnonymous) return;
     set({ busy: true, error: null }); paused = true; clearInterval(timer);
     try {
+      await adapters.beforeDelete?.(); // e.g. leave the team, so nothing of the learner is left behind there
       await fb.deleteDoc(userDoc(user.uid));
       await fb.deleteUser(user);
       adapters.clear(); win.location.reload();
@@ -148,5 +149,7 @@ export function createAccount({ config, adapters, load = loadFirebase, storage =
     setUi: ui => set({ ui, error: null }),
     subscribe: fn => { subs.add(fn); return () => subs.delete(fn); },
     syncNow: () => push(),
+    /** Firestore for other features (the team race), only while signed in to a real account. */
+    firestore: async () => { const u = auth?.currentUser; return u && !u.isAnonymous ? { fb, db, uid: u.uid } : null; },
   };
 }

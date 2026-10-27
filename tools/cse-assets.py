@@ -95,3 +95,23 @@ for name, height in (('loop-far', 256), ('loop-near', 192), ('loop-clouds', 160)
 path = os.path.join(scenes, 'mirror.png')
 if os.path.exists(path):
     Image.open(path).convert('RGB').resize((1152, 384), Image.LANCZOS).save(os.path.join(out, 'mirror.webp'), 'WEBP', quality=84, method=6); print('scene mirror')
+
+# the race's exhaust fire and wind (docs/redesign/cse/nitro, on magenta) -> dist/assets/race: each fire a strip of its
+# three flicker frames, every frame 3:1 with the flame's root at the right edge, halfway down (team.css plays them)
+def frame_box(frames):
+    """one box for all frames: their union, widened to 3:1 around the root (the rightmost ink)"""
+    a = np.any([np.asarray(f)[:, :, 3] > 24 for f in frames], axis=0)
+    ys, xs = np.nonzero(a); x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
+    root = int(np.nonzero(a[:, x1 - 6:x1].any(axis=1))[0].mean())
+    w = x1 - x0; h = max(w // 3, 2 * max(root - y0, y1 - root) + 4); w = max(w, h * 3)
+    return (x1 - w, root - h // 2, x1, root - h // 2 + h)
+
+nitro = os.path.join(CSE, 'nitro'); race = os.path.join(DIST, 'race'); os.makedirs(race, exist_ok=True)
+for name, n in (('nitro', 3), ('mega', 3), ('wind', 1)):
+    paths = [os.path.join(nitro, f'{name}-{i}.png') for i in range(1, n + 1)]
+    if not all(os.path.exists(p) for p in paths): continue
+    frames = [unkey(p) for p in paths]; box = frame_box(frames)
+    fw, fh = 600, 200; strip = Image.new('RGBA', (fw * n, fh), (0, 0, 0, 0))
+    for i, f in enumerate(frames):
+        strip.alpha_composite(f.crop(box).resize((fw, fh), Image.LANCZOS), (fw * i, 0))
+    strip.save(os.path.join(race, name + '.webp'), 'WEBP', quality=86, method=6); print('race', name, strip.size)

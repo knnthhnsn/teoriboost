@@ -1,0 +1,131 @@
+/* Dit hold: the team race on the home road and on #hold (team.js) */
+
+/* ---------- the race on the road ---------- */
+.road-top .road-loop.is-race{--h0:236px}
+@media (min-width:701px){.road-top .road-loop.is-race{--h0:270px}}
+.road-loop.is-race .road-asphalt{height:48%}
+.road-loop.is-race .road-dashes{top:46%}
+.road-loop.is-race .road-hills--far,.road-loop.is-race .road-trees{bottom:46%}
+.race-pack{position:absolute;inset:0;z-index:2;display:block;--car:112px}
+@media (min-width:701px){.race-pack{--car:150px}}
+/* each vehicle at its real size next to the others, its wheels on the lane (--wb: how far the wheels sit above the bottom of its canvas) */
+.race-car{--s:1;--wb:.24;--lane:5%;--w:calc(var(--car) * var(--s));position:absolute;left:var(--x);bottom:calc(var(--lane) - var(--w) * var(--wb));width:var(--w);height:var(--w);margin-left:calc(var(--w) * -.5);display:block}
+.race-car.race-lane-1{--lane:25%;scale:.84;transform-origin:50% 76%;z-index:-1}
+.race-scooter{--s:.8;--wb:.11}
+.race-smallcar{--s:1.08;--wb:.23}
+.race-bigcar{--s:1.12;--wb:.25}
+.race-racecar{--s:1.18;--wb:.29}
+.race-rig{position:absolute;inset:0;display:block;isolation:isolate;animation:cruise 3.2s var(--in-out) infinite;animation-delay:calc(var(--i) * -.83s)}
+.race-rig img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.race-rig .mybil-rig{filter:brightness(calc(1 - var(--dark,0) * .38)) saturate(calc(1 - var(--dark,0) * .2))}
+.race-rig .mybil-body.is-sprung{animation:road-bump 1.2s linear infinite;animation-delay:calc(var(--i) * -.37s)}
+.race-rig::after{content:"";position:absolute;left:14%;right:14%;bottom:14%;height:9%;border-radius:50%;z-index:-1;background:rgba(0,0,0,.28);filter:blur(4px)}
+
+/* the name over each car, with its place */
+.race-tag{position:absolute;left:50%;top:var(--tt,30%);translate:-50% -100%;z-index:3;display:flex;align-items:center;gap:5px;max-width:150%;padding:3px 9px 3px 3px;border-radius:999px;
+  background:#fff;border:2px solid #1F2328;box-shadow:0 2px 0 #1F2328;font:800 12px/1.1 var(--font-display);color:#1F2328;white-space:nowrap}
+.race-tag b{display:grid;place-items:center;min-width:19px;height:19px;border-radius:50%;background:#1F2328;color:#fff;font-size:11px}
+.race-scooter{--tt:12%}
+.race-smallcar{--tt:33%}
+.race-bigcar{--tt:35%}
+.race-racecar{--tt:39%}
+.race-car.is-me .race-tag{background:#FFD60A}
+.race-car:first-child .race-tag b{background:#FFD60A;color:#1F2328;box-shadow:0 0 0 2px #1F2328}
+@media (min-width:701px){.race-tag{font-size:13px;padding:4px 11px 4px 4px}}
+
+/* exhaust fire: nitro for the leader or a hot streak, all out for both; a short burst while overtaking */
+.race-fire{position:absolute;z-index:-1;display:block;height:auto;aspect-ratio:3/1;translate:0 -50%;pointer-events:none;transform-origin:100% 50%}
+.race-fire i{position:absolute;inset:0;display:block;background:url("assets/race/nitro.webp") 0 0/300% 100% no-repeat;animation:race-flicker .27s steps(1) infinite}
+.race-fire--nitro{width:62%}
+.race-fire--mega{width:122%}
+@media (max-width:700px){.race-fire--mega{width:100%}}
+.race-fire--mega i{background-image:url("assets/race/mega.webp")}
+.race-fire--pass{width:48%;opacity:0;scale:.4 .7;transition:opacity .25s,scale .35s cubic-bezier(.2,1.4,.4,1)}
+.race-car.is-passing .race-fire--pass{opacity:1;scale:1}
+@keyframes race-flicker{0%{background-position:0 0}33.3%{background-position:50% 0}66.6%{background-position:100% 0}}
+.race-car.is-mega .race-rig{animation:race-shake .14s linear infinite}
+@keyframes race-shake{0%,100%{translate:0 0}25%{translate:1px -1px}50%{translate:-1px 0}75%{translate:1px 1px}}
+.race-wind{position:absolute;right:30%;top:22%;width:150%;height:auto;aspect-ratio:3/1;z-index:-2;display:block;background:url("assets/race/wind.webp") 0 0/100% 100% no-repeat;opacity:.85;animation:race-wind .7s linear infinite}
+@keyframes race-wind{from{translate:30% 0;opacity:0}20%{opacity:.85}to{translate:-25% 0;opacity:0}}
+
+/* "Sofie overhalede Mads" */
+.race-call{position:absolute;left:50%;top:12px;z-index:5;display:block;translate:-50% -8px;padding:6px 14px;border-radius:999px;background:#1F2328;color:#FFD60A;
+  font:800 14px/1.2 var(--font-display);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .3s,translate .45s cubic-bezier(.2,1.5,.4,1)}
+.race-call:empty{display:none}
+.race-call.is-on{opacity:1;translate:-50% 0}
+.road-loop.is-race .road-label{max-width:46%}
+.road-loop.is-race .road-label small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.race-boost{display:inline-block;margin-top:2px;padding:2px 8px;border-radius:999px;background:#1F2328;color:#FFD60A;font:800 12px/1.3 var(--font-display)}
+
+/* "Kør om kap" on your own road, when you are not on a team yet */
+#road-slot.road-top{position:relative!important}
+.race-cta{position:absolute;right:max(12px,calc((100% - 1100px) / 2 + 12px));top:10px;z-index:7;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px 0 10px;border-radius:999px;
+  background:#1F2328;color:#FFD60A;border:2px solid #1F2328;box-shadow:0 3px 0 rgba(0,0,0,.35);font:800 14px var(--font-display);text-decoration:none}
+.race-cta svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.race-cta:active{translate:0 3px;box-shadow:none}
+
+/* reduced motion: the cars stand still in their places */
+@media (prefers-reduced-motion:reduce){.race-rig,.race-rig .mybil-body,.race-fire i,.race-wind{animation:none!important}.race-wind{opacity:.6}}
+
+/* ---------- #hold ---------- */
+.team{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.team .panel h2{margin:0 0 8px;font:800 20px/1.2 var(--font-display)}
+.team .panel h2 small{display:block;margin-top:2px;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:0;color:var(--muted)}
+.team .panel p{margin:0 0 10px}
+.team-race .road-loop.is-big{height:250px;margin:0;border-radius:24px}
+@media (min-width:701px){.team-race .road-loop.is-big{height:300px}}
+.team-split{display:grid;gap:14px}
+@media (min-width:760px){.team-split{grid-template-columns:1fr 1fr}}
+.team-form{display:flex;flex-direction:column;gap:8px}
+.team-form label{font:700 14px var(--font-display)}
+.team-form input[type=text],.team-form input:not([type]),.team-form input[name]{min-height:48px;padding:0 14px;border-radius:14px;border:2px solid var(--line);background:var(--panel,#fff);color:var(--ink);font:700 16px var(--font-display)}
+.team-code-input{letter-spacing:.2em;text-transform:uppercase}
+.team-kind{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px;padding:0;border:0}
+.team-kind legend{margin-bottom:6px;font:700 14px var(--font-display)}
+.team-kind label{position:relative}
+.team-kind input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.team-kind span{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border-radius:999px;border:2px solid var(--line);background:var(--panel,#fff);font:700 14px var(--font-display)}
+.team-kind input:checked + span{background:#FFD60A;border-color:#1F2328;color:#1F2328}
+.team-kind input:focus-visible + span{outline:3px solid #0B6BA8;outline-offset:2px}
+.team-fine{font-size:13px;color:var(--muted)}
+
+/* the ranking */
+.team-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.team-row{display:grid;grid-template-columns:34px 64px 1fr auto;align-items:center;gap:10px;padding:8px 12px 8px 8px;border-radius:18px;border:2px solid var(--line);background:var(--panel,#fff)}
+.team-row.is-me{border-color:#1F2328;background:#FFF6C7;color:#1F2328}
+.team-row.is-me small{color:#4C5560}
+.team-place{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#1F2328;color:#fff;font:800 16px var(--font-display)}
+.team-row:first-child .team-place{background:#FFD60A;color:#1F2328;box-shadow:0 0 0 2px #1F2328}
+.team-thumb{position:relative;display:block;width:64px;height:64px}
+.team-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.team-who{display:flex;flex-direction:column;min-width:0}
+.team-who strong{font:800 16px/1.2 var(--font-display);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.team-who small{font-size:13px;color:var(--muted)}
+.team-pts{display:flex;flex-direction:column;align-items:flex-end}
+.team-pts b{font:800 20px/1 var(--font-display)}
+.team-pts small{font-size:12px;color:var(--muted)}
+@media (max-width:420px){.team-row{grid-template-columns:30px 48px 1fr auto;gap:8px}.team-thumb{width:48px;height:48px}.team-place{width:30px;height:30px}}
+
+/* your boost */
+.team-boost{display:grid;gap:12px}
+@media (min-width:640px){.team-boost{grid-template-columns:auto 1fr;align-items:center}.team-boost .team-fine{grid-column:1 / -1}}
+.team-boost-big{display:flex;flex-direction:column;padding:12px 18px;border-radius:18px;background:#1F2328;color:#fff}
+.team-boost-big small{font:800 12px var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:#C9D0D7}
+.team-boost-big strong{font:900 44px/1 var(--font-display);color:#FFD60A}
+.team-boost-big span{font-size:13px;color:#C9D0D7}
+.team-boost:not(.is-on) .team-boost-big strong{color:#9AA3AD}
+.team-boost-parts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.team-boost-parts li{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:12px;background:var(--soft,#F3F5F7);font:700 15px var(--font-display)}
+
+/* the code to share */
+.team-code{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.team-code b{padding:8px 16px;border-radius:14px;border:2px dashed var(--line);font:900 28px/1 var(--font-display);letter-spacing:.18em}
+.team-how summary{cursor:pointer;font:800 17px var(--font-display)}
+.team-how p{margin:10px 0 0!important;font-size:15px}
+.team-leave{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:0 4px}
+
+/* Din profil: the way in */
+.team-link{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit}
+.team-link img{width:56px;height:56px;object-fit:contain;flex:none}
+.team-link strong{display:block;font:800 18px var(--font-display)}
+.team-link small{color:var(--muted);font-size:14px}

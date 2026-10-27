@@ -195,6 +195,7 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
   const toggle = (key, title) => `<label class="set-row"><span>${title}</span><input type="checkbox" role="switch" data-setting="${key}" ${settings[key] ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
   return `<section class="profile" aria-labelledby="profile-title"><header class="screen-head"><a class="back-round" href="#home" aria-label="Tilbage">${ICON.back}</a><h1 id="profile-title">Din profil</h1></header>
     ${avatarPicker()}
+    <a class="panel team-link" href="#hold"><img src="assets/nav/car.webp" alt="" decoding="async"><span><strong>Dit hold</strong><small>Kør om kap med din køreskole eller dine venner, og få ekstra Boosters.</small></span></a>
     ${renderAccountPanel(account)}
     <div class="tile-row"><div class="tile"><b class="tile-fire"><span class="chip-ico" data-rive="flame:${flameLevel(daily?.currentStreak || 0)}">${flameArt(flameLevel(daily?.currentStreak || 0))}</span>${daily?.currentStreak || 0}</b><small>dage i træk</small></div><div class="tile"><b>${lessonsDone}/${lessonsTotal}</b><small>lektioner</small></div></div>
     ${ready ? `<div class="panel ready-panel"><h2>Hvor klar er du?</h2><div class="ready-row"><span class="ready-gauge" data-rive="gauge:${ready.pct}" aria-hidden="true"></span><b>${ready.pct} %</b><span class="ready-bar" role="img" aria-label="${ready.pct} procent klar"><i style="--p:${ready.pct / 100}"></i></span></div>

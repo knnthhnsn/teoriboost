@@ -1,5 +1,5 @@
 rules_version = '2';
-// TeoriBoost: one document per signed-in learner, readable and writable only by that learner.
+// TeoriBoost: one document per signed-in learner, readable and writable only by that learner, and the teams.
 // Anonymous sessions never sync (their progress stays on the device), so they get no access.
 // Paste this into Firebase console > Firestore Database > Rules, and Publish.
 service cloud.firestore {
@@ -21,6 +21,54 @@ service cloud.firestore {
         && smallString(request.resource.data, 'intro', 20000)
         && smallString(request.resource.data, 'mybil', 50000)
         && smallString(request.resource.data, 'order', 20000);
+    }
+    // Dit hold (dist/team.js): knowing the 6-character code is the invitation. Members see each other's racer; everyone
+    // writes only their own racer, and joining or leaving changes nothing but your own place in the member list.
+    function realUser() {
+      return request.auth != null && request.auth.token.firebase.sign_in_provider != 'anonymous';
+    }
+    function onlyMe(after, before) {
+      return after.toSet().difference(before.toSet()) == [request.auth.uid].toSet()
+        && before.toSet().difference(after.toSet()).size() == 0;
+    }
+    match /teams/{code} {
+      allow get: if realUser();
+      allow list: if realUser() && request.auth.uid in resource.data.members;
+      allow create: if realUser() && code.matches('^[A-HJ-NP-Z2-9]{6}
+      allow read, write: if false;
+    }
+  }
+}
+)
+        && request.resource.data.keys().hasOnly(['name', 'kind', 'owner', 'members', 'createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 30
+        && request.resource.data.kind in ['skole', 'venner']
+        && request.resource.data.owner == request.auth.uid
+        && request.resource.data.members == [request.auth.uid]
+        && request.resource.data.createdAt == request.time;
+      allow update: if realUser()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['members'])
+        && request.resource.data.members.size() <= 40
+        && (onlyMe(request.resource.data.members, resource.data.members) || onlyMe(resource.data.members, request.resource.data.members));
+      match /racers/{uid} {
+        allow read: if realUser() && request.auth.uid in get(/databases/$(database)/documents/teams/$(code)).data.members;
+        allow delete: if realUser() && request.auth.uid == uid;
+        allow create, update: if realUser() && request.auth.uid == uid
+          && request.auth.uid in get(/databases/$(database)/documents/teams/$(code)).data.members
+          && request.resource.data.keys().hasOnly(['name', 'day', 'correct', 'streak', 'car', 'boost', 'updatedAt'])
+          && request.resource.data.name is string && request.resource.data.name.size() >= 2 && request.resource.data.name.size() <= 16
+          && request.resource.data.day is string && request.resource.data.day.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}
+      allow read, write: if false;
+    }
+  }
+}
+)
+          && request.resource.data.correct is int && request.resource.data.correct >= 0 && request.resource.data.correct <= 1000
+          && request.resource.data.streak is int && request.resource.data.streak >= 0 && request.resource.data.streak <= 5000
+          && request.resource.data.car is string && request.resource.data.car.size() <= 1500
+          && request.resource.data.boost is int && request.resource.data.boost >= 0 && request.resource.data.boost <= 75
+          && request.resource.data.updatedAt == request.time;
+      }
     }
     match /{document=**} {
       allow read, write: if false;

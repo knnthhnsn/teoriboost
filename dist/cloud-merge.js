@@ -20,6 +20,8 @@ export function mergeGarage(remote, local) {
     ...r, ...l,
     spent: Math.max(Number(r.spent) || 0, Number(l.spent) || 0),
     earnedSeen: Math.max(Number(r.earnedSeen) || 0, Number(l.earnedSeen) || 0),
+    bonus: Math.max(Number(r.bonus) || 0, Number(l.bonus) || 0),
+    ...(Number.isFinite(r.boostBase) || Number.isFinite(l.boostBase) ? { boostBase: Math.max(Number(r.boostBase) || 0, Number(l.boostBase) || 0) } : {}),
     owned: union(r.owned, l.owned),
     bases: union(r.bases, l.bases),
     active: look.active ?? r.active ?? l.active,

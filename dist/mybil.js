@@ -49,6 +49,10 @@ export function loadGarage(storage = globalThis.localStorage) {
     const g = emptyGarage();
     g.spent = Math.max(0, Number(raw.spent) || 0);
     g.earnedSeen = Math.max(0, Number(raw.earnedSeen) || 0);
+    // the team race's boost (team.js): extra Boosters on top of what learning earns, and how far it has been counted
+    if (Number.isFinite(raw.boostBase)) g.boostBase = Math.max(0, raw.boostBase);
+    g.bonus = Math.max(0, Math.round(Number(raw.bonus) || 0));
+    if (raw.lastBonus > 0) g.lastBonus = Math.round(raw.lastBonus);
     g.owned = Array.isArray(raw.owned) ? raw.owned.filter(id => typeof id === 'string' && id.includes(':')) : [];
     g.bases = Array.isArray(raw.bases) ? [...new Set(['scooter', ...raw.bases.filter(id => baseById(id))])] : ['scooter'];
     g.active = g.bases.includes(raw.active) ? raw.active : 'scooter';
@@ -63,7 +67,7 @@ export function saveGarage(garage, storage = globalThis.localStorage) {
 
 // The app keeps only the last 30 exams, so earnings are remembered as a high-water mark: never lost.
 export const totalEarned = (progress, garage) => Math.max(boostersEarned(progress), garage?.earnedSeen || 0);
-export const balance = (progress, garage) => Math.max(0, totalEarned(progress, garage) - (garage?.spent || 0));
+export const balance = (progress, garage) => Math.max(0, totalEarned(progress, garage) + (garage?.bonus || 0) - (garage?.spent || 0));
 export const withEarnings = (garage, progress) => ({ ...garage, earnedSeen: totalEarned(progress, garage) });
 const owns = (garage, key) => garage.owned.includes(`${garage.active}:${key}`);
 const styleOf = garage => ({ ...DEFAULT_COLORS, plate: '', neonOn: false, lowered: false, ...(garage.style?.[garage.active] || {}) });

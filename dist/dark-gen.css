@@ -1190,3 +1190,41 @@ html[data-theme="dark"] .turn-shell .turn-feedback strong,html[data-theme="dark"
 html[data-theme="dark"] .turn-shell .turn-feedback>span,html[data-theme="dark"] .turn-shell .turn-feedback--repair>span{color:#fff}
 html[data-theme="dark"] .turn-shell .turn-rule>b{color:var(--ink)}
 html[data-theme="dark"] .turn-shell .turn-rule p{color:var(--ink)}
+
+/* team.css */
+html[data-theme="dark"] .race-rig::after{background:rgba(0,0,0,.28)}
+html[data-theme="dark"] .race-tag{background:#1d1d1d;border:2px solid #1F2328;box-shadow:0 2px 0 #1F2328;color:#d5d9de}
+html[data-theme="dark"] .race-tag b{background:#1F2328;color:#fff}
+html[data-theme="dark"] .race-car.is-me .race-tag{background:#FFD60A}
+html[data-theme="dark"] .race-car:first-child .race-tag b{background:#FFD60A;color:#1F2328;box-shadow:0 0 0 2px #1F2328}
+html[data-theme="dark"] .race-fire i{background:url("assets/race/nitro.webp") 0 0/300% 100% no-repeat}
+html[data-theme="dark"] .race-fire--mega i{background-image:url("assets/race/mega.webp")}
+html[data-theme="dark"] .race-wind{background:url("assets/race/wind.webp") 0 0/100% 100% no-repeat}
+html[data-theme="dark"] .race-call{background:#1F2328;color:#e8d260}
+html[data-theme="dark"] .race-boost{background:#1F2328;color:#e8d260}
+html[data-theme="dark"] .race-cta{background:#1F2328;color:#e8d260;border:2px solid #1F2328;box-shadow:0 3px 0 rgba(0,0,0,.35);text-decoration:none}
+html[data-theme="dark"] .race-cta svg{fill:none;stroke:currentColor}
+html[data-theme="dark"] .race-cta:active{box-shadow:none}
+html[data-theme="dark"] .team .panel h2 small{color:var(--muted)}
+html[data-theme="dark"] .team-form input[type=text],html[data-theme="dark"] .team-form input:not([type]),html[data-theme="dark"] .team-form input[name]{border:2px solid var(--line);background:var(--panel,#1d1d1d);color:var(--ink)}
+html[data-theme="dark"] .team-kind{border:0}
+html[data-theme="dark"] .team-kind span{border:2px solid var(--line);background:var(--panel,#1d1d1d)}
+html[data-theme="dark"] .team-kind input:checked + span{background:#FFD60A;border-color:#1F2328;color:#1F2328}
+html[data-theme="dark"] .team-kind input:focus-visible + span{outline:3px solid #0B6BA8}
+html[data-theme="dark"] .team-fine{color:var(--muted)}
+html[data-theme="dark"] .team-row{border:2px solid var(--line);background:var(--panel,#1d1d1d)}
+html[data-theme="dark"] .team-row.is-me{border-color:#1F2328;background:#4b441f;color:#d5d9de}
+html[data-theme="dark"] .team-row.is-me small{color:#b6bdc5}
+html[data-theme="dark"] .team-place{background:#1F2328;color:#fff}
+html[data-theme="dark"] .team-row:first-child .team-place{background:#FFD60A;color:#1F2328;box-shadow:0 0 0 2px #1F2328}
+html[data-theme="dark"] .team-who small{color:var(--muted)}
+html[data-theme="dark"] .team-pts small{color:var(--muted)}
+html[data-theme="dark"] .team-boost-big{background:#1F2328;color:#fff}
+html[data-theme="dark"] .team-boost-big small{color:#C9D0D7}
+html[data-theme="dark"] .team-boost-big strong{color:#e8d260}
+html[data-theme="dark"] .team-boost-big span{color:#C9D0D7}
+html[data-theme="dark"] .team-boost:not(.is-on) .team-boost-big strong{color:#9AA3AD}
+html[data-theme="dark"] .team-boost-parts li{background:var(--soft,#1e262d)}
+html[data-theme="dark"] .team-code b{border:2px dashed var(--line)}
+html[data-theme="dark"] .team-link{text-decoration:none;color:inherit}
+html[data-theme="dark"] .team-link small{color:var(--muted)}
