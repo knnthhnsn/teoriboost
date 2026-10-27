@@ -1,0 +1,10 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.teoriboost.dk" }], "destination": "https://teoriboost.dk/:path*", "permanent": true },
+    { "source": "/app", "destination": "https://app.teoriboost.dk/", "permanent": false }
+  ],
+  "headers": [
+    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] }
+  ]
+}
