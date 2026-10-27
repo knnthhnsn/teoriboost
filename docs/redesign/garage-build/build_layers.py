@@ -73,7 +73,7 @@ def load(path):
     a[tint] = np.stack([g[tint]] * 3, 1)
     return Image.fromarray(a.clip(0, 255).astype(np.uint8))
 
-def white_alpha(im, tol=18):
+def white_alpha(im, tol=18, holes=False):
     from collections import deque
     rgb = im.convert('RGB'); W, H = rgb.size; px = rgb.load(); seen = bytearray(W * H); q = deque()
     for x in range(W): q.extend(((x, 0), (x, H - 1)))
@@ -94,12 +94,19 @@ def white_alpha(im, tol=18):
     a = np.asarray(rgb, dtype=np.int16); light = (a.min(2) >= 170) & (a.max(2) - a.min(2) <= 30)
     pink = (a[..., 0] - a[..., 1] > 25) & (a[..., 2] - a[..., 1] > 25) & (a.min(2) >= 110)  # left from a magenta key (the race car)
     for _ in range(4): out |= ndimage.binary_dilation(out) & (light | pink)
-    # the background also shows through gaps in the drawing (between a wing's blades): big closed patches of pure white
-    paper = (a.min(2) >= 250) & ~out
-    lab, n = ndimage.label(paper)
-    if n:
-        sizes = ndimage.sum(paper, lab, range(1, n + 1))
-        out |= np.isin(lab, 1 + np.nonzero(sizes > W * H * 0.0002)[0])
+    if holes:  # the vehicle itself (base, body), never a part: a white plate or chrome highlight is real
+        # the background shows through gaps in the drawing: big closed patches of pure white (between a wing's
+        # blades) and thin, wide slits of near-white (between the roof rails and the roof)
+        paper = (a.min(2) >= 250) & ~out
+        lab, n = ndimage.label(paper)
+        if n:
+            sizes = ndimage.sum(paper, lab, range(1, n + 1))
+            out |= np.isin(lab, 1 + np.nonzero(sizes > W * H * 0.0002)[0])
+        slit = (a.min(2) >= 238) & (a.max(2) - a.min(2) <= 12) & ~out
+        lab, n = ndimage.label(slit)
+        for i, box in enumerate(ndimage.find_objects(lab)):
+            h, w = box[0].stop - box[0].start, box[1].stop - box[1].start
+            if h <= 10 and w >= 4 * h and (lab[box] == i + 1).sum() >= 30: out[box] |= lab[box] == i + 1
         for _ in range(2): out |= ndimage.binary_dilation(out) & (light | pink)
     return Image.fromarray(np.where(out, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.7))
 
@@ -192,7 +199,7 @@ def tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, ap
 def build(base_id):
     d = os.path.join(HERE, base_id)
     base = load(os.path.join(d, 'base.png'))
-    base_alpha = white_alpha(base)
+    base_alpha = white_alpha(base, holes=True)
     base_rgba = base.convert('RGBA'); base_rgba.putalpha(base_alpha); save(base_rgba, os.path.join(OUT, base_id, 'base.webp'))
     bb = subject_bbox(base); vehicle_area = max(1, count(base_alpha))
     approved, rejects, tiles = [], [], [('base', base_rgba)]
@@ -207,7 +214,7 @@ def build(base_id):
         outside = count(ImageChops.multiply(diff, ImageChops.invert(region_mask(base.size, bb, SLOTS['wheels']['region'])))) / vehicle_area
         if outside <= OUTSIDE_LIMIT:
             wheel_mask = clean_wheels(ImageChops.multiply(diff, region_mask(base.size, bb, SLOTS['wheels']['region'])))
-            body_rgba = body.convert('RGBA'); body_rgba.putalpha(clean_body(white_alpha(body), wheel_mask)); save(body_rgba, os.path.join(OUT, base_id, 'body.webp'))
+            body_rgba = body.convert('RGBA'); body_rgba.putalpha(clean_body(white_alpha(body, holes=True), wheel_mask)); save(body_rgba, os.path.join(OUT, base_id, 'body.webp'))
             wheels = base.convert('RGBA'); wheels.putalpha(ImageChops.multiply(wheel_mask, base_alpha))
             save(wheels, os.path.join(OUT, base_id, 'wheels.webp')); split = True
         else:
