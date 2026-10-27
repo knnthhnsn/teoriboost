@@ -58,7 +58,7 @@
 .race-boost{display:inline-block;margin-top:2px;padding:2px 8px;border-radius:999px;background:#1F2328;color:#FFD60A;font:800 12px/1.3 var(--font-display)}
 
 /* "Kør om kap" on your own road, when you are not on a team yet */
-#road-slot.road-top{position:relative!important}
+#road-slot.road-top{position:relative!important;top:auto;z-index:auto} /* only an anchor for the button: no offset (the old sticky top) and no stacking of its own */
 .race-cta{position:absolute;right:max(12px,calc((100% - 1100px) / 2 + 12px));top:10px;z-index:7;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px 0 10px;border-radius:999px;
   background:#1F2328;color:#FFD60A;border:2px solid #1F2328;box-shadow:0 3px 0 rgba(0,0,0,.35);font:800 14px var(--font-display);text-decoration:none}
 .race-cta svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
