@@ -243,13 +243,23 @@ def build(base_id):
             e = np.asarray(edited, dtype=np.int16); light = (e.min(2) >= 200) & (e.max(2) - e.min(2) <= 24)
             gap = (e.min(2) >= 235) & (e.max(2) - e.min(2) <= 14) & (np.asarray(base_alpha) < 128)
             gap |= ndimage.binary_dilation(gap, iterations=2) & light
+            # the shaded white under a low blade (the race car's spoiler) is a little darker than the paper, but it is
+            # still background where the base has none
+            gap |= (e.min(2) >= 170) & (e.max(2) - e.min(2) <= 30) & (np.asarray(base_alpha) < 128)
             # first close the wing itself: a pale stripe on it is as bright as the white background, so it fell out of
             # the difference (the cream block on the race car's top blade); then cut the real gaps
             colour = np.abs(e - np.asarray(base, dtype=np.int16)).max(2) > 38  # by colour, not brightness
             colour = ndimage.binary_opening(colour, iterations=1) & (np.asarray(region) > 0) & (np.asarray(white_alpha(edited)) > 128)
             al = np.maximum(np.asarray(alpha), np.where(colour, 255, 0))
             al = np.where(ndimage.binary_fill_holes(al > 40) & (al <= 40), 255, al)
-            alpha = Image.fromarray(np.where(gap, 0, al).astype(np.uint8))
+            al = np.where(gap, 0, al)
+            # loose specks (bits of the old background below the uprights) float on dark pages: only real pieces stay
+            lab, n = ndimage.label(al > 40)
+            if n:
+                sizes = ndimage.sum(al > 40, lab, range(1, n + 1))
+                speck = ndimage.binary_dilation(np.isin(lab, 1 + np.nonzero(sizes < 60)[0]), iterations=2) & ~(lab > 0) | np.isin(lab, 1 + np.nonzero(sizes < 60)[0])
+                al = np.where(speck, 0, al)
+            alpha = Image.fromarray(al.astype(np.uint8))
         layer = edited.convert('RGBA'); layer.putalpha(alpha)
         save(layer, os.path.join(OUT, base_id, part['id'] + '.webp'))
         approved.append(part['id']); tiles.append((part['id'], layer))
