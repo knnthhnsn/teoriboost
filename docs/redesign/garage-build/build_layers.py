@@ -62,6 +62,17 @@ def clean_body(alpha, wheels):
 def subject_bbox(im, tol=18):
     return im.convert('L').point(lambda v: 255 if v < 255 - tol else 0).getbbox()
 
+def load(path):
+    """a Codex image; the race car was drawn on magenta, which left a purple tint in its outline: there it goes grey"""
+    import numpy as np
+    from scipy import ndimage
+    a = np.asarray(Image.open(path).convert('RGB'), dtype=np.int16).copy()
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    band = ndimage.binary_dilation(a.min(2) >= 237, iterations=6)  # near the white background (or a white gap)
+    tint = band & (r - g > 10) & (b - g > 10) & (np.abs(r - b) < 40)
+    a[tint] = np.stack([g[tint]] * 3, 1)
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8))
+
 def white_alpha(im, tol=18):
     from collections import deque
     rgb = im.convert('RGB'); W, H = rgb.size; px = rgb.load(); seen = bytearray(W * H); q = deque()
@@ -75,7 +86,22 @@ def white_alpha(im, tol=18):
         if x < W - 1: q.append((x + 1, y))
         if y: q.append((x, y - 1))
         if y < H - 1: q.append((x, y + 1))
-    return Image.frombytes('L', (W, H), bytes(0 if s else 255 for s in seen)).filter(ImageFilter.GaussianBlur(0.7))
+    # the soft edge between the white background and the ink line is light grey: left in, it reads as a thin white
+    # outline on dark pages. Those light, colourless pixels go too, a few pixels deep, but never past the ink.
+    import numpy as np
+    from scipy import ndimage
+    out = np.frombuffer(bytes(seen), np.uint8).reshape(H, W).astype(bool)
+    a = np.asarray(rgb, dtype=np.int16); light = (a.min(2) >= 170) & (a.max(2) - a.min(2) <= 30)
+    pink = (a[..., 0] - a[..., 1] > 25) & (a[..., 2] - a[..., 1] > 25) & (a.min(2) >= 110)  # left from a magenta key (the race car)
+    for _ in range(4): out |= ndimage.binary_dilation(out) & (light | pink)
+    # the background also shows through gaps in the drawing (between a wing's blades): big closed patches of pure white
+    paper = (a.min(2) >= 250) & ~out
+    lab, n = ndimage.label(paper)
+    if n:
+        sizes = ndimage.sum(paper, lab, range(1, n + 1))
+        out |= np.isin(lab, 1 + np.nonzero(sizes > W * H * 0.0002)[0])
+        for _ in range(2): out |= ndimage.binary_dilation(out) & (light | pink)
+    return Image.fromarray(np.where(out, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.7))
 
 def _shift(img, dx, dy):
     canvas = Image.new('RGB', img.size, 'white'); canvas.paste(img, (dx, dy)); return canvas
@@ -165,7 +191,7 @@ def tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, ap
 
 def build(base_id):
     d = os.path.join(HERE, base_id)
-    base = Image.open(os.path.join(d, 'base.png')).convert('RGB')
+    base = load(os.path.join(d, 'base.png'))
     base_alpha = white_alpha(base)
     base_rgba = base.convert('RGBA'); base_rgba.putalpha(base_alpha); save(base_rgba, os.path.join(OUT, base_id, 'base.webp'))
     bb = subject_bbox(base); vehicle_area = max(1, count(base_alpha))
@@ -175,7 +201,7 @@ def build(base_id):
     split = False
     wheel_mask = None  # where the base's own wheels are; a wheel part always replaces all of it
     if os.path.exists(nowheels):
-        body = align(Image.open(nowheels).convert('RGB'), base)
+        body = align(load(nowheels), base)
         diff = ImageChops.difference(base, body).convert('L').point(lambda v: 255 if v > 38 else 0)
         diff = diff.filter(ImageFilter.MedianFilter(5)).filter(ImageFilter.MaxFilter(7))
         outside = count(ImageChops.multiply(diff, ImageChops.invert(region_mask(base.size, bb, SLOTS['wheels']['region'])))) / vehicle_area
@@ -192,7 +218,7 @@ def build(base_id):
         p = os.path.join(d, part['id'] + '.png')
         if not os.path.exists(p): continue
         slot = SLOTS[part['slot']]
-        edited = align(Image.open(p).convert('RGB'), base)
+        edited = align(load(p), base)
         region = region_mask(base.size, bb, slot['region'])
         if part.get('tint'):
             tint_layer(part, base, edited, base_alpha, region, vehicle_area, base_id, approved, rejects, tiles, wheel_mask); continue
@@ -209,6 +235,21 @@ def build(base_id):
         if outside > OUTSIDE_LIMIT or inside < 0.002:
             rejects.append({'part': part['id'], 'outside': round(outside, 3), 'inside': round(inside, 4)}); continue
         alpha = ImageChops.multiply(ImageChops.multiply(diff, region), white_alpha(edited)).filter(ImageFilter.GaussianBlur(0.8))
+        if 'wing' in part['id'] or 'spoiler' in part['id']:
+            # a wing stands up above the vehicle: the white between its blades and in its uprights' cut-outs is the
+            # background (it is white in the base there too), so it must be see-through
+            import numpy as np
+            from scipy import ndimage
+            e = np.asarray(edited, dtype=np.int16); light = (e.min(2) >= 200) & (e.max(2) - e.min(2) <= 24)
+            gap = (e.min(2) >= 235) & (e.max(2) - e.min(2) <= 14) & (np.asarray(base_alpha) < 128)
+            gap |= ndimage.binary_dilation(gap, iterations=2) & light
+            # first close the wing itself: a pale stripe on it is as bright as the white background, so it fell out of
+            # the difference (the cream block on the race car's top blade); then cut the real gaps
+            colour = np.abs(e - np.asarray(base, dtype=np.int16)).max(2) > 38  # by colour, not brightness
+            colour = ndimage.binary_opening(colour, iterations=1) & (np.asarray(region) > 0) & (np.asarray(white_alpha(edited)) > 128)
+            al = np.maximum(np.asarray(alpha), np.where(colour, 255, 0))
+            al = np.where(ndimage.binary_fill_holes(al > 40) & (al <= 40), 255, al)
+            alpha = Image.fromarray(np.where(gap, 0, al).astype(np.uint8))
         layer = edited.convert('RGBA'); layer.putalpha(alpha)
         save(layer, os.path.join(OUT, base_id, part['id'] + '.webp'))
         approved.append(part['id']); tiles.append((part['id'], layer))
@@ -231,7 +272,7 @@ def build(base_id):
     info = {'parts': approved, 'split': split, 'tint': tint, 'bbox': frac(bb)}
     plate = os.path.join(d, 'plate-blank.png')
     if os.path.exists(plate):  # a blank licence plate edit: its changed area is where the app writes the text
-        edited = align(Image.open(plate).convert('RGB'), base)
+        edited = align(load(plate), base)
         pd = ImageChops.difference(base, edited).convert('L').point(lambda v: 255 if v > 38 else 0)
         # only the plate itself: changed pixels that are now near white (the model may also nudge shading elsewhere)
         white = edited.convert('L').point(lambda v: 255 if v > 205 else 0)

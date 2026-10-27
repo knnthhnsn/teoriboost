@@ -1,6 +1,5 @@
 """Turns the road graphics Codex drew (docs/redesign/concepts) into app assets in dist/assets/road:
-  car-top.webp  the yellow car seen from above, cut out of its magenta background
-  tyre.webp     the big tyre, cut out of its magenta background
+  tyre.webp     the big tyre (the Common Side Effects one in docs/redesign/cse/tyre.png), cut out of its magenta background
   skid.webp     the white skid marks, faint: their brightness becomes the alpha (at 18 %), so they lie on any dark
                 surface as a texture
   skid-ink.webp the same marks in asphalt ink at 10 %, for the light page
@@ -34,10 +33,16 @@ def fit(im, longest):
     return im.resize((round(im.width * k), round(im.height * k)), Image.LANCZOS) if k < 1 else im
 
 os.makedirs(OUT, exist_ok=True)
-for name, longest in (('car-top', 640), ('tyre', 760)):
-    src = os.path.join(SRC, name + '.png')
+def inked(im):
+    """the soft edge takes the ink colour, so no magenta is left in it"""
+    a = np.asarray(im).copy(); soft = (a[:, :, 3] > 0) & (a[:, :, 3] < 250); a[soft, :3] = (31, 35, 40)
+    return Image.fromarray(a, 'RGBA')
+
+CSE = os.path.join(ROOT, 'docs', 'redesign', 'cse')
+for name, longest in (('tyre', 760),):  # (car-top.webp is no longer used: the road poster has the top-down cars)
+    src = os.path.join(CSE, name + '.png') if os.path.exists(os.path.join(CSE, name + '.png')) else os.path.join(SRC, name + '.png')
     if os.path.exists(src):
-        fit(cut(src), longest).save(os.path.join(OUT, name + '.webp'), 'WEBP', quality=86, method=6)
+        fit(inked(cut(src)) if src.startswith(CSE) else cut(src), longest).save(os.path.join(OUT, name + '.webp'), 'WEBP', quality=86, method=6)
         print(name, 'ok')
 marks = fit(Image.open(os.path.join(SRC, 'skid.png')).convert('L'), 1600)
 for name, rgb, strength in (('skid', (255, 255, 255), .18), ('skid-ink', (31, 35, 40), .1)):
