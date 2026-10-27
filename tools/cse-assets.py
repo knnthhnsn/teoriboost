@@ -34,11 +34,29 @@ def unkey(path):
     alpha = np.clip((np.abs(rgb - [255, 0, 255]).sum(axis=2) - 60) / 90, 0, 1) * 255
     return Image.fromarray(np.dstack([rgb, alpha]).astype(np.uint8), 'RGBA')
 
+def unsticker(im):
+    """drop a die-cut sticker's white border: the near-white pixels connected to the transparent outside go, so the
+    drawing ends at its own ink outline (small white details inside the drawing stay)"""
+    px = np.asarray(im).astype(int); rgb, al = px[:, :, :3], px[:, :, 3]
+    white = (rgb.min(axis=2) > 222) & (rgb.max(axis=2) - rgb.min(axis=2) < 26) & (al > 0)
+    lab, _ = ndimage.label(white | (al < 30))
+    edge = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
+    border = np.isin(lab, edge[edge > 0]) & white
+    # the sticker's white also shows through holes in the drawing (between the wheel's spokes, the key ring): large
+    # enclosed patches of pure white go too, small highlights stay
+    sizes = ndimage.sum(white, lab, range(1, lab.max() + 1))
+    border |= np.isin(lab, 1 + np.nonzero(sizes > white.size * .006)[0]) & white
+    border = ndimage.binary_dilation(border, iterations=1) & (rgb.min(axis=2) > 190)  # the soft rim between white and ink
+    out = px.copy(); out[border, 3] = 0
+    return Image.fromarray(out.astype(np.uint8), 'RGBA')
+
 for sub, out, size in (('icons', os.path.join(DIST, 'icons'), 128), ('nav', os.path.join(DIST, 'nav'), 128), ('illustrations', os.path.join(DIST, 'illustrations'), 720)):
     src = os.path.join(CSE, sub); os.makedirs(out, exist_ok=True)
     for f in sorted(os.listdir(src)) if os.path.isdir(src) else []:
         if not f.endswith('.png') or f.endswith('-old.png'): continue
-        square(crop(Image.open(os.path.join(src, f)).convert('RGBA')), size).save(os.path.join(out, f[:-4] + '.webp'), 'WEBP', quality=88, method=6)
+        im = Image.open(os.path.join(src, f)).convert('RGBA')
+        if sub == 'nav': im = unsticker(im)
+        square(crop(im), size).save(os.path.join(out, f[:-4] + '.webp'), 'WEBP', quality=88, method=6)
         print(sub, f)
 
 top = os.path.join(CSE, 'topdown'); art = os.path.join(ROOT, 'tools', 'rive', 'road-art'); os.makedirs(art, exist_ok=True)
