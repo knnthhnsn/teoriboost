@@ -31,7 +31,7 @@
     <a class="brand" href="#top" aria-label="TeoriBoost, til toppen"><img src="assets/icon.svg" alt="" width="36" height="36"><span>teoriboost<span class="brand-dot">.</span></span></a>
     <nav class="top-nav" aria-label="Sider" data-pillnav>
       <span class="nav-pill" aria-hidden="true"></span>
-      <a href="#saadan">Sådan virker det</a><a href="#proev">Prøv selv</a><a href="#garage">Garagen</a><a href="#koereskoler">Køreskoler</a>
+      <a href="#saadan">Sådan virker det</a><a href="#proev">Prøv selv</a><a href="#garage">Garagen</a><a href="#sneglen">Sneglen</a><a href="#koereskoler">Køreskoler</a>
     </nav>
     <a class="btn btn-ink btn-small top-cta" href="https://app.teoriboost.dk/">Åbn appen</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-btn><span class="menu-lines" aria-hidden="true"><i></i><i></i></span><span class="menu-label">Menu</span></button>
@@ -43,7 +43,8 @@
       <a href="#proev" style="--i:1">Prøv selv</a>
       <a href="#garage" style="--i:2">Garagen</a>
       <a href="#holdet" style="--i:3">Holdet</a>
-      <a href="#koereskoler" style="--i:4">Køreskoler</a>
+      <a href="#sneglen" style="--i:4">Spørg Sneglen</a>
+      <a href="#koereskoler" style="--i:5">Køreskoler</a>
     </nav>
     <a class="btn btn-ink menu-cta" href="https://app.teoriboost.dk/"><span>Åbn appen</span><i class="btn-disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></svg></i></a>
   </div>
@@ -79,7 +80,7 @@
             <svg viewBox="0 0 300 276" aria-hidden="true" focusable="false">
               <defs><path id="tooth-ring" d="M50,18 L250,18 A32,32 0 0 1 277.71,66 L177.71,239.2 A32,32 0 0 1 122.29,239.2 L22.29,66 A32,32 0 0 1 50,18 L250,18 A32,32 0 0 1 277.71,66 L177.71,239.2 A32,32 0 0 1 122.29,239.2 L22.29,66 A32,32 0 0 1 50,18"/></defs>
               <path class="tooth-shape" d="M50,50 L250,50 L150,223.2 Z"/>
-              <path class="tooth-mark" d="M104,128h13l17-34h-13zM127,128h13l17-34h-13zM150,128h13l17-34h-13z"/>
+              <path class="tooth-mark" d="M112,124.7h13l17-34h-13zM135,124.7h13l17-34h-13zM158,124.7h13l17-34h-13z"/>
               <text class="tooth-words"><textPath href="#tooth-ring" startOffset="0" textLength="801" lengthAdjust="spacing" data-tooth-text>Én regel ad gangen · Kør frem · Bestå med et smil · </textPath></text>
             </svg>
           </a>
@@ -126,7 +127,7 @@
         <p class="eyebrow eyebrow--dark" data-reveal>Kort fortalt</p>
         <h2 id="manifest-title" class="sr-only">Kort fortalt</h2>
         <div class="tri-wrap">
-          <p class="tri" data-paint><span class="tri-l" aria-hidden="true"></span><span class="tri-r" aria-hidden="true"></span>Hajtænder betyder, at du skal holde tilbage. Teorien skal du ikke holde dig tilbage fra. Fem minutter om dagen. Én regel ad gangen. Rigtige trafik&shy;situationer og forkla&shy;ringen med det samme, også når du svarer forkert. Det, der driller, kommer igen, indtil det sidder. Under&shy;vejs bliver bilen lækrere, og du bliver klar. Til prøven. Og til vejen.</p>
+          <p class="tri" data-paint><span class="tri-l" aria-hidden="true"></span><span class="tri-r" aria-hidden="true"></span>Hajtænder betyder, at du skal holde til&shy;bage. Teorien skal du ikke holde dig til&shy;bage fra. Fem minut&shy;ter om dagen. Én regel ad gangen. Rigtige trafik&shy;situationer og forkla&shy;ringen med det samme, også når du svarer forkert. Det, der driller, kommer igen, indtil det sidder. Under&shy;vejs bliver bilen læk&shy;rere, og du bliver klar. Til prøven. Og til vejen.<br><span class="tri-tip">Kør!</span></p>
         </div>
       </div>
     </section>
@@ -194,7 +195,7 @@
       <div class="wrap try-grid">
         <div class="try-copy">
           <p class="eyebrow" data-reveal>Prøv selv</p>
-          <h2 id="try-title" class="split" data-split>Ét spørgsmål. Lige her.</h2>
+          <h2 id="try-title" class="split" data-split>Ét&nbsp;spørgsmål. Lige her.</h2>
           <p class="try-lead" data-reveal>Ingen login. Sådan ser en øvelse ud i appen: en situation, et udsagn – og forklaringen bagefter, uanset hvad du svarer.</p>
         </div>
         <article class="q" aria-labelledby="q-title" data-reveal>
@@ -290,6 +291,52 @@
       </div>
     </section>
 
+    <!-- 7b. Spørg Sneglen: the AI helper. The chat plays as you scroll (questions, the rule cards it looks up, the
+         answer word by word, its sources, then a quiz), and Sneglen crawls along the bottom leaving a wet trail.
+         The answers are written from the app's own exercises and sources (dist/content.js). -->
+    <section class="ai" id="sneglen" aria-labelledby="ai-title">
+      <div class="ai-pin" data-pin="ai">
+        <div class="ai-sticky">
+          <div class="ai-grid wrap">
+            <div class="ai-copy">
+              <p class="eyebrow eyebrow--dark" data-reveal>Spørg Sneglen</p>
+              <h2 id="ai-title" class="split" data-split>Hurtige svar. Fra en snegl.</h2>
+              <p class="ai-lead" data-reveal>Sneglen er appens AI-hjælper. Den kender alle 58 regelkort, viser, hvor svaret kommer fra, og quizzer dig, når du er klar.</p>
+              <ul class="ai-facts" data-reveal>
+                <li><b>58</b><span>regelkort i hovedet</span></li>
+                <li><b>Kilder</b><span>til hvert svar</span></li>
+                <li><b>Quiz</b><span>når du vil teste dig</span></li>
+              </ul>
+              <div class="ai-chips" role="group" aria-label="Vælg et spørgsmål til Sneglen" data-ai-chips hidden>
+                <button type="button" data-chat="0" aria-pressed="false">Forklar hajtænder på 20 sekunder</button>
+                <button type="button" data-chat="1" aria-pressed="false">Hvor mange fejl må jeg have?</button>
+                <button type="button" data-chat="2" aria-pressed="false">Skal jeg altid køre 80, når skiltet siger 80?</button>
+                <button type="button" data-chat="3" aria-pressed="false">Quiz mig i rundkørsler</button>
+              </div>
+            </div>
+            <div class="ai-phone" data-tilt>
+              <div class="ai-top">
+                <span class="ai-avatar"><img src="assets/nav/snail.webp" alt="" width="128" height="128" loading="lazy"></span>
+                <span class="ai-who"><b>Sneglen</b><small><i aria-hidden="true"></i>Kender alle 58 regelkort</small></span>
+                <span class="pill">Eksempel</span>
+              </div>
+              <div class="ai-log" data-ai-log>
+                <p class="msg msg--snail">Hej! Jeg er Sneglen. Spørg mig om alt i køreteori. Jeg svarer ud fra appens regelkort, tjekker Færdselsstyrelsen og kan quizze dig.</p>
+                <p class="msg msg--me">Forklar hajtænder på 20 sekunder</p>
+                <div class="msg msg--snail"><p>Hajtænder betyder ubetinget vigepligt. Du holder tilbage for al kørende færdsel på den vej, du kører ind på eller over – også cyklister. Du behøver ikke holde helt stille, hvis der er frit. Ved en stoptavle standser du altid helt ved stoplinjen.</p><p class="msg-gag">Trekanten kræver respekt, ikke teaterpause.</p><p class="msg-src"><span>Færdselsloven</span><span>Bekendtgørelse om vejafmærkning</span></p></div>
+              </div>
+              <div class="ai-input" aria-hidden="true"><span>Spørg om alt i køreteori …</span><i class="ai-send"><svg viewBox="0 0 24 24"><path d="m6.5 14.5 5.5-5.5 5.5 5.5"/></svg></i></div>
+            </div>
+          </div>
+          <div class="ai-road" aria-hidden="true">
+            <svg class="ai-trail" data-ai-trail><path class="ai-trail-wet" d=""/><path class="ai-trail-shine" d=""/></svg>
+            <span class="ai-crawler" data-ai-crawler><img src="assets/cast/sneglen.webp" alt="" width="512" height="512" loading="lazy"><span class="ai-wait">Vent på mig!</span><span class="ai-hi">Spørg løs!</span></span>
+          </div>
+          <p class="ai-note wrap">Eksempler på svar, skrevet ud fra appens øvelser og kilder. Sneglen er AI og kan tage fejl: tjek reglen med din kørelærer, og skriv ikke personlige oplysninger.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- 8. Together: a race on the road, and the flame that grows with your streak -->
     <section class="race" id="hold" aria-labelledby="race-title">
       <div class="wrap race-head">
@@ -379,7 +426,7 @@
   <footer class="foot">
     <div class="wrap foot-top">
       <a class="brand brand--light" href="#top"><img src="assets/icon.svg" alt="" width="36" height="36"><span>teoriboost<span class="brand-dot">.</span></span></a>
-      <nav class="foot-nav" aria-label="Genveje"><a href="#saadan">Sådan virker det</a><a href="#proev">Prøv selv</a><a href="#garage">Garagen</a><a href="#koereskoler">Køreskoler</a><a href="https://app.teoriboost.dk/">Åbn appen</a></nav>
+      <nav class="foot-nav" aria-label="Genveje"><a href="#saadan">Sådan virker det</a><a href="#proev">Prøv selv</a><a href="#garage">Garagen</a><a href="#sneglen">Sneglen</a><a href="#koereskoler">Køreskoler</a><a href="https://app.teoriboost.dk/">Åbn appen</a></nav>
     </div>
     <div class="wrap foot-bottom">
       <p>© 2026 TeoriBoost</p>

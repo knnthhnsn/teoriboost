@@ -14,6 +14,13 @@ the app's own art. The application in `dist/` is a separate deployment and is ou
   itself by `tools/site-glowup.mjs` (the app on 127.0.0.1:4178), so tints and parts match the app exactly.
   Part names, Booster prices and earning rates are the app's (`dist/mybil-catalog.js`, `BOOSTER_RATES`).
 - The cast lines come from `dist/cast.js`; the streak flame changes at 1, 3, 7 and 30 days (`flameLevel`).
+- Spørg Sneglen: the app's chat as it looks, playing as you scroll (the question is typed, Sneglen looks through the
+  58 rule cards, answers word by word with its sources and a joke, then offers a quiz you can take). The answers
+  are labelled as examples and written from the app's exercises and sources (`dist/content.js` q-065, q-058,
+  q-059, q-047, q-036; the quiz is q-035). Chips let you ask the other questions. Sneglen crawls along the
+  bottom and leaves a wet trail; when you scroll faster than a snail it says "Vent på mig!".
+- Smooth scroll: a mouse wheel or touchpad glides with a little follow-through, and so do links within the page.
+  Touch, keys and the scrollbar stay native; it is off with reduced motion, and the chat keeps its own wheel.
 
 Content counts checked against the local application: 58 rule cards, 10 topics, 83 scenarios, and 25 scenarios
 per practice exam. The race and leaderboard are labelled as examples. Beta scope is stated on the page and in

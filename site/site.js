@@ -210,12 +210,13 @@
       }
       child.replaceWith(frag);
     }
-    // the triangle is exactly as tall as its words need, so they always end in the point
+    const tip = $('.tri-tip', tri); if (tip) ws.push(tip); // the last word, "Kør!", is the point: it lights up last, in yellow
+    // the triangle is exactly as tall as its words need, so "Kør!" lands in the point
     const fit = () => {
       const w = tri.offsetWidth; if (!w) return;
       let lo = .5, hi = 1.6;
-      for (let k = 0; k < 10; k++) { const mid = (lo + hi) / 2; tri.style.height = `${(mid * w).toFixed(1)}px`; if (tri.scrollHeight > tri.clientHeight + 1) lo = mid; else hi = mid; }
-      tri.style.height = `${(hi * 1.05 * w).toFixed(1)}px`; // a little air, so the last lines are not stretched thin
+      for (let k = 0; k < 14; k++) { const mid = (lo + hi) / 2; tri.style.height = `${(mid * w).toFixed(1)}px`; if (tri.scrollHeight > tri.clientHeight + 1) lo = mid; else hi = mid; }
+      tri.style.height = `${(hi * w).toFixed(1)}px`;
     };
     let t = 0, h = 1, lit = -1;
     parts.push({
@@ -365,6 +366,163 @@
     });
   }
 
+  /* ---------- 7b. Spørg Sneglen: the chat plays as you scroll, and Sneglen crawls behind, leaving a wet trail ---------- */
+  const aiSec = $('#sneglen'), log = $('[data-ai-log]');
+  if (aiSec && log) {
+    // Written from the app's own exercises and their sources (dist/content.js: q-065, q-058, q-059, q-047, q-036, q-035)
+    const CHATS = [
+      { q: 'Forklar hajtænder på 20 sekunder',
+        a: 'Hajtænder betyder ubetinget vigepligt. Du holder tilbage for al kørende færdsel på den vej, du kører ind på eller over – også cyklister. Du behøver ikke holde helt stille, hvis der er frit. Ved en stoptavle standser du altid helt ved stoplinjen.',
+        gag: 'Trekanten kræver respekt, ikke teaterpause.', src: ['Færdselsloven', 'Bekendtgørelse om vejafmærkning'] },
+      { q: 'Hvor mange fejl må jeg have?',
+        a: 'Højst fem. Teoriprøven har 25 situationer med fire udsagn hver, mindst ét af dem er rigtigt, og du har 25 minutter. Appens øveprøver bruger samme format, så du kan se, hvor du står.',
+        gag: '25-25-5. Den eneste trio uden comeback-turné.', src: ['Færdselsstyrelsen: Digitale teoriprøver'] },
+      { q: 'Skal jeg altid køre 80, når skiltet siger 80?',
+        a: 'Nej. Hastighedsgrænsen er et maksimum, ikke et mål. Vej, vejr og sigt kan kræve væsentligt lavere fart.',
+        gag: 'Tavlen er et loft, ikke en KPI.', src: ['Færdselsloven'] },
+      { q: 'Quiz mig i rundkørsler', intro: 'Klar? Her er en fra appen. Svar ja eller nej til hvert udsagn.',
+        quiz: { kicker: 'Rundkørsel · udkørslen', q: 'Du forlader en rundkørsel. En gående er på vej ud i fodgængerfeltet lige efter udkørslen, og en cyklist fortsætter langs rundkørslen. Hvad gør du?',
+          items: [['Accelererer gennem feltet, fordi jeg allerede er i rundkørslen.', false], ['Orienterer mig efter cyklisten og holder tilbage for den, før jeg krydser dens bane.', true],
+            ['Holder tilbage for den gående og standser om nødvendigt før fodgængerfeltet.', true], ['Ser kun mod bilerne bagfra.', false]],
+          why: 'Ved udkørslen skal du holde tilbage for cyklisten og for gående, der krydser eller er på vej ud i feltet; stands om nødvendigt.',
+          gag: 'Rundkørslen er rund; dit ansvar er stadig helt.' } },
+    ];
+    const GREETING = 'Hej! Jeg er Sneglen. Spørg mig om alt i køreteori. Jeg svarer ud fra appens regelkort, tjekker Færdselsstyrelsen og kan quizze dig.';
+    const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+    const stick = () => { log.scrollTop = log.scrollHeight; }; // like a chat: the newest message stays in view
+    const show = (node, on) => { if (!node) return; if (on && node.hidden) { node.hidden = false; if (!still()) { node.classList.remove('is-new'); void node.offsetWidth; node.classList.add('is-new'); } } else if (!on) node.hidden = true; };
+
+    function quizCard(qz) {
+      const box = el('div', 'quiz'), list = el('ul', 'quiz-list'), answers = qz.items.map(() => null);
+      const check = el('button', 'quiz-check', 'Tjek mine svar'), result = el('div', 'quiz-result'), burst = el('span', 'sparks');
+      check.type = 'button'; check.disabled = true; result.hidden = true; result.setAttribute('role', 'status'); burst.setAttribute('aria-hidden', 'true');
+      qz.items.forEach(([text], i) => {
+        const li = el('li'); li.append(el('span', '', text));
+        for (const [value, label] of [[true, 'Ja'], [false, 'Nej']]) {
+          const b = el('button', '', label); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', `${label}: ${text}`);
+          b.addEventListener('click', () => {
+            manual = true; log.setAttribute('aria-live', 'polite'); // once you answer, the chat is yours: scrolling no longer drives it
+            answers[i] = value; li.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+            li.classList.remove('is-right', 'is-wrong'); result.hidden = true; check.disabled = answers.includes(null);
+          });
+          li.append(b);
+        }
+        list.append(li);
+      });
+      check.addEventListener('click', () => {
+        let right = 0;
+        qz.items.forEach(([, truth], i) => { const ok = answers[i] === truth; right += ok; list.children[i].classList.toggle('is-right', ok); list.children[i].classList.toggle('is-wrong', !ok); });
+        result.replaceChildren(el('b', '', right === qz.items.length ? 'Alle fire rigtige!' : `${right} af ${qz.items.length} rigtige`), el('p', '', qz.why), el('p', 'msg-gag', qz.gag));
+        result.hidden = false; stick(); if (right === qz.items.length) sparks(burst, 18);
+      });
+      box.append(el('p', 'quiz-kicker', qz.kicker), el('p', 'quiz-q', qz.q), list, check, result, burst);
+      return box;
+    }
+
+    // one turn: my question (typed), Sneglen looking through the rule cards, then the answer word by word or a quiz
+    function turn(c) {
+      const t = { c, me: el('p', 'msg msg--me'), think: el('p', 'msg-think'), words: [] };
+      t.think.innerHTML = '<i aria-hidden="true"><b></b><b></b><b></b></i><span>Slår op i regelkortene</span> <em>1/58</em>';
+      if (c.quiz) { t.answer = el('p', 'msg msg--snail', c.intro); t.quiz = quizCard(c.quiz); }
+      else {
+        t.answer = el('div', 'msg msg--snail'); const p = el('p');
+        c.a.split(' ').forEach((w, i) => { const s = el('span', 'aw', w); if (i) p.append(' '); p.append(s); t.words.push(s); });
+        t.gag = el('p', 'msg-gag', c.gag); t.src = el('p', 'msg-src'); c.src.forEach(s => t.src.append(el('span', '', s)));
+        t.answer.append(p, t.gag, t.src);
+      }
+      [t.me, t.think, t.answer, t.quiz, t.gag, t.src].forEach(n => { if (n) n.hidden = true; });
+      return t;
+    }
+    function play(t, k) { // k: 0..1 through this turn
+      const typed = t.c.q.slice(0, Math.round(clamp(k / .2) * t.c.q.length));
+      if (t.me.textContent !== typed) t.me.textContent = typed;
+      show(t.me, typed.length > 0);
+      show(t.think, k >= .22 && k < .38);
+      if (k >= .22 && k < .38) t.think.querySelector('em').textContent = `${1 + Math.round(clamp((k - .22) / .14) * 57)}/58`;
+      show(t.answer, k >= .38);
+      if (t.quiz) show(t.quiz, k >= .5);
+      else {
+        const lit = Math.round(clamp((k - .4) / .42) * t.words.length);
+        t.words.forEach((w, i) => w.classList.toggle('on', i < lit));
+        show(t.gag, k >= .86); show(t.src, k >= .92);
+      }
+      stick();
+    }
+    const reset = turns => {
+      const hi = el('p', 'msg msg--snail', GREETING);
+      log.replaceChildren(hi, ...turns.flatMap(t => [t.me, t.think, t.answer, t.quiz].filter(Boolean)));
+    };
+
+    // the story the scroll tells: the hajtænder question, then a quiz
+    const story = [turn(CHATS[0]), turn(CHATS[3])];
+    reset(story);
+    let manual = false, storyP = -1;
+    const playStory = p => {
+      if (manual || p === storyP) return; storyP = p;
+      play(story[0], clamp((p - .02) / .5)); play(story[1], clamp((p - .58) / .34));
+    };
+
+    // the chips: ask Sneglen yourself; the chat then answers in its own time
+    const chips = $('[data-ai-chips]');
+    let timer = 0;
+    if (chips) {
+      chips.hidden = false;
+      chips.addEventListener('click', e => {
+        const b = e.target.closest('[data-chat]'); if (!b) return;
+        const c = CHATS[Number(b.dataset.chat)]; if (!c) return;
+        manual = true; cancelAnimationFrame(timer);
+        $$('[data-chat]', chips).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+        const t = turn(c); reset([t]); log.setAttribute('aria-live', 'polite');
+        if (still()) { play(t, 1); return; }
+        const t0 = performance.now(), dur = c.quiz ? 2600 : 3800;
+        const step = now => { const k = clamp((now - t0) / dur); play(t, k); if (k < 1) timer = requestAnimationFrame(step); };
+        timer = requestAnimationFrame(step);
+      });
+    }
+
+    // the road: a wavy line along the bottom; Sneglen follows the story slowly, so it lags when you scroll fast
+    const road = $('.ai-road', aiSec), svg = $('[data-ai-trail]', aiSec), crawler = $('[data-ai-crawler]', aiSec);
+    const wet = $('.ai-trail-wet', svg), shine = $('.ai-trail-shine', svg);
+    const pin = pinned($('[data-pin="ai"]')); const pinOn = () => wide.matches && !still();
+    let L = 1, cw = 100, ch = 100, phoneTop = 0, phoneH = 1, target = 0, t = 0, last = 0, running = false;
+    const phone = $('.ai-phone', aiSec);
+    const place = () => {
+      if (!L) return;
+      const at = clamp(t) * L, pt = wet.getPointAtLength(at), ahead = wet.getPointAtLength(Math.min(L, at + 3));
+      const a = Math.atan2(ahead.y - pt.y, ahead.x - pt.x);
+      crawler.style.transform = `translate(${(pt.x - cw / 2).toFixed(1)}px,${(pt.y - ch * .92).toFixed(1)}px) rotate(${a.toFixed(3)}rad)`;
+      const off = (L * (1 - clamp(t))).toFixed(1); wet.style.strokeDashoffset = off; shine.style.strokeDashoffset = off;
+      crawler.classList.toggle('is-behind', target - t > .07);
+    };
+    const tick = now => {
+      const dt = Math.min(64, now - (last || now)); last = now;
+      t += (target - t) * (1 - Math.exp(-dt / 700));
+      place();
+      if (running) requestAnimationFrame(tick);
+    };
+    parts.push({
+      measure() {
+        pin.measure(); phoneTop = topOf(phone); phoneH = phone.offsetHeight;
+        const w = road.offsetWidth, h = road.offsetHeight;
+        const d = `M ${-60} ${(h * .62).toFixed(1)} C ${(w * .2).toFixed(1)} ${(h * .12).toFixed(1)}, ${(w * .36).toFixed(1)} ${(h * .98).toFixed(1)}, ${(w * .55).toFixed(1)} ${(h * .56).toFixed(1)} S ${(w * .86).toFixed(1)} ${(h * .1).toFixed(1)}, ${w + 60} ${(h * .5).toFixed(1)}`;
+        wet.setAttribute('d', d); shine.setAttribute('d', d);
+        L = wet.getTotalLength(); [wet, shine].forEach(p => { p.style.strokeDasharray = `${L.toFixed(1)}`; });
+        cw = crawler.offsetWidth; ch = cw; // the snail art is square; its image may not have loaded yet
+        if (still()) { t = target; place(); }
+      },
+      update(y) {
+        const p = still() ? 1 : pinOn() ? pin.p(y) : clamp((y + vh * .8 - phoneTop) / (phoneH + vh * .2));
+        playStory(p);
+        target = .04 + p * .9;
+        if (still()) { t = target; place(); }
+      },
+    });
+    new IntersectionObserver(([e]) => {
+      running = e.isIntersecting && !still();
+      if (running) { last = 0; requestAnimationFrame(tick); }
+    }).observe(aiSec);
+  }
+
   /* ---------- 10. answers open smoothly ---------- */
   for (const d of $$('.faq details')) {
     const s = $('summary', d), a = $('.faq-a', d);
@@ -385,11 +543,12 @@
   /* ---------- 11. the finish line: the race car crosses the road as you arrive ---------- */
   const fin = $('[data-final]'), fcar = $('[data-final-car]');
   if (fin && fcar) {
-    let t = 0, h = 1, roadW = 0, cw = 0;
+    let t = 0, roadW = 0, cw = 0;
     parts.push({
-      measure() { t = topOf(fin); h = fin.offsetHeight; roadW = fcar.parentElement.offsetWidth; cw = fcar.offsetWidth; },
+      // the car sets off when the road comes into view and is across by the time the road reaches the upper third
+      measure() { t = topOf(fcar.parentElement); roadW = fcar.parentElement.offsetWidth; cw = fcar.offsetWidth; },
       update(y) {
-        const p = still() ? .55 : clamp((y + vh - t) / (h + vh * .1));
+        const p = still() ? .55 : clamp((y + vh - t) / (vh * .7));
         fcar.style.setProperty('--fcx', `${(-cw + p * (roadW + cw * 1.15)).toFixed(1)}px`);
         fcar.parentElement.style.setProperty('--fp', p.toFixed(4));
       },
@@ -414,6 +573,49 @@
       });
       el.addEventListener('pointerleave', () => { el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
     }
+  }
+
+  /* ---------- smooth scroll: the wheel glides with a little follow-through, and so do links within the page.
+     Only for a mouse or touchpad on a computer: touch, keys and the scrollbar stay native, and it is off with
+     reduced motion. Anything that scrolls by itself (the chat) keeps its own wheel. ---------- */
+  if (fine.matches && !still()) {
+    let goal = scrollY, now = scrollY, glide = 0, prev = 0;
+    const room = () => document.documentElement.scrollHeight - innerHeight;
+    const step = ts => {
+      const dt = Math.min(48, ts - (prev || ts)); prev = ts;
+      now += (goal - now) * (1 - Math.exp(-dt / 105));
+      if (Math.abs(goal - now) < .4) now = goal;
+      scrollTo(0, now);
+      if (now === goal) { glide = 0; prev = 0; } else glide = requestAnimationFrame(step);
+    };
+    const glideTo = y => { goal = clamp(y, 0, room()); if (!glide) { now = scrollY; prev = 0; glide = requestAnimationFrame(step); } };
+    const ownScroll = (el, dy) => {
+      for (; el && el !== document.body && el !== doc; el = el.parentElement) {
+        if (!/(auto|scroll)/.test(getComputedStyle(el).overflowY) || el.scrollHeight <= el.clientHeight + 1) continue;
+        if (dy > 0 ? el.scrollTop + el.clientHeight < el.scrollHeight - 1 : el.scrollTop > 0) return true;
+      }
+      return false;
+    };
+    addEventListener('wheel', e => {
+      if (e.ctrlKey || menuOpen || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      const dy = e.deltaY * (e.deltaMode === 1 ? 18 : e.deltaMode === 2 ? innerHeight : 1);
+      if (ownScroll(e.target, dy)) return;
+      e.preventDefault();
+      glideTo((glide ? goal : scrollY) + dy);
+    }, { passive: false });
+    // keys, the scrollbar or a find-in-page moved the page: start from there next time
+    addEventListener('scroll', () => { if (!glide) goal = now = scrollY; }, { passive: true });
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#"]'); if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      const id = decodeURIComponent(a.getAttribute('href').slice(1)), to = id === 'top' || !id ? null : document.getElementById(id);
+      if (id && id !== 'top' && !to) return;
+      e.preventDefault();
+      history.pushState(null, '', `#${id || 'top'}`);
+      glideTo(to ? topOf(to) - (parseFloat(getComputedStyle(doc).scrollPaddingTop) || 0) : 0);
+      const focusTarget = to || document.body; // keyboard and screen reader users land where they went
+      if (to && !to.matches('a,button,input,select,textarea,[tabindex]')) to.setAttribute('tabindex', '-1');
+      focusTarget.focus?.({ preventScroll: true });
+    });
   }
 
   addEventListener('scroll', request, { passive: true });

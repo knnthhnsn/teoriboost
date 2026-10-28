@@ -15,6 +15,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'site', 'assets', 'glowup');
 const PY = process.env.PY || join(process.env.LOCALAPPDATA || '', 'natkoersel-gen', 'venv', 'Scripts', 'python.exe');
 const SIZE = 720;
+const PLATE_FIX = {}; // the catalog's plate boxes now come from each plate's white face (build_layers.py plate_face)
 const NAMES = { restore: 'Restaurering', paint: 'Lakering', stripe: 'Striber', windows: 'Tonede ruder', wheels: 'Fælge', mirrors: 'Spejle',
   charm: 'Pynt', top: 'Tag', plate: 'Nummerplade', lights: 'Lygter', front: 'Front', bar: 'Kofangerbøjle', exhaust: 'Udstødning', kit: 'Bodykit', neon: 'Neon' };
 
@@ -59,6 +60,14 @@ for (const [base, parts] of Object.entries(plan)) {
   for (let i = 0; i < parts.length; i++) {
     await p.evaluate(([base, i]) => { document.body.innerHTML = `<div class="shot">${window.__plan[base][i].html}</div>`; }, [base, i]);
     await p.evaluate(() => Promise.all([...document.images].map(im => im.decode().catch(() => {}))));
+    // the scooter's plate box in the app's catalog starts 5 % to the right of its drawn plate; use the drawn plate.
+    // Then the plate text shrinks until it fits inside it (wide letters like Æ overflowed the app's sizing).
+    await p.evaluate(fix => {
+      const t = document.querySelector('.mybil-plate b'); if (!t) return;
+      if (fix) Object.assign(t.parentElement.style, { left: `${fix[0] * 100}%`, top: `${fix[1] * 100}%`, width: `${(fix[2] - fix[0]) * 100}%`, height: `${(fix[3] - fix[1]) * 100}%` });
+      let fs = parseFloat(getComputedStyle(t).fontSize);
+      while (t.offsetWidth > t.parentElement.clientWidth * .9 && fs > 4) { fs -= .25; t.style.fontSize = `${fs}px`; }
+    }, PLATE_FIX[base] || null);
     await p.waitForTimeout(80);
     const png = join(OUT, `${base}-${String(i).padStart(2, '0')}.png`);
     await p.locator('.shot').screenshot({ path: png, omitBackground: true });
