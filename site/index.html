@@ -1,84 +1,392 @@
 <!doctype html>
-<html lang="da">
+<html lang="da" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>TeoriBoost — køreteori, du får lyst til at øve</title>
-  <meta name="description" content="Lær dansk køreteori i små bidder. Øv trafiksituationer, forstå dine fejl og tag en øveprøve. Undervejs bygger du din egen bil. Prøv TeoriBoost i browseren.">
-  <meta name="theme-color" content="#F8F8F2">
+  <title>TeoriBoost — bestå teoriprøven med et smil</title>
+  <meta name="description" content="Lær dansk køreteori i små bidder. Øv rigtige trafiksituationer, få forklaringen med det samme, tag en øveprøve – og byg din egen bil undervejs. Direkte i browseren.">
+  <meta name="theme-color" content="#FFD60A">
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://teoriboost.dk/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://teoriboost.dk/">
-  <meta property="og:title" content="TeoriBoost — køreteori, du får lyst til at øve">
-  <meta property="og:description" content="Én regel ad gangen. Korte lektioner, trafiksituationer og øveprøver — med lidt mere lyst til næste tur.">
-  <meta property="og:image" content="https://teoriboost.dk/assets/og-redesign.jpg">
+  <meta property="og:title" content="TeoriBoost — bestå teoriprøven med et smil">
+  <meta property="og:description" content="Fem minutter om dagen. Rigtige trafiksituationer, forklaringen med det samme – og en bil, der bliver lækrere, jo mere du lærer.">
+  <meta property="og:image" content="https://teoriboost.dk/assets/og.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="800">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="da_DK">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="assets/fonts/rubik-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/atkinson-400.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.className = 'js';</script>
   <link rel="stylesheet" href="site.css">
   <script defer src="site.js"></script>
 </head>
 <body id="top">
   <a class="skip" href="#main">Spring til indholdet</a>
-  <header class="top">
-    <a class="brand" href="#top" aria-label="TeoriBoost, til toppen"><img src="assets/icon.svg" alt="" width="32" height="32"><span>teoriboost<span class="brand-dot">.</span></span></a>
-    <nav class="top-nav" aria-label="Sider"><a href="#saadan">Sådan virker det</a><a href="#min-bil">Din garage</a><a href="#koereskoler">Til køreskoler</a></nav>
-    <a class="btn btn-small btn-ink" href="https://app.teoriboost.dk/">Åbn appen <span aria-hidden="true">↗</span></a>
+
+  <header class="top is-dark" data-top>
+    <a class="brand" href="#top" aria-label="TeoriBoost, til toppen"><img src="assets/icon.svg" alt="" width="36" height="36"><span>teoriboost<span class="brand-dot">.</span></span></a>
+    <nav class="top-nav" aria-label="Sider" data-pillnav>
+      <span class="nav-pill" aria-hidden="true"></span>
+      <a href="#saadan">Sådan virker det</a><a href="#proev">Prøv selv</a><a href="#garage">Garagen</a><a href="#koereskoler">Køreskoler</a>
+    </nav>
+    <a class="btn btn-ink btn-small top-cta" href="https://app.teoriboost.dk/">Åbn appen</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-btn><span class="menu-lines" aria-hidden="true"><i></i><i></i></span><span class="menu-label">Menu</span></button>
   </header>
+
+  <div class="menu" id="menu" data-menu hidden>
+    <nav class="menu-nav" aria-label="Menu">
+      <a href="#saadan" style="--i:0">Sådan virker det</a>
+      <a href="#proev" style="--i:1">Prøv selv</a>
+      <a href="#garage" style="--i:2">Garagen</a>
+      <a href="#holdet" style="--i:3">Holdet</a>
+      <a href="#koereskoler" style="--i:4">Køreskoler</a>
+    </nav>
+    <a class="btn btn-ink menu-cta" href="https://app.teoriboost.dk/"><span>Åbn appen</span><i class="btn-disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></svg></i></a>
+  </div>
+
   <main id="main">
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Køreteori til kategori B <span class="beta">Beta</span></p>
-        <h1 id="hero-title">Lidt teori.<br>Mere <span class="underlined">køreglæde.</span></h1>
-        <p class="lead">Få styr på reglerne i små bidder. Øv dig i trafikken, forstå dine fejl — og byg din egen bil undervejs.</p>
-        <div class="cta-row"><a class="btn btn-yellow" href="https://app.teoriboost.dk/">Kom i gang <span aria-hidden="true">↗</span></a><a class="text-link" href="#proev">Prøv et spørgsmål <span aria-hidden="true">↓</span></a></div>
-        <p class="hero-note"><span aria-hidden="true">↳</span> Direkte i browseren. På mobilen og computeren.</p>
-        <div class="hero-bottom"><span class="route-symbol" aria-hidden="true">///</span><p>Små skridt mod<br><strong>en mere sikker tur.</strong></p><a href="#saadan" class="round-link" aria-label="Se hvordan TeoriBoost virker">↓</a></div>
+    <!-- 1. The crossing. Our logo is a zebra crossing, so the headline is painted on one: a stripe per word, in
+         perspective, and scrolling walks you across it (site.js). Road lettering is stretched tall, as on a real road. -->
+    <section class="hero" aria-labelledby="hero-title" data-hero>
+      <div class="hero-pin" data-pin="hero">
+        <div class="hero-sticky">
+          <div class="xing" aria-hidden="true">
+            <div class="xing-road" data-xing>
+              <span class="stripe stripe--brand"><b>teoriboost</b></span>
+              <span class="stripe"><b>Bestå</b></span>
+              <span class="stripe"><b>teoriprøven.</b></span>
+              <span class="stripe"><b>Med et</b></span>
+              <span class="stripe stripe--smile"><svg viewBox="0 0 120 42"><circle cx="45" cy="9" r="7"/><circle cx="75" cy="9" r="7"/><path d="M30 23c10 12 50 12 60 0"/></svg></span>
+              <span class="stripe"></span>
+            </div>
+          </div>
+          <div class="hero-inner">
+            <p class="chip hero-chip" data-reveal><span class="chip-dot" aria-hidden="true"></span>Køreteori til kategori B<span class="beta">Beta</span></p>
+            <h1 id="hero-title" class="sr-only">teoriboost. Bestå teoriprøven. Med et smil.</h1>
+            <div class="hero-foot">
+              <p class="lead" data-reveal style="--d:.2s">Fem minutter om dagen. Rigtige trafiksituationer, forklaringen med det samme – og en bil, der bliver lækrere, jo mere du lærer.</p>
+              <div class="cta-row" data-reveal style="--d:.3s">
+                <a class="btn btn-yellow btn-big" href="https://app.teoriboost.dk/" data-magnetic><span>Kom i gang</span><i class="btn-disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></svg></i></a>
+                <a class="link link--light" href="#proev">Prøv et spørgsmål her</a>
+              </div>
+            </div>
+          <!-- a hajtand (the yield marking) with words driving round it; hovering it brings them to a stop -->
+          <a class="tooth" href="#saadan" data-tooth aria-label="Se, hvordan TeoriBoost virker">
+            <svg viewBox="0 0 300 276" aria-hidden="true" focusable="false">
+              <defs><path id="tooth-ring" d="M50,18 L250,18 A32,32 0 0 1 277.71,66 L177.71,239.2 A32,32 0 0 1 122.29,239.2 L22.29,66 A32,32 0 0 1 50,18 L250,18 A32,32 0 0 1 277.71,66 L177.71,239.2 A32,32 0 0 1 122.29,239.2 L22.29,66 A32,32 0 0 1 50,18"/></defs>
+              <path class="tooth-shape" d="M50,50 L250,50 L150,223.2 Z"/>
+              <path class="tooth-mark" d="M104,128h13l17-34h-13zM127,128h13l17-34h-13zM150,128h13l17-34h-13z"/>
+              <text class="tooth-words"><textPath href="#tooth-ring" startOffset="0" textLength="801" lengthAdjust="spacing" data-tooth-text>Én regel ad gangen · Kør frem · Bestå med et smil · </textPath></text>
+            </svg>
+          </a>
+          </div>
+          <p class="hero-hint" aria-hidden="true"><i></i>Scroll, og gå over</p>
+
+        </div>
       </div>
-      <div class="hero-visual" id="proev">
-        <div class="visual-caption"><span><i aria-hidden="true"></i> Et kig ind i TeoriBoost</span><span>01 / Øv dig</span></div>
-        <article class="question-card" aria-labelledby="sample-title">
-          <div class="question-top"><span>Grundmanøvrer</span><span class="mini-dots" aria-hidden="true">● ● ○</span></div>
-          <figure class="question-image"><img src="assets/learning/hoejresving.webp" srcset="assets/learning/hoejresving-640.webp 640w, assets/learning/hoejresving.webp 1280w" sizes="(max-width: 600px) calc(100vw - 80px), (max-width: 800px) 500px, 580px" alt="Illustreret trafiksituation: en bil ved et højresving og en cyklist på cykelstien til højre." width="1586" height="992" fetchpriority="high"><figcaption>Illustration fra appens øvelser</figcaption></figure>
-          <div class="question-body"><p class="eyebrow">Prøv selv · ét udsagn fra en øvelse</p><h2 id="sample-title">Hvad gør du før højresving?</h2><p class="question-context">Du kører langs en cykelsti og vil dreje til højre. En hurtig elcyklist er bag dig og kan nå op på siden før svinget.</p><p class="statement">“Orienterer mig igen lige før svinget.”</p>
-            <div class="sample-answers" role="group" aria-label="Er udsagnet rigtigt?" hidden><button type="button" data-answer="yes">Ja <span aria-hidden="true">↗</span></button><button type="button" data-answer="no">Nej <span aria-hidden="true">↗</span></button></div>
-            <div class="sample-feedback" id="sample-feedback" role="status" aria-live="polite" hidden><strong id="sample-result"></strong><p>Cyklisten kan flytte sig hurtigt. Gentag orienteringen og hold tilbage for ligeudkørende cykeltrafik.</p><button class="sample-reset" type="button">Prøv igen <span aria-hidden="true">↺</span></button></div>
-            <noscript><p class="sample-static"><strong>Ja.</strong> Cyklisten kan flytte sig hurtigt. Gentag orienteringen og hold tilbage for ligeudkørende cykeltrafik.</p></noscript>
+    </section>
+
+    <!-- 2. The ten topics, as a road sign ticker that follows your scrolling -->
+    <div class="ticker" aria-label="De ti emner i appen">
+      <div class="ticker-row ticker-row--big" data-ticker="1">
+        <ul class="ticker-track">
+          <li>Bilen før turen</li><li>Grundmanøvrer</li><li>Køretøjer omkring dig</li><li>Mennesket bag rattet</li><li>Vej, vejr og udsyn</li>
+          <li>Grundregler og anvisninger</li><li>Kryds og sårbare trafikanter</li><li>Manøvrer på vej</li><li>Risiko, miljø og køreteknik</li><li>Kørekort og prøve</li>
+        </ul>
+      </div>
+      <div class="ticker-row ticker-row--small" data-ticker="-1" aria-hidden="true">
+        <ul class="ticker-track">
+          <li>Langsomt er også en hastighed</li><li>Asfalt har humør</li><li>Politibetjenten slår algoritmen</li><li>Se igen. Cyklisten er stadig der.</li>
+          <li>Hjernen har også en advarselslampe</li><li>Fysik er ligeglad med din streak</li><li>Blind vinkel, stor røv, lang reaktion</li><li>Papirarbejde: den endelige boss</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. What is in the app right now -->
+    <section class="stats wrap" aria-labelledby="stats-title">
+      <div class="stats-head">
+        <p class="eyebrow" data-reveal>I appen lige nu</p>
+        <h2 id="stats-title" class="split" data-split>Små bidder. Rigtige situationer.</h2>
+      </div>
+      <dl class="stats-grid">
+        <div class="stat" data-reveal style="--d:0s"><dt>regelkort</dt><dd data-count="58">58</dd></div>
+        <div class="stat" data-reveal style="--d:.08s"><dt>emner</dt><dd data-count="10">10</dd></div>
+        <div class="stat" data-reveal style="--d:.16s"><dt>trafik&shy;situationer</dt><dd data-count="83">83</dd></div>
+        <div class="stat" data-reveal style="--d:.24s"><dt>situationer i hver øveprøve</dt><dd data-count="25">25</dd></div>
+      </dl>
+    </section>
+
+    <!-- 3b. Typography set as a hajtand, painted on the asphalt as you scroll; then a zebra crossing the snail walks over -->
+    <section class="manifest" aria-labelledby="manifest-title">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--dark" data-reveal>Kort fortalt</p>
+        <h2 id="manifest-title" class="sr-only">Kort fortalt</h2>
+        <div class="tri-wrap">
+          <p class="tri" data-paint><span class="tri-l" aria-hidden="true"></span><span class="tri-r" aria-hidden="true"></span>Hajtænder betyder, at du skal holde tilbage. Teorien skal du ikke holde dig tilbage fra. Fem minutter om dagen. Én regel ad gangen. Rigtige trafik&shy;situationer og forkla&shy;ringen med det samme, også når du svarer forkert. Det, der driller, kommer igen, indtil det sidder. Under&shy;vejs bliver bilen lækrere, og du bliver klar. Til prøven. Og til vejen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Four stops: a horizontal road while you scroll down -->
+    <section class="how" id="saadan" aria-labelledby="how-title">
+      <div class="how-pin" data-pin="how">
+        <div class="how-sticky">
+          <div class="how-head wrap">
+            <p class="eyebrow" data-reveal>Sådan virker det</p>
+            <h2 id="how-title" class="split" data-split>Fire stop på vejen til prøven.</h2>
+          </div>
+          <div class="how-window" data-how-window>
+            <ol class="how-track" data-how-track>
+              <li class="stop stop--white" data-tilt>
+                <div class="stop-top"><span class="stop-n">01</span><img src="assets/nav/wheel.webp" alt="" width="128" height="128" loading="lazy"></div>
+                <h3><span>Lær.</span> Fang reglen.</h3>
+                <p>Korte lektioner tager én regel ad gangen. Du ser den i en situation og bruger den selv bagefter.</p>
+                <div class="mock mock-lesson" aria-hidden="true">
+                  <span class="mock-kicker">Lektion · Blink, horn og lys</span>
+                  <b>Blink giver ingen ret</b>
+                  <span class="mock-text">Blink i passende afstand, så andre kan forstå og bruge informationen.</span>
+                  <span class="mock-dots"><i class="on"></i><i class="on"></i><i></i><i></i></span>
+                </div>
+              </li>
+              <li class="stop stop--yellow" data-tilt>
+                <div class="stop-top"><span class="stop-n">02</span><img src="assets/nav/light.webp" alt="" width="128" height="128" loading="lazy"></div>
+                <h3><span>Øv.</span> Det, der driller.</h3>
+                <p>Det, du er usikker på, kommer igen med mellemrum. Du får forklaringen – også når du svarer forkert.</p>
+                <div class="mock mock-judge" aria-hidden="true">
+                  <span class="mock-kicker">Tåge, regn og sol</span>
+                  <span class="mock-row"><span>Sænker farten og øger afstanden.</span><b class="yes">Ja</b><b>Nej</b></span>
+                  <span class="mock-row"><span>Tænder fjernlys mod de forankørende.</span><b>Ja</b><b class="no">Nej</b></span>
+                </div>
+              </li>
+              <li class="stop stop--ink" data-tilt>
+                <div class="stop-top"><span class="stop-n">03</span><img src="assets/nav/exam.webp" alt="" width="128" height="128" loading="lazy"></div>
+                <h3><span>Prøve.</span> Som den rigtige.</h3>
+                <p>25 situationer på tid. Bagefter ser du, hvilke regler der skal have en tur mere.</p>
+                <div class="mock mock-exam" aria-hidden="true">
+                  <span class="mock-trio"><span><b>25</b>situationer</span><span><b>25 min</b>tid</span><span><b>≤ 5</b>fejl</span></span>
+                  <span class="mock-bar"><i></i></span>
+                  <span class="mock-text">Situation 10 af 25</span>
+                </div>
+              </li>
+              <li class="stop stop--white" data-tilt>
+                <div class="stop-top"><span class="stop-n">04</span><img src="assets/nav/snail.webp" alt="" width="128" height="128" loading="lazy"></div>
+                <h3><span>Spørg.</span> Når en regel driller.</h3>
+                <p>Sneglen svarer ud fra appens regelkort. AI kan tage fejl, så tjek reglen med din kørelærer.</p>
+                <div class="mock mock-chat" aria-hidden="true">
+                  <span class="bubble bubble--me">Hvornår har jeg ubetinget vigepligt?</span>
+                  <span class="bubble bubble--snail">Ved hajtænder eller en stoptavle. Så holder du tilbage for alle på den vej, du skal ind på.</span>
+                  <span class="mock-source">Fra appens regelkort</span>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div class="how-road" aria-hidden="true"><span class="how-line"><i data-how-fill></i></span><img class="how-car" src="assets/nav/car.webp" alt="" width="128" height="128" data-how-car></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. One real exercise from the app -->
+    <section class="try" id="proev" aria-labelledby="try-title">
+      <div class="wrap try-grid">
+        <div class="try-copy">
+          <p class="eyebrow" data-reveal>Prøv selv</p>
+          <h2 id="try-title" class="split" data-split>Ét spørgsmål. Lige her.</h2>
+          <p class="try-lead" data-reveal>Ingen login. Sådan ser en øvelse ud i appen: en situation, et udsagn – og forklaringen bagefter, uanset hvad du svarer.</p>
+        </div>
+        <article class="q" aria-labelledby="q-title" data-reveal>
+          <figure class="q-photo" data-zoom>
+            <img src="assets/learning/hoejresving.webp" srcset="assets/learning/hoejresving-640.webp 640w, assets/learning/hoejresving.webp 1280w" sizes="(max-width: 900px) calc(100vw - 32px), 640px" alt="Illustreret trafiksituation: en bil ved et højresving og en cyklist på cykelstien til højre." width="1586" height="992" loading="lazy">
+            <figcaption>Illustration fra appens øvelser</figcaption>
+          </figure>
+          <div class="q-body">
+            <p class="q-kicker">Grundmanøvrer · Se situationen. Tag stilling.</p>
+            <h3 id="q-title">Hvad gør du før højresving?</h3>
+            <p class="q-context">Du kører langs en cykelsti og vil dreje til højre. En hurtig elcyklist er bag dig og kan nå op på siden før svinget.</p>
+            <div class="q-row">
+              <p class="q-statement">Orienterer mig igen lige før svinget.</p>
+              <div class="q-answers" role="group" aria-label="Er udsagnet rigtigt?" data-answers hidden>
+                <button type="button" data-answer="yes">Ja</button><button type="button" data-answer="no">Nej</button>
+              </div>
+            </div>
+            <div class="q-feedback" role="status" aria-live="polite" data-feedback hidden>
+              <img class="q-cast" src="assets/cast/blink.webp" alt="" width="512" height="512" loading="lazy" data-cast>
+              <div class="q-feedback-text">
+                <p class="q-line"><b data-cast-name>Blink</b> <span data-cast-line></span></p>
+                <strong data-result></strong>
+                <p>Cyklisten kan flytte sig hurtigt. Gentag orienteringen, og hold tilbage for ligeudkørende cykeltrafik.</p>
+                <button class="q-reset" type="button" data-reset>Prøv igen</button>
+              </div>
+            </div>
+            <noscript><p class="q-static"><strong>Svaret er ja.</strong> Cyklisten kan flytte sig hurtigt. Gentag orienteringen, og hold tilbage for ligeudkørende cykeltrafik.</p></noscript>
           </div>
         </article>
-        <div class="visual-foot"><span class="tiny-icon" aria-hidden="true">↳</span><span>Du får forklaringen. Også når du svarer forkert.</span></div>
       </div>
     </section>
-    <div class="facts-strip wrap" aria-label="Indhold i TeoriBoost"><p><strong>58</strong><span>regelkort</span></p><p><strong>10</strong><span>emner</span></p><p><strong>83</strong><span>trafiksituationer</span></p><p><strong>25</strong><span>situationer pr. øveprøve</span></p></div>
-    <section class="method section wrap" id="saadan" aria-labelledby="steps-title">
-      <div class="section-head"><p class="eyebrow">01 / Find dit flow</p><h2 id="steps-title">Det skal give mening.<br>Ikke bare et rigtigt svar.</h2><p>En regel er lettere at huske, når du forstår den. Derfor går du fra forklaring til situation — og prøver selv.</p></div>
-      <div class="method-grid">
-        <article class="method-item"><div class="method-top"><span>01</span><span aria-hidden="true">↗</span></div><h3>Fang reglen.</h3><p>Korte lektioner tager én ting ad gangen. Se reglen i en situation, og brug den selv bagefter.</p><span class="method-tag">Lær i små bidder</span></article>
-        <article class="method-item"><div class="method-top"><span>02</span><span aria-hidden="true">↻</span></div><h3>Øv det svære.</h3><p>Det, du er usikker på, dukker op igen med mellemrum. Du får en forklaring, så du ved, hvad du skal se efter.</p><span class="method-tag">Gentag med omtanke</span></article>
-        <article class="method-item"><div class="method-top"><span>03</span><span aria-hidden="true">⚑</span></div><h3>Tag en øveprøve.</h3><p>Prøv 25 situationer på tid. Bagefter kan du gennemgå svarene og finde de regler, der skal have en tur mere.</p><span class="method-tag">Se, hvad du skal øve</span></article>
+
+    <!-- 6. The garage: scroll, and the scooter is built part by part (frames rendered from the app) -->
+    <section class="garage" id="garage" aria-labelledby="garage-title">
+      <div class="garage-pin" data-pin="garage">
+        <div class="garage-sticky">
+          <span class="garage-door" aria-hidden="true"></span>
+          <div class="garage-grid wrap">
+            <div class="garage-copy">
+              <p class="eyebrow eyebrow--dark" data-reveal>Garagen</p>
+              <h2 id="garage-title" class="split" data-split>Du lærer. Bilen bliver <span class="hl">lækker.</span></h2>
+              <p class="garage-lead" data-reveal>Hver lektion giver 1.000 Boosters, dagens mål 1.500 og en bestået øveprøve 5.000. Brug dem på lak, fælge, neon og nummerplade. Boosters kan ikke købes – kun tjenes.</p>
+              <div class="garage-bill" data-reveal>
+                <p class="garage-bill-head"><span data-vehicle-name>Scooter</span><span data-vehicle-price>Din fra start</span></p>
+                <ol class="parts" data-parts>
+                  <li class="is-done"><span>Restaurering</span><b>4.000</b></li>
+                  <li class="is-done"><span>Racerstriber</span><b>3.000</b></li>
+                  <li class="is-done"><span>Kromfælge</span><b>7.000</b></li>
+                  <li class="is-done"><span>Katteører-spejle</span><b>5.000</b></li>
+                  <li class="is-done"><span>Hjerte</span><b>1.500</b></li>
+                  <li class="is-done"><span>Sløjfe</span><b>2.500</b></li>
+                  <li class="is-done"><span>Egen nummerplade</span><b>2.000</b></li>
+                  <li class="is-done"><span>Neon og sænkning</span><b>9.000</b></li>
+                </ol>
+                <p class="garage-total"><span>Boosters brugt</span><b data-spent>34.000</b></p>
+              </div>
+            </div>
+            <div class="garage-stage">
+              <div class="car" data-car role="img" aria-label="Scooteren går fra rustent vrag til lækker, del for del.">
+                <span class="car-floor" aria-hidden="true"></span>
+                <img class="car-frame is-on" src="assets/glowup/scooter-08.webp" alt="" width="592" height="618" data-frame>
+                <span class="sparks" aria-hidden="true" data-sparks></span>
+              </div>
+              <p class="garage-hint" aria-hidden="true" data-garage-hint>Scroll, og byg den</p>
+              <div class="vehicles" role="group" aria-label="Vælg køretøj" data-vehicles hidden>
+                <button type="button" aria-pressed="true" data-vehicle="scooter">Scooter</button>
+                <button type="button" aria-pressed="false" data-vehicle="smallcar">Lille bil</button>
+                <button type="button" aria-pressed="false" data-vehicle="bigcar">Stor bil</button>
+                <button type="button" aria-pressed="false" data-vehicle="racecar">Racerbil</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="scope-note"><span class="beta">Beta</span> Et supplement til din køreundervisning. TeoriBoost er et selvstændigt øvekoncept og endnu ikke en komplet undervisningsbog.</p>
     </section>
-    <section class="garage-section" id="min-bil" aria-labelledby="garage-title"><div class="wrap garage-grid">
-      <div class="garage-copy"><p class="eyebrow">02 / Noget at køre for</p><h2 id="garage-title">Du lærer.<br>Din bil får<br> en opgradering.</h2><p>Fra rusten scooter til din helt egen racerbil. Tjen Boosters ved at øve, og brug dem på lak, fælge og alt det, der gør bilen til din.</p><a class="text-link" href="https://app.teoriboost.dk/">Kig ind i garagen <span aria-hidden="true">↗</span></a><p class="garage-note">Boosters tjenes ved at lære.<br>De kan ikke købes.</p></div>
-      <div class="garage-demo"><div class="garage-demo-head"><span>Din garage</span><span class="garage-number">Før og efter restaurering.</span></div>
-        <div class="compare" style="--pos:50%"><span class="garage-ring" aria-hidden="true"></span><img class="compare-img" data-compare="dream" src="assets/cars/smallcar-dream.webp" alt="Den lille bil sat i stand" width="720" height="560" loading="lazy"><div class="compare-wreck"><img class="compare-img" data-compare="wreck" src="assets/cars/smallcar-wreck.webp" alt="Den lille bil før restaurering" width="720" height="560" loading="lazy"></div><span class="compare-label compare-label-l" aria-hidden="true">Før</span><span class="compare-label compare-label-r" aria-hidden="true">Efter</span><span class="compare-line" aria-hidden="true"><i>↔</i></span><label class="sr-only" for="compare-range">Vis før og efter restaurering. Brug piletasterne for at flytte skillelinjen.</label><input id="compare-range" class="compare-range" type="range" hidden min="0" max="100" value="50" aria-valuetext="50 procent før restaurering"></div>
-        <div class="vehicle-pick" hidden role="group" aria-label="Vælg køretøj"><button type="button" aria-pressed="false" data-vehicle="scooter">Scooter</button><button type="button" class="is-on" aria-pressed="true" data-vehicle="smallcar">Lille bil</button><button type="button" aria-pressed="false" data-vehicle="bigcar">Stor bil</button><button type="button" aria-pressed="false" data-vehicle="racecar">Racerbil</button></div>
-      </div>
-    </div></section>
-    <section class="together section wrap" id="hold" aria-labelledby="team-title"><div class="section-head"><p class="eyebrow">03 / Det er bedre sammen</p><h2 id="team-title">Lidt konkurrence.<br>En god grund til at øve.</h2><p>Invitér dit teorihold eller dine venner. I kører på samme vej — og dagens rigtige svar rykker jer frem.</p></div>
-      <div class="together-grid"><article class="team-panel"><div class="panel-top"><h3>Hvem ligger forrest?</h3><span class="pill">Eksempel</span></div><p>Del en holdkode. Følg hinandens biler.<br>Se, hvem der har øvet i dag.</p><ol class="leaderboard" aria-label="Eksempel på en rangliste"><li><span class="rank">01</span><img src="assets/cars/racecar.webp" alt="" width="72" height="56" loading="lazy"><span><strong>Sofie</strong><small>9 rigtige · 12 dage i træk</small></span><b>126 <small>point</small></b></li><li><span class="rank">02</span><img src="assets/cars/bigcar.webp" alt="" width="72" height="56" loading="lazy"><span><strong>Mads</strong><small>6 rigtige · 2 dage i træk</small></span><b>66 <small>point</small></b></li><li class="your-row"><span class="rank">03</span><img src="assets/cars/smallcar.webp" alt="" width="72" height="56" loading="lazy"><span><strong>Dig <span class="you-dot" aria-hidden="true"></span></strong><small>5 rigtige · 4 dage i træk</small></span><b>62 <small>point</small></b></li></ol><p class="panel-note">Eksempel: 10 point pr. rigtigt svar i dag + 3 pr. dag i træk.</p></article>
-      <div class="side-panels"><article class="streak-panel"><div><p class="eyebrow">En lille daglig vane</p><h3>Hold flammen<br>i live.</h3><p>Øv lidt hver dag. Din flamme vokser med dig.</p></div><img src="assets/flame/L3-idle.webp" alt="En lille illustreret flamme" width="180" height="180" loading="lazy"></article><article class="snail-panel"><img src="assets/cast/sneglen.webp" alt="Sneglen med en campingvogn som hus" width="120" height="120" loading="lazy"><div><p class="eyebrow">Hjælp undervejs</p><h3>Spørg Sneglen.</h3><p>AI-hjælp med udgangspunkt i appens regelkort, når en regel driller.</p><span class="panel-note">AI kan tage fejl. Tjek reglen med din kørelærer.</span></div></article></div>
+
+    <!-- 7. The cast -->
+    <section class="cast-section" id="holdet" aria-labelledby="cast-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow" data-reveal>Holdet</p>
+          <h2 id="cast-title" class="split" data-split>Seks venner på vejen.</h2>
+          <p class="section-lead" data-reveal>De hepper, hjælper og holder dig i gang. Forklaringen kommer altid først – figurerne er krydderiet.</p>
+        </div>
+        <ul class="cast-grid">
+          <li class="mate" data-tilt data-reveal style="--d:0s"><span class="mate-art"><img src="assets/cast/sneglen.webp" alt="" width="512" height="512" loading="lazy"></span><h3>Sneglen</h3><p class="mate-role">Din rolige guide</p><p class="mate-line">“Roligt nu. Vi tager næste stræk sammen.”</p></li>
+          <li class="mate" data-tilt data-reveal style="--d:.06s"><span class="mate-art"><img src="assets/cast/kegle.webp" alt="" width="512" height="512" loading="lazy"></span><h3>Kegle</h3><p class="mate-role">Vakler, men vælter aldrig</p><p class="mate-line">“Jeg vakler også. Men vi vælter ikke.”</p></li>
+          <li class="mate" data-tilt data-reveal style="--d:.12s"><span class="mate-art"><img src="assets/cast/blink.webp" alt="" width="512" height="512" loading="lazy"></span><h3>Blink</h3><p class="mate-role">Lyser op, når du ser det rigtige</p><p class="mate-line">“Blinket i god tid. Præcis rigtigt.”</p></li>
+          <li class="mate" data-tilt data-reveal style="--d:.18s"><span class="mate-art"><img src="assets/cast/bobbel.webp" alt="" width="512" height="512" loading="lazy"></span><h3>Bobbel</h3><p class="mate-role">Fejrer de store øjeblikke</p><p class="mate-line">“Inden for grænsen! Jeg hopper på baghjulene.”</p></li>
+          <li class="mate" data-tilt data-reveal style="--d:.24s"><span class="mate-art"><img src="assets/cast/krabbe.webp" alt="" width="512" height="512" loading="lazy"></span><h3>Krabbe</h3><p class="mate-role">Byder dig velkommen tilbage</p><p class="mate-line">“Nå, du er tilbage! Jeg er lige flyttet ind igen.”</p></li>
+          <li class="mate" data-tilt data-reveal style="--d:.3s"><span class="mate-art"><img src="assets/cast/daek.webp" alt="" width="512" height="512" loading="lazy"></span><h3>Dæk</h3><p class="mate-role">Din træner til øveprøven</p><p class="mate-line">“25 situationer, én ad gangen. Du må gerne gå tilbage og ændre svar.”</p></li>
+        </ul>
       </div>
     </section>
-    <section class="schools-section" id="koereskoler" aria-labelledby="schools-title"><div class="wrap schools-grid"><div><p class="eyebrow">Til køreskoler</p><h2 id="schools-title">Tag teoriholdet<br>med på tur.</h2><p>Giv eleverne noget at samles om mellem timerne. Opret et hold, del koden, og lad dagens øvelse sætte gang i ranglisten.</p><a class="btn btn-yellow" href="https://app.teoriboost.dk/">Opret et hold i appen <span aria-hidden="true">↗</span></a></div><ol class="school-steps"><li><span>01</span><div><h3>Opret dit hold.</h3><p>Åbn “Dit hold” i appen.</p></div></li><li><span>02</span><div><h3>Del koden.</h3><p>Seks tegn på tavlen eller i holdets chat.</p></div></li><li><span>03</span><div><h3>Giv dem noget at køre for.</h3><p>Holdet ser brugernavn, bil og dagens point.</p></div></li></ol></div></section>
-    <section class="faq section wrap" aria-labelledby="faq-title"><div><p class="eyebrow">Godt at vide</p><h2 id="faq-title">Inden du<br>drejer nøglen.</h2><p>De korte svar på de gode spørgsmål.</p></div><div class="faq-list"><details><summary>Skal jeg downloade noget?<span aria-hidden="true">+</span></summary><p>Nej. TeoriBoost kører direkte i browseren på telefon, tablet og computer.</p></details><details><summary>Er det den officielle teoriprøve?<span aria-hidden="true">+</span></summary><p>Nej. TeoriBoost er et selvstændigt øvekoncept og er ikke tilknyttet myndighederne. Situationerne er skrevet til appen med myndighedernes regler som kilde. En bestået øveprøve er ikke en garanti for at bestå den rigtige.</p></details><details><summary>Hvor gemmes min fremgang?<span aria-hidden="true">+</span></summary><p>På din egen enhed. Logger du ind, gemmes den også i din konto hos Google Firebase med database i EU, så du kan skifte mellem telefon og computer. Chatten med Sneglen bliver på enheden.</p></details><details><summary>Er appen færdig?<span aria-hidden="true">+</span></summary><p>TeoriBoost er i beta. Lektionerne, øvelserne og øveprøverne virker, og der kommer løbende mere til. Appen er endnu ikke en komplet undervisningsbog og supplerer din undervisning hos kørelæreren.</p></details></div></section>
-    <section class="final wrap" aria-labelledby="final-title"><div><p class="eyebrow">Næste stop: din første lektion</p><h2 id="final-title">Klar til at<br>komme i gang?</h2><a class="btn btn-ink" href="https://app.teoriboost.dk/">Tag din første tur <span aria-hidden="true">↗</span></a></div><div class="final-art" aria-hidden="true"><span class="final-route"></span><img src="assets/cars/racecar-dream.webp" alt="" width="640" height="500" loading="lazy"><span class="final-stamp">LÆR. ØV.<br>KØR.</span></div></section>
+
+    <!-- 8. Together: a race on the road, and the flame that grows with your streak -->
+    <section class="race" id="hold" aria-labelledby="race-title">
+      <div class="wrap race-head">
+        <p class="eyebrow" data-reveal>Sammen</p>
+        <h2 id="race-title" class="split" data-split>Kør om kap med dit hold.</h2>
+        <p class="section-lead" data-reveal>Del en holdkode med dit teorihold eller dine venner. Dagens rigtige svar flytter jer frem på vejen.</p>
+      </div>
+      <div class="track" data-race>
+        <span class="track-label" aria-hidden="true">Eksempel</span>
+        <div class="lane" style="--to:.86"><span class="racer"><img class="racer-fire" src="assets/race/nitro.webp" alt="" width="1800" height="200" loading="lazy"><img class="racer-car" src="assets/glowup/racecar-09.webp" alt="" width="640" height="273" loading="lazy"></span></div>
+        <div class="lane" style="--to:.5"><span class="racer"><img class="racer-car" src="assets/glowup/bigcar-09.webp" alt="" width="604" height="368" loading="lazy"></span></div>
+        <div class="lane lane--you" style="--to:.46"><span class="racer"><img class="racer-car" src="assets/glowup/smallcar-09.webp" alt="" width="640" height="364" loading="lazy"><span class="racer-you">Dig</span></span></div>
+      </div>
+      <div class="wrap race-grid">
+        <article class="board" data-reveal>
+          <div class="board-top"><h3>Hvem ligger forrest?</h3><span class="pill">Eksempel</span></div>
+          <ol class="leaderboard" aria-label="Eksempel på en rangliste">
+            <li><span class="rank">1</span><span class="who"><strong>Sofie</strong><small>9 rigtige · 12 dage i træk</small></span><b>126</b></li>
+            <li><span class="rank">2</span><span class="who"><strong>Mads</strong><small>6 rigtige · 2 dage i træk</small></span><b>66</b></li>
+            <li class="is-you"><span class="rank">3</span><span class="who"><strong>Dig</strong><small>5 rigtige · 4 dage i træk</small></span><b>62</b></li>
+          </ol>
+          <p class="board-note">Eksempel: 10 point pr. rigtigt svar i dag + 3 point pr. dag i træk.</p>
+        </article>
+        <article class="streak" data-streak data-reveal style="--d:.1s">
+          <div class="streak-copy">
+            <p class="eyebrow">En lille daglig vane</p>
+            <h3>Hold flammen i live.</h3>
+            <p>Øv lidt hver dag, så vokser din flamme. Den skifter efter 1, 3, 7 og 30 dage i træk.</p>
+          </div>
+          <div class="streak-art" aria-hidden="true">
+            <img class="flame is-on" src="assets/flame/L1-idle.webp" alt="" width="155" height="256" loading="lazy">
+            <img class="flame" src="assets/flame/L2-idle.webp" alt="" width="193" height="278" loading="lazy">
+            <img class="flame" src="assets/flame/L3-idle.webp" alt="" width="229" height="302" loading="lazy">
+            <img class="flame" src="assets/flame/L4-idle.webp" alt="" width="232" height="308" loading="lazy">
+            <p class="streak-days"><b data-days>1</b> <span data-days-label>dag i træk</span></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 9. For driving schools -->
+    <section class="schools" id="koereskoler" aria-labelledby="schools-title">
+      <div class="wrap schools-grid">
+        <div class="schools-copy">
+          <p class="eyebrow eyebrow--dark" data-reveal>Til køreskoler</p>
+          <h2 id="schools-title" class="split" data-split>Tag teoriholdet med på tur.</h2>
+          <p data-reveal>Giv eleverne noget at samles om mellem timerne. Opret et hold, del koden, og lad dagens øvelse sætte gang i ranglisten.</p>
+          <a class="btn btn-yellow btn-big" href="https://app.teoriboost.dk/" data-magnetic data-reveal><span>Opret et hold i appen</span><i class="btn-disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></svg></i></a>
+        </div>
+        <ol class="school-steps">
+          <li data-reveal style="--d:0s"><span class="step-n">01</span><div><h3>Opret dit hold.</h3><p>Åbn “Dit hold” i appen.</p></div></li>
+          <li data-reveal style="--d:.08s"><span class="step-n">02</span><div><h3>Del koden.</h3><p>Seks tegn på tavlen eller i holdets chat.</p></div></li>
+          <li data-reveal style="--d:.16s"><span class="step-n">03</span><div><h3>Kør om kap.</h3><p>Holdet ser brugernavn, bil og dagens point.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section class="faq wrap" id="faq" aria-labelledby="faq-title">
+      <div class="faq-head">
+        <p class="eyebrow" data-reveal>Godt at vide</p>
+        <h2 id="faq-title" class="split" data-split>Inden du drejer nøglen.</h2>
+      </div>
+      <div class="faq-list" data-reveal>
+        <details><summary>Skal jeg downloade noget?<i class="faq-x" aria-hidden="true"></i></summary><div class="faq-a"><p>Nej. TeoriBoost kører direkte i browseren på telefon, tablet og computer.</p></div></details>
+        <details><summary>Er det den officielle teoriprøve?<i class="faq-x" aria-hidden="true"></i></summary><div class="faq-a"><p>Nej. TeoriBoost er et selvstændigt øvekoncept og er ikke tilknyttet myndighederne. Situationerne er skrevet til appen med myndighedernes regler som kilde. En bestået øveprøve er ikke en garanti for at bestå den rigtige.</p></div></details>
+        <details><summary>Hvor gemmes min fremgang?<i class="faq-x" aria-hidden="true"></i></summary><div class="faq-a"><p>På din egen enhed. Logger du ind, gemmes den også i din konto hos Google Firebase med database i EU, så du kan skifte mellem telefon og computer. Chatten med Sneglen bliver på enheden.</p></div></details>
+        <details><summary>Er appen færdig?<i class="faq-x" aria-hidden="true"></i></summary><div class="faq-a"><p>TeoriBoost er i beta. Lektionerne, øvelserne og øveprøverne virker, og der kommer løbende mere til. Appen er endnu ikke en komplet undervisningsbog og supplerer din undervisning hos kørelæreren.</p></div></details>
+      </div>
+    </section>
+
+    <!-- 11. The finish line -->
+    <section class="final" aria-labelledby="final-title" data-final>
+      <div class="final-card">
+        <div class="final-copy">
+          <p class="eyebrow" data-reveal>Næste stop: din første lektion</p>
+          <h2 id="final-title" class="final-title split" data-split>Klar til første tur?</h2>
+          <a class="btn btn-ink btn-huge" href="https://app.teoriboost.dk/" data-magnetic data-reveal><span>Kom i gang</span><i class="btn-disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></svg></i></a>
+        </div>
+        <div class="final-road" aria-hidden="true">
+          <span class="final-car" data-final-car><img class="final-fire" src="assets/race/mega.webp" alt="" width="1800" height="200" loading="lazy"><img src="assets/glowup/racecar-09.webp" alt="" width="640" height="273" loading="lazy"></span>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer class="foot wrap"><div class="footer-top"><a class="brand" href="#top"><img src="assets/icon.svg" alt="" width="32" height="32"><span>teoriboost<span class="brand-dot">.</span></span></a><nav aria-label="Genveje"><a href="#saadan">Sådan virker det</a><a href="#min-bil">Din garage</a><a href="#koereskoler">Køreskoler</a><a href="https://app.teoriboost.dk/">Åbn appen ↗</a></nav></div><div class="footer-bottom"><p>© 2026 TeoriBoost</p><p>Selvstændig øvelse i dansk køreteori.<br>Ikke tilknyttet myndighederne.</p><a href="#top">Til toppen ↑</a></div></footer>
+
+  <footer class="foot">
+    <div class="wrap foot-top">
+      <a class="brand brand--light" href="#top"><img src="assets/icon.svg" alt="" width="36" height="36"><span>teoriboost<span class="brand-dot">.</span></span></a>
+      <nav class="foot-nav" aria-label="Genveje"><a href="#saadan">Sådan virker det</a><a href="#proev">Prøv selv</a><a href="#garage">Garagen</a><a href="#koereskoler">Køreskoler</a><a href="https://app.teoriboost.dk/">Åbn appen</a></nav>
+    </div>
+    <div class="wrap foot-bottom">
+      <p>© 2026 TeoriBoost</p>
+      <p>Selvstændig øvelse i dansk køreteori. Ikke tilknyttet myndighederne.</p>
+      <a class="link link--light" href="#top">Til toppen</a>
+    </div>
+    <p class="foot-word" aria-hidden="true">teoriboost<span>.</span></p>
+  </footer>
 </body>
 </html>

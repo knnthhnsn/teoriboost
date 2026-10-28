@@ -1,0 +1,166 @@
+{
+ "scooter": [
+  {
+   "part": "wreck",
+   "name": "Som du får den"
+  },
+  {
+   "part": "restore",
+   "name": "Restaurering"
+  },
+  {
+   "part": "stripe",
+   "name": "Striber"
+  },
+  {
+   "part": "wheels",
+   "name": "Fælge"
+  },
+  {
+   "part": "mirrors",
+   "name": "Spejle"
+  },
+  {
+   "part": "charm",
+   "name": "Pynt"
+  },
+  {
+   "part": "top",
+   "name": "Tag"
+  },
+  {
+   "part": "plate",
+   "name": "Nummerplade"
+  },
+  {
+   "part": "neon",
+   "name": "Neon"
+  }
+ ],
+ "smallcar": [
+  {
+   "part": "wreck",
+   "name": "Som du får den"
+  },
+  {
+   "part": "paint",
+   "name": "Lakering"
+  },
+  {
+   "part": "stripe",
+   "name": "Striber"
+  },
+  {
+   "part": "windows",
+   "name": "Tonede ruder"
+  },
+  {
+   "part": "wheels",
+   "name": "Fælge"
+  },
+  {
+   "part": "top",
+   "name": "Tag"
+  },
+  {
+   "part": "lights",
+   "name": "Lygter"
+  },
+  {
+   "part": "front",
+   "name": "Front"
+  },
+  {
+   "part": "plate",
+   "name": "Nummerplade"
+  },
+  {
+   "part": "neon",
+   "name": "Neon"
+  }
+ ],
+ "bigcar": [
+  {
+   "part": "wreck",
+   "name": "Som du får den"
+  },
+  {
+   "part": "paint",
+   "name": "Lakering"
+  },
+  {
+   "part": "stripe",
+   "name": "Striber"
+  },
+  {
+   "part": "windows",
+   "name": "Tonede ruder"
+  },
+  {
+   "part": "wheels",
+   "name": "Fælge"
+  },
+  {
+   "part": "bar",
+   "name": "Kofangerbøjle"
+  },
+  {
+   "part": "lights",
+   "name": "Lygter"
+  },
+  {
+   "part": "exhaust",
+   "name": "Udstødning"
+  },
+  {
+   "part": "plate",
+   "name": "Nummerplade"
+  },
+  {
+   "part": "neon",
+   "name": "Neon"
+  }
+ ],
+ "racecar": [
+  {
+   "part": "wreck",
+   "name": "Som du får den"
+  },
+  {
+   "part": "paint",
+   "name": "Lakering"
+  },
+  {
+   "part": "stripe",
+   "name": "Striber"
+  },
+  {
+   "part": "windows",
+   "name": "Tonede ruder"
+  },
+  {
+   "part": "wheels",
+   "name": "Fælge"
+  },
+  {
+   "part": "front",
+   "name": "Front"
+  },
+  {
+   "part": "kit",
+   "name": "Bodykit"
+  },
+  {
+   "part": "exhaust",
+   "name": "Udstødning"
+  },
+  {
+   "part": "plate",
+   "name": "Nummerplade"
+  },
+  {
+   "part": "neon",
+   "name": "Neon"
+  }
+ ]
+}
