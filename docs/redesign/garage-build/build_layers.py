@@ -42,6 +42,35 @@ def clean_wheels(mask):
         sizes = ndimage.sum(m, labels, range(1, n + 1)); keep = np.zeros(n + 1, bool); keep[1:] = sizes >= sizes.max() * .15; m = keep[labels]
     return Image.fromarray((m * 255).astype(np.uint8))
 
+def clean_plate(layer):
+    """the licence plate's face as one clean white surface: the image edit left see-through holes and specks in it
+    (on the scooter its bow showed through in pink). The face is the convex hull of its white, so dents at its
+    edge are filled too; the screw holes (small dark dots near the top corners) stay."""
+    import numpy as np
+    from scipy import ndimage
+    from scipy.spatial import ConvexHull
+    a = np.asarray(layer).copy(); rgb = a[..., :3].astype(int); op = a[..., 3] > 128
+    white = op & (rgb.min(2) > 200)
+    lab, n = ndimage.label(white)
+    if not n: return layer
+    face = lab == 1 + int(np.argmax(ndimage.sum(white, lab, range(1, n + 1))))
+    ys, xs = np.nonzero(face)
+    if len(xs) < 20: return layer
+    hull = ConvexHull(np.c_[xs, ys]).vertices
+    m = Image.new('L', layer.size, 0); ImageDraw.Draw(m).polygon([(int(xs[i]), int(ys[i])) for i in hull], fill=255)
+    hullm = np.asarray(m) > 0
+    inner = ndimage.binary_erosion(hullm, iterations=2)  # off the plate's dark rim, which stays as drawn
+    x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
+    dark = inner & op & (rgb.max(2) < 90)
+    dl, dn = ndimage.label(dark); screws = np.zeros_like(dark)
+    for i in range(1, dn + 1):
+        blob = dl == i; cy, cx = ndimage.center_of_mass(blob)
+        if blob.sum() >= 4 and cy < y0 + (y1 - y0) * .42 and (cx < x0 + (x1 - x0) * .2 or cx > x1 - (x1 - x0) * .2): screws |= blob
+    screws = ndimage.binary_dilation(screws, iterations=1) & inner
+    paint = (inner & ~screws) | (hullm & (a[..., 3] < 200))  # and every see-through pixel inside the plate
+    a[paint, :3] = np.median(rgb[white & inner], axis=0).astype(np.uint8); a[paint, 3] = 255
+    return Image.fromarray(a, 'RGBA')
+
 def drop_specks(alpha, keep_area, reach=12):
     """a part's real pieces only: the edit also nudges a few pixels elsewhere, and those loose specks show as dirt
     where the vehicle sits on something bright (the neon under the big car). Pieces of at least 15 % of the largest
@@ -290,6 +319,7 @@ def build(base_id):
         if not part['id'].startswith(('decal-', 'windows-', 'stripe-', 'charm-', 'mirrors-', 'restore')):
             alpha = drop_specks(alpha, vehicle_area * .003)  # specks are at most about 0.25 % of the vehicle
         layer = edited.convert('RGBA'); layer.putalpha(alpha)
+        if part['id'] == 'plate-blank': layer = clean_plate(layer)
         save(layer, os.path.join(OUT, base_id, part['id'] + '.webp'))
         approved.append(part['id']); tiles.append((part['id'], layer))
 

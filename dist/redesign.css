@@ -241,7 +241,7 @@ select,input{background:#fff;color:var(--ink);border:2px solid var(--line)!impor
 .mybil-body.is-lowered{translate:0 2.2%}
 .mybil-neon{position:absolute;height:7%;border-radius:50%;filter:blur(12px);opacity:.85;z-index:0}
 .mybil-plate{position:absolute;display:grid;place-items:center;overflow:hidden;container-type:size}
-.mybil-plate b{font:800 min(72cqh,calc(100cqw / (var(--n) * .8)))/1 var(--font-display);color:#1F2328;letter-spacing:.02em;white-space:nowrap}
+.mybil-plate b{font:800 min(72cqh,calc(100cqw / (var(--n) * .92)))/1 var(--font-display);color:#1F2328;letter-spacing:.02em;white-space:nowrap}
 .mybil-colors{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .mybil-swatch{width:36px;height:36px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px var(--line)}
 .mybil-swatch.is-on{box-shadow:0 0 0 3px var(--ink)}
