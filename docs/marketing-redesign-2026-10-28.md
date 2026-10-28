@@ -22,6 +22,20 @@ the app's own art. The application in `dist/` is a separate deployment and is ou
 - Smooth scroll: a mouse wheel or touchpad glides with a little follow-through, and so do links within the page.
   Touch, keys and the scrollbar stay native; it is off with reduced motion, and the chat keeps its own wheel.
 
+## Phones and tablets
+
+- Nothing is pinned on touch screens or short screens: the hero scrolls away with your finger and the walk over
+  the crossing follows it (`.is-flow`); the stops are swiped; the garage and the chat play as you scroll past.
+  What is pinned is decided in CSS; `site.js` reads it (`position: sticky`) so both always agree.
+- On phones the hero stacks the copy above the crossing (they cannot overlap at any height), and landscape phones
+  get a hero as tall as its copy, so the button is never pushed off the screen.
+- The chat has a fixed height on phones (just enough for the quiz), fills from the top and scrolls itself, so the
+  page never grows under your finger and a swipe over it moves the page.
+- Hover effects only on devices that hover; quiz buttons 44 px for thumbs; no label under 12 px on phones.
+- Performance: scroll work only for sections near the screen, no layout reads in the frame loop, Sneglen's path
+  sampled once, endless CSS loops paused off screen, garage frames decoded ahead. Measured on an emulated phone
+  with a 4x slower CPU: 60 fps in every section except brief dips at the garage's part steps.
+
 Content counts checked against the local application: 58 rule cards, 10 topics, 83 scenarios, and 25 scenarios
 per practice exam. The race and leaderboard are labelled as examples. Beta scope is stated on the page and in
 the FAQ. The 404 page uses the same road language.

@@ -12,13 +12,28 @@
   const still = () => reduce.matches;
   const topOf = el => el.getBoundingClientRect().top + scrollY;
 
-  /* ---------- the scroll engine: every part measures on resize and updates once per frame ---------- */
+  /* ---------- the scroll engine: every part measures on resize and updates once per frame, but only while its
+     section (el) is near the screen; as it leaves it gets one last update, so it rests in its end state ---------- */
   const parts = [];
   let vh = innerHeight, raf = 0;
-  const frame = () => { raf = 0; const y = scrollY; for (const p of parts) p.update?.(y); };
+  const run = (y, all) => {
+    for (const p of parts) {
+      const near = !p.el || (y > p.lo && y < p.hi);
+      if (near || all || p.live) p.update?.(y);
+      p.live = near;
+    }
+  };
+  const frame = () => { raf = 0; run(scrollY, false); };
   const request = () => { if (!raf) raf = requestAnimationFrame(frame); };
-  const measure = () => { vh = innerHeight; for (const p of parts) p.measure?.(); frame(); };
+  const measure = () => {
+    vh = innerHeight;
+    // twice: a part may change the height of the page (the chat, the hajtand text), which moves the parts below it
+    for (let pass = 0; pass < 2; pass++) for (const p of parts) p.measure?.();
+    for (const p of parts) if (p.el) { const r = p.el.getBoundingClientRect(); p.lo = r.top + scrollY - vh * 1.5; p.hi = r.bottom + scrollY + vh * .5; }
+    run(scrollY, true);
+  };
   const pinned = el => { const s = { top: 0, len: 1 }; s.measure = () => { s.top = topOf(el); s.len = Math.max(1, el.offsetHeight - vh); }; s.p = y => clamp((y - s.top) / s.len); return s; };
+  const isSticky = el => !!el && getComputedStyle(el).position === 'sticky'; // the CSS decides what is pinned
 
   /* ---------- words: headings rise word by word ---------- */
   function splitWords(el) {
@@ -61,24 +76,30 @@
     }
   }
 
-  /* ---------- 1. the crossing: scrolling walks you over it, one bob per stripe ---------- */
-  const hero = $('[data-hero]'), road = $('[data-xing]'), heroPin = $('[data-pin="hero"]');
+  /* ---------- 1. the crossing: scrolling walks you over it, one bob per stripe. Pinned with a mouse; on touch
+     and short screens the hero scrolls away with your finger and the walk follows that (.is-flow) ---------- */
+  const hero = $('[data-hero]'), road = $('[data-xing]'), heroPin = $('[data-pin="hero"]'), heroSticky = $('.hero-sticky');
   let heroEnd = 0;
   if (hero && road && heroPin) {
     const pin = pinned(heroPin), stripes = $$('.stripe', road);
-    let W = 0, H = 0, pitch = 1;
+    let W = 0, H = 0, pitch = 1, ends = [], flow = false, heroH = 1;
     parts.push({
-      measure() { pin.measure(); W = road.offsetWidth; H = road.offsetHeight; pitch = (stripes[1]?.offsetTop || 1) - (stripes[0]?.offsetTop || 0); heroEnd = pin.top + heroPin.offsetHeight; },
+      el: hero,
+      measure() {
+        pin.measure(); flow = !isSticky(heroSticky); hero.classList.toggle('is-flow', flow);
+        W = road.offsetWidth; H = road.offsetHeight; heroH = hero.offsetHeight; heroEnd = pin.top + heroPin.offsetHeight;
+        ends = stripes.map(s => s.offsetTop + s.offsetHeight); pitch = (stripes[1]?.offsetTop || 1) - (stripes[0]?.offsetTop || 0);
+      },
       update(y) {
-        const p = still() ? 0 : pin.p(y);
+        const p = still() ? 0 : flow ? clamp((y - pin.top) / (heroH * .85)) : pin.p(y);
         hero.style.setProperty('--hp', p.toFixed(4));
         const walk = p * pitch * 3.5;
         road.style.setProperty('--walk', `${walk.toFixed(1)}px`);
         road.style.setProperty('--bob', `${(Math.sin(walk / pitch * Math.PI * 2) * .7).toFixed(3)}deg`);
-        for (const s of stripes) { // a stripe that has passed under your feet fades before it gets too close
-          const past = s.offsetTop + s.offsetHeight + walk - H;
+        stripes.forEach((s, i) => { // a stripe that has passed under your feet fades before it gets too close
+          const past = ends[i] + walk - H;
           s.style.opacity = past > W * .2 ? clamp(1 - (past - W * .2) / (W * .25)).toFixed(3) : '';
-        }
+        });
       },
     });
   }
@@ -104,10 +125,11 @@
 
   /* ---------- header: light over the crossing, glass after it; it steps aside while you read down ---------- */
   const top = $('[data-top]');
-  let menuOpen = false, lastY = scrollY;
+  let menuOpen = false, lastY = scrollY, topH = 76;
   if (top) parts.push({
+    measure() { topH = top.offsetHeight; }, // read once: reading it every frame would force a layout mid-frame
     update(y) {
-      const overHero = y < heroEnd - top.offsetHeight;
+      const overHero = y < heroEnd - topH;
       top.classList.toggle('is-dark', overHero && !menuOpen);
       top.classList.toggle('is-solid', !overHero && y > 10);
       if (!menuOpen) {
@@ -220,6 +242,7 @@
     };
     let t = 0, h = 1, lit = -1;
     parts.push({
+      el: tri.closest('section') || tri,
       measure() { fit(); t = topOf(tri); h = tri.offsetHeight; },
       update(y) {
         const n = still() ? ws.length : Math.round(clamp((y + vh * .78 - t) / (h * .9)) * ws.length);
@@ -233,21 +256,24 @@
   const howPin = $('[data-pin="how"]'), howTrack = $('[data-how-track]'), howWin = $('[data-how-window]');
   const howFill = $('[data-how-fill]'), howCar = $('[data-how-car]');
   if (howPin && howTrack && howWin) {
-    const pin = pinned(howPin); const on = () => wide.matches && !still();
-    let dist = 0, roadW = 0;
+    const pin = pinned(howPin), howSticky = $('.how-sticky');
+    let on = false, dist = 0, roadW = 0, carW = 64, swipe = 1;
     const road = p => {
       howFill?.parentElement.style.setProperty('--hp2', p.toFixed(4));
-      howCar?.style.setProperty('--hcx', `${(p * Math.max(0, roadW - (howCar.offsetWidth || 64) - 20)).toFixed(1)}px`);
+      howCar?.style.setProperty('--hcx', `${(p * Math.max(0, roadW - carW - 20)).toFixed(1)}px`);
     };
     parts.push({
+      el: $('#saadan'),
       measure() {
-        if (on()) { dist = Math.max(0, howTrack.scrollWidth - innerWidth); howPin.style.setProperty('--how-dist', `${dist}px`); }
+        on = isSticky(howSticky);
+        if (on) { dist = Math.max(0, howTrack.scrollWidth - innerWidth); howPin.style.setProperty('--how-dist', `${dist}px`); }
         else { dist = 0; howPin.style.removeProperty('--how-dist'); howTrack.style.removeProperty('--hx'); }
-        pin.measure(); roadW = howCar?.parentElement.offsetWidth || 0;
+        pin.measure(); roadW = howCar?.parentElement.offsetWidth || 0; carW = howCar?.offsetWidth || 64;
+        swipe = Math.max(0, howWin.scrollWidth - howWin.clientWidth);
       },
       update(y) {
-        if (on()) { const p = pin.p(y); howTrack.style.setProperty('--hx', `${(p * dist).toFixed(1)}px`); road(p); }
-        else { const max = howWin.scrollWidth - howWin.clientWidth; road(max > 0 ? howWin.scrollLeft / max : 0); }
+        if (on) { const p = pin.p(y); howTrack.style.setProperty('--hx', `${(p * dist).toFixed(1)}px`); road(p); }
+        else road(swipe > 0 ? howWin.scrollLeft / swipe : 0);
       },
     });
     howWin.addEventListener('scroll', request, { passive: true });
@@ -274,7 +300,7 @@
   }
   for (const fig of $$('[data-zoom]')) {
     let t = 0, h = 1;
-    parts.push({ measure() { t = topOf(fig); h = fig.offsetHeight; }, update(y) { fig.style.setProperty('--zp', (still() ? 1 : clamp((y + vh - t) / (vh + h * .5))).toFixed(4)); } });
+    parts.push({ el: fig, measure() { t = topOf(fig); h = fig.offsetHeight; }, update(y) { fig.style.setProperty('--zp', (still() ? 1 : clamp((y + vh - t) / (vh + h * .5))).toFixed(4)); } });
   }
 
   /* ---------- 6. the garage: frames rendered from the app, one more part per step ---------- */
@@ -288,8 +314,8 @@
   if (car && garagePin) {
     const list = $('[data-parts]'), spentEl = $('[data-spent]'), nameEl = $('[data-vehicle-name]'), priceEl = $('[data-vehicle-price]');
     const hint = $('[data-garage-hint]'), tabs = $('[data-vehicles]'), burst = $('[data-sparks]', car);
-    const pin = pinned(garagePin); const on = () => wide.matches && !still();
-    let vehicle = 'scooter', frames = [], step = -1, spent = 0, spentShown = 0, ready = false, carTop = 0, carH = 1;
+    const pin = pinned(garagePin), garageSticky = $('.garage-sticky');
+    let on = false, vehicle = 'scooter', frames = [], step = -1, spent = 0, spentShown = 0, ready = false, carTop = 0, carH = 1;
     const build = v => {
       const g = GLOW[v];
       car.querySelectorAll('.car-frame').forEach(f => f.remove());
@@ -298,6 +324,7 @@
         img.src = `assets/glowup/${v}-${String(i).padStart(2, '0')}.webp`; return img;
       });
       frames.forEach(f => car.insertBefore(f, burst));
+      frames.forEach(f => f.decode?.().catch(() => {})); // decoded ahead, so a new part shows the moment you reach it
       list.innerHTML = g.parts.map(([n, p]) => `<li><span>${n}</span><b>${fmt(p)}</b></li>`).join('');
       nameEl.textContent = g.name; priceEl.textContent = g.price;
       car.setAttribute('aria-label', `${g.name}: fra vrag til lækker, del for del.`);
@@ -315,19 +342,25 @@
       const items = $$('li', list);
       items.forEach((li, i) => { li.classList.toggle('is-done', i < s); li.classList.toggle('is-now', i === s - 1); });
       spent = GLOW[vehicle].parts.slice(0, s).reduce((a, [, p]) => a + p, 0); countTo(spent);
-      if (up && celebrate) { car.classList.remove('is-pop'); void car.offsetWidth; car.classList.add('is-pop'); sparks(burst, s === frames.length - 1 ? 26 : 10); }
+      if (up && celebrate) {
+        if (!still()) frames[s].animate?.([{ scale: '1' }, { scale: '1.035 .975', offset: .35 }, { scale: '1' }], { duration: 550, easing: 'cubic-bezier(.2,1.45,.4,1)' });
+        sparks(burst, s === frames.length - 1 ? 26 : 10);
+      }
       if (hint) hint.style.opacity = s > 0 ? '0' : '';
     };
-    const progress = y => on() ? pin.p(y) : clamp((y + vh * .82 - carTop) / (vh * .55 + carH * .4));
+    const progress = y => on ? pin.p(y) : clamp((y + vh * .82 - carTop) / (vh * .55 + carH * .4));
     const stepFor = p => Math.round(clamp((p - .04) / .82) * (frames.length - 1));
-    parts.push({
-      measure() { pin.measure(); carTop = topOf(car); carH = car.offsetHeight; },
+    const part = {
+      el: $('#garage'),
+      measure() { on = isSticky(garageSticky); pin.measure(); carTop = topOf(car); carH = car.offsetHeight; },
       update(y) { if (ready) setStep(stepFor(progress(y)), true); },
-    });
-    // the frames load once the garage is close, so the top of the page stays light
+    };
+    parts.push(part);
+    // the frames load once the garage is close, so the top of the page stays light. They sit in a box of fixed
+    // proportions, so nothing else on the page moves: only the garage itself is measured again, mid-scroll
     new IntersectionObserver(([e], obs) => {
       if (!e.isIntersecting) return; obs.disconnect();
-      build(vehicle); ready = true; tabs.hidden = false; spentShown = 0; spentEl.textContent = '0'; measure();
+      build(vehicle); ready = true; spentShown = 0; spentEl.textContent = '0'; part.measure(); request();
     }, { rootMargin: '120% 0px' }).observe(garagePin);
     tabs?.addEventListener('click', e => {
       const b = e.target.closest('[data-vehicle]'); if (!b || !GLOW[b.dataset.vehicle]) return;
@@ -343,6 +376,7 @@
     const lanes = $$('.lane', race).map(l => ({ racer: $('.racer', l), to: parseFloat(l.style.getPropertyValue('--to')) || .5 }));
     let t = 0, room = 0;
     parts.push({
+      el: race,
       measure() { t = topOf(race); room = race.offsetWidth; lanes.forEach(o => { o.cw = o.racer.offsetWidth; o.left = o.racer.offsetLeft; }); },
       update(y) {
         const p = still() ? 1 : clamp((y + vh * .95 - t) / (vh * .75)), e = 1 - Math.pow(1 - p, 2.2);
@@ -356,6 +390,7 @@
     const flames = $$('.flame', streak), days = [1, 3, 7, 30], daysEl = $('[data-days]', streak), labelEl = $('[data-days-label]', streak);
     let t = 0, h = 1, level = -1;
     parts.push({
+      el: streak,
       measure() { t = topOf(streak); h = streak.offsetHeight; },
       update(y) {
         const p = still() ? 1 : clamp((y + vh * .85 - t) / (h + vh * .35));
@@ -389,8 +424,16 @@
     ];
     const GREETING = 'Hej! Jeg er Sneglen. Spørg mig om alt i køreteori. Jeg svarer ud fra appens regelkort, tjekker Færdselsstyrelsen og kan quizze dig.';
     const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
-    const stick = () => { log.scrollTop = log.scrollHeight; }; // like a chat: the newest message stays in view
-    const show = (node, on) => { if (!node) return; if (on && node.hidden) { node.hidden = false; if (!still()) { node.classList.remove('is-new'); void node.offsetWidth; node.classList.add('is-new'); } } else if (!on) node.hidden = true; };
+    // like a chat, the newest message stays in view. On a phone the chat cannot be scrolled by hand (a swipe over it
+    // moves the page), so it is scrolled for you as the messages arrive
+    let aiPinned = false;
+    const stick = () => { log.scrollTop = log.scrollHeight; };
+    const show = (node, on) => { // true when it changed
+      if (!node || node.hidden === !on) return false;
+      node.hidden = !on;
+      if (on && !still()) { node.classList.remove('is-new'); void node.offsetWidth; node.classList.add('is-new'); }
+      return true;
+    };
 
     function quizCard(qz) {
       const box = el('div', 'quiz'), list = el('ul', 'quiz-list'), answers = qz.items.map(() => null);
@@ -402,6 +445,7 @@
           const b = el('button', '', label); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', `${label}: ${text}`);
           b.addEventListener('click', () => {
             manual = true; log.setAttribute('aria-live', 'polite'); // once you answer, the chat is yours: scrolling no longer drives it
+            log.classList.add('is-free'); // and it may grow, so your answer and the explanation both fit
             answers[i] = value; li.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
             li.classList.remove('is-right', 'is-wrong'); result.hidden = true; check.disabled = answers.includes(null);
           });
@@ -433,20 +477,21 @@
       [t.me, t.think, t.answer, t.quiz, t.gag, t.src].forEach(n => { if (n) n.hidden = true; });
       return t;
     }
-    function play(t, k) { // k: 0..1 through this turn
+    function play(t, k) { // k: 0..1 through this turn; touches the page only where something changes
+      let changed = false;
       const typed = t.c.q.slice(0, Math.round(clamp(k / .2) * t.c.q.length));
-      if (t.me.textContent !== typed) t.me.textContent = typed;
-      show(t.me, typed.length > 0);
-      show(t.think, k >= .22 && k < .38);
-      if (k >= .22 && k < .38) t.think.querySelector('em').textContent = `${1 + Math.round(clamp((k - .22) / .14) * 57)}/58`;
-      show(t.answer, k >= .38);
-      if (t.quiz) show(t.quiz, k >= .5);
+      if (t.me.textContent !== typed) { t.me.textContent = typed; changed = true; }
+      changed = show(t.me, typed.length > 0) || changed;
+      changed = show(t.think, k >= .22 && k < .38) || changed;
+      if (k >= .22 && k < .38) { const n = `${1 + Math.round(clamp((k - .22) / .14) * 57)}/58`, em = t.think.querySelector('em'); if (em.textContent !== n) em.textContent = n; }
+      changed = show(t.answer, k >= .38) || changed;
+      if (t.quiz) changed = show(t.quiz, k >= .5) || changed;
       else {
         const lit = Math.round(clamp((k - .4) / .42) * t.words.length);
-        t.words.forEach((w, i) => w.classList.toggle('on', i < lit));
-        show(t.gag, k >= .86); show(t.src, k >= .92);
+        if (lit !== t.lit) { t.words.forEach((w, i) => w.classList.toggle('on', i < lit)); t.lit = lit; }
+        changed = show(t.gag, k >= .86) || changed; changed = show(t.src, k >= .92) || changed;
       }
-      stick();
+      if (changed) stick();
     }
     const reset = turns => {
       const hi = el('p', 'msg msg--snail', GREETING);
@@ -480,48 +525,75 @@
       });
     }
 
-    // the road: a wavy line along the bottom; Sneglen follows the story slowly, so it lags when you scroll fast
+    // on a phone the chat has a fixed height, so the page does not grow under your finger: just tall enough for
+    // the story's last message (Sneglen's intro and the quiz), measured with the story briefly at its end
+    const fitLog = () => {
+      if (aiPinned || log.classList.contains('is-free')) { log.style.removeProperty('--log-h'); return; }
+      const end = story[story.length - 1], nodes = [end.answer, end.quiz], hidden = nodes.map(n => n.hidden);
+      nodes.forEach(n => { n.hidden = false; });
+      const need = end.quiz.getBoundingClientRect().bottom - end.answer.getBoundingClientRect().top + 34; // + the chat's padding
+      nodes.forEach((n, i) => { n.hidden = hidden[i]; });
+      log.style.setProperty('--log-h', `${Math.ceil(need)}px`);
+    };
+
+    // the road: a wavy line along the bottom; Sneglen follows the story slowly, so it lags when you scroll fast.
+    // Its path is sampled once (on resize), not every frame, and it only moves (and wiggles) while it has ground to cover
     const road = $('.ai-road', aiSec), svg = $('[data-ai-trail]', aiSec), crawler = $('[data-ai-crawler]', aiSec);
-    const wet = $('.ai-trail-wet', svg), shine = $('.ai-trail-shine', svg);
-    const pin = pinned($('[data-pin="ai"]')); const pinOn = () => wide.matches && !still();
-    let L = 1, cw = 100, ch = 100, phoneTop = 0, phoneH = 1, target = 0, t = 0, last = 0, running = false;
+    const wet = $('.ai-trail-wet', svg), shine = $('.ai-trail-shine', svg), aiSticky = $('.ai-sticky', aiSec);
+    const pin = pinned($('[data-pin="ai"]')), N = 160;
+    let L = 1, pts = [], tMax = .94, cw = 100, ch = 100, phoneTop = 0, phoneH = 1, target = 0, t = 0, last = 0, running = false, visible = false;
     const phone = $('.ai-phone', aiSec);
     const place = () => {
-      if (!L) return;
-      const at = clamp(t) * L, pt = wet.getPointAtLength(at), ahead = wet.getPointAtLength(Math.min(L, at + 3));
-      const a = Math.atan2(ahead.y - pt.y, ahead.x - pt.x);
-      crawler.style.transform = `translate(${(pt.x - cw / 2).toFixed(1)}px,${(pt.y - ch * .92).toFixed(1)}px) rotate(${a.toFixed(3)}rad)`;
+      if (pts.length < 2) return;
+      const f = clamp(t) * N, i = Math.min(N - 1, Math.floor(f)), k = f - i, a = pts[i], b = pts[i + 1];
+      const x = a.x + (b.x - a.x) * k, y = a.y + (b.y - a.y) * k, ang = Math.atan2(b.y - a.y, b.x - a.x);
+      crawler.style.transform = `translate(${(x - cw / 2).toFixed(1)}px,${(y - ch * .92).toFixed(1)}px) rotate(${ang.toFixed(3)}rad)`;
       const off = (L * (1 - clamp(t))).toFixed(1); wet.style.strokeDashoffset = off; shine.style.strokeDashoffset = off;
       crawler.classList.toggle('is-behind', target - t > .07);
+      crawler.classList.toggle('is-right', t > tMax - .22); // near the right edge its bubble opens to the left
     };
     const tick = now => {
       const dt = Math.min(64, now - (last || now)); last = now;
       t += (target - t) * (1 - Math.exp(-dt / 700));
-      place();
-      if (running) requestAnimationFrame(tick);
+      const moving = Math.abs(target - t) > .0015;
+      if (!moving) t = target;
+      place(); crawler.classList.toggle('is-moving', moving);
+      if (moving && visible) requestAnimationFrame(tick); else running = false;
     };
+    const wake = () => { if (!running && visible && !still() && Math.abs(target - t) > .0015) { running = true; last = 0; requestAnimationFrame(tick); } };
     parts.push({
+      el: aiSec,
       measure() {
+        aiPinned = isSticky(aiSticky); fitLog();
         pin.measure(); phoneTop = topOf(phone); phoneH = phone.offsetHeight;
         const w = road.offsetWidth, h = road.offsetHeight;
         const d = `M ${-60} ${(h * .62).toFixed(1)} C ${(w * .2).toFixed(1)} ${(h * .12).toFixed(1)}, ${(w * .36).toFixed(1)} ${(h * .98).toFixed(1)}, ${(w * .55).toFixed(1)} ${(h * .56).toFixed(1)} S ${(w * .86).toFixed(1)} ${(h * .1).toFixed(1)}, ${w + 60} ${(h * .5).toFixed(1)}`;
         wet.setAttribute('d', d); shine.setAttribute('d', d);
         L = wet.getTotalLength(); [wet, shine].forEach(p => { p.style.strokeDasharray = `${L.toFixed(1)}`; });
+        pts = Array.from({ length: N + 1 }, (_, i) => wet.getPointAtLength(L * i / N));
         cw = crawler.offsetWidth; ch = cw; // the snail art is square; its image may not have loaded yet
-        if (still()) { t = target; place(); }
+        // it stops where the whole snail still fits on the screen
+        const edge = w - cw * .62; let i = N; while (i > 0 && pts[i].x > edge) i--; tMax = Math.max(.3, i / N);
+        place();
       },
       update(y) {
-        const p = still() ? 1 : pinOn() ? pin.p(y) : clamp((y + vh * .8 - phoneTop) / (phoneH + vh * .2));
+        const p = still() ? 1 : aiPinned ? pin.p(y) : clamp((y + vh * .8 - phoneTop) / (phoneH + vh * .2));
         playStory(p);
-        target = .04 + p * .9;
-        if (still()) { t = target; place(); }
+        target = .04 + p * (tMax - .04);
+        if (still()) { t = target; place(); } else wake();
       },
     });
-    new IntersectionObserver(([e]) => {
-      running = e.isIntersecting && !still();
-      if (running) { last = 0; requestAnimationFrame(tick); }
-    }).observe(aiSec);
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; wake(); }).observe(aiSec);
+    // a tap (or a click) makes Sneglen hop and say hi
+    crawler.addEventListener('pointerdown', () => {
+      crawler.classList.remove('is-hop'); void crawler.offsetWidth; crawler.classList.add('is-hop');
+      clearTimeout(crawler.t); crawler.t = setTimeout(() => crawler.classList.remove('is-hop'), 1200);
+    });
   }
+
+  /* ---------- endless CSS loops rest while their section is off screen ---------- */
+  const restIO = new IntersectionObserver(es => { for (const e of es) e.target.classList.toggle('is-off', !e.isIntersecting); }, { rootMargin: '20% 0px' });
+  $$('main > section, main > div, footer').forEach(s => restIO.observe(s));
 
   /* ---------- 10. answers open smoothly ---------- */
   for (const d of $$('.faq details')) {
@@ -545,6 +617,7 @@
   if (fin && fcar) {
     let t = 0, roadW = 0, cw = 0;
     parts.push({
+      el: fin,
       // the car sets off when the road comes into view and is across by the time the road reaches the upper third
       measure() { t = topOf(fcar.parentElement); roadW = fcar.parentElement.offsetWidth; cw = fcar.offsetWidth; },
       update(y) {
@@ -619,7 +692,14 @@
   }
 
   addEventListener('scroll', request, { passive: true });
-  addEventListener('resize', () => { clearTimeout(measure.t); measure.t = setTimeout(measure, 120); });
+  let lastW = innerWidth, lastH = innerHeight;
+  addEventListener('resize', () => {
+    // a phone's toolbar sliding in or out while you scroll only changes the height a little: no full re-measure
+    // in the middle of a swipe, just the new height
+    if (!fine.matches && innerWidth === lastW && Math.abs(innerHeight - lastH) < 160) { vh = innerHeight; request(); return; }
+    lastW = innerWidth; lastH = innerHeight;
+    clearTimeout(measure.t); measure.t = setTimeout(measure, 120);
+  });
   addEventListener('load', measure);
   document.fonts?.ready.then(measure);
   reduce.addEventListener?.('change', measure);
