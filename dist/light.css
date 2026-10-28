@@ -25,4 +25,4 @@ html[data-theme] body.start-mode:has(.start-step){background:#FFFFFF!important}
 html[data-theme="light"] .journey-control-dock:not(.journey-lesson-done *){background:linear-gradient(rgba(239,241,245,0),#EFF1F5 34%)!important;border:0!important;box-shadow:none!important;border-radius:0!important}
 html[data-theme] .step-foot{background:linear-gradient(rgba(255,255,255,0),#FFFFFF 30%)}
 /* text on the yellow cover: the grey and blue inks darken until they read on yellow (4.5:1) */
-html[data-theme] body.start-mode:not(:has(.start-step)),html[data-theme] body.start-mode .start-hero{--muted:#4A4127;--blue-ink:#07527F;--good-ink:#2A6100;--bad-ink:#A3161B}
+html[data-theme] body.start-mode:not(:has(.start-step)),html[data-theme] body.start-mode .start-hero{--muted:#4A4127;--blue-ink:#1F2328;--good-ink:#2A6100;--bad-ink:#A3161B}

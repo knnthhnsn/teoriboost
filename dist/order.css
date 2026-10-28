@@ -20,8 +20,8 @@
 .ord-grip{display:grid;place-items:center;align-self:stretch;margin:-8px -6px -8px 0;border-radius:0 16px 16px 0;color:#8A9199;touch-action:none;cursor:grab}
 .ord-grip .ui-ico{width:22px;height:22px}
 .ord-items.is-sorting .ord-item:not(.is-drag){transition:translate .22s var(--spring,ease)}
-.ord-item.is-drag{z-index:5;transition:box-shadow .2s ease,rotate .2s ease;border-color:#1CB0F6;background:#F4FBFF;box-shadow:0 14px 30px -10px rgba(31,35,40,.35),0 4px 0 #1899D6;rotate:-1.2deg;cursor:grabbing}
-.ord-item.is-drag .ord-n{background:#1CB0F6;color:#fff}
+.ord-item.is-drag{z-index:5;transition:box-shadow .2s ease,rotate .2s ease;border-color:#C9A200;background:#FFF5CC;box-shadow:0 14px 30px -10px rgba(31,35,40,.35),0 4px 0 #C9A200;rotate:-1.2deg;cursor:grabbing}
+.ord-item.is-drag .ord-n{background:#FFD60A;color:#1F2328}
 .ord-item.is-right{border-color:#58CC02;box-shadow:0 4px 0 #46A302;background:#F2FCE8}
 .ord-item.is-right .ord-n{background:#58CC02;color:#fff}
 .ord-item.is-wrong{border-color:#FF4B4B;box-shadow:0 4px 0 #E03A3A;background:#FFF1F1;animation:nope .4s ease-in-out}
@@ -36,7 +36,7 @@
 .ord-result.is-right strong{color:#2F6F00}.ord-result.is-near strong{color:#A3300F}
 .ord-result p{margin:0;font-size:15px;line-height:1.45}
 .ord-answer{margin:0;padding-left:22px;font:700 15px/1.5 var(--font-display)}
-.ord-src{align-self:flex-start;font:700 13px var(--font-display);color:#0A4F8F;text-decoration:none}
+.ord-src{align-self:flex-start;font:700 13px var(--font-display);color:var(--blue-ink);text-decoration:none}
 .ord-actions{display:flex;flex-direction:column;gap:10px}
 @media (max-width:360px){.ord-item{grid-template-columns:28px 1fr auto 34px}.ord-move button{width:32px;height:32px}.ord-text{font-size:15px}}
 /* Øv hub: the new section's icon tint */

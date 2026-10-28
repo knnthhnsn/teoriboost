@@ -86,7 +86,7 @@
 .team-kind input{position:absolute;opacity:0;inset:0;cursor:pointer}
 .team-kind span{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border-radius:999px;border:2px solid var(--line);background:var(--panel,#fff);font:700 14px var(--font-display)}
 .team-kind input:checked + span{background:#FFD60A;border-color:#1F2328;color:#1F2328}
-.team-kind input:focus-visible + span{outline:3px solid #0B6BA8;outline-offset:2px}
+.team-kind input:focus-visible + span{outline:3px solid var(--blue);outline-offset:2px}
 .team-fine{font-size:13px;color:var(--muted)}
 
 /* the ranking */

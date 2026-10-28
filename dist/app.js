@@ -266,7 +266,7 @@ function shuffleMoment(){
 }
 function sparks(host,n){
   const box=document.createElement('div');box.className='fx-sparks';box.setAttribute('aria-hidden','true');
-  for(let i=0;i<n;i++){const s=document.createElement('i');const a=Math.PI*2*i/n+Math.random()*.4,d=50+Math.random()*80;s.style.setProperty('--dx',(Math.cos(a)*d).toFixed(1)+'px');s.style.setProperty('--dy',(Math.sin(a)*d*.7-24).toFixed(1)+'px');s.style.setProperty('--h',['#FFD60A','#FFD400','#14E0F0','#FF5FA2'][i%4]);s.style.animationDelay=(Math.random()*.08).toFixed(2)+'s';box.append(s);}
+  for(let i=0;i<n;i++){const s=document.createElement('i');const a=Math.PI*2*i/n+Math.random()*.4,d=50+Math.random()*80;s.style.setProperty('--dx',(Math.cos(a)*d).toFixed(1)+'px');s.style.setProperty('--dy',(Math.sin(a)*d*.7-24).toFixed(1)+'px');s.style.setProperty('--h',['#FFD60A','#FFD400','#FFFFFF','#1F2328'][i%4]);s.style.animationDelay=(Math.random()*.08).toFixed(2)+'s';box.append(s);}
   host.append(box);setTimeout(()=>box.remove(),1100);
 }
 function puffs(stage){

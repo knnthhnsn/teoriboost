@@ -43,7 +43,7 @@
 .judge.judge .judge__hotspot{width:40px;height:40px;min-width:40px;min-height:40px;border:3px solid #fff;background:var(--accent,#FFD60A);color:#1A1605;
   box-shadow:0 0 0 5px rgba(255,214,10,.25),0 6px 16px rgba(0,0,0,.35);transition:scale .18s var(--spring,ease),box-shadow .18s}
 .judge.judge .judge__hotspot::before{font:800 16px var(--font-display)}
-.judge.judge .judge__hotspot--place{background:#7DD3FC;box-shadow:0 0 0 5px rgba(125,211,252,.25),0 6px 16px rgba(0,0,0,.35)}
+.judge.judge .judge__hotspot--place{background:#FFD60A;box-shadow:0 0 0 5px rgba(255,214,10,.3),0 6px 16px rgba(0,0,0,.35)}
 .judge.judge .judge__hotspot span{display:block!important;opacity:0;translate:0 -4px;color:#fff;background:rgba(12,20,30,.88);border:0;border-radius:10px;padding:6px 10px;font:700 12px var(--font-display);transition:opacity .15s,translate .15s}
 .judge.judge .judge__hotspot:hover span,.judge.judge .judge__hotspot:focus-visible span,.judge.judge .judge__hotspot.is-hot span{opacity:1;translate:0 0}
 .judge.judge .judge__hotspot:hover,.judge.judge .judge__hotspot.is-hot{scale:1.14;transform:translate(-50%,-50%)}

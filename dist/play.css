@@ -42,7 +42,7 @@
 .journey-choice-pair,.statement .yes-no{display:flex;gap:6px}
 .journey-tactile-choice,.statement .choice-btn{min-width:56px;min-height:44px;padding:0 10px;border-radius:12px!important;border:2px solid var(--line)!important;background:#fff!important;
   box-shadow:0 3px 0 var(--line)!important;font:800 15px var(--font-display)!important;color:var(--ink)!important;text-transform:none;letter-spacing:0}
-.journey-tactile-choice.selected,.statement .choice-btn.selected{border-color:#1CB0F6!important;background:#DDF4FF!important;box-shadow:0 3px 0 #1899D6!important;color:#0B5E87!important}
+.journey-tactile-choice.selected,.statement .choice-btn.selected{border-color:#C9A200!important;background:#FFD60A!important;box-shadow:0 3px 0 #C9A200!important;color:#1F2328!important}
 .journey-tactile-choice:active,.statement .choice-btn:active{translate:0 2px;box-shadow:0 1px 0 var(--line)!important}
 .statement.correct{border-color:var(--good,#58CC02)!important;box-shadow:0 3px 0 #46A302!important;background:#F2FCE8!important}
 .statement.incorrect{border-color:#FF4B4B!important;box-shadow:0 3px 0 #E03A3A!important;background:#FFF1F1!important}
@@ -89,7 +89,7 @@
 /* ---------- exam in progress ---------- */
 .exam-count{font:800 15px var(--font-display);white-space:nowrap}
 .exam-bar{flex:1;position:relative;height:14px;border-radius:999px;background:#E9ECEF;overflow:hidden}
-.exam-bar i{position:absolute;inset:0;border-radius:999px;background:#1CB0F6;transform-origin:0 50%;scale:var(--p) 1;transition:scale .4s var(--out,ease)}
+.exam-bar i{position:absolute;inset:0;border-radius:999px;background:#FFD60A;transform-origin:0 50%;scale:var(--p) 1;transition:scale .4s var(--out,ease)}
 .exam-top .exam-timer{flex:none;min-width:auto!important;padding:6px 12px!important;border-radius:12px!important;background:#F3F5F7!important;border:0!important;font:800 16px var(--font-display)!important;color:var(--ink)!important;font-variant-numeric:tabular-nums}
 .exam-dock{position:sticky;bottom:0;z-index:5;display:flex;gap:10px;margin-top:16px;padding:12px 0 calc(10px + env(safe-area-inset-bottom));background:linear-gradient(rgba(255,255,255,0),#fff 28%)}
 .exam-dock .exam-flag{flex:0 0 auto;padding:0 16px}
@@ -165,6 +165,6 @@ body.exam-active .question-actions{display:none}
 .journey-model-answer h3 + p{margin:0 0 12px;font-size:16px}
 .voice-player{border:2px solid var(--line)!important;border-radius:18px!important;box-shadow:0 3px 0 var(--line)}
 
-.jp-order{display:flex;align-items:center;gap:12px;margin:0 0 10px;padding:12px 14px;border-radius:18px;background:#F4F0FF;border:2px solid #B9A6F5;box-shadow:0 4px 0 #B9A6F5;color:var(--ink);text-decoration:none;text-align:left}
-.jp-order .ui-ico{width:26px;height:26px;color:#5B3CC4;flex:none}
+.jp-order{display:flex;align-items:center;gap:12px;margin:0 0 10px;padding:12px 14px;border-radius:18px;background:#FFF5CC;border:2px solid #F0C800;box-shadow:0 4px 0 #D9B400;color:var(--ink);text-decoration:none;text-align:left}
+.jp-order .ui-ico{width:26px;height:26px;color:#1F2328;flex:none}
 .jp-order strong{display:block;font:800 16px var(--font-display)}.jp-order small{color:#4C5560;font-size:13px}

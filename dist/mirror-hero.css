@@ -1,6 +1,6 @@
 /* Lær hero: the rear-view mirror */
 .mh{--dx:0;--dy:0;position:relative;isolation:isolate;max-width:1100px;margin:0 auto 14px;display:grid;gap:10px;padding:0 18px 20px;border-radius:26px;overflow:hidden;
-  background:linear-gradient(180deg,#E3F1FC 0,#F3F9FE 38%,#fff 78%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+  background:linear-gradient(180deg,#EEF0F3 0,#F6F7F9 38%,#fff 78%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
 /* the top edge of the card is the windscreen; a faint sheen runs across it */
 .mh::before{content:'';position:absolute;inset:0 0 auto;height:46%;z-index:-1;pointer-events:none;
   background:linear-gradient(100deg,transparent 18%,rgba(255,255,255,.75) 30%,transparent 42%,transparent 64%,rgba(255,255,255,.5) 72%,transparent 80%)}
@@ -102,7 +102,7 @@
 
 /* copy */
 .mh-copy{text-align:center;padding:4px 4px 0}
-.mh-eyebrow{margin:0 0 6px;font:800 12px var(--font-display);letter-spacing:.12em;color:#0F6CA3}
+.mh-eyebrow{margin:0 0 6px;font:800 12px var(--font-display);letter-spacing:.12em;color:#7A6000}
 #main .mh-title{margin:0;font:800 clamp(24px,6.4vw,38px)/1.1 var(--font-display)!important;letter-spacing:-.01em;color:#1F2328;text-wrap:balance}
 .mh-text{margin:8px auto 0;max-width:46ch;font-size:16px;line-height:1.45;color:#46505A;text-wrap:pretty}
 

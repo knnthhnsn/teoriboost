@@ -7,8 +7,8 @@ html[data-theme="dark"],html[data-theme="dark"] .journey-surface{
   --accent:#FFD60A;--accent-ink:#1A1605;--accent-shadow:#B38F00;--acid:#FFD60A;--on-accent:#1A1605;
   --good:#6BD62A;--good-ink:#8BE35A;--good-bg:#17301A;
   --bad:#FF5C5C;--bad-ink:#FF8A8A;--bad-bg:#3A1C1F;
-  --blue:#38BDF8;--blue-ink:#7DD3FC;--orange:#FFA53D;--purple:#C08CF5;
-  --acid-text:#FFE066;--amber-text:#FFB25C;
+  --blue:#FFD60A;--blue-ink:#FFD60A;--orange:#FFA53D;--purple:#FFD60A;
+  --acid-text:#FFD60A;--amber-text:#FFB25C;
   --surface:#171B20;--surface-2:#1E242A;--surface-3:#252C33;
 }
 html[data-theme="dark"] body{background:var(--bg)!important;color:var(--ink)}
@@ -31,7 +31,7 @@ html[data-theme="dark"] body.start-mode{background:#fff!important;color:#1F2328}
 html[data-theme="dark"] .start-hero,html[data-theme="dark"] .start-step,html[data-theme="dark"] .dream-modal{
   color-scheme:light;color:#1F2328;
   --bg:#FFFFFF;--panel:#FFFFFF;--panel2:#F4F5F7;--ink:#1F2328;--muted:#5F656D;--line:#E3E5E8;--line-strong:#D3D6DB;
-  --accent-ink:#1F2328;--accent-shadow:#C9A200;--on-accent:#1F2328;--good-ink:#3B8A00;--bad-ink:#D42F2F;--blue-ink:#0A7BBF;--acid-text:#2F6F00}
+  --accent-ink:#1F2328;--accent-shadow:#C9A200;--on-accent:#1F2328;--good-ink:#3B8A00;--bad-ink:#D42F2F;--blue-ink:#1F2328;--acid-text:#7A6000}
 html[data-theme="dark"] .big-btn--ghost{color:var(--ink)}
 html[data-theme="dark"] .acc-error{color:var(--bad-ink)}
 

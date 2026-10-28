@@ -41,7 +41,7 @@ body.start-mode{background:#fff}
 .start-ticker{overflow:hidden;margin:2px -16px;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);animation:fade-up .7s 1.3s var(--out) both}
 .start-ticker > div{display:flex;gap:8px;width:max-content;animation:ticker 36s linear infinite}
 .start-ticker span{padding:5px 11px;border-radius:999px;background:#F3F5F7;color:#3E454D;font:700 13px var(--font-display);white-space:nowrap}
-.start-ticker span:nth-child(3n){background:#FFEFAD}.start-ticker span:nth-child(4n){background:#E3FAFD}
+.start-ticker span:nth-child(3n){background:#FFEFAD}.start-ticker span:nth-child(4n){background:#FFFFFF}
 @keyframes ticker{to{translate:-50% 0}}
 
 .start-actions{display:flex;flex-direction:column;gap:10px;margin-top:6px;animation:fade-up .7s 1.4s var(--out) both}
@@ -129,9 +129,9 @@ body.start-mode{background:#fff}
 .step-option{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px;padding:12px 16px;border-radius:18px;text-align:left;
   background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);color:var(--ink);animation:reveal .45s var(--out) backwards;animation-delay:calc(var(--i) * 70ms + 450ms)}
 .step-option strong{font:800 17px var(--font-display)}.step-option small{color:var(--muted);font-size:14px}
-.step-option.is-on{border-color:#1CB0F6;background:#E8F7FF;box-shadow:0 4px 0 #1899D6}
-.step-option.is-on small{color:#0B5E87}
-.step-option.is-on::before{content:"";position:absolute;inset:-2px;border-radius:18px;border:2px solid #1CB0F6;animation:ring-out .5s var(--out) forwards;pointer-events:none}
+.step-option.is-on{border-color:#C9A200;background:#FFF5CC;box-shadow:0 4px 0 #C9A200}
+.step-option.is-on small{color:#1F2328}
+.step-option.is-on::before{content:"";position:absolute;inset:-2px;border-radius:18px;border:2px solid #C9A200;animation:ring-out .5s var(--out) forwards;pointer-events:none}
 @keyframes ring-out{from{opacity:1;scale:1}to{opacity:0;scale:1.06}}
 .step-note{margin:0;color:var(--muted);font-size:15px}
 .step-foot{position:sticky;bottom:0;padding:12px 0 calc(8px + env(safe-area-inset-bottom));background:linear-gradient(transparent,#fff 30%)}
@@ -233,23 +233,17 @@ body.start-mode{background:#fff}
 
 /* ---------- v4: poster style, straight from the style reference ----------
    A flat, saturated colour field and a flat organic colour blob under the vehicle. No place, no props,
-   no outlines on the background: the vehicle and the type carry the image. The colours follow the vehicle. */
-.gu[data-active="scooter"]{--poster:#22D3EE;--blob:#9B3FD6}
-.gu[data-active="smallcar"]{--poster:#FFD43B;--blob:#FF5FA2}
-.gu[data-active="bigcar"]{--poster:#4DD9AC;--blob:#FF5FA2}
-.gu[data-active="racecar"]{--poster:#FF6FB0;--blob:#7B2CBF}
-.start-hero:has(.gu[data-active="scooter"]),.step-garage:has(.gu[data-active="scooter"]),.dream-modal:has(.gu[data-active="scooter"]){--poster:#22D3EE}
-.start-hero:has(.gu[data-active="smallcar"]),.step-garage:has(.gu[data-active="smallcar"]),.dream-modal:has(.gu[data-active="smallcar"]){--poster:#FFD43B}
-.start-hero:has(.gu[data-active="bigcar"]),.step-garage:has(.gu[data-active="bigcar"]),.dream-modal:has(.gu[data-active="bigcar"]){--poster:#4DD9AC}
-.start-hero:has(.gu[data-active="racecar"]),.step-garage:has(.gu[data-active="racecar"]),.dream-modal:has(.gu[data-active="racecar"]){--poster:#FF6FB0}
-.start-hero{background:var(--poster,#22D3EE)!important;transition:background-color .7s var(--in-out)}
+   no outlines on the background: the vehicle and the type carry the image. Brand colours for every vehicle: a white
+   poster, a grey tone-on-tone workshop and a yellow blob under the vehicle. */
+.gu,.start-hero,.step-garage,.dream-modal{--poster:#FFFFFF;--blob:#FFD60A}
+.start-hero{background:var(--poster,#FFFFFF)!important;transition:background-color .7s var(--in-out)}
 body.start-mode{background:#fff}
 .start-hero .start-top{background:none!important}
-.step-garage{background:var(--poster,#22D3EE)!important;border-color:#1F2328!important;box-shadow:0 4px 0 #1F2328!important;transition:background-color .7s var(--in-out)}
-.dream-modal{background:var(--poster,#22D3EE);border-radius:20px;padding:8px 0 4px;transition:background-color .7s var(--in-out)}
+.step-garage{background:var(--poster,#FFFFFF)!important;border-color:#1F2328!important;box-shadow:0 4px 0 #1F2328!important;transition:background-color .7s var(--in-out)}
+.dream-modal{background:var(--poster,#FFFFFF);border-radius:20px;padding:8px 0 4px;transition:background-color .7s var(--in-out)}
 .gu::before,.start-show::before,.start-show::after{display:none!important}
 /* the blob: flat, borderless, slightly irregular, breathing very slowly */
-.gu-ring{left:0;right:0;bottom:9%;height:24%;background:var(--blob,#9B3FD6)!important;border:0!important;box-shadow:none!important;
+.gu-ring{left:0;right:0;bottom:9%;height:24%;background:var(--blob,#FFD60A)!important;border:0!important;box-shadow:none!important;
   border-radius:46% 54% 41% 59% / 58% 46% 54% 42%;transition:background-color .7s var(--in-out);animation:blob 9s var(--in-out) infinite}
 .gu-ring::after{display:none}
 .gu.is-done .gu-ring{box-shadow:none!important}
@@ -264,7 +258,7 @@ body.start-mode{background:#fff}
 .gu-label{border-color:#1F2328;box-shadow:0 3px 0 #1F2328}
 
 /* ---------- v5: the poster fades to white (Drivly-style), and a tone-on-tone workshop + road sits behind the car ---------- */
-@property --poster{syntax:'<color>';inherits:true;initial-value:#22D3EE}
+@property --poster{syntax:'<color>';inherits:true;initial-value:#FFFFFF}
 .start-hero,.step-garage,.dream-modal{transition:--poster .8s var(--in-out)}
 .start-hero{background:linear-gradient(180deg,var(--poster) 0,color-mix(in oklab,var(--poster) 70%,#fff) 34%,color-mix(in oklab,var(--poster) 22%,#fff) 56%,#fff 74%)!important}
 @media (min-width:900px){
