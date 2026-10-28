@@ -42,6 +42,25 @@ def clean_wheels(mask):
         sizes = ndimage.sum(m, labels, range(1, n + 1)); keep = np.zeros(n + 1, bool); keep[1:] = sizes >= sizes.max() * .15; m = keep[labels]
     return Image.fromarray((m * 255).astype(np.uint8))
 
+def drop_specks(alpha, keep_area, reach=12):
+    """a part's real pieces only: the edit also nudges a few pixels elsewhere, and those loose specks show as dirt
+    where the vehicle sits on something bright (the neon under the big car). Pieces of at least 15 % of the largest
+    stay, and so does anything close to one of them, or anything of keep_area or more (a kit's separate rear lip);
+    small pieces further away go, with their soft edges."""
+    import numpy as np
+    from scipy import ndimage
+    al = np.asarray(alpha); solid = al > 40
+    lab, n = ndimage.label(solid)
+    if n < 2: return alpha
+    sizes = ndimage.sum(solid, lab, range(1, n + 1))
+    main = np.isin(lab, 1 + np.nonzero((sizes >= sizes.max() * .15) | (sizes >= keep_area))[0])
+    near = ndimage.binary_dilation(main, iterations=reach)
+    touching = np.unique(lab[near & solid])
+    loose = solid & ~np.isin(lab, touching[touching > 0])
+    if not loose.any(): return alpha
+    gone = ndimage.binary_dilation(loose, iterations=2) & ~ndimage.binary_dilation(solid & ~loose, iterations=1)
+    return Image.fromarray(np.where(gone, 0, al).astype(np.uint8))
+
 def near_wheels(mask, wheels, reach=26):
     """only what lies around the base's own wheels (big rims may be a little larger, so reach a bit beyond)"""
     import numpy as np
@@ -267,6 +286,9 @@ def build(base_id):
                 speck = ndimage.binary_dilation(np.isin(lab, 1 + np.nonzero(sizes < 60)[0]), iterations=2) & ~(lab > 0) | np.isin(lab, 1 + np.nonzero(sizes < 60)[0])
                 al = np.where(speck, 0, al)
             alpha = Image.fromarray(al.astype(np.uint8))
+        # patterns are many small pieces by design; the restoration's small pieces cover rust spots; mirrors have ears
+        if not part['id'].startswith(('decal-', 'windows-', 'stripe-', 'charm-', 'mirrors-', 'restore')):
+            alpha = drop_specks(alpha, vehicle_area * .003)  # specks are at most about 0.25 % of the vehicle
         layer = edited.convert('RGBA'); layer.putalpha(alpha)
         save(layer, os.path.join(OUT, base_id, part['id'] + '.webp'))
         approved.append(part['id']); tiles.append((part['id'], layer))
@@ -296,7 +318,21 @@ def build(base_id):
         pd = ImageChops.multiply(pd, white).filter(ImageFilter.MedianFilter(5))
         pb = largest_island(pd)
         if pb: info['plate'] = frac(pb)
+    face = plate_face(os.path.join(OUT, base_id, 'plate-blank.webp'))
+    if face: info['plate'] = face  # the plate as drawn wins: the changed area missed part of the scooter's plate
     return info
+
+def plate_face(path):
+    """where the app writes the plate text: the white face of the finished plate layer, as fractions of the layer"""
+    if not os.path.exists(path): return None
+    import numpy as np
+    from scipy import ndimage
+    a = np.asarray(Image.open(path).convert('RGBA')).astype(int)
+    white = (a[..., 3] > 200) & (a[..., :3].min(2) > 205)
+    lab, n = ndimage.label(white)
+    if not n: return None
+    k = 1 + int(np.argmax(ndimage.sum(white, lab, range(1, n + 1)))); ys, xs = np.nonzero(lab == k); W = a.shape[1]
+    return [round(xs.min() / W, 4), round(ys.min() / W, 4), round((xs.max() + 1) / W, 4), round((ys.max() + 1) / W, 4)]
 
 manifest_path = os.path.join(OUT, 'manifest.json')
 manifest = json.load(open(manifest_path)) if os.path.exists(manifest_path) else {}

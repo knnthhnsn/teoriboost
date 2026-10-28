@@ -60,3 +60,6 @@ html[data-theme="dark"] .race-tag{background:#fff;color:#1F2328}
 html[data-theme="dark"] .race-car.is-me .race-tag{background:#FFD60A;color:#1F2328}
 html[data-theme="dark"] .team-row.is-me{border-color:#FFD60A}
 html[data-theme="dark"] .team-boost-big{background:#111316;box-shadow:inset 0 0 0 2px rgba(255,214,10,.35)}
+
+/* the licence plate is white art in both themes, so its letters stay ink */
+html[data-theme="dark"] .mybil-plate b{color:#1F2328}
