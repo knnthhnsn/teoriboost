@@ -35,6 +35,19 @@ the app's own art. The application in `dist/` is a separate deployment and is ou
 - Performance: scroll work only for sections near the screen, no layout reads in the frame loop, Sneglen's path
   sampled once, endless CSS loops paused off screen, garage frames decoded ahead. Measured on an emulated phone
   with a 4x slower CPU: 60 fps in every section except brief dips at the garage's part steps.
+- Scroll-driven animations: where the browser has scroll timelines (Chrome 115+, Safari 26+), the CSS moves the
+  continuous effects with the scroll itself (the walk over the crossing and its fades, the ticker, the photo, the
+  race, the finish line, the stops' road); `site.js` does the same only without them, and for reduced motion.
+  The view timelines use `view-timeline-inset: 0`, or the page's scroll-padding (for anchor links) would shift them.
+- The hajtand text's lines are set by `site.js`: every word measured in the page's font, each line as wide as the
+  triangle at its foot, justified, soft hyphens kept. Safari breaks lines around `shape-outside` differently (on an
+  iPhone the text ran out of the triangle); the CSS shape stays as the fallback without JavaScript.
+- The garage frames have versioned addresses (`?v=` + a hash, written by `tools/site-glowup.mjs`), because
+  `/assets` is cached for a week: a phone showed week-old frames with the scooter's plate text in the old place.
+- The streak flame starts as smoke (0 days) and grows at 1, 3, 7 and 30 days, as in the app.
+- Tested in Chromium and in WebKit (Playwright 27.2). That WebKit build for Windows draws no 3D perspective and no
+  variable font weights, so the crossing and the heavy type are judged in Chromium and on a real iPhone; the line
+  setting, the scroll timelines and the interactions are checked in both.
 
 Content counts checked against the local application: 58 rule cards, 10 topics, 83 scenarios, and 25 scenarios
 per practice exam. The race and leaderboard are labelled as examples. Beta scope is stated on the page and in

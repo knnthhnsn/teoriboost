@@ -230,6 +230,12 @@ main{overflow-x:clip}
 .tri-tip{transition:color .5s}
 .tri-tip.is-lit,.no-js .tri-tip{color:var(--yellow)}
 .no-js .tri{color:#EDECE6}
+/* set by site.js: one line per row, each exactly as wide as the triangle at its foot, justified */
+.tri.is-set{height:auto}
+.tri-lines{display:block}
+.tri-line{display:flex;justify-content:space-between;column-gap:var(--sp,.25em);margin:0 auto;white-space:nowrap}
+.tri-line.is-centred{justify-content:center}
+.tri-probe{position:absolute;left:0;top:0;visibility:hidden;white-space:pre;pointer-events:none}
 
 /* ---------- 4. how: four stops ---------- */
 .how{position:relative;z-index:2;margin-top:-56px;background:var(--grain-soft) 0 0/200px 200px,var(--mist);border-radius:clamp(28px,4vw,56px) clamp(28px,4vw,56px) 0 0}
@@ -565,7 +571,85 @@ main{overflow-x:clip}
 .foot :focus-visible{outline-color:var(--yellow)}
 
 /* endless loops rest while their section is off screen (site.js) */
-.is-off *,.is-off *::before,.is-off *::after{animation-play-state:paused!important}
+.is-off .chip-dot,.is-off .hero-hint i::after,.is-off .mate-art img,.is-off .msg-think i b,.is-off .final-fire,.is-off .ai-crawler img{animation-play-state:paused}
+.is-off .ticker-track,.is-off .racer-fire{animation-play-state:paused,running} /* the time loop rests; the scroll-driven part keeps following */
+
+/* ---------- scroll-driven: the browser moves these with the scroll itself, in step with your finger. site.js does
+   the same work in browsers without scroll timelines (and for reduced motion, which gets the still states) ---------- */
+/* the ticker drives along on its own; with scroll timelines it also slides as it passes */
+.js .ticker-track{animation:ticker-run 90s linear infinite}
+.js .ticker-row--small .ticker-track{animation:ticker-run 70s linear infinite reverse}
+@keyframes ticker-run{to{translate:-50% 0}}
+@keyframes ticker-shift{from{transform:translateX(7%)}to{transform:translateX(-7%)}}
+@keyframes ticker-shift-back{from{transform:translateX(-7%)}to{transform:translateX(7%)}}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .js .ticker-track{animation:ticker-run 90s linear infinite,ticker-shift linear both;animation-timeline:auto,view(block 0px);animation-range:normal,cover}
+    .js .ticker-row--small .ticker-track{animation:ticker-run 70s linear infinite reverse,ticker-shift-back linear both;animation-timeline:auto,view(block 0px);animation-range:normal,cover}
+
+    /* 1. the crossing: on touch and short screens the hero scrolls away and the walk follows it (85 % of the way
+       out); pinned (a mouse, a tall screen) the walk spans the pin */
+    .js .hero-pin{view-timeline:--hero block;view-timeline-inset:0px} /* 0: not the page's scroll-padding (that is for anchor links under the header) */
+    .js .xing-road{animation:hero-walk-flow linear both;animation-timeline:--hero;animation-range:exit-crossing 0% exit-crossing 85%}
+    .js .hero-inner{animation:hero-copy-flow linear both;animation-timeline:--hero;animation-range:exit-crossing 0% exit-crossing 85%}
+    .js .hero-sticky::before{animation:hero-dusk linear both;animation-timeline:--hero;animation-range:exit-crossing 0% exit-crossing 85%}
+    .js .stripe:nth-child(6){animation:hero-s6 linear both;animation-timeline:--hero;animation-range:exit-crossing 0% exit-crossing 85%}
+    .js .stripe:nth-child(5){animation:hero-s5 linear both;animation-timeline:--hero;animation-range:exit-crossing 0% exit-crossing 85%}
+    .js .stripe:nth-child(4){animation:hero-s4 linear both;animation-timeline:--hero;animation-range:exit-crossing 0% exit-crossing 85%}
+
+    /* 5. the photo settles as it comes up */
+    .js .q-photo img{animation:photo-zoom linear both;animation-timeline:view(block 0px);animation-range:entry 0% cover 50%}
+
+    /* 8. the example race: the cars take their places while the road crosses the screen */
+    .js .track{view-timeline:--race block;view-timeline-inset:0px;container-type:inline-size}
+    .js .racer{animation:race-go linear both;animation-timeline:--race;animation-range:cover 5vh cover 80vh;animation-timing-function:cubic-bezier(.3,.75,.4,1)}
+    .js .racer-fire{animation:fire .36s steps(1) infinite,race-fire linear both;animation-timeline:auto,--race;animation-range:normal,cover 5vh cover 80vh}
+
+    /* 11. the finish line: the race car crosses the road as it comes into view */
+    .js .final-road{view-timeline:--fin block;view-timeline-inset:0px;container-type:inline-size}
+    .js .final-car{animation:fin-car linear both;animation-timeline:--fin;animation-range:cover 0% cover 70vh}
+    .js .final-road::before{animation:fin-dash linear both;animation-timeline:--fin;animation-range:cover 0% cover 70vh}
+
+    /* 4. the four stops, swiped: the little car on the road follows the swipe */
+    .js .how-sticky{timeline-scope:--howx}
+    .js .how-window{scroll-timeline:--howx inline}
+    .js .how-road{container-type:inline-size}
+    .js .how-line i{animation:how-fill linear both;animation-timeline:--howx}
+    .js .how-car{animation:how-car linear both;animation-timeline:--howx}
+  }
+  @media (prefers-reduced-motion:no-preference) and (min-width:761px) and (min-height:521px) and (hover:hover){
+    .js .xing-road{animation-name:hero-walk;animation-range:contain 0% contain 100%}
+    .js .hero-inner{animation-name:hero-copy;animation-range:contain 0% contain 100%}
+    .js .hero-sticky::before,.js .stripe:nth-child(4),.js .stripe:nth-child(5),.js .stripe:nth-child(6){animation-range:contain 0% contain 100%}
+    .js .tooth{animation:hero-tooth linear both;animation-timeline:--hero;animation-range:contain 0% contain 100%}
+    .js .hero-hint{animation:hero-hint linear both;animation-timeline:--hero;animation-range:contain 0% contain 100%}
+  }
+  /* 4. pinned: the stops run sideways along the pin, and the car with them */
+  @media (prefers-reduced-motion:no-preference) and (min-width:900px) and (min-height:600px){
+    .js .how-pin{view-timeline:--how block;view-timeline-inset:0px}
+    .js .how-track{animation:how-slide linear both;animation-timeline:--how;animation-range:contain 0% contain 100%}
+    .js .how-line i,.js .how-car{animation-timeline:--how;animation-range:contain 0% contain 100%}
+  }
+}
+@keyframes hero-copy{0%{opacity:1;translate:0 0}31.25%{opacity:0;translate:0 -18.75px}100%{opacity:0;translate:0 -60px}}
+@keyframes hero-copy-flow{0%{opacity:1}83.33%,100%{opacity:0}}
+@keyframes hero-dusk{from{opacity:1}to{opacity:.15}}
+@keyframes hero-tooth{0%{opacity:1}38.46%,100%{opacity:0}}
+@keyframes hero-hint{0%{opacity:1}20%,100%{opacity:0}}
+/* a stripe that has passed under your feet fades before it gets too close (the same sums as site.js) */
+@keyframes hero-s6{0%,26.58%{opacity:1}59.8%,100%{opacity:0}}
+@keyframes hero-s5{0%,55.15%{opacity:1}88.37%,100%{opacity:0}}
+@keyframes hero-s4{0%,83.72%{opacity:1}100%{opacity:.51}}
+@keyframes photo-zoom{from{scale:1.14}to{scale:1}}
+@keyframes race-go{from{translate:0 0}to{translate:calc(var(--to) * (100cqw - 100% - 2 * var(--gut))) 0}}
+@keyframes race-fire{0%{opacity:0}3%,97%{opacity:1}100%{opacity:0}}
+@keyframes fin-car{from{translate:-100% 0}to{translate:calc(100cqw + 15%) 0}}
+@keyframes fin-dash{from{translate:0 0}to{translate:-260px 0}}
+@keyframes how-slide{from{translate:0 0}to{translate:calc(var(--how-dist,0px) * -1) 0}}
+@keyframes how-fill{from{scale:0 1}to{scale:1 1}}
+@keyframes how-car{from{translate:0 0}to{translate:calc(100cqw - 100% - 20px) 0}}
+@keyframes hero-walk{0%{transform:translateX(-50%) translateY(0vh) rotateX(66deg) translateY(calc(var(--W) * 0))}7.1429%{transform:translateX(-50%) translateY(-1.5714vh) rotateX(66.7deg) translateY(calc(var(--W) * .0537))}14.2857%{transform:translateX(-50%) translateY(-3.1429vh) rotateX(66deg) translateY(calc(var(--W) * .1075))}21.4286%{transform:translateX(-50%) translateY(-4.7143vh) rotateX(65.3deg) translateY(calc(var(--W) * .1612))}28.5714%{transform:translateX(-50%) translateY(-6.2857vh) rotateX(66deg) translateY(calc(var(--W) * .215))}35.7143%{transform:translateX(-50%) translateY(-7.8571vh) rotateX(66.7deg) translateY(calc(var(--W) * .2687))}42.8571%{transform:translateX(-50%) translateY(-9.4286vh) rotateX(66deg) translateY(calc(var(--W) * .3225))}50%{transform:translateX(-50%) translateY(-11vh) rotateX(65.3deg) translateY(calc(var(--W) * .3762))}57.1429%{transform:translateX(-50%) translateY(-12.5714vh) rotateX(66deg) translateY(calc(var(--W) * .43))}64.2857%{transform:translateX(-50%) translateY(-14.1429vh) rotateX(66.7deg) translateY(calc(var(--W) * .4838))}71.4286%{transform:translateX(-50%) translateY(-15.7143vh) rotateX(66deg) translateY(calc(var(--W) * .5375))}78.5714%{transform:translateX(-50%) translateY(-17.2857vh) rotateX(65.3deg) translateY(calc(var(--W) * .5912))}85.7143%{transform:translateX(-50%) translateY(-18.8571vh) rotateX(66deg) translateY(calc(var(--W) * .645))}92.8571%{transform:translateX(-50%) translateY(-20.4286vh) rotateX(66.7deg) translateY(calc(var(--W) * .6987))}100%{transform:translateX(-50%) translateY(-22vh) rotateX(66deg) translateY(calc(var(--W) * .7525))}}
+@keyframes hero-walk-flow{0%{transform:translateX(-50%) translateY(0vh) rotateX(66deg) translateY(calc(var(--W) * 0))}7.1429%{transform:translateX(-50%) translateY(0vh) rotateX(66.7deg) translateY(calc(var(--W) * .0537))}14.2857%{transform:translateX(-50%) translateY(0vh) rotateX(66deg) translateY(calc(var(--W) * .1075))}21.4286%{transform:translateX(-50%) translateY(0vh) rotateX(65.3deg) translateY(calc(var(--W) * .1612))}28.5714%{transform:translateX(-50%) translateY(0vh) rotateX(66deg) translateY(calc(var(--W) * .215))}35.7143%{transform:translateX(-50%) translateY(0vh) rotateX(66.7deg) translateY(calc(var(--W) * .2687))}42.8571%{transform:translateX(-50%) translateY(0vh) rotateX(66deg) translateY(calc(var(--W) * .3225))}50%{transform:translateX(-50%) translateY(0vh) rotateX(65.3deg) translateY(calc(var(--W) * .3762))}57.1429%{transform:translateX(-50%) translateY(0vh) rotateX(66deg) translateY(calc(var(--W) * .43))}64.2857%{transform:translateX(-50%) translateY(0vh) rotateX(66.7deg) translateY(calc(var(--W) * .4838))}71.4286%{transform:translateX(-50%) translateY(0vh) rotateX(66deg) translateY(calc(var(--W) * .5375))}78.5714%{transform:translateX(-50%) translateY(0vh) rotateX(65.3deg) translateY(calc(var(--W) * .5912))}85.7143%{transform:translateX(-50%) translateY(0vh) rotateX(66deg) translateY(calc(var(--W) * .645))}92.8571%{transform:translateX(-50%) translateY(0vh) rotateX(66.7deg) translateY(calc(var(--W) * .6987))}100%{transform:translateX(-50%) translateY(0vh) rotateX(66deg) translateY(calc(var(--W) * .7525))}}
 
 /* ---------- pinned sections ---------- */
 @media (prefers-reduced-motion:no-preference) and (min-width:761px) and (min-height:521px) and (hover:hover){

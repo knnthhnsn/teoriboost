@@ -10,6 +10,9 @@
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const fmt = n => Math.round(n).toLocaleString('da-DK');
   const still = () => reduce.matches;
+  // where the browser has scroll timelines the CSS moves the continuous scroll effects itself, in step with the
+  // finger (site.css); site.js does the same work only without them, and for reduced motion (the still states)
+  const sda = !!window.CSS?.supports?.('animation-timeline: view()'), byCss = () => sda && !still();
   const topOf = el => el.getBoundingClientRect().top + scrollY;
 
   /* ---------- the scroll engine: every part measures on resize and updates once per frame, but only while its
@@ -91,6 +94,7 @@
         ends = stripes.map(s => s.offsetTop + s.offsetHeight); pitch = (stripes[1]?.offsetTop || 1) - (stripes[0]?.offsetTop || 0);
       },
       update(y) {
+        if (byCss()) return;
         const p = still() ? 0 : flow ? clamp((y - pin.top) / (heroH * .85)) : pin.p(y);
         hero.style.setProperty('--hp', p.toFixed(4));
         const walk = p * pitch * 3.5;
@@ -179,30 +183,9 @@
     wide.addEventListener('change', () => { if (menuOpen && wide.matches) set(false); });
   }
 
-  /* ---------- 2. ticker: it drives along, faster while you scroll, and turns with you ---------- */
-  const rows = $$('[data-ticker]').map(row => {
-    const track = $('.ticker-track', row);
+  /* ---------- 2. ticker: the CSS drives it (and slides it as it passes); the list is doubled for a seamless loop ---------- */
+  for (const track of $$('[data-ticker] .ticker-track'))
     for (const li of [...track.children]) { const c = li.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.append(c); }
-    return { track, dir: Number(row.dataset.ticker) || 1, x: 0, half: 1 };
-  });
-  if (rows.length) {
-    let vel = 0, sdir = 1, prevY = scrollY, prevT = 0, visible = false, running = false;
-    const loop = t => {
-      const dt = Math.min(64, t - (prevT || t)); prevT = t;
-      const dy = scrollY - prevY; prevY = scrollY; if (dy) sdir = Math.sign(dy);
-      vel += (Math.min(60, Math.abs(dy)) - vel) * .08;
-      for (const r of rows) {
-        r.x = (((r.x + r.dir * sdir * (.05 + vel * .012) * dt) % r.half) + r.half) % r.half;
-        r.track.style.translate = `${(-r.x).toFixed(1)}px 0`;
-      }
-      if (visible && !still()) requestAnimationFrame(loop); else running = false;
-    };
-    parts.push({ measure() { for (const r of rows) r.half = Math.max(1, r.track.scrollWidth / 2); } });
-    new IntersectionObserver(([e]) => {
-      visible = e.isIntersecting;
-      if (visible && !running && !still()) { running = true; prevT = 0; prevY = scrollY; requestAnimationFrame(loop); }
-    }).observe($('.ticker'));
-  }
 
   /* ---------- 3. the numbers count up once ---------- */
   const cio = new IntersectionObserver(es => {
@@ -218,32 +201,66 @@
   }, { threshold: .5 });
   $$('[data-count]').forEach(el => cio.observe(el));
 
-  /* ---------- 3b. the hajtand of words is painted on, word by word ---------- */
+  /* ---------- 3b. the hajtand of words: lines that follow the triangle, painted on word by word ----------
+     The lines are set here rather than by the browser around two shaped floats: Safari breaks lines around
+     shape-outside its own way, and on an iPhone the text ran out of the triangle. Every word is measured in the
+     page's own font, each line gets exactly the width of the triangle at its height and is justified, the soft
+     hyphens still break long words, and the triangle is as small as the words allow, so "Kør!" sits in its point.
+     Without JavaScript the paragraph keeps its CSS shape (.tri-l, .tri-r). */
   const tri = $('[data-paint]');
   if (tri) {
-    const ws = [];
-    for (const child of [...tri.childNodes]) {
-      if (child.nodeType !== Node.TEXT_NODE) continue;
-      const frag = document.createDocumentFragment();
-      for (const part of child.textContent.split(/(\s+)/)) {
-        if (!part) continue;
-        if (/^\s+$/.test(part)) { frag.append(' '); continue; }
-        const s = document.createElement('span'); s.className = 'pw'; s.textContent = part; frag.append(s); ws.push(s);
-      }
-      child.replaceWith(frag);
-    }
-    const tip = $('.tri-tip', tri); if (tip) ws.push(tip); // the last word, "Kør!", is the point: it lights up last, in yellow
-    // the triangle is exactly as tall as its words need, so "Kør!" lands in the point
-    const fit = () => {
-      const w = tri.offsetWidth; if (!w) return;
-      let lo = .5, hi = 1.6;
-      for (let k = 0; k < 14; k++) { const mid = (lo + hi) / 2; tri.style.height = `${(mid * w).toFixed(1)}px`; if (tri.scrollHeight > tri.clientHeight + 1) lo = mid; else hi = mid; }
-      tri.style.height = `${(hi * w).toFixed(1)}px`;
+    const tipText = $('.tri-tip', tri)?.textContent || 'Kør!';
+    const text = [...tri.childNodes].filter(n => n.nodeType === Node.TEXT_NODE).map(n => n.textContent).join(' ').replace(/\s+/g, ' ').trim();
+    const words = text.split(' ').map(w => w.split('­')); // each word in its hyphenation pieces
+    let ws = [], key = '', t = 0, h = 1, lit = -1;
+    const span = (cls, s) => { const e = document.createElement('span'); if (cls) e.className = cls; if (s != null) e.textContent = s; return e; };
+    const setLines = () => {
+      const W = tri.clientWidth; if (!W) return;
+      const probe = span('tri-probe'); tri.append(probe);
+      const cache = new Map(), wd = s => { if (!cache.has(s)) { probe.textContent = s; cache.set(s, probe.getBoundingClientRect().width); } return cache.get(s); };
+      // set again only when the width or the font changed (a word's width tells: the web font may arrive late)
+      const k = `${W}|${wd('Hajtænder').toFixed(2)}`; if (k === key) { probe.remove(); return; } key = k;
+      const space = wd('X X') - wd('XX'), tipW = wd(tipText);
+      probe.textContent = 'X'; probe.style.display = 'block'; const lh = probe.getBoundingClientRect().height; probe.style.display = '';
+      // line n is as wide as the triangle at the line's foot (where it is narrowest), as with shape-outside
+      const room = (n, H) => W * (1 - (n + 1) * lh / H);
+      const layout = H => {
+        const lines = []; let wi = 0, from = 0;
+        while (wi < words.length) {
+          const A = room(lines.length, H); if (A <= 0) return null;
+          const items = []; let w = 0;
+          while (wi < words.length) {
+            const rest = words[wi].slice(from), gap = items.length ? space : 0, full = rest.join('');
+            if (w + gap + wd(full) <= A) { items.push(full); w += gap + wd(full); wi++; from = 0; continue; }
+            for (let c = rest.length - 1; c >= 1; c--) { // break at a soft hyphen: as much of the word as fits
+              const head = rest.slice(0, c).join('') + '-';
+              if (w + gap + wd(head) <= A) { items.push(head); w += gap + wd(head); from += c; break; }
+            }
+            break;
+          }
+          if (!items.length) return null;
+          lines.push({ items, A });
+        }
+        return room(lines.length, H) >= tipW ? lines : null; // and "Kør!" fits in the point below
+      };
+      let lo = W * .3, hi = W * 3;
+      if (!layout(hi)) { probe.remove(); return; }
+      for (let n = 0; n < 24; n++) { const mid = (lo + hi) / 2; if (layout(mid)) hi = mid; else lo = mid; }
+      const lines = layout(hi), box = span('tri-lines'); probe.remove(); // (measured words live in the cache now)
+      lines.forEach((l, n) => {
+        const row = span('tri-line' + (l.items.length === 1 || n === lines.length - 1 ? ' is-centred' : ''));
+        row.style.width = `${l.A.toFixed(2)}px`;
+        l.items.forEach((s, i) => { if (i) row.append(' '); row.append(span('pw', s)); });
+        box.append(row);
+      });
+      const tip = span('tri-line is-centred'); tip.style.width = `${room(lines.length, hi).toFixed(2)}px`; tip.append(span('tri-tip', tipText)); box.append(tip);
+      box.setAttribute('aria-hidden', 'true'); box.style.setProperty('--sp', `${space.toFixed(2)}px`);
+      tri.replaceChildren(span('sr-only', `${text.replace(/­/g, '')} ${tipText}`), box); tri.classList.add('is-set');
+      ws = [...tri.querySelectorAll('.pw, .tri-tip')]; lit = -1;
     };
-    let t = 0, h = 1, lit = -1;
     parts.push({
       el: tri.closest('section') || tri,
-      measure() { fit(); t = topOf(tri); h = tri.offsetHeight; },
+      measure() { setLines(); t = topOf(tri); h = tri.offsetHeight; },
       update(y) {
         const n = still() ? ws.length : Math.round(clamp((y + vh * .78 - t) / (h * .9)) * ws.length);
         if (n === lit) return; lit = n;
@@ -272,6 +289,7 @@
         swipe = Math.max(0, howWin.scrollWidth - howWin.clientWidth);
       },
       update(y) {
+        if (byCss()) return;
         if (on) { const p = pin.p(y); howTrack.style.setProperty('--hx', `${(p * dist).toFixed(1)}px`); road(p); }
         else road(swipe > 0 ? howWin.scrollLeft / swipe : 0);
       },
@@ -300,7 +318,7 @@
   }
   for (const fig of $$('[data-zoom]')) {
     let t = 0, h = 1;
-    parts.push({ el: fig, measure() { t = topOf(fig); h = fig.offsetHeight; }, update(y) { fig.style.setProperty('--zp', (still() ? 1 : clamp((y + vh - t) / (vh + h * .5))).toFixed(4)); } });
+    parts.push({ el: fig, measure() { t = topOf(fig); h = fig.offsetHeight; }, update(y) { if (!byCss()) fig.style.setProperty('--zp', (still() ? 1 : clamp((y + vh - t) / (vh + h * .5))).toFixed(4)); } });
   }
 
   /* ---------- 6. the garage: frames rendered from the app, one more part per step ---------- */
@@ -310,6 +328,7 @@
     bigcar: { name: 'Stor bil', price: '60.000 Boosters', w: 604, h: 368, parts: [['Lakering', 6000], ['Sidestribe', 3000], ['Tonede ruder', 4000], ['Kæmpe alufælge', 9000], ['Kofangerbøjle krom', 6000], ['Lygtebøjle på taget', 7000], ['4 rør', 6000], ['Egen nummerplade', 2000], ['Neon og sænkning', 9000]] },
     racecar: { name: 'Racerbil', price: '120.000 Boosters', w: 640, h: 273, parts: [['Lakering', 6000], ['Racerstriber', 3000], ['Tonede ruder', 4000], ['Sportsfælge', 5000], ['LED-bryn', 3500], ['Street-kit', 8000], ['6 rør', 8000], ['Egen nummerplade', 2000], ['Neon og sænkning', 9000]] },
   };
+  const FRAMES_V = '81461f1e'; // set by tools/site-glowup.mjs: the frames' version, so a phone never shows week-old cached frames
   const car = $('[data-car]'), garagePin = $('[data-pin="garage"]');
   if (car && garagePin) {
     const list = $('[data-parts]'), spentEl = $('[data-spent]'), nameEl = $('[data-vehicle-name]'), priceEl = $('[data-vehicle-price]');
@@ -321,7 +340,7 @@
       car.querySelectorAll('.car-frame').forEach(f => f.remove());
       frames = Array.from({ length: g.parts.length + 1 }, (_, i) => {
         const img = new Image(); img.className = 'car-frame'; img.alt = ''; img.decoding = 'async'; img.width = g.w; img.height = g.h;
-        img.src = `assets/glowup/${v}-${String(i).padStart(2, '0')}.webp`; return img;
+        img.src = `assets/glowup/${v}-${String(i).padStart(2, '0')}.webp?v=${FRAMES_V}`; return img;
       });
       frames.forEach(f => car.insertBefore(f, burst));
       frames.forEach(f => f.decode?.().catch(() => {})); // decoded ahead, so a new part shows the moment you reach it
@@ -379,6 +398,7 @@
       el: race,
       measure() { t = topOf(race); room = race.offsetWidth; lanes.forEach(o => { o.cw = o.racer.offsetWidth; o.left = o.racer.offsetLeft; }); },
       update(y) {
+        if (byCss()) return;
         const p = still() ? 1 : clamp((y + vh * .95 - t) / (vh * .75)), e = 1 - Math.pow(1 - p, 2.2);
         for (const o of lanes) o.racer.style.setProperty('--rx-px', `${(e * o.to * Math.max(0, room - o.cw - o.left * 2)).toFixed(1)}px`);
         lanes[0]?.racer.style.setProperty('--fire', p > .03 && p < .97 ? '1' : '0');
@@ -387,16 +407,17 @@
   }
   const streak = $('[data-streak]');
   if (streak) {
-    const flames = $$('.flame', streak), days = [1, 3, 7, 30], daysEl = $('[data-days]', streak), labelEl = $('[data-days-label]', streak);
+    // from smoke (no streak) to the big flame: the app's levels at 0, 1, 3, 7 and 30 days in a row
+    const flames = $$('.flame', streak), days = [0, 1, 3, 7, 30], daysEl = $('[data-days]', streak), labelEl = $('[data-days-label]', streak);
     let t = 0, h = 1, level = -1;
     parts.push({
       el: streak,
       measure() { t = topOf(streak); h = streak.offsetHeight; },
       update(y) {
         const p = still() ? 1 : clamp((y + vh * .85 - t) / (h + vh * .35));
-        const l = Math.min(3, Math.floor(p * 4)); if (l === level) return; level = l;
+        const last = flames.length - 1, l = Math.min(last, Math.floor(p * flames.length)); if (l === level) return; level = l;
         flames.forEach((f, i) => f.classList.toggle('is-on', i === l));
-        daysEl.textContent = String(days[l]); labelEl.textContent = l ? 'dage i træk' : 'dag i træk';
+        daysEl.textContent = String(days[l]); labelEl.textContent = days[l] === 1 ? 'dag i træk' : 'dage i træk';
       },
     });
   }
@@ -621,6 +642,7 @@
       // the car sets off when the road comes into view and is across by the time the road reaches the upper third
       measure() { t = topOf(fcar.parentElement); roadW = fcar.parentElement.offsetWidth; cw = fcar.offsetWidth; },
       update(y) {
+        if (byCss()) return;
         const p = still() ? .55 : clamp((y + vh - t) / (vh * .7));
         fcar.style.setProperty('--fcx', `${(-cw + p * (roadW + cw * 1.15)).toFixed(1)}px`);
         fcar.parentElement.style.setProperty('--fp', p.toFixed(4));
@@ -702,6 +724,7 @@
   });
   addEventListener('load', measure);
   document.fonts?.ready.then(measure);
+  document.fonts?.addEventListener?.('loadingdone', () => measure()); // a font that arrives late re-sets the hajtand
   reduce.addEventListener?.('change', measure);
   wide.addEventListener?.('change', measure);
   measure();

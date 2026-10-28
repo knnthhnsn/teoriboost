@@ -4,7 +4,8 @@
 // site/assets/glowup/{vehicle}-{nn}.webp and site/assets/glowup/frames.json (part names per frame).
 // Needs the app served on 127.0.0.1:4178. Run: G=$(npm root -g) node tools/site-glowup.mjs
 import { createRequire } from 'node:module';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
@@ -95,4 +96,15 @@ for v in ${JSON.stringify(Object.keys(plan))}:
     print(v, 'box', box, 'size', im.size)
 `], { stdio: 'inherit' });
 writeFileSync(join(OUT, 'frames.json'), JSON.stringify(manifest, null, 1));
+// teoriboost.dk keeps /assets in the browser's cache for a week, so frames that change get a new address: a hash
+// of all frames goes into every reference (site/index.html) and into site.js (FRAMES_V)
+const hash = createHash('sha1'); for (const f of readdirSync(OUT).filter(f => f.endsWith('.webp')).sort()) hash.update(readFileSync(join(OUT, f)));
+const V = hash.digest('hex').slice(0, 8);
+const SITE = join(ROOT, 'site');
+const html = readFileSync(join(SITE, 'index.html'), 'utf8').replace(/(assets\/glowup\/[a-z]+-\d\d\.webp)(\?v=[0-9a-f]+)?/g, `$1?v=${V}`);
+writeFileSync(join(SITE, 'index.html'), html);
+const js = readFileSync(join(SITE, 'site.js'), 'utf8').replace(/const FRAMES_V = '[0-9a-f]*'/, `const FRAMES_V = '${V}'`);
+if (!js.includes(`FRAMES_V = '${V}'`)) throw new Error('site.js has no FRAMES_V');
+writeFileSync(join(SITE, 'site.js'), js);
+console.log('frames version', V);
 console.log(Object.fromEntries(Object.entries(manifest).map(([k, v]) => [k, v.map(s => s.part).join(' > ')])));
