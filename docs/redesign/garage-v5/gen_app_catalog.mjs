@@ -4,7 +4,7 @@ import fs from 'node:fs';
 
 const cat = JSON.parse(fs.readFileSync('docs/redesign/garage-v5/catalog.json', 'utf8'));
 const manifest = JSON.parse(fs.readFileSync('dist/assets/mybil/manifest.json', 'utf8'));
-const NAMES = { scooter: ['Ødelagt scooter', 0], smallcar: ['Slidt lille bil', 25000], bigcar: ['Stor slidt bil', 60000], racecar: ['Ødelagt racerbil', 120000] };
+const NAMES = { scooter: ['Scooter', 0], smallcar: ['Lille bil', 25000], bigcar: ['Stor bil', 60000], racecar: ['Racerbil', 120000] };
 
 const slots = Object.entries(cat.slots).map(([id, s]) => ({ id, name: s.name, z: s.z })).sort((a, b) => a.z - b.z);
 const parts = cat.parts.map(({ id, slot, name, price, tint, text }) => ({ id, slot, name, price, ...(tint ? { tint } : {}), ...(text ? { text: true } : {}) }));

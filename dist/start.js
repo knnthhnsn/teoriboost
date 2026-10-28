@@ -14,10 +14,10 @@ export function saveIntro(patch, store = globalThis.localStorage) { const v = { 
 
 /** The "lækker" build of each vehicle, used by the hero loop and by "Se hvad den kan blive". */
 export const DREAMS = {
-  scooter: { from: 'Rusten scooter', to: 'Lækker scooter', equipped: { restore: 'restore', paint: 'paint-mask', stripe: 'stripe-racing', wheels: 'wheels-chrome', mirrors: 'mirrors-cat', charm: 'charm-heart', top: 'top-bow', plate: 'plate-blank' }, style: { paint: '#D9A93A', stripe: '#F1E6CC', neon: '#FFB000', neonOn: true, lowered: true, plate: 'LÆKKER' } },
-  smallcar: { from: 'Slidt lille bil', to: 'Lækker lille bil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-chrome', top: 'top-spoiler', lights: 'lights-fog', front: 'front-led', plate: 'plate-blank' }, style: { paint: '#2F6F78', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#14E0F0', neonOn: true, lowered: true, plate: 'BOOST' } },
-  bigcar: { from: 'Stor slidt bil', to: 'Lækker stor bil', equipped: { paint: 'paint-mask', stripe: 'stripe-side', windows: 'windows-mask', wheels: 'wheels-big', bar: 'bar-chrome', lights: 'lights-roofbar', exhaust: 'exhaust-4', plate: 'plate-blank' }, style: { paint: '#7E8C5A', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#FFB000', neonOn: true, lowered: true, plate: 'TEORI 1' } },
-  racecar: { from: 'Ødelagt racerbil', to: 'Lækker racerbil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-sport', front: 'front-led', kit: 'kit-street', exhaust: 'exhaust-6', plate: 'plate-blank' }, style: { paint: '#E8B530', stripe: '#2B2F33', windows: '#2B2F33', neon: '#FF4B4B', neonOn: true, lowered: true, plate: 'BESTÅET' } },
+  scooter: { from: 'Scooter', to: 'Lækker scooter', equipped: { restore: 'restore', paint: 'paint-mask', stripe: 'stripe-racing', wheels: 'wheels-chrome', mirrors: 'mirrors-cat', charm: 'charm-heart', top: 'top-bow', plate: 'plate-blank' }, style: { paint: '#D9A93A', stripe: '#F1E6CC', neon: '#FFB000', neonOn: true, lowered: true, plate: 'LÆKKER' } },
+  smallcar: { from: 'Lille bil', to: 'Lækker lille bil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-chrome', top: 'top-spoiler', lights: 'lights-fog', front: 'front-led', plate: 'plate-blank' }, style: { paint: '#2F6F78', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#14E0F0', neonOn: true, lowered: true, plate: 'BOOST' } },
+  bigcar: { from: 'Stor bil', to: 'Lækker stor bil', equipped: { paint: 'paint-mask', stripe: 'stripe-side', windows: 'windows-mask', wheels: 'wheels-big', bar: 'bar-chrome', lights: 'lights-roofbar', exhaust: 'exhaust-4', plate: 'plate-blank' }, style: { paint: '#7E8C5A', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#FFB000', neonOn: true, lowered: true, plate: 'TEORI 1' } },
+  racecar: { from: 'Racerbil', to: 'Lækker racerbil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-sport', front: 'front-led', kit: 'kit-street', exhaust: 'exhaust-6', plate: 'plate-blank' }, style: { paint: '#E8B530', stripe: '#2B2F33', windows: '#2B2F33', neon: '#FF4B4B', neonOn: true, lowered: true, plate: 'BESTÅET' } },
 };
 const ORDER = ['scooter', 'smallcar', 'bigcar', 'racecar'];
 const garageFor = (base, dream) => ({ spent: 0, earnedSeen: 0, owned: [], bases: [base], active: base,
@@ -137,7 +137,7 @@ function hero({ counts }) {
       <span class="start-kicker">Din hjerne. Dit kørekort.</span><h1 id="start-title" class="start-title"><span class="kl">${words('Bestå teoriprøven.')}</span><span class="kl">${words('Med et', 'kw-b')} ${smile}</span></h1>
       <p class="start-lead">5 minutter om dagen. Byg din bil op, mens du lærer.</p>
       ${ticker()}
-      <div class="start-actions"><span class="cta-rive" data-rive="cta"><a class="start-cta rive-keep" href="#start:1" data-start-go>Kom i gang · gratis</a></span></div>
+      <div class="start-actions"><span class="cta-rive" data-rive="cta"><a class="start-cta rive-keep" href="#start:1" data-start-go>Kom i gang</a></span></div>
     </div>
   </section>`;
 }
@@ -168,7 +168,7 @@ export function renderStart(step, ctx) {
   if (step === 2) return shell(2, `<h1 id="step-title" class="sr-only">Hvor meget vil du øve om dagen?</h1>${talk('blink', 'Hvor meget vil du øve om dagen?')}${options('goal', GOALS, intro.goal || 2)}<p class="step-note">Du kan altid ændre det. Ingen straf, hvis du springer en dag over.</p>`, 'Fortsæt');
   if (step === 3) return shell(3, `<p class="eyebrow step-eyebrow">DIT MÅL</p><h1 id="step-title" class="step-title">Start med en rusten scooter. <span>Byg dig op til racerbilen.</span></h1>
       <div class="step-garage">${glowUp(['bigcar', 'racecar'], { loop: true, label: true })}</div>
-      <div class="step-first"><img src="${baseSrc('scooter')}" alt="" width="64" height="64"><div><strong>Din første: Rusten scooter</strong><small>Den er din fra start. Alt andet tjener du dig til.</small></div></div>
+      <div class="step-first"><img src="${baseSrc('scooter')}" alt="" width="64" height="64"><div><strong>Din første: Scooter</strong><small>Den er din fra start. Alt andet tjener du dig til.</small></div></div>
       <div class="step-earn"><span class="step-earn-icon">${boosterIcon(28)}</span><div><strong>Tjen Boosters ved at lære</strong><small>${fmt(BOOSTER_RATES.lesson)} pr. lektion · ${fmt(BOOSTER_RATES.dailyGoal)} for dagens mål · ${fmt(BOOSTER_RATES.examPass)} for en bestået øveprøve</small></div></div>
       <p class="step-note">Restaurér den, lakér den, giv den fælge og neon. Eller spar op til en rigtig bil.</p>`, 'Den er min!', { ctaAttr: 'data-start-claim' });
   const whenText = { '2w': 'Teoriprøve inden for 2 uger', '1m': 'Teoriprøve om ca. 1 måned', '3m': 'Teoriprøve om 2–3 måneder', '?': 'Ingen dato endnu' }[intro.when || '1m'];

@@ -498,6 +498,16 @@ html body .pn--next .pn-btn{animation:next-pulse 2.4s var(--in-out) infinite,btn
 .mybil-head-tyre{position:absolute;right:-74px;bottom:-96px;width:250px;height:auto;rotate:-12deg;z-index:-1;pointer-events:none}
 @media (min-width:700px){.mybil-head{min-height:190px;padding:28px}.mybil-head-tyre{width:330px;right:-60px;bottom:-130px}}
 @media (max-width:380px){.mybil-head > div{max-width:60%}.mybil-head-tyre{width:190px;right:-88px;bottom:-78px}}
+/* the tyre rolls in from beyond the edge (its turn matches the distance: 110 % of its width is 126 degrees), then
+   keeps turning slowly. Re-renders after a tap don't roll it in again: app.js parks it at the angle it had (--idle).
+   Giving gas on the car spins it twice. */
+.mybil-head-tyre{animation:tyre-in-x 1.4s var(--spring-soft) both,tyre-in-turn 1.4s var(--spring-soft) both,tyre-idle 40s linear 1.4s infinite}
+.mybil-head-tyre.is-parked{animation:tyre-idle 40s linear var(--idle,0s) infinite}
+.mybil:has(.mybil-stage.is-revving) .mybil-head-tyre{animation:tyre-rev 1.4s cubic-bezier(.3,0,.2,1),tyre-idle 40s linear var(--idle,1.4s) infinite}
+@keyframes tyre-in-x{from{translate:110% 0}}
+@keyframes tyre-in-turn{from{rotate:114deg}}
+@keyframes tyre-idle{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+@keyframes tyre-rev{to{rotate:-732deg}}
 /* the stops keep clear of the poster word: the road runs in the space to its left */
 @media (min-width:700px){.learn-path{padding-right:104px}}
 /* Desktop: Lær uses the width the mirror and the road above it use. The road poster fills the left; the topic
