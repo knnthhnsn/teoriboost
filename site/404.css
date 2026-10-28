@@ -1,25 +1,18 @@
-/* 404: the road is closed. Keglen stands in the way, the wrecked scooter waits behind a barrier. Uses site.css. */
-.lost{position:relative;min-height:100vh;overflow-x:clip;display:flex;flex-direction:column;background:var(--asphalt) 0 0/220px 220px,var(--asphalt-bg);color:#F4F2EA}
-.lost-main{position:relative;z-index:1;flex:1;display:grid;gap:24px;align-items:center;width:min(1180px,100% - 32px);margin:0 auto;padding:40px 0 0}
-@media (min-width:900px){.lost-main{grid-template-columns:1fr 1fr;padding-top:24px}}
-.lost h1{font-size:clamp(56px,10vw,120px);font-weight:900;margin-bottom:22px}
-.lost .lead{max-width:520px}
-.lost .cta-row{margin-bottom:24px}
-
-/* the scene: a stretch of road with a striped barrier, the cone in front, the wreck behind */
-.detour{position:relative;align-self:end;height:clamp(320px,44vw,520px)}
-/* the road runs the full width of the window, under the scene (as tall as 28 % of it) */
-.detour-road{position:absolute;left:0;right:0;bottom:0;height:calc(clamp(320px,44vw,520px) * .28);background:var(--asphalt) 0 0/220px 220px,#3A3F47;border-top:7px solid #E3E7EA}
-.detour-road span{position:absolute;left:0;right:0;top:46%;height:6px;background:repeating-linear-gradient(90deg,#F0E9D2 0 54px,transparent 54px 110px)}
+/* The same calm visual language as the homepage, with a small detour scene. */
+.lost{min-height:100vh;display:flex;flex-direction:column;background:var(--paper);color:var(--ink)}
 .lost .top .btn{margin-left:auto}
-.detour-barrier{position:absolute;left:8%;right:8%;bottom:22%;height:clamp(28px,4vw,40px);z-index:2;border:3px solid var(--ink);border-radius:8px;box-shadow:0 6px 0 rgba(0,0,0,.35);
-  background:repeating-linear-gradient(-45deg,#E8431B 0 26px,#fff 26px 52px)}
-.detour-barrier::before,.detour-barrier::after{content:"";position:absolute;bottom:-46px;width:12px;height:46px;background:var(--ink);border-radius:0 0 4px 4px}
-.detour-barrier::before{left:12%}.detour-barrier::after{right:12%}
-.detour-scooter{position:absolute;right:4%;bottom:24%;width:48%;height:auto;z-index:1;filter:drop-shadow(0 10px 8px rgba(0,0,0,.35)) saturate(.85);rotate:-4deg}
-.detour-cone{position:absolute;left:10%;bottom:6%;width:46%;height:auto;z-index:3;filter:drop-shadow(0 14px 10px rgba(0,0,0,.4));transform-origin:50% 100%;animation:halt 3.2s ease-in-out infinite}
-@keyframes halt{0%,70%,100%{rotate:0deg}78%{rotate:-4deg}86%{rotate:3deg}94%{rotate:-1deg}}
-.detour-sign{position:absolute;right:6%;top:4%;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;rotate:5deg}
-.detour-sign b{display:block;padding:12px 18px;border-radius:12px;background:var(--yellow);color:var(--ink);border:3px solid var(--ink);box-shadow:0 6px 0 rgba(0,0,0,.35);
-  font:900 clamp(18px,2.4vw,26px)/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
-.detour-sign i{display:block;width:10px;height:clamp(60px,9vw,110px);background:var(--ink)}
+.lost-main{flex:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;width:min(1248px,calc(100% - 96px));margin:auto;padding-block:70px}
+.lost h1{font-size:clamp(56px,6.5vw,96px);font-weight:500;line-height:1.04;letter-spacing:-.06em;margin-bottom:26px}
+.lost .hl{background:linear-gradient(transparent 83%,var(--yellow) 83%,var(--yellow) 94%,transparent 94%)}
+.lost .lead{max-width:430px;font-size:18px;color:var(--ink-soft)}
+.detour{position:relative;height:420px;background:#eceee4;border:1px solid #dce1d1;border-radius:12px;overflow:hidden}
+.detour::before{content:'404';position:absolute;top:10%;left:8%;font:400 105px var(--display);letter-spacing:-.08em;color:#c6ccb8}
+.detour-scooter{position:absolute;right:-4%;bottom:6%;width:65%;height:auto;z-index:1;transform:rotate(-5deg)}
+.detour-cone{position:absolute;left:3%;bottom:0;width:53%;height:auto;z-index:3}
+.detour-sign{position:absolute;right:8%;top:14%;z-index:2;display:flex;flex-direction:column;align-items:center;transform:rotate(6deg)}
+.detour-sign b{padding:10px 16px;background:var(--yellow);color:var(--ink);border:1px solid #9f932c;border-radius:4px;font:400 13px var(--display)}
+.detour-sign i{width:4px;height:80px;background:#9ca48c}
+.detour-barrier{position:absolute;left:7%;right:7%;bottom:21%;height:22px;z-index:2;border:1px solid #b3b99f;border-radius:3px;background:repeating-linear-gradient(-45deg,var(--yellow) 0 20px,var(--ink) 20px 40px)}
+.detour-road{height:50px;border-top:1px solid var(--line);background:#eceee4}
+@media(max-width:800px){.lost-main{grid-template-columns:1fr;width:calc(100% - 40px);padding-block:40px;gap:35px}.lost h1{font-size:65px}.lost .lead{font-size:17px}.detour{height:320px;max-width:520px;width:100%;justify-self:center}.lost .cta-row{gap:12px}.lost .btn{font-size:13px;padding-inline:18px;gap:15px}}
+@media(max-width:360px){.lost-main{width:calc(100% - 32px)}.lost h1{font-size:56px}.detour{height:280px}}
