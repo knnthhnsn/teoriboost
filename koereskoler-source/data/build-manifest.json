@@ -1,0 +1,830 @@
+{
+  "date": "2026-11-10",
+  "slice": false,
+  "counts": {
+    "pages": 117,
+    "indexable": 31,
+    "noindex": 86
+  },
+  "pages": [
+    {
+      "path": "/koereskoler/",
+      "title": "Køreskoler i Danmark: find en skole på kortet | TeoriBoost",
+      "description": "Find køreskoler på et interaktivt Danmarkskort. Søg på by, postnummer eller adresse, se verificerede kontaktoplysninger, og få hjælp til dit valg.",
+      "indexable": true,
+      "kind": "index"
+    },
+    {
+      "path": "/koereskoler/albertslund/",
+      "title": "Køreskoler i Albertslund: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Albertslund. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/alleroed/",
+      "title": "Køreskoler i Allerød: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Allerød. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/assens/",
+      "title": "Køreskoler i Assens: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Assens. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/avannaata/",
+      "title": "Køreskoler i Avannaata: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Avannaata. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/ballerup/",
+      "title": "Køreskoler i Ballerup: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Ballerup. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/billund/",
+      "title": "Køreskoler i Billund: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Billund. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/bornholms-regionskommune/",
+      "title": "Køreskoler i Bornholms Regionskommune: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Bornholms Regionskommune. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/broendby/",
+      "title": "Køreskoler i Brøndby: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Brøndby. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/broenderslev/",
+      "title": "Køreskoler i Brønderslev: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Brønderslev. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/dragoer/",
+      "title": "Køreskoler i Dragør: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Dragør. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/egedal/",
+      "title": "Køreskoler i Egedal: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Egedal. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/esbjerg/",
+      "title": "Køreskoler i Esbjerg: 16 i oversigten | TeoriBoost",
+      "description": "Se 16 køreskoler i kortoversigten for Esbjerg. 3 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/favrskov/",
+      "title": "Køreskoler i Favrskov: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Favrskov. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/faxe/",
+      "title": "Køreskoler i Faxe: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Faxe. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/fredensborg/",
+      "title": "Køreskoler i Fredensborg: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Fredensborg. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/fredericia/",
+      "title": "Køreskoler i Fredericia: 5 i oversigten | TeoriBoost",
+      "description": "Se 5 køreskoler i kortoversigten for Fredericia. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/frederiksberg/",
+      "title": "Køreskoler i Frederiksberg: 12 i oversigten | TeoriBoost",
+      "description": "Se 12 køreskoler i kortoversigten for Frederiksberg. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/frederikshavn/",
+      "title": "Køreskoler i Frederikshavn: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Frederikshavn. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/frederikssund/",
+      "title": "Køreskoler i Frederikssund: 4 i oversigten | TeoriBoost",
+      "description": "Se 4 køreskoler i kortoversigten for Frederikssund. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/furesoe/",
+      "title": "Køreskoler i Furesø: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Furesø. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/faaborg-midtfyn/",
+      "title": "Køreskoler i Faaborg-Midtfyn: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Faaborg-Midtfyn. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/gentofte/",
+      "title": "Køreskoler i Gentofte: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Gentofte. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/gladsaxe/",
+      "title": "Køreskoler i Gladsaxe: 5 i oversigten | TeoriBoost",
+      "description": "Se 5 køreskoler i kortoversigten for Gladsaxe. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/glostrup/",
+      "title": "Køreskoler i Glostrup: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Glostrup. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/greve/",
+      "title": "Køreskoler i Greve: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Greve. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/gribskov/",
+      "title": "Køreskoler i Gribskov: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Gribskov. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/guldborgsund/",
+      "title": "Køreskoler i Guldborgsund: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Guldborgsund. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/haderslev/",
+      "title": "Køreskoler i Haderslev: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Haderslev. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/halsnaes/",
+      "title": "Køreskoler i Halsnæs: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Halsnæs. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/hedensted/",
+      "title": "Køreskoler i Hedensted: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Hedensted. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/helsingoer/",
+      "title": "Køreskoler i Helsingør: 8 i oversigten | TeoriBoost",
+      "description": "Se 8 køreskoler i kortoversigten for Helsingør. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/herlev/",
+      "title": "Køreskoler i Herlev: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Herlev. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/herning/",
+      "title": "Køreskoler i Herning: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Herning. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/hilleroed/",
+      "title": "Køreskoler i Hillerød: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Hillerød. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/hjoerring/",
+      "title": "Køreskoler i Hjørring: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Hjørring. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/holbaek/",
+      "title": "Køreskoler i Holbæk: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Holbæk. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/holstebro/",
+      "title": "Køreskoler i Holstebro: 4 i oversigten | TeoriBoost",
+      "description": "Se 4 køreskoler i kortoversigten for Holstebro. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/horsens/",
+      "title": "Køreskoler i Horsens: 4 i oversigten | TeoriBoost",
+      "description": "Se 4 køreskoler i kortoversigten for Horsens. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/hvidovre/",
+      "title": "Køreskoler i Hvidovre: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Hvidovre. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/hoeje-taastrup/",
+      "title": "Køreskoler i Høje-Taastrup: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Høje-Taastrup. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/hoersholm/",
+      "title": "Køreskoler i Hørsholm: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Hørsholm. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/ikast-brande/",
+      "title": "Køreskoler i Ikast-Brande: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Ikast-Brande. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/ishoej/",
+      "title": "Køreskoler i Ishøj: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Ishøj. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/jammerbugt/",
+      "title": "Køreskoler i Jammerbugt: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Jammerbugt. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/kalundborg/",
+      "title": "Køreskoler i Kalundborg: 4 i oversigten | TeoriBoost",
+      "description": "Se 4 køreskoler i kortoversigten for Kalundborg. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/kerteminde/",
+      "title": "Køreskoler i Kerteminde: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Kerteminde. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/kolding/",
+      "title": "Køreskoler i Kolding: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Kolding. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/kujalleq/",
+      "title": "Køreskoler i Kujalleq: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Kujalleq. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/koebenhavn/",
+      "title": "Køreskoler i København: 41 i oversigten | TeoriBoost",
+      "description": "Se 41 køreskoler i kortoversigten for København. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/koege/",
+      "title": "Køreskoler i Køge: 5 i oversigten | TeoriBoost",
+      "description": "Se 5 køreskoler i kortoversigten for Køge. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/langeland/",
+      "title": "Køreskoler i Langeland: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Langeland. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/lejre/",
+      "title": "Køreskoler i Lejre: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Lejre. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/lemvig/",
+      "title": "Køreskoler i Lemvig: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Lemvig. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/lolland/",
+      "title": "Køreskoler i Lolland: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Lolland. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/lyngby-taarbaek/",
+      "title": "Køreskoler i Lyngby-Taarbæk: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Lyngby-Taarbæk. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/mariagerfjord/",
+      "title": "Køreskoler i Mariagerfjord: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Mariagerfjord. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/middelfart/",
+      "title": "Køreskoler i Middelfart: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Middelfart. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/morsoe/",
+      "title": "Køreskoler i Morsø: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Morsø. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/norddjurs/",
+      "title": "Køreskoler i Norddjurs: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Norddjurs. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/nordfyns/",
+      "title": "Køreskoler i Nordfyns: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Nordfyns. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/nyborg/",
+      "title": "Køreskoler i Nyborg: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Nyborg. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/naestved/",
+      "title": "Køreskoler i Næstved: 5 i oversigten | TeoriBoost",
+      "description": "Se 5 køreskoler i kortoversigten for Næstved. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/odder/",
+      "title": "Køreskoler i Odder: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Odder. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/odense/",
+      "title": "Køreskoler i Odense: 4 i oversigten | TeoriBoost",
+      "description": "Se 4 køreskoler i kortoversigten for Odense. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/odsherred/",
+      "title": "Køreskoler i Odsherred: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Odsherred. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/qeqertalik/",
+      "title": "Køreskoler i Qeqertalik: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Qeqertalik. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/qeqqata/",
+      "title": "Køreskoler i Qeqqata: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Qeqqata. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/randers/",
+      "title": "Køreskoler i Randers: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Randers. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/rebild/",
+      "title": "Køreskoler i Rebild: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Rebild. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/ringkoebing-skjern/",
+      "title": "Køreskoler i Ringkøbing-Skjern: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Ringkøbing-Skjern. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/ringsted/",
+      "title": "Køreskoler i Ringsted: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Ringsted. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/roskilde/",
+      "title": "Køreskoler i Roskilde: 10 i oversigten | TeoriBoost",
+      "description": "Se 10 køreskoler i kortoversigten for Roskilde. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/rudersdal/",
+      "title": "Køreskoler i Rudersdal: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Rudersdal. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/roedovre/",
+      "title": "Køreskoler i Rødovre: 4 i oversigten | TeoriBoost",
+      "description": "Se 4 køreskoler i kortoversigten for Rødovre. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/sermersooq/",
+      "title": "Køreskoler i Sermersooq: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Sermersooq. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/silkeborg/",
+      "title": "Køreskoler i Silkeborg: 7 i oversigten | TeoriBoost",
+      "description": "Se 7 køreskoler i kortoversigten for Silkeborg. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/skanderborg/",
+      "title": "Køreskoler i Skanderborg: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Skanderborg. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/skive/",
+      "title": "Køreskoler i Skive: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Skive. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/slagelse/",
+      "title": "Køreskoler i Slagelse: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Slagelse. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/solroed/",
+      "title": "Køreskoler i Solrød: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Solrød. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/soroe/",
+      "title": "Køreskoler i Sorø: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Sorø. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/stevns/",
+      "title": "Køreskoler i Stevns: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Stevns. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/struer/",
+      "title": "Køreskoler i Struer: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Struer. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/svendborg/",
+      "title": "Køreskoler i Svendborg: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Svendborg. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/syddjurs/",
+      "title": "Køreskoler i Syddjurs: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Syddjurs. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/soenderborg/",
+      "title": "Køreskoler i Sønderborg: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Sønderborg. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/thisted/",
+      "title": "Køreskoler i Thisted: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Thisted. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/toender/",
+      "title": "Køreskoler i Tønder: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Tønder. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/taarnby/",
+      "title": "Køreskoler i Tårnby: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Tårnby. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/vallensbaek/",
+      "title": "Køreskoler i Vallensbæk: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Vallensbæk. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/varde/",
+      "title": "Køreskoler i Varde: 2 i oversigten | TeoriBoost",
+      "description": "Se 2 køreskoler i kortoversigten for Varde. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/vejen/",
+      "title": "Køreskoler i Vejen: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Vejen. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/vejle/",
+      "title": "Køreskoler i Vejle: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Vejle. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/vesthimmerlands/",
+      "title": "Køreskoler i Vesthimmerlands: 3 i oversigten | TeoriBoost",
+      "description": "Se 3 køreskoler i kortoversigten for Vesthimmerlands. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/viborg/",
+      "title": "Køreskoler i Viborg: 5 i oversigten | TeoriBoost",
+      "description": "Se 5 køreskoler i kortoversigten for Viborg. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/vordingborg/",
+      "title": "Køreskoler i Vordingborg: 1 i oversigten | TeoriBoost",
+      "description": "Se 1 køreskoler i kortoversigten for Vordingborg. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/aeroe/",
+      "title": "Køreskoler i Ærø: 0 i oversigten | TeoriBoost",
+      "description": "Se 0 køreskoler i kortoversigten for Ærø. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/aabenraa/",
+      "title": "Køreskoler i Aabenraa: 4 i oversigten | TeoriBoost",
+      "description": "Se 4 køreskoler i kortoversigten for Aabenraa. 0 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": false,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/aalborg/",
+      "title": "Køreskoler i Aalborg: 18 i oversigten | TeoriBoost",
+      "description": "Se 18 køreskoler i kortoversigten for Aalborg. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/aarhus/",
+      "title": "Køreskoler i Aarhus: 14 i oversigten | TeoriBoost",
+      "description": "Se 14 køreskoler i kortoversigten for Aarhus. 1 har verificeret skoleadresse og undervisningstilbud. Find kontakt, kilder og hjælp til dit valg.",
+      "indexable": true,
+      "kind": "town"
+    },
+    {
+      "path": "/koereskoler/koebenhavn/amager-koereskole/",
+      "title": "Amager Køreskole i København S: adresse og undervisning | TeoriBoost",
+      "description": "Amager Køreskole: Elbagade 22, 2300 København S. Se BE, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i København.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/frederikssund/dinesen-trafikskole-skibby/",
+      "title": "Dinesen Trafikskole, Skibby i Skibby: adresse og undervisning | TeoriBoost",
+      "description": "Dinesen Trafikskole, Skibby: Bymidten 6, 4050 Skibby. Se B, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Frederikssund.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/fredericia/driving-academy/",
+      "title": "Driving Academy i Fredericia: adresse og undervisning | TeoriBoost",
+      "description": "Driving Academy: Erritsø Bygade 38, 7000 Fredericia. Se B, Motorcykel, Trailer, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Fredericia.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/slagelse/egekjaers-trafikskole/",
+      "title": "Egekjærs Trafikskole i Slagelse: adresse og undervisning | TeoriBoost",
+      "description": "Egekjærs Trafikskole: Valbyvej 1, 4200 Slagelse. Se B, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Slagelse.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/glostrup/gs-koereskole/",
+      "title": "GS Køreskole i Glostrup: adresse og undervisning | TeoriBoost",
+      "description": "GS Køreskole: Stationsparken 20, st. tv., 2600 Glostrup. Se B, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Glostrup.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/esbjerg/hillerup-s-koereskole/",
+      "title": "Hillerup's Køreskole i Esbjerg N: adresse og undervisning | TeoriBoost",
+      "description": "Hillerup's Køreskole: Spangsbjerg Møllevej 16D, 6715 Esbjerg N. Se B, Motorcykel, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Esbjerg.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/kalundborg/jakobs-koereskole/",
+      "title": "Jakobs Køreskole i Høng: adresse og undervisning | TeoriBoost",
+      "description": "Jakobs Køreskole: Centervej 36, 4270 Høng. Se B, Knallert, Traktor, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Kalundborg.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/silkeborg/kvik-trafik/",
+      "title": "Kvik Trafik i Silkeborg: adresse og undervisning | TeoriBoost",
+      "description": "Kvik Trafik: Christian 8.s Vej 58, 8600 Silkeborg. Se B, Motorcykel, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Silkeborg.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/esbjerg/koereskolen-blink-styr/",
+      "title": "Køreskolen Blink & Styr i Bramming: adresse og undervisning | TeoriBoost",
+      "description": "Køreskolen Blink & Styr: Storegade 17, 6740 Bramming. Se B, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Esbjerg.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/frederikshavn/lene-s-koereskole/",
+      "title": "Lene's Køreskole i Frederikshavn: adresse og undervisning | TeoriBoost",
+      "description": "Lene's Køreskole: Danmarksgade 16A, 9900 Frederikshavn. Se Personbil, Motorcykel, Trailer, Lastbil, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Frederikshavn.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/holstebro/pers-koereskole/",
+      "title": "Pers Køreskole i Holstebro: adresse og undervisning | TeoriBoost",
+      "description": "Pers Køreskole: Stationsvej 20, 7500 Holstebro. Se B, Motorcykel, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Holstebro.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/taarnby/smile-n-drive/",
+      "title": "Smile 'n Drive i Kastrup: adresse og undervisning | TeoriBoost",
+      "description": "Smile 'n Drive: Fuglebækvej 2C, 1. sal, 2770 Kastrup. Se Bil (kategori ikke oplyst), kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Tårnby.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/aarhus/stavtrup-koereskole/",
+      "title": "Stavtrup Køreskole i Viby J: adresse og undervisning | TeoriBoost",
+      "description": "Stavtrup Køreskole: Trindballevej 37, Ormslev, 8260 Viby J. Se B, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Aarhus.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/aalborg/vejgaard-koereskole/",
+      "title": "Vejgaard Køreskole i Aalborg: adresse og undervisning | TeoriBoost",
+      "description": "Vejgaard Køreskole: Hadsundvej 56A, 9000 Aalborg. Se B, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Aalborg.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/herlev/wonsbek-trafikskole/",
+      "title": "Wonsbek Trafikskole i Herlev: adresse og undervisning | TeoriBoost",
+      "description": "Wonsbek Trafikskole: Herlev Hovedgade 117 A, 2730 Herlev. Se B, Motorcykel, Trailer, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Herlev.",
+      "indexable": true,
+      "kind": "school"
+    },
+    {
+      "path": "/koereskoler/esbjerg/young-drivers-koereskole/",
+      "title": "Young Drivers Køreskole i Esbjerg: adresse og undervisning | TeoriBoost",
+      "description": "Young Drivers Køreskole: Stormgade 48, 6700 Esbjerg. Se B, A1, A2, A, BE, kontakt, kort og kilder hentet 10. november 2026. Find også skoler i Esbjerg.",
+      "indexable": true,
+      "kind": "school"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "fetchedAt": "2026-11-10T13:55:49.332Z",
+  "osmSourceTimestamp": "2026-11-10T13:54:48Z",
+  "rawObjects": 157,
+  "excluded": 16,
+  "beforeDedup": 141,
+  "mergedObjects": 1,
+  "schools": 140,
+  "verifiedSchools": 17,
+  "schoolPages": 16,
+  "municipalities": 46,
+  "unknownMunicipality": 0,
+  "conflicts": 6,
+  "fieldCoverage": {
+    "address": 17,
+    "website": 17,
+    "phone": 17,
+    "categories": 17,
+    "cvr": 25,
+    "municipality": 140,
+    "region": 140
+  },
+  "coverage": "Partial OpenStreetMap directory, NOT all Danish driving schools",
+  "licence": "ODbL-1.0; original editorial prose separately © TeoriBoost"
+}

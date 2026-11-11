@@ -1,0 +1,16 @@
+.policy-links{display:flex;flex-wrap:wrap;align-items:center;gap:0 24px;padding:12px 0 22px;color:#C2CCD6;font:400 13px/1.5 var(--body,var(--tb-body,Arial,sans-serif))}
+.policy-links a,.policy-links button{display:inline-flex;align-items:center;min-width:44px;min-height:44px;padding:8px 0;border:0;background:none;color:inherit;font:inherit;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.policy-links :is(a,button):focus-visible{outline:2px solid #FFD60A;outline-offset:5px}
+.policy-footer-simple{background:#1F2328;color:#C2CCD6}
+.policy-footer-simple .policy-links{padding-block:18px}
+@media(hover:hover){.policy-links :is(a,button):hover{color:#FFD60A}}
+#current-cookie-settings{box-sizing:border-box;position:fixed;inset:0;margin:auto;width:480px;max-width:calc(100% - 32px);max-height:calc(100dvh - 32px);padding:0;overflow:auto;border:1px solid #C2CCD6;border-radius:18px;background:#F4F5F7;color:#1F2328;box-shadow:0 20px 60px #1F232833;font:400 17px/1.55 var(--body,var(--tb-body,Arial,sans-serif))}
+#current-cookie-settings::backdrop{background:#1F232866}
+#current-cookie-settings .confirm-content{padding:28px}
+#current-cookie-settings h2{margin:0 0 16px;font:800 26px/1.2 var(--display,var(--tb-display,Arial,sans-serif));letter-spacing:-.03em;color:#1F2328}
+#current-cookie-settings p{margin:0;color:#5F656D;font:inherit}
+#current-cookie-settings .actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
+#current-cookie-settings .tb-button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid #1F2328;border-radius:9px;background:#F4F5F7;color:#1F2328;font:700 14px/1.4 var(--display,var(--tb-display,Arial,sans-serif));text-align:center;text-decoration:none;cursor:pointer}
+#current-cookie-settings .tb-button:first-child{background:#FFD60A}
+#current-cookie-settings :is(a,button):focus-visible{outline:2px solid #1F2328;outline-offset:4px}
+@media(max-width:420px){.policy-links{gap:0 18px}.policy-links :is(a,button){font-size:12px}#current-cookie-settings .confirm-content{padding:22px}#current-cookie-settings .actions{flex-direction:column}}

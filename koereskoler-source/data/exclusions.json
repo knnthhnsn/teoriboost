@@ -1,0 +1,73 @@
+[
+  {
+    "id": "node-952144995",
+    "reason": "Unnamed object; cannot identify a school"
+  },
+  {
+    "id": "node-3400760595",
+    "name": "Køreteknisk Anlæg Randers",
+    "reason": "Training facility, professional academy or unverified non-school object"
+  },
+  {
+    "id": "node-5782876202",
+    "name": "Løschkes Køreskole",
+    "reason": "OSM flags possible closure; not independently resolved"
+  },
+  {
+    "id": "node-8905270901",
+    "name": "Køreteknisk Anlæg Horsens",
+    "reason": "Training facility, professional academy or unverified non-school object"
+  },
+  {
+    "id": "node-10030127017",
+    "name": "SNO1-Hjem",
+    "reason": "Training facility, professional academy or unverified non-school object"
+  },
+  {
+    "id": "node-10832118679",
+    "reason": "Unnamed object; cannot identify a school"
+  },
+  {
+    "id": "node-11978213743",
+    "name": "Scania Driver Academy",
+    "reason": "Training facility, professional academy or unverified non-school object"
+  },
+  {
+    "id": "node-12181913709",
+    "reason": "Unnamed object; cannot identify a school"
+  },
+  {
+    "id": "node-12507321067",
+    "reason": "Unnamed object; cannot identify a school"
+  },
+  {
+    "id": "node-12663354457",
+    "reason": "Unnamed object; cannot identify a school"
+  },
+  {
+    "id": "node-12845079234",
+    "name": "Zealand i Næstved",
+    "reason": "Training facility, professional academy or unverified non-school object"
+  },
+  {
+    "id": "node-13935300726",
+    "reason": "Unnamed object; cannot identify a school"
+  },
+  {
+    "id": "way-309274130",
+    "reason": "Unnamed object; cannot identify a school"
+  },
+  {
+    "id": "way-324210013",
+    "name": "Herning Køretekniske Anlæg",
+    "reason": "Training facility, professional academy or unverified non-school object"
+  },
+  {
+    "id": "way-582921071",
+    "reason": "Unnamed object; cannot identify a school"
+  },
+  {
+    "id": "way-648693769",
+    "reason": "Unnamed object; cannot identify a school"
+  }
+]

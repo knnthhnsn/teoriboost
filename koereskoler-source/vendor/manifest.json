@@ -1,0 +1,23 @@
+[
+  {
+    "file": "vendor/maplibre-gl.js",
+    "url": "https://unpkg.com/maplibre-gl@5.15.0/dist/maplibre-gl.js",
+    "fetchedAt": "2026-11-10T14:01:52.834Z",
+    "sha256": "29f5c00792a339ae89dc3e10271c3ccd8ae6ec9be9440f3e2e401686b8ca7e5d",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "file": "vendor/maplibre-gl.css",
+    "url": "https://unpkg.com/maplibre-gl@5.15.0/dist/maplibre-gl.css",
+    "fetchedAt": "2026-11-10T14:01:52.899Z",
+    "sha256": "1dae8925ee5906e442f0fd7028dded2884381b9acd7a780e5270025e09fc7c5e",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "file": "vendor/LICENSE-maplibre.txt",
+    "url": "https://unpkg.com/maplibre-gl@5.15.0/LICENSE.txt",
+    "fetchedAt": "2026-11-10T14:01:53.016Z",
+    "sha256": "ee5fc05a0677eaf69601d2c7db0d9ecd6cc27c3abc1d0733bc9ed34707cf8ef2",
+    "license": "BSD-3-Clause"
+  }
+]

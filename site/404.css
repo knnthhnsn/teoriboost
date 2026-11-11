@@ -1,0 +1,31 @@
+/* 404: the road is closed. The homepage's road language: asphalt, white road paint, signal yellow. Uses site.css. */
+.lost{min-height:100vh;display:flex;flex-direction:column;background:var(--asphalt-tex) 0 0/220px 220px,#2C3035;color:#fff}
+.lost .top{position:relative;background:none}
+.lost .brand{color:#fff}.lost .brand-dot{color:var(--yellow)}
+.lost .top .btn{margin-left:auto;border-color:var(--yellow);box-shadow:0 3px 0 var(--yellow-edge)}
+.lost :focus-visible{outline-color:var(--yellow)}
+.lost-main{flex:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;width:var(--wrap);margin:auto;padding-block:48px}
+.lost .eyebrow{color:#fff}.lost .eyebrow::before{background:var(--yellow)}
+.lost .eyebrow .dot{display:none}
+.lost h1{margin-bottom:26px;font-size:clamp(56px,8vw,128px);font-weight:900;line-height:.9;letter-spacing:-.05em;color:#fff}
+.lost .lead{max-width:440px;font-size:19px;color:rgba(255,255,255,.78)}
+.lost .cta-row{margin-top:30px}
+.lost .btn-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
+.detour{position:relative;height:clamp(320px,40vw,480px)}
+.detour::before{content:'404';position:absolute;top:2%;left:4%;font:900 clamp(90px,12vw,170px)/1 var(--display);letter-spacing:-.06em;color:rgba(255,255,255,.07)}
+.detour-scooter{position:absolute;right:2%;bottom:16%;z-index:1;width:56%;height:auto;rotate:-4deg;filter:saturate(.85) drop-shadow(0 16px 14px rgba(0,0,0,.45))}
+.detour-cone{position:absolute;left:6%;bottom:2%;z-index:3;width:44%;height:auto;transform-origin:50% 100%;animation:halt 3.2s ease-in-out infinite;filter:drop-shadow(0 16px 14px rgba(0,0,0,.45))}
+@keyframes halt{0%,70%,100%{rotate:0deg}78%{rotate:-4deg}86%{rotate:3deg}94%{rotate:-1deg}}
+.detour-sign{position:absolute;right:8%;top:6%;z-index:2;display:flex;flex-direction:column;align-items:center;rotate:5deg}
+.detour-sign b{padding:12px 18px;border:3px solid var(--ink);border-radius:12px;background:var(--yellow);color:var(--ink);box-shadow:0 5px 0 #000;font:900 clamp(16px,2vw,22px)/1 var(--display);letter-spacing:.02em;text-transform:uppercase}
+.detour-sign i{display:block;width:8px;height:clamp(60px,8vw,100px);background:#14171B}
+.detour-barrier{position:absolute;left:6%;right:6%;bottom:24%;z-index:2;height:clamp(26px,3.4vw,38px);border:3px solid var(--ink);border-radius:8px;
+  background:repeating-linear-gradient(-45deg,var(--yellow) 0 24px,var(--ink) 24px 48px);box-shadow:0 6px 0 rgba(0,0,0,.4)}
+.detour-barrier::before,.detour-barrier::after{content:"";position:absolute;bottom:-40px;width:10px;height:40px;border-radius:0 0 4px 4px;background:var(--ink)}
+.detour-barrier::before{left:12%}.detour-barrier::after{right:12%}
+/* the road under it is a zebra crossing, as everywhere on teoriboost.dk */
+.detour-road{display:block;height:84px;border-top:4px solid rgba(255,255,255,.08);
+  background:repeating-linear-gradient(90deg,#EDECE6 0 46px,transparent 46px 92px) center/100% 62% no-repeat,var(--asphalt-tex) 0 0/220px 220px,#25292E}
+.detour-road span{display:none}
+@media (max-width:800px){.lost-main{grid-template-columns:1fr;gap:24px;padding-block:32px}.detour{justify-self:center;width:100%;max-width:520px}}
+@media (prefers-reduced-motion:reduce){.detour-cone{animation:none}}

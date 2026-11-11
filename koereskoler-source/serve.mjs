@@ -1,0 +1,6 @@
+import http from 'node:http';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+const own=path.resolve('site'),reference=path.resolve('../teoriboost-release-site-perf-20261108'),port=Number(process.env.DIRECTORY_PORT||4197);
+const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.xml':'application/xml; charset=utf-8','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png','.woff2':'font/woff2','.md':'text/plain; charset=utf-8'};
+http.createServer(async(req,res)=>{let url;try{url=new URL(req.url,'http://localhost');}catch{res.writeHead(400).end();return;}const rel=decodeURIComponent(url.pathname);for(const root of [own,reference]){let file=path.resolve(root,'.'+rel);if(!file.startsWith(root+path.sep)&&file!==root)continue;try{if((await fs.stat(file)).isDirectory())file=path.join(file,'index.html');const b=await fs.readFile(file);res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'}).end(b);return;}catch{}}res.writeHead(404,{'Content-Type':'text/plain; charset=utf-8'}).end('Ikke fundet');}).listen(port,'127.0.0.1',()=>console.log('Local directory preview: http://127.0.0.1:'+port+'/koereskoler/ (existing root routes served read-only from reference snapshot)'));

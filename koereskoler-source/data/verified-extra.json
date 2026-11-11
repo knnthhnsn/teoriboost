@@ -1,0 +1,258 @@
+{
+  "reviewedOn": "2026-11-10",
+  "purpose": "Additional school-website business facts for integration; website claims are not independent licensing or quality endorsements.",
+  "provenance": "sourceId values match data/raw/fetch-manifest.json; each fact is from that fetched source and is paraphrased for publication.",
+  "records": [
+    {
+      "osmId": 14212237222,
+      "sourceId": "school-14212237222",
+      "name": "Jakobs Køreskole",
+      "address": "Centervej 36, 4270 Høng",
+      "phone": "40 78 25 33",
+      "website": "https://jakobs-koereskole.dk/",
+      "cvr": "19312976",
+      "categoriesClaimed": [
+        "bil",
+        "knallert",
+        "traktor"
+      ],
+      "distinctiveFacts": [
+        "Skolen angiver Centervej 36 som teorilokale.",
+        "Kørelæreren beskriver også undervisning i knallert og traktor."
+      ],
+      "fieldEvidence": {
+        "name": "school-14212237222: page title 'Jakobs Køreskole'",
+        "address": "school-14212237222: footer 'Centervej 36' and '4270 Høng'; theory-room sentence",
+        "phone": "school-14212237222: footer 'Tlf. 40 78 25 33'",
+        "website": "school-14212237222: fetch-manifest URL and HTTP 200",
+        "cvr": "school-14212237222: footer 'CVR 19312976'",
+        "categoriesClaimed": "school-14212237222: 'Kørekort til bil', 'Knallertkørekort', 'Traktorkørekort'",
+        "distinctiveFacts": "school-14212237222: theory-room address and own teacher biography"
+      },
+      "fetchedAt": "2026-11-10T14:01:45.333Z"
+    },
+    {
+      "osmId": 14255038877,
+      "sourceId": "school-14255038877",
+      "name": "Dinesen Trafikskole, Skibby",
+      "address": "Bymidten 6, 4050 Skibby",
+      "phone": "31 19 50 10",
+      "website": "https://dinesen-trafikskole.dk/koereskole-skibby/",
+      "cvr": "42853038",
+      "categoriesClaimed": [
+        "bil"
+      ],
+      "distinctiveFacts": [
+        "Skibby-afdelingens teori foregår i Bymidten 6.",
+        "Skolen omtaler også afdelinger i Frederikssund og Jyllinge."
+      ],
+      "fieldEvidence": {
+        "name": "school-14255038877: 'Dinesen Trafikskole' and Skibby page heading",
+        "address": "school-14255038877: 'Vi holder til i Bymidten 6, 4050 Skibby'",
+        "phone": "school-14255038877: Skibby enrolment paragraph '31 19 50 10'",
+        "website": "school-14255038877: fetch-manifest URL and HTTP 200",
+        "cvr": "school-14255038877: footer 'CVR-nr.: 42853038'",
+        "categoriesClaimed": "school-14255038877: Skibby page 'Priser – Bilkørekort'; MC appears in site-wide navigation, not proven at this branch",
+        "distinctiveFacts": "school-14255038877: Skibby theory-room and branch paragraphs"
+      },
+      "fetchedAt": "2026-11-10T14:01:48.762Z"
+    },
+    {
+      "osmId": 13291254452,
+      "sourceId": "school-13291254452",
+      "name": "Hillerup's Køreskole",
+      "address": "Spangsbjerg Møllevej 16D, 6715 Esbjerg N",
+      "phone": "+45 27 29 24 89",
+      "website": "https://www.hillerupskoereskole.dk/",
+      "cvr": "28269633",
+      "categoriesClaimed": [
+        "bil",
+        "motorcykel",
+        "generhvervelse"
+      ],
+      "distinctiveFacts": [
+        "Skolen oplyser, at den også tilbyder et engelsksproget kørekortforløb."
+      ],
+      "fieldEvidence": {
+        "name": "school-13291254452: 'Hillerup's Køreskole' in body",
+        "address": "school-13291254452: contact block 'Spangsbjerg Møllevej 16D, 6715 Esbjerg N'",
+        "phone": "school-13291254452: contact block '+45 27 29 24 89'",
+        "website": "school-13291254452: fetch-manifest URL and HTTP 200",
+        "cvr": "school-13291254452: footer 'CVR: 28269633'",
+        "categoriesClaimed": "school-13291254452: 'Kørekort til bil, MC eller generhvervelse'",
+        "distinctiveFacts": "school-13291254452: statement about an English driver's-licence course"
+      },
+      "fetchedAt": "2026-11-10T14:00:45.711Z"
+    },
+    {
+      "osmId": 13348453535,
+      "sourceId": "school-13348453535",
+      "name": "GS Køreskole",
+      "address": "Stationsparken 20, st. tv., 2600 Glostrup",
+      "phone": "27 59 28 70",
+      "website": "https://www.gskoreskole.dk/",
+      "cvr": null,
+      "categoriesClaimed": [
+        "bil"
+      ],
+      "distinctiveFacts": [
+        "Skolen angiver undervisning med både manuelt gear og automatgear."
+      ],
+      "fieldEvidence": {
+        "name": "school-13348453535: page title 'GS Køreskole'",
+        "address": "school-13348453535: contact block 'Stationsparken 20, st. tv. 2600 Glostrup'",
+        "phone": "school-13348453535: contact block 'Tlf. 27 59 28 70'",
+        "website": "school-13348453535: fetch-manifest URL and HTTP 200",
+        "categoriesClaimed": "school-13348453535: 'Kørekort til bil'",
+        "distinctiveFacts": "school-13348453535: 'Manuelt gear eller automatgear'"
+      },
+      "fetchedAt": "2026-11-10T14:01:01.123Z"
+    },
+    {
+      "osmId": 13226724955,
+      "sourceId": "school-13226724955",
+      "name": "Renés Køreskole",
+      "address": "Torvegade 49, kld., 6700 Esbjerg",
+      "phone": "40 76 33 36",
+      "website": "https://renes.dk/",
+      "cvr": "42131725",
+      "categoriesClaimed": [
+        "B",
+        "BE",
+        "B+"
+      ],
+      "distinctiveFacts": [
+        "Skolen oplyser, at den tilbyder både manuelt gear og automatgear.",
+        "Skolen tilbyder efter eget udsagn også individuelt tilpassede forløb ved særlige behov."
+      ],
+      "fieldEvidence": {
+        "name": "school-13226724955: 'Renés Køreskole' in page body",
+        "address": "school-13226724955: footer 'Torvegade 49, 6700 Esbjerg' and location section 'Kld.'",
+        "phone": "school-13226724955: 'Ring på 40 76 33 36'",
+        "website": "school-13226724955: fetch-manifest URL and HTTP 200",
+        "cvr": "school-13226724955: footer 'Cvr. 42 13 17 25'",
+        "categoriesClaimed": "school-13226724955: 'Kategori B (Bil)' and '(Trailer) Kategori B/E B+'",
+        "distinctiveFacts": "school-13226724955: 'Automat og manuel gear' and paragraph on adjusted teaching"
+      },
+      "fetchedAt": "2026-11-10T14:00:42.721Z"
+    },
+    {
+      "osmId": 13710910511,
+      "sourceId": "school-13710910511",
+      "name": "Young Drivers Køreskole",
+      "address": "Stormgade 48, 6700 Esbjerg",
+      "phone": "+45 40 89 46 40",
+      "website": "https://ydkoreskole.dk/",
+      "cvr": "37803626",
+      "categoriesClaimed": [
+        "B",
+        "A1",
+        "A2",
+        "A",
+        "BE"
+      ],
+      "distinctiveFacts": [
+        "Skolen oplyser fysisk teoriundervisning og førstehjælpskursus."
+      ],
+      "fieldEvidence": {
+        "name": "school-13710910511: site title and introduction 'Young Drivers'",
+        "address": "school-13710910511: footer 'Stormgade 48, 6700 Esbjerg'",
+        "phone": "school-13710910511: contact '+45 40 89 46 40'",
+        "website": "school-13710910511: fetch-manifest finalUrl and HTTP 200",
+        "cvr": "school-13710910511: footer 'CVR: 37803626'",
+        "categoriesClaimed": "school-13710910511: 'Bil-kørekort (Kategori B)', 'Motorcykel-kørekort (Kategori A, A1, A2)', 'Trailer-kørekort (Kategori B/E)'",
+        "distinctiveFacts": "school-13710910511: 'Teoriundervisning fysisk' and 'Førstehjælpskursus til kørekort'"
+      },
+      "fetchedAt": "2026-11-10T14:01:17.279Z"
+    },
+    {
+      "osmId": 12709703996,
+      "sourceId": "school-12709703996",
+      "name": "Vejgaard Køreskole",
+      "address": "Hadsundvej 56A, 9000 Aalborg",
+      "phone": "+45 26 15 32 13",
+      "website": "https://vejgaardkoreskole.dk/",
+      "cvr": "29560544",
+      "categoriesClaimed": [
+        "bil"
+      ],
+      "distinctiveFacts": [
+        "Teoriundervisningen foregår i lokalet på Hadsundvej 56A.",
+        "Skolen viser et tilbud om kørekort med automatgear."
+      ],
+      "fieldEvidence": {
+        "name": "school-12709703996: site title/body 'Vejgaard Køreskole'",
+        "address": "school-12709703996: footer 'Hadsundvej 56A, 9000 Aalborg'",
+        "phone": "school-12709703996: contact '+45 26 15 32 13'",
+        "website": "school-12709703996: fetch-manifest URL and HTTP 200",
+        "cvr": "school-12709703996: footer 'CVR : 29560544'",
+        "categoriesClaimed": "school-12709703996: 'Kørekort til bil'",
+        "distinctiveFacts": "school-12709703996: theory-room sentence and 'Kørekort med automatgear'"
+      },
+      "fetchedAt": "2026-11-10T14:00:10.529Z"
+    },
+    {
+      "osmId": 13051920192,
+      "sourceId": "school-13051920192",
+      "name": "Driving Academy",
+      "address": "Erritsø Bygade 38, 7000 Fredericia",
+      "phone": "28 87 87 00",
+      "website": "https://www.driving-academy.net/",
+      "cvr": "40242716",
+      "categoriesClaimed": [
+        "bil",
+        "motorcykel",
+        "trailer"
+      ],
+      "distinctiveFacts": [
+        "Skolen oplyser undervisning på engelsk.",
+        "Den angiver Erritsø Bygade 42 som særskilt teoriadresse for MC og trailer."
+      ],
+      "fieldEvidence": {
+        "name": "school-13051920192: page title 'Driving Academy'",
+        "address": "school-13051920192: footer 'Erritsø Bygade 38, 7000 Fredericia'",
+        "phone": "school-13051920192: contact 'Tlf. 28 87 87 00'; another number also appears for other branches",
+        "website": "school-13051920192: fetch-manifest URL and HTTP 200",
+        "cvr": "school-13051920192: footer 'CVR: 40242716'",
+        "categoriesClaimed": "school-13051920192: paragraph 'bil, trailer og motorcykel'",
+        "distinctiveFacts": "school-13051920192: English-licence sentence and 'Erritsø Bygade 42 (MC, trailer)'"
+      },
+      "fetchedAt": "2026-11-10T14:00:30.448Z"
+    },
+    {
+      "osmId": 13157526750,
+      "sourceId": "school-13157526750",
+      "name": "Lene's Køreskole",
+      "address": "Danmarksgade 16A, 9900 Frederikshavn",
+      "phone": "20 33 33 28",
+      "website": "https://www.lene1.dk/",
+      "cvr": null,
+      "categoriesClaimed": [
+        "personbil",
+        "motorcykel",
+        "trailer",
+        "lastbil"
+      ],
+      "distinctiveFacts": [
+        "Skolen viser separate sider for teoriundervisning til personbil, MC, trailer og lastbil."
+      ],
+      "fieldEvidence": {
+        "name": "school-13157526750: page title 'Lene's Køreskole'",
+        "address": "school-13157526750: contact 'Danmarksgade 16A, 9900 Frederikshavn'",
+        "phone": "school-13157526750: contact '20 33 33 28'",
+        "website": "school-13157526750: fetch-manifest URL and HTTP 200",
+        "categoriesClaimed": "school-13157526750: headings 'Personbil', 'MC', 'Trailer', 'Lastbil' each with theory teaching",
+        "distinctiveFacts": "school-13157526750: category-specific theory page headings"
+      },
+      "fetchedAt": "2026-11-10T14:00:33.001Z"
+    }
+  ],
+  "exclusions": [
+    "school-14081821386: OSM calls the node Hosbonds Køreskole while its website now presents StartDriving.dk and lists three locations; no safe one-record identity match.",
+    "school-13972323527: Maribo Køreskole page gave categories but no clear business/teaching street address in the fetched front page.",
+    "school-14085536372: fetched page is only a redirect notice.",
+    "school-14042079655: two teaching locations but fetched page does not clearly state a vehicle category for either.",
+    "school-13522496773: contact address is clear but the fetched front page did not explicitly identify a licence category.",
+    "school-13825744692: contact address is clear but the fetched front page did not explicitly identify a licence category."
+  ]
+}
