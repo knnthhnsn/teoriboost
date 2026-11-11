@@ -1,11 +1,31 @@
 import {EXAM_PHOTOS} from './exam-photos.js';
-export const VISUAL_SCENE_IDS=Object.freeze(Object.keys(EXAM_PHOTOS));
+import {EXAM_SCHEMATICS} from './exam-schematics.js';
+import {mountSchematic} from './schematic-view.js';
+// diagrams.js is 1.8 MB (730 kB sent) and only the schematic questions use it, so it is fetched after the app has
+// started, not before its first screen. A question that comes before it has arrived draws its diagram when it does.
+let diagrams=null,diagramsLoad=null;
+export function loadDiagrams(){return diagramsLoad||=import('./diagrams.js').then(m=>diagrams=m,e=>{diagramsLoad=null;throw e;});}
+const idle=globalThis.requestIdleCallback||(f=>setTimeout(f,1200));
+const preload=()=>idle(()=>loadDiagrams().catch(()=>{}),{timeout:4000});
+if(typeof document!=='undefined'){if(document.readyState==='complete')preload();else addEventListener('load',preload,{once:true});}
+export const VISUAL_SCENE_IDS=Object.freeze([...Object.keys(EXAM_PHOTOS),...Object.keys(EXAM_SCHEMATICS)]);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function renderQuestionVisual(q,_unused,{examMode=false,index=0}={}){
+  const schematic=EXAM_SCHEMATICS[q.id];
+  if(schematic)return `<section class="scene-panel scene-photo scene-schematic" aria-label="Skematisk illustration" data-visual-question="${esc(q.id)}" data-visual-kind="schematic-diagram" data-visual-status="${diagrams?'ready':'loading'}"><div class="scene-photo-top"><span>${examMode?'SITUATION '+(index+1):'SE SITUATIONEN'}</span><span>Skematisk illustration</span></div><div class="scene-photo-stage"${diagrams?'':' data-diagram-pending'}>${diagrams?diagrams.questionDiagram(q):''}</div><p class="scene-photo-note">Opgaveteksten angiver alle afgørende betingelser.</p></section>`;
   const photo=EXAM_PHOTOS[q.id],media=photo?`<img id="question-visual-photo" src="${photo.src}" width="${photo.width}" height="${photo.height}" alt="${esc(q.context)}" decoding="async" fetchpriority="high" hidden>`:'';
   return `<section class="scene-panel scene-photo" aria-label="Situationsbillede" data-visual-question="${esc(q.id)}"><div class="scene-photo-top"><span>${examMode?'SITUATION '+(index+1):'SE SITUATIONEN'}</span><span>AI-illustration</span></div><div class="scene-photo-stage">${media}<div class="scene-photo-fallback" ${photo?'hidden':''}><p>Billedet kunne ikke vises.</p><p>Alle betingelser står i situationens tekst.</p><button type="button" data-scene-retry>Hent billedet igen</button></div></div><div class="scene-photo-bottom"><p data-scene-title>${esc(photo?.title||'Situationen')}</p><button type="button" class="scene-expand" aria-haspopup="dialog" data-scene-expand disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>Større billede</button></div>${photo?.facts?.length?`<div class="scene-facts">${photo.facts.map(f=>`<span>${esc(f)}</span>`).join('')}</div>`:''}<p class="scene-photo-note">Læs situationens betingelser før du svarer.</p></section>`;
 }
 export function mountQuestionVisual(host,q,{onOpen=()=>{}}={}){
+  if(EXAM_SCHEMATICS[q.id]){
+    const pending=host?.querySelector('[data-diagram-pending]');
+    if(!pending)return mountSchematic(host);
+    let inner=null,gone=false;
+    const draw=()=>{if(gone||!pending.isConnected)return;pending.innerHTML=diagrams.questionDiagram(q);pending.removeAttribute('data-diagram-pending');inner=mountSchematic(host);if(!inner)host.dataset.visualStatus='ready';};
+    const fail=()=>{if(gone||!pending.isConnected)return;pending.innerHTML='<p class="scene-photo-note">Tegningen kunne ikke hentes. Alle betingelser står i situationens tekst.</p>';host.dataset.visualStatus='ready';};
+    loadDiagrams().then(draw,fail);
+    return {dispose(){gone=true;inner?.dispose();}};
+  }
   const photo=EXAM_PHOTOS[q.id],media=host?.querySelector('#question-visual-photo');if(!photo||!media)return null;
   const fallback=host.querySelector('.scene-photo-fallback'),expand=host.querySelector('[data-scene-expand]'),retry=host.querySelector('[data-scene-retry]'),origin=media.parentElement;
   let dialog=null,observer=null,focusBefore=null,disposed=false,zoom=1,loadGeneration=0;

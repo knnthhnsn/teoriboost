@@ -1,0 +1,265 @@
+{
+  "source": "seated-cast-four-directions-v2.png",
+  "sha256": "879e3090d74d9d3886beffdc5cb7f82b34e0a7fbf2deda5b0a0fb9a2cd88c4ce",
+  "width": 1254,
+  "height": 1254,
+  "frameGrid": "four rows identities, four columns views; cell boundaries rounded from equal quarters",
+  "frames": [
+    {
+      "row": 0,
+      "column": 0,
+      "cell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        20,
+        23,
+        289,
+        314
+      ]
+    },
+    {
+      "row": 0,
+      "column": 1,
+      "cell": [
+        314,
+        0,
+        627,
+        314
+      ],
+      "visibleBounds": [
+        354,
+        25,
+        609,
+        314
+      ]
+    },
+    {
+      "row": 0,
+      "column": 2,
+      "cell": [
+        627,
+        0,
+        940,
+        314
+      ],
+      "visibleBounds": [
+        663,
+        28,
+        932,
+        314
+      ]
+    },
+    {
+      "row": 0,
+      "column": 3,
+      "cell": [
+        940,
+        0,
+        1254,
+        314
+      ],
+      "visibleBounds": [
+        969,
+        26,
+        1238,
+        314
+      ]
+    },
+    {
+      "row": 1,
+      "column": 0,
+      "cell": [
+        0,
+        314,
+        314,
+        627
+      ],
+      "visibleBounds": [
+        19,
+        314,
+        294,
+        627
+      ]
+    },
+    {
+      "row": 1,
+      "column": 1,
+      "cell": [
+        314,
+        314,
+        627,
+        627
+      ],
+      "visibleBounds": [
+        354,
+        314,
+        620,
+        627
+      ]
+    },
+    {
+      "row": 1,
+      "column": 2,
+      "cell": [
+        627,
+        314,
+        940,
+        627
+      ],
+      "visibleBounds": [
+        656,
+        314,
+        937,
+        626
+      ]
+    },
+    {
+      "row": 1,
+      "column": 3,
+      "cell": [
+        940,
+        314,
+        1254,
+        627
+      ],
+      "visibleBounds": [
+        982,
+        314,
+        1239,
+        625
+      ]
+    },
+    {
+      "row": 2,
+      "column": 0,
+      "cell": [
+        0,
+        627,
+        314,
+        940
+      ],
+      "visibleBounds": [
+        24,
+        627,
+        286,
+        940
+      ]
+    },
+    {
+      "row": 2,
+      "column": 1,
+      "cell": [
+        314,
+        627,
+        627,
+        940
+      ],
+      "visibleBounds": [
+        355,
+        633,
+        614,
+        940
+      ]
+    },
+    {
+      "row": 2,
+      "column": 2,
+      "cell": [
+        627,
+        627,
+        940,
+        940
+      ],
+      "visibleBounds": [
+        634,
+        633,
+        939,
+        940
+      ]
+    },
+    {
+      "row": 2,
+      "column": 3,
+      "cell": [
+        940,
+        627,
+        1254,
+        940
+      ],
+      "visibleBounds": [
+        981,
+        633,
+        1241,
+        940
+      ]
+    },
+    {
+      "row": 3,
+      "column": 0,
+      "cell": [
+        0,
+        940,
+        314,
+        1254
+      ],
+      "visibleBounds": [
+        26,
+        940,
+        297,
+        1241
+      ]
+    },
+    {
+      "row": 3,
+      "column": 1,
+      "cell": [
+        314,
+        940,
+        627,
+        1254
+      ],
+      "visibleBounds": [
+        359,
+        940,
+        621,
+        1239
+      ]
+    },
+    {
+      "row": 3,
+      "column": 2,
+      "cell": [
+        627,
+        940,
+        940,
+        1254
+      ],
+      "visibleBounds": [
+        662,
+        940,
+        940,
+        1239
+      ]
+    },
+    {
+      "row": 3,
+      "column": 3,
+      "cell": [
+        940,
+        940,
+        1254,
+        1254
+      ],
+      "visibleBounds": [
+        940,
+        940,
+        1245,
+        1238
+      ]
+    }
+  ]
+}

@@ -541,7 +541,7 @@ export function getJourneyStep(session, content) {
       question: resolved.checkpointView,
       reordered: restored.checkpoint.reordered,
       notice: restored.checkpoint.reordered
-        ? 'Samme situation, men udsagnene er tydeligt markeret som omordnet.'
+        ? 'Brug reglen én gang til i situationen.'
         : 'Nyt spørgsmål fra samme emne.',
       attempts: restored.checkpoint.attempts.length
     };

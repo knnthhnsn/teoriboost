@@ -1,0 +1,73 @@
+/* UX fixes from the interviews and the app test, 9 Nov 2026 (docs/ux-research/2026-11-09).
+   Brand-manual colours only: #FFD60A, #FFF6C7, #C9A200, #4A4127, #2B3138, #FEFFED, #5F656D, #FF9600 (warning). */
+
+/* Intro: who stands behind the rules (fund 12) */
+.start-trust{margin:12px 0 0;max-width:34ch;font-size:13px;line-height:1.45;color:var(--muted,#5F656D)}
+
+/* Intro: the plan follows the exam date (F1, F2) */
+.step-tip{font-weight:700;color:var(--ink,#2B3138)}
+.plan-check--note{flex:none}
+.plan-check--note circle,.plan-check--note path{fill:none;stroke:#FF9600;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:none;stroke-dashoffset:0;animation:none}
+.plan-tight small{color:var(--ink,#2B3138)}
+
+/* Lesson cards: long rules as short paragraphs (F3, F4) */
+.jp-card-text p{margin:0}
+.jp-card-text p+p{margin-top:.7em}
+
+/* The words that decide a rule, as the design manual asks (F9) */
+.kw-rule{font-weight:800}
+
+/* Feedback: the rule right under the mistake, and one "Hvorfor?" per wrong statement (F5, F6, F8) */
+.jp-rule{margin:4px 0 0;padding:12px 14px;border-radius:12px;background:#FFF6C7;color:#2B3138}
+.jp-rule-label{margin:0 0 4px;font:800 11px/1.2 var(--font-display,sans-serif);letter-spacing:.08em;text-transform:uppercase;color:#4A4127}
+.jp-rule>p{margin:0;font-size:15px;line-height:1.55}
+.jp-rule-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:8px}
+.jp-rule-foot .lesson-references{margin:0}
+.jp-why{display:flex;width:max-content;max-width:100%;align-items:center;min-height:36px;margin-top:8px;padding:0 14px;border-radius:999px;background:#2B3138;color:#FEFFED;font:800 13px var(--font-display,sans-serif);text-decoration:none}
+.jp-why:hover{background:#3A434C}
+html[data-theme="dark"] .jp-why{background:#FFD60A;color:#1F2328}
+html[data-theme="dark"] .jp-why:hover{background:#FFE45C}
+html[data-theme="dark"] .jp-wrong-statements li{background:#1F2328}
+html[data-theme="dark"] .jp-rule{background:#1F2328;color:#FEFFED;border:1px solid #3A434C}
+html[data-theme="dark"] .jp-rule-label{color:#FFD60A}
+.jp-why:focus-visible,.mybil-learn:focus-visible{outline:3px solid #FFD60A;outline-offset:2px}
+
+/* Readiness: "Lige startet" instead of a discouraging 2 % (F15) */
+.mh-ring.is-early .mh-ring-word{letter-spacing:-.02em}
+.mh-ring.is-early .mh-ring-num small{font-size:9px;white-space:nowrap}
+.ready-early{white-space:nowrap}
+
+/* Min bil: the way into Garagen, the car's parts are on the test (F16) */
+.mybil-learn{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 14px;margin:20px 0 0;padding:16px 18px;border-radius:18px;background:#FFD60A;color:#2B3138;text-decoration:none;box-shadow:0 4px 0 #C9A200;transition:transform .12s ease,box-shadow .12s ease}
+.mybil-learn-kicker{grid-column:1;font:800 11px/1.2 var(--font-display,sans-serif);letter-spacing:.08em;text-transform:uppercase;color:#4A4127}
+.mybil-learn strong{grid-column:1;font:800 18px/1.15 var(--font-display,sans-serif);letter-spacing:-.01em}
+.mybil-learn small{grid-column:1;font-size:13px;line-height:1.4;color:#4A4127}
+.mybil-learn-go{grid-column:2;grid-row:1/4;padding:9px 16px;border-radius:999px;background:#2B3138;color:#FEFFED;font:800 13px var(--font-display,sans-serif)}
+.mybil-learn:active{transform:translateY(2px);box-shadow:0 2px 0 #C9A200}
+html[data-theme="dark"] .mybil-learn,html[data-theme="dark"] .mybil-learn strong{color:#2B3138}
+html[data-theme="dark"] .mybil-learn small,html[data-theme="dark"] .mybil-learn-kicker{color:#4A4127}
+html[data-theme="dark"] .mybil-learn-go{background:#2B3138;color:#FEFFED}
+@media (prefers-reduced-motion:reduce){.mybil-learn{transition:none}.mybil-learn:active{transform:none}}
+/* QA sweep 10 Nov 2026: tap targets of at least 44 px and readable numbers */
+.topbar .brand{min-height:44px;display:inline-flex;align-items:center}
+.experience-status .text-link{min-height:44px;display:inline-flex;align-items:center}
+.topic-cards,.topic-cards--go{min-height:44px}
+.audio-btn,.source-badges>a,.lesson-references>a{min-height:44px}
+.source-badges>a,.lesson-references>a{display:inline-flex;align-items:center}
+.home-chip.chip--streak>b{color:#1F2328}
+html[data-theme="dark"] .home-chip.chip--streak>b{color:#FF9600}
+html[data-theme="dark"] .garage-topic-link>.mono,html[data-theme="dark"] .garage-zone>span{color:#C2CCD6}
+/* Teemo, Figma 10 Nov 2026 */
+/* the green and red main buttons get a real pressed edge, and the green one dark text (white on #58CC02 is 2.2:1) */
+.journey-feedback-tray.correct .jp-feedback-go{color:#1F2328!important;box-shadow:0 5px 0 #2F6F00!important}
+.journey-feedback-tray.repair .jp-feedback-go{box-shadow:0 5px 0 #D42F2F!important}
+/* "Se reglen" and "Spørg Sneglen" sit on one line while the rule is closed */
+.jp-feedback-content>details:not([open]){display:inline-block;vertical-align:top;border-top:0;padding-top:0}
+.journey-feedback-tray summary,.jp-ask{min-height:44px}
+/* the four statement dots use the display type and the same 2 px edge as the answer buttons */
+.journey-player .journey-statement-dots button{border-width:2px;font:800 14px var(--font-display)}
+.journey-player .journey-statement-dots button.current{outline-color:#1F2328}
+html[data-theme="dark"] .journey-player .journey-statement-dots button.current{outline-color:#FFD60A}
+/* the practical note lines up with the cards above it; the hint under a listen button gets air */
+.journey-lesson-done .journey-practical-note{max-width:none;margin-inline:0}
+.journey-open-step .voice-read{margin-bottom:12px}

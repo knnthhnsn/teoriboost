@@ -1,0 +1,8028 @@
+{
+  "schema": 1,
+  "model": "sedan",
+  "iteration": 53,
+  "approval": "approved_step",
+  "lod": "lod1",
+  "approval_evidence": "docs/qa/claude-review/approval052-047.json; docs/qa/claude-review/junction053-scope.json; docs/qa/claude-review/game053-steering-request.json",
+  "approval_scope": "Kenneth approved052; Claude explicitly authorized only this scope-verified corner correction and its game export. Exact053 export review remains pending; no game release approval.",
+  "export_review_status": "awaiting_claude_review",
+  "source": {
+    "path": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\tools\\car3d\\out\\junction053-v2\\sedan-full.blend",
+    "sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+    "model_sha256": "d426069037fd2c6390d21b77982479259923e8f0befde19f77d16ea32b20d1c2"
+  },
+  "exporter_sha256": "3dc71471ffc63620e9031e32ce3e973bee8e33592a604f06b8ebf3711799f3dd",
+  "asset": {
+    "path": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\exports\\game\\sedan-053-lod1.glb",
+    "sha256": "d9ae06d8fc0e19df96a4345be1b6fd6c5e8281a0f68f95c369ac38ab63e1bc34",
+    "bytes": 659312
+  },
+  "geometry": {
+    "triangles_before": 155101,
+    "triangles_after": 62713,
+    "budget": 55000,
+    "semantic_parts": 212,
+    "groups": 8,
+    "bounds_blender_z_up": {
+      "min": [
+        0.05999999865889549,
+        -1.212959885597229,
+        0
+      ],
+      "max": [
+        4.720907211303711,
+        1.212959885597229,
+        1.5638190507888794
+      ],
+      "dimensions": [
+        4.6609072126448154,
+        2.425919771194458,
+        1.5638190507888794
+      ]
+    },
+    "wheel_pivots_blender_z_up": {
+      "body": [
+        0,
+        0,
+        0
+      ],
+      "glass": [
+        0,
+        0,
+        0
+      ],
+      "lights": [
+        0,
+        0,
+        0
+      ],
+      "steering_wheel": [
+        2.909999966621399,
+        0.4816054552793503,
+        1.0672524571418762
+      ],
+      "wheel_rl": [
+        0.8600000441074371,
+        0.963200032711029,
+        0.38514620065689087
+      ],
+      "wheel_rr": [
+        0.8600000441074371,
+        -0.9632000923156738,
+        0.38514620065689087
+      ],
+      "wheel_fl": [
+        3.8200000524520874,
+        0.9800000190734863,
+        0.38514620065689087
+      ],
+      "wheel_fr": [
+        3.8200000524520874,
+        -0.9800000190734863,
+        0.38514620065689087
+      ]
+    },
+    "steering_wheel_blender_z_up": {
+      "name": "steering_wheel",
+      "pivot_blender_z_up": [
+        2.909999966621399,
+        0.4816054552793503,
+        1.0672524571418762
+      ],
+      "axis_blender_z_up": [
+        1,
+        0,
+        0
+      ],
+      "axis_gltf_y_up": [
+        1,
+        0,
+        0
+      ],
+      "source_part_ids": [
+        "steering wheel"
+      ],
+      "reference_part_id": "steering wheel",
+      "reference_bounds_blender_z_up": {
+        "min": [
+          2.8993022441864014,
+          0.3018248975276947,
+          0.9067341089248657
+        ],
+        "max": [
+          2.9206976890563965,
+          0.6613860130310059,
+          1.2277708053588867
+        ]
+      }
+    },
+    "node_pivots_gltf_y_up": [
+      {
+        "name": "body",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "extras": {
+          "source_part_id": "continuous quad coachwork with native apertures",
+          "source_model": "sedan",
+          "source_iteration": 53,
+          "logical_group": "body",
+          "source_part_ids": [
+            "continuous quad coachwork with native apertures",
+            "wheelhouse 0.86 -1",
+            "wheelhouse back 0.86 -1",
+            "wheelhouse 3.82 -1",
+            "wheelhouse back 3.82 -1",
+            "sculpted closed sill -1",
+            "wheelhouse 0.86 1",
+            "wheelhouse back 0.86 1",
+            "wheelhouse 3.82 1",
+            "wheelhouse back 3.82 1",
+            "sculpted closed sill 1",
+            "closed continuous end pillar 0.28 -1",
+            "closed continuous end pillar 3.28 -1",
+            "closed lower window frame -1",
+            "curved upper roof rail -1",
+            "rear quarter divider -1",
+            "black B pillar -1",
+            "complete window seal -1",
+            "complete fine chrome window surround -1",
+            "closed continuous end pillar 0.28 1",
+            "closed continuous end pillar 3.28 1",
+            "closed lower window frame 1",
+            "curved upper roof rail 1",
+            "rear quarter divider 1",
+            "black B pillar 1",
+            "complete window seal 1",
+            "complete fine chrome window surround 1",
+            "rear hatch glass painted edge -1",
+            "rear hatch glass painted edge 1",
+            "continuous dark glass roof painted edge -1",
+            "continuous dark glass roof painted edge 1",
+            "windscreen painted edge -1",
+            "windscreen painted edge 1",
+            "rear hatch lower frame",
+            "rear hatch upper painted header",
+            "panoramic roof flush seal 1.28",
+            "panoramic roof flush seal 2.57",
+            "closed tapered optical cassette -1",
+            "closed curved air curtain backing -1",
+            "closed tapered optical cassette 1",
+            "closed curved air curtain backing 1",
+            "recessed lower grille",
+            "grille louvre 0.251",
+            "grille louvre 0.2888",
+            "grille louvre 0.3266",
+            "grille louvre 0.3644",
+            "grille louvre 0.4022",
+            "grille louvre 0.44",
+            "closed integrated front lower lip",
+            "angular bonnet closing seam -1",
+            "angular bonnet closing seam 1",
+            "bonnet front closing seam",
+            "bonnet cowl closing seam",
+            "integral deck edge",
+            "rear recessed lens housing -1",
+            "rear recessed lens housing 1",
+            "rear outlined inset bootlid",
+            "rear number plate dark surround",
+            "rear plate",
+            "rear sculpted diffuser",
+            "rear lower blind finisher well -1",
+            "rear lower blind finisher well 1",
+            "door seam front -1",
+            "door seam rear -1",
+            "door seam A-base -1",
+            "flush handle 1.24 -1",
+            "flush handle 2.24 -1",
+            "sculpted aero mirror -1",
+            "angled mounted mirror stalk -1",
+            "mirror glass -1",
+            "door seam front 1",
+            "door seam rear 1",
+            "door seam A-base 1",
+            "flush handle 1.24 1",
+            "flush handle 2.24 1",
+            "sculpted aero mirror 1",
+            "angled mounted mirror stalk 1",
+            "mirror glass 1",
+            "front cushion -0.43",
+            "front contoured seatback -0.43",
+            "front side bolster -0.43 -1",
+            "front upholstery seam -0.43 -1",
+            "front side bolster -0.43 1",
+            "front upholstery seam -0.43 1",
+            "front tapered headrest -0.43",
+            "front cushion 0.43",
+            "front contoured seatback 0.43",
+            "front side bolster 0.43 -1",
+            "front upholstery seam 0.43 -1",
+            "front side bolster 0.43 1",
+            "front upholstery seam 0.43 1",
+            "front tapered headrest 0.43",
+            "rear continuous bench cushion",
+            "rear sculpted bench back",
+            "rear tapered headrest -0.43",
+            "rear tapered headrest 0.43",
+            "rear centre headrest",
+            "dashboard",
+            "centre screen",
+            "console",
+            "fixed grey brake caliper 0.86 -1",
+            "fixed grey brake caliper 0.86 1",
+            "fixed grey brake caliper 3.82 -1",
+            "fixed grey brake caliper 3.82 1",
+            "tb_badge_sedan_front_enamel",
+            "tb_badge_sedan_front_domed_chrome_bezel",
+            "tb_badge_sedan_front_raised_bar_1",
+            "tb_badge_sedan_front_raised_bar_2",
+            "tb_badge_sedan_front_raised_bar_3",
+            "tb_badge_sedan_rear_enamel",
+            "tb_badge_sedan_rear_domed_chrome_bezel",
+            "tb_badge_sedan_rear_raised_bar_1",
+            "tb_badge_sedan_rear_raised_bar_2",
+            "tb_badge_sedan_rear_raised_bar_3"
+          ],
+          "source_native_sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+          "semantic_group": "body",
+          "spin_axis_local": ""
+        }
+      },
+      {
+        "name": "glass",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "extras": {
+          "source_part_id": "quarterlight glazing -1",
+          "source_model": "sedan",
+          "source_iteration": 53,
+          "logical_group": "glass",
+          "source_part_ids": [
+            "quarterlight glazing -1",
+            "rear door glazing -1",
+            "front door glazing -1",
+            "quarterlight glazing 1",
+            "rear door glazing 1",
+            "front door glazing 1",
+            "rear hatch glass",
+            "continuous dark glass roof",
+            "windscreen",
+            "dark optical cell -1 0",
+            "dark optical cell -1 1",
+            "dark optical cell -1 2",
+            "dark optical cell -1 3",
+            "dark optical cell -1 4",
+            "dark optical cell -1 5",
+            "dark optical cell -1 6",
+            "dark optical cell 1 0",
+            "dark optical cell 1 1",
+            "dark optical cell 1 2",
+            "dark optical cell 1 3",
+            "dark optical cell 1 4",
+            "dark optical cell 1 5",
+            "dark optical cell 1 6"
+          ],
+          "source_native_sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+          "semantic_group": "glass",
+          "spin_axis_local": ""
+        }
+      },
+      {
+        "name": "lights",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "extras": {
+          "source_part_id": "LED blade -1",
+          "source_model": "sedan",
+          "source_iteration": 53,
+          "logical_group": "lights",
+          "source_part_ids": [
+            "LED blade -1",
+            "LED lower return -1",
+            "LED swept outer join -1",
+            "LED blade 1",
+            "LED lower return 1",
+            "LED swept outer join 1",
+            "rear single LED bar -1",
+            "rear single LED bar 1",
+            "rear slim reflector -1",
+            "rear slim reflector 1"
+          ],
+          "source_native_sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+          "semantic_group": "lights",
+          "spin_axis_local": ""
+        }
+      },
+      {
+        "name": "steering_wheel",
+        "translation": [
+          2.9099998474121094,
+          1.0672523975372314,
+          -0.4816054701805115
+        ],
+        "extras": {
+          "source_part_id": "steering wheel",
+          "source_model": "sedan",
+          "source_iteration": 53,
+          "logical_group": "steering_wheel",
+          "source_part_ids": [
+            "steering wheel"
+          ],
+          "source_native_sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+          "semantic_group": "steering_wheel",
+          "spin_axis_local": "X",
+          "rotation_axis_gltf_y_up": [
+            1,
+            0,
+            0
+          ],
+          "rotation_axis_blender_z_up": [
+            1,
+            0,
+            0
+          ],
+          "pivot_blender_z_up": [
+            2.909999966621399,
+            0.4816054552793503,
+            1.0672524571418762
+          ],
+          "pivot_gltf_y_up": [
+            2.909999966621399,
+            1.0672524571418762,
+            -0.4816054552793503
+          ]
+        }
+      },
+      {
+        "name": "wheel_rl",
+        "translation": [
+          0.8600000143051147,
+          0.38514620065689087,
+          -0.963200032711029
+        ],
+        "extras": {
+          "source_part_id": "tyre.rl",
+          "source_model": "sedan",
+          "source_iteration": 53,
+          "logical_group": "wheel_rl",
+          "source_part_ids": [
+            "tyre.rl",
+            "rim.rl",
+            "hubcap.rl",
+            "rounded dished bronze spoke 0.rl",
+            "rounded dished bronze spoke 1.rl",
+            "rounded dished bronze spoke 2.rl",
+            "rounded dished bronze spoke 3.rl",
+            "rounded dished bronze spoke 4.rl",
+            "understated bronze wheel nut 0.rl",
+            "understated bronze wheel nut 1.rl",
+            "understated bronze wheel nut 2.rl",
+            "understated bronze wheel nut 3.rl",
+            "understated bronze wheel nut 4.rl",
+            "closed recessed wheel backing cup.rl",
+            "grey brake rotor.rl",
+            "brake rotor hub hat.rl"
+          ],
+          "source_native_sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+          "semantic_group": "wheel_rl",
+          "spin_axis_local": "Y"
+        }
+      },
+      {
+        "name": "wheel_rr",
+        "translation": [
+          0.8600000143051147,
+          0.38514620065689087,
+          0.9632000923156738
+        ],
+        "extras": {
+          "source_part_id": "tyre.rr",
+          "source_model": "sedan",
+          "source_iteration": 53,
+          "logical_group": "wheel_rr",
+          "source_part_ids": [
+            "tyre.rr",
+            "rim.rr",
+            "hubcap.rr",
+            "rounded dished bronze spoke 0.rr",
+            "rounded dished bronze spoke 1.rr",
+            "rounded dished bronze spoke 2.rr",
+            "rounded dished bronze spoke 3.rr",
+            "rounded dished bronze spoke 4.rr",
+            "understated bronze wheel nut 0.rr",
+            "understated bronze wheel nut 1.rr",
+            "understated bronze wheel nut 2.rr",
+            "understated bronze wheel nut 3.rr",
+            "understated bronze wheel nut 4.rr",
+            "closed recessed wheel backing cup.rr",
+            "grey brake rotor.rr",
+            "brake rotor hub hat.rr"
+          ],
+          "source_native_sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+          "semantic_group": "wheel_rr",
+          "spin_axis_local": "Y"
+        }
+      },
+      {
+        "name": "wheel_fl",
+        "translation": [
+          3.820000171661377,
+          0.38514620065689087,
+          -0.9800000190734863
+        ],
+        "extras": {
+          "source_part_id": "tyre.fl",
+          "source_model": "sedan",
+          "source_iteration": 53,
+          "logical_group": "wheel_fl",
+          "source_part_ids": [
+            "tyre.fl",
+            "rim.fl",
+            "hubcap.fl",
+            "rounded dished bronze spoke 0.fl",
+            "rounded dished bronze spoke 1.fl",
+            "rounded dished bronze spoke 2.fl",
+            "rounded dished bronze spoke 3.fl",
+            "rounded dished bronze spoke 4.fl",
+            "understated bronze wheel nut 0.fl",
+            "understated bronze wheel nut 1.fl",
+            "understated bronze wheel nut 2.fl",
+            "understated bronze wheel nut 3.fl",
+            "understated bronze wheel nut 4.fl",
+            "closed recessed wheel backing cup.fl",
+            "grey brake rotor.fl",
+            "brake rotor hub hat.fl"
+          ],
+          "source_native_sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+          "semantic_group": "wheel_fl",
+          "spin_axis_local": "Y"
+        }
+      },
+      {
+        "name": "wheel_fr",
+        "translation": [
+          3.820000171661377,
+          0.38514620065689087,
+          0.9800000190734863
+        ],
+        "extras": {
+          "source_part_id": "tyre.fr",
+          "source_model": "sedan",
+          "source_iteration": 53,
+          "logical_group": "wheel_fr",
+          "source_part_ids": [
+            "tyre.fr",
+            "rim.fr",
+            "hubcap.fr",
+            "rounded dished bronze spoke 0.fr",
+            "rounded dished bronze spoke 1.fr",
+            "rounded dished bronze spoke 2.fr",
+            "rounded dished bronze spoke 3.fr",
+            "rounded dished bronze spoke 4.fr",
+            "understated bronze wheel nut 0.fr",
+            "understated bronze wheel nut 1.fr",
+            "understated bronze wheel nut 2.fr",
+            "understated bronze wheel nut 3.fr",
+            "understated bronze wheel nut 4.fr",
+            "closed recessed wheel backing cup.fr",
+            "grey brake rotor.fr",
+            "brake rotor hub hat.fr"
+          ],
+          "source_native_sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+          "semantic_group": "wheel_fr",
+          "spin_axis_local": "Y"
+        }
+      }
+    ]
+  },
+  "parts": [
+    {
+      "id": "continuous quad coachwork with native apertures",
+      "group": "body",
+      "roles": [
+        "nordic_paint",
+        "trim"
+      ],
+      "triangles_before": 179654,
+      "bounds_before": {
+        "min": [
+          0.05999999865889549,
+          -1.136820673942566,
+          0.14725731313228607
+        ],
+        "max": [
+          4.71983528137207,
+          1.136820673942566,
+          1.0915850400924683
+        ]
+      },
+      "clamped_vertices": 9,
+      "bounds_after": {
+        "min": [
+          0.05999999865889549,
+          -1.136820673942566,
+          0.14725731313228607
+        ],
+        "max": [
+          4.71983528137207,
+          1.1365714073181152,
+          1.0915170907974243
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 3292
+    },
+    {
+      "id": "wheelhouse 0.86 -1",
+      "group": "body",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 192,
+      "bounds_before": {
+        "min": [
+          0.42899999022483826,
+          -1.080726981163025,
+          0.3692573308944702
+        ],
+        "max": [
+          1.2910000085830688,
+          -0.8095066547393799,
+          0.8002573251724243
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.4306447207927704,
+          -1.080726981163025,
+          0.3692573308944702
+        ],
+        "max": [
+          1.2910000085830688,
+          -0.8095066547393799,
+          0.7991966009140015
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "wheelhouse back 0.86 -1",
+      "group": "body",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 190,
+      "bounds_before": {
+        "min": [
+          0.41999998688697815,
+          -0.8456000089645386,
+          0.3692573308944702
+        ],
+        "max": [
+          1.2999999523162842,
+          -0.8456000089645386,
+          0.809197187423706
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          0.41999998688697815,
+          -0.8456000089645386,
+          0.36926794052124023
+        ],
+        "max": [
+          1.2999999523162842,
+          -0.8456000089645386,
+          0.8089951276779175
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 29
+    },
+    {
+      "id": "wheelhouse 3.82 -1",
+      "group": "body",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 192,
+      "bounds_before": {
+        "min": [
+          3.3889999389648438,
+          -1.107519268989563,
+          0.3692573308944702
+        ],
+        "max": [
+          4.250999927520752,
+          -0.8429372310638428,
+          0.8002573251724243
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          3.3889999389648438,
+          -1.107519268989563,
+          0.3692573308944702
+        ],
+        "max": [
+          4.250319957733154,
+          -0.8429372310638428,
+          0.7990960478782654
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 29
+    },
+    {
+      "id": "wheelhouse back 3.82 -1",
+      "group": "body",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 190,
+      "bounds_before": {
+        "min": [
+          3.380000114440918,
+          -0.8456000089645386,
+          0.3692573308944702
+        ],
+        "max": [
+          4.260000228881836,
+          -0.8454928994178772,
+          0.809197187423706
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          3.380000114440918,
+          -0.8456000089645386,
+          0.3692573308944702
+        ],
+        "max": [
+          4.260000228881836,
+          -0.8454928994178772,
+          0.809196412563324
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 29
+    },
+    {
+      "id": "sculpted closed sill -1",
+      "group": "body",
+      "roles": [
+        "paint2"
+      ],
+      "triangles_before": 696,
+      "bounds_before": {
+        "min": [
+          1.2899999618530273,
+          -1.0496386289596558,
+          0.13825730979442596
+        ],
+        "max": [
+          3.390000104904175,
+          -0.9775549173355103,
+          0.195257306098938
+        ]
+      },
+      "clamped_vertices": 13,
+      "bounds_after": {
+        "min": [
+          1.2899999618530273,
+          -1.0496386289596558,
+          0.13825730979442596
+        ],
+        "max": [
+          3.390000104904175,
+          -0.9775549173355103,
+          0.195257306098938
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 62
+    },
+    {
+      "id": "wheelhouse 0.86 1",
+      "group": "body",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 192,
+      "bounds_before": {
+        "min": [
+          0.42899999022483826,
+          0.8095066547393799,
+          0.3692573308944702
+        ],
+        "max": [
+          1.2910000085830688,
+          1.080726981163025,
+          0.8002573251724243
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.4306447207927704,
+          0.8095066547393799,
+          0.3692573308944702
+        ],
+        "max": [
+          1.2910000085830688,
+          1.080726981163025,
+          0.7991966009140015
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "wheelhouse back 0.86 1",
+      "group": "body",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 190,
+      "bounds_before": {
+        "min": [
+          0.41999998688697815,
+          0.8456000089645386,
+          0.3692573308944702
+        ],
+        "max": [
+          1.2999999523162842,
+          0.8456000089645386,
+          0.809197187423706
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          0.41999998688697815,
+          0.8456000089645386,
+          0.36926794052124023
+        ],
+        "max": [
+          1.2999999523162842,
+          0.8456000089645386,
+          0.8089951276779175
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 29
+    },
+    {
+      "id": "wheelhouse 3.82 1",
+      "group": "body",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 192,
+      "bounds_before": {
+        "min": [
+          3.3889999389648438,
+          0.8429372310638428,
+          0.3692573308944702
+        ],
+        "max": [
+          4.250999927520752,
+          1.107519268989563,
+          0.8002573251724243
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          3.3889999389648438,
+          0.8429372310638428,
+          0.3692573308944702
+        ],
+        "max": [
+          4.250319957733154,
+          1.107519268989563,
+          0.7990960478782654
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 29
+    },
+    {
+      "id": "wheelhouse back 3.82 1",
+      "group": "body",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 190,
+      "bounds_before": {
+        "min": [
+          3.380000114440918,
+          0.8454928994178772,
+          0.3692573308944702
+        ],
+        "max": [
+          4.260000228881836,
+          0.8456000089645386,
+          0.809197187423706
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          3.380000114440918,
+          0.8454928994178772,
+          0.3692573308944702
+        ],
+        "max": [
+          4.260000228881836,
+          0.8456000089645386,
+          0.809196412563324
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 29
+    },
+    {
+      "id": "sculpted closed sill 1",
+      "group": "body",
+      "roles": [
+        "paint2"
+      ],
+      "triangles_before": 696,
+      "bounds_before": {
+        "min": [
+          1.2899999618530273,
+          0.9775549173355103,
+          0.13825730979442596
+        ],
+        "max": [
+          3.390000104904175,
+          1.0496386289596558,
+          0.195257306098938
+        ]
+      },
+      "clamped_vertices": 13,
+      "bounds_after": {
+        "min": [
+          1.2899999618530273,
+          0.9775549173355103,
+          0.13825730979442596
+        ],
+        "max": [
+          3.390000104904175,
+          1.0496386289596558,
+          0.195257306098938
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 62
+    },
+    {
+      "id": "closed continuous end pillar 0.28 -1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 508,
+      "bounds_before": {
+        "min": [
+          0.2800000011920929,
+          -1.0735238790512085,
+          1.0256034135818481
+        ],
+        "max": [
+          1,
+          -0.7245720028877258,
+          1.3548486232757568
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          0.2804313004016876,
+          -1.0728957653045654,
+          1.025862455368042
+        ],
+        "max": [
+          1,
+          -0.7247902750968933,
+          1.3548486232757568
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 50
+    },
+    {
+      "id": "closed continuous end pillar 3.28 -1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 508,
+      "bounds_before": {
+        "min": [
+          3.2799999713897705,
+          -1.0714792013168335,
+          1.0378745794296265
+        ],
+        "max": [
+          3.299999952316284,
+          -0.9777742624282837,
+          1.0541421175003052
+        ]
+      },
+      "clamped_vertices": 1,
+      "bounds_after": {
+        "min": [
+          3.28000545501709,
+          -1.0692225694656372,
+          1.037941336631775
+        ],
+        "max": [
+          3.299877643585205,
+          -0.9777742624282837,
+          1.0541366338729858
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 50
+    },
+    {
+      "id": "closed lower window frame -1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 788,
+      "bounds_before": {
+        "min": [
+          1,
+          -1.0698139667510986,
+          1.018842339515686
+        ],
+        "max": [
+          3.2799999713897705,
+          -0.9188122749328613,
+          1.1908063888549805
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          1.0000805854797363,
+          -1.069014072418213,
+          1.018842339515686
+        ],
+        "max": [
+          3.2799999713897705,
+          -0.9259502291679382,
+          1.1905641555786133
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 66
+    },
+    {
+      "id": "curved upper roof rail -1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 788,
+      "bounds_before": {
+        "min": [
+          0.998155951499939,
+          -1.0456243753433228,
+          1.0521421432495117
+        ],
+        "max": [
+          3.2860007286071777,
+          -0.6482642292976379,
+          1.5306159257888794
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          0.998155951499939,
+          -1.0456243753433228,
+          1.0542824268341064
+        ],
+        "max": [
+          3.2860007286071777,
+          -0.6482642292976379,
+          1.5306159257888794
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 116
+    },
+    {
+      "id": "quarterlight glazing -1",
+      "group": "glass",
+      "roles": [
+        "nordic_glass"
+      ],
+      "triangles_before": 968,
+      "bounds_before": {
+        "min": [
+          1.0099999904632568,
+          -0.978936493396759,
+          1.1276882886886597
+        ],
+        "max": [
+          1.5199999809265137,
+          -0.7512550950050354,
+          1.387891411781311
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          1.0099999904632568,
+          -0.978936493396759,
+          1.1276882886886597
+        ],
+        "max": [
+          1.5199999809265137,
+          -0.7512550950050354,
+          1.387891411781311
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 76
+    },
+    {
+      "id": "rear door glazing -1",
+      "group": "glass",
+      "roles": [
+        "nordic_glass"
+      ],
+      "triangles_before": 968,
+      "bounds_before": {
+        "min": [
+          1.4600000381469727,
+          -0.9980897307395935,
+          1.0921608209609985
+        ],
+        "max": [
+          2.0999999046325684,
+          -0.6741725206375122,
+          1.488929033279419
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          1.4600186347961426,
+          -0.9980897307395935,
+          1.0921608209609985
+        ],
+        "max": [
+          2.0999999046325684,
+          -0.6741725206375122,
+          1.488929033279419
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 75
+    },
+    {
+      "id": "front door glazing -1",
+      "group": "glass",
+      "roles": [
+        "nordic_glass"
+      ],
+      "triangles_before": 968,
+      "bounds_before": {
+        "min": [
+          2.1549999713897705,
+          -1.0496832132339478,
+          1.0549801588058472
+        ],
+        "max": [
+          3.265000104904175,
+          -0.6811476945877075,
+          1.4780184030532837
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          2.1549999713897705,
+          -1.0495141744613647,
+          1.0549801588058472
+        ],
+        "max": [
+          3.265000104904175,
+          -0.6814184188842773,
+          1.4780184030532837
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 76
+    },
+    {
+      "id": "rear quarter divider -1",
+      "group": "body",
+      "roles": [
+        "seal"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          1.419729232788086,
+          -0.995309054851532,
+          1.1231359243392944
+        ],
+        "max": [
+          1.560131311416626,
+          -0.7415012717247009,
+          1.4112223386764526
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          1.4197794198989868,
+          -0.995309054851532,
+          1.123352289199829
+        ],
+        "max": [
+          1.560131311416626,
+          -0.7415838837623596,
+          1.4112223386764526
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "black B pillar -1",
+      "group": "body",
+      "roles": [
+        "seal"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          2.0999999046325684,
+          -1.014699101448059,
+          1.08855402469635
+        ],
+        "max": [
+          2.1549999713897705,
+          -0.6781055331230164,
+          1.4904754161834717
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          2.100008249282837,
+          -1.0146092176437378,
+          1.0890095233917236
+        ],
+        "max": [
+          2.1549999713897705,
+          -0.6781055331230164,
+          1.4904754161834717
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "complete window seal -1",
+      "group": "body",
+      "roles": [
+        "seal"
+      ],
+      "triangles_before": 4276,
+      "bounds_before": {
+        "min": [
+          0.9747350811958313,
+          -1.0672600269317627,
+          1.0457648038864136
+        ],
+        "max": [
+          3.2850778102874756,
+          -0.6754859685897827,
+          1.4973291158676147
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          0.9749681353569031,
+          -1.067192554473877,
+          1.0462414026260376
+        ],
+        "max": [
+          3.2850778102874756,
+          -0.6754859685897827,
+          1.496687889099121
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 259
+    },
+    {
+      "id": "complete fine chrome window surround -1",
+      "group": "body",
+      "roles": [
+        "nordic_dlo_silver"
+      ],
+      "triangles_before": 4276,
+      "bounds_before": {
+        "min": [
+          0.9732991456985474,
+          -1.0756597518920898,
+          1.0442982912063599
+        ],
+        "max": [
+          3.2864627838134766,
+          -0.6805402636528015,
+          1.498803973197937
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.9732991456985474,
+          -1.0756597518920898,
+          1.0478800535202026
+        ],
+        "max": [
+          3.2864627838134766,
+          -0.6805402636528015,
+          1.4982709884643555
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 259
+    },
+    {
+      "id": "closed continuous end pillar 0.28 1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 508,
+      "bounds_before": {
+        "min": [
+          0.2800000011920929,
+          0.7245720028877258,
+          1.0256034135818481
+        ],
+        "max": [
+          1,
+          1.0735238790512085,
+          1.3548486232757568
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          0.2800000011920929,
+          0.7245720028877258,
+          1.025926113128662
+        ],
+        "max": [
+          1,
+          1.065112590789795,
+          1.3548486232757568
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 50
+    },
+    {
+      "id": "closed continuous end pillar 3.28 1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 508,
+      "bounds_before": {
+        "min": [
+          3.2799999713897705,
+          0.9777742624282837,
+          1.0378745794296265
+        ],
+        "max": [
+          3.299999952316284,
+          1.0714792013168335,
+          1.0541421175003052
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          3.2799999713897705,
+          0.9777742624282837,
+          1.0379706621170044
+        ],
+        "max": [
+          3.299999952316284,
+          1.0703353881835938,
+          1.0541414022445679
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 50
+    },
+    {
+      "id": "closed lower window frame 1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 788,
+      "bounds_before": {
+        "min": [
+          1,
+          0.9188122749328613,
+          1.018842339515686
+        ],
+        "max": [
+          3.2799999713897705,
+          1.0698139667510986,
+          1.1908063888549805
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          1,
+          0.9259502291679382,
+          1.018842339515686
+        ],
+        "max": [
+          3.279789686203003,
+          1.0685148239135742,
+          1.1904617547988892
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 66
+    },
+    {
+      "id": "curved upper roof rail 1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 788,
+      "bounds_before": {
+        "min": [
+          0.998155951499939,
+          0.6482642292976379,
+          1.0521421432495117
+        ],
+        "max": [
+          3.2860007286071777,
+          1.0456244945526123,
+          1.5306159257888794
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.998155951499939,
+          0.6482642292976379,
+          1.054201602935791
+        ],
+        "max": [
+          3.2860007286071777,
+          1.0456244945526123,
+          1.5306159257888794
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 116
+    },
+    {
+      "id": "quarterlight glazing 1",
+      "group": "glass",
+      "roles": [
+        "nordic_glass"
+      ],
+      "triangles_before": 968,
+      "bounds_before": {
+        "min": [
+          1.0099999904632568,
+          0.7512550950050354,
+          1.1276882886886597
+        ],
+        "max": [
+          1.5199999809265137,
+          0.978936493396759,
+          1.387891411781311
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          1.0099999904632568,
+          0.7512550950050354,
+          1.1276882886886597
+        ],
+        "max": [
+          1.5199999809265137,
+          0.978936493396759,
+          1.387891411781311
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 76
+    },
+    {
+      "id": "rear door glazing 1",
+      "group": "glass",
+      "roles": [
+        "nordic_glass"
+      ],
+      "triangles_before": 968,
+      "bounds_before": {
+        "min": [
+          1.4600000381469727,
+          0.6741725206375122,
+          1.0921608209609985
+        ],
+        "max": [
+          2.0999999046325684,
+          0.9980897307395935,
+          1.488929033279419
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          1.4600186347961426,
+          0.6741725206375122,
+          1.0921608209609985
+        ],
+        "max": [
+          2.0999999046325684,
+          0.9980897307395935,
+          1.488929033279419
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 76
+    },
+    {
+      "id": "front door glazing 1",
+      "group": "glass",
+      "roles": [
+        "nordic_glass"
+      ],
+      "triangles_before": 968,
+      "bounds_before": {
+        "min": [
+          2.1549999713897705,
+          0.6811476945877075,
+          1.0549801588058472
+        ],
+        "max": [
+          3.265000104904175,
+          1.0496832132339478,
+          1.4780184030532837
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          2.1549999713897705,
+          0.6814184188842773,
+          1.0549801588058472
+        ],
+        "max": [
+          3.265000104904175,
+          1.0495141744613647,
+          1.4780184030532837
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 76
+    },
+    {
+      "id": "rear quarter divider 1",
+      "group": "body",
+      "roles": [
+        "seal"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          1.419729232788086,
+          0.7415012717247009,
+          1.1231359243392944
+        ],
+        "max": [
+          1.560131311416626,
+          0.995309054851532,
+          1.4112224578857422
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          1.4197818040847778,
+          0.7415807247161865,
+          1.1231359243392944
+        ],
+        "max": [
+          1.560131311416626,
+          0.995309054851532,
+          1.4112224578857422
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "black B pillar 1",
+      "group": "body",
+      "roles": [
+        "seal"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          2.0999999046325684,
+          0.6781055331230164,
+          1.08855402469635
+        ],
+        "max": [
+          2.1549999713897705,
+          1.014699101448059,
+          1.4904754161834717
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          2.1000006198883057,
+          0.678252637386322,
+          1.0885599851608276
+        ],
+        "max": [
+          2.1549999713897705,
+          1.0146431922912598,
+          1.4904754161834717
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "complete window seal 1",
+      "group": "body",
+      "roles": [
+        "seal"
+      ],
+      "triangles_before": 4276,
+      "bounds_before": {
+        "min": [
+          0.9747350811958313,
+          0.6754859685897827,
+          1.0457648038864136
+        ],
+        "max": [
+          3.2850778102874756,
+          1.0672600269317627,
+          1.4973291158676147
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          0.9749680757522583,
+          0.6754859685897827,
+          1.0462414026260376
+        ],
+        "max": [
+          3.2850778102874756,
+          1.067192554473877,
+          1.496687889099121
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 259
+    },
+    {
+      "id": "complete fine chrome window surround 1",
+      "group": "body",
+      "roles": [
+        "nordic_dlo_silver"
+      ],
+      "triangles_before": 4276,
+      "bounds_before": {
+        "min": [
+          0.9732991456985474,
+          0.6805402636528015,
+          1.0442982912063599
+        ],
+        "max": [
+          3.2864627838134766,
+          1.0756597518920898,
+          1.498803973197937
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          0.9732991456985474,
+          0.6805402636528015,
+          1.0478800535202026
+        ],
+        "max": [
+          3.2864627838134766,
+          1.0756597518920898,
+          1.498803973197937
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 259
+    },
+    {
+      "id": "rear hatch glass",
+      "group": "glass",
+      "roles": [
+        "nordic_glass"
+      ],
+      "triangles_before": 3432,
+      "bounds_before": {
+        "min": [
+          0.5,
+          -0.7114109396934509,
+          1.1252422332763672
+        ],
+        "max": [
+          1.2300000190734863,
+          0.7114109396934509,
+          1.466221570968628
+        ]
+      },
+      "clamped_vertices": 10,
+      "bounds_after": {
+        "min": [
+          0.5,
+          -0.7114109396934509,
+          1.1252422332763672
+        ],
+        "max": [
+          1.2300000190734863,
+          0.7114109396934509,
+          1.466221570968628
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 180
+    },
+    {
+      "id": "rear hatch glass painted edge -1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 536,
+      "bounds_before": {
+        "min": [
+          0.5,
+          -0.8272220492362976,
+          1.1070791482925415
+        ],
+        "max": [
+          1.2336241006851196,
+          -0.5995151400566101,
+          1.4398193359375
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          0.5,
+          -0.8272220492362976,
+          1.1070791482925415
+        ],
+        "max": [
+          1.233599305152893,
+          -0.5995239019393921,
+          1.4398193359375
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 52
+    },
+    {
+      "id": "rear hatch glass painted edge 1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 536,
+      "bounds_before": {
+        "min": [
+          0.5,
+          0.5995151400566101,
+          1.1070791482925415
+        ],
+        "max": [
+          1.23362398147583,
+          0.8272220492362976,
+          1.4398193359375
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.5,
+          0.5995285511016846,
+          1.1070791482925415
+        ],
+        "max": [
+          1.23362398147583,
+          0.8272220492362976,
+          1.4398193359375
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 52
+    },
+    {
+      "id": "continuous dark glass roof",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 7196,
+      "bounds_before": {
+        "min": [
+          1.2799999713897705,
+          -0.7472500205039978,
+          1.4365262985229492
+        ],
+        "max": [
+          2.569999933242798,
+          0.7472500205039978,
+          1.563842535018921
+        ]
+      },
+      "clamped_vertices": 7,
+      "bounds_after": {
+        "min": [
+          1.2799999713897705,
+          -0.7472500205039978,
+          1.4368505477905273
+        ],
+        "max": [
+          2.569999933242798,
+          0.7472500205039978,
+          1.5638190507888794
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 304
+    },
+    {
+      "id": "continuous dark glass roof painted edge -1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 536,
+      "bounds_before": {
+        "min": [
+          1.2799999713897705,
+          -0.7949468493461609,
+          1.430336833000183
+        ],
+        "max": [
+          2.569999933242798,
+          -0.6072138547897339,
+          1.526766061782837
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          1.2799999713897705,
+          -0.7949468493461609,
+          1.4306190013885498
+        ],
+        "max": [
+          2.569999933242798,
+          -0.6072138547897339,
+          1.526766061782837
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 52
+    },
+    {
+      "id": "continuous dark glass roof painted edge 1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 536,
+      "bounds_before": {
+        "min": [
+          1.2799999713897705,
+          0.6072138547897339,
+          1.430336833000183
+        ],
+        "max": [
+          2.569999933242798,
+          0.7949468493461609,
+          1.526766061782837
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          1.2799999713897705,
+          0.6072138547897339,
+          1.4312163591384888
+        ],
+        "max": [
+          2.569999933242798,
+          0.7949468493461609,
+          1.526766061782837
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 52
+    },
+    {
+      "id": "windscreen",
+      "group": "glass",
+      "roles": [
+        "nordic_glass"
+      ],
+      "triangles_before": 3432,
+      "bounds_before": {
+        "min": [
+          2.569999933242798,
+          -0.9369919896125793,
+          1.0457016229629517
+        ],
+        "max": [
+          3.299999952316284,
+          0.9369919896125793,
+          1.4840712547302246
+        ]
+      },
+      "clamped_vertices": 19,
+      "bounds_after": {
+        "min": [
+          2.569999933242798,
+          -0.9369570016860962,
+          1.0457825660705566
+        ],
+        "max": [
+          3.299999952316284,
+          0.9369427561759949,
+          1.4838618040084839
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 179
+    },
+    {
+      "id": "windscreen painted edge -1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 536,
+      "bounds_before": {
+        "min": [
+          2.565432071685791,
+          -0.9968000054359436,
+          1.0309165716171265
+        ],
+        "max": [
+          3.299999952316284,
+          -0.7458071112632751,
+          1.4517947435379028
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          2.565460681915283,
+          -0.9968000054359436,
+          1.0309356451034546
+        ],
+        "max": [
+          3.299999952316284,
+          -0.7458071112632751,
+          1.4517947435379028
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 52
+    },
+    {
+      "id": "windscreen painted edge 1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 536,
+      "bounds_before": {
+        "min": [
+          2.565432071685791,
+          0.7458070516586304,
+          1.0309165716171265
+        ],
+        "max": [
+          3.299999952316284,
+          0.9968000054359436,
+          1.4517947435379028
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          2.565678119659424,
+          0.7458070516586304,
+          1.0309871435165405
+        ],
+        "max": [
+          3.299999952316284,
+          0.9967749714851379,
+          1.4517947435379028
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 52
+    },
+    {
+      "id": "rear hatch lower frame",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 2876,
+      "bounds_before": {
+        "min": [
+          0.2800000011920929,
+          -0.8415679931640625,
+          1.0249336957931519
+        ],
+        "max": [
+          0.5057559609413147,
+          0.8415679931640625,
+          1.1407599449157715
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          0.2800000011920929,
+          -0.8413525819778442,
+          1.0249440670013428
+        ],
+        "max": [
+          0.5057559609413147,
+          0.8415493965148926,
+          1.1407599449157715
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 158
+    },
+    {
+      "id": "rear hatch upper painted header",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 956,
+      "bounds_before": {
+        "min": [
+          1.2300000190734863,
+          -0.6988952159881592,
+          1.4170446395874023
+        ],
+        "max": [
+          1.2837215662002563,
+          0.6988952159881592,
+          1.4804023504257202
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          1.2300000190734863,
+          -0.6988952159881592,
+          1.4171087741851807
+        ],
+        "max": [
+          1.2837060689926147,
+          0.6988952159881592,
+          1.4802467823028564
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 76
+    },
+    {
+      "id": "panoramic roof flush seal 1.28",
+      "group": "body",
+      "roles": [
+        "seal"
+      ],
+      "triangles_before": 1276,
+      "bounds_before": {
+        "min": [
+          1.2769999504089355,
+          -0.6495936512947083,
+          1.4462926387786865
+        ],
+        "max": [
+          1.2829999923706055,
+          0.6495936512947083,
+          1.4842714071273804
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          1.2769999504089355,
+          -0.6495936512947083,
+          1.4462926387786865
+        ],
+        "max": [
+          1.2829999923706055,
+          0.6495936512947083,
+          1.4842714071273804
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 140
+    },
+    {
+      "id": "panoramic roof flush seal 2.57",
+      "group": "body",
+      "roles": [
+        "seal"
+      ],
+      "triangles_before": 1276,
+      "bounds_before": {
+        "min": [
+          2.566999912261963,
+          -0.7475531101226807,
+          1.4499545097351074
+        ],
+        "max": [
+          2.572999954223633,
+          0.7475531101226807,
+          1.4879374504089355
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          2.566999912261963,
+          -0.7475531101226807,
+          1.4499545097351074
+        ],
+        "max": [
+          2.572999954223633,
+          0.7475531101226807,
+          1.4878404140472412
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 141
+    },
+    {
+      "id": "closed tapered optical cassette -1",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 2152,
+      "bounds_before": {
+        "min": [
+          4.197844505310059,
+          -1.0659323930740356,
+          0.5921218991279602
+        ],
+        "max": [
+          4.671323776245117,
+          -0.48832541704177856,
+          0.8406040072441101
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          4.227895259857178,
+          -1.0659323930740356,
+          0.5921218991279602
+        ],
+        "max": [
+          4.671323776245117,
+          -0.4883565306663513,
+          0.8402110934257507
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 130
+    },
+    {
+      "id": "LED blade -1",
+      "group": "lights",
+      "roles": [
+        "led"
+      ],
+      "triangles_before": 94,
+      "bounds_before": {
+        "min": [
+          4.302018642425537,
+          -1.0493619441986084,
+          0.6387774348258972
+        ],
+        "max": [
+          4.678965091705322,
+          -0.5022974014282227,
+          0.817670464515686
+        ]
+      },
+      "clamped_vertices": 1,
+      "bounds_after": {
+        "min": [
+          4.302084445953369,
+          -1.0493619441986084,
+          0.6387774348258972
+        ],
+        "max": [
+          4.678965091705322,
+          -0.5023056864738464,
+          0.817670464515686
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 22
+    },
+    {
+      "id": "LED lower return -1",
+      "group": "lights",
+      "roles": [
+        "led"
+      ],
+      "triangles_before": 94,
+      "bounds_before": {
+        "min": [
+          4.377623558044434,
+          -1.0283604860305786,
+          0.6032640337944031
+        ],
+        "max": [
+          4.6665730476379395,
+          -0.5463287234306335,
+          0.7203989624977112
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          4.377623558044434,
+          -1.0283604860305786,
+          0.6032640337944031
+        ],
+        "max": [
+          4.6665730476379395,
+          -0.5463935136795044,
+          0.7203989624977112
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 22
+    },
+    {
+      "id": "LED swept outer join -1",
+      "group": "lights",
+      "roles": [
+        "led"
+      ],
+      "triangles_before": 94,
+      "bounds_before": {
+        "min": [
+          4.336594104766846,
+          -1.047802209854126,
+          0.7166987061500549
+        ],
+        "max": [
+          4.3805952072143555,
+          -1.0281603336334229,
+          0.7968183159828186
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          4.336594104766846,
+          -1.047793984413147,
+          0.7166987061500549
+        ],
+        "max": [
+          4.380577087402344,
+          -1.0281603336334229,
+          0.79681795835495
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 22
+    },
+    {
+      "id": "dark optical cell -1 0",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.65382719039917,
+          -0.5990972518920898,
+          0.6196433305740356
+        ],
+        "max": [
+          4.66160774230957,
+          -0.5719249844551086,
+          0.6346104741096497
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.65382719039917,
+          -0.5990972518920898,
+          0.6196433305740356
+        ],
+        "max": [
+          4.66160774230957,
+          -0.5719249844551086,
+          0.6346104741096497
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell -1 1",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.640872955322266,
+          -0.6546863913536072,
+          0.6271592974662781
+        ],
+        "max": [
+          4.649684429168701,
+          -0.6281781792640686,
+          0.6428267359733582
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.640872955322266,
+          -0.6546863913536072,
+          0.6271592974662781
+        ],
+        "max": [
+          4.649684429168701,
+          -0.6281781792640686,
+          0.6428267359733582
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell -1 2",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.623104095458984,
+          -0.711230993270874,
+          0.635925829410553
+        ],
+        "max": [
+          4.632366180419922,
+          -0.6852465867996216,
+          0.6528306603431702
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.623104095458984,
+          -0.711230993270874,
+          0.635925829410553
+        ],
+        "max": [
+          4.632366180419922,
+          -0.6852465867996216,
+          0.6528306603431702
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell -1 3",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.599244594573975,
+          -0.76890629529953,
+          0.6461054682731628
+        ],
+        "max": [
+          4.613093376159668,
+          -0.7431655526161194,
+          0.6646764874458313
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.599244594573975,
+          -0.76890629529953,
+          0.6461054682731628
+        ],
+        "max": [
+          4.613093376159668,
+          -0.7431655526161194,
+          0.6646764874458313
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell -1 4",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.571725845336914,
+          -0.8276795744895935,
+          0.657960832118988
+        ],
+        "max": [
+          4.587301254272461,
+          -0.801942765712738,
+          0.6785081028938293
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.571725845336914,
+          -0.8276795744895935,
+          0.657960832118988
+        ],
+        "max": [
+          4.587301254272461,
+          -0.801942765712738,
+          0.6785081028938293
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell -1 5",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.535802364349365,
+          -0.8878641128540039,
+          0.6717082858085632
+        ],
+        "max": [
+          4.555368900299072,
+          -0.8617486357688904,
+          0.6944999098777771
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.535802364349365,
+          -0.8878641128540039,
+          0.6717082858085632
+        ],
+        "max": [
+          4.555368900299072,
+          -0.8617486357688904,
+          0.6944999098777771
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell -1 6",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.482064247131348,
+          -0.9503101110458374,
+          0.6879432201385498
+        ],
+        "max": [
+          4.509459972381592,
+          -0.9231904149055481,
+          0.7127953767776489
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.482064247131348,
+          -0.9503101110458374,
+          0.6879432201385498
+        ],
+        "max": [
+          4.509459972381592,
+          -0.9231904149055481,
+          0.7127953767776489
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "closed curved air curtain backing -1",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 868,
+      "bounds_before": {
+        "min": [
+          4.270355701446533,
+          -1.0281376838684082,
+          0.3361843228340149
+        ],
+        "max": [
+          4.3749003410339355,
+          -1.0049121379852295,
+          0.5685765147209167
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          4.271103858947754,
+          -1.0281376838684082,
+          0.3383094370365143
+        ],
+        "max": [
+          4.3749003410339355,
+          -1.0049121379852295,
+          0.5685765147209167
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 70
+    },
+    {
+      "id": "closed tapered optical cassette 1",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 2152,
+      "bounds_before": {
+        "min": [
+          4.197844505310059,
+          0.48832541704177856,
+          0.5921218991279602
+        ],
+        "max": [
+          4.671323776245117,
+          1.0659323930740356,
+          0.8406040072441101
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          4.222844123840332,
+          0.4883943200111389,
+          0.5921218991279602
+        ],
+        "max": [
+          4.671323776245117,
+          1.0657579898834229,
+          0.8398109674453735
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 130
+    },
+    {
+      "id": "LED blade 1",
+      "group": "lights",
+      "roles": [
+        "led"
+      ],
+      "triangles_before": 94,
+      "bounds_before": {
+        "min": [
+          4.302018642425537,
+          0.5022974014282227,
+          0.6387774348258972
+        ],
+        "max": [
+          4.678965091705322,
+          1.0493619441986084,
+          0.817670464515686
+        ]
+      },
+      "clamped_vertices": 1,
+      "bounds_after": {
+        "min": [
+          4.302084445953369,
+          0.5023056864738464,
+          0.6387774348258972
+        ],
+        "max": [
+          4.678965091705322,
+          1.0493619441986084,
+          0.817670464515686
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 22
+    },
+    {
+      "id": "LED lower return 1",
+      "group": "lights",
+      "roles": [
+        "led"
+      ],
+      "triangles_before": 94,
+      "bounds_before": {
+        "min": [
+          4.377623558044434,
+          0.5463287234306335,
+          0.6032640337944031
+        ],
+        "max": [
+          4.6665730476379395,
+          1.0283604860305786,
+          0.7203989624977112
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          4.377623558044434,
+          0.5463935136795044,
+          0.6032640337944031
+        ],
+        "max": [
+          4.6665730476379395,
+          1.0283604860305786,
+          0.7203989624977112
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 22
+    },
+    {
+      "id": "LED swept outer join 1",
+      "group": "lights",
+      "roles": [
+        "led"
+      ],
+      "triangles_before": 94,
+      "bounds_before": {
+        "min": [
+          4.336594104766846,
+          1.0281603336334229,
+          0.7166987061500549
+        ],
+        "max": [
+          4.3805952072143555,
+          1.047802209854126,
+          0.7968183159828186
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          4.336594104766846,
+          1.0281603336334229,
+          0.7166987061500549
+        ],
+        "max": [
+          4.380577087402344,
+          1.047793984413147,
+          0.79681795835495
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 22
+    },
+    {
+      "id": "dark optical cell 1 0",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.65382719039917,
+          0.5719249844551086,
+          0.6196433305740356
+        ],
+        "max": [
+          4.66160774230957,
+          0.5990972518920898,
+          0.6346104741096497
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.65382719039917,
+          0.5719249844551086,
+          0.6196433305740356
+        ],
+        "max": [
+          4.66160774230957,
+          0.5990972518920898,
+          0.6346104741096497
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell 1 1",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.640872955322266,
+          0.6281781792640686,
+          0.6271592974662781
+        ],
+        "max": [
+          4.649684429168701,
+          0.6546863913536072,
+          0.6428267359733582
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.640872955322266,
+          0.6281781792640686,
+          0.6271592974662781
+        ],
+        "max": [
+          4.649684429168701,
+          0.6546863913536072,
+          0.6428267359733582
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell 1 2",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.623104095458984,
+          0.6852465867996216,
+          0.635925829410553
+        ],
+        "max": [
+          4.632366180419922,
+          0.711230993270874,
+          0.6528306603431702
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.623104095458984,
+          0.6852465867996216,
+          0.635925829410553
+        ],
+        "max": [
+          4.632366180419922,
+          0.711230993270874,
+          0.6528306603431702
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell 1 3",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.599244594573975,
+          0.7431655526161194,
+          0.6461054682731628
+        ],
+        "max": [
+          4.613093376159668,
+          0.76890629529953,
+          0.6646764874458313
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.599244594573975,
+          0.7431655526161194,
+          0.6461054682731628
+        ],
+        "max": [
+          4.613093376159668,
+          0.76890629529953,
+          0.6646764874458313
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell 1 4",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.571725845336914,
+          0.801942765712738,
+          0.657960832118988
+        ],
+        "max": [
+          4.587301254272461,
+          0.8276795744895935,
+          0.6785081028938293
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.571725845336914,
+          0.801942765712738,
+          0.657960832118988
+        ],
+        "max": [
+          4.587301254272461,
+          0.8276795744895935,
+          0.6785081028938293
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell 1 5",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.535802364349365,
+          0.8617486357688904,
+          0.6717082858085632
+        ],
+        "max": [
+          4.555368900299072,
+          0.8878641128540039,
+          0.6944999098777771
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.535802364349365,
+          0.8617486357688904,
+          0.6717082858085632
+        ],
+        "max": [
+          4.555368900299072,
+          0.8878641128540039,
+          0.6944999098777771
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "dark optical cell 1 6",
+      "group": "glass",
+      "roles": [
+        "panoroof"
+      ],
+      "triangles_before": 2,
+      "bounds_before": {
+        "min": [
+          4.482064247131348,
+          0.9231904149055481,
+          0.6879432201385498
+        ],
+        "max": [
+          4.509459972381592,
+          0.9503101110458374,
+          0.7127953767776489
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          4.482064247131348,
+          0.9231904149055481,
+          0.6879432201385498
+        ],
+        "max": [
+          4.509459972381592,
+          0.9503101110458374,
+          0.7127953767776489
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2
+    },
+    {
+      "id": "closed curved air curtain backing 1",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 868,
+      "bounds_before": {
+        "min": [
+          4.270355701446533,
+          1.0049121379852295,
+          0.3361843228340149
+        ],
+        "max": [
+          4.3749003410339355,
+          1.0281376838684082,
+          0.5685765147209167
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          4.27110481262207,
+          1.0049121379852295,
+          0.3382563292980194
+        ],
+        "max": [
+          4.3749003410339355,
+          1.0281376838684082,
+          0.5685765147209167
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 70
+    },
+    {
+      "id": "recessed lower grille",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 2058,
+      "bounds_before": {
+        "min": [
+          4.536705493927002,
+          -0.7707914113998413,
+          0.19225730001926422
+        ],
+        "max": [
+          4.668562412261963,
+          0.7707914113998413,
+          0.3822573125362396
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          4.536705493927002,
+          -0.7707914113998413,
+          0.19225730001926422
+        ],
+        "max": [
+          4.668562412261963,
+          0.7707914113998413,
+          0.3822573125362396
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 126
+    },
+    {
+      "id": "grille louvre 0.251",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 88,
+      "bounds_before": {
+        "min": [
+          4.564532279968262,
+          -0.7337051033973694,
+          0.21791045367717743
+        ],
+        "max": [
+          4.687870502471924,
+          0.7337051033973694,
+          0.22524790465831757
+        ]
+      },
+      "clamped_vertices": 14,
+      "bounds_after": {
+        "min": [
+          4.564532279968262,
+          -0.7337051033973694,
+          0.21791045367717743
+        ],
+        "max": [
+          4.687870502471924,
+          0.7337051033973694,
+          0.22524790465831757
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 21
+    },
+    {
+      "id": "grille louvre 0.2888",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 88,
+      "bounds_before": {
+        "min": [
+          4.575035095214844,
+          -0.7055048942565918,
+          0.25002145767211914
+        ],
+        "max": [
+          4.686105251312256,
+          0.7055048942565918,
+          0.2561068534851074
+        ]
+      },
+      "clamped_vertices": 12,
+      "bounds_after": {
+        "min": [
+          4.575428009033203,
+          -0.7054990530014038,
+          0.25002145767211914
+        ],
+        "max": [
+          4.686105251312256,
+          0.7054997086524963,
+          0.2561068534851074
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 21
+    },
+    {
+      "id": "grille louvre 0.3266",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 88,
+      "bounds_before": {
+        "min": [
+          4.577948093414307,
+          -0.6777003407478333,
+          0.2773381173610687
+        ],
+        "max": [
+          4.6754255294799805,
+          0.6777003407478333,
+          0.2827736437320709
+        ]
+      },
+      "clamped_vertices": 16,
+      "bounds_after": {
+        "min": [
+          4.578218460083008,
+          -0.6776922345161438,
+          0.2773381173610687
+        ],
+        "max": [
+          4.6754255294799805,
+          0.6776925921440125,
+          0.2827736437320709
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 21
+    },
+    {
+      "id": "grille louvre 0.3644",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 88,
+      "bounds_before": {
+        "min": [
+          4.576459884643555,
+          -0.6500976085662842,
+          0.30270543694496155
+        ],
+        "max": [
+          4.661116600036621,
+          0.6500976085662842,
+          0.3080931603908539
+        ]
+      },
+      "clamped_vertices": 15,
+      "bounds_after": {
+        "min": [
+          4.576459884643555,
+          -0.6500976085662842,
+          0.30270543694496155
+        ],
+        "max": [
+          4.661116600036621,
+          0.6500976085662842,
+          0.3080931603908539
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 21
+    },
+    {
+      "id": "grille louvre 0.4022",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 88,
+      "bounds_before": {
+        "min": [
+          4.573228359222412,
+          -0.6225630044937134,
+          0.32896843552589417
+        ],
+        "max": [
+          4.646613121032715,
+          0.6225630044937134,
+          0.33491045236587524
+        ]
+      },
+      "clamped_vertices": 10,
+      "bounds_after": {
+        "min": [
+          4.573228359222412,
+          -0.6225630044937134,
+          0.32896843552589417
+        ],
+        "max": [
+          4.646613121032715,
+          0.6225630044937134,
+          0.33491045236587524
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 21
+    },
+    {
+      "id": "grille louvre 0.44",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 88,
+      "bounds_before": {
+        "min": [
+          4.5711798667907715,
+          -0.5949697494506836,
+          0.3589720129966736
+        ],
+        "max": [
+          4.63535213470459,
+          0.5949697494506836,
+          0.3660705089569092
+        ]
+      },
+      "clamped_vertices": 11,
+      "bounds_after": {
+        "min": [
+          4.571315765380859,
+          -0.5949676036834717,
+          0.3589720129966736
+        ],
+        "max": [
+          4.63535213470459,
+          0.594967782497406,
+          0.3660705089569092
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 21
+    },
+    {
+      "id": "closed integrated front lower lip",
+      "group": "body",
+      "roles": [
+        "paint2"
+      ],
+      "triangles_before": 896,
+      "bounds_before": {
+        "min": [
+          4.352572917938232,
+          -0.9933308959007263,
+          0.1532573103904724
+        ],
+        "max": [
+          4.708902359008789,
+          0.9933308959007263,
+          0.19425730407238007
+        ]
+      },
+      "clamped_vertices": 13,
+      "bounds_after": {
+        "min": [
+          4.360421180725098,
+          -0.9928787350654602,
+          0.1532573103904724
+        ],
+        "max": [
+          4.708902359008789,
+          0.9925171136856079,
+          0.19425730407238007
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "angular bonnet closing seam -1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 2396,
+      "bounds_before": {
+        "min": [
+          3.30964994430542,
+          -0.8978971242904663,
+          0.761867880821228
+        ],
+        "max": [
+          4.456557273864746,
+          -0.5193151831626892,
+          1.0738255977630615
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.30964994430542,
+          -0.8978971242904663,
+          0.761867880821228
+        ],
+        "max": [
+          4.456557273864746,
+          -0.5193151831626892,
+          1.073776364326477
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 189
+    },
+    {
+      "id": "angular bonnet closing seam 1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 2396,
+      "bounds_before": {
+        "min": [
+          3.30964994430542,
+          0.5193151831626892,
+          0.761867880821228
+        ],
+        "max": [
+          4.456557273864746,
+          0.8978971242904663,
+          1.0738255977630615
+        ]
+      },
+      "clamped_vertices": 1,
+      "bounds_after": {
+        "min": [
+          3.30964994430542,
+          0.5193151831626892,
+          0.761867880821228
+        ],
+        "max": [
+          4.456557273864746,
+          0.8978971242904663,
+          1.0738255977630615
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 190
+    },
+    {
+      "id": "bonnet front closing seam",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          4.451092720031738,
+          -0.5208929181098938,
+          0.7615488767623901
+        ],
+        "max": [
+          4.457390785217285,
+          0.5208929181098938,
+          0.7746931910514832
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          4.451092720031738,
+          -0.5208929181098938,
+          0.761608362197876
+        ],
+        "max": [
+          4.457367897033691,
+          0.5208929181098938,
+          0.7746931910514832
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 156
+    },
+    {
+      "id": "bonnet cowl closing seam",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          3.308500051498413,
+          -0.8964222073554993,
+          1.047959804534912
+        ],
+        "max": [
+          3.311499834060669,
+          0.8964222073554993,
+          1.0709370374679565
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          3.308500051498413,
+          -0.8964222073554993,
+          1.047959804534912
+        ],
+        "max": [
+          3.311499834060669,
+          0.8964222073554993,
+          1.0709370374679565
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 156
+    },
+    {
+      "id": "integral deck edge",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 164,
+      "bounds_before": {
+        "min": [
+          0.08500000089406967,
+          -0.8064000606536865,
+          0.9892573952674866
+        ],
+        "max": [
+          0.21424490213394165,
+          0.8064000606536865,
+          0.9970038533210754
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          0.08500348776578903,
+          -0.8059359788894653,
+          0.9892573952674866
+        ],
+        "max": [
+          0.21424490213394165,
+          0.8059359788894653,
+          0.9970038533210754
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 28
+    },
+    {
+      "id": "rear recessed lens housing -1",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 4816,
+      "bounds_before": {
+        "min": [
+          0.12940776348114014,
+          -1.0012799501419067,
+          0.8432273268699646
+        ],
+        "max": [
+          0.38852956891059875,
+          -0.3919999897480011,
+          0.910685122013092
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.12943574786186218,
+          -1.0012799501419067,
+          0.8432440757751465
+        ],
+        "max": [
+          0.38817617297172546,
+          -0.3919999897480011,
+          0.910685122013092
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 278
+    },
+    {
+      "id": "rear single LED bar -1",
+      "group": "lights",
+      "roles": [
+        "rear050_led"
+      ],
+      "triangles_before": 1916,
+      "bounds_before": {
+        "min": [
+          0.11871626228094101,
+          -0.9855999946594238,
+          0.8661075830459595
+        ],
+        "max": [
+          0.3484256863594055,
+          -0.40880000591278076,
+          0.8923308253288269
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.11872491240501404,
+          -0.9855999946594238,
+          0.8661076426506042
+        ],
+        "max": [
+          0.3484256863594055,
+          -0.40880000591278076,
+          0.8921099305152893
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 120
+    },
+    {
+      "id": "rear recessed lens housing 1",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 4816,
+      "bounds_before": {
+        "min": [
+          0.12940776348114014,
+          0.3919999897480011,
+          0.8432273268699646
+        ],
+        "max": [
+          0.38852956891059875,
+          1.0012799501419067,
+          0.910685122013092
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.12940776348114014,
+          0.3919999897480011,
+          0.8432483673095703
+        ],
+        "max": [
+          0.3882010281085968,
+          1.0012799501419067,
+          0.9105262160301208
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 278
+    },
+    {
+      "id": "rear single LED bar 1",
+      "group": "lights",
+      "roles": [
+        "rear050_led"
+      ],
+      "triangles_before": 1916,
+      "bounds_before": {
+        "min": [
+          0.11871626228094101,
+          0.40880000591278076,
+          0.8661075830459595
+        ],
+        "max": [
+          0.3484256863594055,
+          0.9855999946594238,
+          0.8923308253288269
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          0.11872561275959015,
+          0.40880000591278076,
+          0.8661077618598938
+        ],
+        "max": [
+          0.34837591648101807,
+          0.9854559302330017,
+          0.8922596573829651
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 120
+    },
+    {
+      "id": "rear outlined inset bootlid",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 7176,
+      "bounds_before": {
+        "min": [
+          0.09380000084638596,
+          -0.7669759392738342,
+          0.6405826807022095
+        ],
+        "max": [
+          0.1915915459394455,
+          0.7669759392738342,
+          1.000057339668274
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          0.09380000084638596,
+          -0.7669492959976196,
+          0.6405849456787109
+        ],
+        "max": [
+          0.19144468009471893,
+          0.7669759392738342,
+          1.000057339668274
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 304
+    },
+    {
+      "id": "rear number plate dark surround",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 8524,
+      "bounds_before": {
+        "min": [
+          0.12156753987073898,
+          -0.2911999821662903,
+          0.6567042469978333
+        ],
+        "max": [
+          0.17749229073524475,
+          0.2911999821662903,
+          0.7564154267311096
+        ]
+      },
+      "clamped_vertices": 46,
+      "bounds_after": {
+        "min": [
+          0.12156753987073898,
+          -0.2911999821662903,
+          0.656704306602478
+        ],
+        "max": [
+          0.17749229073524475,
+          0.2911999821662903,
+          0.7564154267311096
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 344
+    },
+    {
+      "id": "rear plate",
+      "group": "body",
+      "roles": [
+        "plate"
+      ],
+      "triangles_before": 6220,
+      "bounds_before": {
+        "min": [
+          0.11370488256216049,
+          -0.26767998933792114,
+          0.6688324213027954
+        ],
+        "max": [
+          0.15062029659748077,
+          0.26767998933792114,
+          0.7466377019882202
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.11370489001274109,
+          -0.26767998933792114,
+          0.6688324809074402
+        ],
+        "max": [
+          0.1506202667951584,
+          0.26767998933792114,
+          0.7466377019882202
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 274
+    },
+    {
+      "id": "rear sculpted diffuser",
+      "group": "body",
+      "roles": [
+        "paint2",
+        "trim"
+      ],
+      "triangles_before": 33010,
+      "bounds_before": {
+        "min": [
+          0.23996476829051971,
+          -0.8904000520706177,
+          0.20325730741024017
+        ],
+        "max": [
+          0.4230961501598358,
+          0.8904000520706177,
+          0.3642573356628418
+        ]
+      },
+      "clamped_vertices": 13,
+      "bounds_after": {
+        "min": [
+          0.23996832966804504,
+          -0.8904000520706177,
+          0.20325730741024017
+        ],
+        "max": [
+          0.42302149534225464,
+          0.8903951644897461,
+          0.3642573356628418
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 932
+    },
+    {
+      "id": "rear lower blind finisher well -1",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 1944,
+      "bounds_before": {
+        "min": [
+          0.29725274443626404,
+          -0.7974399924278259,
+          0.2472573071718216
+        ],
+        "max": [
+          0.3953363299369812,
+          -0.520799994468689,
+          0.3082573115825653
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          0.29725274443626404,
+          -0.7974397540092468,
+          0.2472573071718216
+        ],
+        "max": [
+          0.3953363299369812,
+          -0.5208039879798889,
+          0.3082568645477295
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 120
+    },
+    {
+      "id": "rear slim reflector -1",
+      "group": "lights",
+      "roles": [
+        "red"
+      ],
+      "triangles_before": 680,
+      "bounds_before": {
+        "min": [
+          0.2552510201931,
+          -0.8679999709129333,
+          0.39725732803344727
+        ],
+        "max": [
+          0.3583715856075287,
+          -0.6428800225257874,
+          0.4202573299407959
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          0.25551649928092957,
+          -0.8679773211479187,
+          0.39725732803344727
+        ],
+        "max": [
+          0.3583715856075287,
+          -0.6428802013397217,
+          0.4202573299407959
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 60
+    },
+    {
+      "id": "rear lower blind finisher well 1",
+      "group": "body",
+      "roles": [
+        "nordic_recess"
+      ],
+      "triangles_before": 1948,
+      "bounds_before": {
+        "min": [
+          0.29725274443626404,
+          0.520799994468689,
+          0.2472573071718216
+        ],
+        "max": [
+          0.3953363299369812,
+          0.7974399924278259,
+          0.3082573115825653
+        ]
+      },
+      "clamped_vertices": 1,
+      "bounds_after": {
+        "min": [
+          0.297259122133255,
+          0.5208016633987427,
+          0.2472657561302185
+        ],
+        "max": [
+          0.3953363299369812,
+          0.7974323034286499,
+          0.30820971727371216
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 120
+    },
+    {
+      "id": "rear slim reflector 1",
+      "group": "lights",
+      "roles": [
+        "red"
+      ],
+      "triangles_before": 672,
+      "bounds_before": {
+        "min": [
+          0.2552510201931,
+          0.6428800225257874,
+          0.39725732803344727
+        ],
+        "max": [
+          0.3583715856075287,
+          0.8679999709129333,
+          0.4202573299407959
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          0.2553817927837372,
+          0.6428800225257874,
+          0.39725732803344727
+        ],
+        "max": [
+          0.3583715856075287,
+          0.8679666519165039,
+          0.4202573299407959
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 60
+    },
+    {
+      "id": "door seam front -1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 1796,
+      "bounds_before": {
+        "min": [
+          2.123243570327759,
+          -1.0667481422424316,
+          0.18114493787288666
+        ],
+        "max": [
+          2.1467931270599365,
+          -0.9636350274085999,
+          1.0474016666412354
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          2.123243570327759,
+          -1.0667481422424316,
+          0.18114493787288666
+        ],
+        "max": [
+          2.1467931270599365,
+          -0.9636510610580444,
+          1.0474016666412354
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 163
+    },
+    {
+      "id": "door seam rear -1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 1796,
+      "bounds_before": {
+        "min": [
+          1.078312635421753,
+          -1.1108264923095703,
+          0.18451730906963348
+        ],
+        "max": [
+          1.3616167306900024,
+          -1.0111017227172852,
+          1.0378310680389404
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          1.078312635421753,
+          -1.1108264923095703,
+          0.18451730906963348
+        ],
+        "max": [
+          1.3616167306900024,
+          -1.0111639499664307,
+          1.0378310680389404
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 164
+    },
+    {
+      "id": "door seam A-base -1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 1796,
+      "bounds_before": {
+        "min": [
+          3.2382304668426514,
+          -1.1001688241958618,
+          0.17696283757686615
+        ],
+        "max": [
+          3.3017771244049072,
+          -1.0173839330673218,
+          1.0274462699890137
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          3.2382304668426514,
+          -1.1001688241958618,
+          0.17696283757686615
+        ],
+        "max": [
+          3.3017771244049072,
+          -1.0173839330673218,
+          1.0274462699890137
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 163
+    },
+    {
+      "id": "flush handle 1.24 -1",
+      "group": "body",
+      "roles": [
+        "paint2"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          1.2400000095367432,
+          -1.0819926261901855,
+          0.9172573089599609
+        ],
+        "max": [
+          1.434999942779541,
+          -1.0719126462936401,
+          0.9512573480606079
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          1.2400000095367432,
+          -1.0808817148208618,
+          0.9172573089599609
+        ],
+        "max": [
+          1.4343560934066772,
+          -1.0729800462722778,
+          0.9504492282867432
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "flush handle 2.24 -1",
+      "group": "body",
+      "roles": [
+        "paint2"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          2.240000009536743,
+          -1.056687593460083,
+          0.9172573089599609
+        ],
+        "max": [
+          2.434999942779541,
+          -1.046607494354248,
+          0.9512573480606079
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          2.240000009536743,
+          -1.056687593460083,
+          0.9172573089599609
+        ],
+        "max": [
+          2.434999942779541,
+          -1.046607494354248,
+          0.9512573480606079
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 64
+    },
+    {
+      "id": "sculpted aero mirror -1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 76,
+      "bounds_before": {
+        "min": [
+          2.7850000858306885,
+          -1.212959885597229,
+          1.0912572145462036
+        ],
+        "max": [
+          3.1050000190734863,
+          -1.0270400047302246,
+          1.195257306098938
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          2.7894883155822754,
+          -1.212959885597229,
+          1.0940022468566895
+        ],
+        "max": [
+          3.1015992164611816,
+          -1.0270400047302246,
+          1.183196783065796
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 20
+    },
+    {
+      "id": "angled mounted mirror stalk -1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 56,
+      "bounds_before": {
+        "min": [
+          2.9789469242095947,
+          -1.1351927518844604,
+          0.9988391995429993
+        ],
+        "max": [
+          3.1580069065093994,
+          -1.0610058307647705,
+          1.129737377166748
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          2.9791390895843506,
+          -1.1351927518844604,
+          0.9988391995429993
+        ],
+        "max": [
+          3.1579389572143555,
+          -1.0610359907150269,
+          1.129737377166748
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "mirror glass -1",
+      "group": "body",
+      "roles": [
+        "chrome"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          2.7780001163482666,
+          -1.1647999286651611,
+          1.105257272720337
+        ],
+        "max": [
+          2.7880001068115234,
+          -1.043839931488037,
+          1.1722573041915894
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          2.7780001163482666,
+          -1.1647999286651611,
+          1.105257272720337
+        ],
+        "max": [
+          2.7880001068115234,
+          -1.043839931488037,
+          1.1722573041915894
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 34
+    },
+    {
+      "id": "door seam front 1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 1796,
+      "bounds_before": {
+        "min": [
+          2.123243570327759,
+          0.9636350274085999,
+          0.18114493787288666
+        ],
+        "max": [
+          2.1467931270599365,
+          1.0667481422424316,
+          1.0474016666412354
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          2.123243570327759,
+          0.9636350274085999,
+          0.18114493787288666
+        ],
+        "max": [
+          2.1467299461364746,
+          1.0667481422424316,
+          1.0474016666412354
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 163
+    },
+    {
+      "id": "door seam rear 1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 1796,
+      "bounds_before": {
+        "min": [
+          1.078312635421753,
+          1.0111017227172852,
+          0.18451730906963348
+        ],
+        "max": [
+          1.3616167306900024,
+          1.1108264923095703,
+          1.0378310680389404
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          1.078312635421753,
+          1.0111639499664307,
+          0.18451730906963348
+        ],
+        "max": [
+          1.3616167306900024,
+          1.1108264923095703,
+          1.0378310680389404
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 164
+    },
+    {
+      "id": "door seam A-base 1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 1796,
+      "bounds_before": {
+        "min": [
+          3.2382304668426514,
+          1.0173839330673218,
+          0.17696283757686615
+        ],
+        "max": [
+          3.3017771244049072,
+          1.1001688241958618,
+          1.0274462699890137
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          3.2382304668426514,
+          1.0173839330673218,
+          0.17696283757686615
+        ],
+        "max": [
+          3.3017771244049072,
+          1.1001688241958618,
+          1.0274462699890137
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 164
+    },
+    {
+      "id": "flush handle 1.24 1",
+      "group": "body",
+      "roles": [
+        "paint2"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          1.2400000095367432,
+          1.0719126462936401,
+          0.9172573089599609
+        ],
+        "max": [
+          1.434999942779541,
+          1.0819926261901855,
+          0.9512573480606079
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          1.2400000095367432,
+          1.0729938745498657,
+          0.9172573089599609
+        ],
+        "max": [
+          1.4342061281204224,
+          1.0808817148208618,
+          0.9505403637886047
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "flush handle 2.24 1",
+      "group": "body",
+      "roles": [
+        "paint2"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          2.240000009536743,
+          1.046607494354248,
+          0.9172573089599609
+        ],
+        "max": [
+          2.434999942779541,
+          1.056687593460083,
+          0.9512573480606079
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          2.240000009536743,
+          1.046607494354248,
+          0.9172573089599609
+        ],
+        "max": [
+          2.434999942779541,
+          1.056687593460083,
+          0.9512573480606079
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 64
+    },
+    {
+      "id": "sculpted aero mirror 1",
+      "group": "body",
+      "roles": [
+        "nordic_paint"
+      ],
+      "triangles_before": 76,
+      "bounds_before": {
+        "min": [
+          2.7850000858306885,
+          1.0270400047302246,
+          1.0912572145462036
+        ],
+        "max": [
+          3.1050000190734863,
+          1.212959885597229,
+          1.195257306098938
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          2.7885735034942627,
+          1.0270400047302246,
+          1.094152569770813
+        ],
+        "max": [
+          3.1050000190734863,
+          1.212959885597229,
+          1.195257306098938
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 20
+    },
+    {
+      "id": "angled mounted mirror stalk 1",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 56,
+      "bounds_before": {
+        "min": [
+          2.9789469242095947,
+          1.0610058307647705,
+          0.9988391995429993
+        ],
+        "max": [
+          3.1580069065093994,
+          1.1351927518844604,
+          1.129737377166748
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          2.9791390895843506,
+          1.0610359907150269,
+          0.9988391995429993
+        ],
+        "max": [
+          3.1579389572143555,
+          1.1351927518844604,
+          1.129737377166748
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "mirror glass 1",
+      "group": "body",
+      "roles": [
+        "chrome"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          2.7780001163482666,
+          1.043839931488037,
+          1.105257272720337
+        ],
+        "max": [
+          2.7880001068115234,
+          1.1647999286651611,
+          1.1722573041915894
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          2.7780001163482666,
+          1.043839931488037,
+          1.105257272720337
+        ],
+        "max": [
+          2.7880001068115234,
+          1.1647999286651611,
+          1.1722573041915894
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 34
+    },
+    {
+      "id": "front cushion -0.43",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          2.2821106910705566,
+          -0.7462822794914246,
+          0.45725733041763306
+        ],
+        "max": [
+          2.8055214881896973,
+          -0.21691769361495972,
+          0.617257297039032
+        ]
+      },
+      "clamped_vertices": 12,
+      "bounds_after": {
+        "min": [
+          2.2832958698272705,
+          -0.7462593913078308,
+          0.45725733041763306
+        ],
+        "max": [
+          2.805211067199707,
+          -0.21691769361495972,
+          0.617257297039032
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "front contoured seatback -0.43",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1996,
+      "bounds_before": {
+        "min": [
+          2.169977903366089,
+          -0.7400354146957397,
+          0.5572572946548462
+        ],
+        "max": [
+          2.425236940383911,
+          -0.2231646031141281,
+          1.2122572660446167
+        ]
+      },
+      "clamped_vertices": 12,
+      "bounds_after": {
+        "min": [
+          2.169977903366089,
+          -0.7377615571022034,
+          0.5572572946548462
+        ],
+        "max": [
+          2.4248268604278564,
+          -0.22492900490760803,
+          1.2122572660446167
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 122
+    },
+    {
+      "id": "front side bolster -0.43 -1",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          2.2739999294281006,
+          -0.736386239528656,
+          0.6572573184967041
+        ],
+        "max": [
+          2.4292490482330322,
+          -0.6412137150764465,
+          1.167257308959961
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          2.2760496139526367,
+          -0.7356847524642944,
+          0.6572573184967041
+        ],
+        "max": [
+          2.428997755050659,
+          -0.6412137150764465,
+          1.167257308959961
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "front upholstery seam -0.43 -1",
+      "group": "body",
+      "roles": [
+        "seat_seam"
+      ],
+      "triangles_before": 996,
+      "bounds_before": {
+        "min": [
+          2.32267689704895,
+          -0.6452022790908813,
+          0.6871426701545715
+        ],
+        "max": [
+          2.4177732467651367,
+          -0.6203922629356384,
+          1.137664556503296
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          2.32267689704895,
+          -0.6452022790908813,
+          0.6871426701545715
+        ],
+        "max": [
+          2.4177732467651367,
+          -0.6203922629356384,
+          1.137664556503296
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 126
+    },
+    {
+      "id": "front side bolster -0.43 1",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          2.2739999294281006,
+          -0.32198622822761536,
+          0.6572573184967041
+        ],
+        "max": [
+          2.4292490482330322,
+          -0.22681376338005066,
+          1.167257308959961
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          2.2760496139526367,
+          -0.321284681558609,
+          0.6572573184967041
+        ],
+        "max": [
+          2.428997755050659,
+          -0.22681376338005066,
+          1.167257308959961
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "front upholstery seam -0.43 1",
+      "group": "body",
+      "roles": [
+        "seat_seam"
+      ],
+      "triangles_before": 996,
+      "bounds_before": {
+        "min": [
+          2.32267689704895,
+          -0.3428077697753906,
+          0.6871426701545715
+        ],
+        "max": [
+          2.4177732467651367,
+          -0.31799769401550293,
+          1.137664556503296
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          2.32267689704895,
+          -0.3428077697753906,
+          0.6871426701545715
+        ],
+        "max": [
+          2.4177732467651367,
+          -0.31799769401550293,
+          1.137664556503296
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 126
+    },
+    {
+      "id": "front tapered headrest -0.43",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          2.152458906173706,
+          -0.6172720789909363,
+          1.1972572803497314
+        ],
+        "max": [
+          2.2853803634643555,
+          -0.3459279537200928,
+          1.3722572326660156
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          2.153974771499634,
+          -0.6158116459846497,
+          1.1972572803497314
+        ],
+        "max": [
+          2.2852964401245117,
+          -0.346549391746521,
+          1.3722572326660156
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "front cushion 0.43",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          2.2821106910705566,
+          0.21691769361495972,
+          0.45725733041763306
+        ],
+        "max": [
+          2.8055214881896973,
+          0.7462822794914246,
+          0.617257297039032
+        ]
+      },
+      "clamped_vertices": 12,
+      "bounds_after": {
+        "min": [
+          2.2832958698272705,
+          0.21694065630435944,
+          0.45725733041763306
+        ],
+        "max": [
+          2.805211067199707,
+          0.7462822794914246,
+          0.617257297039032
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "front contoured seatback 0.43",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1996,
+      "bounds_before": {
+        "min": [
+          2.169977903366089,
+          0.2231646031141281,
+          0.5572572946548462
+        ],
+        "max": [
+          2.425236940383911,
+          0.7400354146957397,
+          1.2122572660446167
+        ]
+      },
+      "clamped_vertices": 12,
+      "bounds_after": {
+        "min": [
+          2.169977903366089,
+          0.22543847560882568,
+          0.5572572946548462
+        ],
+        "max": [
+          2.4248268604278564,
+          0.7382710576057434,
+          1.2122572660446167
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 122
+    },
+    {
+      "id": "front side bolster 0.43 -1",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          2.2739999294281006,
+          0.22681376338005066,
+          0.6572573184967041
+        ],
+        "max": [
+          2.4292490482330322,
+          0.32198622822761536,
+          1.167257308959961
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          2.2760496139526367,
+          0.2275153249502182,
+          0.6572573184967041
+        ],
+        "max": [
+          2.428997755050659,
+          0.32198622822761536,
+          1.167257308959961
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "front upholstery seam 0.43 -1",
+      "group": "body",
+      "roles": [
+        "seat_seam"
+      ],
+      "triangles_before": 996,
+      "bounds_before": {
+        "min": [
+          2.32267689704895,
+          0.31799769401550293,
+          0.6871426701545715
+        ],
+        "max": [
+          2.4177732467651367,
+          0.3428077697753906,
+          1.137664556503296
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          2.32267689704895,
+          0.31799769401550293,
+          0.6871426701545715
+        ],
+        "max": [
+          2.4177732467651367,
+          0.3428077697753906,
+          1.137664556503296
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 126
+    },
+    {
+      "id": "front side bolster 0.43 1",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          2.2739999294281006,
+          0.6412137150764465,
+          0.6572573184967041
+        ],
+        "max": [
+          2.4292490482330322,
+          0.736386239528656,
+          1.167257308959961
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          2.2760496139526367,
+          0.6419153213500977,
+          0.6572573184967041
+        ],
+        "max": [
+          2.428997755050659,
+          0.736386239528656,
+          1.167257308959961
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "front upholstery seam 0.43 1",
+      "group": "body",
+      "roles": [
+        "seat_seam"
+      ],
+      "triangles_before": 996,
+      "bounds_before": {
+        "min": [
+          2.32267689704895,
+          0.6203922629356384,
+          0.6871426701545715
+        ],
+        "max": [
+          2.4177732467651367,
+          0.6452022790908813,
+          1.137664556503296
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          2.32267689704895,
+          0.6203922629356384,
+          0.6871426701545715
+        ],
+        "max": [
+          2.4177732467651367,
+          0.6452022790908813,
+          1.137664556503296
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 126
+    },
+    {
+      "id": "front tapered headrest 0.43",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          2.152458906173706,
+          0.3459279537200928,
+          1.1972572803497314
+        ],
+        "max": [
+          2.2853803634643555,
+          0.6172720789909363,
+          1.3722572326660156
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          2.153974771499634,
+          0.3473883867263794,
+          1.1972572803497314
+        ],
+        "max": [
+          2.2852964401245117,
+          0.6166506409645081,
+          1.3722572326660156
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "rear continuous bench cushion",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          1.1783965826034546,
+          -0.7576820850372314,
+          0.45725733041763306
+        ],
+        "max": [
+          1.7225589752197266,
+          0.7576820850372314,
+          0.6272573471069336
+        ]
+      },
+      "clamped_vertices": 11,
+      "bounds_after": {
+        "min": [
+          1.180800199508667,
+          -0.7576820850372314,
+          0.45725733041763306
+        ],
+        "max": [
+          1.7190223932266235,
+          0.7564206123352051,
+          0.6272573471069336
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "rear sculpted bench back",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          1.0581116676330566,
+          -0.7540667057037354,
+          0.5772573351860046
+        ],
+        "max": [
+          1.3059989213943481,
+          0.7540667057037354,
+          1.167257308959961
+        ]
+      },
+      "clamped_vertices": 10,
+      "bounds_after": {
+        "min": [
+          1.0588051080703735,
+          -0.7488800883293152,
+          0.5772573351860046
+        ],
+        "max": [
+          1.3059989213943481,
+          0.7490766644477844,
+          1.167257308959961
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "rear tapered headrest -0.43",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          1.0345755815505981,
+          -0.6067109704017639,
+          1.1472572088241577
+        ],
+        "max": [
+          1.1566370725631714,
+          -0.35648903250694275,
+          1.3122572898864746
+        ]
+      },
+      "clamped_vertices": 9,
+      "bounds_after": {
+        "min": [
+          1.03534734249115,
+          -0.6044137477874756,
+          1.1472572088241577
+        ],
+        "max": [
+          1.156134009361267,
+          -0.35792332887649536,
+          1.3122572898864746
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "rear tapered headrest 0.43",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1596,
+      "bounds_before": {
+        "min": [
+          1.0345755815505981,
+          0.35648903250694275,
+          1.1472572088241577
+        ],
+        "max": [
+          1.1566370725631714,
+          0.6067109704017639,
+          1.3122572898864746
+        ]
+      },
+      "clamped_vertices": 9,
+      "bounds_after": {
+        "min": [
+          1.03534734249115,
+          0.3587862253189087,
+          1.1472572088241577
+        ],
+        "max": [
+          1.156134009361267,
+          0.6052767038345337,
+          1.3122572898864746
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 106
+    },
+    {
+      "id": "rear centre headrest",
+      "group": "body",
+      "roles": [
+        "seat"
+      ],
+      "triangles_before": 1356,
+      "bounds_before": {
+        "min": [
+          1.035069465637207,
+          -0.10165255516767502,
+          1.1172572374343872
+        ],
+        "max": [
+          1.1303861141204834,
+          0.10165255516767502,
+          1.2172572612762451
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          1.035984754562378,
+          -0.10098113864660263,
+          1.1172922849655151
+        ],
+        "max": [
+          1.1294467449188232,
+          0.10165255516767502,
+          1.2172572612762451
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 94
+    },
+    {
+      "id": "dashboard",
+      "group": "body",
+      "roles": [
+        "interior"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          2.9600000381469727,
+          -0.8848000168800354,
+          0.8272573351860046
+        ],
+        "max": [
+          3.2899999618530273,
+          0.8848000168800354,
+          1.0122572183609009
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          2.9662234783172607,
+          -0.8786144852638245,
+          0.8357558846473694
+        ],
+        "max": [
+          3.281501531600952,
+          0.8786503672599792,
+          1.0038291215896606
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "centre screen",
+      "group": "body",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          2.990000009536743,
+          -0.19040000438690186,
+          1.0072572231292725
+        ],
+        "max": [
+          3.0199999809265137,
+          0.19040000438690186,
+          1.1372572183609009
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          2.992743492126465,
+          -0.19019101560115814,
+          1.0076227188110352
+        ],
+        "max": [
+          3.0186736583709717,
+          0.19007663428783417,
+          1.1368918418884277
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "console",
+      "group": "body",
+      "roles": [
+        "interior"
+      ],
+      "triangles_before": 188,
+      "bounds_before": {
+        "min": [
+          1.9500000476837158,
+          -0.14559999108314514,
+          0.41725730895996094
+        ],
+        "max": [
+          3.119999885559082,
+          0.14559999108314514,
+          0.6372573375701904
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          1.9589014053344727,
+          -0.14168651401996613,
+          0.42266544699668884
+        ],
+        "max": [
+          3.116039514541626,
+          0.14168652892112732,
+          0.6318719387054443
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 30
+    },
+    {
+      "id": "steering wheel",
+      "group": "steering_wheel",
+      "roles": [
+        "trim"
+      ],
+      "triangles_before": 20384,
+      "bounds_before": {
+        "min": [
+          2.8993022441864014,
+          0.3018248975276947,
+          0.9067341089248657
+        ],
+        "max": [
+          2.9206976890563965,
+          0.6613860130310059,
+          1.2277708053588867
+        ]
+      },
+      "clamped_vertices": 36,
+      "bounds_after": {
+        "min": [
+          2.8993022441864014,
+          0.302259236574173,
+          0.9074999094009399
+        ],
+        "max": [
+          2.9206976890563965,
+          0.6613860130310059,
+          1.227472186088562
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 652
+    },
+    {
+      "id": "tyre.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "rubber"
+      ],
+      "triangles_before": 389488,
+      "bounds_before": {
+        "min": [
+          0.4748538136482239,
+          0.8345746994018555,
+          0
+        ],
+        "max": [
+          1.2451462745666504,
+          1.0918253660202026,
+          0.7702924013137817
+        ]
+      },
+      "clamped_vertices": 89,
+      "bounds_after": {
+        "min": [
+          0.4748538136482239,
+          0.8345746994018555,
+          0
+        ],
+        "max": [
+          1.2451462745666504,
+          1.0918253660202026,
+          0.7702924013137817
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 5874
+    },
+    {
+      "id": "rim.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "bronze",
+        "liner"
+      ],
+      "triangles_before": 617824,
+      "bounds_before": {
+        "min": [
+          0.5441020727157593,
+          0.8176161050796509,
+          0.06924822926521301
+        ],
+        "max": [
+          1.1758979558944702,
+          1.0895419120788574,
+          0.7010442018508911
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.544122040271759,
+          0.8176161050796509,
+          0.06924822926521301
+        ],
+        "max": [
+          1.1758882999420166,
+          1.0895419120788574,
+          0.7010207772254944
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 8298
+    },
+    {
+      "id": "hubcap.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 57420,
+      "bounds_before": {
+        "min": [
+          0.8187529444694519,
+          0.925119936466217,
+          0.343899130821228
+        ],
+        "max": [
+          0.9012470841407776,
+          1.0465283393859863,
+          0.4263932704925537
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          0.8187529444694519,
+          0.925119936466217,
+          0.343899130821228
+        ],
+        "max": [
+          0.9012470841407776,
+          1.0465283393859863,
+          0.4263932704925537
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1406
+    },
+    {
+      "id": "rounded dished bronze spoke 0.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.8883964419364929,
+          0.9900800585746765,
+          0.3666090667247772
+        ],
+        "max": [
+          1.1643527746200562,
+          1.0169600248336792,
+          0.5152066946029663
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.8884280920028687,
+          0.9900800585746765,
+          0.36671391129493713
+        ],
+        "max": [
+          1.164293646812439,
+          1.0169600248336792,
+          0.5151234269142151
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 1.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.8136012554168701,
+          0.9900800585746765,
+          0.4225097894668579
+        ],
+        "max": [
+          0.9054679870605469,
+          1.0169600248336792,
+          0.6946922540664673
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.8136977553367615,
+          0.9900800585746765,
+          0.4225097894668579
+        ],
+        "max": [
+          0.905369758605957,
+          1.0169600248336792,
+          0.6945865750312805
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 2.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.5549086332321167,
+          0.9900800585746765,
+          0.36555802822113037
+        ],
+        "max": [
+          0.831208348274231,
+          1.0169600248336792,
+          0.5119025111198425
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.5549719929695129,
+          0.9900800585746765,
+          0.36566251516342163
+        ],
+        "max": [
+          0.8311835527420044,
+          1.0169600248336792,
+          0.5118181705474854
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 3.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.6517128944396973,
+          0.9900800585746765,
+          0.1138562262058258
+        ],
+        "max": [
+          0.8570905923843384,
+          1.0169600248336792,
+          0.3681677579879761
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.6517750024795532,
+          0.9900800585746765,
+          0.11392500251531601
+        ],
+        "max": [
+          0.856999397277832,
+          1.0169600248336792,
+          0.3681033253669739
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 4.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.8634322881698608,
+          0.9900800585746765,
+          0.11565282940864563
+        ],
+        "max": [
+          1.070971965789795,
+          1.0169600248336792,
+          0.36864688992500305
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.8635212779045105,
+          0.9900800585746765,
+          0.11572152376174927
+        ],
+        "max": [
+          1.0709095001220703,
+          1.0169600248336792,
+          0.3685828447341919
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "understated bronze wheel nut 0.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.9137094020843506,
+          1.0161535739898682,
+          0.3954235911369324
+        ],
+        "max": [
+          0.9362077713012695,
+          1.0451840162277222,
+          0.4179219603538513
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          0.9137094020843506,
+          1.0161535739898682,
+          0.39548128843307495
+        ],
+        "max": [
+          0.9358360767364502,
+          1.0451840162277222,
+          0.41786429286003113
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 1.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.8483511209487915,
+          1.0161535739898682,
+          0.44232839345932007
+        ],
+        "max": [
+          0.8708494901657104,
+          1.0451840162277222,
+          0.464826762676239
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          0.8483511209487915,
+          1.0161535739898682,
+          0.44238609075546265
+        ],
+        "max": [
+          0.8708494901657104,
+          1.0451840162277222,
+          0.464826762676239
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 2.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.783545196056366,
+          1.0161535739898682,
+          0.39466333389282227
+        ],
+        "max": [
+          0.8060435652732849,
+          1.0451840162277222,
+          0.4171617031097412
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          0.783545196056366,
+          1.0161535739898682,
+          0.39466333389282227
+        ],
+        "max": [
+          0.8056718707084656,
+          1.0451840162277222,
+          0.4171617031097412
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 3.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.8088512420654297,
+          1.0161535739898682,
+          0.31829994916915894
+        ],
+        "max": [
+          0.8313496112823486,
+          1.0451840162277222,
+          0.3407983183860779
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.8088512420654297,
+          1.0161535739898682,
+          0.31829994916915894
+        ],
+        "max": [
+          0.8313496112823486,
+          1.0451840162277222,
+          0.3407406508922577
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 4.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.8892971277236938,
+          1.0161535739898682,
+          0.31876981258392334
+        ],
+        "max": [
+          0.9117954969406128,
+          1.0451840162277222,
+          0.3412681818008423
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          0.8896688222885132,
+          1.0161535739898682,
+          0.31876981258392334
+        ],
+        "max": [
+          0.9117954969406128,
+          1.0451840162277222,
+          0.3412681818008423
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "closed recessed wheel backing cup.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 648532,
+      "bounds_before": {
+        "min": [
+          0.5609729290008545,
+          0.8007999062538147,
+          0.08611908555030823
+        ],
+        "max": [
+          1.159027099609375,
+          0.8243571519851685,
+          0.6841733455657959
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          0.5609729290008545,
+          0.8007999062538147,
+          0.08611908555030823
+        ],
+        "max": [
+          1.159027099609375,
+          0.8243571519851685,
+          0.6841733455657959
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 8606
+    },
+    {
+      "id": "grey brake rotor.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "brake_disc"
+      ],
+      "triangles_before": 290384,
+      "bounds_before": {
+        "min": [
+          0.630347490310669,
+          0.8657599091529846,
+          0.15549367666244507
+        ],
+        "max": [
+          1.0896525382995605,
+          0.8814401626586914,
+          0.6147987246513367
+        ]
+      },
+      "clamped_vertices": 9,
+      "bounds_after": {
+        "min": [
+          0.630362868309021,
+          0.8657599091529846,
+          0.15550096333026886
+        ],
+        "max": [
+          1.0896366834640503,
+          0.8814401626586914,
+          0.6147924661636353
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 4716
+    },
+    {
+      "id": "brake rotor hub hat.rl",
+      "group": "wheel_rl",
+      "roles": [
+        "brake_disc"
+      ],
+      "triangles_before": 86644,
+      "bounds_before": {
+        "min": [
+          0.7615941762924194,
+          0.8657599091529846,
+          0.28674039244651794
+        ],
+        "max": [
+          0.9584058523178101,
+          0.9296001195907593,
+          0.4835520088672638
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          0.7615941762924194,
+          0.8657599091529846,
+          0.28674039244651794
+        ],
+        "max": [
+          0.9584058523178101,
+          0.9296001195907593,
+          0.4835520088672638
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1910
+    },
+    {
+      "id": "tyre.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "rubber"
+      ],
+      "triangles_before": 389488,
+      "bounds_before": {
+        "min": [
+          0.4748538136482239,
+          -1.0918254852294922,
+          0
+        ],
+        "max": [
+          1.2451462745666504,
+          -0.8345746994018555,
+          0.7702924013137817
+        ]
+      },
+      "clamped_vertices": 89,
+      "bounds_after": {
+        "min": [
+          0.4748538136482239,
+          -1.0918254852294922,
+          0
+        ],
+        "max": [
+          1.2451462745666504,
+          -0.8345746994018555,
+          0.7702924013137817
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 5874
+    },
+    {
+      "id": "rim.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "bronze",
+        "liner"
+      ],
+      "triangles_before": 617824,
+      "bounds_before": {
+        "min": [
+          0.5441020727157593,
+          -1.0895419120788574,
+          0.06924822926521301
+        ],
+        "max": [
+          1.1758979558944702,
+          -0.8176161050796509,
+          0.7010442018508911
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          0.5441202521324158,
+          -1.0895419120788574,
+          0.06928131729364395
+        ],
+        "max": [
+          1.1758850812911987,
+          -0.8176161050796509,
+          0.7010179758071899
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 8298
+    },
+    {
+      "id": "hubcap.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 57420,
+      "bounds_before": {
+        "min": [
+          0.8187529444694519,
+          -1.0465283393859863,
+          0.343899130821228
+        ],
+        "max": [
+          0.9012470841407776,
+          -0.925119936466217,
+          0.4263932704925537
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          0.8187529444694519,
+          -1.0465283393859863,
+          0.343899130821228
+        ],
+        "max": [
+          0.9012470841407776,
+          -0.925119936466217,
+          0.4263932704925537
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1406
+    },
+    {
+      "id": "rounded dished bronze spoke 0.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.5556472539901733,
+          -1.0169600248336792,
+          0.3666090667247772
+        ],
+        "max": [
+          0.8316035866737366,
+          -0.9900799989700317,
+          0.5152066946029663
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.5557064414024353,
+          -1.0169600248336792,
+          0.36671391129493713
+        ],
+        "max": [
+          0.8315719366073608,
+          -0.9900799989700317,
+          0.5151234269142151
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 1.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.8145320415496826,
+          -1.0169600248336792,
+          0.4225097894668579
+        ],
+        "max": [
+          0.9063987731933594,
+          -0.9900799989700317,
+          0.6946922540664673
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.8146230578422546,
+          -1.0169600248336792,
+          0.4226202070713043
+        ],
+        "max": [
+          0.906302273273468,
+          -0.9900799989700317,
+          0.694585382938385
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 2.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.8887916803359985,
+          -1.0169600248336792,
+          0.36555802822113037
+        ],
+        "max": [
+          1.1650913953781128,
+          -0.9900800585746765,
+          0.5119025111198425
+        ]
+      },
+      "clamped_vertices": 1,
+      "bounds_after": {
+        "min": [
+          0.8887916803359985,
+          -1.0169600248336792,
+          0.36566251516342163
+        ],
+        "max": [
+          1.1650162935256958,
+          -0.9900800585746765,
+          0.5118181705474854
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 3.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.8629094362258911,
+          -1.0169600248336792,
+          0.1138562262058258
+        ],
+        "max": [
+          1.0682871341705322,
+          -0.9900800585746765,
+          0.3681677579879761
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.8630006909370422,
+          -1.0169600248336792,
+          0.11391976475715637
+        ],
+        "max": [
+          1.0682251453399658,
+          -0.9900800585746765,
+          0.3680802881717682
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 4.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          0.6490280032157898,
+          -1.0169600248336792,
+          0.11565282940864563
+        ],
+        "max": [
+          0.8565677404403687,
+          -0.9900799989700317,
+          0.36864688992500305
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.6490904688835144,
+          -1.0169600248336792,
+          0.11571670323610306
+        ],
+        "max": [
+          0.8564788699150085,
+          -0.9900799989700317,
+          0.36857789754867554
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "understated bronze wheel nut 0.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.78379225730896,
+          -1.0451840162277222,
+          0.3954235911369324
+        ],
+        "max": [
+          0.8062906265258789,
+          -1.0161535739898682,
+          0.4179219603538513
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          0.78379225730896,
+          -1.0451840162277222,
+          0.3957953155040741
+        ],
+        "max": [
+          0.8059189319610596,
+          -1.0161535739898682,
+          0.4179219603538513
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 1.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.849150538444519,
+          -1.0451840162277222,
+          0.44232839345932007
+        ],
+        "max": [
+          0.871648907661438,
+          -1.0161535739898682,
+          0.464826762676239
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.8495222926139832,
+          -1.0451840162277222,
+          0.44356992840766907
+        ],
+        "max": [
+          0.8686551451683044,
+          -1.0161535739898682,
+          0.4635852575302124
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 2.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.9139564633369446,
+          -1.0451840162277222,
+          0.39466333389282227
+        ],
+        "max": [
+          0.9364548325538635,
+          -1.0161536931991577,
+          0.4171617031097412
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.9139564633369446,
+          -1.0451840162277222,
+          0.39472100138664246
+        ],
+        "max": [
+          0.9360830783843994,
+          -1.0161536931991577,
+          0.4171617031097412
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 3.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.8886504173278809,
+          -1.0451840162277222,
+          0.31829994916915894
+        ],
+        "max": [
+          0.9111487865447998,
+          -1.0161535739898682,
+          0.3407983183860779
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          0.8886504173278809,
+          -1.0451840162277222,
+          0.31829994916915894
+        ],
+        "max": [
+          0.9111487865447998,
+          -1.0161535739898682,
+          0.3407983183860779
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 4.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          0.8082045316696167,
+          -1.0451840162277222,
+          0.31876981258392334
+        ],
+        "max": [
+          0.8307029008865356,
+          -1.0161535739898682,
+          0.3412681818008423
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.8094460964202881,
+          -1.0451840162277222,
+          0.32001134753227234
+        ],
+        "max": [
+          0.829461395740509,
+          -1.0161535739898682,
+          0.3400266468524933
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "closed recessed wheel backing cup.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 648532,
+      "bounds_before": {
+        "min": [
+          0.5609729290008545,
+          -0.8243572115898132,
+          0.08611908555030823
+        ],
+        "max": [
+          1.159027099609375,
+          -0.8007998466491699,
+          0.6841733455657959
+        ]
+      },
+      "clamped_vertices": 7,
+      "bounds_after": {
+        "min": [
+          0.5609729290008545,
+          -0.8243572115898132,
+          0.08612069487571716
+        ],
+        "max": [
+          1.159026861190796,
+          -0.8007998466491699,
+          0.6841733455657959
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 8606
+    },
+    {
+      "id": "grey brake rotor.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "brake_disc"
+      ],
+      "triangles_before": 290384,
+      "bounds_before": {
+        "min": [
+          0.630347490310669,
+          -0.8814401626586914,
+          0.15549367666244507
+        ],
+        "max": [
+          1.0896525382995605,
+          -0.8657599091529846,
+          0.6147987246513367
+        ]
+      },
+      "clamped_vertices": 8,
+      "bounds_after": {
+        "min": [
+          0.630363404750824,
+          -0.8814401626586914,
+          0.15549367666244507
+        ],
+        "max": [
+          1.0896522998809814,
+          -0.8657599091529846,
+          0.6147909164428711
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 4716
+    },
+    {
+      "id": "brake rotor hub hat.rr",
+      "group": "wheel_rr",
+      "roles": [
+        "brake_disc"
+      ],
+      "triangles_before": 86644,
+      "bounds_before": {
+        "min": [
+          0.7615942358970642,
+          -0.929600179195404,
+          0.28674039244651794
+        ],
+        "max": [
+          0.9584058523178101,
+          -0.8657599091529846,
+          0.4835520088672638
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          0.7615942358970642,
+          -0.929600179195404,
+          0.28674039244651794
+        ],
+        "max": [
+          0.9584058523178101,
+          -0.8657599687576294,
+          0.4835520088672638
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1910
+    },
+    {
+      "id": "tyre.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "rubber"
+      ],
+      "triangles_before": 389488,
+      "bounds_before": {
+        "min": [
+          3.4348537921905518,
+          0.851374626159668,
+          0
+        ],
+        "max": [
+          4.205146312713623,
+          1.1086254119873047,
+          0.7702924013137817
+        ]
+      },
+      "clamped_vertices": 78,
+      "bounds_after": {
+        "min": [
+          3.4349794387817383,
+          0.851374626159668,
+          0
+        ],
+        "max": [
+          4.205146312713623,
+          1.1086254119873047,
+          0.7702924013137817
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 5874
+    },
+    {
+      "id": "rim.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "bronze",
+        "liner"
+      ],
+      "triangles_before": 617824,
+      "bounds_before": {
+        "min": [
+          3.5041019916534424,
+          0.8344160914421082,
+          0.06924822926521301
+        ],
+        "max": [
+          4.135898113250732,
+          1.10634183883667,
+          0.7010442018508911
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          3.5041208267211914,
+          0.8344160914421082,
+          0.06926566362380981
+        ],
+        "max": [
+          4.135870456695557,
+          1.10634183883667,
+          0.7009934782981873
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 8298
+    },
+    {
+      "id": "hubcap.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 57420,
+      "bounds_before": {
+        "min": [
+          3.7787528038024902,
+          0.9419199228286743,
+          0.343899130821228
+        ],
+        "max": [
+          3.8612470626831055,
+          1.0633282661437988,
+          0.4263932704925537
+        ]
+      },
+      "clamped_vertices": 7,
+      "bounds_after": {
+        "min": [
+          3.7787528038024902,
+          0.9419199228286743,
+          0.343899130821228
+        ],
+        "max": [
+          3.8612470626831055,
+          1.0633282661437988,
+          0.4263932704925537
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1406
+    },
+    {
+      "id": "rounded dished bronze spoke 0.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.8483963012695312,
+          1.0068800449371338,
+          0.3666090667247772
+        ],
+        "max": [
+          4.12435245513916,
+          1.0337600708007812,
+          0.5152066946029663
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.8484556674957275,
+          1.0068800449371338,
+          0.3667139410972595
+        ],
+        "max": [
+          4.124273777008057,
+          1.0337600708007812,
+          0.5151234269142151
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 1.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.7736010551452637,
+          1.0068800449371338,
+          0.4225097894668579
+        ],
+        "max": [
+          3.8654680252075195,
+          1.0337600708007812,
+          0.6946922540664673
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.7736976146698,
+          1.0068800449371338,
+          0.4226168692111969
+        ],
+        "max": [
+          3.8653697967529297,
+          1.0337600708007812,
+          0.6945880055427551
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 2.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.5149085521698,
+          1.0068800449371338,
+          0.36555802822113037
+        ],
+        "max": [
+          3.791208267211914,
+          1.0337600708007812,
+          0.5119025111198425
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.514971971511841,
+          1.0068800449371338,
+          0.36566251516342163
+        ],
+        "max": [
+          3.7911834716796875,
+          1.0337600708007812,
+          0.5118181705474854
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 3.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.611712694168091,
+          1.0068800449371338,
+          0.1138562262058258
+        ],
+        "max": [
+          3.8170905113220215,
+          1.0337600708007812,
+          0.3681677579879761
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.6117749214172363,
+          1.0068800449371338,
+          0.11391975730657578
+        ],
+        "max": [
+          3.8170371055603027,
+          1.0337600708007812,
+          0.36810335516929626
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 4.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.823432207107544,
+          1.0068800449371338,
+          0.11565282940864563
+        ],
+        "max": [
+          4.030972003936768,
+          1.0337600708007812,
+          0.36864688992500305
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.823521137237549,
+          1.0068800449371338,
+          0.11572148650884628
+        ],
+        "max": [
+          4.030909538269043,
+          1.0337600708007812,
+          0.3685828149318695
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "understated bronze wheel nut 0.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.8737094402313232,
+          1.0329536199569702,
+          0.3954235911369324
+        ],
+        "max": [
+          3.896207809448242,
+          1.0619840621948242,
+          0.4179219603538513
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.8740813732147217,
+          1.0329536199569702,
+          0.39617714285850525
+        ],
+        "max": [
+          3.895836353302002,
+          1.0619840621948242,
+          0.4175502359867096
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 1.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.8083510398864746,
+          1.0329536199569702,
+          0.44232839345932007
+        ],
+        "max": [
+          3.8308494091033936,
+          1.0619840621948242,
+          0.464826762676239
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          3.808722734451294,
+          1.0329536199569702,
+          0.44232839345932007
+        ],
+        "max": [
+          3.8308494091033936,
+          1.0619840621948242,
+          0.464826762676239
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 2.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.7435450553894043,
+          1.0329536199569702,
+          0.39466333389282227
+        ],
+        "max": [
+          3.7660434246063232,
+          1.0619840621948242,
+          0.4171617031097412
+        ]
+      },
+      "clamped_vertices": 7,
+      "bounds_after": {
+        "min": [
+          3.7435450553894043,
+          1.0329536199569702,
+          0.39466333389282227
+        ],
+        "max": [
+          3.7660434246063232,
+          1.0619840621948242,
+          0.4171617031097412
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 3.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.7688510417938232,
+          1.0329536199569702,
+          0.31829994916915894
+        ],
+        "max": [
+          3.791349411010742,
+          1.0619840621948242,
+          0.3407983183860779
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          3.7692229747772217,
+          1.0329536199569702,
+          0.3183576464653015
+        ],
+        "max": [
+          3.791349411010742,
+          1.0619840621948242,
+          0.3407983183860779
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 4.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.849297046661377,
+          1.0329536199569702,
+          0.31876981258392334
+        ],
+        "max": [
+          3.871795415878296,
+          1.0619840621948242,
+          0.3412681818008423
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.851975679397583,
+          1.0329536199569702,
+          0.31914156675338745
+        ],
+        "max": [
+          3.8714237213134766,
+          1.0619840621948242,
+          0.3408964276313782
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "closed recessed wheel backing cup.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 648532,
+      "bounds_before": {
+        "min": [
+          3.520972728729248,
+          0.817599892616272,
+          0.08611908555030823
+        ],
+        "max": [
+          4.119027137756348,
+          0.8411571979522705,
+          0.6841733455657959
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          3.5209813117980957,
+          0.817599892616272,
+          0.08611908555030823
+        ],
+        "max": [
+          4.119027137756348,
+          0.841149091720581,
+          0.6841733455657959
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 8606
+    },
+    {
+      "id": "grey brake rotor.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "brake_disc"
+      ],
+      "triangles_before": 290384,
+      "bounds_before": {
+        "min": [
+          3.5903472900390625,
+          0.8825598955154419,
+          0.15549367666244507
+        ],
+        "max": [
+          4.049652576446533,
+          0.8982401490211487,
+          0.6147987246513367
+        ]
+      },
+      "clamped_vertices": 19,
+      "bounds_after": {
+        "min": [
+          3.5903472900390625,
+          0.8825598955154419,
+          0.15550096333026886
+        ],
+        "max": [
+          4.049652576446533,
+          0.8982401490211487,
+          0.6147892475128174
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 4716
+    },
+    {
+      "id": "brake rotor hub hat.fl",
+      "group": "wheel_fl",
+      "roles": [
+        "brake_disc"
+      ],
+      "triangles_before": 86644,
+      "bounds_before": {
+        "min": [
+          3.7215940952301025,
+          0.8825598955154419,
+          0.28674039244651794
+        ],
+        "max": [
+          3.918405771255493,
+          0.9464001059532166,
+          0.4835520088672638
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          3.7215940952301025,
+          0.8825598955154419,
+          0.2867450416088104
+        ],
+        "max": [
+          3.918405771255493,
+          0.9464001059532166,
+          0.4835473597049713
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1910
+    },
+    {
+      "id": "tyre.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "rubber"
+      ],
+      "triangles_before": 389488,
+      "bounds_before": {
+        "min": [
+          3.4348537921905518,
+          -1.1086254119873047,
+          0
+        ],
+        "max": [
+          4.205146312713623,
+          -0.851374626159668,
+          0.7702924013137817
+        ]
+      },
+      "clamped_vertices": 87,
+      "bounds_after": {
+        "min": [
+          3.4348537921905518,
+          -1.1086254119873047,
+          0
+        ],
+        "max": [
+          4.205146312713623,
+          -0.851374626159668,
+          0.7702924013137817
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 5874
+    },
+    {
+      "id": "rim.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "bronze",
+        "liner"
+      ],
+      "triangles_before": 617824,
+      "bounds_before": {
+        "min": [
+          3.5041019916534424,
+          -1.1063419580459595,
+          0.06924822926521301
+        ],
+        "max": [
+          4.135898113250732,
+          -0.8344160318374634,
+          0.7010442018508911
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          3.5041120052337646,
+          -1.1063419580459595,
+          0.06926566362380981
+        ],
+        "max": [
+          4.13586950302124,
+          -0.8344160318374634,
+          0.700995147228241
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 8298
+    },
+    {
+      "id": "hubcap.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 57420,
+      "bounds_before": {
+        "min": [
+          3.7787528038024902,
+          -1.0633282661437988,
+          0.343899130821228
+        ],
+        "max": [
+          3.8612470626831055,
+          -0.9419199228286743,
+          0.4263932704925537
+        ]
+      },
+      "clamped_vertices": 7,
+      "bounds_after": {
+        "min": [
+          3.7787528038024902,
+          -1.0633282661437988,
+          0.343899130821228
+        ],
+        "max": [
+          3.8612470626831055,
+          -0.9419199228286743,
+          0.4263932704925537
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1406
+    },
+    {
+      "id": "rounded dished bronze spoke 0.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.5156471729278564,
+          -1.0337600708007812,
+          0.3666090667247772
+        ],
+        "max": [
+          3.7916035652160645,
+          -1.0068799257278442,
+          0.5152066946029663
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.51572585105896,
+          -1.0337600708007812,
+          0.3667139410972595
+        ],
+        "max": [
+          3.791571855545044,
+          -1.0068799257278442,
+          0.5151234865188599
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 1.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.774531841278076,
+          -1.0337600708007812,
+          0.4225097894668579
+        ],
+        "max": [
+          3.866398811340332,
+          -1.0068800449371338,
+          0.6946922540664673
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.774630308151245,
+          -1.0337600708007812,
+          0.4226168692111969
+        ],
+        "max": [
+          3.866302490234375,
+          -1.0068800449371338,
+          0.6945880055427551
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 2.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.8487915992736816,
+          -1.0337600708007812,
+          0.36555802822113037
+        ],
+        "max": [
+          4.125091552734375,
+          -1.0068800449371338,
+          0.5119025111198425
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.848816394805908,
+          -1.0337600708007812,
+          0.36566248536109924
+        ],
+        "max": [
+          4.125028133392334,
+          -1.0068800449371338,
+          0.5118181705474854
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 3.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.822909355163574,
+          -1.0337600708007812,
+          0.1138562262058258
+        ],
+        "max": [
+          4.028286933898926,
+          -1.0068800449371338,
+          0.3681677579879761
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.82300066947937,
+          -1.0337600708007812,
+          0.11391972005367279
+        ],
+        "max": [
+          4.028224945068359,
+          -1.0068800449371338,
+          0.36810335516929626
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "rounded dished bronze spoke 4.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "bronze"
+      ],
+      "triangles_before": 132,
+      "bounds_before": {
+        "min": [
+          3.609027862548828,
+          -1.0337600708007812,
+          0.11565282940864563
+        ],
+        "max": [
+          3.8165676593780518,
+          -1.0068800449371338,
+          0.36864688992500305
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.609090566635132,
+          -1.0337600708007812,
+          0.11572149395942688
+        ],
+        "max": [
+          3.816478729248047,
+          -1.0068800449371338,
+          0.3685828447341919
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 72
+    },
+    {
+      "id": "understated bronze wheel nut 0.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.7437920570373535,
+          -1.0619840621948242,
+          0.3954235911369324
+        ],
+        "max": [
+          3.7662904262542725,
+          -1.0329536199569702,
+          0.4179219603538513
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          3.7437920570373535,
+          -1.0619840621948242,
+          0.3960127532482147
+        ],
+        "max": [
+          3.765918731689453,
+          -1.0329536199569702,
+          0.4179219603538513
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 1.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.809150457382202,
+          -1.0619840621948242,
+          0.44232839345932007
+        ],
+        "max": [
+          3.831648826599121,
+          -1.0329536199569702,
+          0.464826762676239
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          3.809150457382202,
+          -1.0619840621948242,
+          0.44232839345932007
+        ],
+        "max": [
+          3.831648826599121,
+          -1.0329536199569702,
+          0.464826762676239
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 2.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.8739564418792725,
+          -1.0619840621948242,
+          0.39466333389282227
+        ],
+        "max": [
+          3.8964548110961914,
+          -1.0329536199569702,
+          0.4171617031097412
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          3.8739564418792725,
+          -1.0619840621948242,
+          0.39466333389282227
+        ],
+        "max": [
+          3.8964548110961914,
+          -1.0329536199569702,
+          0.4171617031097412
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 3.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.8486502170562744,
+          -1.0619840621948242,
+          0.31829994916915894
+        ],
+        "max": [
+          3.8711485862731934,
+          -1.0329536199569702,
+          0.3407983183860779
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          3.849022150039673,
+          -1.0619840621948242,
+          0.31829994916915894
+        ],
+        "max": [
+          3.8711485862731934,
+          -1.0329536199569702,
+          0.3407983183860779
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "understated bronze wheel nut 4.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "liner",
+        "steel"
+      ],
+      "triangles_before": 64,
+      "bounds_before": {
+        "min": [
+          3.7682044506073,
+          -1.0619840621948242,
+          0.31876981258392334
+        ],
+        "max": [
+          3.7907028198242188,
+          -1.0329536199569702,
+          0.3412681818008423
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          3.7694461345672607,
+          -1.0619840621948242,
+          0.31876981258392334
+        ],
+        "max": [
+          3.7907028198242188,
+          -1.0329536199569702,
+          0.3412681818008423
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 18
+    },
+    {
+      "id": "closed recessed wheel backing cup.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "liner"
+      ],
+      "triangles_before": 648532,
+      "bounds_before": {
+        "min": [
+          3.520972728729248,
+          -0.8411571979522705,
+          0.08611908555030823
+        ],
+        "max": [
+          4.119027137756348,
+          -0.817599892616272,
+          0.6841733455657959
+        ]
+      },
+      "clamped_vertices": 6,
+      "bounds_after": {
+        "min": [
+          3.520972728729248,
+          -0.8411492109298706,
+          0.08611908555030823
+        ],
+        "max": [
+          4.119027137756348,
+          -0.817599892616272,
+          0.6841733455657959
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 8606
+    },
+    {
+      "id": "grey brake rotor.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "brake_disc"
+      ],
+      "triangles_before": 290384,
+      "bounds_before": {
+        "min": [
+          3.5903475284576416,
+          -0.8982401490211487,
+          0.15549367666244507
+        ],
+        "max": [
+          4.049652576446533,
+          -0.8825598955154419,
+          0.6147987246513367
+        ]
+      },
+      "clamped_vertices": 20,
+      "bounds_after": {
+        "min": [
+          3.5903637409210205,
+          -0.8982401490211487,
+          0.1555013358592987
+        ],
+        "max": [
+          4.049652576446533,
+          -0.8825598955154419,
+          0.6147908568382263
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 4716
+    },
+    {
+      "id": "brake rotor hub hat.fr",
+      "group": "wheel_fr",
+      "roles": [
+        "brake_disc"
+      ],
+      "triangles_before": 86644,
+      "bounds_before": {
+        "min": [
+          3.7215940952301025,
+          -0.9464001655578613,
+          0.28674039244651794
+        ],
+        "max": [
+          3.918405771255493,
+          -0.8825598955154419,
+          0.4835520088672638
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          3.7215940952301025,
+          -0.9464001059532166,
+          0.28674039244651794
+        ],
+        "max": [
+          3.918405771255493,
+          -0.8825598955154419,
+          0.4835520088672638
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1910
+    },
+    {
+      "id": "fixed grey brake caliper 0.86 -1",
+      "group": "body",
+      "roles": [
+        "brake_caliper"
+      ],
+      "triangles_before": 37020,
+      "bounds_before": {
+        "min": [
+          0.6115729212760925,
+          -0.9105666875839233,
+          0.3288573622703552
+        ],
+        "max": [
+          0.6762665510177612,
+          -0.8355153799057007,
+          0.44140875339508057
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.6115767955780029,
+          -0.9105520844459534,
+          0.3288624584674835
+        ],
+        "max": [
+          0.6762646436691284,
+          -0.8355177044868469,
+          0.44140398502349854
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1014
+    },
+    {
+      "id": "fixed grey brake caliper 0.86 1",
+      "group": "body",
+      "roles": [
+        "brake_caliper"
+      ],
+      "triangles_before": 37020,
+      "bounds_before": {
+        "min": [
+          0.6115729212760925,
+          0.8355153799057007,
+          0.3288573622703552
+        ],
+        "max": [
+          0.6762665510177612,
+          0.9105663299560547,
+          0.44140878319740295
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          0.6115759611129761,
+          0.835517168045044,
+          0.3288649022579193
+        ],
+        "max": [
+          0.6762643456459045,
+          0.910555362701416,
+          0.44140687584877014
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1014
+    },
+    {
+      "id": "fixed grey brake caliper 3.82 -1",
+      "group": "body",
+      "roles": [
+        "brake_caliper"
+      ],
+      "triangles_before": 36552,
+      "bounds_before": {
+        "min": [
+          3.571575403213501,
+          -0.9274020791053772,
+          0.32886049151420593
+        ],
+        "max": [
+          3.6362664699554443,
+          -0.8522891402244568,
+          0.44140464067459106
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.571577310562134,
+          -0.9273962378501892,
+          0.3288702666759491
+        ],
+        "max": [
+          3.6362617015838623,
+          -0.8523005843162537,
+          0.4414038062095642
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1004
+    },
+    {
+      "id": "fixed grey brake caliper 3.82 1",
+      "group": "body",
+      "roles": [
+        "brake_caliper"
+      ],
+      "triangles_before": 36552,
+      "bounds_before": {
+        "min": [
+          3.571575403213501,
+          0.8522891402244568,
+          0.32886049151420593
+        ],
+        "max": [
+          3.6362664699554443,
+          0.9274020791053772,
+          0.44140464067459106
+        ]
+      },
+      "clamped_vertices": 0,
+      "bounds_after": {
+        "min": [
+          3.5715770721435547,
+          0.8522990942001343,
+          0.32886695861816406
+        ],
+        "max": [
+          3.6362621784210205,
+          0.9273898005485535,
+          0.44140300154685974
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 1004
+    },
+    {
+      "id": "tb_badge_sedan_front_enamel",
+      "group": "body",
+      "roles": [
+        "tb_badge_enamel"
+      ],
+      "triangles_before": 145536,
+      "bounds_before": {
+        "min": [
+          4.685026168823242,
+          -0.04749999940395355,
+          0.6247572898864746
+        ],
+        "max": [
+          4.720913410186768,
+          0.04749999940395355,
+          0.7197573184967041
+        ]
+      },
+      "clamped_vertices": 5,
+      "bounds_after": {
+        "min": [
+          4.685043811798096,
+          -0.047499943524599075,
+          0.6247572898864746
+        ],
+        "max": [
+          4.720907211303711,
+          0.04749999940395355,
+          0.7197573184967041
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2864
+    },
+    {
+      "id": "tb_badge_sedan_front_domed_chrome_bezel",
+      "group": "body",
+      "roles": [
+        "tb_badge_chrome"
+      ],
+      "triangles_before": 25816,
+      "bounds_before": {
+        "min": [
+          4.681345462799072,
+          -0.05000000074505806,
+          0.6222572922706604
+        ],
+        "max": [
+          4.720648765563965,
+          0.05000000074505806,
+          0.7222573161125183
+        ]
+      },
+      "clamped_vertices": 23,
+      "bounds_after": {
+        "min": [
+          4.68151330947876,
+          -0.05000000074505806,
+          0.6222572922706604
+        ],
+        "max": [
+          4.720645904541016,
+          0.05000000074505806,
+          0.7222573161125183
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 828
+    },
+    {
+      "id": "tb_badge_sedan_front_raised_bar_1",
+      "group": "body",
+      "roles": [
+        "tb_badge_bars"
+      ],
+      "triangles_before": 9536,
+      "bounds_before": {
+        "min": [
+          4.6996893882751465,
+          -0.03295312449336052,
+          0.6502885818481445
+        ],
+        "max": [
+          4.7166924476623535,
+          0.0008906250004656613,
+          0.6942260265350342
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          4.699689865112305,
+          -0.03295312449336052,
+          0.6502885818481445
+        ],
+        "max": [
+          4.7166924476623535,
+          0.0008906136499717832,
+          0.6942260265350342
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 424
+    },
+    {
+      "id": "tb_badge_sedan_front_raised_bar_2",
+      "group": "body",
+      "roles": [
+        "tb_badge_bars"
+      ],
+      "triangles_before": 9536,
+      "bounds_before": {
+        "min": [
+          4.699181079864502,
+          -0.01692187413573265,
+          0.6502885818481445
+        ],
+        "max": [
+          4.717641830444336,
+          0.01692187413573265,
+          0.6942260265350342
+        ]
+      },
+      "clamped_vertices": 3,
+      "bounds_after": {
+        "min": [
+          4.69918155670166,
+          -0.01692187413573265,
+          0.6502885818481445
+        ],
+        "max": [
+          4.717641830444336,
+          0.01692184805870056,
+          0.6942260265350342
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 424
+    },
+    {
+      "id": "tb_badge_sedan_front_raised_bar_3",
+      "group": "body",
+      "roles": [
+        "tb_badge_bars"
+      ],
+      "triangles_before": 9536,
+      "bounds_before": {
+        "min": [
+          4.698081970214844,
+          -0.0008906250004656613,
+          0.6502885818481445
+        ],
+        "max": [
+          4.717647075653076,
+          0.03295312449336052,
+          0.6942260265350342
+        ]
+      },
+      "clamped_vertices": 2,
+      "bounds_after": {
+        "min": [
+          4.698084354400635,
+          -0.0008906250004656613,
+          0.6502885818481445
+        ],
+        "max": [
+          4.717647075653076,
+          0.03295307978987694,
+          0.6942260265350342
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 424
+    },
+    {
+      "id": "tb_badge_sedan_rear_enamel",
+      "group": "body",
+      "roles": [
+        "tb_badge_enamel"
+      ],
+      "triangles_before": 145536,
+      "bounds_before": {
+        "min": [
+          0.1054757609963417,
+          -0.04749999940395355,
+          0.8497573137283325
+        ],
+        "max": [
+          0.11340006440877914,
+          0.04749999940395355,
+          0.944757342338562
+        ]
+      },
+      "clamped_vertices": 4,
+      "bounds_after": {
+        "min": [
+          0.1054757609963417,
+          -0.04749999940395355,
+          0.8497573733329773
+        ],
+        "max": [
+          0.11340003460645676,
+          0.04749999940395355,
+          0.944757342338562
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 2864
+    },
+    {
+      "id": "tb_badge_sedan_rear_domed_chrome_bezel",
+      "group": "body",
+      "roles": [
+        "tb_badge_chrome"
+      ],
+      "triangles_before": 25816,
+      "bounds_before": {
+        "min": [
+          0.10369999706745148,
+          -0.05000000074505806,
+          0.8472573161125183
+        ],
+        "max": [
+          0.11340003460645676,
+          0.05000000074505806,
+          0.9472573399543762
+        ]
+      },
+      "clamped_vertices": 18,
+      "bounds_after": {
+        "min": [
+          0.10370048135519028,
+          -0.05000000074505806,
+          0.8472573161125183
+        ],
+        "max": [
+          0.11340003460645676,
+          0.05000000074505806,
+          0.9472573399543762
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 828
+    },
+    {
+      "id": "tb_badge_sedan_rear_raised_bar_1",
+      "group": "body",
+      "roles": [
+        "tb_badge_bars"
+      ],
+      "triangles_before": 9536,
+      "bounds_before": {
+        "min": [
+          0.10826665163040161,
+          -0.0008906250004656613,
+          0.8752886056900024
+        ],
+        "max": [
+          0.1119820699095726,
+          0.03295312449336052,
+          0.9192260503768921
+        ]
+      },
+      "clamped_vertices": 1,
+      "bounds_after": {
+        "min": [
+          0.10826665163040161,
+          -0.0008905991562642157,
+          0.8752886652946472
+        ],
+        "max": [
+          0.11198192089796066,
+          0.03295309096574783,
+          0.9192260503768921
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 424
+    },
+    {
+      "id": "tb_badge_sedan_rear_raised_bar_2",
+      "group": "body",
+      "roles": [
+        "tb_badge_bars"
+      ],
+      "triangles_before": 9536,
+      "bounds_before": {
+        "min": [
+          0.10821651667356491,
+          -0.01692187413573265,
+          0.8752886056900024
+        ],
+        "max": [
+          0.1120031476020813,
+          0.01692187413573265,
+          0.9192260503768921
+        ]
+      },
+      "clamped_vertices": 1,
+      "bounds_after": {
+        "min": [
+          0.10821651667356491,
+          -0.016921840608119965,
+          0.8752886652946472
+        ],
+        "max": [
+          0.112002894282341,
+          0.016921842470765114,
+          0.9192260503768921
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 424
+    },
+    {
+      "id": "tb_badge_sedan_rear_raised_bar_3",
+      "group": "body",
+      "roles": [
+        "tb_badge_bars"
+      ],
+      "triangles_before": 9536,
+      "bounds_before": {
+        "min": [
+          0.10821161419153214,
+          -0.03295312449336052,
+          0.8752886056900024
+        ],
+        "max": [
+          0.1120866984128952,
+          0.0008906250004656613,
+          0.9192260503768921
+        ]
+      },
+      "clamped_vertices": 1,
+      "bounds_after": {
+        "min": [
+          0.10821161419153214,
+          -0.03295309469103813,
+          0.8752886652946472
+        ],
+        "max": [
+          0.11208660155534744,
+          0.0008906061411835253,
+          0.9192260503768921
+        ]
+      },
+      "triangles_after": null,
+      "lod0_triangles": 424
+    }
+  ],
+  "portable_look": "CSE palette + fixed-light vertex tones; Nordic048 directional field approximation",
+  "nordic048_paint_field_AST_verified": true,
+  "limitations": [
+    "Not native CSE shader/render parity: no Freestyle, hybrid grading, camera-dependent reflections or procedural texture bake.",
+    "Nordic048 paint field uses its approved directional/height coefficients; conversion to displayed vertex RGB is approximate.",
+    "Thin details retain semantic parts but receive bounded simplification. Overall bounds tolerance1percent; visual LOD review required.",
+    "Included cse-outline-adapter.js supplies portable fine silhouettes; native Freestyle crease-line parity is not claimed. Wheel spin axisY in Blender maps to glTF localZ.",
+    "Nordic 053 native source has a steering rim only, with no separate hub or spokes; its existing rim is a movable +X-axis node."
+  ],
+  "compression": {
+    "extension": "EXT_meshopt_compression",
+    "encoder": "meshoptimizer1.3.0",
+    "gltf_transform": "4.5.1",
+    "bytes_before": 1280964,
+    "bytes_after": 659312,
+    "ratio": 0.5146998666629194,
+    "decoded_triangles": 62713,
+    "decoded_primitives": 42,
+    "node_pivots_unchanged": true,
+    "position_rounding_step_m": 0.00001,
+    "target_bytes": 3145728,
+    "target_met": true
+  },
+  "portable_colour_repair": {
+    "blender_emission_signature": "blackbase + whiteemission + dummywhiteCOLOR_0",
+    "repaired_primitives": [],
+    "opaque_unlit": true,
+    "glass_colour_0_held": true
+  },
+  "outline_adapter": {
+    "path": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\exports\\game\\cse-outline-adapter.js",
+    "sha256": "72b94418738f3df30d26bc23d38015e932fec1f052368177dcce3bd52e64cfdc",
+    "method": "screen-space inverted hull; opaque meshes only",
+    "default_width_pixels": 0.6,
+    "usage": "attachCSEOutline(THREE, gltf.scene); call returned.update(renderer) after resize; dispose on unload",
+    "limitation": "Fine silhouette approximation, not native Freestyle internal crease lines."
+  },
+  "recipe_snapshots": [
+    {
+      "source": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\tools\\car3d\\game_export.py",
+      "sha256": "3dc71471ffc63620e9031e32ce3e973bee8e33592a604f06b8ebf3711799f3dd",
+      "snapshot": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\docs\\qa\\game-export-recipes\\3dc71471ffc63620e9031e32ce3e973bee8e33592a604f06b8ebf3711799f3dd.game_export.py"
+    },
+    {
+      "source": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\tools\\car3d\\game_optimize.mjs",
+      "sha256": "8a3627774faa9912199953057bfdc5939b24400de0ca6a9a7ba7e286585e225c",
+      "snapshot": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\docs\\qa\\game-export-recipes\\8a3627774faa9912199953057bfdc5939b24400de0ca6a9a7ba7e286585e225c.game_optimize.mjs"
+    },
+    {
+      "source": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\tools\\car3d\\export_asset.py",
+      "sha256": "2430c78c1647d4b314869493a3727dcb9347544a9d783e5237a62facb8d1ae3c",
+      "snapshot": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\docs\\qa\\game-export-recipes\\2430c78c1647d4b314869493a3727dcb9347544a9d783e5237a62facb8d1ae3c.export_asset.py"
+    },
+    {
+      "source": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\tools\\car3d\\out\\game-export-npm\\package-lock.json",
+      "sha256": "89385277342f7d3b53da86e4f149e7bada6063f343b52ae754fe92968a1c1314",
+      "snapshot": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\docs\\qa\\game-export-recipes\\89385277342f7d3b53da86e4f149e7bada6063f343b52ae754fe92968a1c1314.package-lock.json"
+    }
+  ],
+  "simplification": {
+    "parent_asset": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\exports\\game\\sedan-053-lod0.glb",
+    "parent_sha256": "9f5562054effd69b6180e1a1dc7ef7eab2fa6fbbcedb9545bc85c0e2a2a6bf78",
+    "method": "meshoptimizer attribute-aware topology-preserving simplification",
+    "requested_triangles": 55000,
+    "triangles_before": 155101,
+    "triangles_after": 62713,
+    "target_met": true,
+    "max_allowed_error_m": 0.002,
+    "max_reported_error_m": 0.001997211016714573,
+    "protected_components": 124,
+    "empty_component_removal_allowed": false,
+    "pivots_materials_extras_held": true
+  }
+}

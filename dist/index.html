@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#111416">
+  <meta name="theme-color" content="#FFD60A">
+  <script>(function(){var d=false;try{var p=localStorage.getItem('teoriboost.theme')||'system';d=p==='dark'||(p==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);}catch(e){}document.documentElement.dataset.theme=d?'dark':'light';if(d)document.querySelector('meta[name="theme-color"]').setAttribute('content','#0F1215');})();</script>
   <meta name="description" content="Træn dansk køreteori i korte missioner. Lær af dine fejl, genkald reglerne og øv prøveformatet.">
-  <title>NATKØRSEL — din hjerne. Dit kørekort.</title>
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+  <title>TeoriBoost — din hjerne. Dit kørekort.</title>
+    <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="judge.css">
   <link rel="preload" href="assets/fonts/heading-bold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="lessons.css">
@@ -20,26 +20,56 @@
 <link rel="stylesheet" href="journey-player.css">
 <link rel="stylesheet" href="experience.css">
 <link rel="stylesheet" href="turn-lesson.css">
-</head>
+<link rel="stylesheet" href="redesign.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="start.css">
+<link rel="stylesheet" href="screens.css">
+<link rel="stylesheet" href="play.css">
+<link rel="stylesheet" href="chat.css">
+<link rel="stylesheet" href="save-progress.css">
+<link rel="stylesheet" href="order.css">
+<link rel="stylesheet" href="mirror-hero.css">
+<link rel="stylesheet" href="games.css">
+<link rel="stylesheet" href="road-cast-motion.css">
+<link rel="stylesheet" href="team.css">
+<link rel="stylesheet" href="dark-gen.css">
+<link rel="stylesheet" href="dark.css">
+<link rel="stylesheet" href="light.css">
+<link rel="preload" href="assets/fonts/rubik-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="brand-markers.css">
+<link rel="stylesheet" href="scrollbars.css">
+
+<!-- start modules, fetched together instead of one import level at a time (list: app.js static imports) -->
+<link rel="modulepreload" href="practice.js"><link rel="modulepreload" href="ui-stripes.js"><link rel="modulepreload" href="paywall.js"><link rel="modulepreload" href="rive-fx.js"><link rel="modulepreload" href="account.js"><link rel="modulepreload" href="save-progress.js"><link rel="modulepreload" href="firebase-config.js"><link rel="modulepreload" href="cloud-merge.js"><link rel="modulepreload" href="theme.js"><link rel="modulepreload" href="order.js"><link rel="modulepreload" href="ui-icons.js"><link rel="modulepreload" href="content.js"><link rel="modulepreload" href="core.js"><link rel="modulepreload" href="lessons.js"><link rel="modulepreload" href="lesson-view.js"><link rel="modulepreload" href="garage.js"><link rel="modulepreload" href="initial-load.js"><link rel="modulepreload" href="first-screen.js"><link rel="modulepreload" href="voice-cues.js"><link rel="modulepreload" href="approved-cast.js"><link rel="modulepreload" href="cast.js"><link rel="modulepreload" href="mybil.js"><link rel="modulepreload" href="motion.js"><link rel="modulepreload" href="screens.js"><link rel="modulepreload" href="start.js"><link rel="modulepreload" href="journey-core.js"><link rel="modulepreload" href="journey-profile.js"><link rel="modulepreload" href="profile-store.js"><link rel="modulepreload" href="question-rotation.js"><link rel="modulepreload" href="journey-view.js"><link rel="modulepreload" href="experience.js"><link rel="modulepreload" href="journey-road.js"><link rel="modulepreload" href="road-cast-motion.js"><link rel="modulepreload" href="team.js"><link rel="modulepreload" href="voice-texts.js"><link rel="modulepreload" href="sequences.js"><link rel="modulepreload" href="mirror-hero.js"><link rel="modulepreload" href="entitlements.js"><link rel="modulepreload" href="referral.js"><link rel="modulepreload" href="garage-content.js"><link rel="modulepreload" href="art.js"><link rel="modulepreload" href="mybil-catalog.js"><link rel="modulepreload" href="account-card.js"><link rel="modulepreload" href="turn-learning.js">
+
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="referrer" content="no-referrer"><!-- TEORIBOOST PRIVACY: approved cookie-free pageview counter --><script defer src="/assets/vercel-analytics.js" data-surface="app"></script><script defer data-disable-auto-track="1" src="/_vercel/insights/script.js"></script><!-- /TEORIBOOST PRIVACY --></head>
 <body>
   <a class="skip-link" href="#main">Spring til indhold</a>
   <header class="topbar">
-    <a class="brand" href="#home" aria-label="Natkørsel, hjem"><span class="brand-mark" aria-hidden="true">///</span><span>NATKØRSEL<span class="brand-dot">B</span></span></a>
+    <a class="brand" href="#home" aria-label="TeoriBoost, hjem"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M9.8 46.8h6.8l16-29.6h-6.8zM20.6 46.8h6.8l16-29.6h-6.8zM31.4 46.8h6.8l16-29.6h-6.8z"/></svg></span><span>TeoriBoost<span class="brand-dot" aria-hidden="true">.</span></span></a>
     <div class="top-strap mono">KATEGORI B <span>/</span> DANMARK <span>/</span> LÆR. KØR. GENTAG.</div>
-    <div class="top-actions"><button id="humor-toggle" class="mode-toggle" aria-pressed="true" aria-label="Brainrot og huskekroge"><span class="mode-led"></span><span class="mode-text">BRAINROT</span><b>ON</b></button><button id="sound-toggle" class="icon-btn sound-btn" aria-pressed="true" aria-label="Små lyde"></button><button id="settings-btn" class="icon-btn" aria-label="Indstillinger"></button></div>
+    <div class="top-actions"><a id="booster-chip" class="booster-chip" href="#minbil" hidden aria-label="Dine Boosters. Åbn Min bil"></a><button id="humor-toggle" class="mode-toggle" aria-pressed="true" aria-label="Brainrot og huskekroge"><span class="mode-led"></span><span class="mode-text">BRAINROT</span><b>ON</b></button><button id="sound-toggle" class="icon-btn sound-btn" aria-pressed="true" aria-label="Små lyde"></button><button id="settings-btn" class="icon-btn" aria-label="Indstillinger"></button></div>
   </header>
   <div class="app-layout">
     <aside class="sidebar">
       <div class="sidebar-label mono">DIN GENVEJ TIL TEORIEN</div>
       <nav aria-label="Hovednavigation" id="desktop-nav"></nav>
-      <div class="sidebar-bottom"><div class="small-license"><span class="mono">DIT FØRERKORT</span><span class="license-symbol">B</span><strong>Det begynder<br>med et godt blik.</strong></div><button class="source-link" id="sources-btn">Kilder & faglig status <span>↗</span></button><p class="sidebar-note">Frivillig træning ved siden af<br>din køreskole.</p></div>
+      <div class="sidebar-bottom"><div class="small-license"><span class="mono">DIT FØRERKORT</span><span class="license-symbol">B</span><strong>Det begynder<br>med et godt blik.</strong></div><a class="nav-item nav-item--profile" href="#profil" data-tab="profil" aria-label="Din profil"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span class="nav-label">Din profil</span></a><button class="source-link" id="sources-btn" hidden>Kilder & faglig status</button></div>
     </aside>
     <main id="main" tabindex="-1"><section id="voice-panel" hidden></section><audio id="voice-audio" preload="none" hidden></audio><div id="view"></div></main>
   </div>
   <nav class="mobile-nav" aria-label="Mobilnavigation" id="mobile-nav"></nav>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <dialog id="modal" aria-labelledby="modal-title"><div id="modal-content"></div></dialog>
-  <script src="assets/three.min.js"></script>
+  <!-- BILLING HOOK: styles are scoped to the premium sheet and settings section. -->
+  <link rel="stylesheet" href="paywall.css">
+  <link rel="stylesheet" href="referral.css">
+<link rel="stylesheet" href="practice.css">
+<link rel="stylesheet" href="ux-fixes.css">
   <script type="module" src="app.js"></script>
 </body>
 </html>

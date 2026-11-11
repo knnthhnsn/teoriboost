@@ -1,0 +1,21 @@
+{
+  "buildCommand": "node verify-deploy-config.mjs && node prepare-public.mjs",
+  "functions": {
+    "api/chat.mjs": {
+      "maxDuration": 60
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/referral/process",
+      "schedule": "0 3 * * *"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/__/auth/:path*",
+      "destination": "https://teoriboost.firebaseapp.com/__/auth/:path*"
+    }
+  ],
+  "outputDirectory": "public"
+}

@@ -1,0 +1,86 @@
+/* Dark theme. html[data-theme="dark"] is set before the first paint (index.html) and by theme.js.
+   Same brand: the yellow stays yellow with dark ink on it; surfaces become graphite, text becomes light. */
+/* .journey-surface (body on Lær) re-declares the palette, so the dark values go there too */
+html[data-theme="dark"],html[data-theme="dark"] .journey-surface{
+  color-scheme:dark;
+  --bg:#0F1215;--panel:#1F2328;--panel2:#2B3138;--ink:#FEFFED;--muted:#C2CCD6;--line:#2B3138;--line-strong:#3A434C;
+  --accent:#FFD60A;--accent-ink:#1F2328;--accent-shadow:#C9A200;--acid:#FFD60A;--on-accent:#1F2328;
+  --good:#58CC02;--good-ink:#58CC02;--good-bg:#2B3138;
+  --bad:#FF4B4B;--bad-ink:#FF4B4B;--bad-bg:#2B3138;
+  --blue:#FFD60A;--blue-ink:#FFD60A;--orange:#FF9600;--purple:#FFD60A;
+  --acid-text:#FFD60A;--amber-text:#FF9600;
+  --surface:#1F2328;--surface-2:#1F2328;--surface-3:#2B3138;
+}
+html[data-theme="dark"] body{background:var(--bg)!important;color:var(--ink)}
+/* the page is asphalt: faint skid marks and asphalt grain on graphite that darkens downwards */
+html[data-theme="dark"] body:not(.start-mode){background:var(--skid) right -160px bottom -80px/1100px auto no-repeat,var(--asphalt),linear-gradient(180deg,var(--bg) 0,#0F1215 100%)!important;background-attachment:fixed!important;background-size:1100px auto,220px 220px,auto!important}
+
+/* yellow stays yellow, so whatever sits on it keeps dark ink (light rules use var(--ink) there) */
+html[data-theme="dark"] .pn--next .pn-btn,html[data-theme="dark"] .topic.is-active .topic-n,html[data-theme="dark"] .mybil-tab.is-active,
+html[data-theme="dark"] .seg input:checked + span,html[data-theme="dark"] .sidebar .nav-item.active .nav-tile,html[data-theme="dark"] #mobile-nav a.active .nav-tile,
+html[data-theme="dark"] .big-btn:not(.big-btn--ghost):not(.acc-danger),html[data-theme="dark"] .btn-primary,html[data-theme="dark"] .chat-send,html[data-theme="dark"] .toast{color:var(--accent-ink)!important}
+
+
+/* the "Din bil" label sits on the bright road scene, so it stays a light card */
+html[data-theme="dark"] .road-label{background:rgba(254,255,237,0.92)!important;border-color:rgba(254,255,237,0.6)!important;color:#1F2328}
+html[data-theme="dark"] .road-label *{color:#1F2328}
+html[data-theme="dark"] .road-label small,html[data-theme="dark"] .road-label .eyebrow{color:#525C65}
+
+/* the start page is a poster in both themes */
+html[data-theme="dark"] body.start-mode{background:#FEFFED!important;color:#1F2328}
+html[data-theme="dark"] .start-hero,html[data-theme="dark"] .start-step,html[data-theme="dark"] .dream-modal{
+  color-scheme:light;color:#1F2328;
+  --bg:#FEFFED;--panel:#FEFFED;--panel2:#F4F5F7;--ink:#1F2328;--muted:#5F656D;--line:#E3E5E8;--line-strong:#C2CCD6;
+  --accent-ink:#1F2328;--accent-shadow:#C9A200;--on-accent:#1F2328;--good-ink:#2F6F00;--bad-ink:#D42F2F;--blue-ink:#1F2328;--acid-text:#4A4127}
+html[data-theme="dark"] .big-btn--ghost{color:var(--ink)}
+html[data-theme="dark"] .acc-error{color:var(--bad-ink)}
+
+/* the unit banner is the inverse plate: yellow with ink */
+html[data-theme="dark"] .unit-banner{--ub-bg:#FFD60A;--ub-edge:#C9A200;--ub-fg:#1F2328;--ub-hi:#1F2328;--ub-hi-ink:#FFD60A;--ub-dim:rgba(31,35,40,.14)}
+
+/* the light sweep over the next-step card stays a light sweep (the generator would turn its white dark) */
+html[data-theme="dark"] .home-cta::after{background:linear-gradient(100deg,transparent,rgba(254,255,237,0.55),transparent)}
+/* the gloss is a little softer on graphite */
+html[data-theme="dark"]{--gloss:linear-gradient(135deg,rgba(254,255,237,0.5) 0,rgba(254,255,237,0.14) 34%,rgba(255,255,255,0) 52%)}
+
+/* the lesson's button dock fades into the page instead of sitting on a card */
+html[data-theme="dark"] .journey-control-dock:not(.journey-lesson-done *){background:linear-gradient(rgba(10,12,15,0),#0F1215 34%)!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+/* the Lær road poster stays a poster: the open lessons are white stops on the asphalt, as in the light theme */
+html[data-theme="dark"] .learn-path .pn--open .pn-btn{background:#FEFFED;color:#1F2328;border-color:#E3E5E8;box-shadow:0 6px 0 #C2CCD6}
+/* the topic banner is yellow here, so it gets the yellow grit instead of the asphalt */
+html[data-theme="dark"] .unit-banner{background-image:var(--grain-ink)!important;background-size:200px 200px}
+/* on the asphalt page the poster needs an edge to stand off it */
+html[data-theme="dark"] .practice-signal{box-shadow:inset 0 0 0 2px rgba(255,214,10,.35),0 5px 0 #0F1215}
+html[data-theme="dark"] .mybil-try{box-shadow:inset 0 0 0 2px rgba(255,214,10,.35),0 4px 0 #0F1215}
+/* on the asphalt page every card is a slab of asphalt too */
+html[data-theme="dark"] :is(.learn-card,.row-card,.game-card,.tile,.panel,.exam-signal,.avatar-opt,.mybil-item,.mybil-base,.mybil-stage,.road-loop,.mh,.topic,.chat-msg--ai .chat-col,.journey-path,.exam-row){background-image:var(--asphalt);background-size:220px 220px}
+html[data-theme="dark"] .road-poster{box-shadow:inset 0 0 0 2px rgba(255,214,10,.3),0 5px 0 #0F1215}
+/* the race is drawn in daylight: names over the cars stay light, like the road label */
+html[data-theme="dark"] .race-tag{background:#FEFFED;color:#1F2328}
+html[data-theme="dark"] .race-car.is-me .race-tag{background:#FFD60A;color:#1F2328}
+html[data-theme="dark"] .team-row.is-me{border-color:#FFD60A}
+html[data-theme="dark"] .team-boost-big{background:#0F1215;box-shadow:inset 0 0 0 2px rgba(255,214,10,.35)}
+
+/* the licence plate is white art in both themes, so its letters stay ink */
+html[data-theme="dark"] .mybil-plate b{color:#1F2328}
+
+/* Dark accent foregrounds follow the manual yellow; pale goal tiles retain dark ink. */
+html[data-theme="dark"] .brand-dot{color:#FFD60A!important}
+html[data-theme="dark"] .mh-eyebrow,html[data-theme="dark"] .garage-joke .mono,html[data-theme="dark"] .jp-done-goal .ui-ico,html[data-theme="dark"] .turn-done-art>span,html[data-theme="dark"] .turn-entry__mark,html[data-theme="dark"] .turn-entry>b,html[data-theme="dark"] .voice-ai-badge{color:var(--acid-text,#FFD60A)}
+html[data-theme="dark"] .turn-shell{--turn-cyan:var(--acid-text,#FFD60A)}
+html[data-theme="dark"] .chip--goal .ui-ico{color:#4A4127}
+html[data-theme="dark"] .turn-shell.turn-shell .turn-primary{color:#1F2328}
+
+/* Neutral surfaces identify callouts; no one-sided accent bars. */
+html[data-theme="dark"] body :is(.tb-referral-card,.tb-referral-status,.tb-referral-message:not(:empty),dialog.tb-paywall,.tb-pw-message:not(:empty),.garage-joke,.voice-player,.turn-own-answer,.turn-instruction,.journey-checkpoint-note,.journey-feedback-gag,.journey-case-context,.journey-model-answer,.judge__excuse,.lesson-practical,.question-context,.journey-feedback-tray.correct,.journey-feedback-tray.repair){background:#2B3138!important}
+html[data-theme="dark"] body .journey-feedback-gag::before{background:#2B3138}
+
+/* Red 100 keeps normal-sized error text readable on the dark callout surface. */
+html[data-theme="dark"] .save-progress .save-progress__error,
+html[data-theme="dark"] .account-panel:not(.acc-card) .acc-error,
+html[data-theme="dark"] .judge.judge .judge__status[data-tone="retry"],
+html[data-theme="dark"] .jp-wrong-statements li strong,
+html[data-theme="dark"] .journey-answer-review > div.wrong p{color:#FFE5E5}
+@media(max-width:358px){
+  html[data-theme="dark"] #main .feedback.wrong h3{color:#FFE5E5}
+}

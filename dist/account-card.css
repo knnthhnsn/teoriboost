@@ -1,0 +1,233 @@
+/* Logged-in account card: fixed asphalt surface, existing app actions and theme-aware footer. */
+.acc-card.acc-card.account-panel {
+  --acc-quiet:#525C65;
+  display:grid;
+  gap:20px;
+  width:100%;
+  max-width:760px;
+  min-width:0;
+  margin-inline:auto;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+}
+.acc-card.acc-card.account-panel:where(html[data-theme="dark"] *) { --acc-quiet:#C2CCD6; }
+.acc-card.acc-card .acc-card-surface {
+  position:relative;
+  isolation:isolate;
+  min-width:0;
+  border-radius:26px;
+}
+.acc-card.acc-card .acc-card-header {
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  min-width:0;
+}
+.acc-card.acc-card .acc-card-header h2 {
+  margin:0;
+  font:800 25px/1.08 var(--font-display);
+  letter-spacing:-.025em;
+  color:inherit;
+}
+.acc-card.acc-card .acc-card-surface .acc-card-header h2 { color:inherit; }
+.acc-card.acc-card .acc-card-header .tb-stripes {
+  flex-shrink:0;
+  font-size:42px;
+  color:inherit;
+}
+.acc-card.acc-card .acc-card-body {
+  position:relative;
+  z-index:1;
+  min-width:0;
+}
+.acc-card.acc-card .acc-card-photo {
+  display:grid;
+  place-items:center;
+  flex:none;
+}
+.acc-card.acc-card .acc-card-photo img {
+  display:block;
+  width:100%;
+  height:100%;
+  max-width:100%;
+  object-fit:contain;
+}
+.acc-card.acc-card .acc-card-identity { min-width:0; }
+.acc-card.acc-card .acc-card-email {
+  min-width:0;
+  margin:0;
+  font:800 clamp(23px,4.5vw,32px)/1.16 var(--font-display);
+  letter-spacing:-.035em;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  color:inherit;
+}
+.acc-card.acc-card .acc-card-provider {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:13px 0 0;
+  font:600 14px/1.45 var(--font-body,var(--font-display));
+  color:inherit;
+}
+.acc-card.acc-card .acc-card-provider:empty { display:none; }
+.acc-card.acc-card .acc-card-provider .acc-g {
+  flex:0 0 21px;
+  width:21px;
+  height:21px;
+  padding:4px;
+  box-sizing:content-box;
+  background:#FEFFED;
+  border-radius:50%;
+}
+.acc-card.acc-card .acc-card-provider span { min-width:0; overflow-wrap:anywhere; }
+.acc-card.acc-card .acc-card-sync {
+  display:flex;
+  align-items:flex-start;
+  gap:7px;
+  width:fit-content;
+  max-width:100%;
+  margin:17px 0 0;
+  padding:6px 10px;
+  border:1px solid transparent;
+  border-radius:12px;
+  font:600 13px/1.5 var(--font-body,var(--font-display));
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+.acc-card.acc-card .acc-card-check {
+  flex:0 0 17px;
+  width:17px;
+  height:17px;
+  margin-top:1px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.acc-card.acc-card .acc-card-footer { display:grid; gap:14px; min-width:0; }
+.acc-card.acc-card .acc-links {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.acc-card.acc-card .acc-card-signout.big-btn--ghost {
+  width:auto;
+  min-width:146px;
+  min-height:52px;
+  padding:0 25px;
+  border:2px solid var(--line);
+  background:var(--panel,#FEFFED);
+  color:var(--ink,#1F2328);
+  box-shadow:0 4px 0 var(--line);
+  font:800 16px var(--font-display);
+}
+.acc-card.acc-card .acc-link.acc-link--danger {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:8px 4px;
+  color:var(--acc-quiet);
+  font:600 14px/1.3 var(--font-display);
+  text-decoration:underline;
+  text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);
+  text-underline-offset:4px;
+}
+@media (hover:hover) and (pointer:fine) {
+  .acc-card.acc-card .acc-link.acc-link--danger:hover { text-decoration-color:currentColor; }
+}
+.acc-card.acc-card .acc-confirm,
+.acc-card.acc-card .acc-confirm.acc-confirm--danger {
+  gap:14px;
+  padding:18px;
+  border:2px solid var(--line);
+  border-radius:18px;
+  background:var(--panel,#FEFFED);
+  color:var(--ink,#1F2328);
+}
+.acc-card.acc-card .acc-confirm p,
+.acc-card.acc-card .acc-confirm .acc-fine {
+  margin:0;
+  font:500 14px/1.5 var(--font-body,var(--font-display));
+  color:var(--ink,#1F2328);
+  overflow-wrap:anywhere;
+}
+.acc-card.acc-card .acc-confirm .acc-fine { color:var(--acc-quiet); font-size:13px; }
+.acc-card.acc-card .acc-confirm .big-btn { padding:10px 16px; font-size:15px; }
+.acc-card.acc-card .acc-confirm .big-btn--ghost {
+  border:2px solid var(--line);
+  background:var(--panel,#FEFFED);
+  color:var(--ink,#1F2328);
+  box-shadow:0 4px 0 var(--line);
+}
+.acc-card.acc-card .acc-confirm .acc-danger {
+  border:2px solid var(--line);
+  background:var(--panel2,#E3E5E8);
+  color:var(--ink,#1F2328);
+  box-shadow:0 4px 0 var(--line);
+}
+.acc-card.acc-card .acc-error {
+  margin:0;
+  padding:13px 15px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2,#F4F5F7);
+  color:var(--ink,#1F2328);
+  font:600 14px/1.5 var(--font-body,var(--font-display));
+  overflow-wrap:anywhere;
+}
+.acc-card.acc-card :is(button,a):focus-visible {
+  outline:3px solid var(--ink,#1F2328);
+  outline-offset:5px;
+}
+.acc-card.acc-card :is(button,a):disabled { opacity:.62; cursor:wait; }
+
+/* The selected cast portrait rises out of a quiet asphalt card. */
+.acc-card.acc-card .acc-card-surface {
+  margin-top:67px;
+  padding:85px 27px 28px;
+  background:var(--asphalt) 0 0/220px 220px,#1F2328;
+  color:#FEFFED;
+  box-shadow:0 6px 0 #0F1215;
+}
+.acc-card.acc-card .acc-card-header { justify-content:center; text-align:center; }
+.acc-card.acc-card .acc-card-header h2 { font-size:24px; color:#FEFFED; }
+.acc-card.acc-card .acc-card-header .tb-stripes { display:none; }
+.acc-card.acc-card .acc-card-body { position:static; margin-top:19px; text-align:center; }
+.acc-card.acc-card .acc-card-photo {
+  position:absolute;
+  z-index:2;
+  top:-67px;
+  left:50%;
+  width:134px;
+  height:134px;
+  transform:translateX(-50%);
+  border:6px solid var(--bg,#F4F5F7);
+  border-radius:50%;
+  background:var(--gloss),#FFD60A;
+  box-shadow:0 4px 0 rgba(15,18,21,.45);
+}
+.acc-card.acc-card .acc-card-photo img { width:111%; max-width:none; height:111%; }
+.acc-card.acc-card .acc-card-email { color:#FEFFED; }
+.acc-card.acc-card .acc-card-provider { justify-content:center; color:#E3E5E8; }
+.acc-card.acc-card .acc-card-sync { justify-content:center; margin:22px auto 0; border-color:rgba(254,255,237,.12); background:rgba(254,255,237,.05); color:#C2CCD6; }
+
+@media (max-width:430px) {
+  .acc-card.acc-card .acc-card-surface { padding-inline:22px; }
+  .acc-card.acc-card .acc-card-email { font-size:25px; }
+  .acc-card.acc-card .acc-links { flex-direction:column; align-items:stretch; gap:11px; }
+  .acc-card.acc-card .acc-card-signout.big-btn--ghost { width:100%; }
+  .acc-card.acc-card .acc-link.acc-link--danger { align-self:center; }
+  .acc-card.acc-card .acc-confirm .acc-actions { flex-direction:column; }
+  .acc-card.acc-card .acc-confirm .acc-actions .big-btn { width:100%; flex:auto; }
+}

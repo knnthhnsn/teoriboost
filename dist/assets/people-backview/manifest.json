@@ -1,0 +1,78 @@
+{
+  "status": "rear-view derivatives of approved profile drawings; static game cards, not rigs",
+  "method": "built-in imagegen edit; original preserved; delivery alpha-bbox crop and aspect-preserving Lanczos resize to768px maximum height",
+  "cyclists": {
+    "a_cyclist": {
+      "file": "dist/assets/people-backview/a_cyclist.png",
+      "sha256": "426d1ee004d17c375bdd20b8fd55e743dcfc00efd4d0b274e3d5d729e23f6235",
+      "bytes": 201622,
+      "view": "rear; moving away from observer",
+      "original": "tools/game-people-backview/originals/a_cyclist.png",
+      "original_sha256": "8eb337c0ac7f03f5faa5acfdfd3ab528ed84538e1836db8d52a4ff07a67d4e57",
+      "original_size": [
+        956,
+        1645
+      ],
+      "original_alpha_bbox": [
+        41,
+        0,
+        887,
+        1645
+      ],
+      "size": [
+        395,
+        768
+      ],
+      "profile_source": "tools/rive/people-v3/registered/trimmed/a_cyclist.png",
+      "profile_sha256": "0c8d94b74afacae63927afb8ccaffb752197e55922ccf7d4bd9a3e5f37c8d7e6"
+    },
+    "b_cyclist": {
+      "file": "dist/assets/people-backview/b_cyclist.png",
+      "sha256": "e9d96926bf184a3508b10c3b320d2773860cbbfa5a5599d0c78a8f9b784a14bc",
+      "bytes": 202438,
+      "view": "rear; moving away from observer",
+      "original": "tools/game-people-backview/originals/b_cyclist.png",
+      "original_sha256": "86a286c831b197ea3f4c7f0750effa2776a57ce7c7a5d6f57107953b245a8a7e",
+      "original_size": [
+        950,
+        1656
+      ],
+      "original_alpha_bbox": [
+        89,
+        37,
+        878,
+        1634
+      ],
+      "size": [
+        379,
+        768
+      ],
+      "profile_source": "tools/rive/people-v3/registered/trimmed/b_cyclist.png",
+      "profile_sha256": "36a2fe43d49e131a2e6036711b1f0a2c3537e4768d63cd2e83497ec5a0f9372e"
+    },
+    "c_cyclist": {
+      "file": "dist/assets/people-backview/c_cyclist.png",
+      "sha256": "89dcd5aac49830165f477aca5914ba354df113b21710c1d2cfdb1375599d6b01",
+      "bytes": 203453,
+      "view": "rear; moving away from observer",
+      "original": "tools/game-people-backview/originals/c_cyclist.png",
+      "original_sha256": "577083aa0bf382e7a285b793d522e9bdf856f9c1295690f74cd289c88f4e367b",
+      "original_size": [
+        905,
+        1737
+      ],
+      "original_alpha_bbox": [
+        33,
+        19,
+        794,
+        1717
+      ],
+      "size": [
+        344,
+        768
+      ],
+      "profile_source": "tools/rive/people-v3/registered/trimmed/c_cyclist.png",
+      "profile_sha256": "4816707640766348109fda272c6b3289213c8d67d00fa6aab8ad60a2e45d8a9f"
+    }
+  }
+}

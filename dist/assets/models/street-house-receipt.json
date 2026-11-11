@@ -1,0 +1,45 @@
+{
+  "roundtrip": {
+    "mesh_objects": 9,
+    "triangles": 11816,
+    "bounds_blender_z_up_m": {
+      "min": [
+        -4.239999771118164,
+        -4.099999904632568,
+        0.0
+      ],
+      "max": [
+        4.239999771118164,
+        4.099999904632568,
+        7.019999980926514
+      ],
+      "dimensions": [
+        8.479999542236328,
+        8.199999809265137,
+        7.019999980926514
+      ]
+    },
+    "materials": [
+      "door_wood",
+      "facade_brick",
+      "foundation",
+      "frames",
+      "gutter_metal",
+      "plaster",
+      "roof_slate",
+      "window_glass",
+      "window_warm"
+    ],
+    "cameras": 0,
+    "lights": 0
+  },
+  "asset": "dist/assets/models/street-house.glb",
+  "asset_sha256": "523733c8c415c23f279416019c4fa7d4c30451a81560e5a6443ddfabb52cd527",
+  "bytes": 839360,
+  "blend": "tools/street3d/out/street-house.blend",
+  "blend_sha256": "c2cf80367f45a985a5c574d1ff0a7b32b61468f359206bac3d3abca777f29fe5",
+  "generator_sha256": "8beb5974e18e66860c2a1ddf5ae79e2e1561645019089f874b444e608bf60b81",
+  "unit": "metres",
+  "orientation": "glTF +Y up, +Z front",
+  "note": "Original locally generated geometry, no downloaded model. Actual scene-scale and performance require browser verification."
+}

@@ -1,0 +1,41 @@
+{
+  "status": "TECHNICAL PROTOTYPE ONLY; likeness and art direction not approved",
+  "asset": "cse-cyclist-a.glb",
+  "sha256": "52124eac0c52deab74ececb4153fc05d492eddf534295f6fe3bbfc7971a06f02",
+  "bytes": 1445976,
+  "source_blend": "tools/cse-cyclist-a/out/cse-cyclist-a.blend",
+  "source_blend_sha256": "6e6066d87676d2e8805df91f9d0a90675fb818b0419868bbd902a7552597126e",
+  "generator_sha256": "b6e2c2c7e049b03f14a5b447bdb2ebe062a8c38e3322400c3452c74770494741",
+  "geometry_sha256": "2426d4fddc8f15b4f6d7b578532924d9fa8e573e308635435caa2737ca183552",
+  "palette_sha256": "4c32407e01d5b3454f53ee2cf7994c2f87cdb198e61511fc445bdb57eb367814",
+  "reference_path": "tools/rive/people-v3/registered/trimmed/a_cyclist.png",
+  "reference_sha256": "0c8d94b74afacae63927afb8ccaffb752197e55922ccf7d4bd9a3e5f37c8d7e6",
+  "original_rig_generator_sha256": "c17955a5fdb80f56036de24692419bd7cb15cc49add102326b512fdfb5fc7f7a",
+  "original_bicycle_source_sha256": "7af9b5254f0c1d149a8dd4d2ca07fb730012a07487e3e9a7507c1ee318397bfc",
+  "unit": "metre",
+  "gltf_axes": "Y up, forward -Z",
+  "bounds_at_frame_0_m": {
+    "width_x": 0.6527985334396362,
+    "height_y": 2.0778002738952637,
+    "length_z": 1.9117987155914307
+  },
+  "clip": "Cyclist_Pedal_1p2s",
+  "clip_duration_seconds": 1.2,
+  "wheel_radius_m": 0.34,
+  "wheel_revolutions_per_pedal_cycle": 2,
+  "metres_per_pedal_cycle": 4.272566008882119,
+  "runtime_distance_driven_phase": "clip_seconds = (distance_metres / metres_per_pedal_cycle mod 1) * clip_duration_seconds; hold phase when stopped",
+  "fresh_import": {
+    "skins": [
+      6,
+      35
+    ],
+    "draw_calls": 5,
+    "triangles": 31156,
+    "max_sole_marker_error_m": 0.002446732569402549,
+    "max_sole_penetration_m": 0.0027434229850769043,
+    "loop_max_vertex_error_m": 7.79431869424702e-07
+  },
+  "materials": "KHR_materials_unlit, nearest-sampled 8-bit base palette plus #260817 multiply at 40% (rounded to byte); physical 3.5mm inverted hull outline on major shapes; no runtime toon adapter",
+  "limitations": "Face, helmet and loose clothes do not yet match the approved art; no user visual approval; missing brake cables/levers, chain circulation and lean; not browser-integrated or tested; no 2D pedalling fallback authored."
+}

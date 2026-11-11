@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#FFD60A">
+  <script>(function(){var d=false;try{var p=localStorage.getItem('teoriboost.theme')||'system';d=p==='dark'||(p==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);}catch(e){}document.documentElement.dataset.theme=d?'dark':'light';if(d)document.querySelector('meta[name="theme-color"]').setAttribute('content','#0F1215');})();</script>
+  <script type="module">import {applyTheme,watchSystemTheme} from './theme.js';applyTheme();watchSystemTheme();</script>
+  <meta name="robots" content="noindex">
+  <meta name="referrer" content="strict-origin">
+  <title>Din adgang · TeoriBoost</title>
+    <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="redesign.css">
+  <link rel="stylesheet" href="start.css">
+  <link rel="stylesheet" href="screens.css">
+  <link rel="stylesheet" href="dark-gen.css">
+  <link rel="stylesheet" href="dark.css">
+  <link rel="stylesheet" href="light.css">
+  <link rel="stylesheet" href="brand-markers.css">
+  <link rel="stylesheet" href="scrollbars.css">
+  <link rel="stylesheet" href="payment.css">
+  <script type="module" src="payment-entry.js"></script>
+
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body class="payment-page">
+  <a class="skip-link" href="#payment-main">Gå til din betaling</a>
+  <header class="topbar payment-header"><a class="brand" href="/" aria-label="TeoriBoost, hjem"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M9.8 46.8h6.8l16-29.6h-6.8zM20.6 46.8h6.8l16-29.6h-6.8zM31.4 46.8h6.8l16-29.6h-6.8z"/></svg></span><span>TeoriBoost<span class="brand-dot" aria-hidden="true">.</span></span></a><a class="payment-close" href="/">Ikke nu</a></header>
+  <main id="payment-main" class="payment-layout" aria-busy="true"><p role="status">Henter din adgang …</p></main>
+  <noscript><p class="payment-noscript">Slå JavaScript til for at se betalingsmulighederne. <a href="/">Fortsæt gratis i TeoriBoost</a>.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* The logo's exact three strokes replace decorative UI dots and squares. */
+.tb-stripes,
+.mode-led,
+.eyebrow::before,
+.journey-kicker::before,
+.turn-scene-tag > span,
+.chat-dot,
+.chat-status > i,
+.mh-led,
+.mh-dots > i,
+.goal-dots > i,
+.judge__legend i,
+.facts > li::before,
+.fx-sparks > i {
+ display:inline-block;
+ flex:0 0 1em;
+ width:1em !important;
+ height:.62em !important;
+ border:0 !important;
+ border-radius:0 !important;
+ box-shadow:none !important;
+ clip-path:none !important;
+ -webkit-mask:url("assets/brand-stripes.svg") center / contain no-repeat;
+ mask:url("assets/brand-stripes.svg") center / contain no-repeat;
+ vertical-align:-.1em;
+}
+.tb-stripes { background:currentColor; }
+.eyebrow::before,.journey-kicker::before,.facts > li::before { content:"" !important; }
+.facts > li { padding-left:26px; }
+.facts > li::before { background:currentColor; top:.4em; }
+.chat-status > i { background:var(--acid,#FFD60A); animation:tb-marker-pulse 1.4s ease-in-out infinite; }
+.chat-status > i canvas { display:none; }
+.fx-sparks > i { margin:-6px -8px; }
+.mh-dots > i.on,.goal-dots > i.on { background:#FFD60A; }
+@keyframes tb-marker-pulse { 0%,100%{opacity:.45} 50%{opacity:1} }
+body.no-motion .chat-status > i { animation:none; }
+@media(prefers-reduced-motion:reduce) { .chat-status > i { animation:none; } }
+
+/* Branded list markers in the premium sheet. */
+ul.tb-pw-benefits { list-style:none; padding-left:0; }
+ul.tb-pw-benefits > li { position:relative; padding-left:1.6em; }
+ul.tb-pw-benefits > li::before { content:""; position:absolute; left:0; top:.42em; width:1em; height:.62em; background:currentColor; -webkit-mask:url("assets/brand-stripes.svg") center / contain no-repeat; mask:url("assets/brand-stripes.svg") center / contain no-repeat; }
+
+/* Markdown answer lists use the same mark, preserving list semantics. */
+.chat-bubble .chat-prose-list{list-style:none;padding-left:0}
+.chat-bubble .chat-prose-list>li{position:relative;padding-left:1.65em}
+.chat-bubble .chat-prose-list>li::before{content:"";position:absolute;left:0;top:.3em;display:block;width:1em;height:.62em;background:currentColor;mask:url("assets/brand-stripes.svg") center/contain no-repeat;-webkit-mask:url("assets/brand-stripes.svg") center/contain no-repeat}

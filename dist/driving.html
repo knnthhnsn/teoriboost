@@ -1,25 +1,32 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>
+<!doctype html><html data-scroll-theme="dark"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="stylesheet" href="scrollbars.css"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#F4F5F7;color:#0F1215}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>
 @font-face{font-family:Barlow;src:url('assets/fonts/heading-bold.ttf')}
 @font-face{font-family:DM;src:url('assets/fonts/body-regular.ttf')}
-:root{--asphalt:#111b20;--dash:#18252a;--seam:#42574b;--sodium:#d5ff62;--mist:#b2c5c2}
-body{font-family:DM,sans-serif;color:#f1f4e8}h1,h2,.go,.pedal{font-family:Barlow,Impact,sans-serif!important}.card{border-radius:10px!important;background:#172329f2!important}.go{background:#d5ff62!important;color:#172112!important;border-radius:5px}.rule{border-color:#78b8a0!important}.penalty{color:#ffb48d!important;font-size:11px!important}#frame{border-color:#3c514d!important}#radio{color:#d4e3df!important}.held{box-shadow:inset 0 0 0 2px #d5ff62!important}
-</style></head><body>
-<title>NATKØRSEL — kør en tur</title>
+
+body{font-family:DM,sans-serif;color:#F4F5F7}h1,h2,.go,.pedal{font-family:Barlow,Impact,sans-serif!important}.card{border-radius:18px!important;background:linear-gradient(145deg,rgba(36,53,57,.97),rgba(17,27,33,.98))!important}.go{background:#FFD60A!important;color:#0F1215!important;border-radius:10px}.rule{border-color:#C2CCD6!important}.penalty{color:#FFEB85!important;font-size:11px!important}#frame{border-color:#3A434C!important}#radio{color:#E3E5E8!important}.held{box-shadow:inset 0 0 0 2px #FFD60A!important}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head><body>
+<style>.turn-phone{display:none}@media (orientation:portrait){.turn-phone{position:fixed;inset:0;z-index:9999;display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;padding:28px;background:#1F2328;color:#F4F5F7;font:600 18px/1.45 system-ui,sans-serif}.turn-phone strong{display:block;color:#FFD60A;font-size:28px}.turn-phone a{color:#FFD60A;margin-top:14px}.turn-phone img{width:150px;height:auto}.turn-phone-icon{width:34px;height:53px;border:3px solid #f2e8be;border-radius:7px;box-shadow:inset 0 -5px #627267;transform:rotate(90deg);animation:turn-phone-motion 2.6s ease-in-out infinite}@keyframes turn-phone-motion{0%,25%{transform:rotate(0)}65%,100%{transform:rotate(90deg)}}}@media(prefers-reduced-motion:reduce){.turn-phone-icon{animation:none}}</style>
+<div class="turn-phone" role="status"><img src="assets/cast/sneglen.webp" alt=""><span class="turn-phone-icon" aria-hidden="true"></span><strong>Vend telefonen</strong><span>Køreturen virker bedst, når du holder telefonen på siden.</span><a href="./index.html#practice" target="_top">Tilbage til TeoriBoost</a></div>
+<title>TeoriBoost — kør en tur</title>
 
 <style>
 /* Layout: one framed windscreen fills the screen; instruments sit on the glass like a head-up display,
    pedals in the lower right, the instructor's line above the speed. Single dark look by choice: it is night. */
 :root {
   color-scheme: dark;
-  --asphalt: #0b101c;      /* page ground */
-  --dash: #131b2c;         /* panels */
-  --seam: #2c3853;         /* hairlines, borders */
-  --marking: #e9edf4;      /* text, road-marking white */
-  --mist: #98a5bd;         /* secondary text */
-  --sodium: #f2a43c;       /* street-lamp amber, the accent */
-  --signal: #e2493b;       /* sign red, errors */
-  --clear: #5fcc9f;        /* clean situation */
-  --glass: rgba(11, 16, 28, .74);
+  --asphalt: #1F2328;      /* page ground */
+  --dash: #2B3138;         /* panels */
+  --seam: #3A434C;         /* hairlines, borders */
+  --marking: #FEFFED;      /* text, road-marking white */
+  --mist: #C2CCD6;         /* secondary text */
+  --sodium: #FFD60A;       /* street-lamp amber, the accent */
+  --signal: #FF4B4B;       /* sign red, errors */
+  --clear: #58CC02;        /* clean situation */
+  --glass: #1F2328;
   --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
@@ -36,8 +43,8 @@ button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--sodium); outline-offset: 3px; }
 
 .frame {
-  position: relative; height: 100%; min-height: 420px; max-width: 1500px; margin-inline: auto;
-  border: 1px solid var(--seam); border-radius: 6px; overflow: hidden; background: #0d1424;
+  position: relative; height: 100%; min-height: 0; max-width: 1500px; margin-inline: auto;
+  border: 1px solid var(--seam); border-radius: 14px; overflow: hidden; background: #0F1215;
   user-select: none; -webkit-user-select: none; touch-action: none;
 }
 #view { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -47,30 +54,31 @@ button { font: inherit; color: inherit; }
   grid-template-rows: auto 1fr auto; gap: 12px; }
 .hud-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 .label { font-family: var(--data); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mist); }
+.where { padding: 8px 12px; background: rgba(11,20,26,.72); border: 1px solid var(--seam); border-radius: 10px; }
 .where strong { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(22px, 3.4vw, 34px);
-  line-height: 1; letter-spacing: .02em; text-transform: uppercase; margin-top: 4px; text-shadow: 0 2px 12px #000a; }
-.where .next { font-family: var(--data); font-size: 12px; color: var(--sodium); margin-top: 6px; min-height: 18px; text-shadow: 0 1px 6px #000c; }
-.tally { display: flex; gap: 18px; background: var(--glass); border: 1px solid var(--seam); border-radius: 4px; padding: 8px 14px; }
+  line-height: 1; letter-spacing: .02em; text-transform: uppercase; margin-top: 4px; text-shadow: 0 2px 12px #0F1215AA; }
+.where .next { font-family: var(--data); font-size: 12px; color: var(--sodium); margin-top: 6px; min-height: 18px; text-shadow: 0 1px 6px #0F1215CC; }
+.tally { display: flex; gap: 18px; background: var(--glass); border: 1px solid var(--seam); border-radius: 10px; padding: 8px 14px; backdrop-filter: blur(8px); }
 .tally div { display: grid; gap: 2px; }
 .tally b { font-family: var(--data); font-weight: 500; font-size: 17px; font-variant-numeric: tabular-nums; }
 .tally .bad b { color: var(--signal); }
 
 .hud-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
 .left { display: grid; gap: 10px; min-width: 0; max-width: min(460px, 58%); }
-.radio { background: var(--glass); border-left: 3px solid var(--sodium); padding: 8px 12px; font-size: 14px;
+.radio { background: var(--glass);  padding: 8px 12px; font-size: 14px;
   min-height: 38px; border-radius: 0 4px 4px 0; }
 .radio .label { display: block; margin-bottom: 2px; }
 .cluster { display: flex; align-items: flex-end; gap: 14px; }
 .speed { font-family: var(--display); font-weight: 800; font-size: clamp(54px, 9vw, 96px); line-height: .82;
-  font-variant-numeric: tabular-nums; min-width: 2ch; text-shadow: 0 2px 18px #000b; }
+  font-variant-numeric: tabular-nums; min-width: 2ch; text-shadow: 0 2px 18px #0F1215BB; }
 .speed.over { color: var(--signal); }
 .unit { font-family: var(--data); font-size: 12px; color: var(--mist); padding-bottom: 6px; }
 .limit { width: 46px; height: 46px; border-radius: 50%; border: 5px solid var(--signal); background: var(--marking);
-  color: #11151d; font-family: var(--display); font-weight: 800; font-size: 22px; display: grid; place-items: center; margin-bottom: 2px; }
+  color: #0F1215; font-family: var(--display); font-weight: 800; font-size: 22px; display: grid; place-items: center; margin-bottom: 2px; }
 
 .pedals { display: flex; gap: 12px; pointer-events: auto; }
-.pedal { width: clamp(84px, 13vw, 124px); height: clamp(84px, 15vh, 124px); border-radius: 6px; cursor: pointer;
-  border: 1px solid var(--seam); background: var(--glass); display: grid; align-content: end; justify-items: start;
+.pedal { width: clamp(84px, 13vw, 124px); height: clamp(84px, 15vh, 124px); border-radius: 12px; cursor: pointer;
+  border: 1px solid #525C65; background: rgba(12,21,26,.86); backdrop-filter: blur(8px); display: grid; align-content: end; justify-items: start;
   padding: 10px 12px; text-align: left; touch-action: none; transition: transform 80ms ease-out, background 80ms ease-out; }
 .pedal b { font-family: var(--display); font-weight: 800; font-size: 24px; letter-spacing: .04em; line-height: 1; }
 .pedal span { font-family: var(--data); font-size: 10px; letter-spacing: .08em; color: var(--mist); text-transform: uppercase; }
@@ -83,8 +91,9 @@ button { font: inherit; color: inherit; }
   background: linear-gradient(180deg, rgba(8, 11, 20, .25), rgba(8, 11, 20, .82)); }
 .veil--start { place-items: end start; }
 .veil--card { place-items: center end; }
-.card { width: min(440px, 100%); min-width: 0; background: var(--dash); border: 1px solid var(--seam); border-radius: 6px;
-  padding: 22px 22px 20px; display: grid; gap: 14px; box-shadow: 0 18px 60px #000a; }
+.card { width: min(440px, 100%); min-width: 0; background: var(--dash); border: 1px solid #525C65; border-radius: 18px;
+  padding: 22px 22px 20px; display: grid; gap: 14px; box-shadow: 0 18px 60px #0F1215AA; }
+.veil .card { max-height: 100%; overflow-y: auto; overscroll-behavior: contain; }
 .card h1, .card h2 { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: .01em;
   line-height: .95; margin: 0; text-wrap: balance; }
 .card h1 { font-size: clamp(40px, 11vw, 84px); overflow-wrap: anywhere; }
@@ -98,9 +107,9 @@ button { font: inherit; color: inherit; }
 .penalty { justify-self: start; font-family: var(--data); font-size: 13px; color: var(--asphalt); background: var(--signal);
   padding: 3px 9px; border-radius: 3px; }
 .go { justify-self: start; pointer-events: auto; cursor: pointer; border: 0; border-radius: 4px; background: var(--sodium);
-  color: #18130a; font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: .05em;
+  color: #0F1215; font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: .05em;
   text-transform: uppercase; padding: 12px 22px; min-height: 48px; }
-.go:hover { filter: brightness(1.08); }
+
 .sheet { display: grid; gap: 0; margin: 0; }
 .sheet div { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; border-bottom: 1px solid var(--seam); }
 .sheet dt { color: var(--mist); }
@@ -110,24 +119,95 @@ button { font: inherit; color: inherit; }
 
 @media (max-width: 640px) {
   body { padding-block: 12px; }
+  .card { padding: 16px; gap: 10px; }
   .hud { padding: 12px; }
   .left { max-width: none; flex: 1; }
   .hud-bottom { flex-direction: column; align-items: stretch; }
   .pedals { justify-content: space-between; }
-  .pedal { flex: 1; height: 96px; width: auto; }
+  .pedal { flex: 1; height: 82px; width: auto; }
   .veil--start, .veil--card { place-items: end center; }
   .tally { gap: 12px; padding: 6px 10px; }
 }
-@media (prefers-reduced-motion: reduce) { .pedal { transition: none; } }
+/* The windscreen stays completely clear: the guide, instruments and physical
+   pedal controls live in their own console below the 3D view. */
+.frame {border:1px solid #C2CCD6!important;background:#F4F5F7;border-radius:15px;}
+.hud {position:relative;inset:auto;width:100%;height:100%;display:grid;grid-template-rows:auto minmax(146px,1fr) auto;grid-template-columns:minmax(0,1fr);gap:0;padding:0;pointer-events:auto;color:#1F2328;}
+.hud-top {display:flex;align-items:center;gap:10px;padding:8px 12px;background:#FEFFED;border-bottom:1px solid #E3E5E8;}
+.where {flex:1;min-width:0;padding:0;background:none;border:0;border-radius:0;}
+.where .label,.tally .label {font:700 9px/1.2 var(--data);letter-spacing:.1em;color:#5F656D;}
+.where strong {font:800 18px/1.06 Barlow,sans-serif;letter-spacing:0;margin-top:2px;color:#1F2328;text-shadow:none;}
+.where .next {font:700 10px/1.1 var(--data);color:#C9A200;margin-top:2px;min-height:0;text-shadow:none;}
+.tally {gap:10px;padding:5px 8px;background:#E3E5E8;border:1px solid #E3E5E8;border-radius:10px;backdrop-filter:none;}
+.tally div {gap:1px}.tally b {font:700 12px/1.1 var(--data);color:#2B3138;}.tally .bad b{color:#D42F2F}
+.visual-area{position:relative;display:grid;min-width:0;min-height:146px;grid-template-columns:minmax(0,1fr);grid-template-rows:46px minmax(100px,1fr);overflow:hidden;background:#1F2328;}
+.mirror-strip{position:relative;z-index:1;display:flex;justify-content:center;align-items:center;gap:4px;height:46px;padding:1px 2px;background:transparent;}
+.look-button{flex:none;display:grid;place-content:center;width:44px;height:44px;border:1px solid #525C65;border-radius:9px;background:#2B3138;color:#E3E5E8;font:800 9px/1 Barlow,sans-serif;touch-action:none;cursor:pointer}.look-button small{display:block;font:700 8px/1 var(--data);color:#C2CCD6}.look-button.held{background:#FFE45C;color:#2B3138}.look-button.held small{color:#3A434C}.no-motion .tool-button[aria-pressed="true"]{animation:none!important}
+.mirror {position:relative;display:block;flex:1 1 0;min-width:0;max-width:53px;height:27px;width:53px;border:2px solid #525C65;border-radius:7px;overflow:hidden;background:transparent;}
+.mirror--rear{width:88px;max-width:88px;flex:1.6 1 0}.mirror canvas{display:block;width:100%;height:100%;object-fit:fill}.mirror canvas[data-gpu-ready="true"]{opacity:0}.mirror small{position:absolute;bottom:1px;right:3px;font:700 7px/1 var(--data);color:#F4F5F7;text-shadow:0 1px 2px #0F1215;}
+.windscreen {position:relative;min-height:100px;overflow:hidden;background:transparent;pointer-events:none;}
+#view {position:absolute;z-index:0;inset:0;width:100%;height:100%;display:block;pointer-events:none;}
+.hud-bottom {display:grid;min-width:0;gap:7px;align-content:start;padding:8px 12px 9px;background:#F4F5F7;border-top:1px solid #E3E5E8;}
+.guide-row {display:flex;align-items:center;gap:8px;min-width:0;}
+.radio {display:flex;align-items:center;gap:8px;flex:1;min-width:0;min-height:46px;padding:5px 7px;background:#E3E5E8;border:1px solid #E3E5E8;border-radius:11px;}
+.guide-avatar {position:relative;display:block;flex:none;width:38px;height:38px;border-radius:50%;overflow:hidden;background:#FFE45C;}
+.guide-avatar img {display:block;width:100%;height:100%;object-fit:cover;}
+.guide-avatar .rive-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.guide-avatar[data-rive-on="on"]>img{visibility:hidden}
+.guide-copy {display:block;min-width:0;font:600 11px/1.22 DM,sans-serif;color:#2B3138;}
+.radio .label {display:block;margin:0 0 2px;font:700 8px/1 var(--data);letter-spacing:.07em;color:#5F656D;}
+#radio {color:#2B3138!important;}
+.cluster {display:flex;align-items:center;justify-content:flex-end;gap:5px;flex:none;}
+.speed {font:800 28px/.85 Barlow,sans-serif;min-width:0;color:#2B3138;text-shadow:none;text-align:right;}
+.speed.over {color:#D42F2F;}.unit {font:700 8px/1 var(--data);padding:2px 0 0;color:#5F656D;text-align:right;}
+.limit {width:30px;height:30px;margin:0;border:4px solid #D42F2F;background:#F4F5F7;color:#2B3138;font:800 14px/1 Barlow,sans-serif;}
+.pedals {display:grid;grid-template-columns:minmax(0,1fr) 60px minmax(0,1fr);gap:5px;pointer-events:auto;}
+.steer-wrap{display:grid;justify-items:center;align-content:center;gap:0;color:#5F656D;font:700 8px/1 var(--data);}
+.steer{width:56px;height:56px;touch-action:none;cursor:grab;outline-offset:1px;}.steer:active{cursor:grabbing}.steer-art{width:100%;height:100%;filter:drop-shadow(0 3px 2px #1d302b55);}
+.drive-tools{display:grid;grid-template-columns:44px 44px minmax(44px,1fr) 48px 76px;gap:5px;align-items:stretch;}
+.tool-button,.gear-control{height:44px;min-height:44px;border:1px solid #C2CCD6;background:#E3E5E8;border-radius:10px;color:#525C65;font:800 15px/1 Barlow,sans-serif;cursor:pointer;}
+.tool-button[aria-pressed="true"]:not(.mirror-toggle){background:#FFEB85;color:#4A4127;border-color:#FFE45C;box-shadow:inset 0 0 0 1px #FFE45C;}.horn{font-size:14px;}.mirror-toggle{font-size:9px;line-height:1.1}.mirror-toggle[aria-pressed="false"]{color:#5F656D;background:#E3E5E8}.tool-button:disabled{opacity:.5;cursor:default}
+.gear-control{display:flex;align-items:center;justify-content:center;gap:3px;padding:2px 4px;cursor:default}.gear-control span{font:700 8px/1 var(--data);color:#5F656D}.gear-control select{width:49px;height:100%;min-height:44px;border:0;background:transparent;color:#3A434C;font:800 12px/1 Barlow,sans-serif;cursor:pointer;}
+@keyframes blinkPulse{0%,44%{outline-color:#FFD60A}50%,94%{outline-color:#E8BC00}}@media(prefers-reduced-motion:no-preference){.tool-button[aria-pressed="true"]:not(.mirror-toggle){animation:blinkPulse 1.1s infinite}}
+.pedal {display:flex;min-width:0;overflow:hidden;align-items:center;justify-content:center;gap:4px;width:100%;height:76px;min-height:48px;padding:5px 7px;border:1px solid #E3E5E8;border-radius:12px;background:#E3E5E8;box-shadow:inset 0 1px 0 #F4F5F7;backdrop-filter:none;text-align:left;touch-action:none;}
+.pedal--brake,.pedal--gas {border-bottom:1px solid #C2CCD6;}
+.pedal-plate {position:relative;display:block;flex:none;width:42px;height:46px;border-radius:9px 9px 12px 12px;border:3px solid #9ba8a1;
+  background:linear-gradient(120deg,#e3e9e2 0%,#9baaa1 45%,#d7dfd7 100%);box-shadow:0 5px 0 #71817a,0 7px 7px #203e3438;transform:perspective(160px) rotateX(-6deg);transition:transform 80ms ease-out,box-shadow 80ms ease-out;}
+.pedal-plate:after {content:'';position:absolute;inset:5px 4px;border-radius:4px;background:repeating-linear-gradient(0deg,#334840 0 3px,#6b7c72 3px 6px);}
+.pedal--gas .pedal-plate {width:32px;height:62px;border-radius:9px 9px 11px 11px;}
+.pedal-copy {display:grid;min-width:0;align-content:center;gap:2px;color:#2B3138;}.pedal-copy b {font:800 18px/1 Barlow,sans-serif;letter-spacing:0;}
+.pedal-copy span {font:700 10px/1.1 DM,sans-serif;color:#5F656D;text-transform:none;letter-spacing:0;}.pedal-copy small {font:700 7px/1.1 var(--data);color:#5F656D;}
+.pedal--brake .pedal-copy b {color:#D42F2F;}.pedal--gas .pedal-copy b {color:#4A4127;}
+.pedal.held {transform:none;background:#E3E5E8;}.pedal.held .pedal-plate {transform:perspective(160px) rotateX(2deg) translateY(4px);box-shadow:0 1px 0 #71817a;}
+.veil {background:linear-gradient(180deg,rgba(8,18,21,.40),rgba(8,18,21,.79));}
+.card {background:#FEFFED!important;color:#1F2328;border:1px solid #F4F5F7;border-radius:16px!important;padding:16px;gap:10px;box-shadow:0 16px 36px #0F121588;}
+.card .label {font-size:9px;line-height:1.25;color:#5F656D;}.card h1,.card h2 {color:#1F2328;}.card .lede,.keys,.card .note {color:#525C65;}.card .lede{font-size:13px;line-height:1.42;}
+.start-hero {display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;}.start-hero>div{min-width:0;}.start-hero img {width:88px;height:88px;object-fit:contain;flex:none;}
+.card h1 {font-size:clamp(31px,7vw,52px);line-height:.98;text-transform:none;letter-spacing:-.02em;}.card h1 em{color:#5F656D;font-style:normal;}
+.keys {gap:3px;font-size:11px;line-height:1.3;}.keys kbd {font-size:10px;color:#2B3138;border-color:#C2CCD6;background:#F4F5F7;}
+.card .go {width:100%;justify-self:stretch;min-height:48px;font-size:19px;letter-spacing:0;text-transform:none;box-shadow:0 3px 0 #C9A200;}
+#start-btn:disabled {cursor:wait;opacity:.7;box-shadow:none;}
+.card--incident {position:relative;}.card-character {position:absolute;right:14px;top:12px;width:58px;height:58px;object-fit:contain;}.card--incident h2,.card--incident>.label{padding-right:64px;}.rule{background:#F4F5F7;color:#2B3138;}.rule small{color:#5F656D;}
+@media (max-width:640px){body{padding:7px}.hud{padding:0}.hud-top{padding:7px 9px}.hud-bottom{padding:7px 9px 8px;gap:6px}.pedal{height:72px}.pedal--gas .pedal-plate{height:58px}.veil{padding:9px}.card{padding:14px;gap:8px}.start-hero img{width:76px;height:76px}.where strong{font-size:16px}}
+@media(max-width:360px){.drive-tools{grid-template-columns:44px 44px minmax(44px,1fr) 44px 52px}.gear-control{position:relative;padding:0}.gear-control span{display:block;position:absolute;top:2px;left:3px;font-size:6px;pointer-events:none}.gear-control select{width:100%;min-width:44px;padding-top:8px}.pedal{padding:4px;gap:3px}.pedal-plate{width:34px;height:42px}.pedal--gas .pedal-plate{width:27px}.pedal-copy b{font-size:15px}.pedal-copy span{font-size:9px}.pedal-copy small{font-size:6px}}
+@media (prefers-reduced-motion: reduce) { .pedal,.pedal-plate { transition: none; } }
+/* The phone in its holder: part of the lesson. Tapping it covers the road for two seconds. */
+.phone-card{position:absolute;z-index:7;right:22%;top:40%;display:flex;align-items:center;gap:10px;max-width:250px;padding:9px 10px 9px 11px;border-radius:14px;background:#1F2328;border:2px solid #3A434C;color:#FEFFED;box-shadow:0 8px 22px rgba(15,18,21,.45);pointer-events:auto}
+.phone-card[hidden],.phone-look[hidden]{display:none}
+.phone-icon{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#FFD60A;color:#0F1215}
+.phone-copy{display:grid;min-width:0;line-height:1.2}.phone-copy small{font:700 9px/1.2 var(--data);letter-spacing:.08em;text-transform:uppercase;color:#C2CCD6}.phone-copy b{font:700 13px/1.25 DM,sans-serif;color:#FEFFED}
+.phone-card button{flex:none;min-width:52px;min-height:40px;padding:0 12px;border:0;border-radius:10px;background:#FFD60A;color:#0F1215;font:800 14px/1 Barlow,sans-serif;cursor:pointer}
+.phone-look{position:absolute;z-index:8;inset:0;display:grid;place-content:center;justify-items:center;gap:12px;background:#0F1215;color:#FEFFED;pointer-events:none}
+.phone-screen{width:min(260px,70vw);padding:16px 18px;border-radius:22px;background:#FEFFED;color:#1F2328;border:6px solid #2B3138}.phone-screen small{display:block;font:700 10px/1.2 var(--data);letter-spacing:.08em;text-transform:uppercase;color:#5F656D}.phone-screen p{margin:6px 0 0;font:600 16px/1.35 DM,sans-serif}
+.phone-look-note{font:700 11px/1.2 var(--data);letter-spacing:.08em;text-transform:uppercase;color:#C2CCD6}
+@media (max-height:500px){.phone-card{right:max(128px,22%);top:76px;max-width:210px;padding:7px 8px;gap:8px}.phone-copy b{font-size:12px}}
 </style>
-
+<link rel="stylesheet" href="cockpit.css">
+<link rel="stylesheet" href="drive-quiz.css">
+<link rel="stylesheet" href="brand-markers.css">
 <div class="frame" id="frame">
-  <canvas id="view" aria-label="Udsyn gennem forruden på en mørk villavej"></canvas>
-
   <div class="hud" id="hud">
     <div class="hud-top">
       <div class="where">
-        <span class="label">Køretime 01 · byzone</span>
+        <span class="label">Køretime 1 <span class="tb-stripes" aria-hidden="true"></span> byzone</span>
         <strong id="place">Lindevej</strong>
         <div class="next" id="next"></div>
       </div>
@@ -136,54 +216,98 @@ button { font: inherit; color: inherit; }
         <div class="bad"><span class="label">Fejl</span><b id="errors">0</b></div>
       </div>
     </div>
-    <div></div>
+    <div class="visual-area" id="visual-area">
+    <canvas id="view" tabindex="0" aria-label="Udsyn gennem forruden og tre bagudrettede spejle"></canvas>
+    <div class="mirror-strip" aria-label="Forenklede spejle og udsyn til siderne">
+      <button id="look-left" class="look-button" type="button" aria-label="Kig til venstre, hold nede" title="Hold for at kigge til venstre, slip for at se frem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m14 8-4 4 4 4"/></svg> KIG<small>Q</small></button>
+      <span class="mirror mirror--side"><canvas id="mirror-left" width="96" height="48" role="img" aria-label="Venstre sidespejl"></canvas><small>V</small></span>
+      <span class="mirror mirror--rear"><canvas id="mirror-rear" width="96" height="48" role="img" aria-label="Bakspejl"></canvas><small>BAGUD</small></span>
+      <span class="mirror mirror--side"><canvas id="mirror-right" width="96" height="48" role="img" aria-label="Højre sidespejl"></canvas><small>H</small></span>
+      <button id="look-right" class="look-button" type="button" aria-label="Kig til højre, hold nede" title="Hold for at kigge til højre, slip for at se frem">KIG <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 4 4-4 4"/></svg><small>E</small></button>
+    </div>
+    <div class="windscreen" id="windscreen"></div>
+    <div class="phone-card" id="phone" hidden>
+      <span class="phone-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span>
+      <span class="phone-copy" role="status"><small>Telefonen i holderen</small><b id="phone-from">Ny besked</b></span>
+      <button type="button" id="phone-read" aria-label="Læs beskeden på telefonen">Læs</button>
+    </div>
+    <div class="phone-look" id="phone-look" hidden><div class="phone-screen"><small id="phone-look-from">Besked</small><p id="phone-look-text"></p></div><span class="phone-look-note">Du kigger ned på telefonen</span></div>
+    </div>
     <div class="hud-bottom">
-      <div class="left">
-        <div class="radio" role="status" aria-live="polite"><span class="label">Kørelærer</span><span id="radio">Kør, når du er klar. Jeg siger først noget, når det går galt.</span></div>
+      <div class="guide-row">
+        <div class="radio" role="status" aria-live="polite">
+          <span class="guide-avatar"><img src="assets/cast/sneglen-face.webp" alt=""></span>
+          <span class="guide-copy"><span class="label">Sneglen <span class="tb-stripes" aria-hidden="true"></span> din guide</span><span id="radio">Kør, når du er klar. Jeg siger først noget, når det går galt.</span></span>
+        </div>
         <div class="cluster">
-          <div class="speed" id="speed">0</div><div class="unit">km/t</div>
+          <div><div class="speed" id="speed">0</div><div class="unit"><span class="cluster-gear" id="cluster-gear" aria-label="Gear D">D</span> km/t</div></div>
           <div class="limit" title="Hastighedsgrænse i byzone: 50 km/t" aria-label="Grænse 50 km i timen">50</div>
         </div>
       </div>
       <div class="pedals">
-        <button class="pedal pedal--brake" id="brake" type="button" aria-label="Brems, hold nede"><b>Brems</b><span>↓ · S · mellemrum</span></button>
-        <button class="pedal pedal--gas" id="gas" type="button" aria-label="Gas, hold nede"><b>Gas</b><span>↑ · W</span></button>
+        <div class="gear-buttons" role="group" aria-label="Vælg køreretning">
+          <button id="gear-drive" type="button" aria-label="Vælg fremadgear, tast F" aria-keyshortcuts="F" title="Fremadgear (F)" aria-pressed="true">Frem</button>
+          <button id="gear-reverse" type="button" aria-label="Vælg bakgear, tast R" aria-keyshortcuts="R" title="Bakgear (R)" aria-pressed="false">Bak</button>
+        </div>
+        <button class="pedal pedal--brake" id="brake" type="button" aria-label="Brems, mellemrum" aria-keyshortcuts="Space">
+          <span class="pedal-plate" aria-hidden="true"></span><span class="pedal-copy"><b>Brems</b><span>Hold nede</span><small>Mellemrum</small></span>
+        </button>
+        <div class="steer-wrap"><div id="steer" class="steer" role="slider" tabindex="0" aria-label="Rat. A drejer til venstre, D til højre" aria-keyshortcuts="A D" aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Ligeud">
+          <svg class="steer-art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="39" fill="none" stroke="#2a3b35" stroke-width="11"/><circle cx="50" cy="50" r="30" fill="none" stroke="#aab8aa" stroke-width="2"/><path d="M17 43 L40 48 M83 43 L60 48 M50 55 L50 84" stroke="#394d44" stroke-width="9" stroke-linecap="round"/><circle cx="50" cy="51" r="13" fill="#56685b" stroke="#253b32" stroke-width="4"/></svg>
+        </div><span>RAT</span></div>
+        <button class="pedal pedal--gas" id="gas" type="button" aria-label="Gas, W" aria-keyshortcuts="W">
+          <span class="pedal-plate" aria-hidden="true"></span><span class="pedal-copy"><b>Gas</b><span>Hold nede</span><small>Pil op <span class="tb-stripes" aria-hidden="true"></span> W</small></span>
+        </button>
+      </div>
+      <div class="drive-tools" aria-label="Øvrig betjening">
+        <button id="drive-settings" class="tool-button" type="button" aria-label="Vis køretøjsindstillinger" aria-expanded="false">⚙</button>
+        <button id="blink-left" class="tool-button" type="button" aria-label="Blink til venstre, tast Z" aria-keyshortcuts="Z" title="Blink til venstre (Z)" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m14 8-4 4 4 4"/></svg></button>
+        <button id="blink-right" class="tool-button" type="button" aria-label="Blink til højre, tast C" aria-keyshortcuts="C" title="Blink til højre (C)" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 4 4-4 4"/></svg></button>
+        <button id="horn" class="tool-button horn" type="button" aria-label="Dyt med hornet, H" aria-keyshortcuts="H" title="Dyt (H)">Dyt</button>
+        <button id="mirror-toggle" class="tool-button mirror-toggle" type="button" aria-label="Slå spejle fra" aria-pressed="true" title="Slå spejlvisning til eller fra">Spejle<br>til</button>
+        <select id="gear" hidden aria-label="Gear"><option value="auto">D</option><option value="R">R</option></select><button id="handedness" class="tool-button" type="button" aria-pressed="false">Venstrehånd: fra</button>
       </div>
     </div>
   </div>
 
   <div class="veil veil--start" id="start">
-    <section class="card" aria-labelledby="start-title">
-      <span class="label">Gas og bremse · tre situationer</span>
-      <h1 id="start-title">Natkørsel</h1>
-      <p class="lede">Tre situationer på en dansk villavej efter mørkets frembrud: hajtænder, stoptavle og fodgængerfelt. Du styrer gas og bremse. Bilen holder selv banen.</p>
+    <section class="card card--start" aria-labelledby="start-title">
+      <div class="start-hero"><div><span class="label">Gas og bremse <span class="tb-stripes" aria-hidden="true"></span> ny tur hver gang</span><h1 id="start-title">Kør en tur<br><em>med Sneglen.</em></h1></div><img src="assets/cast/sneglen.webp" alt=""></div>
+      <p class="lede">I denne køretime kører du Nordic GT, uanset hvad du har valgt i Min bil. Hver tur er ny, så læs skilte og afmærkning ved hvert kryds, og hold øje med, hvad der sker langs vejen.</p>
       <ul class="keys">
-        <li><kbd>↑</kbd> eller <kbd>W</kbd> holder gassen nede</li>
-        <li><kbd>↓</kbd>, <kbd>S</kbd> eller <kbd>mellemrum</kbd> bremser</li>
-        <li>På telefon holder du pedalerne nederst</li>
+        <li><kbd>W</kbd> gas/frem</li>
+        <li><kbd>Mellemrum</kbd> brems</li>
+        <li><kbd>A</kbd> venstre, <kbd>D</kbd> højre. <kbd>F</kbd> fremadgear, <kbd>R</kbd> bakgear</li>
+        <li><kbd>Z</kbd> blink venstre, <kbd>C</kbd> blink højre</li>
+        <li><kbd>Q E</kbd> kig til siderne. <kbd>H</kbd> dyt</li>
       </ul>
-      <button class="go" id="start-btn" type="button">Start køretimen</button>
+      <button class="go" id="start-btn" type="button" disabled aria-busy="true">Henter køretimen …</button>
     </section>
   </div>
 
   <div class="veil veil--card" id="incident" hidden>
-    <section class="card" role="alertdialog" aria-labelledby="inc-title" aria-describedby="inc-rule">
+    <section class="card card--incident" role="alertdialog" aria-labelledby="inc-title" aria-describedby="inc-rule">
+      <img class="card-character" src="assets/cast/kegle.webp" alt="">
       <span class="label" id="inc-kicker"></span>
       <h2 id="inc-title"></h2>
       <p class="lede" id="inc-lede"></p>
       <div class="rule"><p id="inc-rule"></p><small id="inc-source"></small></div>
-      <span class="penalty">NYT MOVE · SAMME REGEL</span>
+      <span class="penalty">NYT MOVE <span class="tb-stripes" aria-hidden="true"></span> SAMME REGEL</span>
       <button class="go" id="inc-btn" type="button">Kør videre</button>
     </section>
   </div>
 
+  <div class="veil veil--card" id="quiz" hidden>
+    <section class="card card--quiz" id="quiz-card" role="dialog" aria-modal="true" aria-labelledby="quiz-title"></section>
+  </div>
+
   <div class="veil veil--card" id="result" hidden>
     <section class="card" aria-labelledby="res-title">
-      <span class="label">Tre situationer gennemført</span>
+      <span class="label">Turen er gennemført</span>
       <h2 id="res-title">Køretimen er slut.</h2>
       <p class="lede" id="res-lede"></p>
       <dl class="sheet" id="res-sheet"></dl>
-      <p class="note">Selvstændig timing-simulation. Ingen fartscore eller XP. Øv og genkald reglerne i missionerne; faglig og visuel kørelærergennemgang udestår.</p>
+      <p class="note">Øv og genkald reglerne i missionerne.</p>
       <button class="go" id="res-btn" type="button">Kør igen</button>
     </section>
   </div>
@@ -194,17 +318,41 @@ button { font: inherit; color: inherit; }
 </div>
 
 <script src="assets/three.min.js"></script>
-<script>
+<script src="assets/GLTFLoader-r128.js"></script>
+<script type="module">
+import {getDaylight} from './daylight-cycle.js';
+import {advanceVehicle,carsOverlap,onRoute,DRIVE_GEOMETRY} from './drive-physics.js';
+import * as SIT from './drive-situations.js';
+import {createRoadRider} from './drive-rider.js';
+import {createStreetKit} from './street-kit.js';
+import {loadApprovedFleet} from './approved-fleet.js';
+import {createSeatedOccupants} from './seated-occupants.js';
+import {cockpitWheel,cockpitInstrument} from './cockpit.js';
+import {attachCylindricalBillboard} from './cylindrical-billboard.js';
+import {SCOOTER,SCOOTER_CENTRE_X,newScooterState,stepScooter,createScooterRider,addPlateBorder} from './traffic-scooter.js';
+import {mistakeTags,pickQuizQuestions,newQuizRun,createDriveQuiz,loadQuizQuestionBank} from './drive-quiz.js';
+import {setBrandText} from './ui-stripes.js';
+import {loadGarage} from './mybil.js';
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const frame = $('frame'), canvas = $('view');
+  const frame=$('frame'),area=$('visual-area'),surface=$('windscreen'),canvas=$('view');
+  const chosenVehicle=loadGarage().active;
+  // This lesson temporarily uses the approved Nordic GT for every garage choice.
+  const cockpitStyle='nordic';
+  const driverAnchor=Object.freeze(cockpitStyle==='nordic'?[-.55,1.22,-.10]:[-.40,1.50,.05]);
+  frame.dataset.vehicle=cockpitStyle;frame.dataset.requestedVehicle=chosenVehicle;
+  const cockpitSvg=document.querySelector('.steer-art');cockpitSvg.setAttribute('viewBox','0 0 150 150');cockpitSvg.innerHTML=cockpitWheel(cockpitStyle);
+  const instrumentArt=document.createElement('span');instrumentArt.className='cockpit-instrument-art';instrumentArt.setAttribute('aria-hidden','true');instrumentArt.innerHTML=cockpitInstrument(cockpitStyle);document.querySelector('.cluster').prepend(instrumentArt);
   const T = window.THREE;
   let renderer = null;
   try { if (T) renderer = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' }); } catch (e) { renderer = null; }
+  if(renderer){renderer.outputEncoding=T.sRGBEncoding;renderer.toneMapping=T.NoToneMapping;}
   if (!renderer) { $('start').hidden = true; $('hud').hidden = true; $('nogl').hidden = false; return; }
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const motionDisabled=()=>{let off=reduceMotion.matches;try{off=off||window.parent.document.body.classList.contains('no-motion');}catch{}return off;};
+  document.body.classList.toggle('no-motion',motionDisabled());
 
   /* ---------- world layout (metres; we drive towards -z, right-hand traffic) ---------- */
   const HALF = 3.25, LANE = 1.625;           // half road width, centre of our lane
@@ -213,19 +361,18 @@ button { font: inherit; color: inherit; }
   const FOG = 0x172637;
 
   const scene = new T.Scene();
-  scene.fog = new T.FogExp2(FOG, 0.0135);
+  scene.fog = new T.FogExp2(FOG, 0.0068);
   const camera = new T.PerspectiveCamera(60, 1.6, 0.08, 420);
   scene.add(camera);
 
-  // sky: last light on the horizon
-  { const c = document.createElement('canvas'); c.width = 4; c.height = 256; const g = c.getContext('2d');
-    const grad = g.createLinearGradient(0, 0, 0, 256);
-    grad.addColorStop(0, '#05080f'); grad.addColorStop(.42, '#0d1528'); grad.addColorStop(.56, '#1c2a47');
-    grad.addColorStop(.64, '#3a3550'); grad.addColorStop(.69, '#6b4a4a'); grad.addColorStop(.74, '#151d31'); grad.addColorStop(1, '#151d31');
-    g.fillStyle = grad; g.fillRect(0, 0, 4, 256); scene.background = new T.CanvasTexture(c); }
-
-  scene.add(new T.HemisphereLight(0x8da2cc, 0x0b0d14, 0.92));
-  const moon = new T.DirectionalLight(0x9db4e0, 0.34); moon.position.set(-40, 80, 30); scene.add(moon);
+  const skyCanvas = document.createElement('canvas'); skyCanvas.width=512; skyCanvas.height=256;
+  const skyContext=skyCanvas.getContext('2d'), skyTexture=new T.CanvasTexture(skyCanvas); skyTexture.encoding=T.sRGBEncoding; skyTexture.repeat.y=3;skyTexture.offset.y=-1.3; scene.background=skyTexture;
+  const skyStudy=new Image();let skyStudyReady=false;skyStudy.onload=()=>{skyStudyReady=true;updateDaylight();};skyStudy.src='assets/gas-study/study-sky.jpg';
+  const skyDome=new T.Mesh(new T.SphereGeometry(360,32,16),new T.MeshBasicMaterial({map:skyTexture,side:T.BackSide,depthWrite:false,fog:false,toneMapped:false}));skyDome.renderOrder=-1000;scene.add(skyDome);
+  const mixColor=(night,day,t)=>'#'+new T.Color(night).lerp(new T.Color(day),t).getHexString();
+  // Ambient fill keeps hazards legible even during the darkest part of the cycle.
+  const ambient = new T.HemisphereLight(0xa1b4d3, 0x28312d, 1.15); scene.add(ambient);
+  const moon = new T.DirectionalLight(0xa8bde0, 0.45); moon.position.set(-40, 80, 30); scene.add(moon);
   const reviewLight = new T.DirectionalLight(0xffffff, 0); reviewLight.position.set(10, 60, 20); scene.add(reviewLight);
 
   const mat = (color, extra) => new T.MeshStandardMaterial(Object.assign({ color, roughness: .92, metalness: 0 }, extra || {}));
@@ -236,29 +383,77 @@ button { font: inherit; color: inherit; }
   const flat = (w, d) => { const g = new T.PlaneGeometry(w, d); g.rotateX(-Math.PI / 2); return g; };
 
   // ground, roads, pavements
-  add(new T.Mesh(flat(700, 900), mat(0x18221f)), 0, -0.06, -200);
-  const roadMat = mat(0x2b2f37, { roughness: .86 });
-  add(new T.Mesh(flat(HALF * 2, 520), roadMat), 0, 0, -215);
-  for (const j of [J1, J2]) add(new T.Mesh(flat(360, HALF * 2), roadMat), 0, 0.004, j);
-  const paveMat = mat(0x4b4f57);
+  const gardenGroundMaterial=new T.MeshBasicMaterial({color:0x687568});
+  new T.TextureLoader().load('assets/textures/garden-grass-v2-painted.webp',texture=>{texture.encoding=T.sRGBEncoding;texture.wrapS=texture.wrapT=T.MirroredRepeatWrapping;texture.repeat.set(35,45);texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());texture.needsUpdate=true;gardenGroundMaterial.color.setHex(0xffffff);gardenGroundMaterial.map=texture;gardenGroundMaterial.needsUpdate=true;canvas.dataset.gardenGrass='ready';});
+  add(new T.Mesh(flat(700, 900),gardenGroundMaterial),0,-.06,-200);
+  // Repeatable fine aggregate, kept subtle so the signs and road markings remain legible.
+  // Generated locally from a fixed seed: no remote texture request or image license dependency.
+  const roadLayers=[];
+  function asphalt(repeatX, repeatY) {
+    const c = document.createElement('canvas'); c.width = c.height = 512;
+    const ctx = c.getContext('2d'); ctx.fillStyle = '#34383e'; ctx.fillRect(0, 0, 512, 512);
+    let n = 17823; const noise = () => { n = (Math.imul(n, 1664525) + 1013904223) >>> 0; return n / 4294967296; };
+    for (let i = 0; i < 4200; i++) {
+      const x = noise() * 512, y = noise() * 512, size = .45 + noise() * 1.6;
+      ctx.fillStyle = noise() > .47 ? 'rgba(195,198,192,.085)' : 'rgba(6,10,13,.10)';
+      ctx.fillRect(x, y, size, size * (.4 + noise()));
+    }
+    const texture = new T.CanvasTexture(c); texture.wrapS = texture.wrapT = T.RepeatWrapping;
+    texture.encoding=T.sRGBEncoding;texture.repeat.set(repeatX, repeatY); texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy()); roadLayers.push({ctx,texture});
+    return new T.MeshBasicMaterial({color:0x666666,map:texture});
+  }
+  const mainAsphalt=asphalt(1,52);add(new T.Mesh(flat(HALF * 2, 520), mainAsphalt), 0, 0, -215);
+  for (const j of [J1, J2]) add(new T.Mesh(flat(360, HALF * 2), asphalt(36, 1)), 0, 0.004, j);
+  // The corner squares between the kerbs are asphalt on the diagonal, matching pointOnRoad.
+  {const c=DRIVE_GEOMETRY.cornerChamfer,position=[],uv=[];for(const j of [J1,J2])for(const sx of [-1,1])for(const sz of [-1,1])for(const [x,z] of [[sx*HALF,j+sz*HALF],[sx*(HALF+c),j+sz*HALF],[sx*HALF,j+sz*(HALF+c)]]){position.push(x,.004,z);uv.push(x/(HALF*2),z/520);}
+    const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(position,3));geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geometry.computeVertexNormals();
+    const material=mainAsphalt.clone();material.side=T.DoubleSide;const corners=new T.Mesh(geometry,material);corners.name='junction-corners';scene.add(corners);}
+  // Load the local asphalt study into power-of-two GPU textures. The procedural
+  // surface above remains usable if the optional image is missing or offline.
+  const asphaltImage=new Image();asphaltImage.onload=()=>{for(const layer of roadLayers){layer.ctx.fillStyle='#34383e';layer.ctx.fillRect(0,0,512,512);
+    layer.ctx.globalAlpha=1;layer.ctx.filter='contrast(1.3) brightness(.88)';layer.ctx.drawImage(asphaltImage,0,0,512,512);layer.ctx.filter='none';layer.texture.needsUpdate=true;}canvas.dataset.asphaltLoaded='true';canvas.dataset.asphaltVersions=roadLayers.map(x=>x.texture.version).join(',');canvas.dataset.asphaltRepeats=roadLayers.map(x=>`${x.texture.repeat.x}x${x.texture.repeat.y}`).join(',');};
+  asphaltImage.src='assets/gas-study/figma-aerial.jpg';
+  // Sparse, connected surface wear overlays the approved asphalt image below road markings.
+  const wearTexture=(()=>{const c=document.createElement('canvas');c.width=256;c.height=768;const g=c.getContext('2d');g.fillStyle='rgba(20,24,26,.16)';for(const [x,y,rx,ry] of [[63,144,32,65],[192,486,42,90]]){g.beginPath();g.ellipse(x,y,rx,ry,.17,0,Math.PI*2);g.fill()}g.strokeStyle='rgba(12,16,18,.52)';g.lineWidth=2.6;g.lineCap='round';for(const points of [[[72,45],[81,83],[72,118],[91,158],[88,192]],[[88,158],[106,171],[121,205]],[[176,355],[169,388],[184,419],[176,459],[190,490],[182,535]],[[184,419],[203,437],[214,470]],[[51,590],[65,626],[59,654],[72,689]]]){g.beginPath();points.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.stroke()}return new T.CanvasTexture(c)})();
+  const wearMaterial=new T.MeshBasicMaterial({map:wearTexture,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1});
+  for(let z=18;z>-465;z-=34)if([J1,J2,PED].every(j=>Math.abs(z-j)>17))add(new T.Mesh(flat(6,20),wearMaterial),0,.006,z);
+
+  for(const side of [-1,1])for(const [from,to] of [[45,J1+HALF],[J1-HALF,J2+HALF],[J2-HALF,-475]])add(new T.Mesh(flat(.28,from-to),new T.MeshBasicMaterial({color:0x202b30,transparent:true,opacity:.4,depthWrite:false})),side*(HALF-.14),.008,(from+to)/2);
+  const pavingTexture = (() => { const c=document.createElement('canvas');c.width=c.height=256;const ctx=c.getContext('2d');
+    ctx.fillStyle='#a4a6a2';ctx.fillRect(0,0,256,256);ctx.strokeStyle='rgba(48,55,55,.32)';ctx.lineWidth=2;
+    for(let y=0;y<=256;y+=64){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(256,y);ctx.stroke();
+      for(let x=((y/64)%2)*64;x<256;x+=128){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+64);ctx.stroke();}}
+    let n=98765;for(let i=0;i<1600;i++){n=(Math.imul(n,1664525)+1013904223)>>>0;const x=n%256;n=(Math.imul(n,1664525)+1013904223)>>>0;const y=n%256;ctx.fillStyle='rgba(28,34,35,.08)';ctx.fillRect(x,y,1,1);}
+    const tex=new T.CanvasTexture(c);tex.wrapS=tex.wrapT=T.RepeatWrapping;return tex;})();
+  const graniteTexture=(()=>{const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');g.fillStyle='#a4a7a1';g.fillRect(0,0,128,128);let n=19387;for(let i=0;i<4200;i++){n=(Math.imul(n,1664525)+1013904223)>>>0;const x=n%128;n=(Math.imul(n,1664525)+1013904223)>>>0;const y=n%128;g.fillStyle=i%2?'rgba(45,52,50,.32)':'rgba(239,238,226,.42)';g.fillRect(x,y,1+(i%3===0),1);}const t=new T.CanvasTexture(c);t.wrapS=t.wrapT=T.RepeatWrapping;return t;})();
+  const paveMat = mat(0x858984,{map:pavingTexture,roughness:.96}), curbMat=new T.MeshBasicMaterial({map:graniteTexture});
+  // Map the upper surface in metres so paving slabs stay a consistent size
+  // instead of stretching the same few tiles across an entire block.
+  function pavedWalk(width,depth){const geometry=new T.BoxGeometry(width,.14,depth),uv=geometry.attributes.uv;
+    for(let i=8;i<12;i++)uv.setXY(i,uv.getX(i)*width,uv.getY(i)*depth);uv.needsUpdate=true;return geometry;}
   const kerbGaps = [[J1 - HALF - 2.2, J1 + HALF + 2.2], [J2 - HALF - 2.2, J2 + HALF + 2.2]];
   { let from = 45; for (const [lo, hi] of kerbGaps.concat([[-480, -475]])) { const len = from - hi; if (len > 0) for (const side of [-1, 1])
-      add(new T.Mesh(new T.BoxGeometry(2.1, 0.14, len), paveMat), side * (HALF + 1.05), 0.07, hi + len / 2); from = lo; } }
+      { add(new T.Mesh(pavedWalk(2.1,len), paveMat), side * (HALF + 1.05), 0.07, hi + len / 2);
+        add(new T.Mesh(pavedWalk(.18,len),curbMat), side*(HALF+.09),.075,hi+len/2); } from = lo; } }
   for (const j of [J1, J2]) for (const sz of [-1, 1]) for (const sx of [-1, 1])
-    add(new T.Mesh(new T.BoxGeometry(170, 0.14, 2.1), paveMat), sx * (HALF + 2.2 + 85), 0.07, j + sz * (HALF + 1.05));
+    add(new T.Mesh(pavedWalk(170,2.1), paveMat), sx * (HALF + 2.2 + 85), 0.07, j + sz * (HALF + 1.05));
 
   // markings
   const white = new T.MeshBasicMaterial({ color: 0xd9dee8 });
   const inJunction = z => kerbGaps.some(([lo, hi]) => z > lo - 1 && z < hi + 1) || Math.abs(z - PED) < 5;
-  for (let z = 36; z > -470; z -= 6) if (!inJunction(z)) add(new T.Mesh(flat(0.12, 3), white), 0, 0.02, z);
-  for (const j of [J1, J2]) for (let x = -170; x < 170; x += 6) if (Math.abs(x) > HALF + 2) add(new T.Mesh(flat(3, 0.12), white), x, 0.024, j);
+  const dashAhead=flat(.12,3),dashCross=flat(3,.12),crossStripe=flat(.5,4);
+  const mark=(geometry,x,y,z)=>{const m=add(new T.Mesh(geometry,white),x,y,z);m.userData.streetFeature=true;return m;};
+  for (let z = 36; z > -470; z -= 6) if (!inJunction(z)) mark(dashAhead,0,.02,z);
+  for (const j of [J1, J2]) for (let x = -170; x < 170; x += 6) if (Math.abs(x) > HALF + 2) mark(dashCross,x,.024,j);
+  // Shown or hidden per tour: a junction only has the signs its situation needs.
+  const tourControls={yield:[],stop:[]};
   // hajtænder: a row of triangles, points towards the driver who has to give way
-  { const shape = new T.Shape(); shape.moveTo(-0.25, 0); shape.lineTo(0.25, 0); shape.lineTo(0, 0.62); shape.closePath();
+  { const shape = new T.Shape(); shape.moveTo(-0.25, 0); shape.lineTo(0.25, 0); shape.lineTo(0, 0.60); shape.closePath();
     const g = new T.ShapeGeometry(shape); g.rotateX(-Math.PI / 2); g.rotateY(Math.PI);     // tip towards +z
-    for (let i = 0; i < 5; i++) add(new T.Mesh(g, white), 0.42 + i * 0.6, 0.022, J1 + HALF + 0.35); }
+    for (let i = 0; i < 4; i++) tourControls.yield.push(add(new T.Mesh(g, white), 0.25 + i * 0.9, 0.022, J1 + HALF + 0.35)); }
   const STOP_LINE = J2 + HALF + 0.9;
-  add(new T.Mesh(flat(HALF - 0.2, 0.42), white), LANE, 0.022, STOP_LINE - 0.21);
-  for (let x = -HALF + 0.45; x < HALF; x += 1) add(new T.Mesh(flat(0.5, 4), white), x, 0.022, PED);
+  tourControls.stop.push(add(new T.Mesh(flat(HALF - 0.2, 0.5), white), LANE, 0.022, STOP_LINE - 0.25));
+  for (let x = -HALF + 0.45; x < HALF; x += 1) mark(crossStripe,x,.022,PED);
 
   // signs, drawn on canvases
   function signTexture(draw) { const c = document.createElement('canvas'); c.width = c.height = 256; draw(c.getContext('2d')); const t = new T.CanvasTexture(c); t.anisotropy = 4; return t; }
@@ -273,11 +468,12 @@ button { font: inherit; color: inherit; }
     g.fillRect(70, 204, 22, 8); g.fillRect(104, 204, 22, 8); g.fillRect(138, 204, 22, 8); g.fillRect(172, 204, 22, 8); });
   const poleMat = mat(0x7b8492, { roughness: .6 });
   function sign(tex, x, z, size) { const g = new T.Group();
-    add(new T.Mesh(new T.CylinderGeometry(0.035, 0.035, 2.6, 8), poleMat), 0, 1.3, 0, g);
-    add(new T.Mesh(new T.PlaneGeometry(size, size), new T.MeshBasicMaterial({ map: tex, transparent: true, alphaTest: .5 })), 0, 2.45, 0.05, g);
-    g.position.set(x, 0, z); scene.add(g); }
-  sign(texYield, HALF + 0.9, J1 + HALF + 2.6, 1.0);
-  sign(texStop, HALF + 0.9, J2 + HALF + 2.6, 0.95);
+    const top = 2.2 + size;
+    add(new T.Mesh(new T.CylinderGeometry(0.035, 0.035, top, 8), poleMat), 0, top / 2, 0, g);
+    add(new T.Mesh(new T.PlaneGeometry(size, size), new T.MeshBasicMaterial({ map: tex, transparent: true, alphaTest: .5 })), 0, 2.2 + size / 2, 0.05, g);
+    g.position.set(x, 0, z); scene.add(g); return g; }
+  tourControls.yield.push(sign(texYield, HALF + 0.9, J1 + HALF + 2.6, 0.7));
+  tourControls.stop.push(sign(texStop, HALF + 0.9, J2 + HALF + 2.6, 0.7));
   sign(texCross, HALF + 0.9, PED + 2.8, 0.85);
   sign(texCross, -HALF - 0.9, PED + 2.8, 0.85);
 
@@ -286,45 +482,246 @@ button { font: inherit; color: inherit; }
     const r = g.createRadialGradient(64, 64, 2, 64, 64, 64); r.addColorStop(0, 'rgba(255,176,84,.62)'); r.addColorStop(.45, 'rgba(255,160,70,.2)'); r.addColorStop(1, 'rgba(255,150,60,0)');
     g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new T.CanvasTexture(c); })();
   const poolMat = new T.MeshBasicMaterial({ map: poolTex, transparent: true, blending: T.AdditiveBlending, depthWrite: false });
-  const lampMat = mat(0x2a303b, { roughness: .5 }), bulbMat = glow(0xffc27a);
+  // Pools share one geometry, allowing the existing feature batching to draw
+  // every identical additive light without changing its material or position.
+  const lightPoolGeometry=flat(7,7);
+  const lampMat = mat(0x414e4e,{roughness:.72}), bulbMat = glow(0xffc27a);
+  const lampPole=new T.CylinderGeometry(.055,.10,4.6,8),lampFoot=new T.CylinderGeometry(.14,.19,.30,8),lampHead=new T.BoxGeometry(.27,.38,.27),lampCap=new T.ConeGeometry(.25,.19,4),lampHalo=new T.PlaneGeometry(.85,.85);
+  const haloCanvas=document.createElement('canvas');haloCanvas.width=haloCanvas.height=128;const haloContext=haloCanvas.getContext('2d');
+  const haloGradient=haloContext.createRadialGradient(64,64,1,64,64,64);haloGradient.addColorStop(0,'rgba(255,206,122,.65)');haloGradient.addColorStop(.3,'rgba(255,181,92,.22)');haloGradient.addColorStop(1,'rgba(255,181,92,0)');haloContext.fillStyle=haloGradient;haloContext.fillRect(0,0,128,128);
+  const lampHaloMat=new T.MeshBasicMaterial({map:new T.CanvasTexture(haloCanvas),transparent:true,blending:T.AdditiveBlending,depthWrite:false,opacity:.5});
   function lamp(x, z, towards) { const g = new T.Group();
-    add(new T.Mesh(new T.CylinderGeometry(0.07, 0.09, 6.4, 8), lampMat), 0, 3.2, 0, g);
-    add(new T.Mesh(new T.BoxGeometry(1.7, 0.08, 0.1), lampMat), towards * 0.85, 6.4, 0, g);
-    add(new T.Mesh(new T.BoxGeometry(0.5, 0.1, 0.22), bulbMat), towards * 1.6, 6.33, 0, g);
+    const part=(geometry,material,y)=>{const m=add(new T.Mesh(geometry,material),0,y,0,g);m.userData.streetFeature=true;return m;};
+    part(lampPole,lampMat,2.3);part(lampFoot,lampMat,.15);part(lampHead,bulbMat,4.67);part(lampCap,lampMat,4.96);part(lampHalo,lampHaloMat,4.67);
     g.position.set(x, 0, z); scene.add(g);
-    add(new T.Mesh(flat(15, 15), poolMat), x + towards * 2.2, 0.03, z); }
-  { let side = 1; for (let z = 22; z > -470; z -= 29) { if (Math.abs(z - J1) < 7 || Math.abs(z - J2) < 7) continue; lamp(side * (HALF + 0.75), z, -side); side = -side; } }
-  for (const j of [J1, J2]) { lamp(-HALF - 0.75, j + HALF + 1.6, 1); lamp(HALF + 0.75, j - HALF - 1.6, -1); for (const x of [-34, 34, -68, 68]) add(new T.Mesh(flat(15, 15), poolMat), x, 0.03, j); }
-  lamp(HALF + 0.75, PED + 1.2, -1);
+    add(new T.Mesh(lightPoolGeometry,poolMat),x+towards*3.8,.03,z).userData.streetFeature=true; }
+  { let side = 1; for (let z = 22; z > -470; z -= 29) { if (Math.abs(z - J1) < 7 || Math.abs(z - J2) < 7) continue; lamp(side * (HALF + 3.8), z, -side); side = -side; } }
+  for (const j of [J1, J2]) { lamp(-HALF - 3.8, j + HALF + 1.6, 1); lamp(HALF + 3.8, j - HALF - 1.6, -1); }
+  lamp(HALF + 3.8, PED + 1.2, -1);
 
   // houses, hedges, trees. The corners at each junction are kept open so cross traffic can be seen.
-  const wallColors = [0x74524a, 0x8c8676, 0x565d6b, 0x6a6257, 0x7d5a44], roofColors = [0x2a2c33, 0x40302c, 0x33363d];
-  const winLit = glow(0xffcf8a), winDark = glow(0x1a2233), hedgeMat = mat(0x1b2f25), trunkMat = mat(0x33291f), crownMat = mat(0x1d3a2b);
+  const wallColors = [0x805b50, 0xaaa292, 0x707a83, 0x898275, 0x947060], roofColors = [0x394149, 0x524441, 0x414a50];
+  // Shared, restrained brick and paving surfaces: detailed at street level,
+  // but still readable at a distance and inexpensive to reuse across houses.
+  const brickTexture = (() => { const c = document.createElement('canvas'); c.width = c.height = 256; const ctx = c.getContext('2d');
+    ctx.fillStyle = '#d5d4ce'; ctx.fillRect(0, 0, 256, 256); ctx.strokeStyle = 'rgba(66,61,58,.18)'; ctx.lineWidth = 2;
+    for (let y = 0; y <= 256; y += 32) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(256,y); ctx.stroke();
+      const offset = ((y / 32) % 2) * 32; for (let x = offset; x < 256; x += 64) { ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x,y+32); ctx.stroke(); } }
+    const texture = new T.CanvasTexture(c); texture.wrapS = texture.wrapT = T.RepeatWrapping; texture.repeat.set(3,2);
+    // Low-opacity material detail keeps the procedural mortar grid continuous
+    // even if the optional source image is missing or has an imperfect edge.
+    const image=new Image();image.onload=()=>{ctx.globalAlpha=.22;ctx.drawImage(image,0,0,256,256);ctx.globalAlpha=1;texture.needsUpdate=true;};
+    image.src='assets/textures/brick-study-v1.webp';return texture; })();
+  const roofTexture=(()=>{const c=document.createElement('canvas');c.width=c.height=256;const g=c.getContext('2d');g.fillStyle='#c4c8c5';g.fillRect(0,0,256,256);
+    g.strokeStyle='rgba(43,49,50,.22)';g.lineWidth=2;for(let y=0;y<256;y+=20){g.beginPath();g.moveTo(0,y);g.lineTo(256,y);g.stroke();
+      for(let x=((y/20)%2)*18;x<256;x+=36){g.beginPath();g.moveTo(x,y);g.lineTo(x,y+20);g.stroke();}}
+    const texture=new T.CanvasTexture(c);texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.repeat.set(3,2);return texture;})();
+  const wallMats = wallColors.map(color => mat(color, {map:brickTexture, roughness:.96}));
+  const roofMats = roofColors.map(color => mat(color, {map:roofTexture,roughness:.96}));
+  const hedgeTexture=(()=>{const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');g.fillStyle='#aeb9ab';g.fillRect(0,0,128,128);
+    let seed=43117;const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+    for(let i=0;i<950;i++){g.fillStyle=rand()>.5?'rgba(41,67,45,.27)':'rgba(220,230,208,.16)';g.beginPath();g.ellipse(rand()*128,rand()*128,1+rand()*2,.6+rand()*1.1,rand()*3,0,Math.PI*2);g.fill();}
+    const texture=new T.CanvasTexture(c);texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.repeat.set(3,1);return texture;})();
+  const winLit = glow(0xffcf8a), winDark = glow(0x1a2233), hedgeMat = mat(0x456c54,{map:hedgeTexture,roughness:1}), trunkMat = mat(0x50463b), crownMat = mat(0x436952,{map:hedgeTexture,roughness:1});
+  const hedgeStudy=new Image();hedgeStudy.onload=()=>{const ctx=hedgeTexture.image.getContext('2d');ctx.drawImage(hedgeStudy,0,0,128,128);hedgeTexture.needsUpdate=true;hedgeMat.color.setHex(0x8ca287);};
+  hedgeStudy.src='assets/textures/hedge-study-v1.webp';
+  const windowFrame = mat(0x263135, {roughness:.82}), doorMat = mat(0x3d4b49,{roughness:.85}), entryLamp = glow(0xffca84);
+  const groundShade = new T.MeshBasicMaterial({color:0x182b24,transparent:true,opacity:.18,depthWrite:false});
+  const streetShapes = {frame:new T.PlaneGeometry(1.3,1.4), glass:new T.PlaneGeometry(1.08,1.18), sill:new T.BoxGeometry(.19,.08,1.42),
+    jamb:new T.BoxGeometry(.07,2.18,1.12), door:new T.BoxGeometry(.08,1.92,.9), lamp:new T.BoxGeometry(.14,.12,.20), canopy:new T.BoxGeometry(.4,.10,1.5),
+    frontSill:new T.BoxGeometry(1.42,.08,.19), mullion:new T.BoxGeometry(.045,1.18,.025), chimney:new T.BoxGeometry(.65,1.15,.7),
+    groundShadow:new T.CircleGeometry(1,24),
+    trunk:new T.CylinderGeometry(.16,.22,1,8), crown:new T.SphereGeometry(1,12,8),treeCard:new T.PlaneGeometry(1,1),hedgeCrown:new T.IcosahedronGeometry(1,1)};
+  const feature = (g, geometry, material, x, y, z, yaw=0) => { const mesh=new T.Mesh(geometry,material); mesh.rotation.y=yaw; mesh.userData.streetFeature=true; mesh.userData.houseFallback=!!g.userData.houseFallback; return add(mesh,x,y,z,g); };
+  const houseSlots=[],houseFallbackBatches=[],houseChunks=[],treeFallbackBatches=[],treePhotoBatches=[];let houseAssets=null,houseClosed=false,approvedStreetReady=false;
   const openCorner = z => [J1, J2].some(j => Math.abs(z - j) < 24);
-  function house(side, z) { const w = 8 + rnd() * 3, d = 7 + rnd() * 3, h = 3.1 + rnd() * 2.4, x = side * (HALF + 7.5 + w / 2 + rnd() * 3); const g = new T.Group();
-    add(new T.Mesh(new T.BoxGeometry(w, h, d), mat(pick(wallColors))), 0, h / 2, 0, g);
-    const r = 4, roof = new T.Mesh(new T.ConeGeometry(r, 2 + rnd() * 1.2, 4), mat(pick(roofColors))); roof.rotation.y = Math.PI / 4;
-    roof.scale.set(w * 1.1 / (r * Math.SQRT2), 1, d * 1.1 / (r * Math.SQRT2)); add(roof, 0, h + roof.geometry.parameters.height / 2, 0, g);
-    const n = 2 + Math.floor(rnd() * 2); for (let i = 0; i < n; i++) { const win = new T.Mesh(new T.PlaneGeometry(1.1, 1.2), rnd() < .55 ? winLit : winDark);
-      win.rotation.y = -side * Math.PI / 2; add(win, -side * (w / 2 + 0.02), 1.7, (i - (n - 1) / 2) * (d / (n + .4)), g); }
-    g.position.set(x, 0, z); scene.add(g);
-    if (rnd() < .7) add(new T.Mesh(new T.BoxGeometry(0.7, 1.1, d + 4), hedgeMat), side * (HALF + 2.7), 0.55, z); }
-  function tree(x, z) { const h = 4 + rnd() * 3; add(new T.Mesh(new T.CylinderGeometry(0.16, 0.22, h * .5, 6), trunkMat), x, h * .25, z);
-    const c = new T.Mesh(new T.IcosahedronGeometry(1.5 + rnd() * .9, 0), crownMat); c.scale.y = 1.25; add(c, x, h * .5 + 1.5, z); }
+  // Hedge transforms preserve the original dimensions and UV mapping while
+  // sharing geometry, so the repeated street material can be instanced.
+  const hedgeBoxGeometry=new T.BoxGeometry(1,1,1);
+  function house(side, z) { const w = 8 + rnd() * 3, d = 7 + rnd() * 3, h = 3.1 + rnd() * 2.4, x = side * (HALF + 4.6 + w / 2 + rnd() * 1.5); const g = new T.Group();g.userData.houseFallback=true;
+    add(new T.Mesh(new T.BoxGeometry(w, h, d), pick(wallMats)), 0, h / 2, 0, g);
+    const roofHeight = 1.7 + rnd() * .8, overhang = .22, profile = new T.Shape();
+    profile.moveTo(-w/2-overhang,0); profile.lineTo(0,roofHeight); profile.lineTo(w/2+overhang,0); profile.closePath();
+    const roof = new T.Mesh(new T.ExtrudeGeometry(profile,{depth:d+overhang*2,bevelEnabled:false}),pick(roofMats));
+    add(roof,0,h,-d/2-overhang,g);
+    if(rnd()>.35) feature(g,streetShapes.chimney,windowFrame,w*.22,h+roofHeight*.62,-d*.16);
+    // The wall facing the road gets inset glazing, a sill and a lit entry.
+    const n = 2 + Math.floor(rnd() * 2); for (let i = 0; i < n; i++) { const wz = (i - (n - 1) / 2) * (d / (n + .4));
+      feature(g,streetShapes.frame,windowFrame,-side*(w/2+.022),1.7,wz,-side*Math.PI/2);
+      feature(g,streetShapes.glass,rnd()<.55?winLit:winDark,-side*(w/2+.029),1.7,wz,-side*Math.PI/2);
+      feature(g,streetShapes.sill,windowFrame,-side*(w/2+.10),.99,wz); }
+    // Gable ends face approaching traffic: use framed windows instead of blank walls.
+    const frontZ=d/2+.035;
+    for(const y of (h>4.5?[1.55,h-1.1]:[1.55])) for(const fx of [-w*.23,w*.23]){
+      feature(g,streetShapes.frame,windowFrame,fx,y,frontZ);
+      feature(g,streetShapes.glass,rnd()<.58?winLit:winDark,fx,y,frontZ+.01);
+      feature(g,streetShapes.frontSill,windowFrame,fx,y-.71,frontZ+.06);
+      feature(g,streetShapes.mullion,windowFrame,fx,y,frontZ+.025);
+    }
+    const entryZ = d*.39, faceX = -side*(w/2+.035);
+    feature(g,streetShapes.jamb,windowFrame,faceX,1.09,entryZ);
+    feature(g,streetShapes.door,doorMat,faceX-side*.045,1.05,entryZ);
+    feature(g,streetShapes.lamp,entryLamp,faceX-side*.08,2.35,entryZ+.72);
+    feature(g,streetShapes.canopy,windowFrame,faceX-side*.13,2.48,entryZ);
+    g.position.set(x, 0, z); scene.add(g);houseSlots.push({g,x,z,side,w,d,h});
+    const shade=feature(scene,streetShapes.groundShadow,groundShade,x,-.045,z);shade.rotation.x=-Math.PI/2;shade.scale.set(w*.68,d*.7,1);
+    if (rnd() < .7) {const hx=side*(HALF+2.7),length=d+4;
+      const hedgeBox=add(new T.Mesh(hedgeBoxGeometry,hedgeMat),hx,.55,z);
+      hedgeBox.scale.set(.7,1.1,length);hedgeBox.userData.streetFeature=true;
+      const count=Math.ceil(length/1.05);for(let i=0;i<count;i++){const bump=feature(scene,streetShapes.hedgeCrown,hedgeMat,hx,1.07,z-length/2+(i+.5)*length/count);
+        const variation=.9+.10*Math.sin(i*3.7+z);bump.scale.set(.38*variation,.24*variation,.60*variation);}
+    } }
+  const treePhotoMat=mat(0xcbd2c0,{side:T.DoubleSide,alphaTest:.38,roughness:1});
+  function tree(x, z) { const h = 4 + rnd() * 3, radius=1.15+rnd()*.5;
+    const trunk=feature(scene,streetShapes.trunk,trunkMat,x,h*.25,z);trunk.scale.y=h*.5;trunk.userData.treeFallback=true;
+    const shade=feature(scene,streetShapes.groundShadow,groundShade,x,-.043,z);shade.rotation.x=-Math.PI/2;shade.scale.set(radius*1.2,radius*.85,1);
+    for(const [dx,dy,dz,size] of [[0,1.45,0,1],[-.7,1.1,.08,.72],[.68,1.15,-.15,.76],[0,1.12,.55,.67]]) {
+      const c=feature(scene,streetShapes.crown,crownMat,x+dx,h*.5+dy,z+dz);c.scale.set(radius*size,radius*size*1.08,radius*size);c.userData.treeFallback=true;
+    }
+    // Crossed cutout cards provide locally supplied photographic foliage;
+    // the solid geometry above remains the offline/error fallback.
+    for(const yaw of [0,Math.PI/2]){const card=feature(scene,streetShapes.treeCard,treePhotoMat,x,h/2,z,yaw);
+      card.scale.set(h*.67,h,1);card.userData.treePhoto=true;}
+  }
   for (let z = 30; z > -470; z -= 15) { if (openCorner(z)) continue; house(-1, z + rnd() * 3); house(1, z + rnd() * 3); if (rnd() < .5) tree(pick([-1, 1]) * (HALF + 5.2 + rnd() * 2), z + 7); }
   for (const j of [J1, J2]) for (let x = 30; x < 170; x += 17) for (const sx of [-1, 1]) { if (rnd() < .65) tree(sx * x, j + pick([-1, 1]) * (HALF + 6 + rnd() * 5)); }
+  // Hundreds of small repeated facade details share a few instanced draw calls.
+  { scene.updateMatrixWorld(true); const features=[]; scene.traverse(node=>{if(node.userData.streetFeature)features.push(node);});
+    const groups=new Map(); for(const mesh of features){const kind=mesh.userData.houseFallback?'house':mesh.userData.treeFallback?'tree-fallback':mesh.userData.treePhoto?'tree-photo':'street';
+      const key=mesh.geometry.uuid+':'+mesh.material.uuid+':'+kind;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(mesh);}
+    for(const meshes of groups.values()){const first=meshes[0],batch=new T.InstancedMesh(first.geometry,first.material,meshes.length);batch.frustumCulled=false;
+      meshes.forEach((mesh,index)=>{batch.setMatrixAt(index,mesh.matrixWorld);mesh.parent.remove(mesh);});batch.instanceMatrix.needsUpdate=true;scene.add(batch);
+      if(first.userData.houseFallback)houseFallbackBatches.push(batch);if(first.userData.treeFallback)treeFallbackBatches.push(batch);
+      if(first.userData.treePhoto){batch.visible=false;treePhotoBatches.push(batch);}}
+  }
+  canvas.dataset.treeModel='fallback';let treeClosed=false,treeTexture=null;
+  window.addEventListener('pagehide',event=>{if(event.persisted||treeClosed)return;treeClosed=true;if(treeTexture)treeTexture.dispose();});
+  new T.TextureLoader().load('assets/textures/street-tree-v1.webp',texture=>{
+    if(treeClosed||approvedStreetReady){texture.dispose();return;}treeTexture=texture;texture.encoding=T.sRGBEncoding;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+    treePhotoMat.map=texture;treePhotoMat.needsUpdate=true;
+    for(const mesh of treeFallbackBatches)mesh.visible=false;for(const mesh of treePhotoBatches)mesh.visible=true;canvas.dataset.treeModel='ready';
+  },undefined,()=>{if(!treeClosed)canvas.dataset.treeModel='fallback';});
+  // The Blender building is optional: keep the already-rendered procedural street
+  // until every part has loaded, passed bounds checks, and been instanced safely.
+  function disposeHouseAsset(asset){
+    if(!asset)return;
+    for(const group of asset.groups||[])scene.remove(group.group);
+    for(const geometry of asset.geometries||[])geometry.dispose();
+    for(const material of asset.materials||[])material.dispose();
+    for(const texture of asset.textures||[])texture.dispose();
+  }
+  window.addEventListener('pagehide',event=>{if(event.persisted||houseClosed)return;houseClosed=true;disposeHouseAsset(houseAssets);houseAssets=null;houseChunks.length=0;});
+  function houseCanvasTexture(kind){
+    const c=document.createElement('canvas'),g=c.getContext('2d');
+    if(kind==='brick'){
+      c.width=c.height=512;g.fillStyle='#6d6259';g.fillRect(0,0,512,512);
+      let n=7341;const random=()=>{n=(Math.imul(n,1664525)+1013904223)>>>0;return n/4294967296;};
+      for(let row=0;row<16;row++)for(let col=-1;col<5;col++){
+        const x=col*128+(row%2)*64,y=row*32,v=Math.floor(103+random()*28);
+        g.fillStyle=`rgb(${v+20},${v+5},${v-7})`;g.fillRect(x+2,y+2,124,28);
+      }
+    }else{
+      c.width=c.height=256;g.fillStyle='#59605e';g.fillRect(0,0,256,256);g.strokeStyle='#414a49';g.lineWidth=2;
+      for(let y=0;y<256;y+=32){g.beginPath();g.moveTo(0,y);g.lineTo(256,y);g.stroke();
+        for(let x=((y/32)%2)*32;x<256;x+=64){g.beginPath();g.moveTo(x,y);g.lineTo(x,y+32);g.stroke();}}
+    }
+    const texture=new T.CanvasTexture(c);texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.encoding=T.sRGBEncoding;texture.flipY=false;
+    texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());return texture;
+  }
+  function exactHouseBounds(root){
+    root.updateMatrixWorld(true);const bounds=new T.Box3().makeEmpty(),point=new T.Vector3();let count=0;
+    root.traverse(node=>{const position=node.isMesh&&node.geometry?.attributes?.position;if(!position)return;
+      for(let i=0;i<position.count;i++){point.fromBufferAttribute(position,i).applyMatrix4(node.matrixWorld);bounds.expandByPoint(point);count++;}});
+    if(!count)throw new Error('The building contains no vertices');return bounds;
+  }
+  function installStreetHouse(source){
+    const asset={groups:[],geometries:new Set(),materials:new Set(),textures:new Set(),warm:[],sourceMaterials:new Set()};
+    try{
+      const pieces=[];source.traverse(node=>{if(node.geometry)asset.geometries.add(node.geometry);
+        if(node.material)for(const material of (Array.isArray(node.material)?node.material:[node.material]))asset.sourceMaterials.add(material);
+        if(node.isMesh&&node.geometry&&!Array.isArray(node.material))pieces.push(node);
+      });
+      const bounds=exactHouseBounds(source),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3());
+      if(![size.x,size.y,size.z,center.x,center.z,bounds.min.y].every(Number.isFinite)||size.x<1||size.y<1||size.z<1||size.x>20||size.y>20||size.z>20)throw new Error('Unexpected building dimensions');
+      if(pieces.length!==9||!pieces.some(p=>p.material.name==='facade_brick')||!pieces.some(p=>p.material.name==='roof_slate')||!pieces.some(p=>p.material.name==='window_warm'))throw new Error('Incomplete building materials');
+      const brick=houseCanvasTexture('brick'),slate=houseCanvasTexture('slate');asset.textures.add(brick);asset.textures.add(slate);
+      const materials=pieces.map(part=>{const m=part.material.clone();asset.materials.add(m);
+        if(m.name==='facade_brick'){m.map=brick;m.color.setHex(0xffffff);m.needsUpdate=true;}
+        if(m.name==='roof_slate'){m.map=slate;m.color.setHex(0xffffff);m.needsUpdate=true;}
+        if(m.name==='window_warm')asset.warm.push(m);
+        return m;});
+      const chunks=new Map();for(const [index,slot] of houseSlots.entries()){
+        const id=Math.floor((slot.z+480)/30);if(!chunks.has(id))chunks.set(id,[]);chunks.get(id).push({...slot,index});
+      }
+      const palette=[0xfff1e6,0xe6d7cb,0xf4e8d8,0xdcc8bd,0xf0ded0],roofPalette=[0xffffff,0xd9e2e0,0xe8e3dd];
+      const normalization=new T.Matrix4().makeTranslation(-center.x,-bounds.min.y,-center.z);
+      const report=[];
+      for(const [id,slots] of chunks.entries()){
+        const group=new T.Group(),minZ=Math.min(...slots.map(x=>x.z-x.d/2)),maxZ=Math.max(...slots.map(x=>x.z+x.d/2));
+        for(let partIndex=0;partIndex<pieces.length;partIndex++){
+          const piece=pieces[partIndex],material=materials[partIndex],batch=new T.InstancedMesh(piece.geometry,material,slots.length);batch.frustumCulled=false;
+          slots.forEach((slot,i)=>{
+            // +Z is the facade. Left houses face +X; right houses face -X.
+            const yaw=slot.side<0?Math.PI/2:-Math.PI/2;
+            const sx=(slot.w-.12)/size.z,sy=(slot.h+2.0)/size.y,sz=(slot.d-.12)/size.x;
+            const transform=new T.Matrix4().makeTranslation(slot.x,0,slot.z)
+              .multiply(new T.Matrix4().makeScale(sx,sy,sz)).multiply(new T.Matrix4().makeRotationY(yaw))
+              .multiply(normalization).multiply(piece.matrixWorld);
+            batch.setMatrixAt(i,transform);
+            if(material.name==='facade_brick')batch.setColorAt(i,new T.Color(palette[(slot.index*7+(slot.side>0?2:0))%palette.length]));
+            else if(material.name==='roof_slate')batch.setColorAt(i,new T.Color(roofPalette[slot.index%roofPalette.length]));
+          });
+          batch.instanceMatrix.needsUpdate=true;if(batch.instanceColor)batch.instanceColor.needsUpdate=true;group.add(batch);
+        }
+        asset.groups.push({id,group,minZ,maxZ});
+        for(const slot of slots)report.push({x:slot.x,z:slot.z,side:slot.side,width:slot.w-.12,depth:slot.d-.12,front:slot.side<0?'+X':'-X'});
+      }
+      if(!asset.groups.length)throw new Error('No suitable house placements');
+      const roadGap=Math.min(...report.map(slot=>Math.abs(slot.x)-slot.width/2-HALF));
+      const junctionGap=Math.min(...report.flatMap(slot=>[Math.abs(slot.z-J1)-slot.depth/2-HALF,Math.abs(slot.z-J2)-slot.depth/2-HALF]));
+      if(roadGap<2||junctionGap<10)throw new Error('A building could intrude into a clearance zone');
+      if(houseClosed){disposeHouseAsset(asset);for(const material of asset.sourceMaterials)material.dispose();return null;}
+      for(const entry of asset.groups){scene.add(entry.group);houseChunks.push(entry);}
+      for(const slot of houseSlots)slot.g.visible=false;for(const batch of houseFallbackBatches)batch.visible=false;
+      for(const material of asset.sourceMaterials)material.dispose();
+      canvas.dataset.houseModel='ready';canvas.dataset.houseInstances=String(report.length);
+      if(window.__natkorsel)window.__natkorsel.streetModel={assetSize:[size.x,size.y,size.z],houseCount:report.length,parts:pieces.length,chunks:asset.groups.length,roadGap,junctionGap,placements:report};
+      return asset;
+    }catch(error){
+      for(const slot of houseSlots)slot.g.visible=true;for(const batch of houseFallbackBatches)batch.visible=true;
+      for(const entry of asset.groups){const index=houseChunks.indexOf(entry);if(index>=0)houseChunks.splice(index,1);}
+      for(const material of asset.sourceMaterials)material.dispose();disposeHouseAsset(asset);
+      throw error;
+    }
+  }
+  canvas.dataset.houseModel='loading';
+  if(T.GLTFLoader)new T.GLTFLoader().load('assets/models/street-house.glb',gltf=>{
+    if(houseClosed||approvedStreetReady){const geometry=new Set(),material=new Set();gltf.scene.traverse(o=>{if(o.geometry)geometry.add(o.geometry);if(o.material)material.add(o.material);});geometry.forEach(g=>g.dispose());material.forEach(m=>m.dispose());return;}
+    try{houseAssets=installStreetHouse(gltf.scene);if(!houseAssets)return;updateDaylight();}
+    catch{canvas.dataset.houseModel='fallback';}
+  },undefined,()=>{if(!houseClosed)canvas.dataset.houseModel='fallback';});
+  else canvas.dataset.houseModel='fallback';
+  const starsMaterial = new T.PointsMaterial({color:0xc9d6f2,size:1.4,sizeAttenuation:false,fog:false,transparent:true,depthWrite:false});
   { const g = new T.BufferGeometry(), p = []; for (let i = 0; i < 260; i++) { const a = rnd() * Math.PI * 2, e = .12 + rnd() * 1.2, R = 380; p.push(Math.cos(a) * Math.cos(e) * R, Math.sin(e) * R, Math.sin(a) * Math.cos(e) * R - 200); }
-    g.setAttribute('position', new T.Float32BufferAttribute(p, 3)); scene.add(new T.Points(g, new T.PointsMaterial({ color: 0xc9d6f2, size: 1.4, sizeAttenuation: false, fog: false }))); }
+    g.setAttribute('position', new T.Float32BufferAttribute(p, 3)); scene.add(new T.Points(g, starsMaterial)); }
 
   /* ---------- vehicles ---------- */
   const headMat = glow(0xfff0c8), tailMat = glow(0xd8322a);
-  function carMesh(color) { const g = new T.Group();           // nose towards -z
-    add(new T.Mesh(new T.BoxGeometry(1.8, 0.62, 4.2), mat(color, { roughness: .62, metalness: .08 })), 0, 0.62, 0, g);
-    add(new T.Mesh(new T.BoxGeometry(1.6, 0.56, 2.1), mat(0x10151f, { roughness: .3 })), 0, 1.2, 0.25, g);
-    for (const sx of [-1, 1]) { add(new T.Mesh(new T.BoxGeometry(0.36, 0.16, 0.06), headMat), sx * 0.6, 0.7, -2.11, g); add(new T.Mesh(new T.BoxGeometry(0.36, 0.14, 0.06), tailMat), sx * 0.6, 0.72, 2.11, g); }
-    const beam = new T.Mesh(flat(3.4, 9), new T.MeshBasicMaterial({ map: poolTex, transparent: true, blending: T.AdditiveBlending, depthWrite: false, color: 0xcfd8ff })); add(beam, 0, 0.035, -6, g);
+  const contactGeometry = new T.CircleGeometry(1,24), contactMaterial = new T.MeshBasicMaterial({color:0x05090b,transparent:true,opacity:.32,depthWrite:false});
+  function contactShadow(parent,width,length) { const shadow=new T.Mesh(contactGeometry,contactMaterial); shadow.rotation.x=-Math.PI/2;
+    shadow.scale.set(width,length,1); add(shadow,0,.045,0,parent); }
+  const modelSlots = [];
+  function carMesh(color,{parked=false}={}) { const g = new T.Group(), fallback = new T.Group(); // nose towards -z
+    contactShadow(g,1.06,2.18);
+    add(new T.Mesh(new T.BoxGeometry(1.8, 0.62, 4.2), mat(color, { roughness: .62, metalness: .08 })), 0, 0.62, 0, fallback);
+    add(new T.Mesh(new T.BoxGeometry(1.6, 0.56, 2.1), mat(0x10151f, { roughness: .3 })), 0, 1.2, 0.25, fallback);
+    g.add(fallback); modelSlots.push({g, fallback, occupied:!parked});
+    if(parked){scene.add(g);return g;}
+    for (const sx of [-1, 1]) { const head=add(new T.Mesh(new T.BoxGeometry(0.36, 0.16, 0.06), headMat), sx * 0.6, 0.7, -2.11, g);head.name='legacy-npc-headlamp-box'; const tail=add(new T.Mesh(new T.BoxGeometry(0.36, 0.14, 0.06), tailMat), sx * 0.6, 0.72, 2.11, g);tail.name='legacy-npc-taillamp-box'; }
+    const beam = new T.Mesh(flat(3.4, 9), new T.MeshBasicMaterial({ map: poolTex, transparent: true, blending: T.AdditiveBlending, depthWrite: false, color: 0xcfd8ff }));beam.name='legacy-headlight-beam';add(beam, 0, 0.035, -6, g);
     scene.add(g); return g; }
   const ownCar = carMesh(0x1e5360); ownCar.visible = false;
+  ownCar.name='player-car';
   const beamLight = new T.SpotLight(0xfff0d2, 1.45, 80, 0.46, 0.7, 1.5); scene.add(beamLight); scene.add(beamLight.target);
 
   // cross traffic runs on a fixed timetable per junction: a busy stretch, then a clear one
@@ -332,71 +729,354 @@ button { font: inherit; color: inherit; }
   function junction(z, period, slots, lead) { return { z, period, lead, shift: lead, free: Math.max(...slots.map(s => s.at)) + 1.4,
     slots: slots.map(s => Object.assign({ mesh: carMesh(pick([0x8a8f99, 0x6b2f2a, 0x2f4b6e, 0xb9b4a6, 0x30343c])) }, s)) }; }
   const junctions = [
-    junction(J1, 18, [{ at: 0, dir: 1 }, { at: 3, dir: 1 }, { at: 6.2, dir: 1 }, { at: 1.6, dir: -1 }, { at: 4.6, dir: -1 }, { at: 7.4, dir: -1 }], 5.5),
+    junction(J1, 18, [{ at: 0, dir: 1, waits: true }, { at: 3, dir: 1 }, { at: 6.2, dir: 1 }, { at: 1.6, dir: -1 }, { at: 4.6, dir: -1 }, { at: 7.4, dir: -1 }], 5.5),
     junction(J2, 20, [{ at: 0, dir: -1 }, { at: 2.8, dir: 1 }, { at: 5.4, dir: -1 }, { at: 8, dir: 1 }, { at: 9.6, dir: -1 }], 0),
   ];
+  const oncomingCars=SIT.ONCOMING.offsets.map(()=>{const car=carMesh(pick([0x8a8f99,0x2f4b6e,0xb9b4a6]));car.visible=false;car.rotation.y=Math.PI;return car;});
+  // Parked cars along the kerb before junction 1, and the car that meets the player there. Fixed colours,
+  // so the seeded street above is unchanged. Parked cars have nobody inside and no lamps.
+  const parkedMeshes=[0x6b2f2a,0xb9b4a6,0x30343c].map(color=>{const car=carMesh(color,{parked:true});car.visible=false;car.name='parked-car';return car;});
+  const meetCar=carMesh(0x2f4b6e);meetCar.visible=false;meetCar.rotation.y=Math.PI;meetCar.name='meet-car';
+  // The car that comes from behind at a kerb start, drives ahead and pulls in.
+  const leadCar=carMesh(0x6b2f2a);leadCar.visible=false;leadCar.name='lead-car';
+  // The parking street after the crossing: a bus stop, a yellow kerb line and a driveway, moved per tour.
+  const texBus=signTexture(g=>{g.fillStyle='#F4F1E8';g.fillRect(14,14,228,228);g.lineWidth=12;g.strokeStyle='#1F2A44';g.strokeRect(14,14,228,228);
+    g.fillStyle='#1F2A44';g.fillRect(52,58,152,84);g.fillStyle='#F4F1E8';for(const x of [62,98,134,170])g.fillRect(x,70,26,26);g.fillStyle='#1F2A44';g.beginPath();g.arc(84,148,14,0,7);g.arc(172,148,14,0,7);g.fill();
+    g.font='800 64px "Arial Narrow", Arial, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('BUS',128,206);});
+  const busStop=sign(texBus,HALF+.7,0,.62);busStop.name='bus-stop';busStop.visible=false;
+  const yellowKerb=add(new T.Mesh(flat(.18,1),new T.MeshBasicMaterial({color:0xFFD60A})),HALF+.09,.148,0);yellowKerb.name='yellow-kerb';yellowKerb.visible=false;
+  const driveway=add(new T.Mesh(flat(2.1,1),new T.MeshBasicMaterial({color:0x4b4f55})),HALF+1.05,.146,0);driveway.name='driveway';driveway.visible=false;
+  function placeParkingStreet(){const on=Boolean(S.tour.ped)&&Boolean(S.parking),layout=on?SIT.parkingLayout(S.parking):null;
+    for(const part of [busStop,yellowKerb,driveway])part.visible=on;if(!on)return;
+    busStop.position.z=layout.bus;const [ya,yb]=layout.yellow,[da,db]=layout.drive;
+    yellowKerb.scale.z=yb-ya;yellowKerb.position.z=(ya+yb)/2;driveway.scale.z=db-da;driveway.position.z=(da+db)/2;}
+  let playerReady=false,playerLoading=false,playerClosed=false,playerWheel=null,playerWheelBase=null,playerExteriorOnly=[],playerBatchOriginals=[],playerInteriorBatches=[];
+  const playerWheelAxis=new T.Vector3(1,0,0),playerWheelTurn=new T.Quaternion();
+  const playerNotice=document.createElement('p');playerNotice.className='note';playerNotice.hidden=true;playerNotice.setAttribute('role','status');$('start-btn').before(playerNotice);
+  const playerSlot=modelSlots.find(x=>x.g===ownCar);ownCar.remove(playerSlot.fallback);
+  for(const child of [...ownCar.children])if(child.name==='legacy-npc-headlamp-box'||child.name==='legacy-npc-taillamp-box'||child.name==='legacy-headlight-beam'){ownCar.remove(child);child.geometry.dispose();if(child.name==='legacy-headlight-beam')child.material.dispose();}
+  function batchPlayerStatic(model,names,batchName){
+    model.updateWorldMatrix(true,true);const pieces=names.map(name=>model.getObjectByName(name));
+    if(pieces.some(piece=>!piece?.isMesh||Array.isArray(piece.material)||piece.material.transparent||!piece.geometry.attributes.normal))throw Error('Invalid player interior batch');
+    const material=pieces[0].material;if(pieces.some(piece=>piece.material!==material))throw Error('Player interior batch material mismatch');
+    const count=pieces.reduce((sum,piece)=>sum+piece.geometry.attributes.position.count,0),indexCount=pieces.reduce((sum,piece)=>sum+(piece.geometry.index?.count||piece.geometry.attributes.position.count),0);
+    const positions=new Float32Array(count*3),normals=new Float32Array(count*3),indices=count>65535?new Uint32Array(indexCount):new Uint16Array(indexCount);
+    const inverse=new T.Matrix4().copy(model.matrixWorld).invert(),point=new T.Vector3(),normal=new T.Vector3(),normalMatrix=new T.Matrix3();let vertexOffset=0,indexOffset=0;
+    for(const piece of pieces){const geometry=piece.geometry,p=geometry.attributes.position,n=geometry.attributes.normal,matrix=new T.Matrix4().multiplyMatrices(inverse,piece.matrixWorld);normalMatrix.getNormalMatrix(matrix);
+      for(let i=0;i<p.count;i++){point.fromBufferAttribute(p,i).applyMatrix4(matrix);normal.fromBufferAttribute(n,i).applyNormalMatrix(normalMatrix);positions.set(point.toArray(),(vertexOffset+i)*3);normals.set(normal.toArray(),(vertexOffset+i)*3);}
+      const index=geometry.index;for(let i=0;i<(index?.count||p.count);i++)indices[indexOffset++]=vertexOffset+(index?index.getX(i):i);vertexOffset+=p.count;
+      piece.userData.playerBatchOriginal=true;piece.visible=false;playerBatchOriginals.push(piece);}
+    const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.BufferAttribute(positions,3));geometry.setAttribute('normal',new T.BufferAttribute(normals,3));geometry.setIndex(new T.BufferAttribute(indices,1));geometry.computeBoundingSphere();
+    const batch=new T.Mesh(geometry,material);batch.name=batchName;batch.userData.playerBatch=true;batch.userData.sourceNames=[...names];model.add(batch);playerInteriorBatches.push(batch);
+  }
+  function installPlayerModel(model,source){
+    const bounds=new T.Box3().setFromObject(model),centre=bounds.getCenter(new T.Vector3()),size=bounds.getSize(new T.Vector3());
+    if(![size.x,size.z].every(n=>Number.isFinite(n)&&n>0))throw Error('Invalid player vehicle bounds');
+    // Nordic 053 supplies its own pivot and local-X spin axis. Preserve Nordic's
+    // original node and rest quaternion; the legacy hatch uses its old pivot.
+    const steering=model.getObjectByName('steering_wheel');
+    if(source==='sedan-053-lod1'){if(!steering?.parent||steering.userData.spin_axis_local!=='X')throw Error('Missing Nordic steering pivot');playerWheel=steering;playerWheelBase=steering.quaternion.clone();}
+    else if(steering?.parent){const parent=steering.parent,box=new T.Box3().setFromObject(steering),pivotPoint=parent.worldToLocal(box.getCenter(new T.Vector3()));
+      const pivot=new T.Group();pivot.name='player-steering-pivot';pivot.position.copy(pivotPoint);parent.add(pivot);steering.position.sub(pivotPoint);pivot.add(steering);playerWheel=pivot;}
+    // The supplied interiors have a gap below the seats. Close only that gap
+    // with a floor bounded by the actual seat/dashboard meshes and their own
+    // cabin material; the bonnet, body and glazing remain unchanged GLB data.
+    const seatBounds=new T.Box3(),dashBounds=new T.Box3(),glassBounds=new T.Box3();let cabinMaterial=null,cabinColour=null;
+    model.updateWorldMatrix(true,true);model.traverse(node=>{if(!node.isMesh||Array.isArray(node.material))return;const name=node.material?.name;
+      if(name===(source==='hatch-lite'?'seat_PBR':'portable_seat'))seatBounds.union(new T.Box3().setFromObject(node));
+      if(name===(source==='hatch-lite'?'glass_PBR':'portable_nordic_glass'))glassBounds.union(new T.Box3().setFromObject(node));
+      if(name===(source==='hatch-lite'?'interior_PBR':'portable_interior')){if(!cabinMaterial){cabinMaterial=node.material;cabinColour=node.geometry.getAttribute('color');}if(source!=='hatch-lite')dashBounds.union(new T.Box3().setFromObject(node));}});
+    if(source==='hatch-lite'){const dashboard=model.getObjectByName('dashboard');if(dashboard)dashBounds.setFromObject(dashboard);}
+    if(!cabinMaterial||seatBounds.isEmpty()||dashBounds.isEmpty())throw Error('Missing player cabin floor reference');
+    const floorMinX=seatBounds.min.x-.08,floorMaxX=Math.max(seatBounds.max.x,dashBounds.max.x),floorMinZ=Math.min(seatBounds.min.z,dashBounds.min.z)-.03,floorMaxZ=Math.max(seatBounds.max.z,dashBounds.max.z)+.03;
+    // The Nordic cabin material reads per-vertex colours. Copy one
+    // source interior colour to the three reconstructed surfaces, so they do
+    // not render black when the source GLB uses vertex colours.
+    function cabinSurface(geometry){if(source==='sedan-053-lod1'){
+      if(!cabinColour||cabinColour.itemSize<3||!cabinColour.count)throw Error('Missing Nordic cabin vertex colour');
+      const storage=cabinColour.array||cabinColour.data?.array,values=new storage.constructor(geometry.attributes.position.count*3);
+      for(let i=0;i<values.length;i+=3){values[i]=cabinColour.getX(0);values[i+1]=cabinColour.getY(0);values[i+2]=cabinColour.getZ(0);}
+      geometry.setAttribute('color',new T.BufferAttribute(values,3,cabinColour.normalized));}return geometry;}
+    const floorGeometry=cabinSurface(new T.PlaneGeometry(floorMaxX-floorMinX,floorMaxZ-floorMinZ));floorGeometry.rotateX(-Math.PI/2);
+    const floor=new T.Mesh(floorGeometry,cabinMaterial);floor.name='reconstructed-cabin-floor';floor.position.set((floorMinX+floorMaxX)/2,seatBounds.min.y-.025,(floorMinZ+floorMaxZ)/2);
+    floor.userData={reconstructed:true,method:'seat and dashboard bounds',material:cabinMaterial.name,bounds:[floorMinX,floorMaxX,floorMinZ,floorMaxZ],height:floor.position.y};model.add(floor);
+    // The rear quarter also has no inward-facing lower side surface. Two
+    // fixed, seat/window-bounded liners close that gap below the window sill.
+    if(!glassBounds.isEmpty()){const linerEndX=seatBounds.min.x+(seatBounds.max.x-seatBounds.min.x)*.6,linerTop=Math.min(glassBounds.min.y,seatBounds.max.y-.1),linerBottom=floor.position.y;
+      if(linerTop>linerBottom&&linerEndX>floorMinX)for(const [side,z] of [['left',floorMinZ],['right',floorMaxZ]]){
+        const liner=new T.Mesh(cabinSurface(new T.PlaneGeometry(linerEndX-floorMinX,linerTop-linerBottom)),cabinMaterial);liner.name=`reconstructed-rear-liner-${side}`;
+        liner.position.set((floorMinX+linerEndX)/2,(linerBottom+linerTop)/2,z);if(side==='right')liner.rotation.y=Math.PI;
+        liner.userData={reconstructed:true,method:'seat, window and floor bounds',material:cabinMaterial.name};model.add(liner);}}
+    // Exterior-only parts cannot be seen from inside the cabin. Keep their
+    // original meshes for incident/review views while avoiding their cost in
+    // the driver and mirror passes. Body, glass, seats, dash, mirrors, wipers,
+    // hatch bonnet vent and steering retain the original shared buffers.
+    const hatchInterior=new Set(['body','mirrors','wipers','louvres','glass_front1','glass_quarter1','glass_front-1','glass_quarter-1','glass_windshield','glass_rear','dashboard','seats','rearview','player-steering-pivot','reconstructed-cabin-floor','reconstructed-rear-liner-left','reconstructed-rear-liner-right']);
+    playerExteriorOnly=model.children.filter(child=>source==='hatch-lite'?!hatchInterior.has(child.name):/^wheel_|^lights$/.test(child.name));
+    // The hatch's outward liner and seal overlap the real painted A-pillar
+    // from inside. Retain the paint/glass; restore these source meshes outside.
+    if(source==='hatch-lite')model.getObjectByName('body')?.traverse(node=>{if(node.isMesh&&!Array.isArray(node.material)&&['liner_PBR','seal_PBR'].includes(node.material?.name))playerExteriorOnly.push(node);});
+    for(const part of playerExteriorOnly){part.userData.playerExteriorOnly=true;part.visible=false;}
+    if(source==='hatch-lite'){
+      // Static opaque source pieces share materials; combine their unchanged
+      // triangles in car space. Glass and the rotating steering wheel remain
+      // separate. Review restores the original meshes and hides the batches.
+      batchPlayerStatic(model,['mirrors','wipers','louvres','rearview'],'player-static-trim');
+      batchPlayerStatic(model,['dashboard','reconstructed-cabin-floor','reconstructed-rear-liner-left','reconstructed-rear-liner-right'],'player-static-interior');
+      // The hatch's six glass meshes keep their GLB color, alpha, geometry and
+      // depth/side settings while using a cheaper lit shader in every view.
+      const glassMaterials=new Map();model.traverse(node=>{if(!node.isMesh||Array.isArray(node.material))return;const original=node.material;if(!original?.transparent||original.name!=='glass_PBR')return;
+        let glass=glassMaterials.get(original);if(!glass){glass=new T.MeshLambertMaterial({name:original.name,color:original.color.clone(),opacity:original.opacity,transparent:original.transparent,side:original.side,depthWrite:original.depthWrite,depthTest:original.depthTest,colorWrite:original.colorWrite,alphaTest:original.alphaTest,blending:original.blending,premultipliedAlpha:original.premultipliedAlpha,fog:original.fog,vertexColors:original.vertexColors,flatShading:original.flatShading,toneMapped:original.toneMapped,dithering:original.dithering,map:original.map,alphaMap:original.alphaMap});if(original.emissive)glass.emissive.copy(original.emissive);glassMaterials.set(original,glass);}node.material=glass;});
+    }
+    const aligned=new T.Group();aligned.name='player-car-model';model.name='player-car-glb';
+    model.position.set(-centre.x,-bounds.min.y,-centre.z);aligned.add(model);aligned.scale.setScalar(4.2/size.x);aligned.rotation.y=Math.PI/2;ownCar.add(aligned);
+    playerReady=true;canvas.dataset.playerModel=source;playerNotice.hidden=true;
+  }
+  async function loadPlayerHatch(){
+    if(playerReady||playerLoading||playerClosed||cockpitStyle==='nordic')return;
+    playerLoading=true;canvas.dataset.playerModel='loading';syncStartButton();
+    try{const url=new URL('assets/models/trafiklab-hatch-lite.glb',location.href),response=await fetch(url);
+      if(!response.ok)throw Error('Player vehicle unavailable');const bytes=await response.arrayBuffer();
+      const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');
+      if(hash!=='08bf4d1d36777d76b97e04a31a46cd6cbf53809b48e901654ee565d63b1bcb81')throw Error('Player vehicle integrity mismatch');
+      const gltf=await new Promise((resolve,reject)=>new T.GLTFLoader().parse(bytes,new URL('.',url).href,resolve,reject));
+      if(!playerClosed)installPlayerModel(gltf.scene,'hatch-lite');
+    }catch{if(!playerClosed){canvas.dataset.playerModel='unavailable';playerNotice.textContent='Bilen kunne ikke hentes. Tryk Prøv igen.';playerNotice.hidden=false;}}
+    finally{playerLoading=false;syncStartButton();}
+  }
+  window.addEventListener('pagehide',event=>{if(!event.persisted)playerClosed=true;});
+  let trafficReady=false,trafficLoading=false,trafficClosed=false,trafficAsset=null,trafficOccupants=null;
+  function disposeTraffic(root){if(!root)return;const geometries=new Set(),materials=new Set(),textures=new Set();root.traverse(node=>{if(node.geometry)geometries.add(node.geometry);for(const m of (Array.isArray(node.material)?node.material:node.material?[node.material]:[])){materials.add(m);for(const v of Object.values(m))if(v?.isTexture)textures.add(v);}});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());}
+  const trafficNotice=document.createElement('p');trafficNotice.className='note';trafficNotice.hidden=true;trafficNotice.setAttribute('role','status');$('start-btn').before(trafficNotice);
+  async function loadTraffic(){
+    if(trafficReady||trafficLoading||trafficClosed)return;
+    trafficLoading=true;canvas.dataset.trafficFleet='loading';trafficNotice.hidden=false;trafficNotice.textContent='Henter trafikken …';syncStartButton();
+    try {
+      const gltf=await loadApprovedFleet(T,'sedan','lod1');trafficAsset=gltf.scene;
+      if(trafficClosed){disposeTraffic(trafficAsset);trafficAsset=null;return;}
+      if(cockpitStyle==='nordic'&&!playerReady&&!playerClosed)installPlayerModel(trafficAsset.clone(true),'sedan-053-lod1');
+      trafficOccupants=await createSeatedOccupants(T);
+      if(trafficClosed){trafficOccupants.dispose();trafficOccupants=null;disposeTraffic(trafficAsset);trafficAsset=null;return;}
+      const bounds=new T.Box3().setFromObject(trafficAsset),centre=bounds.getCenter(new T.Vector3()),size=bounds.getSize(new T.Vector3());
+      if(![size.x,size.z].every(n=>Number.isFinite(n)&&n>0))throw Error('Invalid vehicle bounds');
+      let occupantIndex=0;
+      for(const {g,fallback,occupied} of modelSlots){
+        if(g===ownCar)continue;
+        const model=trafficAsset.clone(true),aligned=new T.Group();
+        if(occupied!==false){const index=occupantIndex++,driver=trafficOccupants.create({identity:index%4,width:.55,height:.66});driver.userData.occupantRole='driver';driver.position.set(2.5,.83,-.43);model.add(driver);
+        if(index%4===0){const passenger=trafficOccupants.create({role:'passenger',identity:(index+1)%4,width:.55,height:.66});passenger.userData.occupantRole='passenger';passenger.position.set(2.5,.83,.43);model.add(passenger);}}
+        model.position.set(-centre.x,-bounds.min.y,-centre.z);
+        aligned.add(model);aligned.scale.setScalar(4.2/size.x);aligned.rotation.y=Math.PI/2;
+        g.remove(fallback);for(const child of [...g.children])if(child.name==='legacy-npc-headlamp-box'||child.name==='legacy-npc-taillamp-box'){g.remove(child);child.geometry.dispose();}g.add(aligned);
+      }
+      trafficReady=true;canvas.dataset.trafficFleet='approved-sedan-053';trafficNotice.hidden=true;
+    }catch{trafficOccupants?.dispose();trafficOccupants=null;disposeTraffic(trafficAsset);trafficAsset=null;if(!trafficClosed){canvas.dataset.trafficFleet='unavailable';trafficNotice.textContent='Trafikken kunne ikke hentes. Tryk Prøv igen.';trafficNotice.hidden=false;}}
+    finally{trafficLoading=false;syncStartButton();if(trafficReady){void loadScooter();void loadQuizQuestions();void loadRider();loadChild();}}
+  }
+  // Until the verified traffic is available, Start is gated and no legacy proxy is shown.
+  for(const {g,fallback} of modelSlots)if(g!==ownCar)g.remove(fallback);
+  window.addEventListener('pagehide',event=>{if(event.persisted||trafficClosed)return;trafficClosed=true;trafficOccupants?.dispose();trafficOccupants=null;disposeTraffic(trafficAsset);trafficAsset=null;});
   // seconds since this car passed our lane (negative: still on its way)
   const sincePass = (j, slot, t) => { let p = (t + j.shift - slot.at) % j.period; if (p < 0) p += j.period; return p >= j.period / 2 ? p - j.period : p; };
-  function placeTraffic(t) { for (const j of junctions) for (const s of j.slots) { const tau = sincePass(j, s, t), x = LANE + s.dir * SPEED * tau;
-      s.x = x; s.mesh.position.set(x, 0, j.z + s.dir * LANE); s.mesh.rotation.y = -s.dir * Math.PI / 2; s.mesh.visible = Math.abs(x) < j.period * SPEED / 2 - 4; } }
+  function placeTraffic(t) { for (const j of junctions) for (const s of j.slots) { if(s.off){s.mesh.visible=false;continue;} const tau = sincePass(j, s, t), x = s.held?-HALF-3.2:LANE + s.dir * SPEED * tau;
+      s.x = x; s.mesh.position.set(x, 0, j.z + s.dir * LANE); s.mesh.rotation.y = -s.dir * Math.PI / 2; // Distance affects the visual mesh only. Conflict and collision timing use
+      // the car's computed position even while its fog-hidden mesh is culled.
+      s.mesh.visible = (s.held||Math.abs(x) < j.period * SPEED / 2 - 4) && Math.hypot(x-S.x,j.z+s.dir*LANE-S.z)<180; } }
   // how long we need, from here with the gas down, before our rear bumper is clear of the far side
   function timeToClear(front, v, farEdge) { let d = (front - farEdge) + FRONT + REAR, t = 0; while (d > 0 && t < 12) { v += 2.9 * (1 - v / 17.2) * .05; d -= v * .05; t += .05; } return t; }
-  function conflict(j, front, v, t) { const need = timeToClear(front, v, j.z - HALF) + 1.2, half = (0.9 + 2.1) / SPEED;
-    return j.slots.some(s => { const until = -sincePass(j, s, t); return until + half > -0.2 && until - half < need; }); }
-  const collides = (j, z, t) => j.slots.some(s => Math.abs(s.dir * SPEED * sincePass(j, s, t)) < 3.0 && Math.abs((j.z + s.dir * LANE) - z) < FRONT + 0.9);
+  function conflict(j, front, v, t, x=LANE) {const need=timeToClear(front,v,j.z-HALF)+1.2,half=(.9+2.1)/SPEED+.45;
+    return j.slots.some(s=>{if(s.off||s.held)return false;const until=(x-LANE)/(s.dir*SPEED)-sincePass(j,s,t);return until+half>-.2&&until-half<need;});}
+  const collides=(j,z,t,x=LANE,heading=0)=>j.slots.some(s=>{if(s.off)return false;if(s.held)return carsOverlap({x,z,heading},{x:s.x,z:j.z+s.dir*LANE,heading:s.dir*Math.PI/2});const trafficX=LANE+s.dir*SPEED*sincePass(j,s,t);
+    return Math.abs(trafficX)<j.period*SPEED/2-4&&carsOverlap({x,z,heading},{x:trafficX,z:j.z+s.dir*LANE,heading:s.dir*Math.PI/2});});
+
+  // One oncoming scooter. Scenery only: no conflict, collision or score ever reads it.
+  const scooterGroup=new T.Group();scooterGroup.visible=false;scooterGroup.name='traffic-scooter';scene.add(scooterGroup);
+  let scooterState=newScooterState(),scooterReady=false,scooterLoading=false,scooterAsset=null,scooterRider=null;
+  async function loadScooter(){
+    if(scooterReady||scooterLoading||trafficClosed)return;
+    scooterLoading=true;canvas.dataset.trafficScooter='loading';
+    try{
+      const gltf=await loadApprovedFleet(T,'scooter','lod1');scooterAsset=gltf.scene;addPlateBorder(T,scooterAsset);
+      scooterRider=await createScooterRider(T,attachCylindricalBillboard);
+      if(trafficClosed){scooterRider.dispose();disposeTraffic(scooterAsset);return;}
+      const aligned=new T.Group();scooterAsset.position.x=-SCOOTER_CENTRE_X;aligned.add(scooterAsset);aligned.add(scooterRider);
+      aligned.rotation.y=-Math.PI/2;scooterGroup.add(aligned);contactShadow(scooterGroup,.42,1.06);
+      scooterReady=true;canvas.dataset.trafficScooter='approved-scooter-048';
+    }catch{scooterRider?.dispose();scooterRider=null;disposeTraffic(scooterAsset);scooterAsset=null;canvas.dataset.trafficScooter='unavailable';}
+    finally{scooterLoading=false;}
+  }
+  window.addEventListener('pagehide',event=>{if(event.persisted)return;scooterRider?.dispose();scooterRider=null;disposeTraffic(scooterAsset);scooterAsset=null;});
+  // Cross traffic due at the scooter's lane within the time it needs to cross.
+  function scooterMustWait(j,t){return j.slots.some(s=>{if(s.off||s.held)return false;const until=(-LANE-LANE)/(s.dir*SPEED)-sincePass(j,s,t);return until>-1.2&&until<3.2;});}
+  const scooterWorld={lane:-LANE,roadEnd:END,roadStart:44,avoid:[J1,J2,PED],playerX:LANE,playerZ:26,
+    stops(){const t=S.clock,w=S.walker;return [
+      ...(S.tour.ped?[{id:'ped',z:PED-SCOOTER.crossingClear,kind:'give-way',blocked:w.state==='walk'&&w.x>-HALF-.5}]:[]),
+      ...(S.tour.j2==='stop'?[{id:'j2',z:J2-HALF-SCOOTER.junctionClear,kind:'sign',blocked:scooterMustWait(junctions[1],t)}]:[]),
+      {id:'j1',z:J1-HALF-SCOOTER.junctionClear,kind:'give-way',blocked:scooterMustWait(junctions[0],t)},
+    ];}};
+  function placeScooter(){
+    const show=scooterReady&&S.mode==='drive'&&ambientScooter()&&scooterState.active&&Math.abs(scooterState.z-S.z)<180;
+    scooterGroup.visible=show;if(show)scooterGroup.position.set(-LANE,0,scooterState.z);
+  }
+
+  // The cyclist on a right turn. Without the art the turn still works, just without a rider.
+  const riderGroup=new T.Group();riderGroup.visible=false;riderGroup.name='road-rider';scene.add(riderGroup);
+  let riderReady=false,riderLoading=false,riderCard=null;
+  async function loadRider(){if(riderReady||riderLoading||trafficClosed)return;riderLoading=true;canvas.dataset.roadRider='loading';
+    try{riderCard=await createRoadRider(T,attachCylindricalBillboard);if(trafficClosed){riderCard.dispose();return;}riderGroup.add(riderCard.mesh);contactShadow(riderGroup,.22,.9);riderReady=true;S.rider.available=true;if(S.bike)S.bike.available=true;canvas.dataset.roadRider='ready';}
+    catch{canvas.dataset.roadRider='unavailable';}finally{riderLoading=false;}}
+  window.addEventListener('pagehide',event=>{if(event.persisted)return;riderCard?.dispose();riderCard=null;});
+  function placeRider(){const r=S.rider,b=S.bike,bike=riderReady&&b&&SIT.bikeTour(S.tour)&&b.state!=='wait';
+    if(bike){const show=Math.abs(b.z-S.z)<180;riderGroup.visible=show;if(show)riderGroup.position.set(b.x,b.x>HALF?.14:0,b.z);return;}
+    const show=riderReady&&r.active&&Math.abs(r.z-S.z)<180;riderGroup.visible=show;if(show)riderGroup.position.set(SIT.RIDER.x,0,r.z);}
+  // The scenery scooter stays away on left turns, and on a stretch with parked cars, where it may be the one meeting the player.
+  function ambientScooter(){return S.tour.j2!=='left'&&S.tour.stretch!=='meet'&&S.tour.stretch!=='child'&&S.tour.stretch!=='follow';}
+  function placeLead(){const l=S.lead,show=S.tour.stretch==='follow'&&l&&SIT.leadOnRoad(l)&&Math.abs(l.z-S.z)<180;leadCar.visible=Boolean(show);if(show)leadCar.position.set(l.x,0,l.z);}
+  function placeMeet(){const m=S.meet,on=S.tour.stretch==='meet'&&m?.launched,K={J1,HALF};let car=false,scooter=false;
+    if(on)for(const v of m.vehicles){if(!SIT.meetVisible(v,K)||Math.abs(v.z-S.z)>180)continue;if(v.kind==='car'){meetCar.position.set(SIT.MEET.x,0,v.z);car=true;}else if(scooterReady){scooterGroup.position.set(SIT.MEET.x,0,v.z);scooter=true;}}
+    meetCar.visible=car;if(S.tour.stretch==='meet')scooterGroup.visible=scooter;
+    parkedMeshes.forEach((mesh,i)=>{const spot=S.parked[i];mesh.visible=Boolean(spot)&&Math.abs(spot.z-S.z)<180;if(spot)mesh.position.set(spot.x,0,spot.z);});}
+  // The child after the ball. Running card on the way out, the approved walking card on the way back.
+  const childGroup=new T.Group(),ballGroup=new T.Group();childGroup.visible=ballGroup.visible=false;childGroup.name='child-after-ball';ballGroup.name='play-ball';scene.add(childGroup);scene.add(ballGroup);
+  let childReady=false,childLoading=false,childCards=null;
+  function childCard(texture,height){texture.encoding=T.sRGBEncoding;const w=height*texture.image.width/texture.image.height,geometry=new T.PlaneGeometry(w,height);geometry.translate(0,height/2,0);return attachCylindricalBillboard(T,new T.Mesh(geometry,new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.05,depthWrite:false,side:T.DoubleSide})));}
+  function loadChild(){if(childReady||childLoading||trafficClosed)return;childLoading=true;canvas.dataset.childAfterBall='loading';syncStartButton();const loader=new T.TextureLoader(),load=url=>new Promise((resolve,reject)=>loader.load(url,resolve,undefined,reject));
+    Promise.all(['assets/people-cse/a_child_run.webp','assets/people-cse/a_child.png','assets/people-cse/play-ball.webp'].map(load)).then(([run,walk,ball])=>{if(trafficClosed){[run,walk,ball].forEach(t=>t.dispose());return;}
+      childCards={run:childCard(run,1.32),walk:childCard(walk,1.32),ball:childCard(ball,.42)};childCards.walk.visible=false;childGroup.add(childCards.run,childCards.walk);contactShadow(childGroup,.3,.3);ballGroup.add(childCards.ball);childReady=true;canvas.dataset.childAfterBall='ready';restoreStretch();})
+      .catch(()=>{canvas.dataset.childAfterBall='unavailable';}).finally(()=>{childLoading=false;syncStartButton();});}
+  window.addEventListener('pagehide',event=>{if(event.persisted||!childCards)return;for(const card of Object.values(childCards)){card.geometry.dispose();card.material.map?.dispose();card.material.dispose();}childCards=null;});
+  function placeChild(){const c=S.child,on=S.tour.stretch==='child'&&childReady&&c&&c.phase!=='wait';childGroup.visible=on&&Math.abs(SIT.CHILD.gapZ-S.z)<180;ballGroup.visible=on&&c.ball;
+    if(!on)return;childGroup.position.set(c.x,c.x>HALF?.14:0,SIT.CHILD.gapZ);childCards.run.visible=c.phase==='ball'||c.phase==='out';childCards.walk.visible=!childCards.run.visible;ballGroup.position.set(c.ballX,0,SIT.CHILD.gapZ+.2);}
+  const PHONE_MESSAGES=[['Mor','Kan du købe mælk på vejen hjem?'],['Jonas','Er du der snart? Vi venter.'],['Pakkeshop','Din pakke er klar til afhentning.'],['Sara','Har du set billedet, jeg sendte?']];
+  let phoneShown=null;
+  function placePhone(){const ph=S.phone,state=S.mode==='drive'&&S.tour.stretch==='phone'&&ph?ph.state:'off';if(state===phoneShown)return;phoneShown=state;
+    $('phone').hidden=state!=='ring';$('phone-look').hidden=state!=='look';canvas.dataset.phone=state;}
+  function placeOncoming(){const o=S.oncoming,left=S.tour.j2==='left'&&o.armed,taus=left?SIT.oncomingTaus(S.clock,o.phase):null;
+    oncomingCars.forEach((car,i)=>{const z=left?SIT.oncomingZ(taus[i],J2):0,show=left&&SIT.oncomingActive(z)&&Math.hypot(-LANE-S.x,z-S.z)<180;car.visible=show;if(show)car.position.set(-LANE,0,z);});}
 
   // pedestrian
   const walker = new T.Group();
-  add(new T.Mesh(new T.CylinderGeometry(0.2, 0.24, 1.15, 8), mat(0x2b3140)), 0, 0.95, 0, walker);
-  add(new T.Mesh(new T.SphereGeometry(0.17, 10, 8), mat(0xc9a58c)), 0, 1.7, 0, walker);
-  add(new T.Mesh(new T.BoxGeometry(0.46, 0.14, 0.3), mat(0xd9b24a, { emissive: 0x5a4410 })), 0, 1.36, 0, walker);   // scarf, catches the light
-  const legs = [-1, 1].map(s => add(new T.Mesh(new T.BoxGeometry(0.13, 0.5, 0.15), mat(0x1b1f29)), s * 0.09, 0.25, 0, walker));
+  {const soft=document.createElement('canvas');soft.width=soft.height=64;const ctx=soft.getContext('2d'),rad=ctx.createRadialGradient(32,32,1,32,32,31);rad.addColorStop(0,'rgba(0,0,0,.35)');rad.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=rad;ctx.fillRect(0,0,64,64);const shadow=new T.Mesh(new T.PlaneGeometry(.8,.5),new T.MeshBasicMaterial({map:new T.CanvasTexture(soft),transparent:true,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=.012;walker.add(shadow);}
   scene.add(walker);
+  // The exercise starts only after the approved crossing card has loaded.
+  let pedestrianReady=false,pedestrianLoading=false,pedestrianClosed=false,pedestrianCard=null;
+  const pedestrianNotice=document.createElement('p');pedestrianNotice.className='note';pedestrianNotice.hidden=true;pedestrianNotice.setAttribute('role','status');$('start-btn').before(pedestrianNotice);
+  function syncStartButton(){const loading=playerLoading||trafficLoading||pedestrianLoading||childLoading,ready=playerReady&&trafficReady&&pedestrianReady,button=$('start-btn');button.disabled=loading;button.setAttribute('aria-busy',String(loading));button.textContent=loading?'Henter køretimen …':ready?'Start køretimen':'Prøv igen';}
+  function loadCrossingCard(){if(pedestrianLoading||pedestrianReady||pedestrianClosed)return;pedestrianLoading=true;canvas.dataset.pedestrianModel='loading';pedestrianNotice.hidden=true;syncStartButton();
+    new T.TextureLoader().load('assets/people-cse/a_adult.png',texture=>{pedestrianLoading=false;if(pedestrianClosed){texture.dispose();return}texture.encoding=T.sRGBEncoding;const h=1.8,w=h*texture.image.width/texture.image.height;const geometry=new T.PlaneGeometry(w,h);geometry.translate(0,h/2,0);const material=new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.05,depthWrite:false,side:T.DoubleSide});pedestrianCard=attachCylindricalBillboard(T,new T.Mesh(geometry,material));pedestrianCard.name='CSE_CROSSING';walker.add(pedestrianCard);pedestrianReady=true;canvas.dataset.pedestrianModel='approved-cse';syncStartButton();},undefined,()=>{pedestrianLoading=false;if(pedestrianClosed)return;canvas.dataset.pedestrianModel='unavailable';pedestrianNotice.textContent='Fodgængeren kunne ikke hentes. Prøv igen for at starte køretimen.';pedestrianNotice.hidden=false;syncStartButton();});}
+  canvas.dataset.playerModel='loading';
+  void loadTraffic();loadCrossingCard();syncStartButton();
+  window.addEventListener('pagehide',event=>{if(event.persisted||pedestrianClosed)return;pedestrianClosed=true;if(pedestrianCard){walker.remove(pedestrianCard);pedestrianCard.geometry.dispose();pedestrianCard.material.map?.dispose();pedestrianCard.material.dispose();pedestrianCard=null;}});
 
-  /* ---------- cockpit, in camera space ---------- */
-  const cockpit = new T.Group(); camera.add(cockpit);
-  const trim = new T.MeshBasicMaterial({ color: 0x0c1018 }), trim2 = new T.MeshBasicMaterial({ color: 0x161c28 });
-  add(new T.Mesh(new T.BoxGeometry(1.86, 0.1, 1.9), mat(0x1e5360, { roughness: .4, metalness: .3 })), 0.36, -0.6, -2.1, cockpit);    // bonnet
-  add(new T.Mesh(new T.BoxGeometry(2.6, 0.5, 0.8), trim), 0.36, -0.66, -0.76, cockpit);                                              // dashboard
-  add(new T.Mesh(new T.BoxGeometry(0.5, 0.09, 0.26), trim2), 0, -0.385, -0.84, cockpit);                                              // binnacle
-  const rim = new T.MeshBasicMaterial({ color: 0x2c3649 }); const wheel = new T.Group(); add(new T.Mesh(new T.TorusGeometry(0.185, 0.019, 10, 40), rim), 0, 0, 0, wheel);
-  add(new T.Mesh(new T.BoxGeometry(0.36, 0.035, 0.02), rim), 0, 0, 0, wheel); add(new T.Mesh(new T.BoxGeometry(0.035, 0.19, 0.02), rim), 0, -0.09, 0, wheel);
-  wheel.position.set(0, -0.36, -0.5); wheel.rotation.x = -0.42; cockpit.add(wheel);
-  for (const [x, tilt] of [[-0.9, 0.34], [1.62, -0.34]]) { const p = new T.Mesh(new T.BoxGeometry(0.065, 1.7, 0.08), trim); p.rotation.z = tilt; add(p, x, 0.2, -0.86, cockpit); }
-  const strip = add(new T.Mesh(new T.BoxGeometry(0.2, 0.007, 0.01), glow(0x3c7f8a)), 0, -0.372, -0.708, cockpit);                      // instrument light
+  // Copenhagen's solar position is evaluated locally, gradually following the
+  // actual season and time. It changes lighting, never traffic or scoring.
+  // A local-only timestamp supports visual review of both ends of the cycle.
+  const previewValue = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) ? new URLSearchParams(location.search).get('previewTime') : null;
+  const previewDate = previewValue && Number.isFinite(new Date(previewValue).getTime()) ? new Date(previewValue) : null;
+  let daylightFactor=1;
+  function updateDaylight() {
+    const {day,twilight,azimuth,altitude}=getDaylight(previewDate || new Date());
+    daylightFactor=day;
+    const grad=skyContext.createLinearGradient(0,0,0,256);
+    grad.addColorStop(0,mixColor(0x0b1424,0x86afcb,day));
+    grad.addColorStop(.55,mixColor(0x25354d,0xc3d5df,day));
+    const horizon=new T.Color(mixColor(0x465064,0xe1e1d9,day)).lerp(new T.Color(0xb98372),twilight*.32);
+    grad.addColorStop(.73,'#'+horizon.getHexString());grad.addColorStop(1,mixColor(0x1e2b3c,0xd1dcdb,day));
+    skyContext.fillStyle=grad;skyContext.fillRect(0,0,512,256);
+    if(skyStudyReady){const aspect=surface.clientWidth/Math.max(1,surface.clientHeight),sourceWidth=Math.min(skyStudy.naturalWidth,skyStudy.naturalHeight*aspect);
+      skyContext.globalAlpha=.90-day*.30;skyContext.drawImage(skyStudy,(skyStudy.naturalWidth-sourceWidth)/2,0,sourceWidth,skyStudy.naturalHeight,0,0,512,256);skyContext.globalAlpha=1;}
+    const skyShade=skyContext.createLinearGradient(0,0,0,220);skyShade.addColorStop(0,'rgba(0,24,74,.92)');skyShade.addColorStop(.55,'rgba(0,24,74,.65)');skyShade.addColorStop(1,'rgba(0,24,74,0)');skyContext.fillStyle=skyShade;skyContext.fillRect(0,0,512,220);
+    // Subtle, deterministic high clouds give the sky depth without reducing
+    // the contrast of anything on the road.
+    for(const [x,y,rx,ry] of [[45,58,55,8],[122,78,72,9],[230,40,64,7],[342,72,78,10],[459,48,62,7]]){
+      skyContext.save();skyContext.translate(x,y);skyContext.scale(rx,ry);
+      const cloud=skyContext.createRadialGradient(0,0,0,0,0,1);
+      cloud.addColorStop(0,`rgba(225,235,240,${(.025+day*.08).toFixed(3)})`);cloud.addColorStop(1,'rgba(225,235,240,0)');
+      skyContext.fillStyle=cloud;skyContext.fillRect(-1,-1,2,2);skyContext.restore();
+    }
+    skyTexture.needsUpdate=true;
+    ambient.color.set(mixColor(0x9aafd0,0xd4e5ed,day));ambient.groundColor.set(mixColor(0x252c30,0x5b6b63,day));ambient.intensity=1.10+day*.24;
+    moon.color.set(mixColor(0xa8bde0,0xfff2d9,day));moon.intensity=.42+day*.63;
+    const elevation=Math.max(.15,Math.sin(Math.max(0,altitude)*Math.PI/180));
+    moon.position.set(Math.sin(azimuth)*70,16+elevation*65,-Math.cos(azimuth)*70);
+    scene.fog.color.set(mixColor(0x6a5851,0xb4aaa0,day));
+    starsMaterial.opacity=(1-day)*.85;poolMat.opacity=.82*(1-day)+.04;
+    bulbMat.color.set(mixColor(0xffc27a,0xb4afa0,day));lampHaloMat.opacity=.55*(1-day);entryLamp.color.set(mixColor(0xffca84,0x81939a,day));winLit.color.set(mixColor(0xffcf8a,0x849ba3,day));
+    if(houseAssets)for(const material of houseAssets.warm){material.color.set(mixColor(0xd18b4b,0x81959a,day));material.emissive.set(mixColor(0xff9b48,0x0d1719,day));material.emissiveIntensity=.08+(1-day)*.72;}
+    beamLight.intensity=1.45*(1-day*.72);canvas.dataset.daylight=day.toFixed(3);
+  }
+  updateDaylight();
+  let streetKit=null;
+  createStreetKit(T,scene,{family:'town',length:500,roadHalfWidth:HALF,zStart:35,batch:true,paintAllSides:true,exclusions:[[J1-14,J1+14],[J2-14,J2+14],[PED-12,PED+12]]}).then(async kit=>{streetKit=kit;await kit.ready;approvedStreetReady=true;for(const slot of houseSlots)slot.g.visible=false;for(const batch of [...houseFallbackBatches,...treeFallbackBatches,...treePhotoBatches])batch.visible=false;scene.traverse(o=>{if(o.isInstancedMesh&&(o.geometry===hedgeBoxGeometry||o.geometry===streetShapes.hedgeCrown))o.visible=false;});if(houseAssets){disposeHouseAsset(houseAssets);houseAssets=null;houseChunks.length=0;}canvas.dataset.streetKit='ready';if(window.__natkorsel)window.__natkorsel.streetKit=kit.snapshot();}).catch(error=>{canvas.dataset.streetKit='error';console.warn('approved street:',error);});
+  window.addEventListener('pagehide',event=>{if(!event.persisted)streetKit?.dispose();});
+  const deer=new T.Group();deer.visible=false;scene.add(deer);let deerSeen=false;
+  {const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),g=x.createRadialGradient(32,32,1,32,32,31);g.addColorStop(0,'rgba(0,0,0,.32)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,64,64);const shadow=new T.Mesh(new T.PlaneGeometry(1.2,.55),new T.MeshBasicMaterial({map:new T.CanvasTexture(c),transparent:true,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=.012;deer.add(shadow);}
+  new T.TextureLoader().load('assets/rive/wildlife/deer-shock.png',texture=>{texture.encoding=T.sRGBEncoding;const h=1.3,w=h*texture.image.width/texture.image.height;const geometry=new T.PlaneGeometry(w,h);geometry.translate(0,h/2,0);const mesh=attachCylindricalBillboard(T,new T.Mesh(geometry,new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.05,depthWrite:false,side:T.DoubleSide})));mesh.name='CSE_DEER';deer.add(mesh);});
+
+  // The windshield, bonnet, cabin and pillars come from ownCar's one GLB.
+  // Speed, pedals, mirrors and the interactive steering control remain HTML UI.
 
   /* ---------- state ---------- */
-  const TEXT = {
-    yield: { kicker: 'Ubetinget vigepligt', place: 'Krydset ved Lindevej',
-      rule: 'Ved hajtænder eller vigepligtstavle har du ubetinget vigepligt for kørende trafik fra begge sider. Vis det tydeligt ved at sænke farten i god tid eller standse. Kør først frem, når det kan ske uden fare eller ulempe for andre.',
-      source: 'Færdselsloven § 26, stk. 2 og 5' },
-    stop: { kicker: 'Stoptavle', place: 'Krydset ved Egevej',
-      rule: 'Ved stoptavle skal du standse helt ved stoplinjen. Er der ingen linje, standser du umiddelbart før den krydsende vej. Derefter har du ubetinget vigepligt for kørende trafik fra begge sider.',
-      source: 'Stoptavle B 13 · færdselsloven § 26, stk. 2' },
-    ped: { kicker: 'Fodgængerfelt', place: 'Feltet ved skolen',
-      rule: 'Nærmer du dig et fodgængerfelt uden signal, skal du afpasse farten, så gående i feltet eller på vej ud i det ikke udsættes for fare eller ulempe. Om nødvendigt standser du og lader dem passere.',
-      source: 'Færdselsloven § 27, stk. 7' },
-  };
-  const S = {}; const input = { gas: false, brake: false };
-  function reset() { Object.assign(S, { mode: 'intro', z: 26, v: 0, acc: 0, time: 0, clock: 0, errors: 0, penalty: 0, top: 0, overSince: 0, said: {}, spot: null,
-      sit: { yield: { status: 'pending' }, stop: { status: 'pending', stopped: false }, ped: { status: 'pending' } }, walker: { state: 'wait', x: HALF + 1.3 } });
-    junctions.forEach(j => { j.shift = j.lead + Math.random() * 3; }); say('Kør, når du er klar. Jeg siger først noget, når det går galt.'); }
+  const TEXT = SIT.SITUATION_TEXT;
+  const S = {}; const input = { gas: false, brake: false, left:false, right:false, lookLeft:false, lookRight:false, touchSteer:0 };
+  let headPitch=0,lookDrag=null,lookReturn=null,lookReturnTimer=null,lastLookReleaseAt=null,lastLookRenderedAt=null,lookGeneration=0;
+  const clampLook=(v,limit)=>Math.max(-limit,Math.min(limit,v));
+  function endLook(immediate=false,force=false){const active=lookDrag;if(!active&&!force&&!immediate)return;const generation=++lookGeneration;lookDrag=null;if(active&&surface.hasPointerCapture?.(active.id)){try{surface.releasePointerCapture(active.id)}catch{}}if(lookReturnTimer){clearTimeout(lookReturnTimer);lookReturnTimer=null}if(immediate){lastLookReleaseAt=null;lookReturn=null;S.look=0;headPitch=0;return}lastLookReleaseAt=performance.now();if(motionDisabled()){lookReturn=null;S.look=0;headPitch=0;return}lookReturn={yaw:S.look,pitch:headPitch,start:lastLookReleaseAt};lookReturnTimer=setTimeout(()=>{if(generation!==lookGeneration)return;lookReturnTimer=null;if(!lookDrag&&!input.lookLeft&&!input.lookRight){S.look=0;headPitch=0;lookReturn=null}},300);}
+
+  const tourDeck=SIT.createTourDeck(),stretchDeck=SIT.createStretchDeck();let forcedTour=null,forcedStretch=null,shownIndicator=null;
+  // A junction only has the signs and the traffic its situation needs.
+  function applyTour(tour){
+    for(const part of tourControls.yield)part.visible=tour.j1==='yield';
+    for(const part of tourControls.stop)part.visible=tour.j2==='stop';
+    for(const s of junctions[0].slots){s.held=tour.j1==='right'&&Boolean(s.waits);s.off=tour.j1==='right'&&s.dir===1&&!s.held;}
+    for(const s of junctions[1].slots){s.held=false;s.off=tour.j2!=='stop';}
+    canvas.dataset.tour=tour.id;canvas.dataset.stretch=tour.stretch;placeParkingStreet();
+    if(tour.j2==='left'){scooterGroup.visible=false;}
+  }
+  function reset() { deerSeen=false;deer.visible=false;scooterState=newScooterState();Object.assign(quizRun,newQuizRun());pendingQuiz=[];driveQuiz?.close();
+    // Without the child's art the child stretch would hide its hazard, so it becomes the phone instead.
+    const drawnStretch=forcedStretch||stretchDeck.next(),stretch=drawnStretch==='child'&&!childReady?'phone':drawnStretch;
+    const tour=SIT.composeTour(forcedTour||tourDeck.next(),stretch);forcedTour=forcedStretch=null;const meet=SIT.newMeet();
+    const message=PHONE_MESSAGES[Math.floor(Math.random()*PHONE_MESSAGES.length)];$('phone-from').textContent='Ny besked fra '+message[0];$('phone-look-from').textContent=message[0];$('phone-look-text').textContent=message[1];phoneShown=null;
+    Object.assign(S, { tour, drawnStretch, lastFault:null, oncoming:{armed:false,phase:0,entered:false}, meet, child:SIT.newChild(), phone:SIT.newPhone(), parked:SIT.parkedCars(tour), leftSince:0, kerb:SIT.newKerb(), lead:SIT.newLead(), parking:SIT.newParking(), closeSince:0, bike:Object.assign(SIT.newBike(),{available:riderReady}), rider:{available:riderReady,active:false,done:false,z:0,v:0,following:false,crossing:false}, mode: 'intro', z: 26, x:LANE, heading:0, steer:0, look:0, indicator:0, gear:'auto', v: 0, acc: 0, time: 0, clock: 0, errors: 0, penalty: 0, top: 0, overSince: 0, said: {}, spot: null,
+      sit: SIT.newSituations(tour), walker: { state: 'wait', x: HALF + 1.3 } });if(tour.stretch==='follow')S.x=SIT.KERB.x;applyTour(tour);
+    junctions.forEach(j => { j.shift = j.lead + Math.random() * 3; });input.left=input.right=input.lookLeft=input.lookRight=false;input.touchSteer=0;endLook(true);$('gear').value='auto';updateGearUI();updateBlink();say(S.tour.stretch==='follow'?KERB_LINE:'Kør, når du er klar. Jeg siger først noget, når det går galt.'); }
+  // Short enough for the smallest screen. A touch screen looks by dragging the windscreen, a keyboard with Q.
+  const KERB_LINE=window.matchMedia?.('(pointer: coarse)').matches?'Blink, kig over skulderen (træk i ruden), og vent på bilen bagfra.':'Blink, kig over skulderen (Q), og vent på bilen bagfra.';
+  // The first tour is drawn while the art is still loading. Once the child's art is there, the tour gets its child back.
+  function restoreStretch(){if(S.mode!=='intro'||S.drawnStretch!=='child'||S.tour.stretch==='child'||!childReady)return;forcedTour=SIT.TOURS.find(tour=>tour.id===S.tour.id);forcedStretch='child';reset();}
   const radio = $('radio'); function say(text) { if (radio.textContent !== text) radio.textContent = text; }
   const once = (key, text) => { if (!S.said[key]) { S.said[key] = true; say(text); } };
 
-  function fail(kind, title, lede, spotZ) { const sit = S.sit[kind]; if (sit.status !== 'pending') return; sit.status = 'failed';
-    S.errors++; S.penalty += 12; S.mode = 'incident'; S.v = 0; S.spot = { z: spotZ }; input.gas = input.brake = false; pedalClass();
-    const t = TEXT[kind]; $('inc-kicker').textContent = `Fejl ${S.errors} · ${t.kicker}`; $('inc-title').textContent = title; $('inc-lede').textContent = lede;
-    $('inc-rule').textContent = t.rule; $('inc-source').textContent = 'Kilde: ' + t.source; $('incident').hidden = false; $('inc-btn').focus(); say('Vi tager den ovenfra. Reglen er din næste genvej.'); }
+  let quizQuestions=[],quizLoading=false,quizRun=newQuizRun(),pendingQuiz=[],driveQuiz=null;
+  async function loadQuizQuestions(){if(quizQuestions.length||quizLoading)return;quizLoading=true;try{quizQuestions=await loadQuizQuestionBank();}catch{quizQuestions=[];}finally{quizLoading=false;}}
+  function fail(kind, title, lede, spotZ, physicalCollision=false, twoWheeler=false) {const sit=S.sit[kind];if(sit.status!=='pending'&&!physicalCollision)return;
+    if(!quizQuestions.length)void loadQuizQuestions();
+    pendingQuiz=pickQuizQuestions(mistakeTags({kind,speedMs:S.v,collision:physicalCollision,stoppedFirst:kind==='stop'&&S.sit.stop.stopped,twoWheeler}),quizQuestions,quizRun,{seen:driveQuiz?.seen()});
+    if(sit.status!=='failed'){S.errors++;S.penalty+=12;}sit.status='failed';S.lastFault=kind;S.mode='incident'; S.v = 0; S.spot = { z: spotZ, x: Math.abs(S.x)>HALF+6?S.x:0 }; input.gas = input.brake = false; pedalClass();
+    const t = TEXT[kind]; setBrandText($('inc-kicker'),`Fejl ${S.errors} · ${t.kicker}`); $('inc-title').textContent = title; $('inc-lede').textContent = lede;
+    $('inc-rule').textContent = t.rule; setBrandText($('inc-source'),'Kilde: ' + t.source); $('inc-btn').textContent=pendingQuiz.length===0?'Kør videre':pendingQuiz.length===1?'Besvar spørgsmålet':`Besvar ${pendingQuiz.length} spørgsmål`;$('incident').hidden = false; $('inc-btn').focus(); say('Vi tager den ovenfra. Reglen er din næste genvej.'); }
   function resume() { if (S.mode !== 'incident') return; $('incident').hidden = true; S.mode = 'drive';
     for (const j of junctions) if (Math.abs(S.z - j.z) < 30) j.shift = j.free - S.clock;            // the road ahead is clear when we roll on
-    if (S.sit.ped.status === 'failed' && S.walker.state !== 'done') { S.walker.state = 'done'; S.walker.x = -HALF - 1.6; }
+    if (S.sit.ped?.status === 'failed' && S.walker.state !== 'done') { S.walker.state = 'done'; S.walker.x = -HALF - 1.6; }
+    // A fault in the turn clears it. A fault before the turn must not make the turn free: it is timed again.
+    if(S.lastFault==='left')S.oncoming.phase=S.clock+SIT.ONCOMING.clearAfterFault;
+    else if(S.lastFault==='rightTurn')Object.assign(S.rider,{active:false,done:true});
+    else if(S.tour.j2==='left'&&S.sit.left.status==='pending')S.oncoming.armed=false;
+    else if(S.tour.j2==='rightTurn'&&S.sit.rightTurn.status==='pending')Object.assign(S.rider,{active:false,done:false});
+    // The same for the stretch before junction 1: a fault there clears it, any other fault times it again.
+    if(S.tour.stretch==='meet'){if(S.lastFault==='meet')Object.assign(S.meet,{done:true,vehicles:[]});else if(S.sit.meet.status==='pending')Object.assign(S.meet,{launched:false,done:false,out:false,vehicles:[]});}
+    // A kerb fault puts the car back at the kerb and sends the car from behind again, so the start can be tried again.
+    if(S.tour.stretch==='follow'){if(S.lastFault==='kerb'&&!S.kerb.passed){Object.assign(S,{x:SIT.KERB.x,z:SIT.KERB.z,heading:0,steer:0,v:0,acc:0,indicator:0});S.kerb.started=false;S.lead=SIT.newLead();say(KERB_LINE);}
+      else if(S.lastFault==='follow'&&S.lead.state!=='parked')Object.assign(S.lead,{state:'parked',z:SIT.LEAD.parkZ,x:SIT.LEAD.parkX,v:0});}
+    if(S.lastFault==='bike'&&S.bike)Object.assign(S.bike,{state:'parked',x:SIT.BIKE.parkX,v:0});
+    if(S.tour.stretch==='child'&&S.lastFault==='child')Object.assign(S.child,{phase:'done',x:SIT.CHILD.fromX,ball:false});
     say('Videre. Samme regler som før.'); $('gas').focus(); }
-  function finish() { S.mode = 'result'; input.gas = input.brake = false; pedalClass(); const clean = Object.values(S.sit).filter(s => s.status === 'clean').length, top = Math.round(S.top * 3.6);
+  function finish() { S.mode = 'result'; input.gas = input.brake = false; pedalClass(); for(const s of Object.values(S.sit))if(s.status==='pending')s.status='clean'; const all=Object.values(S.sit),total=all.length,clean = all.filter(s => s.status === 'clean').length;
     $('res-title').textContent = S.errors === 0 ? 'Rent kørt.' : 'Du kom frem.';
     $('res-lede').textContent = S.errors === 0 ? 'Ingen fejl. Kørelæreren har ingen kommentar og virker lidt skuffet over det.'
-      : S.errors < 3 ? 'Det gjorde reglerne ikke alle sammen.' : 'Tre situationer, tre fejl. Det er i det mindste konsekvent.';
-    const rows = [['Rene situationer', clean + ' af 3', clean === 3 ? 'ok' : 'bad'], ['Regler at øve', String(S.errors), S.errors ? 'bad' : 'ok'], ['Fartgrænse', '50 km/t', ''], ['Belønning', 'Korrekte beslutninger', 'ok']];
+      : clean === 0 ? 'Fejl i alle situationer. Det er i det mindste konsekvent.' : 'Det gjorde reglerne ikke alle sammen.';
+    const rows = [['Rene situationer', clean + ' af ' + total, clean === total ? 'ok' : 'bad'], ['Regler at øve', String(S.errors), S.errors ? 'bad' : 'ok'], ...(quizRun.asked?[['Spørgsmål rigtige', quizRun.right + ' af ' + quizRun.asked, quizRun.right===quizRun.asked ? 'ok' : 'bad']]:[]), ['Fartgrænse', '50 km/t', '']];
     $('res-sheet').innerHTML = rows.map(([k, v, c]) => `<div class="${c}"><dt>${k}</dt><dd>${v}</dd></div>`).join(''); $('result').hidden = false; $('res-btn').focus(); }
   const clock = s => `${Math.floor(s / 60)}:${(s % 60).toFixed(1).padStart(4, '0')}`;
   const kmh = v => Math.round(v * 3.6);
@@ -404,99 +1084,412 @@ button { font: inherit; color: inherit; }
   /* ---------- simulation ---------- */
   function step(dt) {
     S.clock += dt; S.time += dt;
-    const braking = input.brake, a = braking ? -7 : input.gas ? 2.9 * (1 - S.v / 17.2) : -(0.35 + 0.035 * S.v);
+    const gearLimit=S.gear==='R'?3:S.gear&&S.gear!=='auto'?([0,7,11,14.5,17.2][Number(S.gear)]||17.2):17.2;
+    const braking = input.brake, a = braking ? -7 : input.gas ? 2.9 * Math.max(0,1 - S.v / gearLimit) : -(0.35 + 0.035 * S.v);
     S.v = Math.max(0, S.v + a * dt); S.acc = S.v > 0 || a > 0 ? a : 0;
-    const before = S.z - FRONT; S.z -= S.v * dt; const front = S.z - FRONT, rear = S.z + REAR;
+    const spatial=Number.isFinite(S.x)&&Number.isFinite(S.heading),oldPose=spatial?{x:S.x,z:S.z,heading:S.heading}:null;
+    const edge=pose=>pose.z-Math.abs(Math.cos(pose.heading))*FRONT-Math.abs(Math.sin(pose.heading))*.9;
+    const before=spatial?edge(oldPose):S.z-FRONT,wasRoute=spatial?onRoute(oldPose):true;
+    if(spatial){const moved=advanceVehicle(oldPose,S.v,S.steer,dt,S.gear==='R'?-1:1);S.x=moved.x;S.z=moved.z;S.heading=moved.heading;
+      if(moved.blocked&&S.v>0){S.v=0;S.acc=0;once('road-edge','Vejkanten. Vælg R og bak forsigtigt, hvis du skal fri.');}}
+    else S.z-=S.v*dt;
+    const front=spatial?edge(S):S.z-FRONT,rear=spatial?S.z+Math.abs(Math.cos(S.heading))*REAR+Math.abs(Math.sin(S.heading))*.9:S.z+REAR;
+    const route=spatial?onRoute(S):true;
     S.top = Math.max(S.top, S.v);
-    if (S.v > 14.75) { S.overSince += dt; if (S.overSince > 1.2) once('speed', 'Byzone. 50. Tallet er ikke vejledende.'); } else S.overSince = 0;
-    const crossed = line => before > line && front <= line;
-
-    // 1 · hajtænder
-    const y = S.sit.yield, j1 = junctions[0];
-    if (y.status === 'pending') {
-      if (front - J1 < 75) once('y', 'Hajtænder forude. De er ikke pynt.');
-      if (crossed(J1 + HALF) && conflict(j1, front, S.v, S.clock)) return fail('yield', 'Den anden havde ret til vejen.', `Du kørte ud i krydset med ${kmh(S.v)} km/t, mens der kom biler på den krydsende vej.`, J1);
-      if (front < J1 + HALF && rear > J1 - HALF && collides(j1, S.z, S.clock)) return fail('yield', 'Den anden havde ret til vejen.', 'Du holdt i krydset, da den næste bil kom. Den havde ikke tænkt sig at vente.', J1);
-      if (rear < J1 - HALF) { y.status = 'clean'; say('Du så dig for. Bemærkelsesværdigt.'); }
+    if (S.v > SIT.SPEED_LIMIT) { S.overSince += dt; once('speed', 'Byzone. 50. Tallet er ikke vejledende.');
+      if(S.overSince>=SIT.SPEED_GRACE&&S.sit.speed?.status==='pending')return fail('speed','For stærkt i byzone.',`Du holdt ${kmh(S.v)} km/t i flere sekunder. Grænsen er 50.`,S.z);
+    } else S.overSince = 0;
+    const crossed = line => before > line && front <= line && (!spatial||Math.abs(S.x)<HALF+FRONT);
+    const routeCrossed = line => crossed(line)&&wasRoute&&route&&S.gear!=='R';
+    // Only the northbound approach facing into the main route owns these
+    // particular stop/yield signs; a car travelling along the cross street
+    // must not be evaluated against a sign that it never passed.
+    const relevantApproach=!spatial||(Math.cos(oldPose.heading)>.65&&oldPose.x>.35&&oldPose.x<HALF+.3);
+    // Contact is a physical event, independent of whether the exercise was
+    // already credited. Both rectangles use the cars' real x/z/heading.
+    const tour=S.tour,K={J1,J2,HALF};
+    // A slow touch only stops the car, like the kerb. Driving into a parked car is a collision.
+    if(spatial&&SIT.hitsParkedCar(S,tour)){const speed=S.v;Object.assign(S,{x:oldPose.x,z:oldPose.z,heading:oldPose.heading,v:0,acc:0});
+      if(speed<1.5){once('parked-bump','Helt tæt på den parkerede bil. Bak lidt med R, og træk ud i god afstand.');}
+      else return fail(tour.stretch,'Du ramte en parkeret bil.','Hold god afstand til parkerede biler, og vent, hvis der ikke er plads til at komme forbi.',S.z,true);}
+    if(spatial&&S.sit.lane?.status==='pending'&&S.v>SIT.LANE_RULE.minSpeed&&S.gear!=='R'&&SIT.leftOfCentre(S)&&!SIT.laneExempt(S,tour,K)&&!SIT.bikeNear(S.bike,S)){S.leftSince=(S.leftSince||0)+dt;
+      if(S.leftSince>=SIT.LANE_RULE.grace)return fail('lane','Du kørte i venstre side.','Du lå over midterlinjen i flere sekunder uden en forhindring eller et sving. Kør i højre side af vejen.',S.z);}
+    else S.leftSince=0;
+    if(spatial&&tour.stretch==='follow'){const l=S.lead;if(l.state==='waiting')SIT.sendLead(l);
+      SIT.stepLead(l,dt,{x:S.x,z:S.z,heading:S.heading});
+      if(SIT.leadHit(l,S)){const speed=S.v;Object.assign(S,{x:oldPose.x,z:oldPose.z,heading:oldPose.heading,v:0,acc:0});
+        if(SIT.leadHit(l,S)&&l.state==='coming'){l.v=0;}
+        if(speed<1.5)once('lead-bump','Helt tæt på bilen. Bak lidt med R, og hold afstand.');
+        else{const kind=S.sit.kerb.status==='pending'&&!S.kerb.passed?'kerb':'follow';return fail(kind,'Sammenstød med bilen.',kind==='kerb'?'Du kørte ud foran bilen, der kom bagfra. Vent, til den er forbi.':'Du ramte bilen foran. Hold så stor afstand, at du kan standse.',S.z,true);}}}
+    if(spatial&&tour.stretch){stepStretch(dt,front,rear,K);if(S.mode!=='drive')return;}
+    // A cyclist ahead between the junctions on a stop tour: pass with good side distance, or wait behind.
+    if(spatial&&S.bike&&S.sit.bike){const b=S.bike,bs=S.sit.bike,pose={x:S.x,z:S.z,heading:S.heading};
+      if(b.available&&SIT.bikeShouldStart(b,front,K))SIT.startBike(b,pose);
+      SIT.stepBike(b,dt);
+      if(SIT.bikeHit(b,pose)){Object.assign(S,{x:oldPose.x,z:oldPose.z,heading:oldPose.heading});return fail('bike','Du ramte cyklisten.','Cyklisten kørte ved kantstenen foran dig. Hold afstand, og kør først forbi, når der er god plads.',S.z,true);}
+      if(bs.status==='pending'){
+        if(b.state==='riding'&&Math.abs(b.z-S.z)<60)once('bike','Cyklist foran ved kantstenen.');
+        const gap=SIT.bikeSideGap(b,pose);
+        if(gap!==null&&S.v-b.v>SIT.BIKE.minRelative&&gap<SIT.BIKE.clearance)return fail('bike','For tæt forbi cyklisten.',`Der var kun ${Math.max(0,gap).toFixed(1).replace('.',',')} m mellem bilen og cyklisten. Giv god sideafstand, eller vent bag cyklisten.`,S.z);
+        if(SIT.passedBike(b,pose)){bs.status='clean';say('God afstand til cyklisten. Sådan.');}
+      }}
+    if(spatial)for(const [kind,j] of [[tour.j1,junctions[0]],[tour.j2,junctions[1]]]){
+      if(Math.abs(S.z-j.z)<HALF+FRONT&&collides(j,S.z,S.clock,S.x,S.heading))
+        return fail(kind,'Sammenstød i krydset.','Du ramte en bil på den krydsende vej. Orientér dig og giv plads.',j.z,true);
     }
-    // 2 · stoptavle
-    const st = S.sit.stop, j2 = junctions[1];
+
+    // 1 · first junction: hajtænder, or no signs at all
+    const y = S.sit[tour.j1], j1 = junctions[0], giveWay=tour.j1==='yield';
+    if (y.status === 'pending') {
+      if (front - J1 < 75) once('y', giveWay?'Hajtænder forude. De er ikke pynt.':'Kryds forude. Ingen skilte. Hvad gælder så?');
+      if(spatial&&!route)y.armed=false;
+      if(routeCrossed(J1+HALF))y.armed=true;
+      if (relevantApproach && crossed(J1 + HALF) && conflict(j1, front, S.v, S.clock, spatial?S.x:HALF/2)) return fail(tour.j1, giveWay?'Den anden havde ret til vejen.':'Bilen fra højre skulle køre først.', giveWay?`Du kørte ud i krydset med ${kmh(S.v)} km/t, mens der kom biler på den krydsende vej.`:`Du kørte ud i krydset med ${kmh(S.v)} km/t, mens der kom en bil fra højre. Her er hverken skilte eller hajtænder.`, J1);
+      if (!spatial && front<J1+HALF && rear>J1-HALF && collides(j1, S.z, S.clock,spatial?S.x:HALF/2,spatial?S.heading:0)) return fail(tour.j1, giveWay?'Den anden havde ret til vejen.':'Bilen fra højre skulle køre først.', 'Du holdt i krydset, da den næste bil kom. Den havde ikke tænkt sig at vente.', J1);
+      if (rear < J1 - HALF && (!spatial||(route&&y.armed))) { y.status = 'clean'; say(giveWay?'Du så dig for. Bemærkelsesværdigt.':'Højre først. Sådan.'); }
+    }
+    // 2 · second junction: a stop sign, or a turn
+    if(tour.j2==='stop'){const st = S.sit.stop, j2 = junctions[1];
     if (st.status === 'pending') {
       if (front - J2 < 80) once('s', 'Stoptavle. Hjulene skal holde helt stille.');
-      if (!st.stopped && S.v === 0 && front >= STOP_LINE && front <= STOP_LINE + 1) { st.stopped = true; say('Det var et stop. Se dig for, før du kører.'); }
-      if (crossed(STOP_LINE) && !st.stopped) return fail('stop', 'Det var ikke et stop.', `Du rullede over stoplinjen med ${Math.max(1, kmh(S.v))} km/t. Et stop er 0.`, J2 + 2);
-      if (crossed(J2 + HALF) && conflict(j2, front, S.v, S.clock)) return fail('stop', 'Du stoppede. Og kørte så ud foran en bil.', 'Stoppet var fint. Vigepligten gælder stadig bagefter.', J2);
-      if (front < J2 + HALF && rear > J2 - HALF && collides(j2, S.z, S.clock)) return fail('stop', 'Du stoppede. Og kørte så ud foran en bil.', 'Du holdt i krydset, da den næste bil kom.', J2);
-      if (rear < J2 - HALF) { st.status = 'clean'; say('Fuldt stop og fri bane. Jeg noterer det som en begivenhed.'); }
-    }
+      if(spatial&&!route){st.armed=false;st.stopped=false;}
+      if (!st.stopped && route && S.v === 0 && front >= STOP_LINE && front <= STOP_LINE + 1) { st.stopped = true; say('Det var et stop. Se dig for, før du kører.'); }
+      if (relevantApproach && crossed(STOP_LINE) && !st.stopped) return fail('stop', 'Det var ikke et stop.', `Du rullede over stoplinjen med ${Math.max(1, kmh(S.v))} km/t. Et stop er 0.`, J2 + 2);
+      if(routeCrossed(J2+HALF))st.armed=true;
+      if (relevantApproach && crossed(J2 + HALF) && conflict(j2, front, S.v, S.clock,spatial?S.x:HALF/2)) return fail('stop', 'Du stoppede. Og kørte så ud foran en bil.', 'Stoppet var fint. Vigepligten gælder stadig bagefter.', J2);
+      if (!spatial && front<J2+HALF && rear>J2-HALF && collides(j2, S.z, S.clock,spatial?S.x:HALF/2,spatial?S.heading:0)) return fail('stop', 'Du stoppede. Og kørte så ud foran en bil.', 'Du holdt i krydset, da den næste bil kom.', J2);
+      if (rear < J2 - HALF && (!spatial||(route&&st.armed))) { st.status = 'clean'; say('Fuldt stop og fri bane. Jeg noterer det som en begivenhed.'); }
+    }}else{stepTurn(dt,front,crossed,relevantApproach);if(S.mode!=='drive')return;}
     // 3 · fodgængerfelt
-    const p = S.sit.ped, w = S.walker;
+    if(tour.ped){const p = S.sit.ped, w = S.walker;
     if (front - PED < 95) once('p', 'Fodgængerfelt. Hold øje med fortovet.');
     if (w.state === 'wait' && front - (PED + 2) < 44) w.state = 'walk';
     if (w.state === 'walk') { w.x -= 1.35 * dt; if (w.x < -HALF - 1.6) w.state = 'done'; }
     if (p.status === 'pending') {
-      if (w.state === 'walk' && w.x > -1.4 && front <= PED + 2.3 && rear >= PED - 2)
+      // Keep waiting while the pedestrian is entering or still in either half
+      // of the crossing; only release after they have cleared the roadway.
+      if(spatial&&!route)p.armed=false;
+      if(routeCrossed(PED+2.3))p.armed=true;
+      if (w.state === 'walk' && w.x >= -HALF - 0.2 && front <= PED + 2.3 && rear >= PED - 2 && (!spatial||Math.abs(S.x)<HALF+FRONT))
         return fail('ped', 'Hun var på vej over.', `Du kørte ind i feltet med ${kmh(S.v)} km/t, mens der var en gående i det.`, PED);
-      if (rear < PED - 2) { p.status = 'clean'; say('Hun kom over. Det gjorde du også.'); }
+      if (rear < PED - 2 && (!spatial||(route&&p.armed))) { p.status = 'clean'; say('Hun kom over. Det gjorde du også.'); }
     }
-    if (front < END) finish();
+    if(!spatial){if(front<END&&SIT.tourZones(tour).every(k=>S.sit[k].status!=='pending'))finish();}
+    else if(SIT.tourZones(tour).every(k=>S.sit[k].status!=='pending'))return stepParking(dt);}
   }
+
+  // The stretch before junction 1: oncoming traffic at parked cars, a child after a ball, or the phone.
+  function stepStretch(dt,front,rear,K){
+    const tour=S.tour,kind=tour.stretch,sit=S.sit[kind],pose={x:S.x,z:S.z,heading:S.heading};
+    if(kind==='meet'){const m=S.meet,zone=SIT.obstacleZone(tour);
+      if(front-zone.near<70)once('parked','Parkerede biler i din side af vejen.');
+      // Car or scooter is settled when the traffic starts, so a scooter still loading at the start of the tour is not lost.
+      if(SIT.shouldLaunchMeet(m,front,S.v,zone,K)){if(!scooterReady)m.lineup=m.lineup.map(()=>'car');SIT.launchMeet(m,K);}
+      if(m.launched)SIT.stepMeet(m,dt,pose);
+      const hit=SIT.meetHit(m,pose);
+      if(hit){const scooter=hit.kind==='scooter';Object.assign(m,{done:true,vehicles:[]});return fail('meet',scooter?'Sammenstød med knallerten.':'Sammenstød med en modkørende.',scooter?'Du kørte ud foran en knallert, der kom imod dig. Forhindringen var i din side, så du skulle vente.':'Du kørte ud foran en bil, der kom imod dig. Forhindringen var i din side, så du skulle vente.',S.z,true,scooter);}
+      if(sit.status!=='pending')return;
+      const out=SIT.pulledOut(pose,zone),newly=out&&!m.out;m.out=out;
+      if(newly&&S.v>.3){const vehicle=SIT.meetConflict(m,pose,S.v,zone);if(vehicle){const scooter=vehicle.kind==='scooter';
+        return fail('meet','De parkerede biler holdt i din side.',scooter?'Du trak ud forbi bilerne, mens en knallert kom imod dig. Knallerter kan køre 45 km/t og er svære at bedømme. Du skulle vente.':'Du trak ud forbi bilerne, mens en bil kom imod dig. Forhindringen var i din side, så du skulle vente.',S.z,false,scooter);}}
+      if(rear<zone.far-1){sit.status='clean';say(m.launched?'Du lod de modkørende komme forbi først. Sådan.':'Fri bane forbi bilerne. Godt.');}
+    }else if(kind==='child'){const c=S.child;
+      if(front-SIT.CHILD.gapZ<75)once('parked','Parkerede biler i din side af vejen.');
+      if(c.phase==='wait'&&sit.status==='pending'&&SIT.childTrigger(front,S.v)){SIT.startChild(c);once('ball','En bold!');}
+      SIT.stepChild(c,dt,pose);
+      if(sit.status!=='pending')return;
+      if(S.v>.3&&SIT.childHitsCar(c,pose))return fail('child','Barnet løb ud efter bolden.',`Du kørte ${kmh(S.v)} km/t, da barnet kom ud mellem bilerne. Bolden var dit varsel.`,SIT.CHILD.gapZ);
+      if(c.phase!=='wait'&&rear<SIT.CHILD.gapZ-3){sit.status='clean';say('Bold, så barn. Du var klar til at stoppe. Godt.');}
+    }else if(kind==='follow'){const k=S.kerb,kerb=S.sit.kerb,l=S.lead;
+      if(kerb.status==='pending'&&!k.started&&S.v>.3&&S.gear!=='R'){k.started=true;const faults=SIT.kerbStartFaults(pose,S.indicator,k.lookedAt,S.clock,l);
+        if(faults.length){const first=faults[0],titles={traffic:'Bilen bagfra skulle forbi først.',blink:'Du gav ikke tegn.',look:'Du kiggede ikke over skulderen.'};
+          const ledes={traffic:'Du kørte ud fra kantstenen, mens en bil kom bagfra. Vent, til den er forbi.',blink:'Du kørte ud fra kantstenen uden blink til venstre.',look:'Før du kører ud, ser du over venstre skulder. Brug Q, eller træk i forruden.'};
+          return fail('kerb',titles[first],ledes[first]+(faults.length>1?' Og: '+faults.slice(1).map(f=>({traffic:'bilen bagfra var ikke forbi',blink:'blinket var ikke tændt',look:'du så dig ikke tilbage'})[f]).join(', ')+'.':''),S.z);}
+        k.passed=true;say('Blink, blik og plads. Ud i trafikken.');}
+      if(kerb.status==='pending'&&k.started&&S.z<=SIT.KERB.blinkOffZ){if(S.indicator===-1)return fail('kerb','Blinket står stadig til venstre.','Du er ude i vognbanen, men blinket viser stadig, at du vil til venstre. Sluk det, når manøvren er færdig.',S.z);kerb.status='clean';}
+      if(sit.status==='pending'){
+        if(SIT.tooClose(l,pose,S.v)){S.closeSince+=dt;if(S.closeSince>=SIT.LEAD.closeFor)return fail('follow','For tæt på bilen foran.',`Du lå mindre end et sekund bag bilen foran i flere sekunder ved ${kmh(S.v)} km/t. Bremser den, når du ikke at standse.`,S.z);}
+        else S.closeSince=0;
+        if(l.state==='braking')once('lead-brake','Bilen foran bremser og blinker til højre.');
+        if(SIT.passedLead(l,pose)){sit.status='clean';say('God afstand hele vejen. Sådan.');}
+      }
+    }else if(kind==='phone'){const ph=S.phone;
+      if(sit.status!=='pending')return;
+      SIT.stepPhone(ph,dt,front,S.v);
+      if(ph.state==='gone'){sit.status='clean';say('Beskeden kunne vente. Godt.');}
+      else if(ph.state==='read'){const metres=Math.max(0,Math.round(ph.lookFrom-S.z));
+        return fail('phone','Du kiggede på telefonen.',ph.lookV<.5&&metres<1?`Du holdt stille midt på vejen, og det er stadig kørsel. Telefonen tog dit blik i ${SIT.PHONE.look} sekunder.`:`I ${SIT.PHONE.look} sekunder kørte bilen ${metres} meter, mens du så ned på skærmen.`,S.z);}
+    }
+  }
+
+  // A straight tour ends parked at the kerb after the crossing. Each tour moves the bus stop, the yellow line and the driveway.
+  const PARK_TEXT={bus:['For tæt på busstoppestedet.','Bilen holder nærmere end 12 m fra tavlen ved stoppestedet. Find en plads længere væk.'],
+    yellow:['Gul kantlinje.','Den gule ubrudte linje på kantstenen betyder, at du ikke må standse her.'],
+    drive:['Ud for en indkørsel.','Bilen spærrer en indkørsel. Find en plads, hvor ingen skal ind eller ud.']};
+  function stepParking(dt){const pk=S.parking,park=S.sit.park;if(!pk||!park)return;
+    once('park','Parkér ind til kantstenen på et lovligt sted.');
+    if(!(S.v===0&&S.gear!=='R'&&SIT.inParkingStrip(S)&&SIT.atKerb(S,{HALF}))){pk.still=0;return;}
+    pk.still+=dt;if(pk.still<SIT.PARKING.still)return;
+    const reason=SIT.parkingFault(S,SIT.parkingLayout(pk));
+    if(!reason){if(park.status==='pending'){park.status='clean';say('Lovligt parkeret. Turen er slut.');}return finish();}
+    if(park.status==='pending')return fail('park',PARK_TEXT[reason][0],PARK_TEXT[reason][1],S.z);
+    once('park-again-'+reason,PARK_TEXT[reason][0]+' Find en anden plads.');}
+
+  // The turn at junction 2: blink in time, then the oncoming cars or the cyclist, then the side road.
+  function stepTurn(dt,front,crossed,relevantApproach){
+    const tour=S.tour,kind=tour.j2,side=SIT.turnSide(tour),turn=S.sit[kind],blink=S.sit.blink,K={J2,HALF},pose={x:S.x,z:S.z,heading:S.heading},wanted=side<0?'venstre':'højre';
+    if(front-J2<90)once('turn',`Næste kryds: sving til ${wanted}. Blink i god tid.`);
+    if(blink.status==='pending'&&relevantApproach&&crossed(J2+HALF+SIT.BLINK_BEFORE)){
+      if(S.indicator===side)blink.status='clean';
+      else{S.indicator=side;return fail('blink','Du blinkede ikke i god tid.',`Du skulle til ${wanted}, men blinket var ikke tændt ${SIT.BLINK_BEFORE} meter før krydset. Nu er det tændt.`,J2);}
+    }
+    if(kind==='left'){const o=S.oncoming;
+      if(!o.armed&&front-J2<SIT.ONCOMING.armAt){o.armed=true;o.entered=false;o.phase=SIT.oncomingPhase(S.clock,front-J2,S.v);}
+      if(o.armed){const taus=SIT.oncomingTaus(S.clock,o.phase);
+        if(taus.some(tau=>{const z=SIT.oncomingZ(tau,J2);return SIT.oncomingActive(z)&&carsOverlap(pose,{x:SIT.ONCOMING.x,z,heading:Math.PI});}))return fail('left','Sammenstød med en modkørende.','Du ramte en bil, der kørte ligeud. Den skulle du holde tilbage for.',J2,true);
+        const entered=SIT.enteredOncoming(pose,K),newly=entered&&!o.entered;o.entered=entered;
+        if(turn.status==='pending'&&newly&&SIT.leftTurnConflict(taus,SIT.timeToClearOncoming(S.v)))return fail('left','Du svingede foran en modkørende.','Den modkørende bil skulle køre først. Vent på et ophold, der gør hele svinget forsvarligt.',J2);
+      }
+    }else{const r=S.rider;
+      if(r.available&&!r.active&&!r.done&&front-J2<SIT.RIDER.spawnAt){Object.assign(r,{active:true,z:SIT.riderStartZ(S.z,front-(J2+HALF),S.v,K),v:SIT.RIDER.speed,following:false,crossing:false});once('rider','Cyklist på vejen. Hold øje med spejlet.');}
+      if(r.active){SIT.stepRider(r,dt,pose,S.v,K);
+        if(turn.status==='pending'){
+          if(SIT.riderHitsCar(r,pose))return fail('rightTurn','Du ramte cyklisten.','Cyklisten var ved siden af dig. Du må ikke klemme eller skære ind foran en cyklist på din højre side.',J2,true);
+          const crossing=SIT.cutsAcrossRider(pose,K),newly=crossing&&!r.crossing;r.crossing=crossing;
+          if(newly&&SIT.rightTurnConflict(r,pose))return fail('rightTurn','Du skar ind foran cyklisten.','Cyklisten fortsatte ligeud langs vejkanten. Ved højresving holder du tilbage for dem.',J2);
+        }
+      }
+    }
+    const turned=SIT.hasTurned(pose,side,K);
+    if(turned){
+      if(S.indicator===side)S.indicator=0;
+      if(turn.status==='pending'){turn.status='clean';say(side<0?'Modkørende først, så dig. Godt.':'Du så dig for, før du svingede. Godt.');}
+      if(side*S.x>SIT.SIDE_ROAD_FINISH&&SIT.tourZones(tour).every(k=>S.sit[k].status!=='pending'))finish();
+      return;
+    }
+    if(SIT.missedTurn(pose,side,K)){
+      Object.assign(S,{z:J2+HALF+FRONT+SIT.RETRY_DISTANCE,x:LANE,heading:0,steer:0,v:0,acc:0,overSince:0});
+      if(turn.status==='pending'){S.oncoming.armed=false;if(!S.rider.done)S.rider.active=false;}
+      say(`Du skulle til ${wanted} her. Vi tager krydset igen.`);
+    }
+  }
+
+  // The wheel springs towards centre when released. Vehicle pose and road-edge
+  // constraints are computed separately in the deterministic 2D road model.
+  function stepSteering(dt){const target=input.touchSteer||((input.right?1:0)-(input.left?1:0));S.steer+=(target-S.steer)*Math.min(1,dt*5);}
 
   /* ---------- drawing ---------- */
   const hud = { speed: $('speed'), time: $('time'), errors: $('errors'), next: $('next'), place: $('place') };
   let lastHud = '';
-  function drawHud() { const front = S.z - FRONT; let next = '', place = 'Lindevej';
-    const ahead = [['yield', J1 + HALF, 'Hajtænder'], ['stop', STOP_LINE, 'Stoptavle'], ['ped', PED + 2, 'Fodgængerfelt']].find(([k]) => S.sit[k].status === 'pending');
-    if (ahead) { const d = Math.max(0, Math.round(front - ahead[1])); if (d < 120) { next = `${ahead[2]} · ${d} m`; place = TEXT[ahead[0]].place; } } else if (S.mode === 'drive') next = `Mål · ${Math.max(0, Math.round(front - END))} m`;
+  function drawHud() { const front=S.z-Math.abs(Math.cos(S.heading))*FRONT-Math.abs(Math.sin(S.heading))*.9;let next='',place='Lindevej';
+    const tour=S.tour,side=SIT.turnSide(tour),K={J2,HALF},turned=side!==0&&SIT.hasTurned(S,side,K);
+    const zone=SIT.obstacleZone(tour);
+    const points=[...(zone?[[tour.stretch, zone.near, tour.stretch==='follow'?'Bilen foran':'Parkerede biler']]:[]),[tour.j1, J1 + HALF, 'Kryds'],...(side?[[tour.j2, J2 + HALF, side<0?'Sving til venstre':'Sving til højre']]:[['stop', STOP_LINE, 'Kryds']]),...(tour.ped?[['ped', PED + 2, 'Fodgængerfelt']]:[])];
+    const ahead = points.find(([k]) => S.sit[k].status === 'pending'||(side&&k===tour.j2&&!turned));
+    if(S.mode==='drive'&&!SIT.onTourRoute(S,tour,K)){place='Sidevej';next='Find tilbage til ruten';}
+    else if (ahead) { const d = Math.max(0, Math.round(front - ahead[1])),turning=side&&ahead[0]===tour.j2; if(turning){place=TEXT[tour.j2].place;if(d<120)next=`${ahead[2]} · ${d} m`;}else if(front<ahead[1]-FRONT){place=TEXT[ahead[0]].place;next='Vend tilbage til situationen';}else if (d < 120) { next = `${ahead[2]} · ${d} m`; place = TEXT[ahead[0]].place; } } else if (S.mode === 'drive') next = side?`Mål · ${Math.max(0,Math.round(SIT.SIDE_ROAD_FINISH-Math.abs(S.x)))} m`:'Parkér ind til kantstenen';
+    if(S.mode==='drive'&&tour.stretch==='follow'&&S.kerb&&!S.kerb.started){next='Kør ud fra kantstenen';place='Lindevej';}
     const key = [kmh(S.v), clock(S.time), S.errors, next, place].join('|'); if (key === lastHud) return; lastHud = key;
-    hud.speed.textContent = kmh(S.v); hud.speed.classList.toggle('over', S.v > 14.75); hud.time.textContent = clock(S.time); hud.errors.textContent = S.errors; hud.next.textContent = next; hud.place.textContent = place; }
+    hud.speed.textContent = (S.gear==='R'&&kmh(S.v)>0?'−':'')+kmh(S.v); hud.speed.classList.toggle('over', S.v > SIT.SPEED_LIMIT); hud.time.textContent = clock(S.time); hud.errors.textContent = S.errors; setBrandText(hud.next,next); hud.place.textContent = place; }
 
-  let dive = 0;
+  // Mirrors remain on the GPU: three small render targets are updated one at
+  // a time, then their textures are composited into the main WebGL canvas.
+  // The 2D canvases remain only as clearly labelled fallback placeholders.
+  const mirrorScene=new T.Scene(),mirrorCamera=new T.OrthographicCamera(0,1,1,0,.1,10),mirrorQuadGeometry=new T.PlaneGeometry(1,1);
+  mirrorCamera.position.z=1;
+  const mirrorViews=[];let mirrorClosed=false,mirrorFailed=false,mirrorsEnabled=true,mirrorIndex=0,lastMirror=-10,frameAverage=16;
+  try{for(const [id,offset,side] of [['mirror-left',-.55,-1],['mirror-rear',0,0],['mirror-right',.55,1]]){
+    const screen=$(id),ctx=screen.getContext('2d'),target=new T.WebGLRenderTarget(96,48,{depthBuffer:true,stencilBuffer:false});
+    if(!ctx)throw new Error('Canvas unavailable');
+    const material=new T.MeshBasicMaterial({map:target.texture,side:T.DoubleSide,depthTest:false,depthWrite:false,toneMapped:false});
+    const quad=new T.Mesh(mirrorQuadGeometry,material);quad.frustumCulled=false;quad.visible=false;mirrorScene.add(quad);
+    mirrorViews.push({screen,ctx,target,material,quad,offset,side,camera:new T.PerspectiveCamera(side?75:58,2,.1,190),label:screen.getAttribute('aria-label'),updated:-Infinity,stale:true});
+  }canvas.dataset.mirrors='loading';}catch{mirrorUnavailable();}
+  function mirrorMessage(screen,message){screen.dataset.gpuReady='false';const ctx=screen.getContext('2d');if(!ctx)return;ctx.fillStyle='#425451';ctx.fillRect(0,0,96,48);ctx.fillStyle='#fff';ctx.font='10px sans-serif';ctx.fillText(message,5,25);}
+  function mirrorUnavailable(){mirrorFailed=true;canvas.dataset.mirrors='fallback';for(const mirror of mirrorViews)mirror.quad.visible=false;const toggle=$('mirror-toggle');toggle.disabled=true;toggle.setAttribute('aria-label','Spejle ikke tilgængelige');
+    for(const id of ['mirror-left','mirror-rear','mirror-right']){const screen=$(id);screen.setAttribute('aria-label','Spejlvisning ikke tilgængelig');mirrorMessage(screen,'Ikke tilgængeligt');}}
+  function setMirrors(enabled){if(mirrorFailed)return;mirrorsEnabled=enabled;const toggle=$('mirror-toggle');toggle.setAttribute('aria-pressed',String(enabled));
+    toggle.setAttribute('aria-label',enabled?'Slå spejle fra':'Slå spejle til');toggle.innerHTML=enabled?'Spejle<br>til':'Spejle<br>fra';canvas.dataset.mirrors=enabled?'loading':'off';if(!enabled)delete canvas.dataset.mirrorRate;
+    for(const mirror of mirrorViews){mirror.updated=-Infinity;mirror.stale=true;mirror.quad.visible=false;mirror.screen.setAttribute('aria-label',enabled?'Spejl opdateres':'Spejl slået fra');mirrorMessage(mirror.screen,enabled?'Opdateres':'Slået fra');}}
+  $('mirror-toggle').addEventListener('click',()=>setMirrors(!mirrorsEnabled));
+  window.addEventListener('pagehide',event=>{if(event.persisted||mirrorClosed)return;mirrorClosed=true;for(const mirror of mirrorViews){mirror.quad.visible=false;mirror.target.dispose();mirror.material.dispose();}mirrorQuadGeometry.dispose();});
+  let mirrorPassCount=0,lastMirrorOwnCarVisible=null;
+  function updateMirrors(t,review){if(mirrorClosed||mirrorFailed||!mirrorsEnabled||!mirrorViews.length)return;
+    if(review||S.mode==='result'){canvas.dataset.mirrors='paused';return;}
+    if(document.hidden)return;
+    for(const mirror of mirrorViews)if(!mirror.stale&&t-mirror.updated>.7){mirror.stale=true;mirror.screen.setAttribute('aria-label','Spejlbillede forsinket');}
+    // Back off when frames are slow and replace old views with a notice
+    // instead of implying that a delayed image is current.
+    const interval=frameAverage>110?.18:frameAverage>75?.12:.08;canvas.dataset.mirrorRate=interval===.08?'normal':'reduced';
+    if(t-lastMirror<interval&&mirrorViews.every(m=>Number.isFinite(m.updated)))return;lastMirror=t;const mirror=mirrorViews[mirrorIndex++%mirrorViews.length],oldTarget=renderer.getRenderTarget(),wasOwnCar=ownCar.visible;
+    const detailedVisibility=houseChunks.map(chunk=>chunk.group.visible),simpleVisibility=houseSlots.map(slot=>slot.g.visible);
+    try{ownCar.visible=false;mirrorPassCount++;lastMirrorOwnCarVisible=ownCar.visible;
+      // The 96px mirrors use the simple local silhouettes, not every small
+      // Blender facade detail, substantially reducing each extra pass.
+      if(houseAssets){for(const chunk of houseChunks)chunk.group.visible=false;for(const slot of houseSlots)slot.g.visible=Math.abs(slot.z-S.z)<90;}
+      mirror.camera.position.set(S.x+mirror.side*.78*Math.cos(S.heading)-.3*Math.sin(S.heading),1.27,S.z+mirror.side*.78*Math.sin(S.heading)+.3*Math.cos(S.heading));mirror.camera.rotation.set(-.025,Math.PI-S.heading+mirror.offset,0);
+      renderer.setRenderTarget(mirror.target);renderer.render(scene,mirror.camera);
+      mirror.quad.visible=true;mirror.screen.dataset.gpuReady='true';mirror.screen.setAttribute('aria-label',mirror.label);
+      mirror.updated=t;mirror.stale=false;canvas.dataset.mirrors='ready';
+    }catch{mirrorUnavailable();}finally{try{renderer.setRenderTarget(oldTarget);}catch{}ownCar.visible=wasOwnCar;
+      houseChunks.forEach((chunk,i)=>{chunk.group.visible=detailedVisibility[i];});houseSlots.forEach((slot,i)=>{slot.g.visible=simpleVisibility[i];});}}
+  let dive=0,lastLookTime=null;
   function draw(t) {
-    placeTraffic(S.clock);
-    const w = S.walker; walker.position.set(w.x, 0.14 * (Math.abs(w.x) > HALF ? 1 : 0), PED); walker.rotation.y = -Math.PI / 2;
-    const stride = w.state === 'walk' ? Math.sin(t * 7) * 0.22 : 0; legs[0].position.z = stride; legs[1].position.z = -stride;
-    ownCar.position.set(LANE, 0, S.z);
-    beamLight.position.set(LANE, 0.7, S.z - 3.3); beamLight.target.position.set(LANE, 0, S.z - 34);
+    streetKit?.update(S.z);
+    skyDome.position.set(S.x,0,S.z);
+    placeTraffic(S.clock);placeScooter();placeMeet();placeLead();placeChild();placePhone();placeOncoming();placeRider();if(shownIndicator!==S.indicator){shownIndicator=S.indicator;updateBlink();}
+    const w = S.walker; walker.position.set(w.x, 0.14 * (Math.abs(w.x) > HALF ? 1 : 0), PED); 
+    // At 180 m fog transmittance is below 0.3%; keep nearby hazards and the
+    // simulated crossing independent from this purely visual visibility test.
+    walker.visible=S.tour.ped&&Math.hypot(w.x-S.x,PED-S.z)<180;
+    if(!deerSeen&&S.overSince>.8&&daylightFactor<.35&&[J1,J2,PED].every(z=>Math.abs((S.z-32)-z)>18)){deerSeen=true;deer.position.set(HALF+3.6,0,S.z-32);deer.visible=true;}
+    if(deer.visible&&S.z<deer.position.z-5)deer.visible=false;
+    const motionOff=motionDisabled();document.body.classList.toggle('no-motion',motionOff);document.body.classList.toggle('needs-reverse',!SIT.onTourRoute(S,S.tour,{J2,HALF})||Boolean(S.said['road-edge']));
+    const lookTarget=((input.lookLeft?1:0)-(input.lookRight?1:0))*1.15,lookDt=lastLookTime===null?.016:Math.max(0,Math.min(.5,t-lastLookTime)),lookFrameAt=performance.now();lastLookTime=t;
+    if(lookDrag&&S.mode!=='drive')endLook(true);
+    if(lookDrag){S.look=lookDrag.yaw;headPitch=lookDrag.pitch;}
+    else if(input.lookLeft||input.lookRight){lookReturn=null;S.look+=(lookTarget-S.look)*(motionOff?1:1-Math.exp(-12*lookDt));headPitch+=(0-headPitch)*(motionOff?1:1-Math.exp(-12*lookDt));}
+    else if(lookReturn){const progress=Math.min(1,Math.max(0,(lookFrameAt-lookReturn.start)/300)),ease=1-progress*progress*(3-2*progress);S.look=lookReturn.yaw*ease;headPitch=lookReturn.pitch*ease;if(progress>=1)lookReturn=null;}
+    else {S.look+=(0-S.look)*(motionOff?1:1-Math.exp(-12*lookDt));headPitch+=(0-headPitch)*(motionOff?1:1-Math.exp(-12*lookDt));}
+    canvas.dataset.look=Math.abs(S.look)<.05?'forward':S.look>0?'left':'right';if(S.kerb&&S.look>SIT.KERB.look)S.kerb.lookedAt=S.clock;
+    ownCar.position.set(S.x, 0, S.z);ownCar.rotation.y=-S.heading;
+    beamLight.position.set(S.x+Math.sin(S.heading)*3.3,.7,S.z-Math.cos(S.heading)*3.3);
+    beamLight.target.position.set(S.x+Math.sin(S.heading)*34,0,S.z-Math.cos(S.heading)*34);
     const review = S.mode === 'incident';
-    cockpit.visible = !review; ownCar.visible = review; reviewLight.intensity = review ? 0.75 : 0;
-    if (review) { camera.position.set(11, 27, S.spot.z + 21); camera.lookAt(0.5, 0, S.spot.z - 1); }
+    for(const part of playerExteriorOnly)part.visible=review;
+    for(const part of playerBatchOriginals)part.visible=review;
+    for(const part of playerInteriorBatches)part.visible=!review;
+    ownCar.visible = playerReady; reviewLight.intensity = review ? 0.75 : 0;
+    if (review) { camera.position.set(S.spot.x + 11, 27, S.spot.z + 21); camera.lookAt(S.spot.x + 0.5, 0, S.spot.z - 1); }
     else { const target = reduceMotion.matches ? 0 : Math.max(-0.02, Math.min(0.02, -S.acc * 0.0028)); dive += (target - dive) * 0.12;
-      camera.position.set(LANE - 0.36, 1.2 + (reduceMotion.matches ? 0 : Math.sin(t * 9) * 0.0025 * Math.min(1, S.v / 8)), S.z + 0.35); camera.rotation.set(-0.045 + dive, 0, 0); }
-    strip.material.color.setHex(S.v > 14.75 ? 0xb5463c : 0x3c7f8a);
-    drawHud(); renderer.render(scene, camera);
+      const [seatX,seatY,seatZ]=driverAnchor;
+      camera.position.set(S.x+seatX*Math.cos(S.heading)-seatZ*Math.sin(S.heading),seatY+(reduceMotion.matches?0:Math.sin(t*9)*.0025*Math.min(1,S.v/8)),S.z+seatX*Math.sin(S.heading)+seatZ*Math.cos(S.heading)); camera.rotation.set((camera.aspect<.8?-.085:-.055) + (cockpitStyle==='hatch'?-.045:0) + dive + headPitch, -S.heading+S.look, 0,'YXZ'); }
+    const viewZ=review?S.spot.z:S.z,detailedChunks=new Set();
+    for(const chunk of houseChunks){chunk.group.visible=chunk.maxZ>=viewZ-60&&chunk.minZ<=viewZ+20;if(chunk.group.visible)detailedChunks.add(chunk.id);}
+    // Far houses use the original light silhouettes. At the viewing distances
+    // where facade detail is legible, switch to the instanced Blender model.
+    if(houseAssets)for(const slot of houseSlots)slot.g.visible=!detailedChunks.has(Math.floor((slot.z+480)/30))&&slot.z>=viewZ-180&&slot.z<=viewZ+45;
+    if(playerWheel){if(playerWheelBase)playerWheel.quaternion.copy(playerWheelBase).multiply(playerWheelTurn.setFromAxisAngle(playerWheelAxis,S.steer*65*Math.PI/180));else playerWheel.rotation.x=-S.steer*.6;}drawSteering();drawHud();const primeMirrors=mirrorViews.some(m=>!Number.isFinite(m.updated));updateMirrors(t,review);if(primeMirrors){updateMirrors(t,review);updateMirrors(t,review)}renderComposite();if(surface.clientWidth&&surface.clientHeight&&area.clientHeight)lastLookRenderedAt=lookFrameAt;if(canvas.dataset.asphaltLoaded==='true'&&canvas.dataset.asphaltGpu!=='ready'&&roadLayers.every(x=>renderer.properties.get(x.texture).__webglTexture))canvas.dataset.asphaltGpu='ready';
   }
 
-  function resize() { const w = frame.clientWidth, h = frame.clientHeight; if (!w || !h) return; renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.setSize(w, h, false);
-    camera.aspect = w / h; camera.fov = camera.aspect < 0.8 ? 76 : camera.aspect < 1.2 ? 68 : 60; camera.updateProjectionMatrix(); }
-  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(frame); else window.addEventListener('resize', resize);
+  function layoutMirrors(){const rect=area.getBoundingClientRect(),height=area.clientHeight;
+    for(const mirror of mirrorViews){const r=mirror.screen.getBoundingClientRect();mirror.quad.position.set(r.left-rect.left+r.width/2,height-(r.top-rect.top+r.height/2),0);
+      // A rear-view mirror reverses left and right; a negative X scale flips the texture on the GPU.
+      mirror.quad.scale.set(-r.width,r.height,1);}}
+  function renderComposite(){const w=surface.clientWidth,h=surface.clientHeight,total=area.clientHeight;if(!w||!h||!total)return;
+    renderer.setRenderTarget(null);renderer.setScissorTest(false);renderer.setClearColor(0x1d2b29,1);renderer.clear();
+    const autoClear=renderer.autoClear;renderer.autoClear=false;
+    try{renderer.setScissorTest(true);renderer.setViewport(0,0,w,h);renderer.setScissor(0,0,w,h);renderer.render(scene,camera);
+      if(mirrorViews.some(mirror=>mirror.quad.visible)){
+        renderer.setViewport(0,0,w,total);renderer.setScissor(0,0,w,total);
+        try{renderer.render(mirrorScene,mirrorCamera);}catch{mirrorUnavailable();}}
+    }finally{renderer.setScissorTest(false);renderer.autoClear=autoClear;}}
+  function resize() {const w=surface.clientWidth,h=surface.clientHeight,total=area.clientHeight;if(!w||!h||!total)return;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));renderer.setSize(w,total,false);
+    camera.aspect=w/h;camera.fov=camera.aspect<.8?68:camera.aspect<1.2?65:60;camera.updateProjectionMatrix();
+    mirrorCamera.left=0;mirrorCamera.right=w;mirrorCamera.top=total;mirrorCamera.bottom=0;mirrorCamera.updateProjectionMatrix();layoutMirrors();if(skyStudyReady)updateDaylight();}
+  if('ResizeObserver' in window)new ResizeObserver(resize).observe(area);else window.addEventListener('resize',resize);
 
-  let last = performance.now();
-  function loop(now) { const dt = Math.min(0.05, (now - last) / 1000); last = now;
-    if (S.mode === 'drive') { let left = dt; while (left > 0 && S.mode === 'drive') { const h = Math.min(left, 1 / 120); step(h); left -= h; } }
+  let last = performance.now(), lastLightUpdate = last;
+  function loop(now) { const elapsed=now-last;frameAverage+=.12*(Math.min(500,elapsed)-frameAverage);const dt = Math.min(0.05, elapsed / 1000); last = now;
+    if (now - lastLightUpdate >= 30000) { updateDaylight(); lastLightUpdate = now; }
+    if (S.mode === 'drive') { let left = dt; while (left > 0 && S.mode === 'drive') { const h = Math.min(left, 1 / 120); stepSteering(h); step(h); left -= h; } if(scooterReady&&S.mode==='drive'&&ambientScooter()){scooterWorld.playerX=S.x;scooterWorld.playerZ=S.z;stepScooter(scooterState,dt,scooterWorld);} }
     else if (S.mode === 'intro') S.clock += dt;
     draw(now / 1000); requestAnimationFrame(loop); }
 
   /* ---------- input ---------- */
   const gasBtn = $('gas'), brakeBtn = $('brake');
+  $('drive-settings').addEventListener('click',()=>{const open=document.body.classList.toggle('drive-settings-open');$('drive-settings').setAttribute('aria-expanded',String(open));});
   function pedalClass() { gasBtn.classList.toggle('held', input.gas); brakeBtn.classList.toggle('held', input.brake); }
   function press(kind, down) { if (S.mode !== 'drive') down = false; if (input[kind] === down) return; input[kind] = down; pedalClass(); }
   for (const [btn, kind] of [[gasBtn, 'gas'], [brakeBtn, 'brake']]) {
     btn.addEventListener('pointerdown', e => { e.preventDefault(); try { btn.setPointerCapture(e.pointerId); } catch (_) {} press(kind, true); });
     for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) btn.addEventListener(type, () => press(kind, false));
     btn.addEventListener('contextmenu', e => e.preventDefault());
+    btn.addEventListener('keydown',e=>{if(e.code==='Enter'){e.preventDefault();e.stopPropagation();press(kind,true);}});
+    btn.addEventListener('keyup',e=>{if(e.code==='Enter'){e.preventDefault();e.stopPropagation();press(kind,false);}});
   }
-  const KEYS = { ArrowUp: 'gas', KeyW: 'gas', ArrowDown: 'brake', KeyS: 'brake', Space: 'brake' };
-  window.addEventListener('keydown', e => { const kind = KEYS[e.code]; if (!kind || S.mode !== 'drive') return; e.preventDefault(); press(kind, true); });
-  window.addEventListener('keyup', e => { const kind = KEYS[e.code]; if (kind) press(kind, false); });
-  window.addEventListener('blur', () => { press('gas', false); press('brake', false); });
+  const steer=$('steer'),steerArt=steer.querySelector('.steer-art');
+  function drawSteering(){const value=Math.round(S.steer*100);steer.setAttribute('aria-valuenow',String(value));steer.setAttribute('aria-valuetext',value===0?'Ligeud':(value<0?'Venstre ':'Højre ')+Math.abs(value)+' procent');steerArt.style.transform=`rotate(${value*.65}deg)`;}
+  const steerAt=e=>{const rect=steer.getBoundingClientRect();input.touchSteer=Math.max(-1,Math.min(1,(e.clientX-(rect.left+rect.width/2))/(rect.width*.42)));};
+  steer.addEventListener('pointerdown',e=>{if(S.mode!=='drive')return;e.preventDefault();try{steer.setPointerCapture(e.pointerId);}catch{}steerAt(e);});
+  steer.addEventListener('pointermove',e=>{if(steer.hasPointerCapture(e.pointerId))steerAt(e);});
+  for(const type of ['pointerup','pointercancel','lostpointercapture'])steer.addEventListener(type,()=>{input.touchSteer=0;});
+  for(const [id,key] of [['look-left','lookLeft'],['look-right','lookRight']]){const button=$(id);
+    const set=down=>{input[key]=S.mode==='drive'&&down;button.classList.toggle('held',input[key]);};
+    button.addEventListener('pointerdown',e=>{e.preventDefault();try{button.setPointerCapture(e.pointerId);}catch{}set(true);});
+    for(const type of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(type,()=>set(false));
+    button.addEventListener('keydown',e=>{if(e.code==='Enter'){e.preventDefault();e.stopPropagation();set(true);}});
+    button.addEventListener('keyup',e=>{if(e.code==='Enter'){e.preventDefault();e.stopPropagation();set(false);}});
+    button.addEventListener('contextmenu',e=>e.preventDefault());}
+  function updateBlink(){for(const [id,side] of [['blink-left',-1],['blink-right',1]])$(id).setAttribute('aria-pressed',String(S.indicator===side));}
+  function setBlink(side){if(S.mode!=='drive')return;S.indicator=S.indicator===side?0:side;updateBlink();}
+  $('phone-read').addEventListener('click',()=>{if(S.mode==='drive'&&S.tour.stretch==='phone')SIT.openPhone(S.phone,S.z,S.v);});
+  $('blink-left').addEventListener('click',()=>setBlink(-1));$('blink-right').addEventListener('click',()=>setBlink(1));
+  function updateGearUI(){const reverse=S.gear==='R';$('gear').value=reverse?'R':'auto';$('gear-drive').setAttribute('aria-pressed',String(!reverse));$('gear-reverse').setAttribute('aria-pressed',String(reverse));$('cluster-gear').textContent=reverse?'R':'D';$('cluster-gear').setAttribute('aria-label',reverse?'Gear R, bak':'Gear D, fremad');}
+  function setGear(next){if(S.mode!=='drive'){updateGearUI();return false}next=next==='R'?'R':'auto';if(next!==S.gear&&S.v>.05){updateGearUI();say('Stands først, før du skifter gear.');return false}if(next!==S.gear)S.v=0;S.gear=next;updateGearUI();return true;}
+  $('gear').addEventListener('change',e=>setGear(e.target.value));$('gear-drive').addEventListener('click',()=>setGear('auto'));$('gear-reverse').addEventListener('click',()=>setGear('R'));
+  const handKey='teoriboost.drive.left-handed';let leftHanded=false;try{leftHanded=localStorage.getItem(handKey)==='1'}catch{}function updateHandedness(){document.body.classList.toggle('left-handed',leftHanded);$('handedness').setAttribute('aria-pressed',String(leftHanded));$('handedness').textContent='Venstrehånd: '+(leftHanded?'til':'fra');}updateHandedness();$('handedness').addEventListener('click',()=>{leftHanded=!leftHanded;try{localStorage.setItem(handKey,leftHanded?'1':'0')}catch{}updateHandedness();});
+  let hornContext=null;function horn(){if(S.mode!=='drive')return;let allowed=true;try{const toggle=window.parent.document.querySelector('#sound-toggle');if(toggle)allowed=toggle.getAttribute('aria-pressed')!=='false';}catch{}if(!allowed)return;
+    try{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;hornContext=hornContext||new Audio();if(hornContext.state==='suspended')hornContext.resume();
+      const now=hornContext.currentTime,gain=hornContext.createGain();gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.055,now+.015);gain.gain.exponentialRampToValueAtTime(.0001,now+.18);gain.connect(hornContext.destination);
+      for(const frequency of [370,466]){const oscillator=hornContext.createOscillator();oscillator.type='sawtooth';oscillator.frequency.value=frequency;oscillator.connect(gain);oscillator.start(now);oscillator.stop(now+.2);}
+    }catch{}}
+  $('horn').addEventListener('click',horn);window.addEventListener('pagehide',event=>{if(event.persisted)return;if(hornContext){hornContext.close().catch(()=>{});hornContext=null;}});
+  surface.addEventListener('pointerdown',e=>{if(S.mode!=='drive'||lookDrag||!e.isPrimary||(e.pointerType==='mouse'&&e.button!==0)||e.target!==surface)return;e.preventDefault();lookGeneration++;if(lookReturnTimer){clearTimeout(lookReturnTimer);lookReturnTimer=null}lookReturn=null;lookDrag={id:e.pointerId,x:e.clientX,y:e.clientY,baseYaw:S.look,basePitch:headPitch,yaw:S.look,pitch:headPitch};try{surface.setPointerCapture(e.pointerId)}catch{}});
+  surface.addEventListener('pointermove',e=>{if(!lookDrag||e.pointerId!==lookDrag.id)return;e.preventDefault();const r=surface.getBoundingClientRect();lookDrag.yaw=clampLook(lookDrag.baseYaw+(e.clientX-lookDrag.x)*Math.PI/(Math.max(1,r.width)*.7),Math.PI);lookDrag.pitch=clampLook(lookDrag.basePitch+(e.clientY-lookDrag.y)*Math.PI/(Math.max(1,r.height)*4.2),Math.PI/3);S.look=lookDrag.yaw;headPitch=lookDrag.pitch;});
+  for(const type of ['pointerup','pointercancel','lostpointercapture'])surface.addEventListener(type,e=>{if(type==='lostpointercapture'&&surface.hasPointerCapture?.(e.pointerId))return;if(lookDrag&&e.pointerId===lookDrag.id)endLook();});
+  const KEYS = { ArrowUp: 'gas', KeyW: 'gas', ArrowDown: 'brake', KeyS: 'brake', Space: 'brake' },STEER_KEYS={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right'},LOOK_KEYS={KeyQ:'lookLeft',KeyE:'lookRight'},GEAR_KEYS={KeyF:'auto',KeyR:'R'},BLINK_KEYS={KeyZ:-1,KeyC:1};
+  const typingDriveKey=e=>e.target.matches?.('select,input,textarea')||e.target.isContentEditable;
+  const modifiedDriveKey=e=>e.ctrlKey||e.metaKey||e.altKey;
+  // Driving keys win before focused controls can activate their own shortcuts.
+  window.addEventListener('keydown', e => {
+    if(typingDriveKey(e)||modifiedDriveKey(e)||S.mode!=='drive')return;
+    const kind=KEYS[e.code],direction=STEER_KEYS[e.code],look=LOOK_KEYS[e.code],gear=GEAR_KEYS[e.code],blink=BLINK_KEYS[e.code];
+    if(!kind&&!direction&&!look&&!gear&&!blink&&e.code!=='KeyH')return;
+    e.preventDefault();e.stopPropagation();
+    if(kind)press(kind,true);
+    else if(direction)input[direction]=true;
+    else if(look)input[look]=true;
+    else if(!e.repeat&&gear)setGear(gear);
+    else if(!e.repeat&&blink)setBlink(blink);
+    else if(!e.repeat&&e.code==='KeyH')horn();
+  },true);
+  window.addEventListener('keyup', e => {
+    const kind=KEYS[e.code],direction=STEER_KEYS[e.code],look=LOOK_KEYS[e.code];
+    // Release held controls even if focus or the game mode changed in between.
+    if(kind)press(kind,false);
+    if(direction)input[direction]=false;
+    if(look)input[look]=false;
+    if(S.mode==='drive'&&!typingDriveKey(e)&&!modifiedDriveKey(e)&&(kind||direction||look||GEAR_KEYS[e.code]||BLINK_KEYS[e.code]||e.code==='KeyH')){
+      e.preventDefault();e.stopPropagation();
+    }
+  },true);
+  window.addEventListener('blur', () => {endLook(false,true);press('gas',false);press('brake',false);input.left=input.right=input.lookLeft=input.lookRight=false;input.touchSteer=0;for(const id of ['look-left','look-right'])$(id).classList.remove('held');});
 
-  $('start-btn').addEventListener('click', () => { $('start').hidden = true; S.mode = 'drive'; gasBtn.focus(); });
-  $('inc-btn').addEventListener('click', resume);
-  $('res-btn').addEventListener('click', () => { $('result').hidden = true; reset(); S.mode = 'drive'; lastHud = ''; gasBtn.focus(); });
+  $('start-btn').addEventListener('click', () => { if(playerLoading||trafficLoading||pedestrianLoading)return; if(!pedestrianReady){loadCrossingCard();return;} if(!trafficReady||!playerReady){void loadTraffic();return;} restoreStretch(); $('start').hidden = true; S.mode = 'drive'; canvas.focus({preventScroll:true}); });
+  let quizStorage=null;try{quizStorage=localStorage;}catch{}
+  driveQuiz=createDriveQuiz({veil:$('quiz'),card:$('quiz-card'),storage:quizStorage,run:quizRun,onDone:resume});
+  $('inc-btn').addEventListener('click',()=>{if(!pendingQuiz.length){resume();return;}$('incident').hidden=true;const picked=pendingQuiz;pendingQuiz=[];driveQuiz.open(picked);});
+  $('res-btn').addEventListener('click', () => { $('result').hidden = true; reset(); S.mode = 'drive'; lastHud = ''; canvas.focus({preventScroll:true}); });
 
   reset(); resize(); placeTraffic(0);
-  window.__natkorsel = { S, input, junctions, conflict, step, K: { J1, J2, PED, END, HALF, STOP_LINE, FRONT } };      // read by the concept's own checks
+  function snapshotTransform(object){if(!object)return null;object.updateWorldMatrix(true,false);return {name:object.name,visible:object.visible,position:object.getWorldPosition(new T.Vector3()).toArray(),quaternion:object.getWorldQuaternion(new T.Quaternion()).toArray(),worldMatrix:object.matrixWorld.toArray()};}
+  window.__natkorsel = { S, input, junctions, conflict, step, K: { J1, J2, PED, END, HALF, STOP_LINE, FRONT, LANE },
+    tours:SIT.TOURS.map(tour=>tour.id),stretches:[...SIT.STRETCHES],setTour(id,stretch){const tour=SIT.TOURS.find(x=>x.id===id);if(!tour)throw new Error('Unknown tour '+id);if(stretch&&!SIT.STRETCHES.includes(stretch))throw new Error('Unknown stretch '+stretch);const mode=S.mode;forcedTour=tour;forcedStretch=stretch||null;reset();S.mode=mode;},
+    get meet(){const m=S.meet;return Object.freeze({launched:m.launched,done:m.done,lineup:[...m.lineup],vehicles:m.vehicles.map(v=>({...v})),carVisible:meetCar.visible,scooterVisible:S.tour.stretch==='meet'&&scooterGroup.visible,parkedVisible:parkedMeshes.map(x=>x.visible),parkedOccupants:parkedMeshes.reduce((sum,car)=>{car.traverse(node=>{if(node.userData.occupantRole)sum++;});return sum;},0),meetCarOccupants:(()=>{let sum=0;meetCar.traverse(node=>{if(node.userData.occupantRole)sum++;});return sum;})()});},
+    get child(){return Object.freeze({...S.child,ready:childReady,visible:childGroup.visible,ballVisible:ballGroup.visible});},
+    get lead(){return Object.freeze({...S.lead,visible:leadCar.visible,occupants:(()=>{let sum=0;leadCar.traverse(node=>{if(node.userData.occupantRole)sum++;});return sum;})()});},
+    get kerb(){return Object.freeze({...S.kerb});},
+    get bike(){return Object.freeze({...S.bike,visible:riderGroup.visible,view:riderCard?.view()});},
+    get parking(){const layout=S.parking&&SIT.parkingLayout(S.parking);return Object.freeze({...S.parking,layout,legalZ:layout?SIT.legalParkingZ(layout):null,visible:busStop.visible});},
+    get phone(){return Object.freeze({...S.phone,cardHidden:$('phone').hidden,lookHidden:$('phone-look').hidden});},
+    get oncoming(){const left=S.tour.j2==='left'&&S.oncoming.armed;return Object.freeze({armed:S.oncoming.armed,phase:S.oncoming.phase,taus:left?SIT.oncomingTaus(S.clock,S.oncoming.phase):[],zs:left?SIT.oncomingTaus(S.clock,S.oncoming.phase).map(tau=>SIT.oncomingZ(tau,J2)):[],visible:oncomingCars.map(car=>car.visible),models:oncomingCars.map(car=>Boolean(car.getObjectByProperty('type','Mesh')?.geometry))});},
+    get roadRider(){return Object.freeze({...S.rider,ready:riderReady,visible:riderGroup.visible,view:riderCard?.view()});},
+    get quizState(){return Object.freeze({loaded:quizQuestions.length,pending:pendingQuiz.map(p=>p.question.id),asked:quizRun.asked,right:quizRun.right});},
+    get scooterState(){return Object.freeze({ready:scooterReady,visible:scooterGroup.visible,active:scooterState.active,z:scooterState.z,v:scooterState.v,x:scooterGroup.position.x});},
+    get cockpitState(){const model=ownCar.getObjectByName('player-car-model'),body=model?.getObjectByName('body');return Object.freeze({requestedVehicle:chosenVehicle,effectiveVehicle:cockpitStyle,source:canvas.dataset.playerModel,ready:playerReady,review:S.mode==='incident',driverAnchor:[...driverAnchor],car:snapshotTransform(ownCar),model:snapshotTransform(model),body:snapshotTransform(body),camera:snapshotTransform(camera),wheel:playerWheel?{rotationX:playerWheel.rotation.x}:null,exteriorOnly:{count:playerExteriorOnly.length,visible:playerExteriorOnly.filter(o=>o.visible).length},mirror:{state:canvas.dataset.mirrors,passCount:mirrorPassCount,lastOwnCarVisible:lastMirrorOwnCarVisible}});},
+    get lookState(){return Object.freeze({yaw:S.look,pitch:headPitch,dragging:Boolean(lookDrag),returning:Boolean(lookReturn),releaseAt:lastLookReleaseAt,returnElapsed:lastLookReleaseAt===null?null:Math.max(0,performance.now()-lastLookReleaseAt),lastRenderedAt:lastLookRenderedAt,lastRenderedSinceRelease:lastLookReleaseAt===null||lastLookRenderedAt===null?null:lastLookRenderedAt-lastLookReleaseAt,camera:[camera.position.x,camera.position.y,camera.position.z,camera.rotation.x,camera.rotation.y,camera.rotation.z],cameraRotationOrder:camera.rotation.order,cameraRight:new T.Vector3(1,0,0).applyQuaternion(camera.getWorldQuaternion(new T.Quaternion())).toArray(),mirrors:mirrorViews.map(m=>({position:[m.camera.position.x,m.camera.position.y,m.camera.position.z],rotation:[m.camera.rotation.x,m.camera.rotation.y,m.camera.rotation.z]}))});} };      // read by the concept's own checks
   requestAnimationFrame(loop);
 })();
 </script>

@@ -1,10 +1,13 @@
+import { sequenceFor } from './sequences.js';
+import { ico } from './ui-icons.js';
 import { CHAPTERS, QUESTIONS, SOURCES } from './content.js';
+import { BOOSTER_RATES } from './mybil.js';
 import { LESSONS } from './lessons.js';
 import { renderQuestionVisual, mountQuestionVisual } from './exam-photo-view.js';
-import { renderArt } from './art.js';
+import { renderCast, castLine } from './cast.js';
 import { createVoiceCue } from './voice-cues.js';
 import {
-  questionVoiceParts, questionFeedbackParts, lessonVoiceParts, lessonCaseVoiceParts,
+  questionGagFits, questionVoiceParts, questionFeedbackParts, lessonVoiceParts, lessonCaseVoiceParts,
   lessonAnswerVoiceParts, lessonRecallPromptParts, lessonRecallAnswerParts
 } from './voice-texts.js';
 import {
@@ -17,7 +20,7 @@ const CONTENT = { questions: QUESTIONS, lessons: LESSONS };
 const LESSON_STAGES = ['understand', 'apply', 'transfer', 'recall', 'checkpoint'];
 const REVIEW_STAGES = ['apply', 'understand', 'transfer', 'recall', 'checkpoint'];
 const STAGE_LABELS = {
-  understand: 'Forstå', apply: 'Vælg', transfer: 'Brug', recall: 'Genkald', checkpoint: 'Prøv igen', done: 'Færdig'
+  understand: 'Forstå', apply: 'Vælg', transfer: 'Brug', recall: 'Forklar', checkpoint: 'Prøv igen', done: 'Færdig'
 };
 const RESPONSE_LIMIT = 5000;
 const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({
@@ -26,13 +29,24 @@ const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({
 const response = value => Array.from({ length: 4 }, (_, index) => (
   typeof value?.[index] === 'boolean' ? value[index] : null
 ));
+// Design manual: bold the words that decide a rule (skal, må, bør) and the negations learners misread.
+const KEY_WORDS = /(^|[^\p{L}])(ikke|ingen|aldrig|skal|må|bør)(?=[^\p{L}]|$)/giu;
+const emph = text => esc(text).replace(KEY_WORDS, '$1<strong class="kw-rule">$2</strong>');
+// Long rule cards read as short paragraphs (same words, so the recorded voice still matches).
+const paras = text => {
+  const value = String(text || '');
+  if (value.length < 240) return `<p>${esc(value)}</p>`;
+  const parts = value.split(/(?<=[.!?])\s+(?=[A-ZÆØÅ])/u), out = [];
+  for (const part of parts) { if (out.length && (out[out.length - 1] + ' ' + part).length <= 170) out[out.length - 1] += ' ' + part; else out.push(part); }
+  return out.map(p => `<p>${esc(p)}</p>`).join('');
+};
 const voiceButton = (kind, label) => (
   `<button class="audio-btn voice-read" type="button" data-journey-voice="${kind}">${label}</button>`
 );
 const refs = (ids, locator = '') => `<div class="lesson-references">${(ids || [])
   .map(id => SOURCES.find(source => source.id === id))
   .filter(Boolean)
-  .map(source => `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.label.split(':')[0])} ↗</a>`)
+  .map(source => `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.label.split(':')[0])}</a>`)
   .join('')}<span>${esc(locator)}</span></div>`;
 
 function firstUnanswered(answers) {
@@ -42,7 +56,7 @@ function firstUnanswered(answers) {
 
 /** Page-local controller. Factual content stays in the existing source-reviewed bank. */
 export function createJourneyPlayer({
-  host, getState, persist, onAssess, onComplete, onExperience = () => {}, narrator, notify = () => {}
+  host, getState, persist, onAssess, onComplete, onExperience = () => {}, onResult = () => {}, narrator, notify = () => {}
 }) {
   let session = null;
   let ui = null;
@@ -53,6 +67,7 @@ export function createJourneyPlayer({
   let transitionGeneration = 0;
   let activeAnimation = null;
   let choiceLocked = false;
+  let streak = 0; // right statements in a row, for the rising pitch
   let lastProgressPercent = null;
   let lastRenderedStage = null;
 
@@ -139,13 +154,13 @@ export function createJourneyPlayer({
     const shownStage = ui?.feedback?.stage || session.stage;
     const progress = stageProgress(shownStage);
     return `<article class="journey-player" data-journey-session="${esc(session.sessionId)}">
-      <header class="journey-player-head">
-        <a class="back-btn" href="#home" aria-label="Gem lektionen og gå til din rute">←</a>
-        <div class="journey-player-title"><span>${session.kind === 'review' ? 'REVIEW' : 'LEKTION'} · ${esc(progress.label)}</span><h1>${esc(section.title)}</h1></div>
+      <header class="journey-player-head jp-top">
+        <a class="back-btn jp-close" href="#home" aria-label="Gem lektionen og gå til din rute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
+        <div class="journey-progress" role="progressbar" aria-label="Lektionens fremskridt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progress.percent)}"><i style="--journey-progress:${progress.percent}%;--journey-progress-ratio:${progress.percent / 100}"></i></div>
         <span class="journey-player-count">${progress.count}</span>
       </header>
-      <div class="journey-progress" role="progressbar" aria-label="Lektionens fremskridt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progress.percent)}"><i style="--journey-progress:${progress.percent}%"></i></div>
-      <div class="journey-player-body">${body}</div>
+      <div class="journey-player-title jp-title"><span>${session.kind === 'review' ? 'GENTAGELSE' : 'LEKTION'} · ${esc(progress.label)}</span><h1>${esc(section.title)}</h1></div>
+      <div class="journey-player-body${ui.feedback ? ' has-feedback' : ''}">${body}</div>
     </article>`;
   }
 
@@ -153,48 +168,67 @@ export function createJourneyPlayer({
     const currentIndex = Math.max(0, currentStep.cardsRead.findIndex(read => !read));
     const card = currentStep.cards[currentIndex] ?? currentStep.cards[2];
     const audioView = ui.audioCards
-      ? `<div class="journey-audio-cards" aria-label="Alle tre kort, som oplæsningen dækker"><p>${esc(lesson.lead)}</p><p>Oplæsningen dækker alle tre kort:</p>${currentStep.cards.map((item, index) => `<article class="${index === currentIndex ? 'current' : ''}"><span>0${index + 1}</span><div><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p></div></article>`).join('')}</div>`
+      ? `<div class="journey-audio-cards" aria-label="Alle tre kort, som oplæsningen dækker"><p>${esc(lesson.lead)}</p><p>Oplæsningen dækker alle tre kort:</p>${currentStep.cards.map((item, index) => `<article class="${index === currentIndex ? 'current' : ''}"><span>${index + 1}</span><div><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p></div></article>`).join('')}</div>`
       : '';
     return `<section class="journey-card-step">
       <div class="journey-step-intro journey-step-intro--compact"><span class="journey-kicker">KORT ${currentIndex + 1} AF 3</span>${voiceButton('lesson', 'Lyt til alle tre kort')}</div>
       ${audioView}
-      <article class="journey-focus-card"><span class="lesson-number">0${currentIndex + 1}</span><div><h2>${esc(card.title)}</h2><p>${esc(card.body)}</p>${refs(card.sourceIds, card.sourceLocator)}</div></article>
-      <div class="journey-control-dock"><p>${session.kind === 'review' ? 'Læs forklaringen efter dit kolde forsøg.' : 'Ét kort ad gangen.'}</p><button class="btn btn-primary" type="button" data-journey-card="${currentIndex}">${currentIndex === 2 ? 'Brug reglen →' : 'Næste kort →'}</button></div>
+      <article class="journey-focus-card"><span class="lesson-number">${currentIndex + 1}</span><div><h2>${esc(card.title)}</h2><div class="jp-card-text">${paras(card.body)}</div>${refs(card.sourceIds, card.sourceLocator)}</div></article>
+      <div class="journey-control-dock"><p>${session.kind === 'review' ? 'Læs forklaringen efter dit kolde forsøg.' : 'Ét kort ad gangen.'}</p><button class="btn btn-primary" type="button" data-journey-card="${currentIndex}">${currentIndex === 2 ? 'Brug reglen' : 'Næste kort'}</button></div>
     </section>`;
   }
 
   function statementMarkup(question, index, { disabled = false } = {}) {
     const statement = question.statements[index];
     const answer = ui.answers[index];
-    return `<article class="journey-statement" data-statement-index="${index}">
-      <span class="statement-index">0${index + 1}</span><p>${esc(statement.text)}</p>
+    const verdict = answer === null ? '' : answer === statement.correct ? 'is-right' : 'is-wrong';
+    return `<article class="journey-statement ${verdict}" data-statement-index="${index}">
+      <span class="statement-index">${index + 1}</span><p>${emph(statement.text)}</p>
       <div class="journey-choice-pair" role="group" aria-label="Udsagn ${index + 1}: ${esc(statement.text)}">
         <button type="button" class="journey-tactile-choice journey-yes ${answer === true ? 'selected' : ''}" data-journey-choice="${index}" data-value="true" aria-pressed="${answer === true}" ${disabled ? 'disabled' : ''}>JA</button>
         <button type="button" class="journey-tactile-choice journey-no ${answer === false ? 'selected' : ''}" data-journey-choice="${index}" data-value="false" aria-pressed="${answer === false}" ${disabled ? 'disabled' : ''}>NEJ</button>
       </div>
+      ${answer === null ? '' : verdictMarkup(answer === statement.correct, answer)}
     </article>`;
   }
 
+  const verdictMarkup = (right, value) => `<p class="journey-verdict" role="status">${right ? `${ico('check')}Rigtigt` : `${ico('x')}Forkert. Svaret er ${value ? 'NEJ' : 'JA'}.`}</p>`;
+
   function assessmentDock() {
     const completed = ui.answers.every(value => value !== null);
+    const statements = currentQuestion()?.statements ?? [];
+    // each dot shows its verdict as an icon and in its label: right, wrong, or the number while it is open
+    const dot = (answer, index) => {
+      const mark = answer === null ? '' : answer === statements[index]?.correct ? 'right' : 'wrong';
+      return `<button type="button" data-journey-statement="${index}" class="${index === ui.statementIndex ? 'current' : ''} ${answer !== null ? 'answered' : ''} ${mark}" aria-label="Gå til udsagn ${index + 1}${mark ? (mark === 'right' ? ', rigtigt' : ', forkert') : ''}" ${index === ui.statementIndex ? 'aria-current="step"' : ''}>${mark ? ico(mark === 'right' ? 'check' : 'x') : index + 1}</button>`;
+    };
     return `<div class="journey-control-dock journey-assessment-dock">
-      <button class="journey-back-statement" aria-label="Tilbage til forrige udsagn" type="button" data-journey-statement-prev ${ui.statementIndex === 0 ? 'disabled' : ''}>← Tilbage</button>
-      <div class="journey-statement-dots" aria-label="Fire udsagn">${ui.answers.map((answer, index) => `<button type="button" data-journey-statement="${index}" class="${index === ui.statementIndex ? 'current' : ''} ${answer !== null ? 'answered' : ''}" aria-label="Gå til udsagn ${index + 1}" ${index === ui.statementIndex ? 'aria-current="step"' : ''}>${index + 1}</button>`).join('')}</div>
-      <button class="btn btn-primary" type="button" data-journey-submit ${completed ? '' : 'disabled'}>${completed ? 'Tjek alle fire →' : `${ui.answers.filter(value => value !== null).length}/4 vurderet`}</button>
+      <button class="journey-back-statement" aria-label="Tilbage til forrige udsagn" type="button" data-journey-statement-prev ${ui.statementIndex === 0 ? 'disabled' : ''}>Tilbage</button>
+      <div class="journey-statement-dots" aria-label="Fire udsagn">${ui.answers.map(dot).join('')}</div>
+      <button class="btn btn-primary" type="button" data-journey-submit ${completed ? '' : 'disabled'}>${completed ? 'Tjek alle fire' : `${ui.answers.filter(value => value !== null).length}/4 vurderet`}</button>
     </div>`;
   }
 
   function feedbackTray(question) {
     const feedback = ui.feedback;
     const repair = !feedback.correct;
+    const showGag = state()?.settings?.humor === true && questionGagFits(question, feedback.correct);
+    const wrong = question.statements.map((statement, index) => ({ statement, index })).filter(({ statement, index }) => feedback.answers[index] !== statement.correct);
+    const answered = feedback.answers.map(value => value ? 1 : 0).join('');
+    const title = !repair ? 'Godt set!' : wrong.length === 1 ? 'Næsten!' : 'Ikke helt endnu';
+    const lead = !repair ? 'Alle fire udsagn er vurderet korrekt.' : wrong.length === 1 ? 'Ét udsagn skal rettes. Reglen står herunder.' : `${wrong.length} udsagn skal rettes. Reglen står herunder.`;
     return `<aside class="journey-feedback-tray ${repair ? 'repair' : 'correct'}" role="status">
-      <div class="journey-feedback-summary"><span aria-hidden="true">${repair ? '↻' : '✓'}</span><div><strong>${repair ? 'Find reglen og prøv igen' : 'Godt set'}</strong><p>${repair ? 'Se det afgørende, og reparér vurderingen.' : 'Alle fire udsagn er vurderet korrekt.'}</p></div></div>
-      ${state()?.settings?.humor === true && question.gag ? `<p class="journey-feedback-gag">${esc(question.gag)}</p>` : ''}
-      <details><summary>Se forklaring og alle fire svar</summary><p>${esc(question.explanation)}</p>
-        <div class="journey-answer-review">${question.statements.map((statement, index) => `<div class="${feedback.answers[index] === statement.correct ? 'right' : 'wrong'}"><span>${feedback.answers[index] === statement.correct ? '✓' : '↻'}</span><p>${esc(statement.text)}</p><b>${statement.correct ? 'JA' : 'NEJ'}</b></div>`).join('')}</div>
-        ${refs(question.sourceIds)}${voiceButton('feedback', 'Lyt til forklaringen')}
+      <div class="jp-feedback-content">${showGag ? `<div class="feedback-cast">${renderCast(question.speaker, { size: 'sm', mood: repair ? 'wrong' : 'correct' })}</div>` : ''}
+      <div class="journey-feedback-summary"><span aria-hidden="true">${repair ? ico('repeat') : ico('check')}</span><div><strong>${title}</strong><p>${lead}</p></div></div>
+      ${repair ? `<div class="jp-wrong-statements"><p>Her skal du ændre dit svar:</p><ol>${wrong.map(({ statement, index }) => `<li><strong>Udsagn ${index + 1}</strong><p>${emph(statement.text)}</p><small>Du svarede ${feedback.answers[index] ? 'JA' : 'NEJ'}. Korrekt svar er ${statement.correct ? 'JA' : 'NEJ'}.</small><a class="jp-why" href="#chat" data-chat-ask="${esc(question.id)}" data-chat-focus="${index}" data-chat-answers="${answered}">Hvorfor? Spørg Sneglen</a></li>`).join('')}</ol></div>
+      <div class="jp-rule"><p class="jp-rule-label">Reglen</p><p>${esc(question.explanation)}</p><div class="jp-rule-foot">${refs(question.sourceIds)}${voiceButton('feedback', 'Lyt til forklaringen')}</div></div>` : ''}
+      ${showGag ? `<p class="journey-feedback-gag">${esc(question.gag)}</p>` : ''}
+      <details><summary>${repair ? 'Se alle fire svar' : 'Se reglen og alle fire svar'}</summary>${repair ? '' : `<p>${esc(question.explanation)}</p>`}
+        <div class="journey-answer-review">${question.statements.map((statement, index) => `<div class="${feedback.answers[index] === statement.correct ? 'right' : 'wrong'}"><span>${feedback.answers[index] === statement.correct ? ico('check') : ico('repeat')}</span><p>${esc(statement.text)}</p><b>${statement.correct ? 'JA' : 'NEJ'}</b></div>`).join('')}</div>
+        ${repair ? '' : `${refs(question.sourceIds)}${voiceButton('feedback', 'Lyt til forklaringen')}`}
       </details>
-      <button class="btn btn-primary" data-journey-continue-feedback type="button">${repair ? 'Prøv de fire igen ↻' : 'Videre →'}</button>
+      <a class="jp-ask" href="#chat" data-chat-ask="${esc(question.id)}" data-chat-answers="${answered}">${repair ? 'Spørg Sneglen om hele spørgsmålet' : 'Spørg Sneglen om det her'}</a></div>
+      <button class="btn btn-primary jp-feedback-go" data-journey-continue-feedback type="button">${repair ? 'Prøv igen' : 'Videre'}</button>
     </aside>`;
   }
 
@@ -206,7 +240,7 @@ export function createJourneyPlayer({
       : '';
     return `<section class="journey-assessment">
       ${notice}
-      <header class="journey-exercise-context"><span class="journey-kicker">${session.kind === 'review' && (currentStep.stage === 'apply' || feedback?.stage === 'apply') ? 'KOLD GENKALDELSE · FØR KORTENE' : 'VURDÉR FIRE UDSAGN'}</span><h2>${esc(question.prompt)}</h2><p class="question-context">${esc(question.context)}</p>${voiceButton('question', 'Læs situationen op')}</header>
+      <header class="journey-exercise-context"><span class="journey-kicker">${session.kind === 'review' && (currentStep.stage === 'apply' || feedback?.stage === 'apply') ? 'KOLD GENKALDELSE <span class="tb-stripes" aria-hidden="true"></span> FØR KORTENE' : 'VURDÉR FIRE UDSAGN'}</span><h2>${esc(question.prompt)}</h2><p class="question-context">${esc(question.context)}</p>${voiceButton('question', 'Læs situationen op')}</header>
       ${renderQuestionVisual(question)}
       <section class="journey-statement-panel"><div class="journey-statement-head"><span>UDSAGN</span><b><span data-journey-statement-count aria-hidden="true">${ui.statementIndex + 1} / 4</span><span class="journey-sr-only" data-journey-statement-announcement aria-live="polite" aria-atomic="true">Udsagn ${ui.statementIndex + 1} af 4</span></b></div><div class="journey-statement-stage">${statementMarkup(question, ui.statementIndex, { disabled: Boolean(feedback) })}</div></section>
       ${feedback ? feedbackTray(question) : assessmentDock()}
@@ -215,20 +249,20 @@ export function createJourneyPlayer({
 
   function writingForm(stage, label, placeholder) {
     const draft = stage === 'transfer' ? ui.transferDraft : ui.recallDraft;
-    return `<div class="journey-writing-form"><label for="journey-open-answer">${label}</label><textarea id="journey-open-answer" maxlength="${RESPONSE_LIMIT}" rows="4" placeholder="${esc(placeholder)}">${esc(draft)}</textarea><div class="journey-writing-actions"><button type="button" class="btn btn-secondary" data-journey-cancel-writing>Tilbage til mentalt bud</button><button type="button" class="btn btn-primary" data-journey-open-submit ${draft.trim() ? '' : 'disabled'}>Sammenlign →</button></div></div>`;
+    return `<div class="journey-writing-form"><label for="journey-open-answer">${label}</label><textarea id="journey-open-answer" maxlength="${RESPONSE_LIMIT}" rows="4" placeholder="${esc(placeholder)}">${esc(draft)}</textarea><div class="journey-writing-actions"><button type="button" class="btn btn-secondary" data-journey-cancel-writing>Tilbage til mentalt bud</button><button type="button" class="btn btn-primary" data-journey-open-submit ${draft.trim() ? '' : 'disabled'}>Sammenlign</button></div></div>`;
   }
 
   function responseDock(stage, currentStep) {
     if (currentStep.revealed) {
       if (stage === 'recall') {
-        return `<div class="journey-control-dock journey-self-check"><p>Vurdér selv. Dine ord er ikke automatisk bedømt.</p><button class="btn btn-secondary" type="button" data-journey-self-check="needs-review">Genkald igen senere</button><button class="btn btn-primary" type="button" data-journey-self-check="remembered">Jeg havde det centrale med →</button></div>`;
+        return `<div class="journey-control-dock journey-self-check"><p>Vurdér selv. Dine ord er ikke automatisk bedømt.</p><button class="btn btn-secondary" type="button" data-journey-self-check="needs-review">Øv den igen senere</button><button class="btn btn-primary" type="button" data-journey-self-check="remembered">Jeg havde det centrale med</button></div>`;
       }
-      return `<div class="journey-control-dock"><p>Sammenlign handling og begrundelse.</p><button class="btn btn-primary" type="button" data-journey-transfer-next>Til genkaldelse →</button></div>`;
+      return `<div class="journey-control-dock"><p>Sammenlign handling og begrundelse.</p><button class="btn btn-primary" type="button" data-journey-transfer-next>Forklar med egne ord</button></div>`;
     }
     if (currentStep.committed) {
-      return `<div class="journey-control-dock"><p>Dit mentale bud er registreret. Det er ikke automatisk bedømt.</p><button class="btn btn-primary" type="button" data-journey-reveal="${stage}">Vis svaret →</button></div>`;
+      return `<div class="journey-control-dock"><p>Se svaret, og sammenlign med dit eget.</p><button class="btn btn-primary" type="button" data-journey-reveal="${stage}">Vis svaret</button></div>`;
     }
-    return `<div class="journey-control-dock journey-response-choice"><p>Svar mentalt, eller skriv med egne ord.</p><button class="btn btn-secondary" type="button" data-journey-write="${stage}">Skriv mit bud</button><button class="btn btn-primary" type="button" data-journey-mental="${stage}">Jeg har et bud →</button></div>`;
+    return `<div class="journey-control-dock journey-response-choice"><p>Svar mentalt, eller skriv med egne ord.</p><button class="btn btn-secondary" type="button" data-journey-write="${stage}">Skriv mit svar</button><button class="btn btn-primary" type="button" data-journey-mental="${stage}">Jeg har svaret i hovedet</button></div>`;
   }
 
   function openStepView(currentStep) {
@@ -238,7 +272,7 @@ export function createJourneyPlayer({
     const answer = currentStep.answer;
     const ownAnswer = currentStep.responseMode === 'written'
       ? `<div class="journey-own-answer"><span>DIT SKRIFTLIGE BUD</span><p>${esc(answer)}</p></div>`
-      : currentStep.committed ? '<div class="journey-mental-note">Mentalt bud gemt · sammenlign selv, når svaret vises</div>' : '';
+      : '';
     const modelAnswer = currentStep.revealed
       ? (isTransfer
         ? `<div class="journey-model-answer"><h3>Handlingen</h3><p>${esc(currentStep.modelAnswer.action)}</p><h3>Derfor</h3><p>${esc(currentStep.modelAnswer.why)}</p>${voiceButton('answer', 'Lyt til handlingen')}${refs(currentStep.case.sourceIds, currentStep.case.sourceLocator)}</div>`
@@ -272,20 +306,27 @@ export function createJourneyPlayer({
     });
     const next = recommendations.recommended;
     const nextLink = next ? `#journey:${esc(next.sectionId)}` : '#home';
-    const nextLabel = next ? `Næste: ${esc(next.title)} →` : 'Til min rute →';
+    const nextLabel = next ? `Næste: <strong>${esc(next.title)}</strong>` : 'Til min rute';
     const streak = daily.currentStreak > 0 ? `<span>${daily.currentStreak} ${daily.currentStreak === 1 ? 'dag' : 'dage'} i træk</span>` : '';
     const completionActions = session.finalizedAt
       ? (daily.goalMet
-        ? `<a class="btn btn-secondary" href="${nextLink}">${next ? nextLabel : 'Åbn min rute'}</a><a class="btn btn-primary" href="#home">Til min rute →</a>`
+        ? `<a class="btn btn-secondary" href="${nextLink}">${next ? nextLabel : 'Åbn min rute'}</a><a class="btn btn-primary" href="#home">Til min rute</a>`
         : `<a class="btn btn-secondary" href="#home">Til min rute</a><a class="btn btn-primary" href="${nextLink}">${nextLabel}</a>`)
-      : '<button class="btn btn-primary" type="button" data-journey-finish>Gem lektionen →</button>';
+      : '<button class="btn btn-primary" type="button" data-journey-finish>Gem lektionen</button>';
+    // Boosters come once per lesson per day: before saving, this lesson earns them if it has no event today yet
+    const todays = (currentState.journey?.events || []).filter(e => e.kind === 'lesson' && e.sectionId === section.id && e.day === daily.day).length;
+    const earns = session.finalizedAt ? todays === 1 : todays === 0;
+    const firstTry = [evidence.apply, evidence.checkpoint].filter(x => x && !x.hadWrong).length;
     return `<section class="journey-lesson-done ${session.finalizedAt ? 'is-finalized' : ''}">
-      <div class="journey-celebration" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="journey-done-art">${renderArt(repaired ? 'omkamp-cone' : 'koerelys-brain', { variant: 'result', humorOnly: true })}</div>
-      <span class="journey-kicker">LEKTION GENNEMFØRT</span><h2>${repaired ? 'Fejlen blev repareret.' : 'Løbet er gennemført.'}</h2>
-      <p>Du har vurderet fire udsagn, brugt reglen og sammenlignet din genkaldelse.</p>
-      <div class="journey-daily-result"><strong>${daily.completedSessions} / ${daily.dailyGoal}</strong><span>${daily.goalMet ? 'Dagens mål er nået' : 'gennemførte sessioner i dag'}</span>${streak}</div>
-      ${lesson.practicalNote ? `<details class="journey-practical-note"><summary>Tag det med til kørelæreren</summary><p>${esc(lesson.practicalNote)}</p></details>` : ''}
+      <div class="journey-celebration" aria-hidden="true" data-rive="confetti"><i></i><i></i><i></i></div>
+      <div class="lesson-rive" data-rive="lessondone" aria-hidden="true"></div>
+      <div class="journey-done-art">${renderCast('kegle', { size: 'md', mood: 'correct', priority: true })}</div>
+      <h2 class="jp-done-title">${repaired ? 'Rettet og klaret!' : 'Lektion klaret!'}</h2>
+      <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den, og det er sådan, det sætter sig.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>
+      <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${ico('bolt')} ${earns ? `+${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '0'}</strong>${earns ? '' : '<em>Tjent i dag allerede</em>'}</div><div><small>RIGTIG I FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
+      ${sequenceFor(section.id) ? `<a class="jp-order" href="#order:${esc(sequenceFor(section.id).id)}">${ico('list')}<span><strong>Sæt det i rækkefølge</strong><small>${esc(sequenceFor(section.id).title)} <span class="tb-stripes" aria-hidden="true"></span> ${sequenceFor(section.id).steps.length} trin</small></span></a>` : ''}
+      <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">${ico('target')} ${daily.goalMet ? `Dagens mål nået. +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')} Boosters` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? `. ${streak}` : ''}</div>
+      ${lesson.practicalNote ? `<details class="journey-practical-note"><summary>Prøv det i bilen med din kørelærer</summary><p>${esc(lesson.practicalNote)}</p></details>` : ''}
       <div class="journey-control-dock">${completionActions}</div>
     </section>`;
   }
@@ -303,6 +344,7 @@ export function createJourneyPlayer({
     const safePercent = Math.max(0, Math.min(100, Number(percent) || 0));
     progress.setAttribute('aria-valuenow', String(Math.round(safePercent)));
     fill.style.setProperty('--journey-progress', `${safePercent}%`);
+    fill.style.setProperty('--journey-progress-ratio', String(safePercent / 100));
     if (!animate || reducedMotion()) fill.style.transition = 'none';
     else fill.style.removeProperty('transition');
     lastProgressPercent = safePercent;
@@ -343,6 +385,7 @@ export function createJourneyPlayer({
       });
     }
     mountVisual();
+    if(currentStep.stage==='done' && session.finalizedAt)onResult(host.querySelector('.journey-lesson-done'),session);
     if (stageChanged) globalThis.scrollTo?.({ top: 0, behavior: 'instant' });
     lastRenderedStage = shownStage;
     const directionalCard = direction && host.querySelector('.journey-focus-card');
@@ -350,13 +393,18 @@ export function createJourneyPlayer({
       activeAnimation = directionalCard.animate([
         { opacity: 0, transform: `translateX(${direction * 28}px)` },
         { opacity: 1, transform: 'translateX(0)' }
-      ], { duration: 240, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      ], { duration: 240, easing: 'cubic-bezier(.16,1,.3,1)' }); // = --out in motion.css
     }
     if (focus) {
-      const heading = host.querySelector('.journey-player-body h2') || host.querySelector('h1');
+      const heading = (ui.feedback && host.querySelector('.jp-feedback-go')) || host.querySelector('.journey-player-body h2') || host.querySelector('h1');
       heading?.setAttribute('tabindex', '-1');
       heading?.focus({ preventScroll: true });
     }
+    if(ui.feedback)requestAnimationFrame(()=>{
+      if(disposed || renderGeneration!==transitionGeneration)return;
+      const tray=host.querySelector('.journey-feedback-tray');
+      if(!globalThis.matchMedia?.('(max-width:700px)').matches)tray?.scrollIntoView?.({block:'end',behavior:reducedMotion()?'instant':'smooth'});
+    });
   }
 
   function updateAssessmentControls() {
@@ -388,7 +436,7 @@ export function createJourneyPlayer({
         activeAnimation = card.animate([
           { opacity: 0, transform: `translateX(${direction * 22}px)` },
           { opacity: 1, transform: 'translateX(0)' }
-        ], { duration: 240, easing: 'cubic-bezier(.2,.8,.2,1)' });
+        ], { duration: 240, easing: 'cubic-bezier(.16,1,.3,1)' }); // = --out in motion.css
       }
     };
     if (!reducedMotion() && stage.firstElementChild?.animate) {
@@ -396,20 +444,25 @@ export function createJourneyPlayer({
       activeAnimation = stage.firstElementChild.animate([
         { opacity: 1, transform: 'translateX(0)' },
         { opacity: 0, transform: `translateX(${-direction * 16}px)` }
-      ], { duration: 120, easing: 'ease-in', fill: 'forwards' });
+      ], { duration: 100, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' }); // = --out in motion.css
       activeAnimation.finished.then(replace).catch(() => {});
     } else replace();
   }
 
-  function scheduleNextStatement(index) {
+  // After the verdict has been on screen for `hold` ms: on to the next open statement, or check the situation
+  // when all four are answered. The hold is reading time, so it stays with reduced motion.
+  function scheduleNextStatement(index, hold) {
     const generation = ++transitionGeneration;
     choiceLocked = true;
     transitionTimer = setTimeout(() => {
       transitionTimer = null;
       if (disposed || generation !== transitionGeneration) return;
       choiceLocked = false;
-      showStatement(index + 1, 1);
-    }, reducedMotion() ? 0 : 220);
+      const open = ui.answers.findIndex(value => value === null);
+      const submit = host.querySelector('[data-journey-submit]');
+      if (open >= 0) showStatement(open, open > index ? 1 : -1);
+      else if (submit) submitAssessment(submit);
+    }, hold);
   }
 
   function read(button) {
@@ -423,8 +476,8 @@ export function createJourneyPlayer({
       button = host.querySelector('[data-journey-voice="lesson"]');
     }
     const getters = {
-      question: () => questionVoiceParts(question),
-      feedback: () => questionFeedbackParts(question, { humor: state()?.settings?.humor === true }),
+      question: () => { const all = questionVoiceParts(question), i = ui.statementIndex; return ui.feedback ? all : [all[0], all[1 + 2 * i], all[2 + 2 * i]].filter(Boolean); }, // the situation and the statement on screen; the next one is read when it is asked for
+      feedback: () => questionFeedbackParts(question, { humor: state()?.settings?.humor === true, correct: ui.feedback?.correct === true }),
       lesson: () => lessonVoiceParts(lesson),
       case: () => lessonCaseVoiceParts(lesson),
       answer: () => lessonAnswerVoiceParts(lesson),
@@ -458,7 +511,8 @@ export function createJourneyPlayer({
     onAssess?.(question, answers);
     const attempts = stage === 'apply' ? session.apply.attempts : session.checkpoint.attempts;
     const hadWrong = attempts.slice(0, -1).some(attempt => attempt.correct === false);
-    experience(result.correct ? 'correct' : 'repair', { assessment: stage, hadWrong });
+    // a wrong statement already got its own sound when it was answered; only the whole situation right is new
+    if (result.correct) experience('correct', { assessment: stage, hadWrong });
     save();
     render();
   }
@@ -487,10 +541,18 @@ export function createJourneyPlayer({
         choice.classList.toggle('selected', selected);
         choice.setAttribute('aria-pressed', String(selected));
       });
-      experience('selection', { assessment: session.stage, statementIndex: index, value });
+      // Right or wrong at once, in words and an icon (not colour alone). A run of right answers raises the pitch.
+      const right = value === currentQuestion()?.statements[index]?.correct;
+      streak = right ? streak + 1 : 0;
+      const card = button.closest('.journey-statement');
+      card?.classList.remove('is-right', 'is-wrong');
+      card?.classList.add(right ? 'is-right' : 'is-wrong', 'fresh');
+      card?.querySelector('.journey-verdict')?.remove();
+      card?.insertAdjacentHTML('beforeend', verdictMarkup(right, value));
+      experience(right ? 'toggle-on' : 'repair', { assessment: session.stage, statementIndex: index, value, rate: 1 + Math.min(Math.max(streak - 1, 0), 5) * .05 });
       save();
       updateAssessmentControls();
-      if (index < 3) scheduleNextStatement(index);
+      scheduleNextStatement(index, right ? 600 : 1300);
       return;
     }
     if (button.hasAttribute('data-journey-statement-prev')) {
@@ -520,9 +582,12 @@ export function createJourneyPlayer({
     if (button.hasAttribute('data-journey-submit') && !ui.feedback) { submitAssessment(button); return; }
     if (button.hasAttribute('data-journey-continue-feedback') && ui.feedback) {
       const finished = ui.feedback.correct && session.stage === 'done';
+      const tried = !ui.feedback.correct ? currentQuestion() : null;
+      const kept = tried ? ui.feedback.answers.map((value, index) => value === tried.statements[index]?.correct ? value : null) : null;
       ui.feedback = null;
-      ui.answers = [null, null, null, null];
-      ui.statementIndex = 0;
+      const next = step()?.question;
+      ui.answers = kept && next && next.id === tried.id ? kept : [null, null, null, null];
+      ui.statementIndex = Math.max(0, ui.answers.findIndex(value => value === null));
       if (finished) finalize();
       save();
       render();

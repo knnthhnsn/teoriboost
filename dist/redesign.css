@@ -1,0 +1,290 @@
+/* Redesign layer: bright, white, Duolingo-like. Loaded last; it re-tokens the existing styles and adds the cast.
+   The yellow logo colour (#FFD60A) is the primary; signal colours are bright and saturated.
+   Fonts: Rubik (display) and Atkinson Hyperlegible (text), both SIL OFL, served locally. */
+@font-face{font-family:Rubik;src:url('assets/fonts/rubik-var.woff2') format('woff2');font-weight:300 900;font-display:swap}
+@font-face{font-family:Atkinson;src:url('assets/fonts/atkinson-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Atkinson;src:url('assets/fonts/atkinson-700.woff2') format('woff2');font-weight:700;font-display:swap}
+/* Many older rules name Barlow/DM/Plex directly. Re-pointing those family names to the new files swaps the
+   type everywhere at once (later @font-face rules win for the same family and weight). */
+@font-face{font-family:Barlow;src:url('assets/fonts/rubik-var.woff2') format('woff2');font-weight:300 900;font-display:swap}
+@font-face{font-family:DM;src:url('assets/fonts/atkinson-400.woff2') format('woff2');font-weight:100 600;font-display:swap}
+@font-face{font-family:DM;src:url('assets/fonts/atkinson-700.woff2') format('woff2');font-weight:601 1000;font-display:swap}
+@font-face{font-family:Plex;src:url('assets/fonts/atkinson-400.woff2') format('woff2');font-weight:100 600;font-display:swap}
+@font-face{font-family:Plex;src:url('assets/fonts/atkinson-700.woff2') format('woff2');font-weight:601 1000;font-display:swap}
+/* Anything still asking for a monospace face gets the text face (no typewriter labels in the new design). */
+code,kbd,samp,.mono,[class*="mono"],.turn-entry small,.turn-kicker,.turn-replay-status,.turn-scene-tag,.turn-shell b,.journey-week small{font-family:var(--font-text)!important}
+
+:root{
+  color-scheme:light;
+  /* neutrals */
+  --bg:#FEFFED;--panel:#FEFFED;--panel2:#F4F5F7;--ink:#1F2328;--muted:#5F656D;--line:#E3E5E8;--line-strong:#C2CCD6;
+  /* brand: the logo's yellow is the primary fill; text on it is ink */
+  --accent:#FFD60A;--accent-ink:#1F2328;--accent-shadow:#C9A200;--acid:#FFD60A;
+  /* signals (text-safe variants on white) */
+  --good:#58CC02;--good-ink:#2F6F00;--good-bg:#E8FBD5;
+  --bad:#FF4B4B;--bad-ink:#D42F2F;--bad-bg:#FFE5E5;
+  --blue:#1F2328;--blue-ink:#1F2328;--orange:#FF9600;--purple:#1F2328;
+  --pink:var(--bad-ink);--cyan:var(--blue-ink);--amber:var(--orange);
+  /* text-safe stand-ins for theme colours the old dark design used as text */
+  --acid-text:#4A4127;--on-accent:#1F2328;--amber-text:#FF9600;
+  --radius:18px;
+  --font-display:Rubik,'Arial Rounded MT Bold',Arial,sans-serif;
+  --font-text:Atkinson,Verdana,Arial,sans-serif;
+}
+body{font:16px/1.55 var(--font-text);background:var(--bg);color:var(--ink)}
+h1,h2,h3,.display{font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;line-height:1.08;color:var(--ink)}
+h1{font-size:clamp(34px,5vw,52px)}h2{font-size:clamp(24px,3vw,32px)}h3{font-size:20px}
+.muted{color:var(--muted)}
+.acid,span.acid{color:var(--acid-text)}
+.pink{color:var(--bad-ink)}
+::selection{background:var(--accent);color:var(--accent-ink)}
+a.text-link,.text-link{color:var(--blue-ink)}
+
+/* Micro labels were 8–10px monospace; keep the label idea, make it readable. */
+.mono,.eyebrow,.journey-kicker,.answer-note,.sidebar-label,.top-strap,.card-tag,.card-top,.card-bottom,
+.section-head .eyebrow,.stat-label,.journey-path-count,.scene-caption{font-family:var(--font-text)!important;font-size:12px!important;letter-spacing:.06em!important;font-weight:700;color:var(--muted)}
+.small,small{font-size:13px}
+.top-actions .mode-toggle,.top-actions .mode-toggle b,span.acid,.brand-dot{font-size:12px!important}
+.text-link,.statement-index,.nav-label,.exam-specs span,.exam-art small,.scene-photo-note,.journey-node__title small,
+.journey-goal small,.journey-unit-control span,.scene-panel span,.result-stats span,.journey-day small{font-size:12px!important}
+.exam-content p{font-size:14px!important}
+
+/* Chrome */
+.topbar{background:#FEFFED!important;border-bottom:2px solid var(--line)}
+.brand{font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+/* The logo stays exactly as before: yellow, skewed /// in the original typeface (styles.css). */
+@font-face{font-family:LogoBarlow;src:url('assets/fonts/heading-bold.ttf') format('truetype');font-weight:800;font-display:swap}
+.brand-mark{font-family:LogoBarlow,Impact,sans-serif!important}
+.sidebar{border-right:2px solid var(--line);background:#FEFFED}
+.nav-item{border-radius:14px;color:var(--muted);border:2px solid transparent}
+.nav-item:hover{background:var(--panel2)}
+.nav-item.active,.nav-item[aria-current="page"]{background:#FFF6C7;color:var(--ink);border-color:var(--accent-shadow)}
+.mobile-nav{background:#FEFFED;border-top:2px solid var(--line)}
+.mobile-nav .nav-item.active,.mobile-nav .nav-item[aria-current="page"]{background:#FFF6C7}
+.icon-btn,.mode-toggle{background:#FEFFED!important;border:2px solid var(--line)!important;color:var(--ink)!important}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+select,input{background:#FEFFED;color:var(--ink);border:2px solid var(--line)!important;border-radius:12px}
+
+/* Buttons: chunky, pressable */
+.btn{border-radius:16px;font-family:var(--font-display);font-weight:700;font-size:16px;min-height:48px}
+.btn-primary{background:var(--accent)!important;color:var(--accent-ink)!important;box-shadow:0 4px 0 var(--accent-shadow);border:0}
+.btn-primary:hover{background:#FFE45C!important;filter:none}
+.btn-primary:active{background:#E8BC00!important;transform:translateY(3px);box-shadow:0 1px 0 var(--accent-shadow)}
+.btn-secondary{background:#FEFFED!important;color:var(--ink)!important;border:2px solid var(--line)!important;box-shadow:0 4px 0 var(--line)}
+.choice-btn{border-radius:12px;font-family:var(--font-display);font-weight:700;font-size:14px!important;background:#FEFFED;color:var(--ink);border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.choice-btn.selected{background:#FFD60A;color:#1F2328;border-color:#C9A200;box-shadow:0 3px 0 #C9A200}
+
+/* Cards: white with a grey edge and a pressed bottom, like physical tiles */
+.question-panel,.feedback,.journey-path,.journey-details,.journey-next-copy,.exam-intro,.learning-note,.chapter-card,.mission-card,
+.result-row,.article-section,.statement,.journey-daily-bar,.stat-strip,.route-strip,.exam-art,.journey-statement-panel{
+  border-radius:var(--radius);background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.statement.correct{border-color:var(--good);background:var(--good-bg)}
+.statement.incorrect{border-color:var(--bad);background:var(--bad-bg)}
+.feedback{border-color:var(--good);background:var(--good-bg);box-shadow:0 4px 0 var(--good)}
+.feedback h3{color:var(--good-ink)}
+.feedback.wrong{border-color:var(--bad);background:var(--bad-bg);box-shadow:0 4px 0 var(--bad)}
+.feedback.wrong h3{color:var(--bad-ink)}
+.journey-feedback-tray.correct{background:#F4F5F7}
+.journey-feedback-tray.repair{background:#F4F5F7}
+.journey-progress-meter,.journey-progress-meter i{border-radius:99px}
+.journey-progress-meter{background:var(--panel2)}.journey-progress-meter i{background:var(--good)}
+
+/* Modules that scope their own colour variables (built for the old dark theme). */
+.journey-surface{--bg:#FEFFED;--panel:#FEFFED;--panel2:var(--panel2-root,#F4F5F7);--line:#E3E5E8;--muted:#5F656D;--ink:#1F2328;background:#FEFFED}
+.garage-page{--garage-orange:#3A434C;--garage-blue:#0A7BBF;--garage-ink:#1F2328}
+.turn-shell{--turn-lime:#FFD60A;--turn-cyan:#4A4127}
+/* "Du er kørelæreren": its --judge-white was the text colour on the dark scene. */
+.judge.judge{--judge-white:#1F2328;--judge-coral:#D42F2F;--judge-yellow:#3A434C;--judge-mint:#2F6F00}
+.judge__intro p{background:#FEFFED!important;color:var(--ink)!important;border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.judge__start{background:var(--accent)!important;color:var(--accent-ink)!important;box-shadow:0 4px 0 var(--accent-shadow)!important;border:0!important;font-family:var(--font-display);font-weight:700}
+
+/* Mobile-first type scale: big display headings were sized for desktop. */
+@media (max-width:700px){
+  #main h1{font-size:clamp(28px,8.5vw,36px)!important;line-height:1.08}
+  #main h2{font-size:clamp(22px,6.8vw,28px)!important;line-height:1.12}
+  #main h3{font-size:clamp(18px,5.2vw,21px)!important}
+  .exam-art .display{font-size:clamp(52px,17vw,72px)!important}
+}
+
+/* Missions: no glow bleeding into the cards; the STOP sign keeps its condensed sign lettering. */
+.stop-sign{font-family:LogoBarlow,Impact,sans-serif!important;filter:none!important;overflow:hidden}
+.mission-card::before,.mission-card::after,.mission-card .card-art::before,.mission-card .card-art::after{background:none!important;box-shadow:none!important;filter:none!important}
+.mission-card .card-art,.mission-card .card-art *{filter:none!important}
+.mission-card .card-art{background:none!important}
+.mission-card .card-arrow,.chapter-card .card-arrow,.mission-card .card-art strong,.mission-card .card-art svg{color:color-mix(in srgb,var(--card-color,#1F2328) 55%,#0F1215)!important}
+.section-head{flex-wrap:wrap;gap:6px 12px}
+.section-head .text-link{font-family:var(--font-text)!important;font-weight:700;font-size:14px!important;white-space:nowrap}
+
+/* Chapter colours are bright neons; as text on white they are darkened to stay readable. */
+.chapter-card .chapter-number,.chapter-card .mono{color:color-mix(in srgb,var(--card-color,#1F2328) 50%,#0F1215)!important}
+.mobile-nav .nav-item.active .nav-label,.mobile-nav .nav-item[aria-current="page"] .nav-label{color:var(--ink)!important}
+.mobile-nav .nav-label{color:var(--muted)}
+#humor-toggle b,.mode-toggle b,.acid{color:var(--acid-text)!important}
+.journey-step--active .journey-node__title small,.journey-node__title small{color:#2F6F00!important}
+.journey-step:not(.journey-step--active) .journey-node__title small{color:var(--muted)!important}
+.exam-art .display,.exam-art .display span{color:var(--ink)!important}
+.exam-art{background:#FFF6C7!important;border-color:var(--accent-shadow)!important;box-shadow:0 4px 0 var(--accent-shadow)!important}
+
+/* ---------- Cast ---------- */
+.cast{margin:0;display:flex;flex-wrap:wrap;align-items:flex-end;gap:4px 12px;min-width:0;max-width:100%}
+.art-scene:has(.cast){position:static!important;inset:auto!important;width:auto!important;height:auto!important;transform:none!important;opacity:1!important;margin:0 0 14px}
+.art-note:has(.cast){display:block}
+.art-scene .cast--md .cast-img{width:clamp(110px,32vw,150px)}
+.cast-img{display:block;height:auto;flex:none;filter:drop-shadow(0 6px 8px rgba(31,35,40,.14))}
+.cast--xs .cast-img{width:56px}.cast--sm .cast-img{width:96px}.cast--md .cast-img{width:150px}.cast--lg .cast-img{width:min(240px,52vw)}
+.cast-bubble{position:relative;margin:0 0 14px;background:#FEFFED;color:var(--ink);border:2px solid var(--line);
+  border-radius:18px 18px 18px 6px;padding:10px 14px;font-size:15px;line-height:1.45;max-width:min(34ch,100%);box-shadow:0 3px 0 var(--line)}
+.cast-name{display:block;font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--blue-ink);margin-bottom:2px}
+@media (prefers-reduced-motion:no-preference){
+  .cast-img{animation:cast-in .45s var(--spring) both}
+  .cast--wrong .cast-img{animation:cast-in .45s var(--spring) both,cast-wobble 1.6s .45s ease-in-out 1}
+  .cast--correct .cast-img{animation:cast-in .45s var(--spring) both,cast-hop .5s .45s ease-out 1}
+}
+@keyframes cast-in{from{opacity:0;transform:translateY(12px) scale(.92)}to{opacity:1;transform:none}}
+@keyframes cast-wobble{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}60%{transform:rotate(4deg)}}
+@keyframes cast-hop{0%,100%{transform:translateY(0)}40%{transform:translateY(-10px)}}
+
+/* ---------- Home ---------- */
+.home-hello{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;margin:4px 0 18px;padding:20px 22px 0;
+  background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);border-radius:24px;overflow:hidden}
+.home-hello .cast{align-items:flex-end}
+.home-hello .cast-bubble{margin-bottom:28px}
+.home-stats{display:flex;flex-direction:column;gap:10px;align-self:center;padding-bottom:20px}
+.home-chip{display:flex;align-items:center;gap:8px;background:#FEFFED;border:2px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:700;white-space:nowrap;color:var(--ink)}
+.home-chip b{font-family:var(--font-display);color:var(--orange);font-size:17px}
+.home-ring{--p:0;width:84px;height:84px;border-radius:50%;background:conic-gradient(var(--good) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;margin:0 auto}
+.home-ring span{width:64px;height:64px;border-radius:50%;background:#FEFFED;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--ink)}
+.home-ring-label{text-align:center;font-size:13px;color:var(--muted)}
+.home-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 22px;padding:16px 18px;border-radius:20px;
+  background:var(--accent);color:var(--accent-ink);box-shadow:0 5px 0 var(--accent-shadow);font-family:var(--font-display)}
+.home-cta small{display:block;font-family:var(--font-text);font-weight:700;font-size:13px;opacity:.8}
+.home-cta strong{font-size:20px;font-weight:800}
+.home-cta b{font-size:24px}
+.home-cta:active{transform:translateY(3px);box-shadow:0 2px 0 var(--accent-shadow)}
+.journey-home-top{display:none}
+.journey-node__circle{font-family:var(--font-display);background:#FEFFED;border:3px solid var(--line);color:var(--muted);box-shadow:0 4px 0 var(--line)}
+.journey-step--active .journey-node__circle{background:var(--accent);border-color:var(--accent-shadow);color:var(--accent-ink);box-shadow:0 4px 0 var(--accent-shadow)}
+.journey-step--lesson-complete .journey-node__circle{background:var(--good);border-color:#58CC02;color:#FEFFED;box-shadow:0 4px 0 #58CC02}
+@media (max-width:700px){
+  .home-hello{grid-template-columns:1fr;padding:16px 16px 0}
+  .home-stats{flex-direction:row;flex-wrap:wrap;align-items:center;padding-bottom:0;order:-1}
+  .home-ring{width:64px;height:64px;margin:0}.home-ring span{width:48px;height:48px;font-size:15px}
+  .home-ring-label{text-align:left}
+  .home-hello .cast-bubble{margin-bottom:18px;font-size:14px}
+}
+
+/* ---------- Feedback with cast ---------- */
+.feedback-cast{display:flex;align-items:flex-end;gap:10px;margin:2px 0 12px}
+.feedback-cast .cast-bubble{margin-bottom:10px}
+.journey-feedback-tray .feedback-cast{margin-top:4px}
+.feedback .gag .art-asset,.journey-coach .art-asset{display:none}
+
+.exam-jump .jump-btn{font-size:13px!important;font-family:var(--font-display)}
+/* The humour toggle is dimmed during the exam; keep its label readable (WCAG AA) instead of fading it. */
+.mode-toggle{opacity:1!important}.mode-toggle b{color:var(--good-ink)}
+.mode-toggle[aria-disabled="true"],.mode-toggle:disabled{filter:none}
+
+/* Narrow phones: Rubik is wider than the old condensed face. */
+@media (max-width:400px){
+  .brand{font-size:17px!important;gap:5px!important}.topbar{gap:6px;padding:0 10px}
+  .top-actions{gap:6px}.top-actions .mode-toggle{padding:6px 8px}
+  .exam-art .display{font-size:clamp(56px,22vw,96px)!important}
+  .exam-art .display small,.exam-art .display span{white-space:normal}
+  .chapter-card{gap:10px!important;padding-left:14px!important;padding-right:14px!important}
+  .chapter-card>div{min-width:0}.chapter-card h3{font-size:20px!important;overflow-wrap:anywhere}
+  .chapter-card .chapter-number{font-size:34px!important}
+}
+
+/* ---------- Boosters + Min bil ---------- */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.booster-chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px 0 8px;border-radius:999px;background:#FEFFED;border:2px solid var(--line);
+  box-shadow:0 3px 0 var(--line);color:var(--ink);font-family:var(--font-display);font-weight:800;font-size:16px;text-decoration:none;white-space:nowrap}
+.booster-chip b{font-weight:800}
+.booster-chip:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.booster-chip--big{font-size:20px;padding:6px 16px 6px 10px}
+.booster-chip--big .booster-icon{width:26px;height:26px}
+/* Mobile-first top bar: logo, Boosters, settings. Humour and sound live in settings. */
+@media (max-width:700px){#humor-toggle,#sound-toggle{display:none!important}}
+
+.mybil{max-width:760px;margin:0 auto}
+.mybil-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.mybil-stage{position:relative;aspect-ratio:1/1;max-height:min(70vw,420px);margin:0 auto;border-radius:24px;
+  background:radial-gradient(70% 55% at 50% 62%,#FFF6C7 0,#FEFFED 70%);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);overflow:hidden}
+.mybil-stage img,.road-car img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.mybil-stage{display:block;width:min(100%,70vw,420px);max-height:none;padding:0;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mybil-message{min-height:24px;margin:10px 0 4px;text-align:center;font-weight:700;color:var(--acid-text)}
+.mybil-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px}
+.mybil-tab{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:#FEFFED;color:var(--ink);font-family:var(--font-display);font-weight:700}
+.mybil-tab.is-active{background:var(--accent);border-color:var(--accent-shadow);box-shadow:0 3px 0 var(--accent-shadow)}
+.mybil-grid,.mybil-bases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:560px){.mybil-grid,.mybil-bases{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.mybil-item,.mybil-base{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 8px 10px;border-radius:18px;background:#FEFFED;border:2px solid var(--line);
+  box-shadow:0 4px 0 var(--line);color:var(--ink);text-align:center;min-height:44px}
+.mybil-item small,.mybil-base small{display:inline-flex;align-items:center;gap:4px;font-weight:700;color:var(--muted);font-size:13px}
+.mybil-item.is-on,.mybil-base.is-active{border-color:var(--accent-shadow);box-shadow:0 4px 0 var(--accent-shadow);background:#FFF6C7}
+.mybil-item.is-on small,.mybil-base.is-active small{color:var(--acid-text)}
+.mybil-item.is-short .mybil-thumb{opacity:.5}
+.mybil-base.is-locked img{filter:grayscale(1) opacity(.55)}
+.mybil-thumb{position:relative;display:block;width:100%;aspect-ratio:1/1}
+.mybil-thumb img,.mybil-base img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.mybil-base{position:relative}.mybil-base img{position:static;height:auto;aspect-ratio:1/1}
+.mybil-item-name,.mybil-base span{font-family:var(--font-display);font-weight:700;font-size:15px}
+.mybil-subtitle{margin:22px 0 10px}
+.mybil-earn{margin:18px 0 0;color:var(--muted);font-size:14px}
+/* Free colours: a coloured shape cut by the mask, with the mask's grey shading multiplied on top. */
+.mybil-stage,.mybil-thumb,.road-car{isolation:isolate}
+.mybil-tint{position:absolute;inset:0;-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}
+.mybil-shade{mix-blend-mode:multiply}
+.mybil-tint.is-glass,.mybil-shade.is-glass{opacity:.82}
+.mybil-body,.mybil-rig,.mybil-wheels{position:absolute;inset:0;display:block}
+.mybil-body{transition:translate .45s var(--spring)}
+.mybil-body.is-lowered{translate:0 2.2%}
+.mybil-neon{position:absolute;height:7%;border-radius:50%;filter:blur(12px);opacity:.85;z-index:0}
+.mybil-plate{position:absolute;display:grid;place-items:center;overflow:hidden;container-type:size}
+.mybil-plate b{font:800 min(72cqh,calc(100cqw / (var(--n) * .92)))/1 var(--font-display);color:#1F2328;letter-spacing:.02em;white-space:nowrap}
+.mybil-colors{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.mybil-swatch{width:36px;height:36px;border-radius:50%;border:3px solid #FEFFED;box-shadow:0 0 0 2px var(--line)}
+.mybil-swatch.is-on{box-shadow:0 0 0 3px var(--ink)}
+.mybil-custom{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px 0 6px;border-radius:999px;border:2px solid var(--line);font-weight:700}
+.mybil-custom input{width:32px;height:32px;border:0;padding:0;background:none}
+.mybil-plate-input{display:flex;flex-direction:column;gap:6px;margin-top:14px;font-weight:700}
+.mybil-plate-input input{min-height:48px;font:800 22px var(--font-display);letter-spacing:.1em;text-transform:uppercase;padding:0 14px;max-width:240px}
+.mybil-extra{min-height:96px;justify-content:center}
+
+/* ---------- Exam ---------- */
+.exam-cast{margin:0 0 18px}
+.result-hero .cast{justify-content:center;margin:0 auto 10px}
+@media (max-width:360px){
+  .booster-chip{gap:4px;padding:0 9px 0 6px;font-size:15px}
+  .booster-chip .booster-icon{width:20px;height:20px}
+  .brand-dot{display:inline-block}
+  .topbar .brand{min-width:0}
+}
+
+/* Min bil: what is on the car right now, each with an x; and the stock tile first in every tab */
+.mybil-on{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:12px auto 0;max-width:520px}
+.mybil-on-label{flex-basis:100%;text-align:center;font:800 12px var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mybil-on-empty{color:var(--muted);font-size:14px}
+.on-chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 6px 0 12px;border-radius:999px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 2px 0 var(--line);font:700 14px var(--font-display);color:var(--ink);cursor:pointer}
+.on-chip i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#F4F5F7;font-style:normal;font-size:12px;color:var(--muted)}
+.on-chip:hover i,.on-chip:focus-visible i{background:#E3E5E8;color:#1F2328}
+.on-clear{min-height:36px;padding:0 12px;border-radius:999px;border:2px dashed #C2CCD6;background:#F4F5F7;color:#1F2328;font:700 14px var(--font-display);cursor:pointer}
+.mybil-stock .mybil-thumb img{filter:saturate(.9)}
+.mybil-stock.is-on{border-color:var(--ink);box-shadow:0 4px 0 var(--ink);background:#FEFFED}
+.mybil-stock.is-on small{color:var(--ink)}
+
+/* Manual-scale foreground roles; yellow fill and dark-yellow text are separate. */
+.brand-dot{display:inline-block!important;color:#FFD60A!important;font:inherit!important;vertical-align:baseline;margin:0}
+.mh-eyebrow,.garage-joke .mono,.jp-done-goal .ui-ico,.turn-done-art>span,.turn-entry__mark,.turn-entry>b,.voice-ai-badge{color:var(--acid-text,#4A4127)}
+.voice-read[aria-pressed=true],.judge__voice[aria-pressed=true]{color:var(--blue-ink,#0A7BBF)}
+.chip--goal .ui-ico{color:var(--chip-ink,#4A4127)}
+.turn-shell{--turn-lime:#FFD60A;--turn-cyan:var(--acid-text,#4A4127)}
+.turn-body h1 em{color:var(--acid-text,#4A4127)}
+.turn-shell.turn-shell .turn-kicker{color:var(--acid-text,#4A4127)}
+.turn-shell.turn-shell .turn-primary{color:#1F2328}
+.chat-dot{background:#FFD60A;box-shadow:0 0 0 0 rgba(255,214,10,.5)}
+@keyframes online{70%{box-shadow:0 0 0 7px rgba(255,214,10,0)}100%{box-shadow:0 0 0 0 rgba(255,214,10,0)}}
+
+/* Feedback is identified by the existing drawn icon and its status label. */
+.journey-feedback-tray.correct .journey-feedback-summary>span,.journey-feedback-tray.correct .journey-feedback-summary strong{color:var(--good-ink)}
+.journey-feedback-tray.repair .journey-feedback-summary>span,.journey-feedback-tray.repair .journey-feedback-summary strong{color:var(--bad-ink)}

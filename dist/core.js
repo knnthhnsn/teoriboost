@@ -126,11 +126,15 @@ export function recordAnswer(state,question,answers,now=Date.now()) {
 }
 
 export function isMastered(r){return !!r&&r.streak>=3&&r.days.length>=2;}
-export function reviewQueue(state,questions,now=Date.now()){
-  return [...questions].sort((a,b)=>{const x=state.records[a.sectionId],y=state.records[b.sectionId];const rank=r=>!r?2:r.lastAssessment==='complete'&&!r.lastCorrect?0:r.due<=now?1:3;return rank(x)-rank(y)||(x?.last||0)-(y?.last||0)||a.id.localeCompare(b.id);});
+export function reviewQueue(state,questions,now=Date.now(),{seen=null,random=Math.random}={}){
+  // Sections keep their order; inside a section the question seen longest ago comes first, ties at random.
+  const sectionStart=new Map(),tie=new Map();
+  if(seen)for(const q of questions){const start=sectionStart.get(q.sectionId);if(start===undefined||q.id.localeCompare(start)<0)sectionStart.set(q.sectionId,q.id);tie.set(q.id,random());}
+  const order=seen?(a,b)=>sectionStart.get(a.sectionId).localeCompare(sectionStart.get(b.sectionId))||(Number(seen[a.id])||0)-(Number(seen[b.id])||0)||tie.get(a.id)-tie.get(b.id):(a,b)=>a.id.localeCompare(b.id);
+  return [...questions].sort((a,b)=>{const x=state.records[a.sectionId],y=state.records[b.sectionId];const rank=r=>!r?2:r.lastAssessment==='complete'&&!r.lastCorrect?0:r.due<=now?1:3;return rank(x)-rank(y)||(x?.last||0)-(y?.last||0)||order(a,b);});
 }
-export function chooseMission(state,questions,now=Date.now(),size=3){
-  const queue=reviewQueue(state,questions,now),chosen=[];
+export function chooseMission(state,questions,now=Date.now(),size=3,options={}){
+  const queue=reviewQueue(state,questions,now,options),chosen=[];
   for(const q of queue)if(!chosen.some(c=>c.sectionId===q.sectionId)){chosen.push(q);if(chosen.length===size)return chosen;}
   return chosen;
 }

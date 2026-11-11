@@ -1,0 +1,155 @@
+{
+  "version": "generated-parts v4, front/shoulder 2.5D candidate; visual acceptance of this composite not established",
+  "module_sha256": "212a1f5a3ee76e0cd87c6b48b3c07047211edd09b4b4bb00a03b266ce18d206e",
+  "frozen_reference_sha256": "1c2c67dc190075c035e4deef3176ea59ac293e37707b16b54134de0dd21c47f1",
+  "built_in_imagegen_sheet_sha256": "25a6ae6d3da7500a2ccab4308fd47047bcf6cb1d8558ea9d2b45d3e5df298c29",
+  "approved_source_sha256": "0c8d94b74afacae63927afb8ccaffb752197e55922ccf7d4bd9a3e5f37c8d7e6",
+  "input_sheet": "tools/cse-cyclist-a/generated/parts-sheet-v1.png",
+  "prompt": "tools/cse-cyclist-a/generated/imagegen-prompt-v1.txt",
+  "frozen_before_runtime": "tools/cse-cyclist-a/generated/frozen-parts-reference-v9.png",
+  "registered_parts": {
+    "far_thigh_backing.png": {
+      "bytes": 1077,
+      "sha256": "9ddaf3ae1b13c3b112c62bc56eb554a55a96311e2722e2fead3848ed52b4786c"
+    },
+    "far_shin_backing.png": {
+      "bytes": 1137,
+      "sha256": "98fce6be73404a216fae3d5f6083f5fef6354dc4a05673adccabf09a1d3c93de"
+    },
+    "far_thigh.png": {
+      "bytes": 6444,
+      "sha256": "919a4b7f095f5a399cb5720e2ca72b999eca90ff10463c9fa96cd8fc0192a3b9"
+    },
+    "far_shin.png": {
+      "bytes": 10262,
+      "sha256": "85991277665454039ac79cc0834e5c3f4bff3e353fe4a5dbdf34e3959291f18a"
+    },
+    "far_knee_cap.png": {
+      "bytes": 930,
+      "sha256": "7e3019983e4ecbd3450cc8ab1f978f19d36e7beef5be7825a9d2131ea21241aa"
+    },
+    "bike.png": {
+      "bytes": 151484,
+      "sha256": "5df2424babeca4930302216897b3b6c446d01158894d9e63c5a001c2ecc11e3d"
+    },
+    "bike_cover.png": {
+      "bytes": 15659,
+      "sha256": "36ed41740ceb7a066ea87e6a8a4b314bc7e0381dc4f476424a20cf5a53bb547c"
+    },
+    "wheel_ring.png": {
+      "bytes": 13072,
+      "sha256": "bd70fd977fe68e11c98c3df64c3b3547df6a0fdf37135ef26f8dcdb7f0307312"
+    },
+    "wheel_erase.png": {
+      "bytes": 5265,
+      "sha256": "e179d8743d9ee76b55abc23e95343f55c80046be74251b97cbe5ead36e72b371"
+    },
+    "far_crank_arm.png": {
+      "bytes": 2710,
+      "sha256": "bf8b0b81b371e53aaa6f8edbbf563268538b7d2301b14398774e2c7cabc54208"
+    },
+    "far_pedal.png": {
+      "bytes": 3066,
+      "sha256": "749e166f32bc06d70bcd4c2f2b097d910b3115a639ad28e0d4b540dbf9ba27c3"
+    },
+    "far_shoe.png": {
+      "bytes": 4187,
+      "sha256": "4e93c94b26f739a65660ff3c7073cf1776b703071a0ec669063bedd4581045ab"
+    },
+    "near_crank_arm.png": {
+      "bytes": 2941,
+      "sha256": "1a4cfb0b73d0543db9c531666bd965562c9689dc18360b8e106be20b66f78c7d"
+    },
+    "near_pedal.png": {
+      "bytes": 2756,
+      "sha256": "d8d197a35e05d9f7716504e33109b0549efc11039843ea7c9a935158c4263ba2"
+    },
+    "near_thigh_backing.png": {
+      "bytes": 1040,
+      "sha256": "18ff82cb83b70cb924edbdd44896e4a11e1277e4ebd971100173add894ddd31c"
+    },
+    "near_shin_backing.png": {
+      "bytes": 1176,
+      "sha256": "b252e0c642cbaf90fcdfbe658e2dddee127610d05f43e3b22f7cd2d5f0d69416"
+    },
+    "near_thigh.png": {
+      "bytes": 10304,
+      "sha256": "e62d2119ceff0f55a827a75fee2136f986876b14ece6f1ed9e7f93bfa33cc60a"
+    },
+    "near_shin.png": {
+      "bytes": 9827,
+      "sha256": "683ae74e6256649eb4c0b8fd67a4a05b4945445db0279117d03d20bed6295883"
+    },
+    "near_knee_cap.png": {
+      "bytes": 945,
+      "sha256": "ce780c761e889a77a8a9b312a6400a71cd43f2d71cf9a4675231ac0fce11d395"
+    },
+    "near_shoe.png": {
+      "bytes": 5479,
+      "sha256": "f1bc621e487394af6cb7fcb6d6b10f0df15973b98da11f6aa6319633a5cef592"
+    },
+    "approved_upper.png": {
+      "bytes": 91993,
+      "sha256": "6495c2437bda6e1913277b9b4bc882221988cc4c45ec8697d2d60bc88542c1e2"
+    }
+  },
+  "downloaded_layer_bytes": 341754,
+  "runtime_module_bytes": 7977,
+  "actor": "one camera-facing 2.5D canvas-textured THREE plane; 1.96 m nominal; source front/shoulder art; no rear variant in this build",
+  "spokes": "source-generated tyre and rim remain fixed; inner strokes are redrawn/rotated in fitted tilted ellipses while moving",
+  "limbs": "generated source thigh/shin/foot with rigid rotations and translation, fixed segment lengths; opaque synthetic joint backing; ankle/foot positions inferred",
+  "far_side_darkening": "approximately 15 percent darker; intentionally authorized",
+  "validation": {
+    "2x_alpha_max_displacement_px": 0.0,
+    "2x_ink_max_displacement_px": 1.0,
+    "max_white_composited_level_delta": 2,
+    "72_phase_max_limb_length_error_px": 8.526512829121202e-14,
+    "72_phase_max_pedal_anchor_error_px": 0,
+    "tyre_max_channel_delta_35_phases": 1,
+    "nominal_390_view_projected_height_px": 119.99999941967309,
+    "lifecycle": {
+      "failedImage": {
+        "message": "Missing cyclist part near_shoe",
+        "children": 0
+      },
+      "recoveryAfterFailure": {
+        "ok": true,
+        "childrenAfterDispose": 0
+      },
+      "lateResolutionAfterCancellation": {
+        "children": 0,
+        "status": "disposed",
+        "internalChildren": 0
+      },
+      "api": {
+        "ground": 6.071532165918825e-17,
+        "first": [
+          0,
+          0.2669335818958115,
+          0,
+          0.9637149282107609
+        ],
+        "second": [
+          0,
+          -0.9637149282107609,
+          0,
+          0.2669335818958115
+        ],
+        "flip1": 1,
+        "flip2": -1,
+        "unchangedVersion": true,
+        "old": 1.029411764705882,
+        "zero": 0,
+        "status": "disposed",
+        "children": 0
+      }
+    }
+  },
+  "limits": [
+    "Frozen generated-parts composite is not a pixel match to the approved original; source comparison is provided.",
+    "The static source style is accepted, but this generated composite and motion require visual review.",
+    "120 px evidence is an isolated THREE render, not the actual game or phone performance.",
+    "Only front/shoulder view in this build.",
+    "The 2x gate validates registration against the frozen generated composite, not the approved original."
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "source": "seated-four-views-v3-wheelless.png",
+  "sha256": "01d89ed441c41284ca7e1fd9fc3bb677025b92195ed95927a2bedb03cff85f4b",
+  "width": 1254,
+  "height": 1254,
+  "frameGrid": "four identities by four view columns, equal quarter cells",
+  "frames": [
+    {
+      "row": 0,
+      "column": 0,
+      "cell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        20,
+        22,
+        290,
+        314
+      ]
+    },
+    {
+      "row": 0,
+      "column": 1,
+      "cell": [
+        314,
+        0,
+        627,
+        314
+      ],
+      "visibleBounds": [
+        353,
+        25,
+        611,
+        314
+      ]
+    },
+    {
+      "row": 0,
+      "column": 2,
+      "cell": [
+        627,
+        0,
+        940,
+        314
+      ],
+      "visibleBounds": [
+        662,
+        27,
+        930,
+        314
+      ]
+    },
+    {
+      "row": 0,
+      "column": 3,
+      "cell": [
+        940,
+        0,
+        1254,
+        314
+      ],
+      "visibleBounds": [
+        968,
+        25,
+        1239,
+        314
+      ]
+    },
+    {
+      "row": 1,
+      "column": 0,
+      "cell": [
+        0,
+        314,
+        314,
+        627
+      ],
+      "visibleBounds": [
+        18,
+        314,
+        296,
+        627
+      ]
+    },
+    {
+      "row": 1,
+      "column": 1,
+      "cell": [
+        314,
+        314,
+        627,
+        627
+      ],
+      "visibleBounds": [
+        353,
+        314,
+        622,
+        626
+      ]
+    },
+    {
+      "row": 1,
+      "column": 2,
+      "cell": [
+        627,
+        314,
+        940,
+        627
+      ],
+      "visibleBounds": [
+        655,
+        314,
+        933,
+        626
+      ]
+    },
+    {
+      "row": 1,
+      "column": 3,
+      "cell": [
+        940,
+        314,
+        1254,
+        627
+      ],
+      "visibleBounds": [
+        980,
+        314,
+        1239,
+        626
+      ]
+    },
+    {
+      "row": 2,
+      "column": 0,
+      "cell": [
+        0,
+        627,
+        314,
+        940
+      ],
+      "visibleBounds": [
+        23,
+        631,
+        288,
+        940
+      ]
+    },
+    {
+      "row": 2,
+      "column": 1,
+      "cell": [
+        314,
+        627,
+        627,
+        940
+      ],
+      "visibleBounds": [
+        354,
+        632,
+        615,
+        940
+      ]
+    },
+    {
+      "row": 2,
+      "column": 2,
+      "cell": [
+        627,
+        627,
+        940,
+        940
+      ],
+      "visibleBounds": [
+        629,
+        632,
+        934,
+        940
+      ]
+    },
+    {
+      "row": 2,
+      "column": 3,
+      "cell": [
+        940,
+        627,
+        1254,
+        940
+      ],
+      "visibleBounds": [
+        978,
+        633,
+        1242,
+        940
+      ]
+    },
+    {
+      "row": 3,
+      "column": 0,
+      "cell": [
+        0,
+        940,
+        314,
+        1254
+      ],
+      "visibleBounds": [
+        24,
+        940,
+        299,
+        1240
+      ]
+    },
+    {
+      "row": 3,
+      "column": 1,
+      "cell": [
+        314,
+        940,
+        627,
+        1254
+      ],
+      "visibleBounds": [
+        358,
+        940,
+        625,
+        1239
+      ]
+    },
+    {
+      "row": 3,
+      "column": 2,
+      "cell": [
+        627,
+        940,
+        940,
+        1254
+      ],
+      "visibleBounds": [
+        661,
+        940,
+        940,
+        1239
+      ]
+    },
+    {
+      "row": 3,
+      "column": 3,
+      "cell": [
+        940,
+        940,
+        1254,
+        1254
+      ],
+      "visibleBounds": [
+        940,
+        940,
+        1246,
+        1239
+      ]
+    }
+  ],
+  "runtimeRowEdges": [
+    0,
+    324,
+    630,
+    922,
+    1254
+  ],
+  "runtimeRowEdgesNote": "Use visual row separators to avoid adjacent pose bleed; grid cell/visibleBounds retained as initial quarter-grid inventory."
+}

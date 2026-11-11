@@ -1,0 +1,363 @@
+/* ---------- "Du er kørelæreren", in the app's own look ----------
+   Full-screen like a lesson: a top bar (close, one bar per case, count), the scene, then the step.
+   Colours come from the app's tokens, so the dark theme follows on its own; overlays on the
+   night scene keep fixed light-on-dark colours. */
+.judge.judge{
+  --judge-bg:transparent;--judge-panel:var(--panel);--judge-line:var(--line);--judge-white:var(--ink);
+  --judge-muted:var(--muted);--judge-mint:var(--good-ink,#2F6F00);--judge-coral:var(--bad-ink,#D42F2F);--judge-yellow:var(--accent);
+  width:min(100%,1180px);margin:0 auto;padding:0;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;
+  color:var(--ink);font-family:var(--font-body,inherit)}
+
+/* top bar */
+.game-top{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+.game-close{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;color:var(--muted);text-decoration:none}
+.game-close:hover{background:var(--panel2)}
+.game-close .ui-ico{width:24px;height:24px}
+.game-cases{flex:1;display:flex;gap:6px}
+.game-cases i{position:relative;flex:1;height:14px;border-radius:999px;background:var(--panel2);box-shadow:inset 0 0 0 1.5px var(--line);overflow:hidden}
+.game-cases i::after{content:'';position:absolute;inset:0;border-radius:inherit;background:var(--good,#58CC02);transform-origin:0 50%;scale:var(--p,0) 1;transition:scale .45s var(--out,ease)}
+.game-cases i.is-done::after{scale:1 1}
+.game-count{flex:none;min-width:44px;text-align:right;font:800 15px var(--font-display);color:var(--muted)}
+
+/* heading */
+.judge.judge .judge__header{padding:4px 2px 12px;background:none;align-items:center}
+.judge.judge .judge__eyebrow{margin:0 0 4px;color:var(--blue-ink,#0A7BBF);font:800 12px var(--font-display);letter-spacing:.1em}
+#main .judge.judge .judge__title{font:800 clamp(24px,4.2vw,34px)/1.1 var(--font-display)!important;letter-spacing:-.01em;color:var(--ink)}
+.judge.judge .judge__meta{display:none!important}
+.judge.judge .judge__welcome-mascot{width:76px;flex:none}
+
+/* the scene */
+.judge.judge .judge__stage{border-radius:22px;overflow:hidden;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);background:#1F2328}
+.judge.judge .judge__intro{background:linear-gradient(180deg,rgba(15,18,21,0.05) 30%,rgba(15,18,21,0.78) 100%)!important;align-content:end;padding:26px 22px 28px}
+.judge.judge .judge__intro p{background:rgba(254,255,237,0.95)!important;color:#1F2328!important;border:0!important;box-shadow:0 6px 20px rgba(15,18,21,0.25)!important;border-radius:16px;font-size:17px;padding:14px 18px}
+.judge.judge .judge__start{min-height:54px;padding:0 26px;border-radius:16px;font:800 17px var(--font-display)!important}
+.judge.judge .judge__intro .judge__voice{background:rgba(254,255,237,0.14);color:#FEFFED;border:2px solid rgba(254,255,237,0.35);box-shadow:none}
+/* overlays on the night scene */
+.judge.judge .judge__clip-label,.judge.judge .judge__replay,.judge.judge .judge__legend{color:#FEFFED;background:rgba(15,18,21,0.72);border:1.5px solid rgba(254,255,237,0.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.judge.judge .judge__clip-label{border-radius:999px;padding:7px 13px;font:700 13px var(--font-display)}
+.judge.judge .judge__replay{border-radius:999px;min-height:40px;padding:0 15px;font:700 14px var(--font-display)}
+.judge.judge .judge__replay:hover{background:rgba(15,18,21,0.86)}
+.judge.judge .judge__legend{border-radius:12px;font-size:13px}
+
+/* markers: lime with the number; the name shows on hover/focus, or when its row is pointed at */
+.judge.judge .judge__hotspot{width:40px;height:40px;min-width:40px;min-height:40px;border:3px solid #FEFFED;background:var(--accent,#FFD60A);color:#1F2328;
+  box-shadow:0 0 0 5px rgba(255,214,10,.25),0 6px 16px rgba(15,18,21,0.35);transition:scale .18s var(--out,ease),box-shadow .18s}
+.judge.judge .judge__hotspot::before{font:800 16px var(--font-display)}
+.judge.judge .judge__hotspot--place{background:#FFD60A;box-shadow:0 0 0 5px rgba(255,214,10,.3),0 6px 16px rgba(15,18,21,0.35)}
+.judge.judge .judge__hotspot span{display:block!important;opacity:0;translate:0 -4px;color:#FEFFED;background:rgba(15,18,21,0.88);border:0;border-radius:10px;padding:6px 10px;font:700 12px var(--font-display);transition:opacity .15s,translate .15s}
+.judge.judge .judge__hotspot:focus-visible span,.judge.judge .judge__hotspot.is-hot span{opacity:1;translate:0 0}@media (hover:hover) and (pointer:fine){.judge.judge .judge__hotspot:hover span{opacity:1;translate:0 0}}
+.judge.judge .judge__hotspot.is-hot{scale:1.14;transform:translate(-50%,-50%)}@media (hover:hover) and (pointer:fine){.judge.judge .judge__hotspot:hover{scale:1.14;transform:translate(-50%,-50%)}}
+.judge.judge .judge__hotspot.is-wrong{background:#FFE5E5;animation:judge-shake .4s ease}
+.judge.judge .judge__hotspot.is-right{background:#58CC02}
+
+/* the step card */
+.judge.judge .judge__workspace{margin-top:14px;padding:18px;border:2px solid var(--line);border-radius:22px;background:var(--panel);box-shadow:0 4px 0 var(--line)}
+.judge.judge .judge__step{display:block;font:inherit}
+.judge__track{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0;padding:0;list-style:none;counter-reset:jt}
+.judge__track li{counter-increment:jt;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:0 6px;border-radius:999px;background:var(--panel2);color:var(--muted);font:700 13px var(--font-display);white-space:nowrap}
+.judge__track li::before{content:counter(jt);display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--line);color:var(--ink);font:800 11px var(--font-display)}
+.judge__track li.is-now{background:var(--accent,#FFD60A);color:var(--accent-ink,#1F2328);box-shadow:0 3px 0 var(--accent-shadow,#C9A200)}
+.judge__track li.is-now::before{background:rgba(254,255,237,0.65);color:#1F2328}
+.judge__track li.is-done{background:var(--good-bg,#E8FBD5);color:var(--good-ink,#2F6F00)}
+.judge__track li.is-done::before{content:'✓';background:var(--good,#58CC02);color:#FEFFED}
+.judge.judge .judge__setup{margin:14px 0 0;color:var(--muted);font-size:16px}
+.judge.judge .judge__description{margin:12px 0 0;font-size:14px;color:var(--muted)}
+.judge.judge .judge__prompt{margin:16px 0 10px;font:800 21px/1.25 var(--font-display);color:var(--ink)}
+.judge.judge .judge__voice{display:inline-flex;align-items:center;min-height:40px;margin:0 0 12px;padding:0 14px;border:2px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);font:700 14px var(--font-display);box-shadow:0 2px 0 var(--line);cursor:pointer}
+.judge.judge .judge__voice[aria-pressed="true"]{border-color:var(--blue-ink,#0A7BBF);color:var(--blue-ink,#0A7BBF)}
+
+/* answers: chunky cards; right turns green, wrong turns red and shakes */
+.judge.judge .judge__answers{display:grid;grid-template-columns:1fr;gap:10px}
+.judge.judge .judge__answer{display:flex;align-items:center;gap:12px;min-height:56px;padding:12px 14px;border:2px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);
+  box-shadow:0 4px 0 var(--line);font:600 16px/1.35 var(--font-body,inherit);text-align:left;cursor:pointer;transition:border-color .15s,background-color .15s,translate .12s}
+.judge.judge .judge__answer b{display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:var(--panel2);color:var(--ink);box-shadow:inset 0 0 0 2px var(--line);font:800 14px var(--font-display)}
+.judge.judge .judge__answers--spatial .judge__answer b{background:var(--accent,#FFD60A);color:#1F2328;box-shadow:none}
+.judge.judge .judge__answer:hover,.judge.judge .judge__answer.is-hot{border-color:var(--blue-ink,#0A7BBF);box-shadow:0 4px 0 var(--blue-ink,#0A7BBF)}
+.judge.judge .judge__answer:active{translate:0 3px;box-shadow:0 1px 0 var(--line)}
+.judge.judge .judge__answer.is-right{border-color:var(--good,#58CC02);background:var(--good-bg,#E8FBD5);box-shadow:0 4px 0 var(--good,#58CC02);color:var(--ink)}
+.judge.judge .judge__answer.is-right b{background:var(--good,#58CC02);color:#FEFFED;font-size:0}
+.judge.judge .judge__answer.is-right b::before{content:'✓';font-size:16px}
+.judge.judge .judge__answer.is-wrong{border-color:var(--bad,#FF4B4B);background:var(--bad-bg,#FFE5E5);box-shadow:0 4px 0 var(--bad,#FF4B4B);animation:judge-shake .4s ease;cursor:default}
+.judge.judge .judge__answer.is-wrong b{background:var(--bad,#FF4B4B);color:#FEFFED;font-size:0}
+.judge.judge .judge__answer.is-wrong b::before{content:'✕';font-size:14px}
+@keyframes judge-shake{20%{translate:-6px 0}40%{translate:6px 0}60%{translate:-4px 0}80%{translate:3px 0}}
+.judge.judge .judge__status{min-height:0;margin:12px 0 0;font:600 14px var(--font-body,inherit)}
+.judge.judge .judge__status:empty{display:none}
+.judge.judge .judge__status[data-tone="retry"]{padding:10px 12px;border-radius:12px;background:var(--bad-bg,#FFE5E5);color:var(--ink)}
+.judge.judge .judge__status[data-tone="ok"]{padding:10px 12px;border-radius:12px;background:var(--good-bg,#E8FBD5);color:var(--ink)}
+
+/* the driver's excuse: a speech bubble, not a striped block */
+.judge.judge .judge__excuse{margin:14px 0 0;padding:0;border:0;border-radius:0;background:none;color:var(--ink)}
+.judge.judge .judge__driver{margin:0 0 8px}
+.judge.judge .judge__driver svg{width:46px;height:46px;border-radius:12px}
+.judge.judge .judge__driver strong{font:800 17px var(--font-display);color:var(--ink)}
+.judge.judge .judge__driver span{color:var(--muted);font-size:13px}
+.judge.judge .judge__excuse p{position:relative;margin:0;padding:12px 14px;border-radius:4px 16px 16px 16px;background:var(--panel2);border:2px solid var(--line);font-size:16px;font-style:italic;line-height:1.45}
+
+/* feedback */
+.judge.judge .judge__feedback{padding:0;border:0;background:none;display:grid;gap:14px}
+.judge__done{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--good-bg,#E8FBD5);border:2px solid var(--good,#58CC02);animation:judge-pop .45s var(--spring,ease)}
+.judge__done-ico{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:var(--good,#58CC02);color:#FEFFED}
+.judge__done-ico .ui-ico{width:24px;height:24px}
+.judge__done strong{display:block;font:800 18px var(--font-display);color:var(--ink)}
+.judge__done small{display:block;color:var(--muted);font-size:14px}
+@keyframes judge-pop{from{scale:.94;opacity:0}}
+/* the scene above already shows the corrected placement */
+.judge.judge .judge__correct-thumb{display:none}
+.judge.judge .judge__correct-thumb figcaption{color:var(--ink);font:700 14px var(--font-display);background:var(--panel2)}
+.judge.judge .judge__rule{margin:0;padding:14px;border-radius:16px;background:var(--panel2);color:var(--ink)}
+.judge.judge .judge__rule span{color:var(--blue-ink,#0A7BBF);font:800 12px var(--font-display);letter-spacing:.1em}
+.judge.judge .judge__sources{margin:0}
+.judge.judge .judge__source{min-height:40px;border:2px solid var(--line);border-radius:999px;background:var(--panel);color:var(--blue-ink,#0A7BBF);font:700 13px var(--font-display)}
+.judge.judge .judge__receipt{margin:0;border-color:var(--line);background:var(--panel2);color:var(--ink);box-shadow:none}
+.judge.judge .judge__receipt p{color:var(--ink)}
+.judge__actions{display:flex;flex-wrap:wrap;gap:10px}
+.judge__actions .big-btn{flex:1 1 200px;width:auto;margin:0;min-height:54px}
+.judge.judge .judge__confirm,.judge.judge .judge__compare{border-radius:16px;font:800 16px var(--font-display);text-align:center}
+
+/* wide screens: scene and step side by side */
+@media (min-width:1050px){
+  .judge--started.judge--started{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:0 18px;align-items:start}
+  .judge--started .game-top,.judge--started .judge__header{grid-column:1/-1}
+  .judge--started.judge--started .judge__stage{position:sticky;top:12px;min-height:440px;height:calc(100vh - 170px);max-height:640px}
+  .judge--started.judge--started .judge__workspace{margin-top:0;border-left:2px solid var(--line)}
+}
+@media (max-width:640px){
+  .judge.judge .judge__stage{border-radius:18px;min-height:260px;aspect-ratio:4/3.4}
+  .judge.judge .judge__workspace{padding:16px 14px}
+  .judge__track li{font-size:0;gap:0}
+  .judge__track li::before{width:22px;height:22px;font-size:12px}
+  .judge__track li.is-now{font-size:13px;gap:6px}
+  .judge.judge .judge__hotspot{width:38px;height:38px;min-width:38px;min-height:38px}
+}
+body.no-motion .judge.judge *,body.no-motion .judge__done{animation:none!important}
+@media (prefers-reduced-motion:reduce){.judge.judge *,.judge__done{animation:none!important}}
+
+/* the prompt and a compact listen control share a row; every control is at least 44 px */
+.judge.judge .judge__ask{display:flex;align-items:flex-start;gap:10px;margin:14px 0 10px}
+.judge.judge .judge__ask .judge__prompt{flex:1;min-width:0;margin:0;align-self:center}
+.judge.judge .judge__voice--icon{flex:none;gap:6px;min-height:44px;margin:0;padding:0 14px}
+.judge.judge .judge__voice--icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.judge.judge .judge__intro .judge__voice{min-height:44px}
+.judge.judge .judge__description summary{display:flex;align-items:center;min-height:44px;padding:0}
+.judge.judge .judge__source{min-height:44px}
+.judge.judge .judge__workspace>.judge__description{margin:12px 0 0}
+/* the deer reacts beside the hint, not inside the answer row */
+.judge.judge .judge__status [data-wildlife]{float:right;width:52px!important;height:44px!important;margin:-8px -4px -8px 8px}
+@media (max-width:640px){
+  .judge.judge .judge__header{padding:0 2px 8px}
+  #main .judge.judge .judge__title{font-size:22px!important}
+  .judge.judge .judge__workspace{margin-top:10px;padding:12px 14px 14px}
+  .judge__track li{min-height:30px}
+  .judge.judge .judge__setup{margin:10px 0 0;font-size:14px;line-height:1.4}
+  .judge.judge .judge__ask{margin:10px 0 8px}
+  .judge.judge .judge__prompt{font-size:18px;line-height:1.25}
+  .judge.judge .judge__status{margin-top:8px}
+}
+
+/* ---------- Trafiklab, in the app's own look ---------- */
+.turn-shell.turn-shell{max-width:1180px;margin:0 auto;padding:0;color:var(--ink);background:none}
+.turn-shell .game-top{margin:0 0 6px;padding:0;border:0;background:none}
+.turn-shell .turn-meter{flex:1;position:relative;height:14px;margin:0;border-radius:999px;background:var(--panel2);box-shadow:inset 0 0 0 1.5px var(--line);overflow:hidden}
+.turn-shell .turn-meter span{position:absolute;inset:0 auto 0 0;width:100%;height:100%;border-radius:999px;background:var(--good,#58CC02);transform:translateX(calc((var(--turn-progress-ratio, 0) - 1) * 100%));transition:transform 300ms var(--out,ease)}
+.turn-shell .turn-listen{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border:2px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);box-shadow:0 2px 0 var(--line);font:700 14px var(--font-display);cursor:pointer}
+.turn-shell .turn-listen svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.turn-title{margin:0 0 12px 56px;color:var(--muted);font:700 13px var(--font-display)}
+.turn-shell .turn-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);gap:18px;align-items:start;margin:0}
+.turn-shell .turn-layout--recall{grid-template-columns:minmax(0,720px);justify-content:center}
+@media (max-width:900px){.turn-shell .turn-layout{grid-template-columns:1fr}.turn-title{margin-left:0}}
+
+/* the scene: a segmented view switch above it, a dark pill on it */
+.turn-shell .turn-stage{margin:0;position:sticky;top:12px}
+.turn-shell .turn-viewbar{display:flex;gap:4px;margin:0 0 10px;padding:4px;border-radius:999px;background:var(--panel2);box-shadow:inset 0 0 0 1.5px var(--line);border:0}
+.turn-shell .turn-viewbar button{flex:1;min-height:40px;border:0;border-radius:999px;background:none;color:var(--muted);font:700 14px var(--font-display);box-shadow:none;cursor:pointer}
+.turn-shell .turn-viewbar button[aria-pressed="true"]{background:var(--accent,#FFD60A);color:#1F2328;box-shadow:0 2px 0 var(--accent-shadow,#C9A200)}
+.turn-shell .turn-viewbar button[aria-pressed="false"],.turn-shell .turn-viewbar button[aria-pressed="false"]:hover{background:#E3E5E8!important;color:#2B3138!important;box-shadow:none}
+html[data-theme="dark"] .turn-shell .turn-viewbar button[aria-pressed="false"],html[data-theme="dark"] .turn-shell .turn-viewbar button[aria-pressed="false"]:hover{background:#2B3138!important;color:#F4F5F7!important;box-shadow:none}
+.turn-shell .turn-canvas-wrap{border-radius:22px;overflow:hidden;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);background:#0F1215}
+.turn-shell .turn-scene-tag{left:12px;bottom:12px;top:auto;padding:7px 13px;border:1.5px solid rgba(254,255,237,0.18);border-radius:999px;background:rgba(15,18,21,0.72);color:#FEFFED;backdrop-filter:blur(8px)}
+.turn-shell .turn-scene-tag b{font:700 13px var(--font-display)!important;letter-spacing:0;text-transform:none}
+.turn-shell .turn-stage figcaption{margin-top:8px;color:var(--muted);font-size:13px}
+
+/* the step card */
+.turn-shell .turn-body{padding:18px;border:2px solid var(--line);border-radius:22px;background:var(--panel);box-shadow:0 4px 0 var(--line)}
+.turn-shell .turn-kicker{display:block;margin:0 0 6px;color:var(--blue-ink,#0A7BBF);font:800 13px var(--font-display)!important;letter-spacing:.02em}
+#main .turn-shell .turn-body h1{margin:0;font:800 clamp(24px,3.6vw,32px)/1.12 var(--font-display)!important;letter-spacing:-.01em;color:var(--ink);text-transform:none}
+.turn-shell .turn-body h1 em{font-style:normal;color:var(--ink)}
+.turn-shell .turn-lead{margin:10px 0 0;color:var(--muted);font-size:16px;line-height:1.5}
+.turn-shell .turn-instruction,.turn-shell .turn-point-hint{display:flex;align-items:center;gap:10px;margin:14px 0 0;padding:12px 14px;border-radius:16px!important;background:var(--panel2)!important;color:var(--ink);font-size:15px}
+.turn-shell .turn-instruction p{margin:0}
+.turn-shell .turn-choices{display:grid;gap:10px;margin:16px 0 0}
+.turn-shell .turn-choice{position:relative;display:grid;grid-template-columns:1fr auto;column-gap:10px;align-items:center;min-height:60px;padding:12px 14px;border:2px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);box-shadow:0 4px 0 var(--line);text-align:left;cursor:pointer;transition:border-color .15s,translate .12s}
+.turn-shell .turn-choice span{font:700 16px/1.3 var(--font-display)}
+.turn-shell .turn-choice small{grid-column:1;color:var(--muted);font-size:14px;line-height:1.4}
+.turn-shell .turn-choice b{grid-row:1/span 2;grid-column:2;color:var(--muted)}
+.turn-shell .turn-choice b .ui-ico{width:20px;height:20px}
+.turn-shell .turn-choice:hover{border-color:var(--blue-ink,#0A7BBF);box-shadow:0 4px 0 var(--blue-ink,#0A7BBF)}
+.turn-shell .turn-choice:active{translate:0 3px;box-shadow:0 1px 0 var(--line)}
+.turn-shell .turn-primary{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:54px;margin:16px 0 0;padding:0 20px;border:0;border-radius:16px;background:var(--accent,#FFD60A);color:#1F2328;box-shadow:0 4px 0 var(--accent-shadow,#C9A200);font:800 16px var(--font-display);text-decoration:none;cursor:pointer}
+.turn-shell .turn-primary:disabled{opacity:.45;cursor:not-allowed}
+.turn-shell .turn-primary:active:not(:disabled){translate:0 3px;box-shadow:0 1px 0 var(--accent-shadow,#C9A200)}
+.turn-shell .turn-text-btn{margin:12px 0 0;padding:6px 0;border:0;background:none;color:var(--blue-ink,#0A7BBF);font:700 15px var(--font-display);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.turn-shell .turn-feedback{display:flex;align-items:flex-start;gap:12px;margin:16px 0 0;padding:12px 14px;border-radius:16px;border:2px solid var(--good,#58CC02);background:var(--good-bg,#E8FBD5);color:var(--ink)}
+.turn-shell .turn-feedback--repair{border-color:var(--orange,#FF9600);background:color-mix(in oklab,var(--orange,#FF9600) 12%,var(--panel))}
+.turn-shell .turn-feedback>span{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;background:var(--good,#58CC02);color:#FEFFED}
+.turn-shell .turn-feedback--repair>span{background:var(--orange,#FF9600)}
+.turn-shell .turn-feedback strong{display:block;font:800 17px var(--font-display)}
+.turn-shell .turn-feedback p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.turn-shell .turn-rule{margin:16px 0 0;padding:14px;border:0;border-radius:16px;background:var(--panel2);color:var(--ink)}
+.turn-shell .turn-rule b{display:block;font:800 17px var(--font-display)}
+.turn-shell .turn-gag{margin:12px 0 0;color:var(--muted);font-style:italic}
+.turn-shell .turn-source,.turn-shell .turn-text-alternative{margin:14px 0 0;color:var(--muted);font-size:14px}
+.turn-shell .turn-source summary,.turn-shell .turn-text-alternative summary{cursor:pointer;padding:6px 0;font:700 14px var(--font-display);color:var(--ink)}
+.turn-shell .turn-source a{color:var(--blue-ink,#0A7BBF)}
+.turn-shell .turn-replay-status{margin:14px 0 0;color:var(--muted);font-size:14px}
+.turn-shell textarea{width:100%;min-height:110px;margin:8px 0 0;padding:14px;border:2px solid var(--line)!important;border-radius:16px;background:var(--panel)!important;color:var(--ink)!important;font:500 16px/1.45 var(--font-body,inherit)}
+.turn-shell .turn-recall-label{display:block;margin:16px 0 0;font:700 14px var(--font-display);color:var(--ink)}
+.turn-shell .turn-review-note{margin:10px 0 0;color:var(--muted);font-size:14px}
+.turn-shell .turn-own-answer{margin:14px 0 0;border:2px solid var(--line)!important;background:var(--panel2)!important;color:var(--ink)}
+.turn-shell .turn-evidence{display:grid;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.turn-shell .turn-evidence li{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:14px;background:var(--panel2);font-size:15px}
+.turn-shell .turn-evidence b{font:700 14px var(--font-display);text-align:right}
+.turn-shell .turn-done-art{display:flex;justify-content:center;margin:0 0 10px}
+@media (max-width:900px){.turn-shell .turn-stage{position:static}}
+
+/* Shared visual finish for the lesson scenes: lighter framing, more room for
+   the actual road, and a quieter hierarchy around the learner's choices. */
+.judge.judge .judge__stage{
+  border:1px solid rgba(43,49,56,0.28);
+  border-radius:20px;
+  box-shadow:0 14px 32px rgba(31,35,40,0.12);
+}
+.judge.judge .judge__workspace{
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(31,35,40,0.06);
+}
+.judge.judge .judge__answer{
+  border-width:1px;
+  border-radius:13px;
+  box-shadow:0 3px 9px rgba(31,35,40,0.05);
+}
+.judge.judge .judge__answer:hover,
+.judge.judge .judge__answer.is-hot{
+  box-shadow:0 3px 12px rgba(31,35,40,0.1);
+}
+.judge.judge .judge__track li.is-now{box-shadow:0 2px 6px rgba(15,18,21,0.14)}
+.judge.judge .judge__voice{border-width:1px;box-shadow:0 3px 8px rgba(31,35,40,0.05)}
+/* The full 44 px button remains easy to touch, while its visible marker is
+   smaller so the person, vehicle and road markings remain the focus. */
+.judge.judge.judge .judge__hotspot,
+.judge.judge.judge .judge__hotspot--place,
+.judge.judge.judge .judge__hotspot.is-right,
+.judge.judge.judge .judge__hotspot.is-wrong{
+  width:44px;height:44px;min-width:44px;min-height:44px;
+  border:0;background:transparent;box-shadow:none;
+}
+.judge.judge.judge .judge__hotspot::before{
+  inset:7px;border:2px solid #FEFFED;border-radius:50%;
+  color:#1F2328;background:var(--accent,#ffd60a);
+  box-shadow:0 0 0 3px rgba(255,214,10,.22),0 3px 10px rgba(15,18,21,0.32);
+  font:800 13px var(--font-display);
+}
+.judge.judge.judge .judge__hotspot.is-right::before{background:#58CC02}
+.judge.judge.judge .judge__hotspot.is-wrong::before{background:#FFE5E5}
+.judge.judge .judge__welcome-mascot{position:relative;width:68px;align-self:center}
+.judge.judge .judge__welcome-mascot img{display:block;width:100%;height:auto;object-fit:contain}
+.judge.judge--started .judge__welcome-mascot{display:none}
+.judge__done .judge__done-ico--cast{position:relative;width:52px;height:52px;background:none;border-radius:0}
+.judge__done-ico--cast img{display:block;width:100%;height:100%;object-fit:contain}
+.judge__done-ico--cast .rive-canvas{inset:0;width:100%;height:100%}
+.turn-shell.turn-shell .turn-instruction--guide{
+  gap:13px;padding:13px 15px;
+  background:color-mix(in srgb,var(--accent,#ffd60a) 12%,var(--panel))!important;
+}
+.turn-guide__avatar{position:relative;display:block;width:48px;height:48px;flex:none}
+.turn-instruction--guide img{width:100%;height:100%;object-fit:contain}
+.turn-instruction--guide p{display:grid;gap:3px;line-height:1.4}
+.turn-instruction--guide strong{font:800 12px var(--font-display);letter-spacing:.03em}
+.turn-shell.turn-shell .turn-feedback>.turn-feedback__cast{position:relative;width:48px;height:48px;background:none;border-radius:0}
+.turn-feedback__cast img{display:block;width:100%;height:100%;object-fit:contain}
+/* old Trafiklab rules that reach into the new top bar and cards */
+.turn-shell .game-top>a.game-close{width:44px;height:44px;border:0;border-radius:12px;font-size:0;color:var(--muted)}
+.turn-shell .game-top>span.game-count{flex:none}
+.turn-shell .game-top .turn-meter{margin:0;height:14px}
+.turn-shell .turn-feedback strong,.turn-shell .turn-feedback--repair strong{color:var(--ink)}
+.turn-shell .turn-feedback>span,.turn-shell .turn-feedback--repair>span{font-size:0;color:#FEFFED}
+.turn-shell .turn-feedback>span .ui-ico{width:22px;height:22px}
+.turn-shell .turn-rule>b{color:var(--ink)}
+.turn-shell .turn-rule p{margin:6px 0 0;color:var(--ink);font-size:15px;line-height:1.5}
+
+/* Trafiklab: quieter framing around the living street scene. */
+.turn-shell.turn-shell .turn-layout{gap:22px}
+.turn-shell.turn-shell .turn-viewbar,
+html[data-theme="dark"] .turn-shell.turn-shell .turn-viewbar{gap:5px;padding:5px;border:1px solid var(--line);border-radius:15px;background:var(--panel2);box-shadow:none}
+.turn-shell.turn-shell .turn-viewbar button{min-height:44px;border-radius:10px;font-size:13px}
+.turn-shell.turn-shell .turn-viewbar button[aria-pressed="true"],
+html[data-theme="dark"] .turn-shell.turn-shell .turn-viewbar button[aria-pressed="true"]{box-shadow:0 2px 6px rgba(15,18,21,0.14)}
+.turn-shell.turn-shell .turn-canvas-wrap,
+html[data-theme="dark"] .turn-shell.turn-shell .turn-canvas-wrap{border:1px solid rgba(43,49,56,0.28);border-radius:20px;box-shadow:0 14px 32px rgba(31,35,40,0.12)}
+.turn-shell.turn-shell .turn-scene-tag{padding:8px 12px;border:1px solid rgba(254,255,237,0.16);background:rgba(31,35,40,0.84)}
+.turn-shell.turn-shell .turn-scene-tag b{font-size:12px!important;letter-spacing:.015em}
+.turn-shell.turn-shell .turn-stage figcaption{margin:9px 3px 0;font-size:12px;line-height:1.5}
+.turn-shell.turn-shell .turn-body,
+html[data-theme="dark"] .turn-shell.turn-shell .turn-body{padding:22px;border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 28px rgba(31,35,40,0.06)}
+.turn-shell.turn-shell .turn-kicker{margin-bottom:8px;letter-spacing:.04em}
+.turn-shell.turn-shell .turn-instruction,
+.turn-shell.turn-shell .turn-point-hint{border-radius:12px!important}
+.turn-shell.turn-shell .turn-choice,
+html[data-theme="dark"] .turn-shell.turn-shell .turn-choice{min-height:64px;border-width:1px;border-radius:13px;box-shadow:0 3px 9px rgba(31,35,40,0.05)}
+.turn-shell.turn-shell .turn-choice:hover,
+html[data-theme="dark"] .turn-shell.turn-shell .turn-choice:hover{box-shadow:0 3px 12px rgba(31,35,40,0.1)}
+.turn-shell.turn-shell .turn-primary,
+html[data-theme="dark"] .turn-shell.turn-shell .turn-primary{min-height:54px;border-radius:13px;box-shadow:0 3px 0 var(--accent-shadow,#C9A200)}
+@media (max-width:700px){
+  .turn-shell.turn-shell .turn-layout{gap:16px}
+  .turn-shell.turn-shell .turn-canvas-wrap{aspect-ratio:1.3;border-radius:17px}
+  .turn-shell.turn-shell .turn-body{padding:18px;border-radius:17px}
+}
+
+/* Trafiklab on a phone: progress stays on top, the step's main button stays in thumb reach,
+   and the scene gives way on answer steps so the choices fit without scrolling. */
+.turn-shell .turn-listen{min-height:44px}
+.turn-shell .turn-source summary,.turn-shell .turn-text-alternative summary{display:flex;align-items:center;min-height:44px}
+.turn-shell .turn-done-art{position:relative;flex-direction:column;align-items:center;height:auto;margin:0 0 6px}
+.turn-shell .turn-done-art .rive-hero{width:100%;height:150px;margin:-8px 0 -6px}
+.turn-shell .turn-done-art>.turn-done-check{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--good,#58CC02);color:#FEFFED;animation:judge-pop .45s var(--spring) both}
+.turn-shell .turn-done-check .ui-ico{width:34px;height:34px}
+.turn-shell .turn-done-art:has(.rive-hero[data-rive-on="on"]) .turn-done-check{display:none}
+@media (max-width:700px){
+  .turn-shell .turn-title{display:none}
+  .turn-shell .game-top{position:sticky;top:0;z-index:20;margin:0 0 8px;padding:6px 0;background:var(--bg)}
+  .turn-shell.turn-shell .turn-canvas-wrap{aspect-ratio:auto;height:clamp(150px,calc(100dvh - 530px),300px)}
+  .turn-shell .turn-layout--choose .turn-canvas-wrap,.turn-shell .turn-layout:has(.turn-text-alternative[open]) .turn-canvas-wrap{height:clamp(120px,calc(100dvh - 640px),250px)}
+  .turn-shell.turn-shell .turn-body{padding:16px 16px 0}
+  .turn-shell .turn-body-copy{padding-bottom:16px}
+  .turn-shell .turn-body-actions{position:sticky;bottom:0;z-index:5;margin:0 -16px;padding:0 16px max(14px,env(safe-area-inset-bottom));border-radius:0 0 17px 17px;background:var(--panel)}
+  .turn-shell .turn-body-actions .turn-primary{margin:0}
+  .turn-shell .turn-choices{gap:8px;margin-top:12px}
+  .turn-shell.turn-shell .turn-choice{min-height:56px;padding:10px 14px}
+  .turn-shell .turn-choice span{font-size:15px}
+  .turn-shell .turn-choice small{font-size:13px}
+  /* the repair card already says what to do; its intro line gives the choices room */
+  .turn-shell .turn-body[data-stage=repair] .turn-lead{display:none}
+}
+@media (max-width:700px) and (max-height:760px){
+  .turn-shell .turn-layout--choose .turn-viewbar,.turn-shell .turn-layout:has(.turn-text-alternative[open]) .turn-viewbar{display:none}
+  .turn-shell .turn-layout--choose .turn-canvas-wrap,.turn-shell .turn-layout:has(.turn-text-alternative[open]) .turn-canvas-wrap{height:clamp(96px,calc(100dvh - 540px),200px)}
+  #main .turn-shell .turn-body h1{font-size:21px}
+  .turn-shell .turn-lead{margin-top:6px;font-size:14px;line-height:1.45}
+  .turn-shell .turn-kicker{margin-bottom:4px}
+  .turn-shell .turn-instruction,.turn-shell .turn-point-hint,.turn-shell .turn-feedback{margin-top:10px}
+}
+@media (max-width:700px) and (prefers-reduced-motion:reduce){.turn-shell .turn-done-check{animation:none}}
+body.no-motion .turn-shell .turn-done-check{animation:none}
+
+/* Driving owns the viewport; app navigation returns on leaving #drive. */
+body.drive-active { overflow:hidden; }
+body.drive-active > header,body.drive-active nav,body.drive-active .drive-head,
+body.drive-active #view > .fine-print { display:none !important; }
+body.drive-active #main { position:fixed; inset:0; z-index:1000; width:100dvw; height:100dvh; margin:0 !important; padding:0 !important; overflow:hidden; transform:none !important; }
+body.drive-active #view { transform:none !important; animation:none !important; }
+body.drive-active .drive-shell { position:fixed; inset:0; z-index:1001; width:100dvw; height:100dvh !important; min-height:0 !important; max-height:none; margin:0; padding:0; border:0 !important; border-radius:0; }
+body.drive-active #driving-frame { display:block; width:100%; height:100%; border:0; }

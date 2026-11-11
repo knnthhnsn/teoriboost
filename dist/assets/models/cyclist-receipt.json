@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-29T12:30:19.266745+00:00",
+  "asset": "cyclist.glb",
+  "asset_sha256": "517e983931609f1700a7713335dbd5ac1143236b3d9d45c75ed55b15de01601a",
+  "asset_bytes": 487408,
+  "editable_blend": "tools/scene3d/out/cyclist.blend",
+  "editable_blend_sha256": "d3d37eba40ece4172646002c248e918283f5ed0396387f8b2365b7196f5cb3b5",
+  "generator": "tools/scene3d/build_cyclist.py",
+  "generator_sha256": "7af9b5254f0c1d149a8dd4d2ca07fb730012a07487e3e9a7507c1ee318397bfc",
+  "origin": "Exported from the editable Blender scene",
+  "provenance": "Original procedural Blender geometry created locally; no downloaded model or texture.",
+  "unit": "metre",
+  "source_axis": "Blender Z up, +Y forward",
+  "asset_axis": "glTF 2.0 Y up, -Z forward",
+  "blender_version": "5.1.2",
+  "source_geometry": {
+    "objects": 35,
+    "vertices": 7442,
+    "triangles": 14164,
+    "bounds": {
+      "min": [
+        -0.31999996304512024,
+        -0.9558994770050049,
+        -1.3433698597964394e-14
+      ],
+      "max": [
+        0.3200000524520874,
+        0.9558993577957153,
+        1.795767068862915
+      ],
+      "dimensions": [
+        0.6400000154972076,
+        1.9117988348007202,
+        1.7957670688629284
+      ]
+    }
+  },
+  "roundtrip": {
+    "blender": "5.1.2",
+    "mesh_objects": 35,
+    "vertices": 11476,
+    "triangles": 14164,
+    "blender_bounds_m": {
+      "min": [
+        -0.31999996304512024,
+        -0.9558993577957153,
+        -1.188898650639203e-07
+      ],
+      "max": [
+        0.3200000524520874,
+        0.9558992981910706,
+        1.795767068862915
+      ],
+      "dimensions": [
+        0.6400000154972076,
+        1.9117986559867859,
+        1.79576718775278
+      ]
+    },
+    "gltf_bounds_m": {
+      "min": [
+        -0.31999996304512024,
+        -1.188898650639203e-07,
+        -0.9558992981910706
+      ],
+      "max": [
+        0.3200000524520874,
+        1.795767068862915,
+        0.9558993577957153
+      ],
+      "dimensions": [
+        0.6400000154972076,
+        1.79576718775278,
+        1.9117986559867859
+      ]
+    },
+    "forward_check": {
+      "blender_front_y": 0.4799999860492912,
+      "blender_rear_y": -0.879999995876003,
+      "gltf_forward": "-Z"
+    }
+  },
+  "limits": [
+    "Static posed model, no rig or pedalling animation.",
+    "Materials are original constant-colour PBR, no image textures.",
+    "Browser/device performance and educational scene integration require separate testing."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "asset": "cyclist-rig-prototype.glb",
+  "sha256": "330ea6f3ebe2b19f3880a79e25475b3e9e56264d8ff9fbd33096ac175b9decfb",
+  "bytes": 1103372,
+  "source_blend": "tools/character-rig3d-cyclist/out/cyclist-rig-prototype.blend",
+  "source_blend_sha256": "bf4b53e3cbe5610c051af76fed18841656d40309d138c4aca437cefcc0974b3d",
+  "generator_sha256": "c17955a5fdb80f56036de24692419bd7cb15cc49add102326b512fdfb5fc7f7a",
+  "geometry_source_sha256": "7af9b5254f0c1d149a8dd4d2ca07fb730012a07487e3e9a7507c1ee318397bfc",
+  "provenance": "Local original geometry, genuine Rigify rider and separate authored mechanical rig; no downloads or paid generator."
+}

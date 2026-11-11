@@ -1,0 +1,25 @@
+.save-progress{max-width:780px;margin:20px auto;padding:22px;background:#FFF6C7;border-radius:20px;color:#1F2328;text-align:left}
+.save-progress__intro{display:flex;align-items:center;gap:16px}
+.save-progress__intro img{flex:none;object-fit:contain}
+.save-progress h2{font-size:24px;line-height:1.15;margin:0 0 8px}
+.save-progress p{font-size:16px;line-height:1.5;margin:0}
+.save-progress__actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:18px}
+.save-progress button{font:inherit;font-size:16px;touch-action:manipulation;cursor:pointer;min-height:48px;border:0;border-radius:12px;padding:12px 16px}
+.save-progress__google{background:#FFD60A;color:#1F2328;font-weight:800}
+.save-progress__email{background:#F4F5F7;color:#1F2328;font-weight:700}
+.save-progress__dismiss{display:block;background:transparent;color:#1F2328;margin:6px auto 0;text-decoration:underline;text-underline-offset:3px}
+.save-progress button:active:not(:disabled){transform:translateY(1px)}
+.save-progress button:focus-visible,.save-progress input:focus-visible{outline:2px solid #1F2328;outline-offset:3px}
+.save-progress button:disabled{opacity:.65;cursor:wait}
+.save-progress form{display:grid;gap:8px;margin-top:18px}
+.save-progress label{font-size:16px;font-weight:700}
+.save-progress input{width:100%;min-height:48px;padding:12px;border:1px solid #C2CCD6;border-radius:10px;background:#F4F5F7;color:#1F2328;font:inherit;font-size:16px;line-height:1.4}
+.save-progress .save-progress__notice,.save-progress .save-progress__error{margin-top:14px}
+.save-progress__error{color:#D42F2F}
+html[data-theme="dark"] .save-progress{background:#2B3138;color:#FEFFED}
+html[data-theme="dark"] .save-progress__email{background:#1F2328;color:#FEFFED}
+html[data-theme="dark"] .save-progress__dismiss{color:#FEFFED}
+html[data-theme="dark"] .save-progress input{background:#1F2328;color:#FEFFED}
+@media(min-width:900px){.save-progress__actions{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.save-progress{padding:18px 16px}.save-progress__intro{gap:12px;align-items:flex-start}.save-progress__intro img{width:48px;height:48px}.save-progress h2{font-size:22px}}
+

@@ -1,3 +1,4 @@
+import {setBrandText} from './ui-stripes.js';
 import { normalizeVoiceText, voiceKey } from './voice-key.js';
 
 export const VOICE_RATES = Object.freeze([0.9, 1, 1.15, 1.25]);
@@ -22,22 +23,18 @@ export function resolveVoiceQueue(parts, pack) {
   if (!texts.length) return { ok: false, queue: [], texts, reason: 'empty' };
 
   const clips = pack?.clips;
-  if (!clips || typeof clips !== 'object') {
-    return { ok: false, queue: [], texts, reason: 'invalid-pack' };
-  }
 
   const queue = [];
   for (const text of texts) {
     const key = voiceKey(text);
-    const clip = clips[key];
+    const clip = clips?.[key];
     const manifestText = normalizeVoiceText(clip?.text);
     const valid = clip
       && manifestText === text
       && voiceKey(manifestText) === key
       && isLocalVoiceSource(clip.src);
 
-    if (!valid) return { ok: false, queue: [], texts, reason: 'missing-or-stale', key, text };
-    queue.push({ key, text, src: clip.src.trim().replace(/\\/g, '/') });
+    queue.push({ key, text, src: valid ? clip.src.trim().replace(/\\/g, '/') : null });
   }
 
   return { ok: true, queue, texts };
@@ -51,7 +48,7 @@ function sourceMatches(audio, expected) {
 }
 
 /** DOM-free playback state machine. Exported for deterministic Node tests. */
-export function createPlaybackEngine({ audio, onChange = noop, notify = noop } = {}) {
+export function createPlaybackEngine({ audio, onChange = noop, notify = noop, speech = globalThis.speechSynthesis, Utterance = globalThis.SpeechSynthesisUtterance } = {}) {
   if (!audio || typeof audio.play !== 'function' || typeof audio.pause !== 'function') {
     throw new TypeError('createPlaybackEngine kræver et audio-lignende objekt');
   }
@@ -70,6 +67,8 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
   let unbind = noop;
   let onPart = noop;
   let partActive = false;
+  let speechActive = false;
+  let activeUtterance = null;
 
   const snapshot = () => ({
     phase,
@@ -78,7 +77,8 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
     text: queue[index]?.text || '',
     label,
     rate,
-    paused
+    paused,
+    browserVoice: speechActive
   });
   const emit = () => onChange(snapshot());
 
@@ -108,6 +108,7 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
     playAttempt += 1;
     detach();
     audio.pause();
+    if (speechActive) { speechActive = false; activeUtterance = null; speech?.cancel(); }
     if (clearSource) {
       if (typeof audio.removeAttribute === 'function') audio.removeAttribute('src');
       else audio.src = '';
@@ -141,14 +142,15 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
     const generation = ++clipGeneration;
     detach();
     audio.pause();
-    audio.src = clip.src;
+    if (speechActive) { speechActive = false; activeUtterance = null; speech?.cancel(); }
+    audio.src = clip.src || '';
     audio.playbackRate = rate;
     audio.load?.();
 
     const stillCurrent = () => !disposed
       && sessionAtStart === session
       && generation === clipGeneration
-      && sourceMatches(audio, clip.src);
+      && (!clip.src || sourceMatches(audio, clip.src));
 
     if (stillCurrent()) {
       partActive = true;
@@ -156,19 +158,54 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
     }
     if (!stillCurrent()) return;
 
-    const onEnded = () => {
+    const advance = () => {
       if (!stillCurrent() || paused) return;
-      if ('ended' in audio && audio.ended === false) return;
       detach();
+      speechActive = false;
+      activeUtterance = null;
       index += 1;
       phase = 'loading';
       emit();
       startClip(sessionAtStart);
     };
+    const startSpeech = () => {
+      if (!stillCurrent()) return;
+      detach();
+      playAttempt += 1;
+      audio.pause();
+      if (!speech || typeof speech.speak !== 'function' || typeof Utterance !== 'function') {
+        fail('Oplæsning er ikke tilgængelig på denne enhed. Teksten står på skærmen.');
+        return;
+      }
+      try {
+        const utterance = new Utterance(clip.text);
+        utterance.lang = 'da-DK';
+        utterance.rate = rate;
+        const voices = speech.getVoices?.() || [];
+        utterance.voice = voices.find(voice => /^da[-_]DK$/i.test(voice.lang)) || voices.find(voice => /^da(?:[-_]|$)/i.test(voice.lang)) || null;
+        speechActive = true;
+        activeUtterance = utterance;
+        utterance.onend = () => { if (speechActive) advance(); };
+        utterance.onerror = () => { if (speechActive && stillCurrent()) fail('Oplæsning er ikke tilgængelig på denne enhed. Teksten står på skærmen.'); };
+        phase = paused ? 'paused' : 'playing';
+        emit();
+        speech.speak(utterance);
+        if (paused) speech.pause?.();
+      } catch {
+        if (stillCurrent()) fail('Oplæsning er ikke tilgængelig på denne enhed. Teksten står på skærmen.');
+      }
+    };
+    if (!clip.src) { startSpeech(); return; }
+
+    const onEnded = () => {
+      if (!stillCurrent() || paused) return;
+      if ('ended' in audio && audio.ended === false) return;
+      advance();
+    };
     const onError = () => {
       if (!stillCurrent()) return;
       if ('error' in audio && audio.error == null) return;
-      fail('Oplæsningen kunne ikke afspilles. Teksten står stadig på skærmen.');
+      startSpeech();
     };
     audio.addEventListener?.('ended', onEnded);
     audio.addEventListener?.('error', onError);
@@ -186,7 +223,7 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
     try {
       result = audio.play();
     } catch {
-      if (stillCurrent()) fail('Oplæsningen kunne ikke starte. Teksten står stadig på skærmen.');
+      if (stillCurrent()) startSpeech();
       return;
     }
     Promise.resolve(result).then(() => {
@@ -195,7 +232,7 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
       emit();
     }, () => {
       if (!stillCurrent() || attempt !== playAttempt) return;
-      fail('Oplæsningen kunne ikke starte. Teksten står stadig på skærmen.');
+      startSpeech();
     });
   }
 
@@ -219,7 +256,8 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
     if (disposed || paused || !['loading', 'playing'].includes(phase)) return false;
     paused = true;
     playAttempt += 1;
-    audio.pause();
+    if (speechActive) speech.pause?.();
+    else audio.pause();
     phase = 'paused';
     emit();
     return true;
@@ -228,6 +266,7 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
   function resume() {
     if (disposed || !paused || !queue[index]) return false;
     paused = false;
+    if (speechActive) { speech.resume?.(); phase = 'playing'; emit(); return true; }
     audio.playbackRate = rate;
     phase = 'loading';
     emit();
@@ -283,6 +322,7 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop } =
     if (!VOICE_RATES.includes(parsed)) return false;
     rate = parsed;
     audio.playbackRate = rate;
+    if (activeUtterance) activeUtterance.rate = rate;
     emit();
     return true;
   }
@@ -394,7 +434,8 @@ export function createNarrator({ host, audio, pack, notify = noop } = {}) {
   const titleRow = makeElement('div', 'voice-title-row');
   titleRow.append(makeElement('strong', 'voice-title', pack?.label || 'Dansk AI-stemme'));
   titleRow.append(makeElement('span', 'voice-ai-badge', 'AI-STEMME'));
-  identity.append(titleRow, makeElement('span', 'voice-speaker', pack?.speaker || 'Dansk oplæser'));
+  const speaker = makeElement('span', 'voice-speaker', pack?.speaker || 'Dansk oplæser');
+  identity.append(titleRow, speaker);
   const status = makeElement('p', 'voice-status', 'Klar');
   status.setAttribute('role', 'status');
   status.setAttribute('aria-live', 'polite');
@@ -444,7 +485,8 @@ export function createNarrator({ host, audio, pack, notify = noop } = {}) {
     audio,
     notify: safeNotify,
     onChange(state) {
-      status.textContent = statusText(state);
+      setBrandText(status, statusText(state));
+      setBrandText(speaker,state.browserVoice ? 'Dansk browserstemme' : (pack?.speaker || 'Dansk oplæser'));
       host.setAttribute('aria-busy', String(state.phase === 'loading'));
       const isPaused = state.phase === 'paused';
       setButton(toggle, {
@@ -457,6 +499,9 @@ export function createNarrator({ host, audio, pack, notify = noop } = {}) {
       triggers.update(state.phase);
     }
   });
+
+  const onVisibilityChange = () => { if (document.hidden) engine.pause(); };
+  document.addEventListener('visibilitychange', onVisibilityChange);
 
   toggle.addEventListener('click', () => {
     if (engine.snapshot().phase === 'paused') engine.resume();
@@ -511,6 +556,7 @@ export function createNarrator({ host, audio, pack, notify = noop } = {}) {
   }
 
   function dispose() {
+    document.removeEventListener('visibilitychange', onVisibilityChange);
     engine.dispose();
     triggers.release();
     host.replaceChildren();

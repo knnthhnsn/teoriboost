@@ -1232,12 +1232,20 @@ export const GARAGE = {
         },
         {
           "title": "ABS, assistent og ESC",
-          "body": "Hjulfølere sender hjulenes omdrejninger til en elektronisk styreboks, som regulerer bremsetrykket og modvirker blokering. Reguleringen giver vibrationer i pedalen og muliggør i en vis udstrækning styring under bremsning. Bremseassistent hjælper ved kraftig opbremsning. Vedvarende ABS-lampe tillader kun kørsel til nærmeste værksted; konstant ESC-lampe kræver fabrikantens anvisning.",
+          "body": "Hjulfølere sender hjulenes omdrejninger til en elektronisk styreboks, som regulerer bremsetrykket og modvirker blokering. Reguleringen giver vibrationer i pedalen og muliggør i en vis udstrækning styring under bremsning. Bremseassistent hjælper ved kraftig opbremsning. Slukker ABS-lampen ikke kort efter igangsætning, er der tegn på fejl. Planen begrænser en eventuel forsvarlig tur til nærmeste værksted; bilen skal stadig være sikkerhedsmæssigt forsvarlig. Ved andre bremsefejl eller usikker bremsevirkning standses sikkert og skaffes hjælp. Konstant ESC-lampe kræver, at fabrikantens anvisninger følges.",
           "refs": [
             "1.2.3.4",
             "1.2.3.6",
             "1.2.3.22",
             "1.2.3.23"
+          ],
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Plan B v1.1 1.2.3, pkt.4,6 og21-23; færdselsloven §67, stk.3",
+          "figmaIds": [
+            "R1-15"
           ]
         },
         {
@@ -1269,7 +1277,7 @@ export const GARAGE = {
         },
         {
           "title": "Fejl mærkes i bilen",
-          "body": "Skævtrækning, hug, ujævn bremsning eller pludseligt længere pedalvandring er fejltegn. Fugt efter bilvask kan kortvarigt påvirke belægningerne, men vedvarende afvigelser, for lidt væske eller en tændt bremselampe kræver straks eftersyn.",
+          "body": "Skævtrækning ved let opbremsning på vandret vej, hugninger, ujævn bremsning eller pludseligt længere pedalvandring er fejltegn, der kræver umiddelbart eftersyn. Fugt efter bilvask kan kortvarigt påvirke belægningerne og forsvinde ved en kortvarig kontrolleret bremsning. Ved vedvarende afvigelser eller usikker bremsevirkning skal bilen undersøges før videre kørsel. For lidt bremsevæske eller en tændt bremseadvarsel kræver også straks eftersyn.",
           "refs": [
             "1.2.3.16",
             "1.2.3.17",
@@ -1277,6 +1285,14 @@ export const GARAGE = {
             "1.2.3.19",
             "1.2.3.20",
             "1.2.3.21"
+          ],
+          "sourceIds": [
+            "plan-b-1-1",
+            "fl-2026"
+          ],
+          "sourceLocator": "Plan B v1.1 1.2.3, pkt.16-21; færdselsloven §67, stk.3",
+          "figmaIds": [
+            "R1-14"
           ]
         }
       ],
@@ -2172,18 +2188,35 @@ export const GARAGE = {
         },
         {
           "title": "Læs dækkets type",
-          "body": "Almindelige dæk er beregnet til højere temperaturer end vinterdæk. M+S sammen med bjerg- og snefnugsymbol viser et vinterdæk; M+S alene kan være et helårsdæk. Symbolet skal læses, ikke gættes ud fra mønsterets dramatiske udseende.",
+          "body": "Almindelige dæk er beregnet til højere temperaturer end vinterdæk. M+S betegner et typegodkendt vinterdæk. Det alpine snegrebsmærke med tre bjergtinder og snefnug, også kaldet 3PMSF, viser yderligere egnethed til krævende sneforhold. Helårsdæk er en markedsføringsbetegnelse og kan også have disse mærker. Læs derfor de konkrete mærker og egenskaber frem for at slutte dæktypen ud fra mønstret alene.",
           "refs": [
             "1.2.7.5",
             "1.2.7.6"
+          ],
+          "sourceIds": [
+            "plan-b-1-1",
+            "dfk-1484",
+            "fstyr-daek"
+          ],
+          "sourceLocator": "DfK1484 bilag1 pkt.8.02.002(6); Færdselsstyrelsen Vejledning om dæk, mærkning; Plan B v1.1 1.2.7, pkt.5-6",
+          "figmaIds": [
+            "R1-27"
           ]
         },
         {
           "title": "Pigdæk og tunge biler",
-          "body": "Pigdæk må bruges fra 1. november til 15. april og skal sidde på alle hjul, også på en eventuel tilkoblet påhængsvogn. El- og hybridbiler har ofte større dækslid på grund af højere vægt og regenerationsfunktion.",
+          "body": "På bil og registreringspligtigt påhængskøretøj til bil må pigdæk kun bruges fra 1. november til 15. april og kun, når alle køretøjets eller vogntogets hjul er forsynet med dem. Tvillingehjul kan dog have pigdæk på kun det ene hjul, hvis der er symmetri om køretøjets længdeakse. Antallet af pigge skal tilnærmelsesvis være det samme for hjulene efter reglerne. El- og hybridbiler har ofte større dækslid på grund af højere vægt og regenerationsfunktion.",
           "refs": [
             "1.2.7.7",
             "1.2.7.8"
+          ],
+          "sourceIds": [
+            "plan-b-1-1",
+            "dfk-1484"
+          ],
+          "sourceLocator": "DfK1484 §18, stk.1 og3; Plan B v1.1 1.2.7, pkt.7-8",
+          "figmaIds": [
+            "R1-27"
           ]
         },
         {
@@ -2477,11 +2510,19 @@ export const GARAGE = {
         },
         {
           "title": "Spejle eller kamera",
-          "body": "Bilen skal have et indvendigt førerspejl og et udvendigt førerspejl på hver side. Spejlene skal være rene og ubeskadigede. De kan erstattes af en kamera- og monitorløsning. Find derfor først ud af, hvilken løsning den konkrete bil er udstyret med.",
+          "body": "En almindelig nyere personbil M1 skal have et indvendigt førerspejl og et udvendigt førerspejl i hver side. Det indvendige spejl kræves ikke, hvis bilens opbygning ikke giver noget udsyn bagud. For M1-biler registreret første gang før 1. juli 2025 kan højre sidespejl undværes, når venstre og indvendigt spejl giver tilstrækkeligt udsyn bagud, hverken bagrudens eller de bageste sideruders lysgennemgang er under 70 procent, og bilen ikke er højrestyret. Spejlene skal være rene og ubeskadigede. En kamera- og monitorerstatning skal være godkendt og mærket, vise de krævede synsfelter uden indstilling og ikke reducere det direkte udsyn gennem forrude og forreste sideruder. Find den konkrete bils godkendte løsning.",
           "refs": [
             "1.2.9.5",
             "1.2.9.6",
             "1.2.9.7"
+          ],
+          "sourceIds": [
+            "plan-b-1-1",
+            "dfk-1484"
+          ],
+          "sourceLocator": "DfK1484 bilag1 pkt.1.01.006,10.03.006(10)a-c og10.03.021(1)a-b, inklusive før01.07.25-forbeholdet; Plan B v1.1 1.2.9, pkt.5-7",
+          "figmaIds": [
+            "R1-28"
           ]
         },
         {
@@ -2709,11 +2750,19 @@ export const GARAGE = {
         },
         {
           "title": "To køretøjer, to attester",
-          "body": "Bilens og påhængskøretøjets registreringsattester bruges til at vurdere, om de må sammenkobles. Under kørsel med påhængskøretøj skal begge attester med. I udlandet kræves originalerne eller en genpart udstedt af Motorstyrelsen, mens kopier kan medbringes i Danmark.",
+          "body": "Bilens og påhængskøretøjets registreringsattester bruges til at vurdere, om de må sammenkobles. Ved synsfri sammenkobling medbringes del 1 af begge køretøjers attester. I Danmark kan relevante kopier medbringes. Til udlandet medbringes originalernes del 1 eller en gyldig officiel genpart udstedt af Motorstyrelsen efter reglerne; en privat fotokopi er ikke en officiel genpart. Begge attester betyder begge køretøjers dokumenter, ikke at både del 1 og del 2 skal med. Motorstyrelsen fraråder at opbevare begge dele samlet i bilen, fordi del 2 indeholder kontroloplysninger til omregistrering.",
           "refs": [
             "1.3.1.3",
             "1.3.1.4",
             "1.3.1.5"
+          ],
+          "sourceIds": [
+            "plan-b-1-1",
+            "motor-registration"
+          ],
+          "sourceLocator": "Plan B v1.1 1.3.1, pkt.1 og4-5; Motorstyrelsen Registreringsattest, Hvornår skal du have registreringsattesten med?",
+          "figmaIds": [
+            "R1-30"
           ]
         },
         {

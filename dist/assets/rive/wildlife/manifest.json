@@ -1,0 +1,60 @@
+{
+  "status": "preview-only; no app integration",
+  "inboxSha256": "051f7f9d5e41b8134313141c5730ce4911faf5a626df486b37f74d6401a8f8fa",
+  "animals": {
+    "deer": {
+      "shockFallbackSha256": "de36cc4bccf577a29815ea6fec1f61fc8cfe7d97a8172e6e065e20bba886ebc1",
+      "shockFallbackBytes": 125530,
+      "riveSha256": "6ce38d5234bd6e89aa124f4bc6067a67c001c37da316badda4498abf7a4594a2",
+      "riveBytes": 155239,
+      "decodedTextureBytes": 513976,
+      "fallbackSha256": "fe0c9397f03579c61b7bede2eef9b3824d7b9fd9c7dc9afb1f5cf9a3b870ec72",
+      "fallbackBytes": 125706,
+      "referenceSha256": "c62fe2e549bc0b2565a35c089c278fc03d30d6cc5f0c718f9813dbdf7c9dd7aa",
+      "gateStatus": "REST_PASS",
+      "playedRestStatus": "PLAYED_REST_PASS",
+      "motionChecks": {
+        "restAndSmugGates": true,
+        "sampledInteriorAlpha": true,
+        "sampledEyeInteriorAlpha": true,
+        "gazeMovesInEyes": true,
+        "gazeOutsideEyesZero": true,
+        "reducedEyesOnly": true,
+        "recoilOutsideEyes": true,
+        "sparkleOnlySmug": true,
+        "reactionReturn1To2Seconds": true,
+        "runtimeErrorsAbsent": true
+      }
+    },
+    "hare": {
+      "shockFallbackSha256": "112623c08ca32c0cc31838e056367d010621bda6a388337363f8955869a798a6",
+      "shockFallbackBytes": 150129,
+      "riveSha256": "0e258e5d10927f6fff4f48db4c75e2ac8b2166975a7d8e57f3238b9f196c4aa0",
+      "riveBytes": 190426,
+      "decodedTextureBytes": 628664,
+      "fallbackSha256": "55703e02729fa3884b2646224b957c6ee0db75f58a2563759e852e1db15ec77c",
+      "fallbackBytes": 150974,
+      "referenceSha256": "7f571b9ec108b9c15fa6a09bda7c09dfbc1851f88bbca010871b7e1d05dfadf6",
+      "gateStatus": "REST_PASS",
+      "playedRestStatus": "PLAYED_REST_PASS",
+      "motionChecks": {
+        "restAndSmugGates": true,
+        "sampledInteriorAlpha": true,
+        "sampledEyeInteriorAlpha": true,
+        "gazeMovesInEyes": true,
+        "gazeOutsideEyesZero": true,
+        "reducedEyesOnly": true,
+        "recoilOutsideEyes": true,
+        "sparkleOnlySmug": true,
+        "reactionReturn1To2Seconds": true,
+        "runtimeErrorsAbsent": true
+      }
+    }
+  },
+  "hedge": {
+    "sha256": "792d26c22965f42a4e955f92790800f8e36b8b7c43ca84bf776ad0a5e113d10b",
+    "bytes": 185768,
+    "sourceMapping": "source x = 1509 - output x, source y = 85 + output y",
+    "operation": "Preview-only one continuous hedge: the approved hedge extraction is laid at source scale with overlapping x offsets 0,72,144 with centre and right copies mirrored, retaining an original organic exterior edge on both sides; no blank gaps or redrawn material. The original approved sheet and extraction stay intact."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "enabled": false,
+  "price": { "currency": "dkk", "includesVat": true, "confirmed": true },
+  "pass": { "autoRenew": false, "confirmed": true },
+  "plans": [
+    { "id": "7-days", "label": "7 dage", "duration": { "days": 7 }, "amountDkk": 99, "stripePriceEnv": "STRIPE_PRICE_ID_7_DAYS" },
+    { "id": "30-days", "label": "30 dage", "duration": { "days": 30 }, "amountDkk": 199, "stripePriceEnv": "STRIPE_PRICE_ID" },
+    { "id": "1-year", "label": "1 år", "duration": { "years": 1 }, "amountDkk": 399, "stripePriceEnv": "STRIPE_PRICE_ID_1_YEAR" }
+  ],
+  "free": {
+    "learnChapters": [1],
+    "practiceQuestionsPerDay": 10,
+    "gameLevels": [1],
+    "confirmed": true
+  },
+  "termsVersion": "draft-2026-11-01",
+  "referral": {
+    "enabled": false,
+    "confirmed": false,
+    "amountsConfirmed": true,
+    "accountAgeLimitConfirmed": true,
+    "accountAgeLimitDecision": "Kenneth, delegated to Claude, 2 Nov 2026",
+    "startedAt": null,
+    "discountPercent": 10,
+    "signup": {
+      "referrerBoosters": 10000,
+      "friendBoosters": 2000,
+      "maxPerReferrerPerMonth": 20,
+      "maxAccountAgeHours": 72
+    },
+    "payment": {
+      "holdDays": 14,
+      "refundPercent": 20,
+      "unpaidReferrerDays": 30,
+      "maxUnpaidRewardMonths": 6
+    }
+  }
+}

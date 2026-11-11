@@ -1,0 +1,105 @@
+/* Landscape control layout adapted from the reviewed cockpit prototype. */
+@media (orientation:landscape) {
+ body{margin:0!important;overflow:hidden!important;background:#1F2328!important}
+ .frame{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-width:none!important;max-height:none!important;margin:0!important;border:0!important;border-radius:0!important;overflow:hidden!important}
+ .hud{display:block!important;position:absolute!important;inset:0!important;background:transparent!important}
+ .visual-area{position:absolute!important;inset:0!important;display:block!important;min-height:0!important;background:#2B3138!important}
+ #windscreen{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+ #view{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+ .hud-top{position:absolute!important;z-index:5;top:max(10px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));pointer-events:none;background:none!important;padding:0!important;border:0!important;display:flex!important;justify-content:space-between}
+ .where,.tally{pointer-events:auto;background:#2B3138EF!important;color:#F4F5F7!important;border:2px solid #1F2328!important;border-radius:12px;padding:8px 12px!important;box-shadow:0 2px #1F2328}
+ .where{flex:0 0 auto!important;width:auto!important;max-width:205px!important}.where strong{color:#F4F5F7!important}
+ .where .label,.tally .label{color:#FFEB85!important;font-size:10px}.where strong{font-size:15px}.next{font-size:12px!important;color:#F4F5F7!important}.tally b{color:#F4F5F7!important}
+ .mirror-strip{position:absolute!important;z-index:6!important;inset:0!important;height:100%!important;background:transparent!important;border:0!important;display:block!important;pointer-events:none}
+ .mirror-strip>*{pointer-events:auto}.mirror-strip .mirror{height:52px!important;width:90px!important;border:3px solid #26332d!important;border-radius:12px!important;background:transparent!important;overflow:hidden}.mirror-strip .mirror--rear{width:130px!important}.mirror-strip canvas{width:100%!important;height:100%!important}.mirror-strip small{display:none}.look-button{width:48px!important;height:48px!important;font-size:11px!important}
+ .mirror-strip .mirror{position:absolute!important;max-width:none!important;box-shadow:0 0 0 5px #935c4b,0 0 0 7px #25302a!important}.mirror-strip .mirror--rear{left:50%;top:12px;transform:translateX(-50%);box-shadow:0 0 0 4px #28372f!important}.mirror-strip .mirror--side:nth-child(2){left:12px;top:145px;border-radius:45%!important}.mirror-strip .mirror--side:nth-child(4){right:12px;top:145px;border-radius:45%!important}.mirror-strip #look-left,.mirror-strip #look-right{position:absolute;top:145px;opacity:.01}.mirror-strip #look-left:focus-visible,.mirror-strip #look-right:focus-visible{opacity:1}.mirror-strip #look-left{left:12px}.mirror-strip #look-right{right:12px}
+ #frame[data-vehicle=wedge] .mirror--side{box-shadow:0 0 0 5px #c8c4af,0 0 0 7px #263c45!important}#frame[data-vehicle=nordic] .mirror--side{box-shadow:0 0 0 5px #ad9883,0 0 0 7px #35454c!important}
+ .hud-bottom{position:static!important;display:contents!important;background:none!important;padding:0!important;border:0!important}.guide-row,.pedals,.drive-tools{display:contents!important}
+ .radio{position:absolute!important;z-index:5;left:max(12px,env(safe-area-inset-left));top:75px;width:min(290px,36vw)!important;min-height:48px!important;padding:5px 8px!important;border:2px solid #1F2328!important;border-radius:28px!important;background:#2B3138EF!important;color:#F4F5F7!important;box-shadow:0 2px #1F2328}
+ .guide-copy,.radio #radio{color:#F4F5F7!important;font-size:12px!important;line-height:1.15!important}.guide-copy .label{color:#FFD60A!important;font-size:10px}.guide-avatar{width:38px!important;height:38px!important}
+ .cluster{position:absolute!important;z-index:5;bottom:0;left:50%;transform:translateX(-50%);width:270px!important;height:74px!important;display:flex!important;justify-content:center;align-items:center;gap:20px;padding:8px!important;border:3px solid #1F2328!important;border-radius:14px 14px 0 0!important;background:linear-gradient(#3A434C,#1F2328)!important;box-shadow:inset 0 3px #5F656D}
+ .cockpit-instrument-art{position:absolute;inset:0;z-index:0;pointer-events:none}.cockpit-instrument-art svg{width:100%;height:100%;display:block}.cluster>div,.cluster>.limit{position:relative;z-index:1}.cluster>div{background:#1F2328;border:1px solid #5F656D;border-radius:4px;padding:2px 8px}.cluster>.limit{width:30px!important;height:30px!important;font-size:13px!important}
+ .speed{font:800 25px/1 system-ui!important;color:#FEFFED!important;text-align:center}.unit{color:#E3E5E8!important;font-size:10px!important}.limit{width:38px!important;height:38px!important;font-size:16px!important}
+ .steer-wrap{position:absolute!important;z-index:8;left:max(12px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));width:min(40dvh,160px)!important;height:min(40dvh,160px)!important;display:block!important}.steer-wrap>span{display:none!important}
+ #steer{width:100%!important;height:100%!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;touch-action:none}.steer-art{width:100%!important;height:100%!important}
+ #horn{position:absolute!important;z-index:10;left:calc(max(12px,env(safe-area-inset-left)) + min(20dvh,80px) - 27px);bottom:calc(max(10px,env(safe-area-inset-bottom)) + min(20dvh,80px) - 27px);width:54px!important;height:54px!important;border-radius:50%!important;background:#3A434C!important;color:#FFE5E5!important;font-size:12px!important;border:2px solid #1F2328!important}
+ #brake,#gas{position:absolute!important;z-index:8;bottom:max(12px,env(safe-area-inset-bottom));padding:0!important;display:block!important;background:transparent!important;border:0!important;box-shadow:none!important;touch-action:none}
+ #brake{right:calc(max(12px,env(safe-area-inset-right)) + 88px);width:112px!important;height:104px!important}#gas{right:max(12px,env(safe-area-inset-right));width:76px!important;height:156px!important}
+ #brake .pedal-plate,#gas .pedal-plate{position:absolute!important;inset:4px!important;width:auto!important;height:auto!important;border:3px solid #162320!important;border-radius:12px!important;background:repeating-linear-gradient(0deg,#24332f 0 12px,#101b19 12px 16px,#53615a 16px 18px)!important;box-shadow:inset 0 3px #a3afa4,0 6px #1d3029!important;transform:none!important}
+ #gas .pedal-plate{border-radius:14px!important}#brake.held .pedal-plate,#gas.held .pedal-plate{transform:translateY(6px)!important;box-shadow:inset 0 2px #e3d273,0 1px #ffd60a!important}
+ .pedal-copy{position:absolute!important;z-index:1;top:14px;left:0;right:0;display:block!important;color:#F4F5F7!important;text-align:center;font:800 11px/1 system-ui!important;text-shadow:0 1px #0F1215}.pedal-copy b{color:#F4F5F7!important;font-size:11px!important}.pedal-copy span,.pedal-copy small{display:none!important}
+ #blink-left,#blink-right{position:absolute!important;z-index:8;bottom:75px;width:54px!important;height:54px!important;background:#3A434C!important;color:#F4F5F7!important;border:2px solid #1F2328!important;border-radius:14px!important}#blink-left{left:calc(max(12px,env(safe-area-inset-left)) + min(40dvh,160px) + 8px)}#blink-right{left:calc(max(12px,env(safe-area-inset-left)) + min(40dvh,160px) + 62px)}#blink-left[aria-pressed=true],#blink-right[aria-pressed=true]{background:#FFD60A!important;color:#1F2328!important}
+ #drive-settings{position:absolute!important;right:8px;top:76px;z-index:9;width:48px;height:48px;background:#2B3138;color:#F4F5F7;border:2px solid #1F2328;border-radius:12px;font-size:22px}
+ #mirror-toggle,.gear-control{display:none!important;position:absolute!important;right:8px;top:130px;z-index:9}.gear-control{top:185px}.gear-control select{font-size:12px}.drive-settings-open #mirror-toggle,.drive-settings-open.needs-reverse .gear-control{display:block!important}
+ .veil{z-index:30!important;box-sizing:border-box!important;place-items:center!important;overflow:hidden!important;padding:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))!important}
+ .veil .card{box-sizing:border-box!important;max-height:calc(100dvh - max(10px,env(safe-area-inset-top)) - max(10px,env(safe-area-inset-bottom)))!important;overflow-y:auto!important;display:flex!important;flex-direction:column;align-items:stretch;gap:8px!important;padding:12px!important;overscroll-behavior:contain}
+ .veil .card .go{position:sticky;bottom:0;z-index:1;flex-shrink:0;align-self:stretch;min-height:48px;font-size:16px!important;padding:9px 14px!important;box-shadow:0 -5px 8px #1F232899}
+ .card--start h1{font-size:27px!important;line-height:1!important}.card--start .start-hero img{width:54px!important;height:54px!important}.card--start .lede,.card--start .keys{font-size:12px!important;line-height:1.25}.card--start .keys{display:grid;grid-template-columns:1fr 1fr;gap:3px 10px}.card--start .keys kbd{font-size:12px!important}.card--start .label,.card--incident .label,.card .rule small{font-size:12px!important}
+ .where .label,.tally .label,.guide-copy .label,.unit,.pedal-copy,.pedal-copy b,.penalty{font-size:12px!important}
+}
+/* Start sheet uses the approved interface palette. Keyboard instructions are
+   useful only on devices with a precise hovering pointer. */
+#start .card--start{background:#FEFFED!important;color:#1F2328!important}
+#start .card--start h1,#start .card--start .lede{color:#1F2328!important}
+#start .card--start h1 em{color:#4A4127!important}
+#start .card--start .label{color:#525C65!important}
+#start .keys{display:none!important}
+@media (hover:hover) and (pointer:fine){#start .keys{display:grid!important}}
+@media (orientation:landscape){
+ #brake .pedal-plate,#gas .pedal-plate{border:4px solid #0F1215!important;border-radius:17px!important;background:repeating-linear-gradient(0deg,#1F2328 0 15px,#0F1215 15px 21px,#343A40 21px 23px)!important;box-shadow:inset 0 3px 5px #525C65,0 5px 0 #0F1215!important}
+ #gas .pedal-plate{border-radius:19px!important}
+ #brake .pedal-plate:after,#gas .pedal-plate:after{display:none!important}
+ #brake.held .pedal-plate,#gas.held .pedal-plate{box-shadow:inset 0 2px #525C65,0 1px #0F1215!important}
+ .pedal-copy,.pedal-copy b{font-size:12px!important;color:#FEFFED!important}
+ .where,.tally,#radio,#drive-settings{background:#1F2328!important;color:#FEFFED!important;border-color:#525C65!important}
+}
+/* All instructional surfaces use the shared brand palette. */
+
+html,body{background:#1F2328!important}
+.card{background:#FEFFED!important;color:#1F2328!important;border-color:#C2CCD6!important}
+.card h1,.card h2,.card .lede,.card .note{color:#1F2328!important}
+.card .label,.card .rule small{color:#525C65!important}
+.card .rule{background:#FFF6C7!important;color:#1F2328!important;border-color:#C9A200!important}
+.card .penalty{background:#FF4B4B!important;color:#1F2328!important}
+.card .sheet>div{border-color:#C2CCD6!important;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}
+.card .sheet dt{color:#525C65!important}.card .sheet dd,.card .sheet .ok dd,.card .sheet .bad dd{color:#1F2328!important;font-weight:700;text-align:right}
+.card :focus-visible{outline-color:#1F2328!important} :focus-visible{outline-color:#FFD60A}
+@media (orientation:portrait){.turn-phone{left:0!important;top:0!important;width:100vw!important;height:100dvh!important;box-sizing:border-box;background:#1F2328!important}}
+.card .lede,.card .note{color:#525C65!important}
+.card .go{background:#FFD60A!important;color:#1F2328!important}
+@media (orientation:landscape){
+ .veil .card--incident{gap:5px!important}
+ .card--incident h2{font-size:31px!important;line-height:1.02!important}
+ .card--incident .rule{padding:8px 10px!important;font-size:13px;line-height:1.35}
+}
+.card .go:hover{background:#FFE45C!important;box-shadow:inset 0 0 0 2px #1F2328!important}.card .go:active{background:#E8BC00!important}
+.turn-phone{color:#FEFFED!important}.turn-phone-icon{border-color:#C2CCD6!important;box-shadow:inset 0 -5px #525C65!important}
+@media (orientation:landscape){
+ #blink-left,#blink-right,#horn{background:#3A434C!important;color:#FEFFED!important;border-color:#0F1215!important}
+ #blink-left[aria-pressed=true],#blink-right[aria-pressed=true]{background:#FFD60A!important;color:#1F2328!important}
+ .drive-settings-open #mirror-toggle,.drive-settings-open .gear-control{background:#E3E5E8!important;color:#1F2328!important;border-color:#C2CCD6!important}
+ .drive-settings-open .gear-control select{color:#1F2328!important}
+}
+@media (orientation:portrait){html{overflow:hidden!important;scrollbar-gutter:auto!important}}
+
+.card .keys,.card .keys li{color:#525C65!important}.card .keys kbd{background:#F4F5F7!important;border-color:#C2CCD6!important;color:#1F2328!important}
+@media (orientation:landscape){
+ #brake{right:calc(max(12px,env(safe-area-inset-right)) + 140px)!important}
+ .gear-buttons{position:absolute;z-index:9;right:calc(max(12px,env(safe-area-inset-right)) + 88px);bottom:max(12px,env(safe-area-inset-bottom));display:grid;gap:4px}
+ .gear-buttons button{width:44px;height:44px;min-width:44px;min-height:44px;border:1px solid #525C65;border-radius:9px;background:#2B3138;color:#FEFFED;font:800 13px/1 system-ui;touch-action:manipulation;cursor:pointer}
+ .gear-buttons button[aria-pressed=true]{background:#FFD60A;color:#1F2328;border-color:#525C65}
+ .gear-buttons button:focus-visible{outline:2px solid #FFD60A;outline-offset:2px}
+ .cluster-gear{display:inline-block;color:#FFD60A;font-weight:900;font-size:13px;margin-right:3px}
+ #handedness{display:none!important;position:absolute!important;right:8px;top:185px;z-index:10;min-width:150px;height:44px;padding:5px 10px;background:#E3E5E8;color:#1F2328;border:1px solid #C2CCD6;font-size:13px}
+ .drive-settings-open #handedness{display:block!important}
+ body.left-handed #gas{right:auto;left:max(12px,env(safe-area-inset-left))}
+ body.left-handed #brake{right:auto!important;left:calc(max(12px,env(safe-area-inset-left)) + 140px)}
+ body.left-handed .gear-buttons{right:auto;left:calc(max(12px,env(safe-area-inset-left)) + 88px)}
+ body.left-handed .steer-wrap{left:auto;right:max(12px,env(safe-area-inset-right))}
+ body.left-handed #horn{left:auto;right:calc(max(12px,env(safe-area-inset-right)) + min(20dvh,80px) - 27px)}
+ body.left-handed #blink-left{left:auto;right:calc(max(12px,env(safe-area-inset-right)) + min(40dvh,160px) + 62px)}
+ body.left-handed #blink-right{left:auto;right:calc(max(12px,env(safe-area-inset-right)) + min(40dvh,160px) + 8px)}
+}
+@media (orientation:landscape){#windscreen{pointer-events:auto;touch-action:none;cursor:grab}#windscreen:active{cursor:grabbing}}
+
+@media (orientation:landscape){.mirror-strip #look-left,.mirror-strip #look-right{z-index:1}}

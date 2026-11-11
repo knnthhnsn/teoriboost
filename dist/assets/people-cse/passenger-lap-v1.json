@@ -1,0 +1,26 @@
+{
+  "source": "authoring/seated-cast-20261102/passenger-lap-v1.png",
+  "sha256": "b3f81330b3bf6c16863088bb88ce48fe7634e29fa9cd485045f09ac3bd4fec6e",
+  "width": 1254,
+  "height": 1254,
+  "columns": [
+    0,
+    314,
+    627,
+    940,
+    1254
+  ],
+  "rows": [
+    0,
+    324,
+    630,
+    922,
+    1254
+  ],
+  "alpha": {
+    "zero": 763359,
+    "opaque": 3653,
+    "partial": 805504
+  },
+  "note": "Native file copied byte-for-byte; mask opacity is a rendering technique, not a source-alpha repair."
+}

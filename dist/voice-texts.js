@@ -18,9 +18,14 @@ export function questionVoiceParts(q) {
   return [joinVoiceParts([q.prompt, q.context]), ...(q.statements || []).flatMap((statement, index) => [`Udsagn ${index + 1}.`, text(statement?.text)])].filter(Boolean);
 }
 
-export function questionFeedbackParts(q, { humor = false } = {}) {
+export function questionGagFits(q, correct) {
+  if (!q?.gag || !['sneglen','kegle','daek'].includes(q.speaker)) return false;
+  return q.gagWhen === 'always' || q.gagWhen === (correct ? 'correct' : 'wrong');
+}
+
+export function questionFeedbackParts(q, { humor = false, correct } = {}) {
   if (!q) return [];
-  return [text(q.explanation), humor ? text(q.gag) : ''].filter(Boolean);
+  return [text(q.explanation), humor && (typeof correct === 'boolean' ? questionGagFits(q, correct) : !!q.gag && ['sneglen','kegle','daek'].includes(q.speaker)) ? text(q.gag) : ''].filter(Boolean);
 }
 
 export function sectionVoiceParts(s) {

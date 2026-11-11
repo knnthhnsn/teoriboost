@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="da" data-scroll-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Vejen er spærret — TeoriBoost</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1F2328">
+    <style>
+/* teoriboost.dk: the app's own look (Common Side Effects art, signal yellow, asphalt with grain) on one page */
+@font-face{font-family:Display;src:url('/assets/fonts/rubik-var.woff2') format('woff2');font-weight:300 900;font-display:swap}
+@font-face{font-family:Body;src:url('/assets/fonts/atkinson-400.woff2') format('woff2');font-weight:100 600;font-display:swap}
+@font-face{font-family:Body;src:url('/assets/fonts/atkinson-700.woff2') format('woff2');font-weight:601 1000;font-display:swap}
+
+:root{
+  --yellow:#FFD60A;--yellow-dark:#C9A200;--ink:#1F2328;--ink-soft:#4C5560;--asphalt-bg:#24282D;--paper:#F7F5EE;--line:#E3E0D5;--white:#fff;
+  --display:Display,system-ui,sans-serif;--body:Body,system-ui,sans-serif;
+  --asphalt:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'220'%20height%3D'220'%3E%3Cfilter%20id%3D'n0'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.5'%20numOctaves%3D'2'%20seed%3D'3'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%200%200%200%200%201%200%200%200%200%201%203.2%200%200%200%20-2.05'%2F%3E%3C%2Ffilter%3E%3Cfilter%20id%3D'n1'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.95'%20numOctaves%3D'2'%20seed%3D'7'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%200%200%200%200%201%200%200%200%200%201%202.4%200%200%200%20-1.35'%2F%3E%3C%2Ffilter%3E%3Cfilter%20id%3D'n2'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.72'%20numOctaves%3D'2'%20seed%3D'11'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%200%200%200%200%200%200%200%200%200%200%200%202.8%200%200%200%20-1.5'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'220'%20height%3D'220'%20filter%3D'url(%23n0)'%20opacity%3D'0.34'%2F%3E%3Crect%20width%3D'220'%20height%3D'220'%20filter%3D'url(%23n1)'%20opacity%3D'0.24'%2F%3E%3Crect%20width%3D'220'%20height%3D'220'%20filter%3D'url(%23n2)'%20opacity%3D'0.5'%2F%3E%3C%2Fsvg%3E");
+  --grain:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'200'%20height%3D'200'%3E%3Cfilter%20id%3D'n0'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.8'%20numOctaves%3D'2'%20seed%3D'5'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%200%200%200%200%200%200%200%200%200%200%200%202.6%200%200%200%20-1.42'%2F%3E%3C%2Ffilter%3E%3Cfilter%20id%3D'n1'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.9'%20numOctaves%3D'2'%20seed%3D'9'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%200%200%200%200%201%200%200%200%200%201%202.4%200%200%200%20-1.4'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'200'%20height%3D'200'%20filter%3D'url(%23n0)'%20opacity%3D'0.26'%2F%3E%3Crect%20width%3D'200'%20height%3D'200'%20filter%3D'url(%23n1)'%20opacity%3D'0.28'%2F%3E%3C%2Fsvg%3E");
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--body);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:.98;letter-spacing:-.02em}
+h2{font-size:clamp(38px,7vw,76px);font-weight:900}
+h3{font-size:28px;font-weight:800}
+p{margin:0 0 14px}
+.wrap{width:min(1180px,100% - 32px);margin:0 auto}
+.narrow{width:min(760px,100% - 32px)}
+.small{font-size:15px;color:var(--ink-soft)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:50;padding:10px 16px;border-radius:12px;background:var(--yellow);color:var(--ink);font-weight:700}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid #0B6BA8;outline-offset:3px}
+
+/* textures: asphalt grain on dark, a fine grain on paper and yellow */
+.asphalt,.hero{background:var(--asphalt) 0 0/220px 220px,var(--asphalt-bg);color:#F4F2EA}
+.paper{background:var(--grain) 0 0/200px 200px,var(--paper)}
+
+.eyebrow{display:inline-flex;align-items:center;gap:9px;margin:0 0 16px;font:800 14px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--yellow-dark)}
+.asphalt .eyebrow,.hero .eyebrow{color:var(--yellow)}
+.eyebrow-ink{color:var(--ink)}
+.eyebrow .dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px rgba(255,214,10,.25)}
+
+/* buttons: chunky, with the app's gloss sweep */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;min-height:58px;padding:0 28px;border-radius:18px;border:2.5px solid var(--ink);
+  font:800 19px/1 var(--display);text-decoration:none;transition:translate .15s,box-shadow .15s}
+.btn-yellow{background:var(--yellow);color:var(--ink);box-shadow:0 6px 0 var(--ink)}
+.btn-ink{background:var(--ink);color:var(--yellow);box-shadow:0 6px 0 rgba(0,0,0,.35)}
+.btn-ghost{background:transparent;color:#F4F2EA;border-color:rgba(244,242,234,.55);box-shadow:0 6px 0 rgba(0,0,0,.35)}
+.btn:hover{translate:0 -2px}
+.btn:active{translate:0 5px;box-shadow:0 1px 0 var(--ink)}
+.btn-yellow::after,.btn-ink::after{content:"";position:absolute;inset:-2px;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 48%,transparent 60%);translate:-120% 0;animation:sweep 4.5s ease-in-out infinite;pointer-events:none}
+.btn-ink::after{background:linear-gradient(105deg,transparent 35%,rgba(255,214,10,.22) 48%,transparent 60%)}
+@keyframes sweep{0%,60%{translate:-120% 0}85%,100%{translate:120% 0}}
+.btn-small{min-height:44px;padding:0 18px;font-size:16px;border-radius:14px;box-shadow:0 4px 0 var(--ink)}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:20px;padding:12px max(16px,calc((100% - 1180px) / 2));background:rgba(31,35,40,.92);backdrop-filter:blur(10px);color:#F4F2EA;border-bottom:1px solid rgba(255,255,255,.08)}
+.brand{display:inline-flex;align-items:center;gap:10px;font:900 22px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
+.top-nav{display:none;gap:22px;margin-left:auto}
+.top-nav a{font:700 16px var(--display);text-decoration:none;opacity:.85}
+.top-nav a:hover{opacity:1;text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:3px;text-underline-offset:6px}
+.top .btn{margin-left:auto}
+@media (min-width:900px){.top-nav{display:flex}.top .btn{margin-left:0}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding-top:56px}
+.hero-copy{position:relative;z-index:2}
+/* the streak flame, on the right of the headline on wide screens */
+.hero-light{display:none}
+@media (min-width:980px){.hero-light{display:block;position:absolute;z-index:1;right:max(40px,calc((100% - 1180px) / 2 + 40px));top:40px;width:clamp(240px,26vw,360px);height:auto;rotate:6deg;filter:drop-shadow(0 18px 18px rgba(0,0,0,.45));transform-origin:50% 100%;animation:sway 3s ease-in-out infinite}}
+@keyframes sway{50%{rotate:3deg;scale:1.03 .97}}
+.hero h1{font-size:clamp(52px,11vw,124px);font-weight:900;margin-bottom:22px}
+.hl{color:var(--yellow)}
+.lead{max-width:560px;font-size:clamp(18px,2.2vw,21px);color:#D5D9DE}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin:26px 0 40px}
+
+/* the road with the race, as in the app's "Dit hold" */
+.road{position:relative;height:clamp(250px,34vw,380px);overflow:hidden;--car:clamp(118px,17vw,210px)}
+.road>span{position:absolute;display:block}
+.road-sky{inset:0;background:linear-gradient(#8FBCD4 0,#C9DEE2 52%,#E6E2CF 60%)}
+.road-clouds{left:0;right:0;top:10px;height:80px;background:url("/assets/scene/loop-clouds.webp") 0 0/auto 80px repeat-x;animation:scroll-clouds 70s linear infinite}
+.road-far{left:0;right:0;bottom:44%;height:128px;background:url("/assets/scene/loop-far.webp") 0 100%/auto 128px repeat-x;animation:scroll-far 40s linear infinite}
+.road-near{left:0;right:0;bottom:44%;height:96px;background:url("/assets/scene/loop-near.webp") 0 100%/auto 96px repeat-x;animation:scroll-near 10s linear infinite}
+.road-asphalt{left:0;right:0;bottom:0;height:46%;background:var(--asphalt) 0 0/220px 220px,#3A3F47}
+.road-asphalt::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:#E3E7EA}
+.road-dashes{position:absolute;left:0;right:0;top:46%;height:6px;background:repeating-linear-gradient(90deg,#F0E9D2 0 54px,transparent 54px 110px);animation:dashes .6s linear infinite}
+@keyframes scroll-clouds{to{background-position-x:-589px}}
+@keyframes scroll-far{to{background-position-x:-707px}}
+@keyframes scroll-near{to{background-position-x:-707px}}
+@keyframes dashes{to{background-position-x:-110px}}
+
+.racer{--s:1;--wb:.24;--lane:5%;--w:calc(var(--car) * var(--s));position:absolute;left:var(--x);bottom:calc(var(--lane) - var(--w) * var(--wb));width:var(--w);height:var(--w);margin-left:calc(var(--w) * -.5);z-index:3;animation:cruise 3.2s ease-in-out infinite}
+.racer img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 6px rgba(0,0,0,.28))}
+.racer.lane-far{--lane:25%;scale:.84;transform-origin:50% 76%;z-index:2}
+.racer-4{--s:.8;--wb:.11;animation-delay:-1s}
+.racer-3{--s:1.08;--wb:.23;animation-delay:-2s}
+.racer-2{--s:1.12;--wb:.25;animation-delay:-.5s}
+.racer-1{--s:1.18;--wb:.29;animation:cruise .9s ease-in-out infinite,shake .14s linear infinite}
+@keyframes cruise{0%,100%{translate:0 0}25%{translate:3px -1px}50%{translate:-2px 0}75%{translate:2px -1px}}
+@keyframes shake{50%{rotate:-.4deg}}
+.tag{position:absolute;left:50%;top:var(--tt,30%);translate:-50% -100%;z-index:4;display:flex;align-items:center;gap:6px;padding:3px 11px 3px 3px;border-radius:999px;background:#fff;border:2px solid var(--ink);box-shadow:0 2px 0 var(--ink);
+  font:800 clamp(12px,1.3vw,15px)/1.1 var(--display);color:var(--ink);white-space:nowrap}
+.tag i{display:grid;place-items:center;min-width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font-style:normal;font-size:11px}
+.tag-lead i{background:var(--yellow);color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.racer-4{--tt:12%}.racer-3{--tt:33%}.racer-2{--tt:35%}.racer-1{--tt:39%}
+.fire{position:absolute;right:88%;top:60%;width:122%;aspect-ratio:3/1;translate:0 -50%;z-index:-1}
+.fire i{position:absolute;inset:0;background:url("/assets/race/mega.webp") 0 0/300% 100% no-repeat;animation:flicker .27s steps(1) infinite}
+@keyframes flicker{0%{background-position:0 0}33.3%{background-position:50% 0}66.6%{background-position:100% 0}}
+.wind{position:absolute;right:30%;top:22%;width:150%;aspect-ratio:3/1;z-index:-2;background:url("/assets/race/wind.webp") 0 0/100% 100% no-repeat;animation:wind .7s linear infinite}
+@keyframes wind{from{translate:30% 0;opacity:0}20%{opacity:.85}to{translate:-25% 0;opacity:0}}
+@media (max-width:640px){.racer.racer-2{display:none}.racer-3{--x:44%!important}.fire{width:100%}}
+
+/* the marquee */
+.marquee{overflow:hidden;background:var(--yellow);border-block:3px solid var(--ink)}
+.marquee-track{display:flex;width:max-content;animation:marquee 26s linear infinite}
+.marquee span{display:flex;align-items:center;gap:34px;padding:14px 0 14px 34px;font:900 clamp(30px,5vw,54px)/1 var(--display);text-transform:uppercase;letter-spacing:-.01em;color:var(--ink)}
+.marquee span::after{content:"";width:16px;height:16px;border-radius:50%;background:var(--ink)}
+@keyframes marquee{to{translate:-50% 0}}
+
+/* ---------- how it works ---------- */
+.steps{padding:96px 0}
+.steps h2{margin-bottom:44px}
+.step-grid{display:grid;gap:18px}
+@media (min-width:860px){.step-grid{grid-template-columns:repeat(3,1fr)}}
+.step{padding:26px;border-radius:26px;background:#fff;border:2.5px solid var(--ink);box-shadow:0 8px 0 var(--ink)}
+.step img{width:88px;height:88px;margin-bottom:14px}
+.step h3{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.step h3 span{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--yellow);border:2px solid var(--ink);font-size:20px}
+.step p{color:var(--ink-soft)}
+.fact{margin:18px 0 0!important;padding-top:14px;border-top:2px dashed var(--line);color:var(--ink)!important;font:700 17px var(--display)}
+.fact b{font-size:26px}
+
+/* ---------- Min bil ---------- */
+.garage{padding:96px 0;background:var(--grain) 0 0/200px 200px,var(--yellow);border-block:3px solid var(--ink)}
+.garage-grid{display:grid;gap:40px;align-items:center}
+@media (min-width:900px){.garage-grid{grid-template-columns:1fr 1.15fr}}
+.garage h2{margin-bottom:22px}
+.garage-copy>p{font-size:19px}
+.earn{list-style:none;margin:24px 0 14px;padding:0;display:grid;gap:10px}
+.earn li{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:16px;background:var(--ink);color:#fff}
+.earn b{min-width:104px;font:900 28px/1 var(--display);color:var(--yellow)}
+.earn b::before{content:"";display:inline-block;width:20px;height:20px;margin-right:8px;vertical-align:-2px;border-radius:50%;background:var(--yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.5 4.5 7.5 13h4l-1 6.5 6-8.5h-4z' fill='%231F2328'/%3E%3C/svg%3E") center/16px no-repeat}
+.garage .small{color:#3E454D}
+.compare-card{padding:16px;border-radius:30px;background:var(--asphalt) 0 0/220px 220px,var(--ink);border:3px solid var(--ink);box-shadow:0 10px 0 rgba(0,0,0,.35)}
+.compare{position:relative;aspect-ratio:9/7;border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 92%,rgba(255,214,10,.22),transparent 60%)}
+.compare-img{position:absolute;inset:6% 4%;width:92%;height:88%;object-fit:contain;-webkit-user-drag:none}
+.compare-wreck{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.compare-line{position:absolute;top:0;bottom:0;left:var(--pos);width:3px;margin-left:-1.5px;background:var(--yellow);pointer-events:none}
+.compare-line i{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);box-shadow:0 4px 0 rgba(0,0,0,.35)}
+.compare-line i::before,.compare-line i::after{content:"";position:absolute;top:50%;width:9px;height:9px;margin-top:-5px;border-top:2px solid var(--ink);border-right:2px solid var(--ink)}
+.compare-line i::before{left:9px;transform:rotate(-135deg)}
+.compare-line i::after{right:9px;transform:rotate(45deg)}
+.compare-label{position:absolute;top:14px;padding:4px 12px;border-radius:999px;font:800 14px var(--display);background:rgba(255,255,255,.92);color:var(--ink)}
+.compare-label-l{left:14px}.compare-label-r{right:14px;background:var(--yellow)}
+.compare-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
+.compare-range:focus-visible + *{outline:none}
+.compare:has(.compare-range:focus-visible){outline:3px solid var(--yellow);outline-offset:3px}
+.vehicle-pick{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.vehicle-pick button{flex:1 1 auto;min-height:46px;padding:0 14px;border-radius:14px;border:2px solid rgba(255,255,255,.25);background:transparent;color:#F4F2EA;font:800 16px var(--display);cursor:pointer}
+.vehicle-pick button.is-on{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+
+/* ---------- teams ---------- */
+.team{padding:96px 0}
+.team-grid{display:grid;gap:40px;align-items:center}
+@media (min-width:900px){.team-grid{grid-template-columns:1fr 1fr}}
+.team h2{margin-bottom:22px}
+.team-copy>p{color:#D5D9DE}
+.boost-list{list-style:none;margin:24px 0 14px;padding:0;display:grid;gap:8px}
+.boost-list li{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font:700 17px var(--display)}
+.boost-list b{color:var(--yellow)}
+.team .small{color:#B6BDC5}
+.board{padding:18px;border-radius:28px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:0 10px 0 rgba(0,0,0,.4);rotate:1.2deg}
+.board-head{display:flex;justify-content:space-between;align-items:baseline;padding:4px 6px 12px;font:900 24px var(--display)}
+.board-head span{font-size:15px;color:var(--ink-soft)}
+.board ol{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.board li{display:grid;grid-template-columns:34px 64px 1fr auto;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:18px;border:2px solid var(--line)}
+.board li i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;font:800 16px var(--display);font-style:normal}
+.board li img{width:64px;height:48px;object-fit:contain}
+.board li b{display:block;font:800 17px var(--display)}
+.board li small{font-size:13px;color:var(--ink-soft)}
+.board li em{font:900 22px var(--display);font-style:normal}
+.board .lead-row i{background:var(--yellow);color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.board .me-row{border-color:var(--ink);background:#FFF6C7}
+.board-note{margin:12px 6px 2px;font-size:13px;color:var(--ink-soft)}
+@media (max-width:420px){.board li{grid-template-columns:30px 48px 1fr auto;gap:8px}.board li img{width:48px}}
+
+/* ---------- streak ---------- */
+.streak{padding:96px 0;text-align:center}
+.section-lead{max-width:620px;margin:18px auto 40px;color:var(--ink-soft);font-size:19px}
+.flames{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:end;max-width:900px;margin-inline:auto}
+.flames li{display:flex;flex-direction:column;align-items:center;gap:10px}
+.flames img{width:100%;max-width:190px;aspect-ratio:1;object-fit:contain;transform-origin:50% 100%;animation:flame 2.4s ease-in-out infinite}
+.flames li:nth-child(1) img{width:60%}.flames li:nth-child(2) img{width:74%;animation-delay:-.6s}.flames li:nth-child(3) img{width:88%;animation-delay:-1.2s}.flames li:nth-child(4) img{animation-delay:-1.8s}
+.flames b{padding:6px 14px;border-radius:999px;background:var(--ink);color:var(--yellow);font:800 clamp(13px,1.8vw,17px) var(--display);white-space:nowrap}
+@keyframes flame{0%,100%{scale:1 1}50%{scale:1.04 .96}}
+
+/* ---------- the snail ---------- */
+.snail{padding:96px 0;background:var(--grain) 0 0/200px 200px,#CFE6D5;border-block:3px solid var(--ink)}
+.snail-grid{display:grid;gap:30px;align-items:center}
+@media (min-width:860px){.snail-grid{grid-template-columns:.9fr 1.1fr}}
+.snail-img{width:min(440px,90%);margin:0 auto;animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{translate:0 -8px}}
+.snail h2{margin-bottom:20px}
+.chat{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.bubble{max-width:82%;margin:0;padding:12px 16px;border-radius:20px;border:2px solid var(--ink);font-size:17px}
+.bubble-me{align-self:flex-end;background:var(--ink);color:#fff;border-bottom-right-radius:6px}
+.bubble-snail{align-self:flex-start;background:#fff;border-bottom-left-radius:6px;box-shadow:0 4px 0 var(--ink)}
+
+/* ---------- the cast ---------- */
+.cast{padding:96px 0;text-align:center}
+.cast h2{margin-bottom:40px}
+.cast-row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (min-width:860px){.cast-row{grid-template-columns:repeat(6,1fr)}}
+.cast-row li{display:flex;flex-direction:column;align-items:center;gap:6px}
+.cast-row img{width:100%;max-width:170px;aspect-ratio:1;object-fit:contain;transition:translate .25s cubic-bezier(.2,1.6,.4,1)}
+.cast-row li:hover img{translate:0 -10px}
+.cast-row b{font:800 18px var(--display)}
+
+/* ---------- driving schools ---------- */
+.schools{padding:96px 0;background:var(--asphalt) 0 0/220px 220px,var(--asphalt-bg)}
+.schools-card{position:relative;display:grid;gap:24px;align-items:center;padding:clamp(24px,4vw,48px);border-radius:32px;background:var(--grain) 0 0/200px 200px,var(--yellow);border:3px solid var(--ink);box-shadow:0 10px 0 rgba(0,0,0,.4);overflow:hidden}
+@media (min-width:860px){.schools-card{grid-template-columns:300px 1fr}}
+.schools-tyre{width:min(300px,52vw);height:auto;aspect-ratio:380/385;object-fit:contain;margin:0 auto;animation:spin 18s linear infinite}
+@keyframes spin{to{rotate:360deg}}
+.schools h2{font-size:clamp(32px,5vw,56px);margin-bottom:20px}
+.school-steps{margin:0 0 16px;padding:0;list-style:none;counter-reset:s;display:grid;gap:10px}
+.school-steps li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;font-size:18px}
+.school-steps li::before{content:counter(s);flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--ink);color:var(--yellow);font:800 17px var(--display)}
+.schools .small{color:#3E454D}
+
+/* ---------- questions ---------- */
+.faq{padding:96px 0}
+.faq h2{margin-bottom:28px}
+.faq details{margin-bottom:12px;border-radius:20px;background:#fff;border:2.5px solid var(--ink);box-shadow:0 5px 0 var(--ink)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px;cursor:pointer;list-style:none;font:800 20px var(--display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:30px;height:30px;border-radius:50%;background:var(--yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F2328' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/18px no-repeat;border:2px solid var(--ink);transition:rotate .25s}
+.faq details[open] summary::after{rotate:45deg}
+.faq details p{padding:0 22px 20px;margin:0;color:var(--ink-soft)}
+
+/* ---------- last call ---------- */
+.final{padding:110px 0;text-align:center;background:var(--grain) 0 0/200px 200px,var(--yellow)}
+.final h2{font-size:clamp(44px,9vw,104px);margin-bottom:16px}
+.final p{font-size:20px;margin-bottom:30px}
+
+.foot{padding:40px 0 50px;background:var(--ink);color:#C9D0D7}
+.foot-grid{display:grid;gap:18px}
+@media (min-width:860px){.foot-grid{grid-template-columns:auto 1fr;align-items:center}.foot .small{grid-column:1 / -1}}
+.foot .brand{color:#fff}
+.foot nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+@media (min-width:860px){.foot nav{justify-content:flex-end}}
+.foot nav a{text-decoration:none;font:700 16px var(--display)}
+.foot nav a:hover{color:var(--yellow)}
+.foot .small{color:#9AA3AD;margin:0}
+
+/* scroll reveal (site.js adds .in) */
+.js .reveal{opacity:0;translate:0 26px;transition:opacity .6s,translate .7s cubic-bezier(.2,1,.3,1)}
+.js .reveal.in{opacity:1;translate:0 0}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;translate:none}
+}
+
+/* 404: the road is closed. Keglen stands in the way, the wrecked scooter waits behind a barrier. Uses site.css. */
+.lost{position:relative;min-height:100vh;overflow-x:clip;display:flex;flex-direction:column;background:var(--asphalt) 0 0/220px 220px,var(--asphalt-bg);color:#F4F2EA}
+.lost-main{position:relative;z-index:1;flex:1;display:grid;gap:24px;align-items:center;width:min(1180px,100% - 32px);margin:0 auto;padding:40px 0 0}
+@media (min-width:900px){.lost-main{grid-template-columns:1fr 1fr;padding-top:24px}}
+.lost h1{font-size:clamp(56px,10vw,120px);font-weight:900;margin-bottom:22px}
+.lost .lead{max-width:520px}
+.lost .cta-row{margin-bottom:24px}
+
+/* the scene: a stretch of road with a striped barrier, the cone in front, the wreck behind */
+.detour{position:relative;align-self:end;height:clamp(320px,44vw,520px)}
+/* the road runs the full width of the window, under the scene (as tall as 28 % of it) */
+.detour-road{position:absolute;left:0;right:0;bottom:0;height:calc(clamp(320px,44vw,520px) * .28);background:var(--asphalt) 0 0/220px 220px,#3A3F47;border-top:7px solid #E3E7EA}
+.detour-road span{position:absolute;left:0;right:0;top:46%;height:6px;background:repeating-linear-gradient(90deg,#F0E9D2 0 54px,transparent 54px 110px)}
+.lost .top .btn{margin-left:auto}
+.detour-barrier{position:absolute;left:8%;right:8%;bottom:22%;height:clamp(28px,4vw,40px);z-index:2;border:3px solid var(--ink);border-radius:8px;box-shadow:0 6px 0 rgba(0,0,0,.35);
+  background:repeating-linear-gradient(-45deg,#E8431B 0 26px,#fff 26px 52px)}
+.detour-barrier::before,.detour-barrier::after{content:"";position:absolute;bottom:-46px;width:12px;height:46px;background:var(--ink);border-radius:0 0 4px 4px}
+.detour-barrier::before{left:12%}.detour-barrier::after{right:12%}
+.detour-scooter{position:absolute;right:4%;bottom:24%;width:48%;height:auto;z-index:1;filter:drop-shadow(0 10px 8px rgba(0,0,0,.35)) saturate(.85);rotate:-4deg}
+.detour-cone{position:absolute;left:10%;bottom:6%;width:46%;height:auto;z-index:3;filter:drop-shadow(0 14px 10px rgba(0,0,0,.4));transform-origin:50% 100%;animation:halt 3.2s ease-in-out infinite}
+@keyframes halt{0%,70%,100%{rotate:0deg}78%{rotate:-4deg}86%{rotate:3deg}94%{rotate:-1deg}}
+.detour-sign{position:absolute;right:6%;top:4%;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;rotate:5deg}
+.detour-sign b{display:block;padding:12px 18px;border-radius:12px;background:var(--yellow);color:var(--ink);border:3px solid var(--ink);box-shadow:0 6px 0 rgba(0,0,0,.35);
+  font:900 clamp(18px,2.4vw,26px)/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.detour-sign i{display:block;width:10px;height:clamp(60px,9vw,110px);background:var(--ink)}
+
+</style>
+<link rel="stylesheet" href="/scrollbars.css">
+<style>/* Manual UI foregrounds; illustration colours are independent. */.lost{color:#FEFFED}.lost header.top,.lost a.brand{color:#FEFFED}.lost p.lead{color:#C2CCD6}</style>
+
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body class="lost">
+  <header class="top">
+    <a class="brand" href="/" aria-label="TeoriBoost, til appen"><img src="/assets/icon.svg" alt="" width="36" height="36"><span>TeoriBoost</span></a>
+    <a class="btn btn-yellow btn-small" href="/">Til appen</a>
+  </header>
+
+  <main class="lost-main">
+    <div class="lost-copy">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Fejl 404</p>
+      <h1>Vejen er<br><span class="hl">spærret.</span></h1>
+      <p class="lead">Den side, du leder efter, findes ikke. Måske er den flyttet, eller også var der en slåfejl i adressen. Keglen her lader dig ikke køre videre, men du kan vende om.</p>
+      <div class="cta-row">
+        <a class="btn btn-yellow" href="/">Tilbage til appen</a>
+        <a class="btn btn-ghost" href="https://teoriboost.dk/">teoriboost.dk</a>
+      </div>
+    </div>
+
+    <div class="detour" role="img" aria-label="Keglen spærrer vejen. Bag den står en skraldet scooter, og et skilt viser omkørsel.">
+      <span class="detour-sign"><b>Omkørsel</b><i aria-hidden="true"></i></span>
+      <img class="detour-scooter" src="/assets/mybil/scooter/base.webp" alt="" width="640" height="560">
+      <img class="detour-cone" src="/assets/cast/kegle.webp" alt="" width="512" height="512">
+      <span class="detour-barrier" aria-hidden="true"></span>
+    </div>
+  </main>
+  <span class="detour-road" aria-hidden="true"><span></span></span>
+</body>
+</html>

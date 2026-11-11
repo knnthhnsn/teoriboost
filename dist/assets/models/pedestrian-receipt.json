@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-29T13:23:22.942054+00:00",
+  "asset": "pedestrian.glb",
+  "asset_sha256": "250664c8437f0e057e5f5d65b2d2ac71d7d3dafb0201560b9aa820cb9ee8fd17",
+  "asset_bytes": 228784,
+  "editable_blend": "tools/pedestrian3d/out/pedestrian.blend",
+  "editable_blend_sha256": "137b5f5253ccb87d886d013b95c86197c33e8a7849b0630eca7ae38614bb2600",
+  "generator": "tools/pedestrian3d/build_pedestrian.py",
+  "generator_sha256": "fce28c22fdc0d2ea8ce2d4150f1add5de9ce53b012b3c317e92b85cb45c75c0c",
+  "origin": "Exported from the editable Blender scene",
+  "provenance": "Original procedural geometry and PBR colours created locally for this project; no downloaded model, textures or paid service.",
+  "unit": "metre",
+  "source_axis": "Blender Z up, +Y forward",
+  "asset_axis": "glTF 2.0 Y up, -Z forward",
+  "blender_version": "5.1.2",
+  "source_geometry": {
+    "objects": 37,
+    "vertices": 4056,
+    "triangles": 7832,
+    "bounds": {
+      "min": [
+        -0.28999999165534973,
+        -0.20800000429153442,
+        0.0
+      ],
+      "max": [
+        0.28999999165534973,
+        0.3019999861717224,
+        1.7339999675750732
+      ],
+      "dimensions": [
+        0.5799999833106995,
+        0.5099999904632568,
+        1.7339999675750732
+      ]
+    }
+  },
+  "roundtrip": {
+    "blender": "5.1.2",
+    "mesh_objects": 37,
+    "vertices": 5140,
+    "triangles": 7832,
+    "blender_bounds_m": {
+      "min": [
+        -0.28999999165534973,
+        -0.20800000429153442,
+        0.0
+      ],
+      "max": [
+        0.28999999165534973,
+        0.3019999861717224,
+        1.7339999675750732
+      ],
+      "dimensions": [
+        0.5799999833106995,
+        0.5099999904632568,
+        1.7339999675750732
+      ]
+    },
+    "gltf_bounds_m": {
+      "min": [
+        -0.28999999165534973,
+        0.0,
+        -0.3019999861717224
+      ],
+      "max": [
+        0.28999999165534973,
+        1.7339999675750732,
+        0.20800000429153442
+      ],
+      "dimensions": [
+        0.5799999833106995,
+        1.7339999675750732,
+        0.5099999904632568
+      ]
+    },
+    "forward_check": {
+      "blender_front_y": 0.10482761231850993,
+      "blender_rear_y": -0.061000000465510074,
+      "gltf_forward": "-Z"
+    },
+    "pivot_checks": {
+      "left_arm_pivot": {
+        "mesh": "left_cuff",
+        "test_angle_degrees": 15,
+        "vertex_displacement_m": 0.09514133843906071
+      },
+      "right_arm_pivot": {
+        "mesh": "right_cuff",
+        "test_angle_degrees": 15,
+        "vertex_displacement_m": 0.0951413226086827
+      },
+      "left_leg_pivot": {
+        "mesh": "left_laces",
+        "test_angle_degrees": 15,
+        "vertex_displacement_m": 0.20631187369898715
+      },
+      "right_leg_pivot": {
+        "mesh": "right_laces",
+        "test_angle_degrees": 15,
+        "vertex_displacement_m": 0.20928800665195949
+      }
+    }
+  },
+  "limits": [
+    "Static walking pose with four named limb pivots; no rig or walk animation.",
+    "No images or external textures.",
+    "Game integration, device performance and educational context require independent testing."
+  ]
+}

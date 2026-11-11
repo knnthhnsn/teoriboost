@@ -4,6 +4,19 @@ import {restoreTurnProfile,mergeTurnProfile} from './turn-learning.js';
 const validTime = value => Number.isFinite(value) && value >= 0 && value <= 8640000000000000;
 const response = value => Array.from({length:4}, (_, i) => typeof value?.[i] === 'boolean' ? value[i] : null);
 
+export function chooseDailyGoal(profile, goal, at = Date.now()) {
+  return {...profile,journey:setDailyGoal(profile?.journey,goal),journeyGoalAt:validTime(at)&&at>0?at:Date.now()};
+}
+
+// Repair onboarding choices saved before goals carried their own sync timestamp.
+export function reconcileIntroGoal(profile, intro = {}, now = Date.now()) {
+  const goal=Number(intro.goal ?? (intro.done?2:NaN));
+  if(![1,2,3].includes(goal))return profile;
+  const introAt=validTime(intro.goalAt)&&intro.goalAt>0?intro.goalAt:0;
+  if(profile?.journeyGoalAt && (!introAt || profile.journeyGoalAt>=introAt))return profile;
+  return chooseDailyGoal(profile,goal,introAt||now);
+}
+
 // Content-aware replay belongs to the player; this boundary only bounds persisted data.
 export function restoreJourneySessions(raw) {
   const sessions = {};

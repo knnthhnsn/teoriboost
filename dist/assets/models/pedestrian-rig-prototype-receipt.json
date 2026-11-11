@@ -1,0 +1,30 @@
+{
+  "asset": "dist/assets/models/pedestrian-rig-prototype.glb",
+  "sha256": "1f9f954892854a40c202a5341551a3d9f99bdcf32bf11e1fc6d22639e9db4201",
+  "bytes": 669648,
+  "source_blend": "tools/character-rig3d/out/pedestrian-rig-prototype.blend",
+  "source_blend_sha256": "83362f592973487cb4cb95319f40f7e0d9192d5aaa8a27d2fe20156da6f99823",
+  "generator_sha256": "ffbc95a08d82e6119f9c020a3da29ab49a5527db1ea5d60d8f0a5a29424a131e",
+  "geometry_source_sha256": "fce28c22fdc0d2ea8ce2d4150f1add5de9ce53b012b3c317e92b85cb45c75c0c",
+  "provenance": "Local original procedural geometry, Rigify generated rig. No image-to-3D service or downloaded model.",
+  "roundtrip": {
+    "verified_fresh_import": true,
+    "blender": "5.1.2",
+    "bones": 35,
+    "skin_joints": 35,
+    "meshes": 1,
+    "triangles_with_ink_hull": 13216,
+    "animations": [
+      "Pedestrian_Walk_InPlace_1p2s"
+    ],
+    "duration_seconds": 1.2,
+    "channels": 105,
+    "loop_max_vertex_error_m": 0.0,
+    "half_cycle_max_vertex_movement_m": 0.46146630998089383,
+    "lowest_vertex_over_cycle_m": -0.005315062589943409,
+    "glb_bytes": 669648,
+    "extensions": [
+      "KHR_materials_unlit"
+    ]
+  }
+}

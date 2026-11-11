@@ -1,0 +1,154 @@
+{
+  "asset": "cyclist-legacy-static-batched.glb",
+  "sha256": "4d6098fe10ddace53817ae02aa3b1faee83a9ce55cbafdd2812c5d11fd7679f7",
+  "bytes": 468736,
+  "source": "cyclist.glb",
+  "source_sha256": "517e983931609f1700a7713335dbd5ac1143236b3d9d45c75ed55b15de01601a",
+  "source_bytes": 487408,
+  "generator_sha256": "20a4a15958655bed0024028c550874fd1fc9fe32a13cb81d2da63f971cee718f",
+  "source_primitives": 35,
+  "output_primitives": 15,
+  "source_vertices": 11476,
+  "output_vertices": 11476,
+  "triangles": 14164,
+  "exact_vertex_bounds_m": [
+    {
+      "min": [
+        -0.31999996304512024,
+        -1.3476955751379194e-07,
+        -0.9558992817677635
+      ],
+      "max": [
+        0.320000059902668,
+        1.7957670466678393,
+        0.9558993163859895
+      ]
+    },
+    {
+      "min": [
+        -0.31999996304512024,
+        -1.347695643971747e-07,
+        -0.9558992981910706
+      ],
+      "max": [
+        0.3200000524520874,
+        1.795767068862915,
+        0.9558992981910706
+      ]
+    }
+  ],
+  "exact_dimensions_m": [
+    [
+      0.6400000229477882,
+      1.7957671814373968,
+      1.9117985981537529
+    ],
+    [
+      0.6400000154972076,
+      1.7957672036324794,
+      1.9117985963821411
+    ]
+  ],
+  "loose_three_boxes": [
+    {
+      "min": [
+        -0.46131387792227363,
+        -1.6491125426343345e-07,
+        -0.9918455495837806
+      ],
+      "max": [
+        0.3678576222540909,
+        1.8284793989463637,
+        0.9558993187943272
+      ]
+    },
+    {
+      "min": [
+        -0.31999996304512024,
+        -1.347695643971747e-07,
+        -0.9558992981910706
+      ],
+      "max": [
+        0.3200000524520874,
+        1.795767068862915,
+        0.9558992981910706
+      ]
+    }
+  ],
+  "bounds_note": "Exact transformed vertex bounds match; ordinary Box3.setFromObject loose bounds shrink after merging because rotated local bounding boxes are no longer separately expanded. No padding vertices were added.",
+  "attributes": {
+    "source_sha256": "517e983931609f1700a7713335dbd5ac1143236b3d9d45c75ed55b15de01601a",
+    "output_sha256": "4d6098fe10ddace53817ae02aa3b1faee83a9ce55cbafdd2812c5d11fd7679f7",
+    "material_definitions_equal": true,
+    "max_position_error_m": 0.0,
+    "max_normal_component_error": 0.0,
+    "uv_values_exact": true,
+    "index_order_exact_with_offsets": true,
+    "original_vertices": 11476,
+    "output_vertices": 11476,
+    "unreferenced_padding_vertices_added": 0,
+    "source_and_output_animations": 0
+  },
+  "webgl_renderer": "Chrome headless WebGL/SwiftShader, 600x600, antialias, sRGB, ACES, identical game-like lights",
+  "webgl_views": [
+    {
+      "view": "front",
+      "calls": [
+        35,
+        15
+      ],
+      "meanRgbError": 0,
+      "maxChannelError": 0,
+      "changedPixels": 0,
+      "pixelsOver2": 0,
+      "pixelsOver8": 0,
+      "pixelsOver32": 0,
+      "pixelCount": 360000
+    },
+    {
+      "view": "side",
+      "calls": [
+        35,
+        15
+      ],
+      "meanRgbError": 5.555555555555556e-05,
+      "maxChannelError": 11,
+      "changedPixels": 4,
+      "pixelsOver2": 2,
+      "pixelsOver8": 2,
+      "pixelsOver32": 0,
+      "pixelCount": 360000
+    },
+    {
+      "view": "rear",
+      "calls": [
+        35,
+        15
+      ],
+      "meanRgbError": 2.777777777777778e-06,
+      "maxChannelError": 1,
+      "changedPixels": 3,
+      "pixelsOver2": 0,
+      "pixelsOver8": 0,
+      "pixelsOver32": 0,
+      "pixelCount": 360000
+    },
+    {
+      "view": "overhead",
+      "calls": [
+        35,
+        15
+      ],
+      "meanRgbError": 4.6296296296296294e-05,
+      "maxChannelError": 17,
+      "changedPixels": 2,
+      "pixelsOver2": 1,
+      "pixelsOver8": 1,
+      "pixelsOver32": 0,
+      "pixelCount": 360000
+    }
+  ],
+  "animations": 0,
+  "alpha_policy": "Only OPAQUE primitives sharing an identical material are merged; non-opaque primitives would stay separate. This source has only OPAQUE materials.",
+  "scope": "Technical derivative of legacy static proxy; not an approved CSE person, no change to game code."
+}

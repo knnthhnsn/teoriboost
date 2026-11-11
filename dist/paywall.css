@@ -1,0 +1,54 @@
+/* Isolated billing UI. Exact manual colours only; no status relies on colour. */
+.tb-paywall, .tb-paywall * { box-sizing: border-box; }
+dialog.tb-paywall { color-scheme: light; background: #F4F5F7; color: #1F2328; width: min(560px, calc(100% - 32px)); max-width: 560px; max-height: calc(100dvh - 32px); margin: auto; border: 1px solid #C2CCD6; border-radius: 18px; padding: 26px; font: 16px/1.5 Rubik, system-ui, sans-serif; overflow: auto; overscroll-behavior: contain; text-align: left; }
+.tb-paywall::backdrop { background: #E3E5E8; }
+.tb-paywall h2 { color: #1F2328; font: 700 clamp(26px, 5vw, 34px)/1.15 Rubik, system-ui, sans-serif; letter-spacing: -.6px; margin: 22px 0 12px; }
+.tb-paywall p { color: #1F2328; margin: 12px 0; }
+.tb-pw-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.tb-pw-kicker { color: #525C65; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
+.tb-paywall button, .tb-premium-settings button { appearance: none; background: #E3E5E8; border: 1px solid #C2CCD6; border-radius: 9px; color: #1F2328; min-height: 44px; padding: 10px 14px; font: 600 14px/1.4 Rubik, system-ui, sans-serif; cursor: pointer; box-shadow: none; text-transform: none; letter-spacing: normal; }
+.tb-paywall button:disabled { background: #E3E5E8; color: #525C65; cursor: default; }
+.tb-paywall .tb-pw-close { border: 0; background: transparent; padding: 8px; }
+.tb-paywall a { color: #1F2328; text-decoration: underline; text-underline-offset: 3px; }
+.tb-paywall :focus-visible, .tb-premium-settings :focus-visible { outline: 3px solid #1F2328; outline-offset: 3px; }
+.tb-pw-benefits { margin: 18px 0; padding-left: 22px; }
+.tb-pw-benefits li { padding: 3px 0; }
+.tb-pw-plans { border: 0; margin: 22px 0 12px; padding: 0; display: grid; gap: 8px; min-width: 0; }
+.tb-pw-plans legend { color: #1F2328; font-weight: 600; margin-bottom: 10px; padding: 0; }
+.tb-pw-plan { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #C2CCD6; border-radius: 10px; cursor: pointer; }
+.tb-pw-plan:has(input:checked) { border: 2px solid #1F2328; padding: 11px; background: #E3E5E8; }
+.tb-paywall input { accent-color: #1F2328; }
+.tb-pw-plan input { width: 20px; height: 20px; margin: 0; flex: 0 0 20px; }
+.tb-pw-plan span { display: grid; }
+.tb-pw-plan small { color: #525C65; font-size: 12px; }
+.tb-pw-plan b { margin-left: auto; font-size: 15px; text-align: right; }
+.tb-paywall .tb-pw-note, .tb-paywall .tb-pw-account, .tb-paywall .tb-pw-legal { color: #525C65; font-size: 13px; overflow-wrap: anywhere; }
+.tb-pw-consents { display: grid; gap: 14px; margin: 20px 0; font-size: 13px; line-height: 1.5; }
+.tb-pw-consents label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+.tb-pw-consents input { width: 20px; height: 20px; flex: 0 0 20px; margin: 1px 0 0; }
+.tb-paywall .tb-pw-buy { width: 100%; min-height: 50px; background: #FFD60A; color: #1F2328; border-color: #1F2328; font-size: 16px; }
+.tb-paywall .tb-pw-buy:disabled { background: #E3E5E8; color: #525C65; border-color: #C2CCD6; }
+.tb-pw-login { border-top: 1px solid #C2CCD6; padding-top: 10px; margin-top: 20px; }
+.tb-pw-login button { width: 100%; margin: 4px 0; }
+.tb-pw-code { border-top: 1px solid #C2CCD6; border-bottom: 1px solid #C2CCD6; margin: 20px 0 12px; padding: 14px 0; }
+.tb-pw-code summary { cursor: pointer; min-height: 32px; display: flex; align-items: center; font-weight: 600; list-style: none; text-decoration: underline; text-underline-offset: 4px; }
+.tb-pw-code summary::-webkit-details-marker { display: none; }
+.tb-pw-code form { margin-top: 16px; }
+.tb-pw-code label { display: block; font-size: 13px; margin-bottom: 8px; font-weight: 600; }
+.tb-pw-code-row { display: flex; gap: 8px; }
+.tb-pw-code-row input { width: 100%; min-width: 0; min-height: 46px; border: 1px solid #525C65; background: #F4F5F7; border-radius: 8px; color: #1F2328; padding: 10px; font: inherit; }
+.tb-pw-code-row button { flex-shrink: 0; background: #FFD60A; border-color: #1F2328; }
+.tb-pw-message:not(:empty) { background: #FFF6C7; border-radius: 8px; padding: 10px 12px; font-weight: 600; overflow-wrap: anywhere; }
+.tb-pw-message[data-error=true]:not(:empty)::before { content: "Kunne ikke gennemføres. "; }
+.tb-pw-footer { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+.tb-paywall .tb-pw-footer button { background: transparent; border: 0; padding-left: 0; padding-right: 0; text-decoration: underline; text-underline-offset: 4px; }
+.tb-premium-settings { background: #F4F5F7; color: #1F2328; border: 1px solid #C2CCD6; border-radius: 12px; padding: 18px; margin: 18px 0; }
+.tb-premium-settings h3, .tb-premium-settings p { color: #1F2328; margin: 0 0 12px; }
+.tb-premium-settings button { margin: 4px 8px 4px 0; }
+@media (max-width: 480px) {
+  dialog.tb-paywall { width: 100%; max-width: 100%; max-height: calc(100dvh - 12px); margin: auto 0 0; border-radius: 18px 18px 0 0; border-bottom: 0; padding: 20px 18px max(20px, env(safe-area-inset-bottom)); }
+  .tb-pw-plan { gap: 10px; }
+  .tb-pw-plan b { font-size: 14px; }
+  .tb-pw-code-row { flex-wrap: wrap; }
+  .tb-pw-code-row input { flex: 1 1 120px; }
+}

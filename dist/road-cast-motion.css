@@ -1,0 +1,48 @@
+/* Kenneth's Figma composition (INBOX 12): one Sneglen, no travelling rail. */
+.learn{position:relative}
+.learn>.learn-path-wrap{margin-right:0}
+.journey-route-first .journey-path{margin-right:0}
+.learn-guide-figure{position:absolute;left:0;top:0;z-index:3;display:block;aspect-ratio:1407/1118;pointer-events:none;filter:drop-shadow(0 9px 10px rgba(15,18,21,0.3333333333333333))}
+.learn-guide-figure>img{display:block;width:100%;height:100%;object-fit:contain}
+.learn-guide-figure canvas{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none}
+.learn-guide-figure.is-live>img{visibility:hidden}
+.learn-path .pn,.learn-path .pn--next .pn-btn,.learn-path .pn-start{animation:none!important}
+.learn-path-wrap{box-shadow:0 6px 12px #0f121559,0 28px 56px -8px #0f121573,0 0 60px #ffd60a21}
+html[data-theme] body .learn-path-wrap .learn-poster-word{color:#1f2328!important}
+#road-slot.mybil-road{max-width:760px;margin:0 auto}
+#road-slot.mybil-road .race-cta{position:absolute;top:10px;right:12px;margin:0;z-index:7}
+#road-slot.mybil-road .road-label--hero{position:absolute;background:none!important;border:0!important;border-radius:0;box-shadow:none;padding:5px;max-width:48%;pointer-events:none}
+#road-slot.mybil-road .road-label--hero small{color:#ffd60a;text-shadow:0 2px 2px #1f2328}
+#main #road-slot.mybil-road .road-label--hero h1{margin:0;color:#ffd60a;font:900 clamp(22px,4vw,34px)/1 var(--font-display);letter-spacing:-.02em;text-shadow:-1px -1px #1f2328,1px -1px #1f2328,-1px 1px #1f2328,1px 2px #1f2328,0 3px 5px #0F1215}
+#road-slot.mybil-road button.road-car{position:absolute;display:block;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#road-slot.mybil-road button.road-car:focus-visible{outline:3px solid #ffd60a;outline-offset:2px;border-radius:12px}
+.mybil-road .road-car.is-revving .mybil-rig{animation:rev-shake 1.5s linear}
+.mybil-road .road-car.is-tuned .mybil-rig{animation:settle .8s var(--spring)}
+.mybil-road .road-car.is-shuffled .mybil-rig{animation:shuffle-shake .8s var(--spring)}
+.mybil-road .road-car [data-layer].is-new,.mybil-road .road-car [data-layer].is-new + .mybil-shade{animation:layer-pop .7s var(--spring)}
+.mybil .mybil-on{justify-content:flex-start;max-width:none;margin:16px auto 0;padding:16px;border:2px solid var(--line);border-radius:18px;background:var(--panel)}
+.mybil .mybil-on-label{text-align:left}
+/* Completed lessons are repeat routes, as in the source Figma frame. */
+html[data-theme] body .learn-path-wrap .pn--done .pn-btn{background:#5f656d;border-color:#3A434C;color:#feffed;box-shadow:0 6px 0 #1F2328}
+html[data-theme] body .learn-path-wrap .pn--done .pn-btn svg{display:none}
+html[data-theme] body .learn-path-wrap .pn--done .pn-btn::before{content:"";width:34px;height:34px;background:url("assets/figma-road/review.svg") center no-repeat}
+@media(min-width:1100px){
+  .learn>.learn-path-wrap{min-height:708px}
+  .learn>.learn-card{min-height:98px;position:static}
+  .learn>.unit-banner{position:static}
+}
+@media(max-width:1099px){
+  .learn>.unit-banner{order:0;width:100%}
+  .learn>.learn-card{order:1;width:100%}
+  .learn>.learn-path-wrap{order:2;width:100%;padding-top:24px;margin-top:8px}
+  html[data-theme] body .learn-path-wrap .learn-poster-word{position:absolute;top:24px;left:auto;right:18px;bottom:auto;display:block;margin:0;width:32px;height:310px;max-height:calc(100% - 150px);max-width:none;--learn-poster-type-size:31;font:900 31px/1 var(--font-display);letter-spacing:-.025em;text-transform:uppercase;writing-mode:vertical-rl;white-space:nowrap;overflow:hidden}
+  .learn-path-wrap .learn-path{padding-right:calc(clamp(96px,30vw,150px) - 20px)}
+  .learn-path .pn{left:calc(var(--x) * clamp(18px,calc(20vw - 46px),32px))}
+  .learn-path .pn-title{max-width:130px}
+  .learn-path .pn-start{right:calc(50% + 52px)}
+}
+@media(max-width:699px){
+  /* The persistent navigation already offers Spørg AI; its duplicate floating
+     button must not sit over a full-width lesson sign. */
+  html body:has(.learn) .ask-fab{display:none}
+}

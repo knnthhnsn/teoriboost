@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "created_utc": "2026-11-01T20:36:04.620755+00:00",
+  "default": "sedan",
+  "vehicles": [
+    {
+      "id": "sedan",
+      "label": "Nordic GT",
+      "model": "sedan",
+      "iteration": 53,
+      "approval": "approved_step",
+      "source_approval": "approved_step",
+      "files": {
+        "lod0": "sedan-053-lod0.glb",
+        "lod1": "sedan-053-lod1.glb"
+      },
+      "integrity": {
+        "lod0": {
+          "sha256": "9f5562054effd69b6180e1a1dc7ef7eab2fa6fbbcedb9545bc85c0e2a2a6bf78",
+          "bytes": 1280964,
+          "receipt": "sedan-053-lod0.json",
+          "receipt_sha256": "e65a0e79888175a01051ec03d6ffc8a3fb8c91b5aa1da77a30a345daa199083d",
+          "extensions_required": [
+            "EXT_meshopt_compression"
+          ],
+          "nodes": 8,
+          "meshes": 8
+        },
+        "lod1": {
+          "sha256": "d9ae06d8fc0e19df96a4345be1b6fd6c5e8281a0f68f95c369ac38ab63e1bc34",
+          "bytes": 659312,
+          "receipt": "sedan-053-lod1.json",
+          "receipt_sha256": "f8216f77097fb7411b7dbf0c30b145fcea992ef8dcbf15307504f485de6f37d2",
+          "extensions_required": [
+            "EXT_meshopt_compression"
+          ],
+          "nodes": 8,
+          "meshes": 8
+        }
+      },
+      "style": {
+        "preserveMaterials": true,
+        "embeddedInk": false
+      },
+      "source": {
+        "path": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\tools\\car3d\\out\\junction053-v2\\sedan-full.blend",
+        "sha256": "3659df21a3f3eab9da5a78089ea72283350fda42d276894acd13c0b4379ff0cf",
+        "model_sha256": "d426069037fd2c6390d21b77982479259923e8f0befde19f77d16ea32b20d1c2"
+      },
+      "look_note": "CSE-farver og lys som 3D-tilnærmelse; ikke identisk med de godkendte billeder.",
+      "approval_scope": "Kenneth and Claude explicitly approved sedan 053 for this game release; the original export receipts are preserved unchanged.",
+      "export_review_status": "approved_by_kenneth_and_claude"
+    },
+    {
+      "id": "scooter",
+      "label": "Petrol GT",
+      "model": "scooter",
+      "iteration": 48,
+      "approval": "approved_step",
+      "source_approval": "approved_step",
+      "files": {
+        "lod0": "scooter-048-lod0.glb",
+        "lod1": "scooter-048-lod1.glb"
+      },
+      "integrity": {
+        "lod0": {
+          "sha256": "0cbe8bfca19b536983ba57839469f930d7c70b2e544a4217daba7d3fe19041dd",
+          "bytes": 1243740,
+          "receipt": "scooter-048-lod0.json",
+          "receipt_sha256": "220bbdb278a852bbf5e6064649e8641409d47e4f7e9495386838813f1ecbe660",
+          "extensions_required": [
+            "EXT_meshopt_compression"
+          ],
+          "nodes": 5,
+          "meshes": 5
+        },
+        "lod1": {
+          "sha256": "40f0537f97df9139c80811b9cfea0a0e89a3b41fe5fd368abcf1dc8e4b4e817e",
+          "bytes": 660888,
+          "receipt": "scooter-048-lod1.json",
+          "receipt_sha256": "93c328c85ac3f391fa778b089335519a3404da6d302c93f4171442043e3ce8e4",
+          "extensions_required": [
+            "EXT_meshopt_compression"
+          ],
+          "nodes": 5,
+          "meshes": 5
+        }
+      },
+      "style": {
+        "preserveMaterials": true,
+        "embeddedInk": false
+      },
+      "source": {
+        "path": "C:\\Users\\kenne\\.codex\\.chatgpt-projects\\g-p-6acc308524108191851ab90d7b7cdefa\\outputs\\teoriboost-car-studio-20261029\\tools\\car3d\\out\\petrol048-v2\\scooter-full.blend",
+        "sha256": "c47d31239803bf804a164e0c6b929b26bc9ef575c147da01b79a151a71dc867d",
+        "model_sha256": "b338419abd89466feae7e75db0647d419d75e3d87927ef3517afc821df24c24f"
+      },
+      "look_note": "CSE-farver og lys som 3D-tilnærmelse; ikke identisk med de godkendte billeder.",
+      "approval_scope": "Kenneth approved Petrol048 as the baseline and approved byte-identical promotion of the reviewed LOD0/LOD1 to game. No form changes or re-export.",
+      "export_review_status": "passed_by_claude"
+    }
+  ],
+  "scope": "Approved053/048; earlier 048/051 sedan and 045 scooter files retained for rollback",
+  "lighting": "Portable CSE approximation; native renders remain the visual reference."
+}
