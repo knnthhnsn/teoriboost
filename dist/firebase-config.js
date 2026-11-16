@@ -8,7 +8,10 @@
 const OWN_DOMAINS = ['app.teoriboost.dk', 'teoriboost.vercel.app'];
 const here = globalThis.location?.hostname;
 
-export const FIREBASE_CONFIG = {
+// The team's open copies have no login at all (16 Nov 2026): progress stays on the device, and onboarding skips the sign-in step.
+const OPEN_HOSTS = ['teoriboost.vercel.app', 'teoriboost-team.web.app', 'teoriboost-team.firebaseapp.com'];
+
+export const FIREBASE_CONFIG = OPEN_HOSTS.includes(here) ? null : {
   apiKey: 'AIzaSyBB4xXyecXDgo63-0Ai2OLK2vEpypontgQ',
   authDomain: OWN_DOMAINS.includes(here) ? here : 'teoriboost.firebaseapp.com',
   projectId: 'teoriboost',
