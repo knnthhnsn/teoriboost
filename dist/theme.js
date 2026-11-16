@@ -5,7 +5,7 @@ const CHOICES = ['system', 'light', 'dark'];
 const media = globalThis.matchMedia?.('(prefers-color-scheme: dark)');
 
 export function themePref(store = globalThis.localStorage) {
-  try { const v = store.getItem(KEY); return CHOICES.includes(v) ? v : 'system'; } catch { return 'system'; }
+  try { const v = store.getItem(KEY); return CHOICES.includes(v) ? v : 'dark'; } catch { return 'dark'; }
 }
 export function resolveTheme(pref, systemDark = !!media?.matches) {
   return pref === 'dark' || (pref === 'system' && systemDark) ? 'dark' : 'light';

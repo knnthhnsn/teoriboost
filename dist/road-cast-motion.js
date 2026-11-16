@@ -12,6 +12,7 @@ export function mountRoadCast(host) {
   pose.setAttribute('aria-hidden', 'true');
   pose.innerHTML = '<img src="assets/rive/registered-guide-web.webp" alt="" decoding="async">';
   learn.append(pose);
+  pose.addEventListener('click', () => { if (innerWidth < 1100) location.hash = '#chat'; });
   const media = matchMedia('(prefers-reduced-motion: reduce)');
   const still = () => media.matches || document.body.classList.contains('no-motion');
   let instance = null, visible = false, loading = false, disposed = false, generation = 0, touchTarget = null, navigationTimer = 0;
@@ -20,21 +21,31 @@ export function mountRoadCast(host) {
     if (disposed || !panel.isConnected) return;
     const p = panel.getBoundingClientRect(), root = learn.getBoundingClientRect();
     const desktop = innerWidth >= 1100;
-    const width = desktop ? Math.min(274, p.width * .38) : Math.min(150, Math.max(96, innerWidth * .30));
+    const width = desktop ? Math.min(274, p.width * .38) : Math.min(190, Math.max(130, innerWidth * .44));
     const height = width * 1118 / 1407;
     let x, y;
     if (desktop) {
+      pose.style.transform = ''; pose.style.clipPath = '';
       x = p.right - root.left - 10 - width * 72 / 1407;
       y = p.top - root.top + p.height * .5 - height * .5;
     } else {
-      const target = panel.querySelector('.pn--next .pn-btn') || panel.querySelector('.pn-btn');
-      const title = panel.querySelector('.learn-poster-word');
-      if (!target || !title) return;
-      const t = target.getBoundingClientRect(), w = title.getBoundingClientRect();
-      x = p.right - root.left - width + 8;
-      y = Math.max(t.top - root.top + t.height * .5 - height * .80, w.bottom - root.top + 18);
+      // Phone: its own composition. Sneglen leans on the road panel's right edge at the height of the learner's
+      // next step (cropped by the edge, mirrored to look at the road, as in the approved layout) and never
+      // covers the road or the vertical title.
+      const title = panel.querySelector('.learn-poster-word'), t = title?.getBoundingClientRect();
+      const node = panel.querySelector('.pn--next') || panel.querySelector('.pn');
+      const edge = p.right - root.left, bleed = width * .36;
+      x = edge - width + bleed;
+      pose.style.transform = 'scaleX(-1)';
+      const centre = node ? node.getBoundingClientRect().top + node.getBoundingClientRect().height * .5 : p.top + p.height * .3;
+      y = centre - height * .55 - root.top;
+      if (t) y = Math.max(y, t.bottom - root.top + 10);
+      const over = Math.max(0, x + width - edge);
+      pose.style.clipPath = `polygon(${over}px 0, 100% 0, 100% 100%, ${over}px 100%)`; // mirrored, so the figure's local left is the visual right
     }
     pose.style.width = width + 'px'; pose.style.left = x + 'px'; pose.style.top = y + 'px';
+    pose.style.pointerEvents = desktop ? 'none' : 'auto'; pose.style.cursor = desktop ? '' : 'pointer';
+    if (!pose.style.transition && !still()) requestAnimationFrame(() => { pose.style.transition = 'left .55s cubic-bezier(.2,.8,.2,1), top .55s cubic-bezier(.2,.8,.2,1)'; });
   }
   function fit() {
     if (!instance) return;
@@ -65,6 +76,7 @@ export function mountRoadCast(host) {
           fit(); created.play('Guide'); pose.classList.add('is-live'); loading = false;
           created.on('statechange', event => pose.dispatchEvent(new CustomEvent('guide-statechange', {detail:event.data})));
           pose.dispatchEvent(new CustomEvent('guide-ready', {detail:created}));
+          installEyes(created);
           if (!visible || document.hidden) created.pause();
         },
         onLoadError() {
@@ -87,6 +99,22 @@ export function mountRoadCast(host) {
   intersection.observe(pose);
   const resize = new ResizeObserver(() => { layout(); fit(); });
   resize.observe(panel); resize.observe(pose);
+  /* The rig only moves the pupils 3-5 artboard px (a quarter of a screen px), so the eyes looked frozen.
+     The look target now drives the pupil nodes directly, right before every draw, with a much longer travel. */
+  const EYE_TRAVEL = 36, EYE_REACH = 140, look = {tx:0, ty:0, x:0, y:0};
+  function installEyes(rive) {
+    const board = rive.artboard;
+    if (!board || board.__eyesInstalled) return;
+    board.__eyesInstalled = true;
+    const draw = board.draw.bind(board);
+    const nodes = ['upperPupilX', 'lowerPupilX'].map(name => board.node(name)), nodesY = ['upperPupilY', 'lowerPupilY'].map(name => board.node(name));
+    board.draw = renderer => {
+      look.x += (look.tx - look.x) * 0.28; look.y += (look.ty - look.y) * 0.28;
+      for (const node of nodes) if (node) node.x = look.x * EYE_TRAVEL;
+      for (const node of nodesY) if (node) node.y = look.y * EYE_TRAVEL;
+      return draw(renderer);
+    };
+  }
   const onPointer = event => {
     if (event.pointerType !== 'mouse' || !instance || !visible || still()) return;
     const r = pose.getBoundingClientRect(), flip = innerWidth < 1100 ? -1 : 1;
@@ -94,6 +122,10 @@ export function mountRoadCast(host) {
     const x = inputs.find(input => input.name === 'lookX'), y = inputs.find(input => input.name === 'lookY');
     if (x) x.value = Math.max(-1, Math.min(1, (event.clientX - r.left - r.width / 2) / 200)) * flip;
     if (y) y.value = Math.max(-1, Math.min(1, (event.clientY - r.top - r.height / 2) / 200));
+    // Eyes sit in the upper right of the figure, so aim from there rather than from the centre.
+    const ex = r.left + r.width * 0.78, ey = r.top + r.height * 0.45;
+    look.tx = Math.max(-1, Math.min(1, (event.clientX - ex) / EYE_REACH)) * flip;
+    look.ty = Math.max(-1, Math.min(1, (event.clientY - ey) / EYE_REACH));
   };
   const onLesson = event => {
     const link = event.target.closest('.pn-btn');

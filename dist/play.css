@@ -20,8 +20,8 @@
 .journey-focus-card p{font-size:18px;line-height:1.55;color:var(--ink)}
 .journey-step-intro--compact{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
 .journey-kicker{font:800 12px var(--font-display);letter-spacing:.08em;color:var(--muted)}
-.voice-read,.audio-btn,[data-voice-kind]{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:2px solid var(--line);background:#FEFFED;box-shadow:0 2px 0 var(--line);font:700 14px var(--font-display);color:var(--ink)}
-.source-badges a,.journey-focus-card .source-badges a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:#FEFFED;font:700 13px var(--font-display);color:var(--blue-ink,#0A7BBF)}
+.voice-read,.audio-btn,[data-voice-kind]{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:2px solid var(--line);background:#FFFFFF;box-shadow:0 2px 0 var(--line);font:700 14px var(--font-display);color:var(--ink)}
+.source-badges a,.journey-focus-card .source-badges a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:#FFFFFF;font:700 13px var(--font-display);color:var(--blue-ink,#0A7BBF)}
 
 /* the one big button at the bottom of every step */
 .journey-control-dock{position:sticky;bottom:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:18px -2px 0;padding:12px 2px calc(10px + env(safe-area-inset-bottom));
@@ -29,22 +29,22 @@
 .journey-control-dock > p{flex-basis:100%;margin:0;color:var(--muted);font-size:14px}
 .journey-control-dock .btn-primary,.exam-dock .btn-primary,.result-actions .btn-primary{flex:1;min-height:56px;border-radius:16px!important;background:var(--accent,#FFD60A)!important;color:#1F2328!important;border:0!important;
   box-shadow:0 5px 0 var(--accent-shadow,#C9A200)!important;font:800 18px var(--font-display)!important;justify-content:center}
-.journey-control-dock .btn-primary:disabled{background:#FEFFED!important;color:#5F656D!important;box-shadow:0 5px 0 #E3E5E8!important}
-.journey-control-dock .btn-secondary,.exam-dock .btn-secondary{min-height:56px;border-radius:16px!important;background:#FEFFED!important;border:2px solid var(--line)!important;box-shadow:0 4px 0 var(--line)!important;font:800 16px var(--font-display)!important;color:var(--ink)!important}
+.journey-control-dock .btn-primary:disabled{background:#FFFFFF!important;color:#5F656D!important;box-shadow:0 5px 0 #E3E5E8!important}
+.journey-control-dock .btn-secondary,.exam-dock .btn-secondary{min-height:56px;border-radius:16px!important;background:#FFFFFF!important;border:2px solid var(--line)!important;box-shadow:0 4px 0 var(--line)!important;font:800 16px var(--font-display)!important;color:var(--ink)!important}
 
 /* ---------- questions: context box, photo, prompt, Ja/Nej pills ---------- */
 .question-context{padding:12px 14px;border-radius:16px;background:#F4F5F7;font-size:15px;line-height:1.45;color:var(--ink)}
 #main .journey-exercise-context h2,#main .question-panel h2{font:800 clamp(22px,6.4vw,28px)/1.15 var(--font-display)!important;margin:10px 0}
 .journey-statement,.statement{display:grid!important;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:10px 10px 10px 14px!important;border-radius:16px!important;
-  background:#FEFFED!important;border:2px solid var(--line)!important;box-shadow:0 3px 0 var(--line)!important;margin:0 0 8px}
+  background:#FFFFFF!important;border:2px solid var(--line)!important;box-shadow:0 3px 0 var(--line)!important;margin:0 0 8px}
 .journey-statement .statement-index,.statement .statement-index{display:none}
 .journey-statement p,.statement .statement-text{margin:0;font-size:16px;line-height:1.35;color:var(--ink)}
 .journey-choice-pair,.statement .yes-no{display:flex;gap:6px}
-.journey-tactile-choice,.statement .choice-btn{min-width:56px;min-height:44px;padding:0 10px;border-radius:12px!important;border:2px solid var(--line)!important;background:#FEFFED!important;
+.journey-tactile-choice,.statement .choice-btn{min-width:56px;min-height:44px;padding:0 10px;border-radius:12px!important;border:2px solid var(--line)!important;background:#FFFFFF!important;
   box-shadow:0 3px 0 var(--line)!important;font:800 15px var(--font-display)!important;color:var(--ink)!important;text-transform:none;letter-spacing:0}
 .journey-tactile-choice.selected,.statement .choice-btn.selected{border-color:#C9A200!important;background:#FFD60A!important;box-shadow:0 3px 0 #C9A200!important;color:#1F2328!important}
 .journey-tactile-choice:active,.statement .choice-btn:active{translate:0 2px;box-shadow:0 1px 0 var(--line)!important}
-.statement.correct{border-color:var(--good,#58CC02)!important;box-shadow:0 3px 0 #58CC02!important;background:#FEFFED!important}
+.statement.correct{border-color:var(--good,#58CC02)!important;box-shadow:0 3px 0 #58CC02!important;background:#FFFFFF!important}
 .statement.incorrect{border-color:#FF4B4B!important;box-shadow:0 3px 0 #FF4B4B!important;background:#F4F5F7!important}
 .answer-note{font:800 12px var(--font-display);letter-spacing:.06em;color:var(--muted)}
 .journey-statement-dots button{min-width:36px;min-height:36px;border-radius:50%}
@@ -63,7 +63,7 @@
 .journey-feedback-tray.repair .journey-feedback-summary strong{color:#D42F2F}
 .journey-feedback-summary p{margin:4px 0 0;font-size:15px;color:#3A434C}
 .journey-feedback-tray details{clear:both;margin:10px 0 4px}
-.journey-feedback-tray summary{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;background:#FEFFED;border:2px solid rgba(15,18,21,0.08);font:800 14px var(--font-display);cursor:pointer;list-style:none}
+.journey-feedback-tray summary{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;background:#FFFFFF;border:2px solid rgba(15,18,21,0.08);font:800 14px var(--font-display);cursor:pointer;list-style:none}
 .journey-feedback-tray summary::-webkit-details-marker{display:none}
 .jp-feedback-go{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:10px;border-radius:16px!important;border:0!important;font:800 18px var(--font-display)!important}
 .journey-feedback-tray.correct .jp-feedback-go{background:var(--good,#58CC02)!important;color:#FEFFED!important;box-shadow:0 5px 0 #58CC02!important}
@@ -71,17 +71,17 @@
 .journey-answer-review > div.right{color:#2F6F00}.journey-answer-review > div.wrong{color:#D42F2F}
 
 /* ---------- lesson done ---------- */
-.journey-lesson-done{text-align:center;padding:12px 0 0;border-radius:24px;background:radial-gradient(90% 60% at 50% 20%,#FFF6C7,#FEFFED 70%)}
+.journey-lesson-done{text-align:center;padding:12px 0 0;border-radius:24px;background:radial-gradient(90% 60% at 50% 20%,#FFD60A,#FEFFED 70%)}
 .journey-done-art{display:flex;justify-content:center}.journey-done-art .cast-img{width:min(46vw,190px)!important}
 #main .jp-done-title{margin:8px 0 4px;font:800 clamp(30px,9vw,40px)/1.05 var(--font-display)!important;color:#1F2328}
 .jp-done-lead{margin:0 auto 14px;max-width:34ch;color:#3A434C;font-size:16px}
 .jp-done-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 10px}
-.jp-done-stats > div{padding:12px;border-radius:18px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.jp-done-stats > div{padding:12px;border-radius:18px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
 .jp-done-stats small{display:block;font:800 11px var(--font-display);letter-spacing:.1em;color:var(--muted)}
 .jp-done-stats strong{display:block;font:800 26px/1.2 var(--font-display)}
 .jp-done-stats em{display:block;font-style:normal;font-size:12px;color:var(--muted)}
-.jp-done-goal{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:10px 16px;border-radius:16px;background:#FEFFED;border:2px solid var(--line);font:800 15px var(--font-display)}
-.jp-done-goal.is-met{background:#FFF6C7;border-color:var(--accent-shadow,#C9A200);box-shadow:0 3px 0 var(--accent-shadow,#C9A200)}
+.jp-done-goal{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:10px 16px;border-radius:16px;background:#FFFFFF;border:2px solid var(--line);font:800 15px var(--font-display)}
+.jp-done-goal.is-met{background:#FFD60A;border-color:var(--accent-shadow,#C9A200);box-shadow:0 3px 0 var(--accent-shadow,#C9A200)}
 .jp-done-goal span{font-weight:700;color:var(--muted)}
 .journey-lesson-done .journey-control-dock{background:none}
 .journey-lesson-done .journey-control-dock .btn-secondary{flex:1}
@@ -107,12 +107,12 @@ body.exam-active .exam-selection-note{font-size:13px;color:var(--muted)}
 .result-mark{font:800 clamp(52px,16vw,76px)/1 var(--font-display)!important;-webkit-text-stroke:0!important;color:#1F2328!important;margin:6px 0 4px}
 .result-hero.is-fail .result-mark{color:#D42F2F!important}
 #main .result-hero h1{font:800 clamp(24px,7vw,32px)/1.1 var(--font-display)!important;margin:4px 0 6px}
-.result-boost{display:inline-flex;align-items:center;gap:6px;margin:6px 0 4px;padding:12px 20px;border-radius:18px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);font:800 20px var(--font-display)}
+.result-boost{display:inline-flex;align-items:center;gap:6px;margin:6px 0 4px;padding:12px 20px;border-radius:18px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);font:800 20px var(--font-display)}
 .result-boost b{font-size:26px}
-.result-review{margin:14px 0 4px;padding:14px;border-radius:18px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);text-align:left}
+.result-review{margin:14px 0 4px;padding:14px;border-radius:18px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);text-align:left}
 #main .result-review h2{margin:0 0 10px;font:800 17px var(--font-display)!important}
 .result-chips{display:flex;flex-wrap:wrap;gap:6px}
-.res-chip{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;border:2px solid var(--line);background:#FEFFED;font:800 14px var(--font-display);color:var(--muted);text-decoration:none}
+.res-chip{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;border:2px solid var(--line);background:#FFFFFF;font:800 14px var(--font-display);color:var(--muted);text-decoration:none}
 .res-chip.is-wrong{border-color:#FF4B4B;background:#F4F5F7;color:#D42F2F}
 .result-actions{display:flex;flex-direction:column;gap:10px}
 /* fixes after the first render pass */
@@ -165,6 +165,6 @@ body.exam-active .question-actions{display:none}
 .journey-model-answer h3 + p{margin:0 0 12px;font-size:16px}
 .voice-player{border:0!important;border-radius:18px!important;box-shadow:none;background:#F4F5F7!important}
 
-.jp-order{display:flex;align-items:center;gap:12px;margin:0 0 10px;padding:12px 14px;border-radius:18px;background:#FFF6C7;border:2px solid #C9A200;box-shadow:0 4px 0 #C9A200;color:var(--ink);text-decoration:none;text-align:left}
+.jp-order{display:flex;align-items:center;gap:12px;margin:0 0 10px;padding:12px 14px;border-radius:18px;background:#FFD60A;border:2px solid #C9A200;box-shadow:0 4px 0 #C9A200;color:var(--ink);text-decoration:none;text-align:left}
 .jp-order .ui-ico{width:26px;height:26px;color:#1F2328;flex:none}
 .jp-order strong{display:block;font:800 16px var(--font-display)}.jp-order small{color:#525C65;font-size:13px}

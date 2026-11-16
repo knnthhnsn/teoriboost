@@ -11,6 +11,7 @@
   "free": {
     "learnChapters": [1],
     "practiceQuestionsPerDay": 10,
+    "fullExams": 1,
     "gameLevels": [1],
     "confirmed": true
   },

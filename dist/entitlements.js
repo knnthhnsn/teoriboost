@@ -129,6 +129,30 @@ export function createPracticeQuota({ storage = globalThis.localStorage, now = (
   };
 }
 
+// The free full practice exams (config.free.fullExams), counted per owner for good, not per day.
+// Like the practice quota this is a device convenience, not a fraud-resistant limit: the questions ship to the browser anyway.
+export function createExamQuota({ storage = globalThis.localStorage, owner = () => 'device' } = {}) {
+  const memory = new Map();
+  const key = () => 'teoriboost.freeExams.v1.' + owner();
+  function read() {
+    let ids;
+    try { ids = JSON.parse(storage.getItem(key()) || 'null'); } catch {}
+    ids ||= memory.get(key());
+    return Array.isArray(ids) ? ids.filter(id => typeof id === 'string').slice(0, 20) : [];
+  }
+  return {
+    used: () => read().length,
+    // An exam already counted may always be resumed and its result opened.
+    allows(limit, id = '') { const ids = read(); return (!!id && ids.includes(id)) || ids.length < limit; },
+    record(id) {
+      const ids = read();
+      if (!id || ids.includes(id)) return;
+      ids.push(id); memory.set(key(), ids);
+      try { storage.setItem(key(), JSON.stringify(ids)); } catch {}
+    }
+  };
+}
+
 export function contentAccess(config, premium, kind, value) {
   if (!gatesEnabled(config) || premium) return true;
   if (kind === 'chapter') return config.free.learnChapters.includes(Number(value));

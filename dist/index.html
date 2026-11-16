@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#FFD60A">
-  <script>(function(){var d=false;try{var p=localStorage.getItem('teoriboost.theme')||'system';d=p==='dark'||(p==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);}catch(e){}document.documentElement.dataset.theme=d?'dark':'light';if(d)document.querySelector('meta[name="theme-color"]').setAttribute('content','#0F1215');})();</script>
+  <script>(function(){var d=false;try{var p=localStorage.getItem('teoriboost.theme')||'dark';d=p==='dark'||(p==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);}catch(e){d=true}document.documentElement.dataset.theme=d?'dark':'light';if(d)document.querySelector('meta[name="theme-color"]').setAttribute('content','#0F1215');})();</script>
   <meta name="description" content="Træn dansk køreteori i korte missioner. Lær af dine fejl, genkald reglerne og øv prøveformatet.">
   <title>TeoriBoost — din hjerne. Dit kørekort.</title>
     <link rel="stylesheet" href="styles.css">
@@ -38,6 +38,9 @@
 <link rel="preload" href="assets/fonts/rubik-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="brand-markers.css">
 <link rel="stylesheet" href="scrollbars.css">
+<link rel="stylesheet" href="design-fixes.css">
+<link rel="stylesheet" href="tour.css">
+<link rel="stylesheet" href="texture.css">
 
 <!-- start modules, fetched together instead of one import level at a time (list: app.js static imports) -->
 <link rel="modulepreload" href="practice.js"><link rel="modulepreload" href="ui-stripes.js"><link rel="modulepreload" href="paywall.js"><link rel="modulepreload" href="rive-fx.js"><link rel="modulepreload" href="account.js"><link rel="modulepreload" href="save-progress.js"><link rel="modulepreload" href="firebase-config.js"><link rel="modulepreload" href="cloud-merge.js"><link rel="modulepreload" href="theme.js"><link rel="modulepreload" href="order.js"><link rel="modulepreload" href="ui-icons.js"><link rel="modulepreload" href="content.js"><link rel="modulepreload" href="core.js"><link rel="modulepreload" href="lessons.js"><link rel="modulepreload" href="lesson-view.js"><link rel="modulepreload" href="garage.js"><link rel="modulepreload" href="initial-load.js"><link rel="modulepreload" href="first-screen.js"><link rel="modulepreload" href="voice-cues.js"><link rel="modulepreload" href="approved-cast.js"><link rel="modulepreload" href="cast.js"><link rel="modulepreload" href="mybil.js"><link rel="modulepreload" href="motion.js"><link rel="modulepreload" href="screens.js"><link rel="modulepreload" href="start.js"><link rel="modulepreload" href="journey-core.js"><link rel="modulepreload" href="journey-profile.js"><link rel="modulepreload" href="profile-store.js"><link rel="modulepreload" href="question-rotation.js"><link rel="modulepreload" href="journey-view.js"><link rel="modulepreload" href="experience.js"><link rel="modulepreload" href="journey-road.js"><link rel="modulepreload" href="road-cast-motion.js"><link rel="modulepreload" href="team.js"><link rel="modulepreload" href="voice-texts.js"><link rel="modulepreload" href="sequences.js"><link rel="modulepreload" href="mirror-hero.js"><link rel="modulepreload" href="entitlements.js"><link rel="modulepreload" href="referral.js"><link rel="modulepreload" href="garage-content.js"><link rel="modulepreload" href="art.js"><link rel="modulepreload" href="mybil-catalog.js"><link rel="modulepreload" href="account-card.js"><link rel="modulepreload" href="turn-learning.js">
@@ -70,6 +73,7 @@
   <link rel="stylesheet" href="referral.css">
 <link rel="stylesheet" href="practice.css">
 <link rel="stylesheet" href="ux-fixes.css">
+<link rel="stylesheet" href="motion-20.css">
   <script type="module" src="app.js"></script>
 </body>
 </html>

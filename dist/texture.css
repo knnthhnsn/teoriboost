@@ -1,0 +1,13 @@
+/* Container textures (marked by texture.js, one kind per class): painted asphalt, smooth cel, warm paper, very fine grain. All subtle. */
+:root{--tex-fine:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 -.3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.1'/%3E%3C/svg%3E")}
+[data-grain]{background-repeat:repeat,var(--bg-rep,repeat)!important}
+[data-grain="asphalt"]{background-image:url(assets/textures/asphalt-study-v1.webp),var(--bg-prev,none)!important;background-size:300px 300px,var(--bg-size,auto)!important;background-blend-mode:soft-light,normal!important}
+[data-grain="fine"]{background-image:var(--tex-fine),var(--bg-prev,none)!important;background-size:140px 140px,var(--bg-size,auto)!important}
+[data-grain="paper"]{background-image:linear-gradient(180deg,rgba(255,240,200,.05),rgba(255,240,200,0)),var(--tex-fine),var(--bg-prev,none)!important;background-size:auto,90px 90px,var(--bg-size,auto)!important;background-repeat:no-repeat,repeat,var(--bg-rep,repeat)!important}
+[data-grain="cel"]{background-image:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 40%,rgba(0,0,0,.16)),var(--bg-prev,none)!important;background-size:auto,var(--bg-size,auto)!important;background-repeat:no-repeat,var(--bg-rep,repeat)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.09)}
+
+/* big yellow tiles: smooth, the speckle only stays on small buttons */
+[data-yellow][data-big][data-grain]{background-image:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0) 45%,rgba(0,0,0,.1))!important;background-size:auto!important;background-repeat:no-repeat!important}
+
+/* dark ink only on text that sits directly on bright yellow (marked by texture.js) */
+[data-ink-dark]{color:#1F2328!important}

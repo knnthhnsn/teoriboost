@@ -5,7 +5,7 @@
 .tb-referral-heading > span { font-size: 11px; color: #525C65; letter-spacing: 1.5px; font-weight: 700; }
 .tb-referral-card h3 { margin: 6px 0 12px; font-size: 23px; line-height: 1.2; }
 .tb-referral-card p { margin: 12px 0; overflow-wrap: anywhere; }
-.tb-referral-card .tb-referral-status { padding: 12px; font-weight: 600; background: #FFF6C7; border-radius: 8px; }
+.tb-referral-card .tb-referral-status { padding: 12px; font-weight: 600; background: #FFD60A; border-radius: 8px; }
 .tb-referral-card input { display: block; width: 100%; min-width: 0; min-height: 46px; background: #F4F5F7; color: #1F2328; border: 1px solid #525C65; border-radius: 8px; padding: 10px 12px; margin: 8px 0; font: inherit; }
 .tb-referral-code-label { display: block; font-size: 13px; font-weight: 600; }
 .tb-referral-code-label input { font-size: 24px; font-weight: 700; letter-spacing: 2px; }
@@ -20,5 +20,5 @@
 .tb-referral-card summary::-webkit-details-marker { display: none; }
 .tb-referral-card a { color: #1F2328; text-decoration: underline; text-underline-offset: 3px; }
 .tb-referral-card .tb-referral-rules { font-size: 13px; }
-.tb-referral-message:not(:empty) { background: #FFF6C7; border-radius: 8px; padding: 10px 12px; }
+.tb-referral-message:not(:empty) { background: #FFD60A; border-radius: 8px; padding: 10px 12px; }
 @media (max-width: 380px) { .tb-referral-card { padding: 16px; } }

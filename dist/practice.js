@@ -1,3 +1,4 @@
+import {tabExplain} from './tab-explain.js';
 import {CHAPTERS} from './content.js';
 import {SEQUENCES} from './sequences.js';
 import {renderMirrorHero, mountMirrorHero} from './mirror-hero.js';
@@ -45,14 +46,15 @@ export function renderPracticeTabs({vm = {}, ready = {}, weak = []} = {}) {
   const action = count ? 'Gentag dem nu' : 'Tag 3 blandede situationer';
   const mirror = renderMirrorHero({streak:daily.currentStreak, goal:daily.dailyGoal, today:daily.completedSessions, pct:ready.pct, days:null, showCopy:false});
   return `<section class="practice practice-page" aria-labelledby="practice-title">
-    <header class="screen-head practice-title"><h1 id="practice-title">Øv</h1></header>
+    <header class="screen-head practice-title"><h1 id="practice-title">Øvelser</h1></header>
+    ${tabExplain('practice')}
     <section class="practice-hero" aria-labelledby="practice-hero-title">
-      <div class="practice-hero-top"><span>DAGENS TRÆNING</span><span class="practice-status"><img src="assets/traffic/${status}.webp" alt="">${count ? 'Klar til gentagelse' : 'Klar til at øve'}</span></div>
+      <div class="practice-hero-top"><span>DAGENS TRÆNING</span><span class="practice-status"><img src="assets/nav/light-${status}.webp" alt="">${count ? 'Klar til gentagelse' : 'Klar til at øve'}</span></div>
       ${mirror}
       <div class="practice-primary"><h2 id="practice-hero-title">${esc(title)}</h2><p>${esc(detail)}</p><a class="btn btn-primary practice-main-btn" href="#review">${esc(action)}</a></div>
     </section>
     <section class="practice-choose" aria-labelledby="practice-choose-title">
-      <p class="list-label">DIN TRÆNING</p><h2 id="practice-choose-title" class="practice-choose-title">Vælg din træning</h2><p>I Lær får du nye regler trin for trin. Her i Øv træner du dem, du har lært.</p>
+      <p class="list-label">DIN TRÆNING</p><h2 id="practice-choose-title" class="practice-choose-title">Vælg din træning</h2><p>I Lær får du nye regler trin for trin. Her i Øvelser træner du dem, du har lært.</p>
       <div class="practice-tabs" role="tablist" aria-label="Vælg træning" data-practice-tabs>${tabs.map(({id,title}, index) => `<button type="button" role="tab" id="practice-tab-${id}" aria-controls="practice-panel-${id}" aria-selected="${index === 0}" tabindex="${index === 0 ? '0' : '-1'}" data-practice-tab="${id}">${esc(title)}</button>`).join('')}</div>
       ${tabs.map(({id,heading}, index) => `<section class="practice-panel" role="tabpanel" id="practice-panel-${id}" aria-labelledby="practice-tab-${id}" tabindex="0" data-practice-panel="${id}"${index === 0 ? '' : ' hidden'}><h3>${esc(heading)}</h3><ul class="practice-grid">${cards(id)}</ul></section>`).join('')}
     </section>

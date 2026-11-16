@@ -1,5 +1,6 @@
 import {EXAM_PHOTOS} from './exam-photos.js';
 import {EXAM_SCHEMATICS} from './exam-schematics.js';
+import {situationFor} from './situation-specs.js';
 import {mountSchematic} from './schematic-view.js';
 // diagrams.js is 1.8 MB (730 kB sent) and only the schematic questions use it, so it is fetched after the app has
 // started, not before its first screen. A question that comes before it has arrived draws its diagram when it does.
@@ -8,15 +9,17 @@ export function loadDiagrams(){return diagramsLoad||=import('./diagrams.js').the
 const idle=globalThis.requestIdleCallback||(f=>setTimeout(f,1200));
 const preload=()=>idle(()=>loadDiagrams().catch(()=>{}),{timeout:4000});
 if(typeof document!=='undefined'){if(document.readyState==='complete')preload();else addEventListener('load',preload,{once:true});}
+// A situation picture for a lesson card: the n-th 3D scene among this section's questions (or none).
+export function lessonScene(questions,sectionId,n){const list=questions.filter(q=>q.sectionId===sectionId&&EXAM_SCHEMATICS[q.id]&&!situationFor(q).generic);return list.length?list[n%list.length]:null;}
 export const VISUAL_SCENE_IDS=Object.freeze([...Object.keys(EXAM_PHOTOS),...Object.keys(EXAM_SCHEMATICS)]);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function renderQuestionVisual(q,_unused,{examMode=false,index=0}={}){
   const schematic=EXAM_SCHEMATICS[q.id];
-  if(schematic)return `<section class="scene-panel scene-photo scene-schematic" aria-label="Skematisk illustration" data-visual-question="${esc(q.id)}" data-visual-kind="schematic-diagram" data-visual-status="${diagrams?'ready':'loading'}"><div class="scene-photo-top"><span>${examMode?'SITUATION '+(index+1):'SE SITUATIONEN'}</span><span>Skematisk illustration</span></div><div class="scene-photo-stage"${diagrams?'':' data-diagram-pending'}>${diagrams?diagrams.questionDiagram(q):''}</div><p class="scene-photo-note">Opgaveteksten angiver alle afgørende betingelser.</p></section>`;
+  if(schematic)return `<section class="scene-panel scene-photo scene-schematic" aria-label="Skematisk illustration" data-visual-question="${esc(q.id)}"${examMode?' data-exam-mode':''} data-visual-kind="schematic-diagram" data-visual-status="${diagrams?'ready':'loading'}"><div class="scene-photo-top"><span>${examMode?'SITUATION '+(index+1):'SE SITUATIONEN'}</span><span>Skematisk illustration</span></div><div class="scene-photo-stage"${diagrams?'':' data-diagram-pending'}>${diagrams?diagrams.questionDiagram(q):''}</div><p class="scene-photo-note">Opgaveteksten angiver alle afgørende betingelser.</p></section>`;
   const photo=EXAM_PHOTOS[q.id],media=photo?`<img id="question-visual-photo" src="${photo.src}" width="${photo.width}" height="${photo.height}" alt="${esc(q.context)}" decoding="async" fetchpriority="high" hidden>`:'';
   return `<section class="scene-panel scene-photo" aria-label="Situationsbillede" data-visual-question="${esc(q.id)}"><div class="scene-photo-top"><span>${examMode?'SITUATION '+(index+1):'SE SITUATIONEN'}</span><span>AI-illustration</span></div><div class="scene-photo-stage">${media}<div class="scene-photo-fallback" ${photo?'hidden':''}><p>Billedet kunne ikke vises.</p><p>Alle betingelser står i situationens tekst.</p><button type="button" data-scene-retry>Hent billedet igen</button></div></div><div class="scene-photo-bottom"><p data-scene-title>${esc(photo?.title||'Situationen')}</p><button type="button" class="scene-expand" aria-haspopup="dialog" data-scene-expand disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>Større billede</button></div>${photo?.facts?.length?`<div class="scene-facts">${photo.facts.map(f=>`<span>${esc(f)}</span>`).join('')}</div>`:''}<p class="scene-photo-note">Læs situationens betingelser før du svarer.</p></section>`;
 }
-export function mountQuestionVisual(host,q,{onOpen=()=>{}}={}){
+function mountBase(host,q,{onOpen=()=>{}}={}){
   if(EXAM_SCHEMATICS[q.id]){
     const pending=host?.querySelector('[data-diagram-pending]');
     if(!pending)return mountSchematic(host);
@@ -47,4 +50,16 @@ export function mountQuestionVisual(host,q,{onOpen=()=>{}}={}){
   function reload(){if(disposed)return;loadGeneration++;fallback.hidden=true;media.hidden=true;host.dataset.visualStatus='loading';media.src=photo.src+'?retry='+Date.now();}
   media.addEventListener('load',ready);media.addEventListener('error',failed);expand.addEventListener('click',open);retry.addEventListener('click',reload);host.dataset.visualStatus='loading';if(media.complete){if(media.naturalWidth)ready();else failed();}
   return {open,close,dispose(){if(disposed)return;close();disposed=true;loadGeneration++;observer?.disconnect();media.removeEventListener('load',ready);media.removeEventListener('error',failed);expand.removeEventListener('click',open);retry.removeEventListener('click',reload);dialog?.remove();}};
+}
+
+// Each time a question's picture is shown it alternates between two takes (stored per question), so a returning learner cannot just recognise the image.
+function nextSceneVariant(id){try{const k='teoriboost.scenevar.v1',m=JSON.parse(localStorage.getItem(k)||'{}'),n=(m[id]|0)+1;m[id]=n;localStorage.setItem(k,JSON.stringify(m));return n%2;}catch{return 0;}}
+// The 3D diorama (situation-3d.js) is drawn over the schematic stage when the browser can do WebGL; otherwise the schematic stays.
+export function mountQuestionVisual(host,q,opts){
+  const base=mountBase(host,q,opts);const spec0=EXAM_SCHEMATICS[q.id]&&situationFor(q);if(!spec0||spec0.generic||!host)return base;const spec={...spec0,variant:nextSceneVariant(q.id)};
+  let gone=false,three=null;
+  // 16 Nov 2026: a loading skeleton while the 3D scene loads; the schematic only shows when 3D cannot be drawn (no WebGL, error).
+  const stage=host.querySelector('.scene-photo-stage'),settle=()=>stage?.classList.remove('is-sit3d-loading');stage?.classList.add('is-sit3d-loading');
+  import('./situation-3d.js').then(m=>m.mountSituation3d(stage,host.hasAttribute('data-exam-mode')?{...spec,actors:spec.actors.filter(a=>!a.joke)}:spec)).then(h=>{settle();if(gone){h?.dispose();return;}three=h;if(h)host.querySelector('.scene-photo-top span:last-child')?.replaceChildren('3D-situation');},settle);
+  return {...(base||{}),dispose(){gone=true;three?.dispose();base?.dispose?.();}};
 }

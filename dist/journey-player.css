@@ -14,7 +14,7 @@ body.focus-mode .journey-player-body .journey-feedback-tray{display:flex;flex-di
 .journey-feedback-tray .jp-feedback-go{flex:none;width:100%;margin-top:14px;min-height:48px}
 .jp-wrong-statements>p{font-weight:700}
 .jp-wrong-statements ol{list-style:none;margin:10px 0;padding:0;display:grid;gap:10px}
-.jp-wrong-statements li{padding:12px;border-radius:12px;background:#FFF6C7}
+.jp-wrong-statements li{padding:12px;border-radius:12px;background:#FFD60A}
 .jp-wrong-statements li strong{color:#D42F2F;font-size:14px}
 .jp-wrong-statements li p{margin:6px 0;font:16px/1.45 DM,Arial,sans-serif}
 .jp-wrong-statements li small{font-size:13px;line-height:1.4}

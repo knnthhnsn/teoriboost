@@ -1,9 +1,10 @@
 import { sequenceFor } from './sequences.js';
 import { ico } from './ui-icons.js';
 import { CHAPTERS, QUESTIONS, SOURCES } from './content.js';
+import { progressCar } from './progress-car.js'
 import { BOOSTER_RATES } from './mybil.js';
 import { LESSONS } from './lessons.js';
-import { renderQuestionVisual, mountQuestionVisual } from './exam-photo-view.js';
+import { renderQuestionVisual, mountQuestionVisual, lessonScene } from './exam-photo-view.js';
 import { renderCast, castLine } from './cast.js';
 import { createVoiceCue } from './voice-cues.js';
 import {
@@ -35,10 +36,15 @@ const emph = text => esc(text).replace(KEY_WORDS, '$1<strong class="kw-rule">$2<
 // Long rule cards read as short paragraphs (same words, so the recorded voice still matches).
 const paras = text => {
   const value = String(text || '');
-  if (value.length < 240) return `<p>${esc(value)}</p>`;
+  if (value.length < 240) return `<p class="jp-lead">${esc(value)}</p>`;
   const parts = value.split(/(?<=[.!?])\s+(?=[A-ZÆØÅ])/u), out = [];
   for (const part of parts) { if (out.length && (out[out.length - 1] + ' ' + part).length <= 170) out[out.length - 1] += ' ' + part; else out.push(part); }
-  return out.map(p => `<p>${esc(p)}</p>`).join('');
+  // the first chunk is the lead; the rest are points, with the words before a colon as the point's own heading
+  return out.map((p, i) => {
+    if (i === 0) return `<p class="jp-lead">${esc(p)}</p>`;
+    const m = /^([^:.]{3,56}):\s+(.+)$/su.exec(p);
+    return m ? `<div class="jp-point"><strong>${esc(m[1])}</strong><p>${esc(m[2])}</p></div>` : `<div class="jp-point"><p>${esc(p)}</p></div>`;
+  }).join('');
 };
 const voiceButton = (kind, label) => (
   `<button class="audio-btn voice-read" type="button" data-journey-voice="${kind}">${label}</button>`
@@ -61,7 +67,7 @@ export function createJourneyPlayer({
   let session = null;
   let ui = null;
   let section = null;
-  let visual = null;
+  let visual = null, cardVisual = null;
   let disposed = false;
   let transitionTimer = null;
   let transitionGeneration = 0;
@@ -156,7 +162,7 @@ export function createJourneyPlayer({
     return `<article class="journey-player" data-journey-session="${esc(session.sessionId)}">
       <header class="journey-player-head jp-top">
         <a class="back-btn jp-close" href="#home" aria-label="Gem lektionen og gå til din rute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
-        <div class="journey-progress" role="progressbar" aria-label="Lektionens fremskridt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progress.percent)}"><i style="--journey-progress:${progress.percent}%;--journey-progress-ratio:${progress.percent / 100}"></i></div>
+        <div class="journey-progress" role="progressbar" aria-label="Lektionens fremskridt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progress.percent)}"><i style="--journey-progress:${progress.percent}%;--journey-progress-ratio:${progress.percent / 100}">${progressCar()}</i></div>
         <span class="journey-player-count">${progress.count}</span>
       </header>
       <div class="journey-player-title jp-title"><span>${session.kind === 'review' ? 'GENTAGELSE' : 'LEKTION'} · ${esc(progress.label)}</span><h1>${esc(section.title)}</h1></div>
@@ -173,7 +179,7 @@ export function createJourneyPlayer({
     return `<section class="journey-card-step">
       <div class="journey-step-intro journey-step-intro--compact"><span class="journey-kicker">KORT ${currentIndex + 1} AF 3</span>${voiceButton('lesson', 'Lyt til alle tre kort')}</div>
       ${audioView}
-      <article class="journey-focus-card"><span class="lesson-number">${currentIndex + 1}</span><div><h2>${esc(card.title)}</h2><div class="jp-card-text">${paras(card.body)}</div>${refs(card.sourceIds, card.sourceLocator)}</div></article>
+      <article class="journey-focus-card"><span class="lesson-number">${currentIndex + 1}</span><div>${(() => { const sq = lessonScene(QUESTIONS, section.id, currentIndex); return sq ? `<div class="jp-card-scene">${renderQuestionVisual(sq)}</div>` : ''; })()}<h2>${esc(card.title)}</h2><div class="jp-card-text">${paras(card.body)}</div>${refs(card.sourceIds, card.sourceLocator)}</div></article>
       <div class="journey-control-dock"><p>${session.kind === 'review' ? 'Læs forklaringen efter dit kolde forsøg.' : 'Ét kort ad gangen.'}</p><button class="btn btn-primary" type="button" data-journey-card="${currentIndex}">${currentIndex === 2 ? 'Brug reglen' : 'Næste kort'}</button></div>
     </section>`;
   }
@@ -215,7 +221,7 @@ export function createJourneyPlayer({
     const showGag = state()?.settings?.humor === true && questionGagFits(question, feedback.correct);
     const wrong = question.statements.map((statement, index) => ({ statement, index })).filter(({ statement, index }) => feedback.answers[index] !== statement.correct);
     const answered = feedback.answers.map(value => value ? 1 : 0).join('');
-    const title = !repair ? 'Godt set!' : wrong.length === 1 ? 'Næsten!' : 'Ikke helt endnu';
+    const title = !repair ? 'Godt set!' : wrong.length === 1 ? 'Næsten. Se reglen igen.' : 'Ikke helt endnu';
     const lead = !repair ? 'Alle fire udsagn er vurderet korrekt.' : wrong.length === 1 ? 'Ét udsagn skal rettes. Reglen står herunder.' : `${wrong.length} udsagn skal rettes. Reglen står herunder.`;
     return `<aside class="journey-feedback-tray ${repair ? 'repair' : 'correct'}" role="status">
       <div class="jp-feedback-content">${showGag ? `<div class="feedback-cast">${renderCast(question.speaker, { size: 'sm', mood: repair ? 'wrong' : 'correct' })}</div>` : ''}
@@ -262,7 +268,7 @@ export function createJourneyPlayer({
     if (currentStep.committed) {
       return `<div class="journey-control-dock"><p>Se svaret, og sammenlign med dit eget.</p><button class="btn btn-primary" type="button" data-journey-reveal="${stage}">Vis svaret</button></div>`;
     }
-    return `<div class="journey-control-dock journey-response-choice"><p>Svar mentalt, eller skriv med egne ord.</p><button class="btn btn-secondary" type="button" data-journey-write="${stage}">Skriv mit svar</button><button class="btn btn-primary" type="button" data-journey-mental="${stage}">Jeg har svaret i hovedet</button></div>`;
+    return `<div class="journey-control-dock journey-response-choice"><p>Hvordan vil du svare?</p><button class="btn btn-secondary" type="button" data-journey-write="${stage}">Skriv med egne ord</button><button class="btn btn-primary" type="button" data-journey-mental="${stage}">Jeg ved det</button></div>`;
   }
 
   function openStepView(currentStep) {
@@ -335,6 +341,8 @@ export function createJourneyPlayer({
     const question = currentQuestion();
     const photo = host.querySelector('.scene-photo');
     if (photo && question) visual = mountQuestionVisual(photo, question, { onOpen: () => narrator?.stop() });
+    const cardScene = host.querySelector('.jp-card-scene .scene-photo');
+    if (cardScene) { const sq = QUESTIONS.find(q => q.id === cardScene.dataset.visualQuestion); if (sq) cardVisual = mountQuestionVisual(cardScene, sq, { onOpen: () => narrator?.stop() }); }
   }
 
   function setProgress(percent, { animate = true } = {}) {
@@ -358,6 +366,8 @@ export function createJourneyPlayer({
     const renderGeneration = transitionGeneration;
     visual?.dispose();
     visual = null;
+    cardVisual?.dispose();
+    cardVisual = null;
     narrator?.stop();
     const currentStep = step();
     const lesson = LESSONS[session.sectionId];

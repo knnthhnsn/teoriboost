@@ -1,5 +1,5 @@
 /* UX fixes from the interviews and the app test, 9 Nov 2026 (docs/ux-research/2026-11-09).
-   Brand-manual colours only: #FFD60A, #FFF6C7, #C9A200, #4A4127, #2B3138, #FEFFED, #5F656D, #FF9600 (warning). */
+   Brand-manual colours only: #FFD60A, #FFD60A, #C9A200, #4A4127, #2B3138, #FEFFED, #5F656D, #FF9600 (warning). */
 
 /* Intro: who stands behind the rules (fund 12) */
 .start-trust{margin:12px 0 0;max-width:34ch;font-size:13px;line-height:1.45;color:var(--muted,#5F656D)}
@@ -18,7 +18,7 @@
 .kw-rule{font-weight:800}
 
 /* Feedback: the rule right under the mistake, and one "Hvorfor?" per wrong statement (F5, F6, F8) */
-.jp-rule{margin:4px 0 0;padding:12px 14px;border-radius:12px;background:#FFF6C7;color:#2B3138}
+.jp-rule{margin:4px 0 0;padding:12px 14px;border-radius:12px;background:#FFD60A;color:#2B3138}
 .jp-rule-label{margin:0 0 4px;font:800 11px/1.2 var(--font-display,sans-serif);letter-spacing:.08em;text-transform:uppercase;color:#4A4127}
 .jp-rule>p{margin:0;font-size:15px;line-height:1.55}
 .jp-rule-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:8px}
@@ -26,7 +26,7 @@
 .jp-why{display:flex;width:max-content;max-width:100%;align-items:center;min-height:36px;margin-top:8px;padding:0 14px;border-radius:999px;background:#2B3138;color:#FEFFED;font:800 13px var(--font-display,sans-serif);text-decoration:none}
 .jp-why:hover{background:#3A434C}
 html[data-theme="dark"] .jp-why{background:#FFD60A;color:#1F2328}
-html[data-theme="dark"] .jp-why:hover{background:#FFE45C}
+html[data-theme="dark"] .jp-why:hover{background:#FFD60A}
 html[data-theme="dark"] .jp-wrong-statements li{background:#1F2328}
 html[data-theme="dark"] .jp-rule{background:#1F2328;color:#FEFFED;border:1px solid #3A434C}
 html[data-theme="dark"] .jp-rule-label{color:#FFD60A}

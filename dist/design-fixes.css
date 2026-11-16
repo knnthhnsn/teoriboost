@@ -1,0 +1,180 @@
+/* Design sweep 11 Nov: shared phone fixes, loaded after every other stylesheet. Colours only via the app's own tokens. */
+
+/* 1. Mission and exam question card: border and background, but no inner padding, so text sat on the border. */
+body:not(.exam-active) .question-panel{padding:18px 16px 16px}
+@media(min-width:700px){body:not(.exam-active) .question-panel{padding:22px 22px 20px}}
+
+/* 2. Back button: one 44 px circle everywhere; the lesson page's text link "Tilbage" drew over the heading. */
+.back-btn{width:44px;height:44px;flex:none;position:relative;touch-action:manipulation}
+.back-btn:not(:has(svg)){font-size:0;line-height:0;overflow:hidden}
+.back-btn:not(:has(svg))::before{content:"";width:11px;height:11px;border-left:3px solid currentColor;border-bottom:3px solid currentColor;transform:translateX(2px) rotate(45deg);border-radius:1px}
+.screen-head>.back-btn+div{min-width:0}
+
+/* 3. Unit kicker: the melting font axis made "18" read as "10"; use its clean master. */
+html[data-theme] body .learn > .unit-banner .unit-kicker{font-variation-settings:"YEAR" 1979;line-height:1.3;padding-top:2px}
+
+/* 4. Mission step counter was 9 px mono and stacked on three lines. */
+.mission-info{font:700 12px/1.2 var(--font-display);white-space:nowrap;align-self:flex-start;padding-top:6px}
+
+/* 5. Ghost big buttons (log in with e-mail) had no padding, the label touched the border. */
+.big-btn--ghost{padding:12px 18px;min-height:52px;justify-content:center;text-align:center;line-height:1.25}
+
+
+/* 7. Tap targets under 44 px: kapløb button on Min bil, the "Sådan virker kapløbet" disclosure on Hold. */
+.race-cta{min-height:44px}
+summary{min-height:44px;display:list-item;padding-block:11px;touch-action:manipulation}
+
+/* 8. "Bland min bil" was a centred pill narrower than the cards around it. */
+@media(max-width:700px){.mybil-dream{width:100%;box-sizing:border-box}}
+
+/* Teemo, Figma 11 Nov 2026: the exercise screen uses the lesson player progress bar, not its own timeline */
+.mission-progress{position:relative;height:16px;margin:0 0 16px;border-radius:999px;background:#E3E5E8;overflow:hidden}
+.mission-progress i{position:absolute;inset:0 auto 0 0;display:block;width:100%;border-radius:999px;background:var(--good,#58CC02);transform:translateX(calc((var(--journey-progress-ratio, 0) - 1) * 100%));transition:transform 300ms var(--out)}
+.mission-progress i::after{content:"";position:absolute;left:10px;right:10px;top:4px;height:4px;border-radius:4px;background:rgba(254,255,237,0.35)}
+body.no-motion .mission-progress i{transition:none}
+.mission-info{white-space:nowrap}
+.result-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.screen-head+.mission-progress{margin-top:4px}
+
+/* Containers that were flat next to the grained cards (Teemo: "mange containere mangler tekstur") */
+:is(.practice-hero,.practice-tabs,.practice-card,.chat-chip,.chat-form,.talk-bubble,.exam-facts,.race-cta,.mybil-on,.mybil-tab:not(.is-active),.home-hello,.cast-bubble,.home-chip,.journey-daily-bar,.journey-next-copy,.journey-details,.exam-status){background-image:var(--grain-soft);background-size:200px 200px}
+:is(.big-btn,.mybil-learn,.mybil-tab.is-active):not(:disabled){background-image:var(--grain-ink);background-size:200px 200px}
+html[data-theme="dark"] :is(.practice-hero,.practice-tabs,.practice-card,.chat-chip,.chat-form,.talk-bubble,.exam-facts,.race-cta,.mybil-on,.mybil-tab:not(.is-active),.home-hello,.cast-bubble,.home-chip,.journey-daily-bar,.journey-next-copy,.journey-details,.exam-status){background-image:var(--asphalt);background-size:220px 220px}
+
+/* Teemo: "dårlig margen med flex-boxe, knapper og tekster" - the tight ones, found by measuring padding on every box */
+.mh-stat{padding:8px 12px 8px 10px}
+.exam-facts{padding-left:14px;padding-right:14px}
+.exam-signal{padding-left:16px}
+.race-cta{padding-left:14px}
+.mybil-dream{padding-left:14px}
+:is(.mybil-item,.mybil-base){padding:10px 10px 12px}
+.practice-tabs{padding:6px}
+/* Designmanual kap. 4: Black Ops One til tal, point, tid og score; overskrifter Rubik 800 */
+@font-face{font-family:"Black Ops One";src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+:is(.unit-count,.unit-num,.pn-btn,.mh-stat b,.stat-value,.result-stats strong,.exam-timer,.gx-score,.gx-score strong,.nav-count,.booster-chip,.team-boost-big strong,.streak-big,.journey-streak b,.chip--streak){font-family:"Black Ops One",var(--font-display);font-weight:400;letter-spacing:.02em}
+:is(.stat-value,.team-boost-big strong,.result-stats strong) small{font-family:var(--font-display);font-weight:700;letter-spacing:0}
+.practice-signal strong,.road-poster-words{font-weight:800!important}
+/* Resten af tallene (gennemgang af alle skærme) */
+:is(.mh-ring b,.tile b,.ready-row b,.mission-steps b,.topic-n,.exam-facts b,.home-ring span,.home-chip b,.journey-daily-bar strong,.journey-node__circle,.journey-goal strong,.game-count,.tile-fire,.gx-pin-dot,.gx-tab-n,.gx-row-mark,.gx-card-ref,.mission-info){font-family:"Black Ops One",var(--font-display);font-weight:400;letter-spacing:.02em}
+.pn-title{font-family:var(--font-display)}
+/* Tekstur-siden i Figma: korn på alle flader, gul = grus, lys = let korn, mørk = asfalt */
+:is(.question-panel,.question-context,.statement,.choice-btn,.audio-btn,.scene-panel,.set-row,.seg,.tb-premium-settings,.ready-gauge,.gx-hero,.gx-seg,.gx-tab:not(.is-active),.gx-row,.gx-btn,.gx-card,.gx-check,.mission-intro,.mission-steps li,.feature-card,.turn-listen,.turn-viewbar,.turn-body,.pitstop .hero,.stat-strip,.mission-card,.route-strip,.judge__stage,.judge__voice,.mh-stat,.mh-ring,.pn-title,.pn-btn:not(.pn--next *)){background-image:var(--grain-soft);background-size:200px 200px}
+html[data-theme="dark"] :is(.question-panel,.question-context,.statement,.choice-btn,.audio-btn,.scene-panel,.set-row,.seg,.tb-premium-settings,.ready-gauge,.gx-hero,.gx-seg,.gx-tab:not(.is-active),.gx-row,.gx-btn,.gx-card,.gx-check,.mission-intro,.mission-steps li,.feature-card,.turn-listen,.turn-viewbar,.turn-body,.pitstop .hero,.stat-strip,.mission-card,.route-strip,.judge__stage,.judge__voice,.mh-stat,.mh-ring,.pn-title,.pn-btn:not(.pn--next *)){background-image:var(--asphalt);background-size:220px 220px}
+:is(.gx-next,.gx-seg-btn.is-active,.gx-tab.is-active):not(:disabled){background-image:var(--grain-ink);background-size:200px 200px}
+:is(section.hero,.btn-secondary,.source-badges a,.tb-premium-settings button,.gx-seg-btn:not(.is-active)){background-image:var(--grain-soft);background-size:200px 200px}
+html[data-theme="dark"] :is(section.hero,.btn-secondary,.source-badges a,.tb-premium-settings button,.gx-seg-btn:not(.is-active)){background-image:var(--asphalt);background-size:220px 220px}
+html body :is(.pn-title,.btn-secondary,.question-context,.topic,.journey-path,.avatar-opt.is-on){background-image:var(--grain-soft);background-size:200px 200px}
+html[data-theme="dark"] body :is(.pn-title,.btn-secondary,.question-context,.topic,.journey-path,.avatar-opt.is-on){background-image:var(--asphalt);background-size:220px 220px}
+html body :is(.gx-seg-btn,.gx-tab,.practice-hero .big-btn):is(.is-active,[aria-selected="true"],[aria-pressed="true"]){background-image:var(--grain-ink);background-size:200px 200px}
+/* svarknapper i en påstand: korn som andre flader (overstyrer den flade regel) */
+html body .statement .choice-btn{background-image:var(--grain-soft)!important;background-size:200px 200px!important}
+html[data-theme="dark"] body .statement .choice-btn{background-image:var(--asphalt)!important;background-size:220px 220px!important}
+/* Fremgangsbjælke: asfaltvej med stiplet midterstreg, glans-fyld og en lys knap i spidsen */
+:is(.mission-progress,.jp-top .journey-progress,.exam-bar,.journey-progress-meter){position:relative;height:22px!important;border-radius:999px!important;overflow:hidden;background:var(--asphalt) 0 0/220px 220px,#2B3138!important;box-shadow:0 4px 0 #0F1215,inset 0 3px 5px rgba(0,0,0,.5)}
+:is(.journey-progress-meter){height:16px!important}
+:is(.mission-progress,.jp-top .journey-progress,.exam-bar,.journey-progress-meter)::before{content:"";position:absolute;left:10px;right:10px;top:calc(50% - 1px);height:2px;background:repeating-linear-gradient(90deg,rgba(254,255,237,.30) 0 9px,transparent 9px 20px)}
+:is(.mission-progress,.jp-top .journey-progress,.exam-bar,.journey-progress-meter) i{background:linear-gradient(180deg,#9BEA4A 0,#58CC02 48%,#3E9C00 100%)!important;border-radius:999px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2),0 0 14px rgba(88,204,2,.5)}
+:is(.mission-progress,.jp-top .journey-progress,.exam-bar,.journey-progress-meter) i::after{left:12px!important;right:12px!important;top:4px!important;height:4px!important;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.2) 30%,rgba(255,255,255,.2) 70%,rgba(255,255,255,.04))!important;border-radius:4px}
+:is(.mission-progress,.jp-top .journey-progress,.exam-bar,.journey-progress-meter) i::before{content:"";position:absolute;right:4px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 0 #2F6F00,0 0 0 2px rgba(47,111,0,.35)}
+:is(.journey-progress-meter) i::before{width:8px;height:8px;margin-top:-4px}
+.exam-bar i::before{display:none}.exam-bar i{background:linear-gradient(180deg,#FFD60A 0,#FFD60A 55%,#E8BC00 100%)!important;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2),0 0 14px rgba(255,214,10,.45)}
+/* Bilen i spidsen: fyldet vokser med bredden, så bilen kan stikke op over bjælken */
+:is(.mission-progress,.jp-top .journey-progress,.exam-bar){overflow:visible!important;margin-top:20px!important}
+:is(.mission-progress,.jp-top .journey-progress,.exam-bar) i{inset:0 auto 0 0!important;width:max(26px,calc(var(--journey-progress-ratio,var(--p,0))*100%))!important;transform:none!important;scale:none!important;transition:width .45s var(--out,ease)!important}
+:is(.mission-progress,.jp-top .journey-progress,.exam-bar) i::before{display:none!important}
+.pbar-car{position:absolute;right:-6px;bottom:-3px;width:78px;height:44px;pointer-events:none;z-index:4;display:block;filter:drop-shadow(0 3px 2px rgba(0,0,0,.35))}
+.pbar-car .mybil-rig{position:absolute;inset:0;display:block;animation:none}
+.pbar-car img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.pbar-car .mybil-body{animation:none!important}
+.mission-progress,.jp-top .journey-progress,.exam-bar{margin-right:14px}
+/* Bilen kører på vejen FORAN fyldet: fyldet stopper en bilbredde før enden */
+:is(.mission-progress,.jp-top .journey-progress,.exam-bar) i{width:calc(14px + var(--journey-progress-ratio,var(--p,0))*(100% - 92px) + var(--journey-progress-ratio,var(--p,0))*var(--journey-progress-ratio,var(--p,0))*var(--journey-progress-ratio,var(--p,0))*var(--journey-progress-ratio,var(--p,0))*var(--journey-progress-ratio,var(--p,0))*var(--journey-progress-ratio,var(--p,0))*78px)!important}
+.pbar-car{right:auto;left:calc(100% + 4px);bottom:3px;width:72px;height:40px;opacity:clamp(0,calc((0.98 - var(--journey-progress-ratio,var(--p,0)))*50),1)}
+/* 3D-situation over skemaets scene */
+.scene-photo-stage{position:relative}
+.scene-photo-stage.has-sit3d{aspect-ratio:16/10;min-height:0;overflow:hidden;border-radius:14px}
+.scene-photo-stage.has-sit3d>:not(canvas){display:none!important}
+.scene-photo-stage.has-sit3d::before,.scene-photo-stage.has-sit3d::after{content:"";position:absolute;inset:0;pointer-events:none}
+.scene-photo-stage.has-sit3d::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay;opacity:.5;z-index:1}
+/* Vandmærke nederst til højre på hvert situationsbillede */
+.scene-panel.scene-photo .scene-photo-stage::after{content:"";position:absolute;right:8px;bottom:8px;width:120px;height:24px;pointer-events:none;z-index:2;background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 150 30%27 width=%27150%27 height=%2730%27%3E%3Crect x=%272%27 y=%272%27 width=%2726%27 height=%2726%27 rx=%276%27 fill=%27%23FFD60A%27/%3E%3Cpath fill=%27%231F2328%27 transform=%27translate%282 2%29 scale%28.406%29%27 d=%27M9.8 46.8h6.8l16-29.6h-6.8zM20.6 46.8h6.8l16-29.6h-6.8zM31.4 46.8h6.8l16-29.6h-6.8z%27/%3E%3Ctext x=%2735%27 y=%2722%27 font-family=%27Rubik,Arial,sans-serif%27 font-weight=%27800%27 font-size=%2719%27 fill=%27%23fff%27 stroke=%27%231F2328%27 stroke-width=%273.2%27 stroke-linejoin=%27round%27 paint-order=%27stroke%27%3Eteoriboost%3C/text%3E%3C/svg%3E") no-repeat right bottom/contain;opacity:.92}
+.scene-panel.scene-photo .scene-photo-stage.has-sit3d::after{inset:0;width:auto;height:auto;background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 150 30%27 width=%27150%27 height=%2730%27%3E%3Crect x=%272%27 y=%272%27 width=%2726%27 height=%2726%27 rx=%276%27 fill=%27%23FFD60A%27/%3E%3Cpath fill=%27%231F2328%27 transform=%27translate%282 2%29 scale%28.406%29%27 d=%27M9.8 46.8h6.8l16-29.6h-6.8zM20.6 46.8h6.8l16-29.6h-6.8zM31.4 46.8h6.8l16-29.6h-6.8z%27/%3E%3Ctext x=%2735%27 y=%2722%27 font-family=%27Rubik,Arial,sans-serif%27 font-weight=%27800%27 font-size=%2719%27 fill=%27%23fff%27 stroke=%27%231F2328%27 stroke-width=%273.2%27 stroke-linejoin=%27round%27 paint-order=%27stroke%27%3Eteoriboost%3C/text%3E%3C/svg%3E") no-repeat right 8px bottom 8px/120px 24px,radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(40,20,10,.38));opacity:1}
+.sit3d{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* Loading skeleton while the 3D scene loads (no flash of the schematic drawing first) */
+.scene-photo-stage.is-sit3d-loading{aspect-ratio:16/10;min-height:0;overflow:hidden;border-radius:14px;background:var(--panel2)}
+.scene-photo-stage.is-sit3d-loading>:not(canvas){display:none!important}
+.scene-photo-stage.is-sit3d-loading::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 35%,rgba(254,255,237,.07) 50%,transparent 65%);background-size:220% 100%;animation:sit3d-shimmer 1.3s linear infinite}
+@keyframes sit3d-shimmer{from{background-position:130% 0}to{background-position:-90% 0}}
+@media (prefers-reduced-motion:reduce){.scene-photo-stage.is-sit3d-loading::before{animation:none}}
+html body.no-motion .scene-photo-stage.is-sit3d-loading::before{animation:none}
+/* Garagen ligger nederst på Lær */
+.learn-garage{margin:34px 0 0;padding-top:26px;border-top:3px solid var(--line)}
+
+/* Teemo's Figma review (14 Nov): wrong fonts, no margins in boxes and flex rows, text flush to box edges.
+   Fonts follow the manual: Rubik for headings and labels, Atkinson Hyperlegible for text; no Plex/Barlow left on screen. */
+:is(.mono,.mode-text,.top-strap,.sidebar-label,.journey-kicker,.source-link,.text-link,.skip-link,.eyebrow,.label,.step-note){font-family:var(--font-text,Atkinson,Verdana,sans-serif)!important}
+strong,b{font-family:inherit}
+/* the lesson-done card: nothing touches the card edge, the glow stays inside it, rows have air */
+.journey-lesson-done{overflow:hidden;padding:20px clamp(14px,4vw,28px) 18px!important;display:flex;flex-direction:column;gap:14px}
+.journey-lesson-done>*{margin-block:0}
+.journey-lesson-done .journey-practical-note{padding:14px 16px!important;border-radius:14px;text-align:left}
+.journey-lesson-done .journey-daily-result{margin:0 auto}
+.journey-lesson-done .journey-control-dock{margin-top:4px;padding:0}
+/* any card or panel that holds text keeps a minimum inner margin, and button rows wrap instead of squeezing */
+:is(.card,.panel,.journey-open-step,.journey-focus-card,.journey-case-context){padding-inline:max(16px,var(--card-pad,16px))}
+:is(.journey-control-dock,.hero-actions,.step-foot){flex-wrap:wrap;gap:10px}
+:is(.journey-control-dock,.hero-actions)>:is(.btn,a,button){min-width:min(100%,160px)}
+@media (max-width:420px){.journey-player{padding-inline:2px}.journey-focus-card{padding-inline:16px!important}}
+
+/* Lær / Øvelser / Prøve guide: three equal cards, the current one in brand yellow */
+.tab-explain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 18px}
+.tab-explain__card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px 10px;border-radius:16px;background:var(--panel,#1F2328);border:1.5px solid var(--line,rgba(255,255,255,.12));color:inherit;text-decoration:none;text-align:center;min-width:0}
+.tab-explain__card img{width:40px;height:40px;object-fit:contain}
+.tab-explain__card strong{font:800 15px/1.1 var(--font-display,Rubik,sans-serif)}
+.tab-explain__card small{font:400 12px/1.3 var(--font-text,Atkinson,sans-serif);opacity:.8;text-wrap:balance}
+.tab-explain__card.is-here{background:#FFD60A;border-color:#FFD60A;color:#1F2328}
+.tab-explain__card.is-here small{opacity:.85}
+@media (min-width:600px){.tab-explain{max-width:560px}.tab-explain__card small{font-size:13px}}
+
+/* Lesson player: one column. Bar, title, card and button all share the same 760px edge (they used to sit on 980 / 760 / 760-offset). */
+.journey-player{max-width:760px;margin-inline:auto;padding-inline:clamp(0px,2vw,8px)}
+.journey-player :is(.journey-step-intro,.journey-focus-card,.journey-control-dock,.journey-lesson-done,.journey-open-step){max-width:none;margin-inline:0}
+.journey-player .jp-card-text{max-width:none}
+.journey-player .jp-title h1,.journey-player .jp-title{color:var(--ink,#FEFFED)}
+
+/* Lesson cards: a situation picture on top, a lead sentence, then separate points instead of one text wall */
+.jp-card-scene{margin:-4px 0 16px;border-radius:20px;overflow:hidden}
+.jp-card-scene .scene-panel{margin:0;border:0;padding:0;background:none;box-shadow:none}
+.jp-card-scene .scene-photo-top,.jp-card-scene .scene-photo-bottom,.jp-card-scene figcaption{display:none!important}
+.jp-card-scene .scene-photo-stage{border-radius:20px}
+.jp-card-text .jp-lead{font:400 18px/1.5 var(--font-text,Atkinson,sans-serif);margin:0 0 16px}
+.jp-card-text .jp-point{display:grid;gap:3px;padding:12px 14px;margin:0 0 10px;border-radius:14px;background:rgba(255,255,255,.045)}
+.jp-card-text .jp-point strong{font:800 15px/1.25 var(--font-display,Rubik,sans-serif);color:var(--ink,#FEFFED)}
+.jp-card-text .jp-point p{margin:0;font:400 16px/1.5 var(--font-text,Atkinson,sans-serif);opacity:.92}
+html[data-theme="light"] .jp-card-text .jp-point{background:rgba(31,35,40,.05)}
+.jp-card-scene :is(.schematic-notes,.scene-photo-note){display:none!important}
+
+/* Scrolling chip rows: fading edges + arrows where there is more, a clear chosen chip, no stray native scrollbar */
+.strip-wrap{position:relative}
+.strip-wrap>.mybil-tabs{scrollbar-width:none;padding-inline:2px;scroll-snap-type:x proximity}
+.strip-wrap>.mybil-tabs::-webkit-scrollbar{display:none}
+.strip-wrap>.mybil-tabs>*{scroll-snap-align:center;flex:none}
+.strip-wrap[data-right="1"]>.mybil-tabs{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent)}
+.strip-wrap[data-left="1"]>.mybil-tabs{-webkit-mask-image:linear-gradient(90deg,transparent,#000 56px);mask-image:linear-gradient(90deg,transparent,#000 56px)}
+.strip-wrap[data-left="1"][data-right="1"]>.mybil-tabs{-webkit-mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent)}
+.strip-arrow{position:absolute;top:2px;width:40px;height:40px;border-radius:50%;border:2px solid var(--line,rgba(255,255,255,.2));background:#1F2328;color:#FEFFED;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 4px 10px rgba(0,0,0,.4)}
+.strip-arrow--left{left:0}.strip-arrow--right{right:0}
+.strip-wrap[data-left="1"] .strip-arrow--left,.strip-wrap[data-right="1"] .strip-arrow--right{display:inline-flex}
+html[data-theme="light"] .strip-arrow{background:#FFFFFF;color:#1F2328}
+.mybil-tab.is-active{background:#FFD60A!important;border-color:#FFD60A!important;color:#1F2328!important;-webkit-text-fill-color:#1F2328!important;box-shadow:0 3px 0 #B89600!important}
+
+/* Count badges (e.g. the 40 rules due on Øvelser): the number sits centred in its circle, never bleeds out of it */
+.nav-count{box-sizing:border-box;flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;padding:0 8px;line-height:1!important;font-size:12px;white-space:nowrap;overflow:hidden;text-align:center}
+.nav-count::before{content:none}
+.sidebar .nav-item{min-width:0;padding-right:12px;gap:10px}
+.sidebar .nav-item .nav-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html .sidebar .nav-count,html[data-theme="dark"] .sidebar .nav-item.active .nav-count{background:#FF4B4B!important;color:#FEFFED!important;margin-left:auto;margin-right:0}
+/* the badge sits on the corner of the icon, so the label keeps its full width */
+.sidebar .nav-item{position:relative}
+html .sidebar .nav-count{position:absolute;left:46px;top:0;min-width:22px;height:22px;padding:0 6px;font-size:11px;margin:0;box-shadow:0 0 0 2px #1B1F24}
+.journey-node__title small{color:#525C65!important}

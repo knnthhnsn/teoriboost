@@ -2,7 +2,7 @@
 @media (hover:hover) and (pointer:fine) and (forced-colors:none) {
  :root { --tb-scroll-thumb:#1F2328; --tb-scroll-hover:#4A4127; --tb-scroll-active:#4A4127; }
  :root[data-theme="dark"], [data-scroll-theme="dark"], .scroll-dark {
-  --tb-scroll-thumb:#FFD60A; --tb-scroll-hover:#FFE45C; --tb-scroll-active:#E8BC00;
+  --tb-scroll-thumb:#FFD60A; --tb-scroll-hover:#FFD60A; --tb-scroll-active:#E8BC00;
  }
  [data-scroll-theme="light"] {
   --tb-scroll-thumb:#1F2328; --tb-scroll-hover:#4A4127; --tb-scroll-active:#4A4127;

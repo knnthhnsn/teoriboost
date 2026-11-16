@@ -1,0 +1,40 @@
+/* Guided tour with Sneglen (tour.js) */
+.tour{position:fixed;inset:0;z-index:9000;opacity:0;transition:opacity .3s ease}
+.tour.is-on{opacity:1}.tour.is-out{opacity:0}
+.tour__spot{position:fixed;box-sizing:border-box;top:50%;left:50%;width:0;height:0;border:3px solid #FFD60A;box-shadow:0 0 0 100vmax rgba(8,10,13,.82),0 0 28px 4px rgba(255,214,10,.45);pointer-events:none;
+  transition:top .65s var(--spring,cubic-bezier(.2,1.45,.4,1)),left .65s var(--spring,cubic-bezier(.2,1.45,.4,1)),width .65s var(--spring,cubic-bezier(.2,1.45,.4,1)),height .65s var(--spring,cubic-bezier(.2,1.45,.4,1)),opacity .3s ease}
+.tour__spot::after{content:"";position:absolute;inset:-3px;border-radius:inherit;border:3px solid rgba(255,214,10,.6);animation:tour-ping 1.8s ease-out infinite}
+.tour__card{position:fixed;left:50%;width:min(440px,calc(100vw - 24px));translate:-50% 0;display:flex;gap:6px;align-items:flex-end}
+.tour__card[data-at="bottom"]{bottom:max(16px,env(safe-area-inset-bottom));top:auto}
+.tour__card[data-at="top"]{top:max(16px,env(safe-area-inset-top));bottom:auto}
+.tour__card[data-at="center"]{top:50%;bottom:auto;translate:-50% -50%}
+@media (min-width:900px){.tour__card[data-at="top"],.tour__card[data-at="bottom"]{left:calc(50% + 120px)}}
+.tour__card.is-in{animation:tour-card .55s var(--spring,cubic-bezier(.2,1.45,.4,1)) both}
+.tour__snail{flex:none;width:92px;margin:0 -10px -6px 0;z-index:2;transform-origin:50% 100%;pointer-events:none}
+.tour__snail .cast{margin:0}.tour__snail img{width:92px;height:92px;object-fit:contain;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45))}
+.tour__snail.hop{animation:tour-hop .7s var(--spring,cubic-bezier(.2,1.45,.4,1))}
+.tour__body{flex:1;min-width:0;background:#FEFFED;color:#1F2328;border-radius:22px 22px 22px 8px;padding:16px 16px 14px;box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 3px #1F2328}
+.tour__dots{display:flex;gap:5px;margin-bottom:10px}
+.tour__dots i{flex:1;height:6px;border-radius:99px;background:rgba(31,35,40,.16);transition:background .3s ease,flex .4s var(--spring,ease)}
+.tour__dots i.done{background:#1F2328}.tour__dots i.now{background:#FFD60A;box-shadow:inset 0 0 0 2px #1F2328;flex:2}
+.tour__title{margin:0 0 4px;color:#1F2328;font:800 22px/1.1 var(--font-display,Rubik,sans-serif)}
+.tour__text{margin:0 0 14px;color:#1F2328;font:400 16px/1.45 var(--font-text,Atkinson,sans-serif)}
+.tour__w{display:inline-block;opacity:0;translate:0 8px;animation:tour-word .4s var(--d,0ms) var(--spring,ease) forwards}
+.tour__actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tour__skip,.tour__back{border:0;background:none;color:#4A4127;font:700 14px var(--font-text,Atkinson,sans-serif);padding:10px 8px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px}
+.tour__skip{margin-right:auto}.tour__next{min-height:48px;padding-inline:18px}
+.tour__confetti{position:fixed;left:50%;top:40%;pointer-events:none}
+.tour__confetti i{position:absolute;width:9px;height:14px;border-radius:2px;background:var(--c);opacity:0;animation:tour-confetti 1.3s var(--d,0ms) cubic-bezier(.15,.8,.3,1) forwards}
+body.tour-open{overflow:hidden}
+@keyframes tour-ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+@keyframes tour-card{0%{opacity:0;transform:translateY(40px) scale(.92)}100%{opacity:1;transform:none}}
+@keyframes tour-hop{0%{transform:translateY(24px) rotate(-8deg) scale(.7)}60%{transform:translateY(-10px) rotate(4deg)}100%{transform:none}}
+@keyframes tour-word{to{opacity:1;translate:0 0}}
+@keyframes tour-confetti{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--x),calc(var(--y) + 260px)) rotate(var(--r))}}
+@media (prefers-reduced-motion:reduce){.tour,.tour__spot,.tour__card.is-in,.tour__snail.hop,.tour__w,.tour__spot::after{animation:none!important;transition:none!important}.tour__w{opacity:1;translate:none}}
+
+.tour__spot.is-empty{border-color:transparent;box-shadow:0 0 0 100vmax rgba(8,10,13,.82)}.tour__spot.is-empty::after{display:none}
+
+.tour__title,.tour__title .tour__w,.tour__text,.tour__text .tour__w{color:#1F2328!important;-webkit-text-fill-color:#1F2328!important}
+
+.tour__card[data-at="side"]{translate:0 0;bottom:auto;transition:top .6s var(--spring,cubic-bezier(.2,1.45,.4,1)),left .6s var(--spring,cubic-bezier(.2,1.45,.4,1))}

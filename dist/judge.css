@@ -6,7 +6,7 @@
   --judge-coral:#D42F2F;
   --judge-white:#F4F5F7;
   --judge-muted:#3A434C;
-  --judge-yellow:#FFEB85;
+  --judge-yellow:#FFD60A;
   width:min(100%, 900px);
   scroll-margin-top:96px;
   margin-inline:auto;
@@ -425,7 +425,7 @@
 }
 
 /* The receipt is a light paper surface in either theme. */
-html[data-theme] #main .judge.judge .judge__receipt{background:#FEFFED;color:#1F2328}
+html[data-theme] #main .judge.judge .judge__receipt{background:#FFFFFF;color:#1F2328}
 html[data-theme] #main .judge.judge .judge__receipt-head{flex-wrap:wrap;gap:4px 10px}
 html[data-theme] #main .judge.judge .judge__receipt-head strong,html[data-theme] #main .judge.judge .judge__receipt-head span,html[data-theme] #main .judge.judge .judge__receipt p,html[data-theme] #main .judge.judge .judge__receipt small{color:#1F2328;overflow-wrap:anywhere}
 html[data-theme] #main .judge.judge .judge__receipt-head span{font-size:12px}

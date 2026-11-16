@@ -38,7 +38,7 @@ dialog.tb-paywall { color-scheme: light; background: #F4F5F7; color: #1F2328; wi
 .tb-pw-code-row { display: flex; gap: 8px; }
 .tb-pw-code-row input { width: 100%; min-width: 0; min-height: 46px; border: 1px solid #525C65; background: #F4F5F7; border-radius: 8px; color: #1F2328; padding: 10px; font: inherit; }
 .tb-pw-code-row button { flex-shrink: 0; background: #FFD60A; border-color: #1F2328; }
-.tb-pw-message:not(:empty) { background: #FFF6C7; border-radius: 8px; padding: 10px 12px; font-weight: 600; overflow-wrap: anywhere; }
+.tb-pw-message:not(:empty) { background: #FFD60A; border-radius: 8px; padding: 10px 12px; font-weight: 600; overflow-wrap: anywhere; }
 .tb-pw-message[data-error=true]:not(:empty)::before { content: "Kunne ikke gennemføres. "; }
 .tb-pw-footer { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
 .tb-paywall .tb-pw-footer button { background: transparent; border: 0; padding-left: 0; padding-right: 0; text-decoration: underline; text-underline-offset: 4px; }

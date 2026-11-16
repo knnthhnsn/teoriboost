@@ -1,4 +1,4 @@
-import { createEntitlementClient, loadPremiumConfig, gatesEnabled, contentAccess, createPracticeQuota } from './entitlements.js';
+import { createEntitlementClient, loadPremiumConfig, gatesEnabled, contentAccess, createPracticeQuota, createExamQuota } from './entitlements.js';
 import { createReferral } from './referral.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
@@ -8,9 +8,13 @@ export function priceText(amount) {
   return Number.isFinite(amount) && amount > 0 ? new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK', maximumFractionDigits: 2 }).format(amount) : 'Pris kommer';
 }
 
-export function createPaywall({ account, chapters = [], questions = [], fetcher = globalThis.fetch, config: providedConfig, document: doc = globalThis.document, win = globalThis.window, onAccessChange = () => {} }) {
+export function createPaywall({ account, chapters = [], questions = [], fetcher = globalThis.fetch, config: providedConfig, document: doc = globalThis.document, win = globalThis.window, onAccessChange = () => {}, currentExamId = () => '' }) {
   const client = createEntitlementClient({ account, fetcher });
   const quota = createPracticeQuota({ owner: () => client.view().uid || 'device' });
+  const exams = createExamQuota({ owner: () => client.view().uid || 'device' });
+  const freeExams = () => Number.isSafeInteger(config?.free?.fullExams) && config.free.fullExams > 0 ? config.free.fullExams : 0;
+  // One full practice exam is free (Founder test, 13 Nov 2026). The exam the learner started free may be resumed and reviewed.
+  function examAllowed(id = currentExamId()) { return !gatesEnabled(config) || isPremium() || exams.allows(freeExams(), id); }
   let config = providedConfig || null, configError = '', selected = '30-days', busy = false, returnFocus, pendingRoute = '', closed = false;
   let sheet, message, mode = 'offer', expiryTimer, referral;
 
@@ -48,10 +52,10 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
     const premium = isPremium();
     sheet.innerHTML =
       '<div class="tb-pw-head"><span class="tb-pw-kicker">TEORIBOOST PREMIUM</span><button type="button" class="tb-pw-close" data-pw="close" aria-label="Luk premium">Ikke nu</button></div>' +
-      '<h2 id="tb-pw-title">' + (premium ? 'Din premiumadgang' : mode === 'code' ? 'Har du en kode?' : 'Hele TeoriBoost. Ét køb.') + '</h2>' +
-      '<p id="tb-pw-description">' + (premium ? 'Du har adgang til hele TeoriBoost med din konto.' : 'Få alle kapitler, fri øvning, øveprøver og alle spilniveauer.') + '</p>' +
+      '<h2 id="tb-pw-title">' + (premium ? 'Din premiumadgang' : mode === 'code' ? 'Har du en kode?' : 'Én regel ad gangen. Hele vejen til prøven.') + '</h2>' +
+      '<p id="tb-pw-description">' + (premium ? 'Du har adgang til hele TeoriBoost med din konto.' : 'Korte lektioner, rigtige trafiksituationer og forklaringen hver gang, også når du svarer forkert.') + '</p>' +
       (premium ? '<p class="tb-pw-active">' + (client.view().entitlement.expiresAt ? 'Adgang til ' + esc(new Date(client.view().entitlement.expiresAt).toLocaleString('da-DK', { dateStyle: 'long', timeStyle: 'short' })) + '.' : 'Din adgang har ingen udløbsdato.') + '</p>' : mode === 'offer' ?
-        '<ul class="tb-pw-benefits"><li>Alle kapitler og guidede forløb</li><li>Ubegrænset øvning og alle øveprøver</li><li>Alle spilniveauer</li><li>AI-hjælp fra Sneglen</li></ul>' + planMarkup() +
+        '<ul class="tb-pw-benefits"><li>Alle emner, én regel ad gangen</li><li>Forklaring på hver fejl, og det, der driller, kommer igen</li><li>Øveprøver som den rigtige: 25 situationer, 25 minutter</li><li>AI-hjælp fra Sneglen og alle spilniveauer</li></ul>' + planMarkup() +
         '<p class="tb-pw-note">' + (available ? 'Samlet pris inklusive moms. Ingen automatisk fornyelse.' : config?.price?.confirmed ? 'Priser inklusive moms. Ingen automatisk fornyelse. Køb er ikke åbnet endnu.' : 'Priserne er ikke fastlagt endnu. Køb er ikke åbnet.') + '</p>' +
         (referral?.discountPercent() ? '<p class="tb-pw-note">De viste priser inkluderer din vens rabat på ' + esc(referral.discountPercent()) + ' % på dit første pas.</p>' : '') +
         // BILLING HOOK: consent and card entry belong to our own payment page.
@@ -90,6 +94,8 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
       open('offer', win.location.hash); return false;
     }
     if (route === 'garage' || route === 'garage-zone') return requireAccess('chapter', 1, win.location.hash);
+    if (route === 'exam' && examAllowed()) return true;
+    if (route === 'exam-result' && exams.used() > 0) return true;
     if (['theory', 'exam', 'exam-result', 'trafiklab', 'order', 'drive'].includes(route)) return requireAccess('premium', null, win.location.hash);
     if (route === 'judge') return requireAccess('game', 1, win.location.hash);
     if (['mission', 'review'].includes(route) && !quota.allows(config.free.practiceQuestionsPerDay, 'new')) {
@@ -97,6 +103,12 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
     }
     return true;
   }
+  function requireExam(id) {
+    if (!config) { open(); return false; }
+    if (examAllowed(id)) return true;
+    open('offer', win.location.hash); return false;
+  }
+  function recordExam(id) { if (gatesEnabled(config) && !isPremium()) exams.record(id); }
   function practiceAllowed(attempt) {
     if (!gatesEnabled(config) || isPremium() || quota.allows(config.free.practiceQuestionsPerDay, attempt)) return true;
     open(); return false;
@@ -205,7 +217,7 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
     if (result) { open(); notify(result === 'cancelled' ? 'Købet blev afbrudt. Du er ikke blevet opkrævet her.' : 'Betalingen kontrolleres. Brug Gendan køb, hvis adgangen ikke er klar endnu.'); }
   })();
   return {
-    ready, client, open, close, allowRoute, requireAccess, practiceAllowed, recordPractice, settingsMarkup, decorate, chatHeaders,
+    ready, client, open, close, allowRoute, requireAccess, requireExam, recordExam, practiceAllowed, recordPractice, settingsMarkup, decorate, chatHeaders,
     config: () => config,
     recordReferralAssessment: (question, answers) => referral?.recordAssessment(question, answers),
     completeReferralLesson: (evidence, session) => referral?.completeLesson(evidence, session),

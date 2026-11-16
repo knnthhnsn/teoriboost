@@ -194,7 +194,7 @@ dialog[open]::backdrop{animation:fade-in .2s var(--out)}
 @keyframes twinkle{50%{filter:brightness(.55)}}
 /* the sun: a warm halo that grows and reddens as it sinks behind the hills */
 .road-sun{right:12%;top:calc(14px + var(--sunset) * 96px);width:calc(46px + var(--sunset) * 10px);height:calc(46px + var(--sunset) * 10px);border-radius:50%;
-  background:color-mix(in oklab,#FFE14D,#FF4E3A calc(var(--sunset) * 100%));
+  background:color-mix(in oklab,#FFD60A,#FF4E3A calc(var(--sunset) * 100%));
   box-shadow:0 0 0 calc(7px + var(--sunset) * 4px) color-mix(in oklab,rgba(255,229,110,.45),rgba(255,110,60,.4) calc(var(--sunset) * 100%)),
     0 0 calc(34px + var(--sunset) * 26px) calc(12px + var(--sunset) * 10px) color-mix(in oklab,rgba(255,214,77,.6),rgba(255,90,50,.55) calc(var(--sunset) * 100%));
   animation:sun-pulse 4.5s var(--in-out) infinite}
@@ -216,7 +216,7 @@ dialog[open]::backdrop{animation:fade-in .2s var(--out)}
 /* lamps: they fade on as it gets dark; the beams reach forward over the road */
 .road-lamps{position:absolute;inset:0;z-index:40;pointer-events:none;opacity:var(--lamps)}
 .road-lamps i{position:absolute;display:block}
-.rl-head{width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:radial-gradient(circle,#FFFDF0 0 30%,rgba(255,240,170,.9) 45%,rgba(255,226,120,0) 72%);
+.rl-head{width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:radial-gradient(circle,#FEFFED 0 30%,rgba(255,240,170,.9) 45%,rgba(255,226,120,0) 72%);
   box-shadow:0 0 14px 6px rgba(255,236,150,.55);animation:lamp-on .9s steps(1) 1}
 .rl-beam{width:130px;height:46px;margin:-23px 0 0 0;mix-blend-mode:screen;
   background:linear-gradient(90deg,rgba(255,244,190,.85),rgba(255,236,160,.35) 55%,rgba(255,236,160,0));
@@ -237,7 +237,7 @@ dialog[open]::backdrop{animation:fade-in .2s var(--out)}
 .road-asphalt{left:0;right:0;bottom:0;height:42%;background:#3A3F47}
 .road-asphalt::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:#E3E7EA}
 .road-dashes{left:0;right:0;top:50%;height:5px;margin-top:-2px;display:block;position:absolute;
-  background:repeating-linear-gradient(90deg,#FFE14D 0 34px,transparent 34px 70px);background-size:70px 5px;animation:scroll-x .5s linear infinite;--w:70px}
+  background:repeating-linear-gradient(90deg,#FFD60A 0 34px,transparent 34px 70px);background-size:70px 5px;animation:scroll-x .5s linear infinite;--w:70px}
 .road-speed{inset:0;z-index:3;pointer-events:none;opacity:.55;
   background:linear-gradient(90deg,transparent 0 10%,rgba(254,255,237,0.9) 10% 13%,transparent 13%) 0 38%/220px 2px repeat-x,
              linear-gradient(90deg,transparent 0 50%,rgba(254,255,237,0.8) 50% 54%,transparent 54%) 0 64%/300px 2px repeat-x;
@@ -250,7 +250,7 @@ dialog[open]::backdrop{animation:fade-in .2s var(--out)}
 .road-car .mybil-body.is-sprung{animation:road-bump 1.2s linear infinite}
 @keyframes road-bump{0%,100%{transform:translateY(0)}10%{transform:translateY(-1.2%)}20%{transform:translateY(.6%)}30%{transform:translateY(0)}60%{transform:translateY(-.4%)}70%{transform:translateY(0)}}
 .road-car::after{content:"";position:absolute;left:14%;right:14%;bottom:14%;height:9%;border-radius:50%;z-index:-1;background:rgba(15,18,21,0.28);filter:blur(4px)}
-.road-loop > .road-label{left:12px;top:10px;z-index:4;display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:7px 11px;border-radius:14px;background:rgba(254,255,237,0.9);border:2px solid var(--line)}
+.road-loop > .road-label{left:12px;top:10px;z-index:4;display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:7px 11px;border-radius:14px;background:rgba(255,255,255,0.92);border:2px solid var(--line)}
 .booster-chip-mini{display:inline-flex;align-items:center;gap:4px;font:800 13px/1 var(--font-display)}
 .booster-chip-mini .booster-icon{width:16px;height:16px}
 .road-label small{font:800 11px/1 var(--font-display);letter-spacing:.08em;color:var(--muted)}

@@ -78,14 +78,14 @@ export function renderMissions({ missions, chapters, practised, due }) {
     const total = c.sections.length, done = c.sections.filter(s => practised(s.id)).length;
     return `<li class="topic ${done === total ? 'is-done' : ''}"><a href="#mission:${esc(c.sections[0].id)}"><span class="topic-n">${i + 1}</span><div><strong>${esc(c.title)}</strong><span class="topic-bar"><i style="--p:${total ? done / total : 0}"></i></span><small>${esc(c.tagline)} <span class="tb-stripes" aria-hidden="true"></span> ${done}/${total} øvet</small></div></a><a class="topic-cards topic-cards--go" href="#mission:${esc(c.sections[0].id)}" aria-label="Øv ${esc(c.title)}">Øv</a></li>`;
   }).join('');
-  return `<section class="missions" aria-labelledby="missions-title"><header class="screen-head"><a class="back-round" href="#practice" aria-label="Tilbage til Øv">${ICON.back}</a><h1 id="missions-title">Vælg en mission</h1></header>
-    <div class="mission-intro">${renderCast('sneglen', { size: 'sm', priority: true })}<div><strong>Korte runder. Lange eftervirkninger.</strong><small>Hver mission er tre situationer og én genkaldelse. Du får forklaringen efter hvert svar, og det, du er usikker på, kommer igen senere. Ingen point for fart.</small></div></div>
-    <ol class="mission-steps" aria-label="Sådan virker en mission">${steps}</ol>
+  return `<section class="missions" aria-labelledby="missions-title"><header class="screen-head"><a class="back-round" href="#practice" aria-label="Tilbage til Øvelser">${ICON.back}</a><h1 id="missions-title">Vælg en øvelse</h1></header>
+    <div class="mission-intro">${renderCast('sneglen', { size: 'sm', priority: true })}<div><strong>Korte runder. Lange eftervirkninger.</strong><small>Hver øvelse er tre situationer og én genkaldelse. Du får forklaringen efter hvert svar, og det, du er usikker på, kommer igen senere. Ingen point for fart.</small></div></div>
+    <ol class="mission-steps" aria-label="Sådan virker en øvelse">${steps}</ol>
     <h2 class="list-label">ANBEFALET</h2><div class="feature-grid">${featured}</div>
     <h2 class="list-label">ALLE EMNER</h2><ol class="topic-list">${rows}</ol>
     <h2 class="list-label">MERE</h2><div class="row-list">
       <a class="row-card" href="#review"><span class="row-ico" style="--c:#F4F5F7">${ico('repeat')}</span><div><strong>Mine gentagelser</strong><small>${due ? `${due} ${due === 1 ? 'regel er' : 'regler er'} klar til at blive gentaget` : 'Ingen regler venter lige nu'}</small></div><span class="row-go" aria-hidden="true">${ICON.chev}</span></a>
-      <a class="row-card" href="#drive"><span class="row-ico" style="--c:#FFF6C7">${ico('gauge')}</span><div><strong>Gas og bremse</strong><small>Mærk vejen: tre situationer i byen</small></div><span class="row-go" aria-hidden="true">${ICON.chev}</span></a>
+      <a class="row-card" href="#drive"><span class="row-ico" style="--c:#FFD60A">${ico('gauge')}</span><div><strong>Gas og bremse</strong><small>Mærk vejen: tre situationer i byen</small></div><span class="row-go" aria-hidden="true">${ICON.chev}</span></a>
     </div></section>`;
 }
 
@@ -155,6 +155,15 @@ export function renderAccountPanel(s) {
         : `<div class="acc-links"><button type="button" class="acc-link" data-account="signout">Log ud</button><button type="button" class="acc-link acc-link--danger" data-account="delete">Slet konto</button></div>`;
     return renderAccountCard({state:s,syncedMarkup:synced,errorMarkup:err,actionsMarkup:confirm,googleG:GOOGLE_G});
   }
+  return `<section class="panel account-panel" aria-labelledby="acc-title"><h2 id="acc-title">Gem din fremgang</h2>
+    <p class="acc-lead">Lige nu gemmes alt kun på denne enhed. Log ind, så kan du fortsætte på både telefon og computer.</p>${renderAccountActions(s)}
+    <p class="acc-fine">Logger du ind, gemmes din fremgang i din konto hos Google Firebase (database i EU). Chatten gemmes kun på enheden. Dine spørgsmål sendes til vores AI-tjeneste for at blive besvaret.</p></section>`;
+}
+
+/** The sign-in buttons and e-mail form on their own: the profile panel, the intro's last step and the login gate share them. */
+export function renderAccountActions(s) {
+  if (!s || s.state === 'off' || s.state === 'user') return '';
+  const err = s.error ? `<p class="acc-error" role="alert">${esc(s.error)}</p>` : '';
   const body = s.state === 'loading' ? '<p class="acc-sync">Forbinder <span class="tb-stripes" aria-hidden="true"></span></p>'
     : s.ui === 'sent' ? `<p class="acc-note" role="status">Tjek din indbakke. Vi har sendt et login-link til <b>${esc(s.sentTo)}</b>. Åbn linket på denne enhed.</p><button type="button" class="acc-link" data-account="email">Send et nyt link</button>`
     : s.ui === 'email' || s.ui === 'finish'
@@ -162,9 +171,7 @@ export function renderAccountPanel(s) {
           <div class="acc-row"><input id="acc-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="navn@eksempel.dk"><button type="submit" class="big-btn"${s.busy ? ' disabled' : ''}>${s.ui === 'finish' ? 'Log ind' : 'Send link'}</button></div>
           ${s.ui === 'email' ? '<button type="button" class="acc-link" data-account="cancel">Annullér</button>' : ''}</form>`
       : `<div class="acc-actions acc-actions--stack"><button type="button" class="big-btn big-btn--ghost acc-google" data-account="google">${GOOGLE_G}<span>Fortsæt med Google</span></button><button type="button" class="big-btn big-btn--ghost" data-account="email">${MAIL}<span>Få et login-link på e-mail</span></button></div>`;
-  return `<section class="panel account-panel" aria-labelledby="acc-title"><h2 id="acc-title">Gem din fremgang</h2>
-    <p class="acc-lead">Lige nu gemmes alt kun på denne enhed. Log ind, så kan du fortsætte på både telefon og computer.</p>${err}${body}
-    <p class="acc-fine">Logger du ind, gemmes din fremgang i din konto hos Google Firebase (database i EU). Chatten gemmes kun på enheden. Dine spørgsmål sendes til vores AI-tjeneste for at blive besvaret.</p></section>`;
+  return err + body;
 }
 
 /** Din profil: pick your profile picture */
@@ -190,6 +197,8 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
     <div class="panel"><h2>Styrker og svagheder</h2><ul class="sw">${bars}</ul></div>
     <a class="set-row set-row--link" href="#start:1"><span>Prøvedato</span><small>${esc(WHEN_TEXT[intro?.when] || 'Vælg')}${examDays !== null ? ` <span class="tb-stripes" aria-hidden="true"></span> ${examDays} dage` : ''}</small></a>
     ${toggle('sound', 'Lyd og oplæsning')}${toggle('humor', 'Humor i forklaringer')}${toggle('motion', 'Bevægelse og animationer')}
+    <a class="set-row set-row--link" href="#start"><span>Se introen og opstarten igen</span></a>
+    <button class="set-row set-row--link" type="button" data-action="tour"><span>Vis rundvisning med Sneglen</span></button>
     <div class="set-row set-row--theme" role="radiogroup" aria-labelledby="theme-label"><span id="theme-label">Udseende</span><span class="seg">${THEME_CHOICES.map(([v, label]) => `<label><input type="radio" name="theme" value="${v}" ${themePref() === v ? 'checked' : ''}><span>${label}</span></label>`).join('')}</span></div>
     <h2 class="list-label">Privatliv og vilkår</h2>
     <a class="set-row set-row--link" href="https://teoriboost.dk/privatliv/" rel="noopener noreferrer"><span>Privatlivspolitik</span></a>

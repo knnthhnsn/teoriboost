@@ -9,7 +9,7 @@
  .hud-top{position:absolute!important;z-index:5;top:max(10px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));pointer-events:none;background:none!important;padding:0!important;border:0!important;display:flex!important;justify-content:space-between}
  .where,.tally{pointer-events:auto;background:#2B3138EF!important;color:#F4F5F7!important;border:2px solid #1F2328!important;border-radius:12px;padding:8px 12px!important;box-shadow:0 2px #1F2328}
  .where{flex:0 0 auto!important;width:auto!important;max-width:205px!important}.where strong{color:#F4F5F7!important}
- .where .label,.tally .label{color:#FFEB85!important;font-size:10px}.where strong{font-size:15px}.next{font-size:12px!important;color:#F4F5F7!important}.tally b{color:#F4F5F7!important}
+ .where .label,.tally .label{color:#FFD60A!important;font-size:10px}.where strong{font-size:15px}.next{font-size:12px!important;color:#F4F5F7!important}.tally b{color:#F4F5F7!important}
  .mirror-strip{position:absolute!important;z-index:6!important;inset:0!important;height:100%!important;background:transparent!important;border:0!important;display:block!important;pointer-events:none}
  .mirror-strip>*{pointer-events:auto}.mirror-strip .mirror{height:52px!important;width:90px!important;border:3px solid #26332d!important;border-radius:12px!important;background:transparent!important;overflow:hidden}.mirror-strip .mirror--rear{width:130px!important}.mirror-strip canvas{width:100%!important;height:100%!important}.mirror-strip small{display:none}.look-button{width:48px!important;height:48px!important;font-size:11px!important}
  .mirror-strip .mirror{position:absolute!important;max-width:none!important;box-shadow:0 0 0 5px #935c4b,0 0 0 7px #25302a!important}.mirror-strip .mirror--rear{left:50%;top:12px;transform:translateX(-50%);box-shadow:0 0 0 4px #28372f!important}.mirror-strip .mirror--side:nth-child(2){left:12px;top:145px;border-radius:45%!important}.mirror-strip .mirror--side:nth-child(4){right:12px;top:145px;border-radius:45%!important}.mirror-strip #look-left,.mirror-strip #look-right{position:absolute;top:145px;opacity:.01}.mirror-strip #look-left:focus-visible,.mirror-strip #look-right:focus-visible{opacity:1}.mirror-strip #look-left{left:12px}.mirror-strip #look-right{right:12px}
@@ -39,7 +39,7 @@
 }
 /* Start sheet uses the approved interface palette. Keyboard instructions are
    useful only on devices with a precise hovering pointer. */
-#start .card--start{background:#FEFFED!important;color:#1F2328!important}
+#start .card--start{background:#FFFFFF!important;color:#1F2328!important}
 #start .card--start h1,#start .card--start .lede{color:#1F2328!important}
 #start .card--start h1 em{color:#4A4127!important}
 #start .card--start .label{color:#525C65!important}
@@ -56,10 +56,10 @@
 /* All instructional surfaces use the shared brand palette. */
 
 html,body{background:#1F2328!important}
-.card{background:#FEFFED!important;color:#1F2328!important;border-color:#C2CCD6!important}
+.card{background:#FFFFFF!important;color:#1F2328!important;border-color:#C2CCD6!important}
 .card h1,.card h2,.card .lede,.card .note{color:#1F2328!important}
 .card .label,.card .rule small{color:#525C65!important}
-.card .rule{background:#FFF6C7!important;color:#1F2328!important;border-color:#C9A200!important}
+.card .rule{background:#FFD60A!important;color:#1F2328!important;border-color:#C9A200!important}
 .card .penalty{background:#FF4B4B!important;color:#1F2328!important}
 .card .sheet>div{border-color:#C2CCD6!important;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}
 .card .sheet dt{color:#525C65!important}.card .sheet dd,.card .sheet .ok dd,.card .sheet .bad dd{color:#1F2328!important;font-weight:700;text-align:right}
@@ -72,7 +72,7 @@ html,body{background:#1F2328!important}
  .card--incident h2{font-size:31px!important;line-height:1.02!important}
  .card--incident .rule{padding:8px 10px!important;font-size:13px;line-height:1.35}
 }
-.card .go:hover{background:#FFE45C!important;box-shadow:inset 0 0 0 2px #1F2328!important}.card .go:active{background:#E8BC00!important}
+.card .go:hover{background:#FFD60A!important;box-shadow:inset 0 0 0 2px #1F2328!important}.card .go:active{background:#E8BC00!important}
 .turn-phone{color:#FEFFED!important}.turn-phone-icon{border-color:#C2CCD6!important;box-shadow:inset 0 -5px #525C65!important}
 @media (orientation:landscape){
  #blink-left,#blink-right,#horn{background:#3A434C!important;color:#FEFFED!important;border-color:#0F1215!important}

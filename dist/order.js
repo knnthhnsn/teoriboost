@@ -13,7 +13,7 @@ const sectionOf = id => CHAPTERS.flatMap(c => c.sections.map(s => ({ ...s, chapt
 
 export function renderOrderList() {
   const res = loadOrderResults();
-  return `<section class="order-list" aria-labelledby="ol-title"><header class="screen-head"><a class="back-round" href="#practice" aria-label="Tilbage til Øv">${ico('up', { cls: 'rot-left' })}</a><h1 id="ol-title">Rækkefølge</h1></header>
+  return `<section class="order-list" aria-labelledby="ol-title"><header class="screen-head"><a class="back-round" href="#practice" aria-label="Tilbage til Øvelser">${ico('up', { cls: 'rot-left' })}</a><h1 id="ol-title">Rækkefølge</h1></header>
     <p class="ord-intro">Procedurer skal sidde i den rigtige rækkefølge. Alle bygger på appens kildetjekkede regelkort.</p>
     <div class="row-list">${SEQUENCES.map(s => `<a class="row-card" href="#order:${s.id}"><span class="row-ico${res[s.id]?.done ? ' is-done' : ''}">${ico(res[s.id]?.done ? 'check' : 'list')}</span><div><strong>${esc(s.title)}</strong><small>${s.steps.length} trin <span class="tb-stripes" aria-hidden="true"></span> ${esc(sectionOf(s.sectionId)?.title || '')}</small></div><span class="row-go">${ico('down', { cls: 'rot-right' })}</span></a>`).join('')}</div></section>`;
 }

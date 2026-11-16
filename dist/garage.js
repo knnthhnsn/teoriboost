@@ -34,6 +34,15 @@ const hooks = {
   'saerlige-koeretoejer': 'Kategori B er ikke et “jeg kører alt”-abonnement.',
   'registreringsattest': 'Papirerne kender bilens grænser. Din optimisme gør ikke.'
 };
+const DONE_KEY = 'teoriboost.garage.done';
+const done = new Set();
+try { JSON.parse(globalThis.localStorage?.getItem(DONE_KEY) || '[]').forEach(id => done.add(id)); } catch {}
+const markDone = id => { done.add(id); try { globalThis.localStorage?.setItem(DONE_KEY, JSON.stringify([...done])); } catch {} };
+if (typeof document !== 'undefined' && !document.getElementById('garage-x-css')) {
+  const link = document.createElement('link');
+  link.id = 'garage-x-css'; link.rel = 'stylesheet'; link.href = 'garage-x.css';
+  document.head.append(link);
+}
 const physical = objective => ['udpege', 'aflæse og forstå', 'kontrollere'].includes(objective.requirement);
 export { hooks as GARAGE_HOOKS };
 const topicMap = new Map(GARAGE.topics.map(topic => [topic.id, topic]));
@@ -65,80 +74,124 @@ function references(refs) {
   return `<div class="garage-refs"><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">Undervisningsplanen</a><span>${refs.map(ref => esc(ref)).join(' <span class="tb-stripes" aria-hidden="true"></span> ')}</span></div>`;
 }
 
-function vehicleGraphic(zone = '') {
-  return `<div class="garage-vehicle" data-zone="${esc(zone)}">
-    <div class="garage-vehicle-top"><span class="mono">BILENS INDERSIDE / KATEGORI B</span><span class="garage-live">SKEMATISK</span></div>
-    <svg class="garage-car" viewBox="0 0 640 465" role="img" aria-labelledby="garage-car-title garage-car-desc">
-      <title id="garage-car-title">En bil set oppefra, med en synlig drivlinje under karrosseriet</title>
-      <desc id="garage-car-desc">Forenden er øverst. Motor og gear er foran kabinen, bremser sidder ved hjulene. Illustrationen viser en forenklet bil med manuel gearkasse; andre biltyper kan være indrettet anderledes.</desc>
-      <defs>
-        <linearGradient id="garage-body-paint" x1="0" x2="1"><stop stop-color="#3a76a5"/><stop offset=".48" stop-color="#7aaecb"/><stop offset="1" stop-color="#235778"/></linearGradient>
-        <linearGradient id="garage-glass-paint" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#244351"/><stop offset="1" stop-color="#101e27"/></linearGradient>
-        <pattern id="garage-grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#54666a" stroke-width=".5"/></pattern>
-        <clipPath id="garage-body-window"><rect id="garage-body-mask" x="185" y="38" width="220" height="416"/></clipPath>
-      </defs>
-      <rect x="0" y="0" width="640" height="465" fill="url(#garage-grid)" opacity=".24"/>
-      <path d="M167 44v380m260-380v380M157 56h20m-20 354h20m240-354h20m-20 354h20" fill="none" stroke="#78908e" stroke-width="1" stroke-dasharray="4 7"/>
-      <text class="garage-graphic-decoration" x="139" y="240" transform="rotate(-90 139 240)" fill="#94a8a6" font-family="monospace" font-size="11" letter-spacing="3">FORSTÅ FØR DU KØRER</text>
-      <ellipse cx="299" cy="283" rx="126" ry="164" fill="#060c10" opacity=".35"/>
-      <g class="garage-chassis"><path d="M235 70Q295 42 355 70L374 111V381Q295 422 216 381V111Z" fill="#192e34" stroke="#5d777a" stroke-width="2"/>
-        <path d="M295 155V364M214 125H376M214 363H376" stroke="#91a5a6" stroke-width="11"/>
-        <path d="M295 155V364" stroke="#1f3038" stroke-width="5"/>
-        <g class="garage-part garage-part-powertrain"><rect x="255" y="90" width="80" height="58" rx="10" fill="#f7a759" stroke="#ffd3a0" stroke-width="2"/>
-          <path d="M269 102v34m13-34v34m13-34v34m13-34v34m13-34v34" stroke="#ac622c" stroke-width="3"/>
-          <circle cx="295" cy="157" r="13" fill="#e9d497" stroke="#fff0c7" stroke-width="2"/>
-          <rect x="280" y="174" width="30" height="42" rx="5" fill="#75cdb2" stroke="#a5f2d9" stroke-width="2"/>
-          <path class="garage-power-flow" d="M295 225V333" fill="none" stroke="#ffa665" stroke-width="3" stroke-dasharray="6 12"/>
-        </g>
-        <g fill="#101619" stroke="#718386" stroke-width="2"><rect x="194" y="100" width="25" height="54" rx="7"/><rect x="371" y="100" width="25" height="54" rx="7"/><rect x="194" y="337" width="25" height="54" rx="7"/><rect x="371" y="337" width="25" height="54" rx="7"/></g>
-        <g class="garage-part garage-part-exterior" fill="#e59b78"><rect x="217" y="111" width="9" height="33" rx="4"/><rect x="364" y="111" width="9" height="33" rx="4"/><rect x="217" y="348" width="9" height="33" rx="4"/><rect x="364" y="348" width="9" height="33" rx="4"/></g>
-      </g>
-      <g class="garage-body" clip-path="url(#garage-body-window)">
-        <path d="M232 61Q295 38 358 61L379 111V379Q367 404 344 411H246Q223 404 211 379V111Z" fill="url(#garage-body-paint)" stroke="#aac9d8" stroke-width="2"/>
-        <path d="M232 165L250 184H340L358 165L344 118H246Z" fill="url(#garage-glass-paint)" stroke="#a4bfcb" stroke-width="1.5"/>
-        <path d="M250 208H340L352 300H238Z" fill="#6194ae" stroke="#a6c0cb" stroke-width="1.5"/>
-        <path d="M238 324L250 350H340L352 324Z" fill="url(#garage-glass-paint)" stroke="#a4bfcb" stroke-width="1.5"/>
-        <path d="M225 171v134l10-22V198Zm140 0v134l-10-22V198Z" fill="#192f3b"/>
-        <path d="M241 76H349M233 378H357" stroke="#aacbd8" stroke-width="2" opacity=".6"/>
-        <path d="M219 164l-22 7v12l20-2m154-17 22 7v12l-20-2" fill="#4f87a2" stroke="#aacbd8"/>
-        <path d="M228 79h32m70 0h32" stroke="#ffecd0" stroke-width="7" stroke-linecap="round"/>
-        <path d="M224 389h24m94 0h24" stroke="#eb7969" stroke-width="6" stroke-linecap="round"/>
-      </g>
-      <g class="garage-part garage-part-cockpit"><circle cx="269" cy="198" r="13" fill="#172c37" stroke="#dae5dc" stroke-width="2.5"/><path d="m256 198 13 5 13-5m-13 5v7" stroke="#dae5dc" stroke-width="2" fill="none"/></g>
-      <g class="garage-part garage-part-documents" transform="translate(451 267) rotate(7)"><rect width="104" height="129" rx="4" fill="#e0dbc9" stroke="#fff3d4"/><rect x="12" y="14" width="29" height="18" fill="#164451"/><path d="M13 47h77m-77 15h64m-64 15h77m-77 15h48m-48 16h77" stroke="#8e998e" stroke-width="3"/><text x="85" y="32" text-anchor="end" fill="#214b52" font-family="monospace" font-size="18">B</text></g>
-      <g fill="none" stroke-width="1.4" class="garage-callouts">
-        <path d="M269 198H115L90 166" stroke="#9bbfff"/><path d="M295 123H464L489 89" stroke="#ffb675"/><path d="M384 363H417L438 427" stroke="#79d5b5"/><path d="M503 295H574V244" stroke="#d8cc98"/>
-      </g>
-      <g class="garage-callout-labels" font-family="monospace" font-size="14" font-weight="bold"><text x="30" y="153" fill="#bad3ff">1 / COCKPIT</text><text x="457" y="73" fill="#ffcc9b">2 / DRIVLINJE</text><text x="430" y="449" fill="#a4ead1">3 / YDERSIDE</text><text x="480" y="227" fill="#eee0ad">4 / PAPIRER</text></g>
-      <path d="M295 22V9m-6 6 6-6 6 6" fill="none" stroke="#cad3ca" stroke-width="1.5"/><text x="315" y="20" fill="#a6b4ad" font-size="10" font-family="monospace">FORAN</text>
-    </svg>
-    <label class="garage-xray"><span><strong>Karrosseri til røntgen</strong><output id="garage-xray-value">0%</output></span><input id="garage-xray" type="range" min="0" max="100" value="0" aria-label="Røntgenvisning af bilens drivlinje" aria-valuetext="Karrosseriet er synligt"></label>
-    <p class="garage-graphic-note">Skematisk bil med manuel gearkasse. Placering og udstyr varierer—find delene i din bil med kørelæreren.</p>
+const chev = dir => `<svg class="gx-chev" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${dir === 'left' ? 'M14.5 6 8.5 12l6 6' : 'M9.5 6l6 6-6 6'}" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const topicsOf = zoneId => GARAGE.topics.filter(topic => topic.zone === zoneId);
+const doneIn = list => list.filter(topic => done.has(topic.id)).length;
+const nextTopic = () => GARAGE.topics.find(topic => !done.has(topic.id)) || null;
+const firstOpenZone = () => (zones.find(zone => topicsOf(zone.id).some(topic => !done.has(topic.id))) || zones[0]).id;
+
+/* Pin positions in percent of the stage: [x, y] on the drawn car, [x, y] on the blueprint. */
+const PINS = {
+  cockpit: { out: [56, 39, 'r'], bp: [40, 42, 'r'] },
+  powertrain: { out: [71, 49, 'b'], bp: [45, 22, 'r'] },
+  exterior: { out: [53, 64, 'r'], bp: [63, 84, 'l'] },
+  documents: { out: [19, 79, 'r'], bp: [87, 76, 'l'] }
+};
+
+function pinSet(view, active) {
+  return `<div class="gx-pins" data-pins="${view}" ${view === 'bp' ? 'hidden' : ''}>${zones.map(zone => {
+    const [x, y, place] = PINS[zone.id][view];
+    return `<button type="button" class="gx-pin gx-pin--${place}" style="left:${x}%;top:${y}%" data-gx-zone="${zone.id}" aria-pressed="${active === zone.id}" aria-label="${esc(zone.title)}, område ${zone.number}"><span class="gx-pin-dot">${zone.number}</span><span class="gx-pin-label">${esc(zone.title)}</span></button>`;
+  }).join('')}</div>`;
+}
+
+function blueprint() {
+  return `<svg class="gx-bp" viewBox="70 30 500 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bil set oppefra med motor, gear og drivlinje synlig under karrosseriet. Forenden er øverst.">
+    <defs><pattern id="gx-grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#3A434C" stroke-width=".7"/></pattern></defs>
+    <rect x="70" y="30" width="500" height="400" fill="url(#gx-grid)"/>
+    <path d="M167 44v380m260-380v380M157 56h20m-20 354h20m240-354h20m-20 354h20" fill="none" stroke="#5F656D" stroke-width="1.2" stroke-dasharray="4 7"/>
+    <ellipse cx="299" cy="283" rx="130" ry="168" fill="#0F1215" opacity=".5"/>
+    <g class="gx-chassis"><path d="M235 70Q295 42 355 70L374 111V381Q295 422 216 381V111Z" class="gx-chassis-fill"/>
+      <path d="M295 155V364M214 125H376M214 363H376" stroke="#C2CCD6" stroke-width="10" fill="none"/>
+      <g class="gx-wheels"><rect x="194" y="100" width="25" height="54" rx="7"/><rect x="371" y="100" width="25" height="54" rx="7"/><rect x="194" y="337" width="25" height="54" rx="7"/><rect x="371" y="337" width="25" height="54" rx="7"/></g>
+      <g class="gx-part gx-part-exterior"><rect x="217" y="111" width="9" height="33" rx="4"/><rect x="364" y="111" width="9" height="33" rx="4"/><rect x="217" y="348" width="9" height="33" rx="4"/><rect x="364" y="348" width="9" height="33" rx="4"/></g>
+      <g class="gx-part gx-part-powertrain"><rect x="255" y="90" width="80" height="58" rx="10"/><path d="M269 102v34m13-34v34m13-34v34m13-34v34m13-34v34" class="gx-detail"/><circle cx="295" cy="157" r="13"/><rect x="280" y="174" width="30" height="42" rx="5"/><path class="gx-power-flow" d="M295 225V333" fill="none" stroke-width="4" stroke-dasharray="6 12"/></g>
+    </g>
+    <path class="gx-shell" d="M232 61Q295 38 358 61L379 111V379Q367 404 344 411H246Q223 404 211 379V111Z"/>
+    <path class="gx-glass" d="M232 165L250 184H340L358 165L344 118H246ZM238 324L250 350H340L352 324Z"/>
+    <g class="gx-part gx-part-cockpit"><circle cx="269" cy="198" r="14"/><path d="m256 198 13 5 13-5m-13 5v8" fill="none" class="gx-detail"/></g>
+    <g class="gx-part gx-part-documents" transform="translate(451 267) rotate(7)"><rect width="104" height="129" rx="6"/><rect x="12" y="14" width="29" height="18" class="gx-detail-fill"/><path d="M13 47h77m-77 15h64m-64 15h77m-77 15h48m-48 16h77" class="gx-detail"/></g>
+  </svg>`;
+}
+
+/* The stage: the drawn car outside, the blueprint inside, and a slider that wipes between them. */
+function stage(active, { interactive = true } = {}) {
+  return `<div class="gx-stage" data-zone="${esc(active)}" style="--reveal:0%">
+    <div class="gx-floor" aria-hidden="true"></div>
+    <div class="gx-layer gx-layer-out"><img class="gx-car" src="assets/garage/nordic.webp" width="1280" height="853" alt="En moderne sedan set på skrå. Fire tal markerer områderne cockpit, drivlinje, yderside og papirer." decoding="async"><svg class="gx-paper gx-part gx-part-documents" viewBox="0 0 104 129" aria-hidden="true"><rect width="104" height="129" rx="6"/><rect x="12" y="14" width="29" height="18" class="gx-detail-fill"/><path d="M13 47h77m-77 15h64m-64 15h77m-77 15h48m-48 16h77" class="gx-detail"/></svg><div class="gx-focus" aria-hidden="true"></div></div>
+    ${interactive ? `<div class="gx-layer gx-layer-in">${blueprint()}</div><div class="gx-wipe" aria-hidden="true"></div>` : ''}
+    ${pinSet('out', active)}${interactive ? pinSet('bp', active) : ''}
   </div>`;
 }
 
-function zoneLinks(active = '') {
-  return `<nav class="garage-zones" aria-label="Områder i bilen">${zones.map(zone => `<a class="garage-zone ${active === zone.id ? 'selected' : ''}" href="#garage-zone:${zone.id}" ${active === zone.id ? 'aria-current="page"' : ''}><span>${zone.number}</span><div><strong>${zone.title}</strong><small>${zone.caption}</small></div></a>`).join('')}</nav>`;
+function xrayControl() {
+  return `<div class="gx-xray"><div class="gx-seg" role="group" aria-label="Vis bilen udefra eller indefra"><button type="button" class="gx-seg-btn" data-gx-view="0" aria-pressed="true">Udefra</button><button type="button" class="gx-seg-btn" data-gx-view="100" aria-pressed="false">Indeni</button></div>
+    <label class="gx-slider"><span class="sr-only">Røntgen: træk for at se ind under karrosseriet</span><input id="garage-xray" type="range" min="0" max="100" value="0" aria-valuetext="Bilen set udefra"></label></div>`;
+}
+
+function topicRow(topic) {
+  const isDone = done.has(topic.id);
+  return `<a href="#garage:${esc(topic.id)}" class="gx-row ${isDone ? 'is-done' : ''}"><span class="gx-row-mark" aria-hidden="true">${isDone ? ico('check') : esc(topic.pointRef)}</span><span class="gx-row-text"><strong>${esc(topic.title)}</strong><small>${topic.objectives.length} delmål${topic.objectives.some(physical) ? ' · opgave i bilen' : ''}${isDone ? ' · gennemgået' : ''}</small></span><span class="gx-go" aria-hidden="true">${chev('right')}</span></a>`;
+}
+
+function panel(zoneId) {
+  const zone = zones.find(item => item.id === zoneId) || zones[0];
+  const list = topicsOf(zone.id), count = doneIn(list), pct = Math.round(count / list.length * 100);
+  return `<span class="gx-eyebrow">OMRÅDE ${zone.number} AF ${zones.length}</span><h2 class="gx-panel-title">${esc(zone.title)}</h2><p class="gx-panel-lead">${esc(zone.caption)}</p>
+    <div class="gx-progress" role="img" aria-label="${count} af ${list.length} systemer gennemgået"><span style="width:${pct}%"></span></div><p class="gx-progress-note">${count} af ${list.length} gennemgået</p>
+    <div class="gx-rows">${list.map(topicRow).join('')}</div>`;
+}
+
+function zoneTabs(active) {
+  return `<div class="gx-tabs" role="group" aria-label="Områder i bilen">${zones.map(zone => {
+    const list = topicsOf(zone.id);
+    return `<button type="button" class="gx-tab" data-gx-zone="${zone.id}" aria-pressed="${active === zone.id}"><span class="gx-tab-n">${zone.number}</span><span class="gx-tab-text"><strong>${esc(zone.title)}</strong><small>${doneIn(list)} af ${list.length}</small></span></button>`;
+  }).join('')}</div>`;
+}
+
+function topicCard(topic) {
+  const isDone = done.has(topic.id);
+  return `<a href="#garage:${esc(topic.id)}" class="gx-card ${isDone ? 'is-done' : ''}"><span class="gx-card-ref">${esc(topic.pointRef)}</span><strong>${esc(topic.title)}</strong><small>${topic.objectives.length} delmål${topic.objectives.some(physical) ? ' · opgave i bilen' : ''}</small><span class="gx-card-state">${isDone ? `${ico('check')}Gennemgået` : 'Ikke startet'}</span></a>`;
 }
 
 function topicLinks(topics) {
-  return `<div class="garage-topics">${topics.map(topic => `<a href="#garage:${esc(topic.id)}" class="garage-topic-link"><span class="mono">${esc(topic.pointRef)}</span><div><strong>${esc(topic.title)}</strong><small>${topic.objectives.length} delmål${topic.objectives.some(physical) ? ' <span class="tb-stripes" aria-hidden="true"></span> opgave i bilen' : ''}</small></div></a>`).join('')}</div>`;
+  return `<div class="gx-cards">${topics.map(topicCard).join('')}</div>`;
+}
+
+function head(backHref, backLabel, eyebrow, title, extra = '') {
+  return `<header class="gx-head"><a class="gx-back" href="${backHref}" aria-label="${esc(backLabel)}">${chev('left')}</a><div class="gx-head-text"><div class="gx-eyebrow">${eyebrow}</div><h1>${title}</h1></div>${extra}</header>`;
 }
 
 function overview(zoneId = '') {
-  const zone = zones.find(item => item.id === zoneId);
-  const topics = zone ? GARAGE.topics.filter(topic => topic.zone === zone.id) : GARAGE.topics;
-  return `<section class="garage-page">
-    <div class="screen-head"><a class="back-btn" href="#theory" aria-label="Tilbage til teoriatlaset">Tilbage</a><div><div class="eyebrow">BILEN FØR TUREN / VÆRKSTED 1</div><h1>GARAGEN.</h1></div><a class="garage-quick-start" href="#garage:kobling">Prøv kobling</a></div>
-    <div class="garage-overview"><div class="garage-overview-art">${vehicleGraphic(zone?.id)}${zoneLinks(zone?.id)}</div>
-      <div class="garage-overview-content"><div class="garage-intro art-note"><div class="art-scene">${renderArt('daek',{variant:'garage',humorOnly:true})}</div><span class="mono acid">INDERSIDEN ER OGSÅ PENSUM</span><h2>En bil har ingen<br>“det går nok”-knap.</h2><p>Tag en beslutning. Se systemet bag. Genkald det, før du tager reglen med til den rigtige bil.</p><div class="garage-inventory"><strong>${GARAGE.topics.length}</strong><span>UNDEROMRÅDER FRA<br>UNDERVISNINGSPLANENS KAPITEL 1</span></div></div>
-        <div class="garage-list-head"><h2>${zone ? esc(zone.title) : 'Vælg dit næste system'}</h2>${zone ? '<a href="#garage" class="text-link">Se alle 17</a>' : ''}</div>
-        <label class="garage-search"><span class="sr-only">Søg i garagens emner og delmål</span><input id="garage-search" type="search" placeholder="Søg fx kobling, dæk eller ratslør" autocomplete="off"></label>
-        <div id="garage-topic-results" data-zone="${esc(zone?.id || '')}">${topicLinks(topics)}</div>
-        <div class="garage-physical-summary"><div><strong>Kontrollen skal med ud i bilen.</strong><p>Udpegning, aflæsning og kontrol forberedes her og udføres med kørelæreren.</p><a href="#garage:checklist" class="text-link">Åbn den samlede biltjekliste</a></div></div>
-      </div>
+  const active = zones.some(zone => zone.id === zoneId) ? zoneId : firstOpenZone();
+  const total = GARAGE.topics.length, finished = doneIn(GARAGE.topics), next = nextTopic();
+  const score = `<div class="gx-score" role="img" aria-label="${finished} af ${total} systemer gennemgået"><strong>${finished}</strong><span>af ${total}<br>gennemgået</span></div>`;
+  return `<section class="garage-page gx-page" data-active="${active}">
+    ${head('#theory', 'Tilbage til teoriatlaset', 'BILEN FØR TUREN / VÆRKSTED 1', 'GARAGEN.', score)}
+    <div class="gx-hero">
+      <div class="gx-hero-left">${stage(active)}${xrayControl()}${zoneTabs(active)}</div>
+      <div class="gx-panel" id="gx-panel" aria-live="polite">${panel(active)}</div>
     </div>
+    <div class="gx-next ${next ? '' : 'is-all'}">
+      <div class="gx-next-text"><span class="gx-eyebrow">${next ? 'DIT NÆSTE SYSTEM' : 'ALT GENNEMGÅET'}</span><h2>${next ? esc(next.title) : 'Tag kontrollen med ud i bilen.'}</h2><p>${next ? esc(next.lead) : 'Du har været hele bilen igennem. Næste skridt er biltjeklisten sammen med kørelæreren.'}</p>
+        <a class="gx-btn" href="${next ? `#garage:${esc(next.id)}` : '#garage:checklist'}">${next ? 'Start systemet' : 'Åbn biltjeklisten'}<span class="gx-go" aria-hidden="true">${chev('right')}</span></a></div>
+      <img class="gx-next-daek" src="assets/cast/daek.webp" alt="" aria-hidden="true" width="512" height="512" loading="lazy" decoding="async">
+    </div>
+    <div class="gx-list-head"><h2>Alle ${total} systemer</h2></div>
+    <label class="gx-search"><span class="sr-only">Søg i garagens emner og delmål</span><input id="garage-search" type="search" placeholder="Søg fx kobling, dæk eller ratslør" autocomplete="off"></label>
+    <div id="garage-topic-results" data-zone="">${topicLinks(GARAGE.topics)}</div>
+    <a class="gx-check" href="#garage:checklist"><span class="gx-check-ico" aria-hidden="true">${ico('clipboard')}</span><span><strong>Kontrollen skal med ud i bilen.</strong><small>Udpegning, aflæsning og kontrol forberedes her og udføres med kørelæreren. Åbn den samlede biltjekliste.</small></span><span class="gx-go" aria-hidden="true">${chev('right')}</span></a>
   </section>`;
+}
+
+function steps(topic) {
+  const answered = answers.has(topic.id);
+  return `<ol class="gx-steps" aria-label="Sådan gennemgår du systemet"><li class="${answered ? 'is-done' : 'is-now'}"><span>${answered ? ico('check') : '1'}</span>Tag stilling</li><li class="${answered ? 'is-now' : ''}"><span>2</span>Forstå systemet</li><li><span>3</span>Genkald uden hjælp</li></ol>`;
+}
+
+function miniCar(topic) {
+  const zone = zones.find(item => item.id === topic.zone);
+  return `<div class="gx-mini"><div class="gx-mini-top"><span class="gx-eyebrow">HER SIDDER DET</span><strong>${esc(zone?.title || '')}</strong></div>${stage(topic.zone, { interactive: false })}</div>`;
 }
 
 function caseMarkup(topic) {
@@ -154,12 +207,12 @@ function topicView(topic) {
   const index = GARAGE.topics.indexOf(topic);
   const next = GARAGE.topics[(index + 1) % GARAGE.topics.length];
   const needsCar = topic.objectives.some(physical);
-  return `<article class="garage-page garage-detail">
-    <div class="screen-head"><a class="back-btn" href="#garage" aria-label="Tilbage til garagen">Tilbage</a><div><div class="eyebrow">GARAGEN / PLANPUNKT ${esc(topic.pointRef)}</div><h1>${esc(topic.title)}</h1></div></div>
+  return `<article class="garage-page gx-page garage-detail">
+    ${head('#garage', 'Tilbage til garagen', `GARAGEN / PLANPUNKT ${esc(topic.pointRef)}`, esc(topic.title))}${steps(topic)}
     <div class="garage-detail-grid"><div class="garage-detail-main"><div id="garage-current-case">${caseMarkup(topic)}</div>
       <details class="garage-explanation" id="garage-explanation" ${answers.has(topic.id) ? 'open' : ''}><summary><span class="garage-section-label">2 / FORSTÅ SYSTEMET</span><strong>Se forklaringen</strong><span aria-hidden="true">＋</span></summary><div class="garage-explanation-body"><p class="garage-topic-lead">${esc(topic.lead)}</p><button class="voice-read" type="button" data-garage-voice="explanation" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til forklaringen</button>${topic.cards.map(card => `<section class="garage-knowledge-card"><h3>${esc(card.title)}</h3><p>${esc(card.body)}</p>${references(card.refs)}</section>`).join('')}<section class="garage-recall"><span class="garage-section-label">3 / GENKALD UDEN HJÆLP</span><h3>${esc(topic.recall.prompt)}</h3><button class="voice-read" type="button" data-garage-voice="recall" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til spørgsmålet</button><details><summary>Se forklaringen, når du har tænkt</summary><p>${esc(topic.recall.answer)}</p>${references(topic.recall.refs)}<button class="voice-read" type="button" data-garage-voice="recall-answer" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til svaret</button></details><p class="garage-case-note">Forklar med dine egne ord. Dit svar bliver ikke automatisk vurderet.</p></section></div></details>
       <details class="garage-objectives"><summary>Se alle ${topic.objectives.length} delmål og deres krav</summary><ul>${topic.objectives.map(objective => `<li><div><span class="mono">${esc(objective.ref)}</span><span class="garage-requirement ${physical(objective) ? 'physical' : ''}">${esc(objective.requirement)}${physical(objective) ? ' <span class="tb-stripes" aria-hidden="true"></span> i bilen' : ''}</span></div><p>${esc(objective.summary)}</p></li>`).join('')}</ul>${references([topic.pointRef])}</details>
-    </div><aside class="garage-detail-side">${vehicleGraphic(topic.zone)}
+    </div><aside class="garage-detail-side">${miniCar(topic)}
       <section class="garage-practical"><span class="garage-section-label">TAG DET MED TIL BILEN</span><h2>${needsCar ? 'Skal vises i bilen.' : 'Tag forståelsen med.'}</h2><p class="garage-practical-intro">${needsCar ? 'Appen forbereder dig. Udpegning, aflæsning og kontrol trænes med kørelæreren i undervisningsbilen.' : 'Afprøv forståelsen sammen med kørelæreren. Placering og betjening afhænger af bilen.'}</p>${topic.practical.length ? `<ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol>` : ''}<button class="voice-read" type="button" data-garage-voice="practical" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til opgaven i bilen</button><a class="text-link" href="#garage:checklist">Se den samlede biltjekliste</a></section>
     </aside></div>
     <div class="garage-next"><a class="btn btn-primary" href="#garage:${esc(next.id)}">Næste system: ${esc(next.title)}</a><a class="text-link" href="#garage">Tilbage til garagen</a></div>
@@ -168,7 +221,7 @@ function topicView(topic) {
 
 function checklistView() {
   const topics = GARAGE.topics.filter(topic => topic.practical.length && topic.objectives.some(physical));
-  return `<article class="garage-page garage-checklist"><div class="screen-head"><a class="back-btn" href="#garage" aria-label="Tilbage til garagen">Tilbage</a><div><div class="eyebrow">GARAGEN / TIL NÆSTE KØRETIME</div><h1>Tag kontrollen<br>med til bilen.</h1></div></div><p class="garage-topic-lead">En fælles huskeliste til dig og kørelæreren. Udfør kontrollen i undervisningsbilen efter dens anvisninger. Listen registrerer eller godkender ingen praktisk færdighed.</p><div class="garage-checklist-list">${topics.map(topic => `<section><div class="garage-list-head"><h2>${esc(topic.title)}</h2><a href="#garage:${esc(topic.id)}" class="text-link">Forstå systemet</a></div><ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol></section>`).join('')}</div><a href="#garage" class="btn btn-secondary">Til garagen</a></article>`;
+  return `<article class="garage-page gx-page garage-checklist">${head('#garage', 'Tilbage til garagen', 'GARAGEN / TIL NÆSTE KØRETIME', 'Tag kontrollen<br>med til bilen.')}<p class="garage-topic-lead">En fælles huskeliste til dig og kørelæreren. Udfør kontrollen i undervisningsbilen efter dens anvisninger. Listen registrerer eller godkender ingen praktisk færdighed.</p><div class="garage-checklist-list">${topics.map(topic => `<section><div class="garage-list-head"><h2>${esc(topic.title)}</h2><a href="#garage:${esc(topic.id)}" class="text-link">Forstå systemet</a></div><ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol></section>`).join('')}</div><a href="#garage" class="btn btn-secondary">Til garagen</a></article>`;
 }
 
 export function renderGarage(id = '', zone = '') {
@@ -180,14 +233,63 @@ export function renderGarage(id = '', zone = '') {
   return overview(zone);
 }
 
+let car3d = [];
 export function mountGarage(root, { onAnswer = () => {}, onNarrate = () => {} } = {}) {
+  car3d.forEach(handle => handle.dispose()); car3d = [];
+  let main3d = null;
+  import('./garage-3d.js').then(async ({ mountCar3d }) => {
+    for (const el of root.querySelectorAll('.gx-stage')) {
+      const mini = !!el.closest('.gx-mini');
+      const handle = await mountCar3d(el, { interactive: !mini, zone: mini ? (el.dataset.zone || '') : '' });
+      if (!handle) continue;
+      if (!root.isConnected) { handle.dispose(); continue; }
+      car3d.push(handle); if (!mini) main3d = handle;
+    }
+  }).catch(() => {});
+  const stageEl = root.querySelector('.gx-stage');
   const input = root.querySelector('#garage-xray');
-  input?.addEventListener('input', () => {
-    const value = Number(input.value);
-    root.querySelector('#garage-body-mask').setAttribute('width', String(220 * (1 - value / 100)));
-    root.querySelector('#garage-xray-value').textContent = `${value}%`;
-    input.setAttribute('aria-valuetext', `${value}% røntgenvisning`);
-    root.querySelector('.garage-vehicle').classList.toggle('xray-active', value > 25);
+  const reduced = () => document.body.classList.contains('no-motion') || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const setReveal = value => {
+    if (!stageEl) return;
+    stageEl.style.setProperty('--reveal', `${value}%`);
+    const inside = value >= 50;
+    if (main3d) { main3d.setXray(value / 100); stageEl.toggleAttribute('data-mid', false); root.querySelectorAll('[data-gx-view]').forEach(btn => btn.setAttribute('aria-pressed', String((Number(btn.dataset.gxView) >= 50) === inside))); if (input) { input.value = String(value); input.setAttribute('aria-valuetext', value >= 100 ? 'Bilen set indefra' : value <= 0 ? 'Bilen set udefra' : `${value}% indefra`); } return; }
+    stageEl.dataset.view = inside ? 'in' : 'out';
+    stageEl.toggleAttribute('data-mid', value > 0 && value < 100);
+    root.querySelector('[data-pins="out"]')?.toggleAttribute('hidden', inside);
+    root.querySelector('[data-pins="bp"]')?.toggleAttribute('hidden', !inside);
+    root.querySelectorAll('[data-gx-view]').forEach(btn => btn.setAttribute('aria-pressed', String((Number(btn.dataset.gxView) >= 50) === inside)));
+    if (input) { input.value = String(value); input.setAttribute('aria-valuetext', value >= 100 ? 'Bilen set indefra' : value <= 0 ? 'Bilen set udefra' : `${value}% indefra`); }
+  };
+  let tween = 0;
+  const glideTo = target => {
+    cancelAnimationFrame(tween);
+    const from = Number(input?.value || 0);
+    if (reduced() || from === target) { setReveal(target); return; }
+    const t0 = performance.now();
+    const step = now => {
+      const k = Math.min(1, (now - t0) / 420), eased = 1 - Math.pow(1 - k, 3);
+      setReveal(Math.round(from + (target - from) * eased));
+      if (k < 1) tween = requestAnimationFrame(step);
+    };
+    tween = requestAnimationFrame(step);
+  };
+  input?.addEventListener('input', () => { cancelAnimationFrame(tween); setReveal(Number(input.value)); });
+  const selectZone = zoneId => {
+    if (!stageEl) return;
+    stageEl.dataset.zone = zoneId; stageEl.dataset.touched = '1';
+    root.querySelector('.gx-page')?.setAttribute('data-active', zoneId);
+    root.querySelectorAll('[data-gx-zone]').forEach(el => el.setAttribute('aria-pressed', String(el.dataset.gxZone === zoneId)));
+    if (main3d) { main3d.setZone(zoneId, { withXray: false }); const want = zoneId === 'powertrain' ? 100 : zoneId === 'cockpit' ? 60 : 0; glideTo(want); }
+    const target = root.querySelector('#gx-panel');
+    target.innerHTML = panel(zoneId);
+    target.classList.remove('gx-swap'); void target.offsetWidth; target.classList.add('gx-swap');
+  };
+  root.addEventListener('click', event => {
+    const pin = event.target.closest('[data-gx-zone]');
+    if (pin && stageEl) { selectZone(pin.dataset.gxZone); return; }
+    const view = event.target.closest('[data-gx-view]');
+    if (view) glideTo(Number(view.dataset.gxView));
   });
   root.querySelector('#garage-search')?.addEventListener('input', event => {
     const term = event.target.value.trim().toLocaleLowerCase('da-DK');
@@ -222,6 +324,9 @@ export function mountGarage(root, { onAnswer = () => {}, onNarrate = () => {} } 
       const grade = gradeGarageChoice(topic, button.dataset.garageAnswer);
       if (!grade || answers.has(topic.id)) return;
       answers.set(topic.id, button.dataset.garageAnswer);
+      markDone(topic.id);
+      const rail = root.querySelector('.gx-steps');
+      if (rail) rail.outerHTML = steps(topic);
       root.querySelector('#garage-current-case').innerHTML = caseMarkup(topic);
       root.querySelector('#garage-explanation').open = true;
       onAnswer(grade.correct);

@@ -1,11 +1,11 @@
 /* Start page + intro. Full-bleed, no app chrome: the first minute should feel like a game's title screen. */
 body.start-mode .topbar,body.start-mode .sidebar,body.start-mode #mobile-nav,body.start-mode .experience-status{display:none!important}
 body.start-mode #main{padding:0!important;max-width:none}
-body.start-mode{background:#FEFFED}
+body.start-mode{background:#FFFFFF}
 
 /* ---------- hero ---------- */
 .start-hero{position:relative;min-height:100svh;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;padding:12px 16px 20px;
-  background:radial-gradient(120% 60% at 50% 18%,#FFF6C7 0,#FEFFED 62%)}
+  background:radial-gradient(120% 60% at 50% 18%,#FFD60A 0,#FEFFED 62%)}
 .start-top{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
 .start-brand{font-size:20px!important;text-decoration:none;color:var(--ink)}
 .start-skip{font:700 14px var(--font-display);color:var(--blue-ink,#1F2328);text-decoration:none;padding:12px 4px;min-height:44px;display:inline-flex;align-items:center}
@@ -32,7 +32,7 @@ body.start-mode{background:#FEFFED}
 .start-lead{margin:0 auto;max-width:36ch;color:var(--muted);font-size:16px;line-height:1.5;animation:fade-up .7s .9s var(--out) both}
 @keyframes fade-up{from{opacity:0;translate:0 12px}}
 .start-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.start-chips li{display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:999px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 2px 0 var(--line);
+.start-chips li{display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:999px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 2px 0 var(--line);
   font:600 14px var(--font-body,inherit);animation:pop-in .5s var(--spring) both}
 .start-chips li:nth-child(1){animation-delay:1.05s}.start-chips li:nth-child(2){animation-delay:1.15s}.start-chips li:nth-child(3){animation-delay:1.25s}
 .start-chips b{font:800 15px var(--font-display)}
@@ -41,7 +41,7 @@ body.start-mode{background:#FEFFED}
 .start-ticker{overflow:hidden;margin:2px -16px;-webkit-mask:linear-gradient(90deg,transparent,#0F1215 12%,#0F1215 88%,transparent);mask:linear-gradient(90deg,transparent,#0F1215 12%,#0F1215 88%,transparent);animation:fade-up .7s 1.3s var(--out) both}
 .start-ticker > div{display:flex;gap:8px;width:max-content;animation:ticker 36s linear infinite}
 .start-ticker span{padding:5px 11px;border-radius:999px;background:#F4F5F7;color:#3A434C;font:700 13px var(--font-display);white-space:nowrap}
-.start-ticker span:nth-child(3n){background:#FFF6C7}.start-ticker span:nth-child(4n){background:#FEFFED}
+.start-ticker span:nth-child(3n){background:#FFD60A}.start-ticker span:nth-child(4n){background:#FFFFFF}
 @keyframes ticker{to{translate:-50% 0}}
 
 .start-actions{display:flex;flex-direction:column;gap:10px;margin-top:6px;animation:fade-up .7s 1.4s var(--out) both}
@@ -51,7 +51,7 @@ body.start-mode{background:#FEFFED}
 .start-cta::after{content:"";position:absolute;inset:-30% auto -30% -40%;width:28%;z-index:-1;background:linear-gradient(100deg,transparent,rgba(254,255,237,0.8),transparent);transform:skewX(-18deg);animation:shine 3.6s 2s var(--in-out) infinite}
 .start-cta:active{translate:0 4px;box-shadow:0 1px 0 var(--accent-shadow,#C9A200);animation:none}
 @keyframes cta-breathe{0%,100%{scale:1}50%{scale:1.025}}
-.start-ghost{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:18px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);
+.start-ghost{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:18px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);
   color:var(--ink);font:800 16px var(--font-display);text-decoration:none}
 .start-fine{margin:0;color:var(--muted);font-size:13px}
 
@@ -93,7 +93,7 @@ body.start-mode{background:#FEFFED}
 .gu .fx-puffs{left:14%;top:62%}
 
 .gu-label{position:absolute;left:50%;bottom:0;translate:-50% 0;display:flex;align-items:center;gap:8px;white-space:nowrap;padding:7px 14px;border-radius:999px;
-  background:#FEFFED;border:2px solid var(--line);box-shadow:0 3px 0 var(--line);font:800 14px var(--font-display);color:var(--ink);z-index:60}
+  background:#FFFFFF;border:2px solid var(--line);box-shadow:0 3px 0 var(--line);font:800 14px var(--font-display);color:var(--ink);z-index:60}
 .gu-from{color:var(--muted);text-decoration:line-through 2px rgba(31,35,40,.35);transition:color .3s}
 .gu-arrow{color:var(--muted)}
 .gu-to{opacity:.25;transition:opacity .3s}
@@ -123,13 +123,13 @@ body.start-mode{background:#FEFFED}
 .step-body{flex:1;display:flex;flex-direction:column;gap:14px;padding:12px 0}
 .step-talk{display:flex;align-items:flex-end;gap:10px}
 .step-talk .cast-img{width:96px!important}
-.step-bubble{position:relative;flex:1;margin:0 0 18px;padding:12px 14px;border-radius:18px 18px 18px 6px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 3px 0 var(--line);
+.step-bubble{position:relative;flex:1;margin:0 0 18px;padding:12px 14px;border-radius:18px 18px 18px 6px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 3px 0 var(--line);
   font-size:17px;line-height:1.4;min-height:3.6em;animation:bubble-in .5s .15s var(--spring) both;transform-origin:0 100%}
 .step-options{display:flex;flex-direction:column;gap:10px}
 .step-option{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px;padding:12px 16px;border-radius:18px;text-align:left;
-  background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);color:var(--ink);animation:reveal .45s var(--out) backwards;animation-delay:calc(var(--i) * 70ms + 450ms)}
+  background:#FFFFFF;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);color:var(--ink);animation:reveal .45s var(--out) backwards;animation-delay:calc(var(--i) * 70ms + 450ms)}
 .step-option strong{font:800 17px var(--font-display)}.step-option small{color:var(--muted);font-size:14px}
-.step-option.is-on{border-color:#C9A200;background:#FFF6C7;box-shadow:0 4px 0 #C9A200}
+.step-option.is-on{border-color:#C9A200;background:#FFD60A;box-shadow:0 4px 0 #C9A200}
 .step-option.is-on small{color:#1F2328}
 .step-option.is-on::before{content:"";position:absolute;inset:-2px;border-radius:18px;border:2px solid #C9A200;animation:ring-out .5s var(--out) forwards;pointer-events:none}
 @keyframes ring-out{from{opacity:1;scale:1}to{opacity:0;scale:1.06}}
@@ -138,10 +138,10 @@ body.start-mode{background:#FEFFED}
 .step-eyebrow{margin:6px 0 0}
 .step-title{margin:0;font:800 clamp(26px,7.6vw,40px)/1.08 var(--font-display);letter-spacing:-.01em}
 .step-title span{display:block;color:var(--muted)}
-.step-garage{position:relative;padding:8px 0 4px;border-radius:24px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.step-garage{position:relative;padding:8px 0 4px;border-radius:24px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
 .step-garage .gu{width:min(78vw,340px)}
-.step-replay{display:block;margin:6px auto 4px;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:#FEFFED;font:700 14px var(--font-display);color:var(--ink)}
-.step-earn{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);animation:reveal .5s .6s var(--out) backwards}
+.step-replay{display:block;margin:6px auto 4px;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:#FFFFFF;font:700 14px var(--font-display);color:var(--ink)}
+.step-earn{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);animation:reveal .5s .6s var(--out) backwards}
 .step-earn strong{display:block;font:800 17px var(--font-display)}.step-earn small{color:var(--muted);font-size:14px}
 .step-earn-icon{animation:bolt-glint 3s 1s var(--in-out) infinite}
 
@@ -150,7 +150,7 @@ body.start-mode{background:#FEFFED}
 .plan-hero .cast{justify-content:center}.plan-hero .cast-img{width:150px!important}
 .plan-title{text-align:center}
 .plan-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
-.plan-list li{display:grid;grid-template-columns:44px 1fr 28px;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:#FEFFED;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);
+.plan-list li{display:grid;grid-template-columns:44px 1fr 28px;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);
   animation:reveal .5s var(--out) backwards;animation-delay:calc(var(--i) * 260ms + 500ms)}
 .plan-list strong{display:block;font:800 16px var(--font-display)}.plan-list small{color:var(--muted);font-size:14px}
 .plan-ico{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#F4F5F7;font-size:22px}
@@ -187,7 +187,7 @@ body.start-mode{background:#FEFFED}
 @media (prefers-reduced-motion:reduce){.mybil-dream-ico svg,.mybil-dream-ico svg .s{animation:none}}
 .dream-modal .gu{width:min(76vw,380px)}
 
-.step-first{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:18px;background:#FEFFED;border:2px solid #C9A200;box-shadow:0 4px 0 #C9A200;animation:reveal .5s .45s var(--out) backwards}
+.step-first{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:18px;background:#FFFFFF;border:2px solid #C9A200;box-shadow:0 4px 0 #C9A200;animation:reveal .5s .45s var(--out) backwards}
 .step-first img{width:64px;height:64px;object-fit:contain;flex:none;animation:idle-wobble 3.4s var(--in-out) infinite}
 .step-first strong{display:block;font:800 16px var(--font-display)}.step-first small{color:var(--muted);font-size:14px}
 /* cars drive in and out of the machine: never let that widen the page */
@@ -264,7 +264,7 @@ body.start-mode{background:#F4F5F7}
 @media (min-width:900px){
   .start-hero{background:radial-gradient(70% 90% at 72% 42%,var(--poster) 0,color-mix(in oklab,var(--poster) 60%,#F4F5F7) 38%,color-mix(in oklab,var(--poster) 16%,#F4F5F7) 64%,#F4F5F7 86%)!important}
 }
-.step-garage,.dream-modal{background:linear-gradient(180deg,var(--poster) 0,color-mix(in oklab,var(--poster) 45%,#FEFFED) 100%)!important}
+.step-garage,.dream-modal{background:linear-gradient(180deg,var(--poster) 0,color-mix(in oklab,var(--poster) 88%,#FFFFFF) 100%)!important}
 /* the scene: flat shapes in darker tones of the poster colour, no outlines, faded at the edges */
 .gu-scene{position:absolute;inset:-4% -6% 0 -6%;width:112%;height:104%;z-index:-2;pointer-events:none;overflow:visible;
   -webkit-mask:radial-gradient(64% 62% at 50% 52%,#000 58%,transparent 100%);mask:radial-gradient(64% 62% at 50% 52%,#000 58%,transparent 100%)}
@@ -326,10 +326,10 @@ body.start-mode .step-bar{height:12px;background:#E3E5E8}
 body.start-mode .step-bar i{background:#FFD60A;box-shadow:inset 0 -3px 0 #E8BC00}
 body.start-mode .step-bar i::after{background:rgba(254,255,237,0.55)}
 /* answer cards (Svarkort): white with a 2 px edge; chosen is light yellow with a yellow edge */
-body.start-mode .step-option{background:#FEFFED;border:2px solid #E3E5E8;box-shadow:0 4px 0 #E3E5E8;border-radius:18px;padding:16px 18px}
-body.start-mode .step-option.is-on{background:#FFF6C7;border-color:#E8BC00;box-shadow:0 4px 0 #C9A200}
+body.start-mode .step-option{background:#FFFFFF;border:2px solid #E3E5E8;box-shadow:0 4px 0 #E3E5E8;border-radius:18px;padding:16px 18px}
+body.start-mode .step-option.is-on{background:#FFD60A;border-color:#E8BC00;box-shadow:0 4px 0 #C9A200}
 /* cards (Kort): 2 px Asfalt 200 edge and a 0 4 0 shadow in the same colour */
-body.start-mode :is(.step-first,.step-earn,.plan-list li){background:#FEFFED;border:2px solid #E3E5E8;box-shadow:0 4px 0 #E3E5E8;border-radius:18px}
+body.start-mode :is(.step-first,.step-earn,.plan-list li){background:#FFFFFF;border:2px solid #E3E5E8;box-shadow:0 4px 0 #E3E5E8;border-radius:18px}
 /* the steps' button is the primary yellow button */
 body.start-mode .step-foot .start-cta{background:#FFD60A!important;color:#1F2328!important;border:0!important;box-shadow:0 4px 0 #C9A200!important;font:700 18px var(--font-display)}
 body.start-mode .step-foot .start-cta:active{translate:0 4px;box-shadow:none!important}
@@ -362,3 +362,37 @@ body.start-mode .step-foot .start-cta:active{translate:0 4px;box-shadow:none!imp
 .mybil-stage.is-shuffled .mybil-rig{animation:shuffle-shake .8s var(--spring)}
 @keyframes shuffle-shake{15%{translate:-6px 0;rotate:-2deg}30%{translate:6px -4px;rotate:2deg}45%{translate:-4px 0;rotate:-1deg}60%{translate:3px -2px;rotate:.5deg}}
 @media (prefers-reduced-motion:reduce){.mybil-try{animation:none}.mybil-stage.is-shuffled .mybil-rig{animation:none}}
+
+/* Founder test, 13 Nov 2026: steps left, the sign-up step, the plan reveal and the login gate. */
+.step-left{margin:0;align-self:flex-start;font:800 13px var(--font-display);letter-spacing:.02em;color:#1F2328;background:#FFD60A;border-radius:999px;padding:4px 12px}
+.step-save-lead{text-align:center}
+.step-login{display:flex;flex-direction:column;gap:10px}
+.start-cta.is-waiting{opacity:.55;pointer-events:none}
+.start-cta.is-waiting::after{animation:none}
+.login-gate{max-width:520px;margin:0 auto;padding:32px 16px 48px;display:flex;flex-direction:column;gap:14px;text-align:center}
+.login-gate__cast{align-self:center}.login-gate__cast .cast{justify-content:center}.login-gate__cast .cast-img{width:150px!important}
+.login-gate h1{margin:0;font:900 clamp(24px,6vw,32px)/1.15 var(--font-display)}
+.login-gate__lead{margin:0;color:var(--muted);font-size:16px}
+.login-gate__actions{display:flex;flex-direction:column;gap:10px;text-align:left}
+.login-gate__fine{margin:0;color:var(--muted);font-size:14px}
+html[data-theme="dark"] .step-left{color:#1F2328}
+/* The intro is always light, also in dark theme, so the shared sign-in buttons stay light here. */
+body.start-mode .step-login :is(.big-btn--ghost,.acc-row input){background:#FFFFFF;background-image:none;color:#1F2328;border:2px solid #E3E5E8;box-shadow:0 4px 0 #E3E5E8}
+body.start-mode .step-login :is(label,.acc-note,.acc-sync,.acc-link){color:#1F2328}
+/* Intro progress: four separate steps (one pill each) instead of one stripe, readable on both white and the yellow start screen. */
+.step-bar{display:flex;gap:6px;height:12px;background:none!important;overflow:visible}
+.step-bar i,body.start-mode .step-bar i{position:static;flex:1;scale:none;animation:none;border-radius:999px;background:rgba(31,35,40,.16);box-shadow:none}
+.step-bar i.on,body.start-mode .step-bar i.on{background:#1F2328;transition:background .3s var(--spring,ease)}
+.step-bar i::after,body.start-mode .step-bar i::after{display:none}
+body:not(.start-mode) .step-bar i.on{background:var(--good,#58CC02)}
+
+/* Intro screen: night road with a soft street light (picked 14 Nov). The scooter picture sits in a soft card, no outline. */
+html body.start-mode .start-hero{background:
+  conic-gradient(from 180deg at 50% -6%,transparent 0 158deg,rgba(254,255,237,.16) 158deg 202deg,transparent 202deg),
+  radial-gradient(120% 70% at 50% 110%,rgba(15,18,21,.8),transparent 60%),
+  var(--skid) 50% 88%/160% auto no-repeat,var(--asphalt) 0 0/220px 220px,#1B1F24!important;color:#FEFFED}
+html body.start-mode .start-title,html body.start-mode .start-title *,html body.start-mode .start-lead,html body.start-mode .start-trust,html body.start-mode .start-brand,html body.start-mode .start-skip{color:#FEFFED!important}
+html body.start-mode .start-kicker{background:#FFD60A!important;color:#1F2328!important}
+html body.start-mode .start-hero .start-cta{background:#FFD60A!important;color:#1F2328!important;box-shadow:0 4px 0 #B89600!important}
+html body.start-mode .start-show{position:relative;border-radius:30px;overflow:hidden;box-shadow:0 30px 50px rgba(0,0,0,.55);-webkit-mask-image:none;mask-image:none;margin-inline:auto;width:min(86%,520px)}
+html body.start-mode .start-show::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 46px 6px rgba(15,18,21,.62)}

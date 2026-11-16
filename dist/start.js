@@ -83,7 +83,7 @@ export function sparks(host, n) {
   for (let i = 0; i < n; i++) {
     const s = document.createElement('i'), a = Math.PI * 2 * i / n + Math.random() * .5, d = 40 + Math.random() * 90;
     s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(1) + 'px'); s.style.setProperty('--dy', (Math.sin(a) * d * .7 - 20).toFixed(1) + 'px');
-    s.style.setProperty('--h', ['#FFD60A', '#FFD400', '#FFFFFF', '#1F2328', '#FFE066'][i % 5]); s.style.animationDelay = (Math.random() * .08).toFixed(2) + 's';
+    s.style.setProperty('--h', ['#FFD60A', '#FFD400', '#FFFFFF', '#1F2328', '#FFD60A'][i % 5]); s.style.animationDelay = (Math.random() * .08).toFixed(2) + 's';
     box.append(s);
   }
   host.append(box); setTimeout(() => box.remove(), 1100);
@@ -100,7 +100,7 @@ export function confetti({ count = 140, origin = { x: .5, y: .35 } } = {}) {
   const c = document.createElement('canvas'); c.className = 'fx-confetti'; c.setAttribute('aria-hidden', 'true');
   const dpr = Math.min(2, devicePixelRatio || 1); c.width = innerWidth * dpr; c.height = innerHeight * dpr; document.body.append(c);
   const g = c.getContext('2d'); g.scale(dpr, dpr);
-  const colors = ['#FFD60A', '#FFFFFF', '#FFD400', '#1F2328', '#FFE066', '#C9A200', '#FF9600'];
+  const colors = ['#FFD60A', '#FFFFFF', '#FFD400', '#1F2328', '#FFD60A', '#C9A200', '#FF9600'];
   const ps = Array.from({ length: count }, () => {
     const a = -Math.PI / 2 + (Math.random() - .5) * 1.9, v = 7 + Math.random() * 9;
     return { x: origin.x * innerWidth, y: origin.y * innerHeight, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: Math.random() * 6.28, vr: (Math.random() - .5) * .4,
@@ -150,13 +150,17 @@ export const DEFAULT_GOAL = { '2w': 3, '1m': 2, '3m': 1 };
 const DEADLINE_DAYS = { '2w': 14, '1m': 30, '3m': 75 };
 const GOAL_TIP = { '2w': 'Med prøve inden for 2 uger anbefaler vi 3 lektioner om dagen.', '1m': 'Med prøve om ca. 1 måned passer 2 lektioner om dagen.', '3m': 'Med 2–3 måneder til prøven er 1 lektion om dagen nok.' };
 
-function shell(step, body, cta, { ctaAttr = 'data-start-next', ctaHref = `#start:${step + 1}` } = {}) {
+// Goal gradient: "Kom i gang" already counts as the first step, so the bar never starts empty,
+// and the last steps say how many are left instead of how many are done.
+function shell(step, body, cta, { ctaAttr = 'data-start-next', ctaHref = `#start:${step + 1}`, total = 4 } = {}) {
+  const parts = total + 1, left = total - step + 1;
+  const leftText = left === 1 ? 'Sidste trin' : left === 2 ? '2 trin igen' : '';
   return `<section class="start-step" data-step="${step}" aria-labelledby="step-title">
     <header class="step-top"><a class="step-back" href="${step === 1 ? '#start' : `#start:${step - 1}`}" aria-label="Tilbage">Tilbage</a>
-      <span class="step-bar" role="progressbar" aria-label="Intro" aria-valuemin="1" aria-valuemax="4" aria-valuenow="${step}"><i style="--from:${(step - 1) / 4};--to:${step / 4}"></i></span>
+      <span class="step-bar" role="progressbar" aria-label="Intro" aria-valuemin="0" aria-valuemax="${parts}" aria-valuenow="${step + 1}" aria-valuetext="Trin ${step} af ${total}">${Array.from({ length: parts }, (_, i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</span>
       <a class="step-skip" href="#home" data-start-skip>Spring over</a></header>
-    <div class="step-body">${body}</div>
-    <footer class="step-foot"><a class="start-cta" href="${ctaHref}" ${ctaAttr}>${cta}</a></footer>
+    <div class="step-body">${leftText ? `<p class="step-left">${leftText}</p>` : ''}${body}</div>
+    ${cta ? `<footer class="step-foot"><a class="start-cta" href="${ctaHref}" ${ctaAttr}>${cta}</a></footer>` : ''}
   </section>`;
 }
 const talk = (who, line) => `<div class="step-talk">${renderCast(who, { size: 'sm', priority: true })}<p class="step-bubble"><span class="cast-name">${esc(who === 'sneglen' ? 'Sneglen' : who === 'blink' ? 'Blink' : who === 'bobbel' ? 'Bobbel' : 'Kegle')}</span><span class="sr-only">${esc(line)}</span><span class="tw" aria-hidden="true" data-type="${esc(line)}"></span></p></div>`;
@@ -168,14 +172,24 @@ function options(name, list, chosen) {
 
 export function renderStart(step, ctx) {
   const { intro, counts, plan } = ctx;
+  // Sign-up comes after the plan (step 5), and only when a real login exists here.
+  const login = !!ctx.loginState && !['off', 'local'].includes(ctx.loginState);
+  const total = login ? 5 : 4;
   if (!step) return hero({ counts });
-  if (step === 1) return shell(1, `<h1 id="step-title" class="sr-only">Hvornår skal du til teoriprøve?</h1>${talk('sneglen', 'Hej! Hvornår skal du til teoriprøve?')}${options('when', WHEN, intro.when || '1m')}`, 'Fortsæt');
-  if (step === 2) return shell(2, `<h1 id="step-title" class="sr-only">Hvor meget vil du øve om dagen?</h1>${talk('sneglen', 'Hvor meget vil du øve om dagen?')}${options('goal', GOALS, intro.goal || DEFAULT_GOAL[intro.when || '1m'] || 2)}${GOAL_TIP[intro.when || '1m'] ? `<p class="step-note step-tip">${GOAL_TIP[intro.when || '1m']}</p>` : ''}<p class="step-note">Du kan altid ændre det. Ingen straf, hvis du springer en dag over.</p>`, 'Fortsæt');
+  if (step === 5 && login) {
+    const done = ctx.loginState === 'user';
+    return shell(5, `<div class="plan-hero">${renderCast('sneglen', { size: 'md', priority: true, mood: done ? 'correct' : undefined })}<h1 id="step-title" class="step-title plan-title">${done ? 'Din plan er gemt' : 'Gem din plan'}</h1></div>
+      <p class="step-note step-save-lead">${done ? 'Dine svar, dine fejl og din bil gemmes nu i din konto.' : 'Log ind, så gemmes dine svar, dine fejl og din bil. Så kan du fortsætte på både telefon og computer.'}</p>
+      ${done ? '' : `<div class="step-login" data-login-body>${ctx.accountActions || ''}</div><p class="step-note">Din fremgang gemmes hos Google Firebase (database i EU).</p>`}`,
+    done ? 'Start første lektion' : '', { ctaAttr: 'data-start-finish', ctaHref: plan.firstHref, total });
+  }
+  if (step === 1) return shell(1, `<h1 id="step-title" class="sr-only">Hvornår skal du til teoriprøve?</h1>${talk('sneglen', 'Hej! Hvornår skal du til teoriprøve?')}${options('when', WHEN, intro.when || '1m')}`, 'Fortsæt', { total });
+  if (step === 2) return shell(2, `<h1 id="step-title" class="sr-only">Hvor meget vil du øve om dagen?</h1>${talk('sneglen', 'Hvor meget vil du øve om dagen?')}${options('goal', GOALS, intro.goal || DEFAULT_GOAL[intro.when || '1m'] || 2)}${GOAL_TIP[intro.when || '1m'] ? `<p class="step-note step-tip">${GOAL_TIP[intro.when || '1m']}</p>` : ''}<p class="step-note">Du kan altid ændre det. Ingen straf, hvis du springer en dag over.</p>`, 'Fortsæt', { total });
   if (step === 3) return shell(3, `<p class="eyebrow step-eyebrow">DIT MÅL</p><h1 id="step-title" class="step-title">Start med en rusten scooter. <span>Byg dig op til racerbilen.</span></h1>
       <div class="step-garage">${glowUp(['scooter'], { loop: true, label: true })}</div>
       <div class="step-first"><img src="${baseSrc('scooter')}" alt="" width="64" height="64"><div><strong>Din første: Scooter</strong><small>Den er din fra start. Alt andet tjener du dig til.</small></div></div>
       <div class="step-earn"><span class="step-earn-icon">${boosterIcon(28)}</span><div><strong>Tjen Boosters ved at lære</strong><small>${fmt(BOOSTER_RATES.lesson)} pr. lektion <span class="tb-stripes" aria-hidden="true"></span> ${fmt(BOOSTER_RATES.dailyGoal)} for dagens mål <span class="tb-stripes" aria-hidden="true"></span> ${fmt(BOOSTER_RATES.examPass)} for en bestået øveprøve</small></div></div>
-      <p class="step-note">Restaurér den, lakér den, giv den fælge og neon. Eller spar op til en rigtig bil.</p>`, 'Den er min!', { ctaAttr: 'data-start-claim' });
+      <p class="step-note">Restaurér den, lakér den, giv den fælge og neon. Eller spar op til en rigtig bil.</p>`, 'Den er min!', { ctaAttr: 'data-start-claim', total });
   const whenText = { '2w': 'Teoriprøve inden for 2 uger', '1m': 'Teoriprøve om ca. 1 måned', '3m': 'Teoriprøve om 2–3 måneder', '?': 'Ingen dato endnu' }[intro.when || '1m'];
   const goal = Number(intro.goal || DEFAULT_GOAL[intro.when || '1m'] || 2);
   const days = Math.ceil(counts.lessons / goal), deadline = DEADLINE_DAYS[intro.when || '1m'] || null;
@@ -186,12 +200,25 @@ export function renderStart(step, ctx) {
   const mark = tooTight
     ? '<svg class="plan-check plan-check--note" viewBox="0 0 24 24" role="img" aria-label="Bemærk"><circle cx="12" cy="12" r="9.5"/><path d="M12 7.2v6.2M12 16.6v.2"/></svg>'
     : '<svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
-  return shell(4, `<div class="plan-hero">${renderCast('sneglen', { size: 'md', priority: true, mood: 'correct' })}<h1 id="step-title" class="step-title plan-title">Din plan er klar</h1></div>
+  return shell(4, `<div class="plan-hero">${renderCast('sneglen', { size: 'md', priority: true, mood: 'correct' })}<h1 id="step-title" class="step-title plan-title" data-plan-title>Din plan er klar</h1></div>
     <ol class="plan-list">
       <li style="--i:0" class="${tooTight ? 'plan-tight' : ''}"><span class="plan-ico">${ico('calendar')}</span><div><strong>${esc(whenText)}</strong><small>${planLine}</small></div>${mark}</li>
       <li style="--i:1"><span class="plan-ico">${ico('clock')}</span><div><strong>${goal} ${goal === 1 ? 'lektion' : 'lektioner'} om dagen</strong><small>${goal * 5} minutter <span class="tb-stripes" aria-hidden="true"></span> dagens mål giver ${fmt(BOOSTER_RATES.dailyGoal)} Boosters</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
       <li style="--i:2"><span class="plan-ico">${ico('target')}</span><div><strong>Første lektion: ${esc(plan.firstTitle)}</strong><small>Tre korte regelkort, så dit første rigtige spørgsmål</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
-    </ol>`, 'Start første lektion', { ctaAttr: 'data-start-finish', ctaHref: plan.firstHref });
+    </ol>`, login ? 'Gem min plan' : 'Start første lektion', { ctaAttr: 'data-start-finish', ctaHref: login ? '#start:5' : plan.firstHref, total });
+}
+
+/** Reel 1, kept honest: the plan screen shows the three lines it really built from the answers, one by one,
+ *  under "Sneglen lægger din plan", and only then says it is ready. No wait at all when motion is off. */
+export function revealPlan(root) {
+  const title = root.querySelector('[data-plan-title]'), cta = root.querySelector('.step-foot .start-cta'), rows = root.querySelectorAll('.plan-list li');
+  if (!title || still()) return () => {};
+  const ready = title.textContent;
+  title.textContent = 'Sneglen lægger din plan';
+  cta?.setAttribute('aria-disabled', 'true'); cta?.classList.add('is-waiting');
+  // The rows reveal 260 ms apart from 500 ms (start.css), so the last one lands about 1.3 s in.
+  const t = setTimeout(() => { title.textContent = ready; cta?.removeAttribute('aria-disabled'); cta?.classList.remove('is-waiting'); }, 500 + rows.length * 260 + 200);
+  return () => clearTimeout(t);
 }
 
 /** Typewriter for cast bubbles (the full line is in an sr-only span for screen readers). */

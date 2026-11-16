@@ -1,0 +1,150 @@
+/* The 20 principles, applied (13 Nov 2026). Loaded last, so it tunes rules from motion.css, screens.css,
+   start.css, garage-x.css, chat.css and styles.css without editing them. Audit: natkoersel/docs/qa/claude-review/
+   app-motion-20-principles-20261113/findings.md.
+   The deciding rule is how often something is used: what you tap all day answers in about 200 ms without
+   overshoot; the rare moments (a lesson done, a test passed, a car tuned) keep the springs, squash and arcs.
+   Reduced motion and "Bevægelse" off still stop all of it through the switch at the end of motion.css. */
+
+/* ---------- frequent: the tab bar and page swaps (snappy timing, frequency of use) ---------- */
+#mobile-nav a.active svg,#desktop-nav a.active svg,#mobile-nav a.active .nav-tile{animation:nav-tap .2s var(--out)}
+@keyframes nav-tap{40%{translate:0 -3px;scale:1.06}}
+::view-transition-group(root){animation-duration:.22s}
+::view-transition-new(root){animation-duration:.22s}
+::view-transition-old(root){animation-duration:.15s}
+
+/* ---------- frequent: Min bil and the garage pins on home ---------- */
+.mybil-tab.is-active{animation:tab-on .2s var(--spring-soft)}
+.mybil-swatch.is-on{animation:swatch-on .22s var(--spring-soft)}
+.mybil-item.is-on{animation:item-on .24s var(--spring-soft)}
+.mybil-grid,.mybil-colors{animation-duration:.22s}
+.mybil-grid > *{animation-duration:.25s}
+html body .gx-pin{animation-duration:.26s;animation-timing-function:var(--spring-soft)}
+html body .gx-pin:nth-child(2){animation-delay:.04s}html body .gx-pin:nth-child(3){animation-delay:.08s}html body .gx-pin:nth-child(4){animation-delay:.12s}
+
+/* ---------- medium: Spørg Sneglen's suggestions arrive like every other list ---------- */
+.chat-chip{animation-duration:.25s;animation-delay:calc(var(--i,0) * 30ms + 60ms)}
+
+/* ---------- staging: one focus at a time ----------
+   The light sweep on the yellow buttons, the Booster bolt's glint and the dream button's sparkle each play twice
+   to point the way, then rest. Endless loops on buttons you press many times turn into noise.
+   The map's next lesson keeps its slow pulse: that is the one thing the screen asks you to do. */
+html body :is(.btn-primary,.judge__start,.turn-shell .turn-primary,.voice-control-primary,.chat-send,.chat-quiz-check,.journey-jump,.mybil-dream){animation-iteration-count:2}
+html body .pn--next .pn-btn{animation-iteration-count:infinite,2}
+.booster-chip .booster-icon{animation-iteration-count:2}
+.mybil-dream-ico svg,.mybil-dream-ico svg .s{animation-iteration-count:2}
+
+/* ---------- staging: the next lesson on the map is the one thing that moves ----------
+   road-cast-motion.css stopped all motion on the path (Figma INBOX 12), which left "Start!" and the next stop
+   looking dead. They come back as one beat on a 2.4 s cycle: the ring breathes out, and "Start!" leans toward the
+   stop with a small wind-up and a settle (anticipation, follow-through, slow in and out). Done lessons stay still.
+   Pressing the stop squashes it like the other buttons, a little deeper because it is the big one. */
+html body .learn-path .pn--next .pn-btn{animation:next-pulse 2.4s var(--in-out) infinite!important}
+@keyframes start-lean{0%,52%,100%{translate:0 0}62%{translate:-3px 0}76%{translate:9px 0}86%{translate:-1px 0}}
+html body .learn-path .pn-btn:active{scale:.93 .97}
+
+/* ---------- every tab opens with its own moment (like Øv's mirror being adjusted) ----------
+   Kenneth, 13 Nov: only Øv does something when it opens. Each tab now has one short scene built from what is
+   already on it, under a second, never blocking a tap for long. Same order everywhere: the place first, then the
+   things in it, then the one thing to do. */
+
+/* Lær: the road unrolls down the map, the stops pop up along it with a squash, "Start!" swings in last */
+html body .learn-road{animation:road-unroll .6s var(--out) both}
+@keyframes road-unroll{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+html body .learn-path .pn{animation:stop-pop .38s var(--spring-soft) both!important;animation-delay:calc(var(--i,0) * 60ms + .15s)!important}
+@keyframes stop-pop{0%{opacity:0;scale:.4}60%{opacity:1;scale:1.08 .94}100%{scale:1}}
+html body .learn-path .pn--next .pn-start{animation:start-in .32s .55s var(--spring-soft) both,start-lean 2.4s .9s var(--in-out) infinite!important}
+@keyframes start-in{from{opacity:0;translate:-14px 0;rotate:-8deg}}
+/* these three outrank the global off switch in motion.css (they need !important against road-cast-motion.css),
+   so they get their own: reduced motion or "Bevægelse" off leaves the map still, as before */
+@media (prefers-reduced-motion:reduce){html body .learn-path :is(.pn,.pn--next .pn-btn,.pn--next .pn-start){animation:none!important}}
+html body.no-motion .learn-path :is(.pn,.pn--next .pn-btn,.pn--next .pn-start){animation:none!important}
+.unit-banner .unit-num{animation:num-pop .4s .1s var(--spring-soft) both}
+@keyframes num-pop{from{scale:.5;rotate:-12deg}}
+
+/* Prøve: the poster's words slam in line by line and the highlighter wipes over "er vigtigere";
+   the facts count off left to right (the car on the poster and the traffic light are Rive, they move already) */
+.road-poster-words > span{display:inline-block;animation:word-slam .34s var(--out) both}
+.road-poster-words > span:nth-child(2){animation-delay:.09s}.road-poster-words > span:nth-child(3){animation-delay:.18s}
+@keyframes word-slam{from{opacity:0;translate:-22px 0}}
+.road-poster-words .road-poster-mark{animation:word-slam .34s .09s var(--out) both,mark-wipe .4s .3s var(--in-out) both}
+@keyframes mark-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.exam-facts > div{animation:reveal .3s var(--out) both}
+.exam-facts > div:nth-child(1){animation-delay:.3s}.exam-facts > div:nth-child(2){animation-delay:.36s}.exam-facts > div:nth-child(3){animation-delay:.42s}
+
+/* Min bil: the vehicle drives in, brakes, dips its nose and settles on its springs (follow-through) */
+html body .mybil-road .road-car .mybil-rig{animation:drive-in 1s linear both}
+@keyframes drive-in{
+  0%{translate:-700px 0;rotate:0deg;animation-timing-function:cubic-bezier(.35,.55,.45,1)}   /* rolls in, braking */
+  62%{translate:4% 0;rotate:2deg;animation-timing-function:cubic-bezier(.45,0,.55,1)}       /* overshoots, nose dips */
+  82%{translate:-1% 0;rotate:-.8deg;animation-timing-function:cubic-bezier(.45,0,.55,1)}    /* rocks back on the springs */
+  100%{translate:0 0;rotate:0deg}}
+
+/* Profil: the three pictures are dealt like cards along a small arc; your pick gives a little hop */
+.avatar-pick .avatar-opt{animation:deal .36s var(--spring-soft) both}
+.avatar-pick .avatar-opt:nth-child(1){animation-delay:.06s}.avatar-pick .avatar-opt:nth-child(2){animation-delay:.12s}.avatar-pick .avatar-opt:nth-child(3){animation-delay:.18s}
+@keyframes deal{from{opacity:0;translate:0 26px;rotate:-7deg}}
+.avatar-pick .avatar-opt.is-on img{animation:pick-hop .45s .5s var(--spring) both}
+@keyframes pick-hop{40%{translate:0 -8px;scale:1.06 .95}}
+.team-link > img{animation:car-in .6s .25s var(--out) both}
+@keyframes car-in{0%{opacity:0;translate:-36px 0}62%{opacity:1;translate:3px 0;rotate:1.5deg}100%{translate:0 0;rotate:0deg}}
+
+/* Spørg AI: the greeting rises, the line under it follows (Sneglen's own picture is left to the Sneglen work) */
+.chat-hello{animation:reveal .32s var(--spring-soft) both}
+.chat-sub{animation:reveal .3s .08s var(--out) both}
+
+/* Øv (Kenneth, 14 Nov: "Øv-fanen skal også have mere liv"). The mirror was the only thing that moved.
+   Now the whole tab follows it: the status light switches on, the mirror's numbers pop up once it is set, the main
+   button answers with a hop when everything is in place, and the training list below comes alive: tabs pop,
+   each panel deals its cards in, the long Emner list rises row by row as you scroll, and every card presses. */
+.practice-status img{animation:light-on .7s .15s steps(1) both,light-glow .5s .85s var(--out) both}
+@keyframes light-on{0%{opacity:.25}20%{opacity:1}35%{opacity:.4}55%{opacity:1}}
+@keyframes light-glow{from{filter:drop-shadow(0 0 0 rgba(88,204,2,0))}50%{filter:drop-shadow(0 0 10px rgba(88,204,2,.75))}to{filter:drop-shadow(0 0 0 rgba(88,204,2,0))}}
+.practice-hero .mh-stat{animation:stat-pop .34s var(--spring-soft) both}
+.practice-hero .mh-stat:nth-of-type(1){animation-delay:.9s}.practice-hero .mh-stat:nth-of-type(2){animation-delay:1s}
+@keyframes stat-pop{from{opacity:0;scale:.6;translate:-8px 0}}
+html body .practice-hero .btn-primary{animation:ready-hop .5s 1.45s var(--spring) both,btn-shine 5s 2.2s cubic-bezier(.45,0,.55,1) 2}
+@keyframes ready-hop{0%{scale:1}30%{scale:1.04 .94;translate:0 2px}60%{scale:.98 1.03;translate:0 -3px}100%{scale:1;translate:0 0}}
+.practice-choose > :is(.list-label,h2,p){animation:reveal .3s var(--out) both}
+.practice-choose > h2{animation-delay:.04s}.practice-choose > p:not(.list-label){animation-delay:.08s}
+.practice-tabs button[aria-selected=true]{animation:tab-on .22s var(--spring-soft)}
+.practice-tabs button{transition:background-color .15s var(--out),color .15s var(--out),scale .16s var(--spring)}
+.practice-tabs button:active{scale:.94}
+.practice-panel:not([hidden]) > h3{animation:reveal .24s var(--out) both}
+.practice-panel:not([hidden]) .practice-grid > li{animation:deal .3s var(--spring-soft) both}
+.practice-panel:not([hidden]) .practice-grid > li:nth-child(2){animation-delay:.04s}.practice-panel:not([hidden]) .practice-grid > li:nth-child(3){animation-delay:.08s}
+.practice-panel:not([hidden]) .practice-grid > li:nth-child(4){animation-delay:.12s}.practice-panel:not([hidden]) .practice-grid > li:nth-child(5){animation-delay:.16s}
+.practice-panel:not([hidden]) .practice-grid > li:nth-child(6){animation-delay:.2s}.practice-panel:not([hidden]) .practice-grid > li:nth-child(7){animation-delay:.24s}
+.practice-panel:not([hidden]) .practice-grid > li:nth-child(8){animation-delay:.28s}
+/* rows further down the long lists rise as they scroll into view (where the browser can tie motion to scrolling) */
+@supports (animation-timeline:view()){
+  .practice-panel:not([hidden]) .practice-grid > li:nth-child(n+9){animation:row-in linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+  @keyframes row-in{from{opacity:.35;translate:0 18px;scale:.97}}
+}
+.practice-card{transition:transform .16s var(--spring),translate .16s var(--spring),scale .16s var(--spring),box-shadow .16s var(--out),border-color .2s var(--out)}
+.practice-card:active{scale:.98}
+@media (hover:hover){html body .practice-card:hover{translate:0 -2px;border-color:#FFD60A}}
+@media (prefers-reduced-motion:reduce){.practice-panel .practice-grid > li{animation:none!important}}
+body.no-motion .practice-panel .practice-grid > li{animation:none!important}
+
+/* ---------- pose to pose: the exam glides between situations like the lessons do ---------- */
+body.exam-active .question-layout{animation:exam-q-in .18s var(--out)}
+@keyframes exam-q-in{from{opacity:0;translate:0 6px}}
+
+/* ---------- Fitts + Miller: bigger targets, chunked in fives ---------- */
+.exam-jump{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-width:360px}
+.exam-jump .jump-btn{width:auto;height:44px;border-radius:10px}
+/* Fitts: on the narrowest phones "Næste" ran 1 px off the screen. "Markér" becomes a 56 px flag like "Forrige";
+   its word stays in the button (font-size 0), so screen readers still say "Markér". */
+@media (max-width:359px){.exam-dock{gap:8px}.exam-dock .exam-flag{flex:0 0 56px;padding:0!important;justify-content:center;font-size:0!important;gap:0}.exam-dock .exam-flag svg{width:22px;height:22px}}
+html body .gx-seg-btn{min-height:44px} /* garage-x.css is loaded later by garage.js */
+
+/* ---------- Doherty: a slow network gets a visible answer ----------
+   Buttons that wait on the network are already disabled while their form is busy. If the answer takes longer
+   than 300 ms, a small ring fades in on the main button, so the tap never looks ignored. */
+[aria-busy="true"] :is(.btn-primary,.big-btn,.payment-primary,[data-action="pay"]):disabled,button[aria-busy="true"]{position:relative}
+[aria-busy="true"] :is(.btn-primary,.big-btn,.payment-primary,[data-action="pay"]):disabled::after,button[aria-busy="true"]::after{
+  content:"";position:absolute;right:14px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;
+  border:2.5px solid #0F1215;border-right-color:transparent;opacity:0;
+  animation:busy-in .2s .3s var(--out) forwards,busy-spin .7s linear infinite}
+@keyframes busy-in{to{opacity:1}}
+@keyframes busy-spin{to{rotate:360deg}}

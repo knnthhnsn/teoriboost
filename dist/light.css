@@ -3,7 +3,7 @@
    This file adds the page gradient (white that cools into light grey; yellow is kept for deliberate, solid
    surfaces, never a wash), glass chrome over it. */
 html[data-theme="light"]{
-  --page:linear-gradient(180deg,#FEFFED 0,#FEFFED 30%,#FEFFED 100%);
+  --page:#F4F5F7;
 }
 /* faint asphalt-ink skid marks sweep across the lower right of the page, like the dark theme's white ones */
 html[data-theme="light"] body,html[data-theme="light"] body.journey-surface{background:url("assets/road/skid-ink.webp") right -160px bottom -80px/1100px auto no-repeat,var(--grain-soft),var(--page)!important;background-attachment:fixed!important;background-size:1100px auto,200px 200px,auto!important}
@@ -13,12 +13,12 @@ html[data-theme="light"] .brand-mark{background:#1F2328!important;color:#FFD60A!
 
 /* the chrome is glass over the page gradient */
 html[data-theme="light"] .topbar{background:rgba(254,255,237,0.62)!important;backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);border-bottom-color:rgba(31,35,40,.08)}
-html[data-theme="light"] .mobile-nav,html[data-theme="light"] #mobile-nav{background:rgba(254,255,237,0.8)!important;backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5)}
+html[data-theme="light"] .mobile-nav,html[data-theme="light"] #mobile-nav{background:rgba(255,255,255,0.85)!important;backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5)}
 
 /* the intro in both themes: the cover is the manual's grainy yellow with signal stripes (start.css), the steps are
    white app pages */
 html[data-theme] body.start-mode{background:var(--grain-ink) 0 0/200px 200px,#FFD60A!important;color:#1F2328}
-html[data-theme] body.start-mode:has(.start-step){background:#FEFFED!important}
+html[data-theme] body.start-mode:has(.start-step){background:#FFFFFF!important}
 
 
 /* the button docks at the bottom of a lesson and the intro steps are no white cards: they fade into the page */
@@ -29,7 +29,7 @@ html[data-theme] body.start-mode:not(:has(.start-step)),html[data-theme] body.st
 
 /* Flat UI interiors are solid manual colours: opacity/gloss must not invent new fills.
    Approved road, Lær poster textures/gradients, scene assets and car art stay intact. */
-html[data-theme="light"] .topbar,html[data-theme="light"] #mobile-nav{background:#FEFFED!important;backdrop-filter:none;-webkit-backdrop-filter:none}
+html[data-theme="light"] .topbar,html[data-theme="light"] #mobile-nav{background:#FFFFFF!important;backdrop-filter:none;-webkit-backdrop-filter:none}
 html[data-theme="dark"] .topbar,html[data-theme="dark"] #mobile-nav{background:#1F2328!important;backdrop-filter:none;-webkit-backdrop-filter:none}
 html[data-theme] body :is(.practice-signal-go,.mybil-tab.is-active,#mobile-nav a.active .nav-tile,.sidebar .nav-item.active .nav-tile,.mybil-dream){background-image:none!important}
 html[data-theme] body .mybil-dream.is-locked:disabled{opacity:1!important;background:#C9A200!important;color:#1F2328!important;filter:none;cursor:not-allowed}

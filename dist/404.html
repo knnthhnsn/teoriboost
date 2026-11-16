@@ -13,7 +13,7 @@
 @font-face{font-family:Body;src:url('/assets/fonts/atkinson-700.woff2') format('woff2');font-weight:601 1000;font-display:swap}
 
 :root{
-  --yellow:#FFD60A;--yellow-dark:#C9A200;--ink:#1F2328;--ink-soft:#4C5560;--asphalt-bg:#24282D;--paper:#F7F5EE;--line:#E3E0D5;--white:#fff;
+  --yellow:#FFD60A;--yellow-dark:#C9A200;--ink:#1F2328;--ink-soft:#4C5560;--asphalt-bg:#24282D;--paper:#F4F5F7;--line:#E3E5E8;--white:#fff;
   --display:Display,system-ui,sans-serif;--body:Body,system-ui,sans-serif;
   --asphalt:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'220'%20height%3D'220'%3E%3Cfilter%20id%3D'n0'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.5'%20numOctaves%3D'2'%20seed%3D'3'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%200%200%200%200%201%200%200%200%200%201%203.2%200%200%200%20-2.05'%2F%3E%3C%2Ffilter%3E%3Cfilter%20id%3D'n1'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.95'%20numOctaves%3D'2'%20seed%3D'7'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%200%200%200%200%201%200%200%200%200%201%202.4%200%200%200%20-1.35'%2F%3E%3C%2Ffilter%3E%3Cfilter%20id%3D'n2'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.72'%20numOctaves%3D'2'%20seed%3D'11'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%200%200%200%200%200%200%200%200%200%200%200%202.8%200%200%200%20-1.5'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'220'%20height%3D'220'%20filter%3D'url(%23n0)'%20opacity%3D'0.34'%2F%3E%3Crect%20width%3D'220'%20height%3D'220'%20filter%3D'url(%23n1)'%20opacity%3D'0.24'%2F%3E%3Crect%20width%3D'220'%20height%3D'220'%20filter%3D'url(%23n2)'%20opacity%3D'0.5'%2F%3E%3C%2Fsvg%3E");
   --grain:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'200'%20height%3D'200'%3E%3Cfilter%20id%3D'n0'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.8'%20numOctaves%3D'2'%20seed%3D'5'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%200%200%200%200%200%200%200%200%200%200%200%202.6%200%200%200%20-1.42'%2F%3E%3C%2Ffilter%3E%3Cfilter%20id%3D'n1'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.9'%20numOctaves%3D'2'%20seed%3D'9'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%200%200%200%200%201%200%200%200%200%201%202.4%200%200%200%20-1.4'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'200'%20height%3D'200'%20filter%3D'url(%23n0)'%20opacity%3D'0.26'%2F%3E%3Crect%20width%3D'200'%20height%3D'200'%20filter%3D'url(%23n1)'%20opacity%3D'0.28'%2F%3E%3C%2Fsvg%3E");
@@ -184,7 +184,7 @@ p{margin:0 0 14px}
 .board li small{font-size:13px;color:var(--ink-soft)}
 .board li em{font:900 22px var(--display);font-style:normal}
 .board .lead-row i{background:var(--yellow);color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
-.board .me-row{border-color:var(--ink);background:#FFF6C7}
+.board .me-row{border-color:var(--ink);background:#FFD60A}
 .board-note{margin:12px 6px 2px;font-size:13px;color:var(--ink-soft)}
 @media (max-width:420px){.board li{grid-template-columns:30px 48px 1fr auto;gap:8px}.board li img{width:48px}}
 
