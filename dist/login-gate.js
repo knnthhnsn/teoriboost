@@ -6,8 +6,8 @@ import { renderCast } from './cast.js';
 
 // Routes that record answers. Hubs (home, practice, theory, profil, garage, chat, start) stay open.
 export const LOGIN_ROUTES = ['journey', 'learn', 'lesson', 'mission', 'review', 'exam', 'exam-result', 'drive', 'trafiklab', 'judge'];
-// teoriboost.vercel.app is the open copy for the team (16 Nov 2026): login works there but is never required.
-const OPEN_HOST = globalThis.location?.hostname === 'teoriboost.vercel.app';
+// The team's open copies (16 Nov 2026): login works there but is never required.
+const OPEN_HOST = ['teoriboost.vercel.app', 'teoriboost-team.web.app', 'teoriboost-team.firebaseapp.com'].includes(globalThis.location?.hostname);
 const RETURN_KEY = 'teoriboost.loginReturn.v1';
 const RETURN_TTL = 24 * 60 * 60 * 1000;
 

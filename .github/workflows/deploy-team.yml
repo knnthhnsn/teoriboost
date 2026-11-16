@@ -1,0 +1,30 @@
+# Every push to main that touches the app publishes dist/ to https://teoriboost-team.web.app (the team's open copy:
+# login is optional there). It signs in to Google Cloud without a stored key (Workload Identity Federation, limited to
+# this repository's main branch). app.teoriboost.dk is released separately and is not touched by this workflow.
+name: Deploy team site
+on:
+  push:
+    branches: [main]
+    paths: ['dist/**', 'firebase.json', '.firebaserc', '.github/workflows/deploy-team.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: deploy-team
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Copies only the public files (no api/, *.mjs, package files) into dist/public, as on Vercel.
+      - run: node dist/prepare-public.mjs
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/440103435369/locations/global/workloadIdentityPools/github/providers/teoriboost-repo
+          service_account: github-team-deploy@teoriboost.iam.gserviceaccount.com
+      - run: npx --yes firebase-tools@15.1.0 deploy --only hosting:team --project teoriboost --non-interactive --message "${{ github.sha }}"

@@ -1,0 +1,4 @@
+{
+  "projects": { "default": "teoriboost" },
+  "targets": { "teoriboost": { "hosting": { "team": ["teoriboost-team"] } } }
+}

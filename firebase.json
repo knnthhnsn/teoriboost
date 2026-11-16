@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "target": "team",
+    "public": "dist/public",
+    "ignore": ["**/.*"],
+    "redirects": [
+      { "source": "/assets/voice/:path*", "destination": "https://app.teoriboost.dk/assets/voice/:path", "type": 302 }
+    ],
+    "rewrites": [
+      { "source": "/api/**", "run": { "serviceId": "teoriboost-api", "region": "europe-west1" } }
+    ]
+  }
+}
