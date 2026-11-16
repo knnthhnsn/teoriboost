@@ -408,8 +408,45 @@ export async function mountSituation3d(stage, spec) {
   const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'), r = g.createRadialGradient(32, 32, 2, 32, 32, 30); r.addColorStop(0, 'rgba(255,60,40,.9)'); r.addColorStop(1, 'rgba(255,60,40,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new T.CanvasTexture(c); })();
   const amberTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'), r = g.createRadialGradient(32, 32, 2, 32, 32, 30); r.addColorStop(0, 'rgba(255,150,0,.95)'); r.addColorStop(1, 'rgba(255,150,0,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new T.CanvasTexture(c); })();
   const lit = exm.lampsOn || spec.env === 'night' || spec.env === 'fog' || spec.env === 'rain' || spec.env === 'snow';
+  // 16 Nov 2026: on the fleet cars the lamps are the model's own lamp parts lit up (LED strip, lenses), with a soft glow on
+  // each and a warm light pool on the road at night, instead of white balls stuck on the outside of the body.
+  const LAMP_PARTS = { sedan: { front: ['portable_led'], rear: ['portable_rear050_led'] }, hatch: { front: ['portable_lens'], rear: ['portable_red'] } };
+  const lampSpots = {};
+  const spotsFor = k => lampSpots[k] ||= (() => {
+    const parts = LAMP_PARTS[k], boxes = { front: [[], []], rear: [[], []] }, v = new T.Vector3();
+    models[k].scene.updateMatrixWorld(true);
+    models[k].scene.traverse(o => {
+      if (!o.isMesh) return;
+      const mats = [].concat(o.material), pos = o.geometry.attributes.position, idx = o.geometry.index;
+      const groups = Array.isArray(o.material) && o.geometry.groups.length ? o.geometry.groups : [{ start: 0, count: idx ? idx.count : pos.count, materialIndex: 0 }];
+      for (const gr of groups) {
+        const name = mats[gr.materialIndex]?.name, side = parts.front.includes(name) ? 'front' : parts.rear.includes(name) ? 'rear' : null;
+        if (!side) continue;
+        for (let i = gr.start; i < gr.start + gr.count; i++) { v.fromBufferAttribute(pos, idx ? idx.getX(i) : i).applyMatrix4(o.matrixWorld); boxes[side][v.z < 0 ? 0 : 1].push(v.clone()); }
+      }
+    });
+    const c = list => list.length ? list.reduce((s, p) => s.add(p), new T.Vector3()).divideScalar(list.length) : null;
+    return { front: boxes.front.map(c).filter(Boolean), rear: boxes.rear.map(c).filter(Boolean), names: new Set([...parts.front, ...parts.rear]), frontNames: new Set(parts.front) };
+  })();
+  const softGlow = rgb => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'), r = g.createRadialGradient(64, 64, 0, 64, 64, 62); r.addColorStop(0, `rgba(${rgb},1)`); r.addColorStop(0.18, `rgba(${rgb},.75)`); r.addColorStop(0.5, `rgba(${rgb},.18)`); r.addColorStop(1, `rgba(${rgb},0)`); g.fillStyle = r; g.fillRect(0, 0, 128, 128); const t = new T.CanvasTexture(c); signTextures.push(t); return t; };
+  const glowFront = softGlow('255,244,214'), glowRear = softGlow('255,58,42');
+  const poolTex = (() => { const c = document.createElement('canvas'); c.width = 256; c.height = 128; const g = c.getContext('2d'); g.scale(1, 0.5); const r = g.createRadialGradient(96, 128, 4, 120, 128, 122); r.addColorStop(0, 'rgba(255,240,200,.8)'); r.addColorStop(0.5, 'rgba(255,236,190,.3)'); r.addColorStop(1, 'rgba(255,236,190,0)'); g.fillStyle = r; g.fillRect(0, 0, 256, 256); const t = new T.CanvasTexture(c); signTextures.push(t); return t; })();
+  const litFront = new T.MeshBasicMaterial({ color: 0xFFF6DC }), litRear = new T.MeshBasicMaterial({ color: 0xFF3A2A });
+  const addFleetLamps = (car, k, a) => {
+    const body = car.children[0], spots = spotsFor(k);
+    body.traverse(o => { if (!o.isMesh || o.name === 'ink') return; if (Array.isArray(o.material)) o.material = o.material.map(m => spots.names.has(m.name) ? (spots.frontNames.has(m.name) ? litFront : litRear) : m); else if (spots.names.has(o.material.name)) o.material = spots.frontNames.has(o.material.name) ? litFront : litRear; });
+    const glow = (map, p, s, dx) => { const sp = new T.Sprite(new T.SpriteMaterial({ map, transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: spec.env === 'night' ? 0.95 : 0.7 })); sp.scale.set(s, s, 1); sp.position.set(p.x + dx, p.y, p.z); body.add(sp); };
+    for (const p of spots.front) glow(glowFront, p, spec.env === 'night' ? 0.62 : 0.45, 0.04);
+    for (const p of spots.rear) glow(glowRear, p, 0.8, -0.04);
+    if (spec.env === 'night' && (a.learner || a.dir === 'toward') && spots.front.length) {
+      const fx = Math.max(...spots.front.map(p => p.x)), pool = new T.Mesh(new T.PlaneGeometry(11, 4.2), new T.MeshBasicMaterial({ map: poolTex, transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: 0.6 }));
+      pool.rotation.x = -Math.PI / 2; pool.position.set(fx + 5.3, 0.04, 0); body.add(pool);
+    }
+  };
   const addLamps = (car, kind, a) => {
     if (!lit) return;
+    const fk = a.learner || kind === 'police' ? 'sedan' : models[kind] && LAMP_PARTS[kind] ? kind : !EXTRA_KINDS.has(kind) && !PLAIN[kind] && models.sedan && !models[kind] ? 'sedan' : null;
+    if (fk && LAMP_PARTS[fk] && car.children[0]) { addFleetLamps(car, fk, a); return; }
     const half = halves[kind] || ({ bus: 6, lorry: 8, ambulance: 3, tractor: 2.2, scooter: 1 }[kind] || 2.3), y = ({ bus: 0.8, lorry: 0.9, ambulance: 0.9, scooter: 0.7 }[kind] || 0.72), w = ({ bus: 0.9, lorry: 0.9, ambulance: 0.8, scooter: 0.0 }[kind] ?? 0.72);
     const zs = w ? [-w, w] : [0];
     for (const z of zs) {
