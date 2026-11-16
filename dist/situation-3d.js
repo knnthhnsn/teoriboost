@@ -3,6 +3,7 @@ import { loadThree } from './initial-load.js';
 import { loadApprovedFleet } from './approved-fleet.js';
 import { plateTexture, addPlates } from './plate-3d.js';
 import { attachCylindricalBillboard } from './cylindrical-billboard.js';
+import { createSeatedOccupants } from './seated-occupants.js';
 import { buildExtra, addPoliceMarkings } from './vehicles-extra.js';
 const EXTRA_KINDS = new Set(['bus', 'lorry', 'ambulance', 'tractor']); // drawn from boxes when there is no model (tractor) or the model fails to load
 
@@ -47,6 +48,9 @@ export async function mountSituation3d(stage, spec) {
   const T = window.THREE;
   const kinds = [...new Set(['sedan', ...spec.actors.filter(a => a.t === 'car' || a.t === 'parked').map(a => a.kind === 'police' ? 'sedan' : a.kind || 'sedan').filter(k => LODS[k] || PLAIN[k])])], models = {};
   for (const k of kinds) { try { models[k] = await loadVehicle(T, k); } catch { if (k === 'sedan') return null; } }
+  // Drivers: the game's own seated 2D people (seated-occupants.js), only when a moving sedan is in the scene.
+  let occupants = null;
+  if (spec.actors.some(a => a.t === 'car' && (a.learner || !a.kind || a.kind === 'sedan' || a.kind === 'police'))) { try { occupants = await createSeatedOccupants(T); } catch { occupants = null; } }
   let cyclist = null;
   if (spec.actors.some(a => a.t === 'cyclist')) { try { cyclist = await loadCyclist(T); } catch { cyclist = null; } }
   const people = {};
@@ -333,12 +337,7 @@ export async function mountSituation3d(stage, spec) {
     const sh = new T.Shape(); sh.moveTo(-0.11, 0); sh.lineTo(0.11, 0); sh.lineTo(0.11, 1.5); sh.lineTo(0.5, 1.5); sh.lineTo(0, 2.3); sh.lineTo(-0.5, 1.5); sh.lineTo(-0.11, 1.5); sh.closePath();
     const ar = new T.Mesh(new T.ShapeGeometry(sh), new T.MeshBasicMaterial({ color: 0xFEFFED, side: T.DoubleSide })); ar.rotation.set(-Math.PI / 2, 0, 0.55); ar.position.set(-W / 4, 0.04, z + 1.1); scene.add(ar);
   }
-  // A focus marker: a bright ring over the part the question is about (tyre, lamps, mirror, boot, seat).
-  if (spec.mark) {
-    const rc = document.createElement('canvas'); rc.width = rc.height = 128; const rg = rc.getContext('2d'); rg.lineWidth = 12; rg.strokeStyle = '#FFD60A'; rg.beginPath(); rg.arc(64, 64, 52, 0, 7); rg.stroke(); rg.lineWidth = 4; rg.strokeStyle = '#0F1215'; rg.beginPath(); rg.arc(64, 64, 59, 0, 7); rg.stroke();
-    const rt = new T.CanvasTexture(rc); signTextures.push(rt);
-    const ring = new T.Sprite(new T.SpriteMaterial({ map: rt, transparent: true, depthTest: false })); ring.scale.set(1.0, 1.0, 1); ring.position.set(...spec.mark); ring.renderOrder = 9; scene.add(ring);
-  }
+  // The part the question is about (spec.mark) is shown by the camera close-up in draw(), not by a ring.
   if (spec.road === 'rail') {
     const rz = spec.rz; flat(200, 5, 0x6A6F73, 0, 0.01, rz);
     for (const dz of [-0.75, 0.75]) box(200, 0.1, 0.1, 0xC2CCD6, 0, 0.12, rz + dz, false);
@@ -378,20 +377,9 @@ export async function mountSituation3d(stage, spec) {
   const paintNames = new Set(['portable_nordic_paint', 'portable_paint', 'portable_paint2']);
   const centres = {}, halves = {}, inkOutline = {}, toonCache = new Map();
   const toonRamp = (() => { const d = new Uint8Array([95, 150, 210, 255]), t = new T.DataTexture(d, 4, 1, T.LuminanceFormat); t.minFilter = t.magFilter = T.NearestFilter; t.needsUpdate = true; return t; })();
-  // A driver behind the wheel (left front seat; nose is +x so left is -z), placed from the model's own seat bounds. Parked cars stay empty.
-  const seats = {}, SKIN = [0xE9C9A0, 0xC99A6E, 0x8A5A3B, 0xF1D5B8], HAIR = [0x2B2622, 0x6B4A2E, 0xC9A04A, 0x8A8F96], SHIRT = [0x3F5F73, 0xB5543A, 0x5F7F6B, 0x2D7BFF, 0x7C8FA0];
+  // A driver in a moving sedan: the same seated person and seat spot as the game (judge-world.js), hands on the wheel. Parked cars stay empty.
   let driverN = 0;
-  const addDriver = (g, k, model) => {
-    const sb = seats[k] ??= (() => { let bb = null; model.scene.traverse(o => { if (o.isMesh && [].concat(o.material).some(m => m.name === 'portable_seat')) { const b = new T.Box3().setFromObject(o); bb = bb ? bb.union(b) : b; } }); return bb; })();
-    if (!sb) return;
-    const n = driverN++, toon = col => new T.MeshToonMaterial({ color: new T.Color(col).convertSRGBToLinear(), gradientMap: toonRamp }), ink = new T.MeshBasicMaterial({ color: 0x2B2622, side: T.BackSide });
-    const d = new T.Group(), x = sb.max.x - 0.32 - centres[k], z = sb.min.z / 2, top = sb.max.y;
-    const add = (geo, col, px, py, pz) => { const m = new T.Mesh(geo, toon(col)); m.position.set(px, py, pz); const o = new T.Mesh(geo, ink); o.scale.setScalar(1.08); m.add(o); d.add(m); return m; };
-    add(new T.CylinderGeometry(0.17, 0.21, 0.42, 10), SHIRT[n % SHIRT.length], x, top - 0.47, z);
-    add(new T.SphereGeometry(0.12, 14, 10), SKIN[(n * 3) % SKIN.length], x + 0.02, top - 0.1, z);
-    const hair = add(new T.SphereGeometry(0.128, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2), HAIR[(n * 5 + 1) % HAIR.length], x - 0.01, top - 0.09, z); hair.rotation.z = 0.35;
-    g.add(d); /* in the unscaled outer group: the seat box is in world units, the model root may be scaled */
-  };
+  const addDriver = body => { if (!occupants) return; const raw = body.children[0]?.children[0] || body, d = occupants.create({ identity: driverN++ % 4, width: 0.55, height: 0.66 }); d.position.set(2.5, 0.83, -0.43); raw.add(d); };
   const makeCar = (kind, hex, driver = false) => {
     const model = models[kind] || models.sedan, k = models[kind] ? kind : 'sedan';
     const g = new T.Group(), body = model.scene.clone(true);
@@ -410,7 +398,7 @@ export async function mountSituation3d(stage, spec) {
     const hulls = []; body.traverse(o => { if (o.isMesh && !o.isSkinnedMesh && ![].concat(o.material).some(m => m.transparent)) hulls.push(o); });
     for (const o of hulls) { const h = new T.Mesh(o.geometry, outlineMat); h.name = 'ink'; o.add(h); }
     if (k === 'sedan') addPlates(T, body, plateMap);
-    if (driver && !PLAIN[kind]) addDriver(g, k, model);
+    if (driver && k === 'sedan') addDriver(body);
     body.position.x = -centres[k]; g.add(body); return g;
   };
 
@@ -558,7 +546,7 @@ export async function mountSituation3d(stage, spec) {
   const reduced = () => document.body.classList.contains('no-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches;
   const draw = now => {
     const sway = reduced() ? 0 : Math.sin(now / 3200) * 0.9;
-    const c = spec.cam; if (c) { camera.position.set(c.pos[0] + sway + (V ? (c.pos[0] > 0 ? -1.6 : 1.6) : 0), c.pos[1] * (V ? 0.85 : 1), c.pos[2]); camera.lookAt(...c.look); } else { camera.position.set((exm.tunnel ? 0.8 : V ? -1.2 : 2.6) + sway, (exm.tunnel ? 4.5 : ex.trailer ? 11 : 8.4) * (V ? 0.72 : 1), z0 + (V ? 14.5 : 12.5) + (ex.trailer ? 8 : 0)); camera.lookAt(0.5, 0.2, z0 - 3.5 + (ex.trailer ? 2 : 0)); } renderer.render(scene, camera);
+    const c = spec.cam; if (c) { const p = [c.pos[0] + (V ? (c.pos[0] > 0 ? -1.6 : 1.6) : 0), c.pos[1] * (V ? 0.85 : 1), c.pos[2]], m = spec.mark; if (m) { /* close-up on the part the question is about, seen from the rule's side, instead of a ring over it (16 Nov 2026) */ const d = p.map((v, i) => v - m[i]), k = Math.min(1, (spec.markDist || 3.2) / Math.hypot(...d)); camera.position.set(m[0] + d[0] * k + sway * k, m[1] + d[1] * k, m[2] + d[2] * k); camera.lookAt(...m); } else { camera.position.set(p[0] + sway, p[1], p[2]); camera.lookAt(...c.look); } } else { camera.position.set((exm.tunnel ? 0.8 : V ? -1.2 : 2.6) + sway, (exm.tunnel ? 4.5 : ex.trailer ? 11 : 8.4) * (V ? 0.72 : 1), z0 + (V ? 14.5 : 12.5) + (ex.trailer ? 8 : 0)); camera.lookAt(0.5, 0.2, z0 - 3.5 + (ex.trailer ? 2 : 0)); } renderer.render(scene, camera);
   };
   // Hills: the whole world is tilted about the learner's car, so the road climbs or drops away in front of it (a crest also fades out into mist).
   if (exm.hill) {
@@ -583,7 +571,7 @@ export async function mountSituation3d(stage, spec) {
     if (disposed) return; disposed = true; cancelAnimationFrame(raf); ro.disconnect();
     Object.values(props).forEach(pm => pm.userData.dispose?.()); Object.values(people).forEach(pm => pm.userData.dispose?.()); Object.values(effectCards).forEach(c => c.userData.dispose?.()); cyclist?.userData.dispose?.(); signTextures.forEach(t => t.dispose()); signArt.forEach(t => t.dispose());
     scene.traverse(o => { o.geometry?.dispose?.(); for (const m of [].concat(o.material || [])) { if (!paintNames.has(m.name)) if (m.map !== plateMap) m.map?.dispose?.(); m.dispose?.(); } });
-    plateMap.dispose(); renderer.dispose(); renderer.forceContextLoss?.(); canvas.remove(); stage.classList.remove('has-sit3d');
+    plateMap.dispose(); occupants?.dispose(); renderer.dispose(); renderer.forceContextLoss?.(); canvas.remove(); stage.classList.remove('has-sit3d');
   }
   function frame(now) {
     if (disposed) return; raf = requestAnimationFrame(frame);

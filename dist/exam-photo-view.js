@@ -10,7 +10,8 @@ const idle=globalThis.requestIdleCallback||(f=>setTimeout(f,1200));
 const preload=()=>idle(()=>loadDiagrams().catch(()=>{}),{timeout:4000});
 if(typeof document!=='undefined'){if(document.readyState==='complete')preload();else addEventListener('load',preload,{once:true});}
 // A situation picture for a lesson card: the n-th 3D scene among this section's questions (or none).
-export function lessonScene(questions,sectionId,n){const list=questions.filter(q=>q.sectionId===sectionId&&EXAM_SCHEMATICS[q.id]&&!situationFor(q).generic);return list.length?list[n%list.length]:null;}
+// 16 Nov 2026: with the card text as hint it picks the question that shares the card's rarest words (a tyre card gets a tyre scene), and falls back to the n-th one.
+export function lessonScene(questions,sectionId,n,hint=''){const list=questions.filter(q=>q.sectionId===sectionId&&EXAM_SCHEMATICS[q.id]&&!situationFor(q).generic);if(!list.length)return null;const words=[...new Set(String(hint).toLowerCase().match(/[a-zæøå]{5,}/g)||[])].map(w=>w.slice(0,6)),texts=list.map(q=>[q.context,q.prompt,...(q.statements||[]).map(s=>s.text)].join(' ').toLowerCase());let best=-1,score=0;texts.forEach((t,i)=>{let s=0;for(const w of words)if(t.includes(w))s+=1/texts.filter(x=>x.includes(w)).length;if(s>score){score=s;best=i;}});return best>=0&&score>=0.5?list[best]:list[n%list.length];}
 export const VISUAL_SCENE_IDS=Object.freeze([...Object.keys(EXAM_PHOTOS),...Object.keys(EXAM_SCHEMATICS)]);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function renderQuestionVisual(q,_unused,{examMode=false,index=0}={}){

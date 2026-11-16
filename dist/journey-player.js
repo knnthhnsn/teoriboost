@@ -179,7 +179,7 @@ export function createJourneyPlayer({
     return `<section class="journey-card-step">
       <div class="journey-step-intro journey-step-intro--compact"><span class="journey-kicker">KORT ${currentIndex + 1} AF 3</span>${voiceButton('lesson', 'Lyt til alle tre kort')}</div>
       ${audioView}
-      <article class="journey-focus-card"><span class="lesson-number">${currentIndex + 1}</span><div>${(() => { const sq = lessonScene(QUESTIONS, section.id, currentIndex); return sq ? `<div class="jp-card-scene">${renderQuestionVisual(sq)}</div>` : ''; })()}<h2>${esc(card.title)}</h2><div class="jp-card-text">${paras(card.body)}</div>${refs(card.sourceIds, card.sourceLocator)}</div></article>
+      <article class="journey-focus-card"><span class="lesson-number">${currentIndex + 1}</span><div>${(() => { const sq = lessonScene(QUESTIONS, section.id, currentIndex, card.title + ' ' + card.body); return sq ? `<div class="jp-card-scene">${renderQuestionVisual(sq)}</div>` : ''; })()}<h2>${esc(card.title)}</h2><div class="jp-card-text">${paras(card.body)}</div>${refs(card.sourceIds, card.sourceLocator)}</div></article>
       <div class="journey-control-dock"><p>${session.kind === 'review' ? 'Læs forklaringen efter dit kolde forsøg.' : 'Ét kort ad gangen.'}</p><button class="btn btn-primary" type="button" data-journey-card="${currentIndex}">${currentIndex === 2 ? 'Brug reglen' : 'Næste kort'}</button></div>
     </section>`;
   }
