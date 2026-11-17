@@ -126,15 +126,17 @@ strong,b{font-family:inherit}
 :is(.journey-control-dock,.hero-actions)>:is(.btn,a,button){min-width:min(100%,160px)}
 @media (max-width:420px){.journey-player{padding-inline:2px}.journey-focus-card{padding-inline:16px!important}}
 
-/* Lær / Øvelser / Prøve guide: three equal cards, the current one in brand yellow */
-.tab-explain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 18px}
-.tab-explain__card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px 10px;border-radius:16px;background:var(--panel,#1F2328);border:1.5px solid var(--line,rgba(255,255,255,.12));color:inherit;text-decoration:none;text-align:center;min-width:0}
-.tab-explain__card img{width:40px;height:40px;object-fit:contain}
+/* Lær / Øvelser / Prøve switcher: one segmented bar, the current tab in brand yellow, one line under it */
+.tab-explain{margin:0 0 18px}
+.tab-explain__bar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border-radius:18px;background:var(--panel,#1F2328);border:1.5px solid var(--line,rgba(255,255,255,.12))}
+.tab-explain__card{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:6px 8px;border-radius:14px;color:inherit;text-decoration:none;min-width:0;transition:background-color .15s}
+.tab-explain__card:not(.is-here):hover{background:var(--panel2,rgba(255,255,255,.06))}
+.tab-explain__card img{width:24px;height:24px;object-fit:contain;flex:none}
 .tab-explain__card strong{font:800 15px/1.1 var(--font-display,Rubik,sans-serif)}
-.tab-explain__card small{font:400 12px/1.3 var(--font-text,Atkinson,sans-serif);opacity:.8;text-wrap:balance}
-.tab-explain__card.is-here{background:#FFD60A;border-color:#FFD60A;color:#1F2328}
-.tab-explain__card.is-here small{opacity:.85}
-@media (min-width:600px){.tab-explain{max-width:560px}.tab-explain__card small{font-size:13px}}
+.tab-explain__card.is-here{background:#FFD60A;color:#1F2328}
+.tab-explain__card:focus-visible{outline:3px solid var(--ink,#FEFFED);outline-offset:2px}
+.tab-explain__line{margin:10px 4px 0;font:400 14px/1.35 var(--font-text,Atkinson,sans-serif);color:var(--muted,inherit)}
+@media (min-width:600px){.tab-explain{max-width:560px}.tab-explain__card strong{font-size:16px}}
 
 /* Lesson player: one column. Bar, title, card and button all share the same 760px edge (they used to sit on 980 / 760 / 760-offset). */
 .journey-player{max-width:760px;margin-inline:auto;padding-inline:clamp(0px,2vw,8px)}

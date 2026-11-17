@@ -1,54 +1,98 @@
-/* Isolated billing UI. Exact manual colours only; no status relies on colour. */
+/* Premium dialog. Exact brand-manual hexes only: #FFD60A #1F2328 #2B3138 #3A434C #5F656D #C2CCD6 #FEFFED.
+   Light = cream paper, dark = graphite. Colour never carries a state alone: the chosen plan also gets a filled dot.
+   Rules sit under "html dialog.tb-paywall" so they beat the older generated dark rules in dark-gen.css. */
 .tb-paywall, .tb-paywall * { box-sizing: border-box; }
-dialog.tb-paywall { color-scheme: light; background: #F4F5F7; color: #1F2328; width: min(560px, calc(100% - 32px)); max-width: 560px; max-height: calc(100dvh - 32px); margin: auto; border: 1px solid #C2CCD6; border-radius: 18px; padding: 26px; font: 16px/1.5 Rubik, system-ui, sans-serif; overflow: auto; overscroll-behavior: contain; text-align: left; }
-.tb-paywall::backdrop { background: #E3E5E8; }
-.tb-paywall h2 { color: #1F2328; font: 700 clamp(26px, 5vw, 34px)/1.15 Rubik, system-ui, sans-serif; letter-spacing: -.6px; margin: 22px 0 12px; }
-.tb-paywall p { color: #1F2328; margin: 12px 0; }
-.tb-pw-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.tb-pw-kicker { color: #525C65; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
-.tb-paywall button, .tb-premium-settings button { appearance: none; background: #E3E5E8; border: 1px solid #C2CCD6; border-radius: 9px; color: #1F2328; min-height: 44px; padding: 10px 14px; font: 600 14px/1.4 Rubik, system-ui, sans-serif; cursor: pointer; box-shadow: none; text-transform: none; letter-spacing: normal; }
-.tb-paywall button:disabled { background: #E3E5E8; color: #525C65; cursor: default; }
-.tb-paywall .tb-pw-close { border: 0; background: transparent; padding: 8px; }
-.tb-paywall a { color: #1F2328; text-decoration: underline; text-underline-offset: 3px; }
-.tb-paywall :focus-visible, .tb-premium-settings :focus-visible { outline: 3px solid #1F2328; outline-offset: 3px; }
-.tb-pw-benefits { margin: 18px 0; padding-left: 22px; }
-.tb-pw-benefits li { padding: 3px 0; }
-.tb-pw-plans { border: 0; margin: 22px 0 12px; padding: 0; display: grid; gap: 8px; min-width: 0; }
-.tb-pw-plans legend { color: #1F2328; font-weight: 600; margin-bottom: 10px; padding: 0; }
-.tb-pw-plan { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #C2CCD6; border-radius: 10px; cursor: pointer; }
-.tb-pw-plan:has(input:checked) { border: 2px solid #1F2328; padding: 11px; background: #E3E5E8; }
-.tb-paywall input { accent-color: #1F2328; }
-.tb-pw-plan input { width: 20px; height: 20px; margin: 0; flex: 0 0 20px; }
-.tb-pw-plan span { display: grid; }
-.tb-pw-plan small { color: #525C65; font-size: 12px; }
-.tb-pw-plan b { margin-left: auto; font-size: 15px; text-align: right; }
-.tb-paywall .tb-pw-note, .tb-paywall .tb-pw-account, .tb-paywall .tb-pw-legal { color: #525C65; font-size: 13px; overflow-wrap: anywhere; }
-.tb-pw-consents { display: grid; gap: 14px; margin: 20px 0; font-size: 13px; line-height: 1.5; }
-.tb-pw-consents label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
-.tb-pw-consents input { width: 20px; height: 20px; flex: 0 0 20px; margin: 1px 0 0; }
-.tb-paywall .tb-pw-buy { width: 100%; min-height: 50px; background: #FFD60A; color: #1F2328; border-color: #1F2328; font-size: 16px; }
-.tb-paywall .tb-pw-buy:disabled { background: #E3E5E8; color: #525C65; border-color: #C2CCD6; }
-.tb-pw-login { border-top: 1px solid #C2CCD6; padding-top: 10px; margin-top: 20px; }
-.tb-pw-login button { width: 100%; margin: 4px 0; }
-.tb-pw-code { border-top: 1px solid #C2CCD6; border-bottom: 1px solid #C2CCD6; margin: 20px 0 12px; padding: 14px 0; }
-.tb-pw-code summary { cursor: pointer; min-height: 32px; display: flex; align-items: center; font-weight: 600; list-style: none; text-decoration: underline; text-underline-offset: 4px; }
-.tb-pw-code summary::-webkit-details-marker { display: none; }
-.tb-pw-code form { margin-top: 16px; }
-.tb-pw-code label { display: block; font-size: 13px; margin-bottom: 8px; font-weight: 600; }
-.tb-pw-code-row { display: flex; gap: 8px; }
-.tb-pw-code-row input { width: 100%; min-width: 0; min-height: 46px; border: 1px solid #525C65; background: #F4F5F7; border-radius: 8px; color: #1F2328; padding: 10px; font: inherit; }
-.tb-pw-code-row button { flex-shrink: 0; background: #FFD60A; border-color: #1F2328; }
-.tb-pw-message:not(:empty) { background: #FFD60A; border-radius: 8px; padding: 10px 12px; font-weight: 600; overflow-wrap: anywhere; }
-.tb-pw-message[data-error=true]:not(:empty)::before { content: "Kunne ikke gennemføres. "; }
-.tb-pw-footer { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
-.tb-paywall .tb-pw-footer button { background: transparent; border: 0; padding-left: 0; padding-right: 0; text-decoration: underline; text-underline-offset: 4px; }
+
+html dialog.tb-paywall {
+  --pw-bg: #FEFFED; --pw-ink: #1F2328; --pw-muted: #5F656D; --pw-line: #C2CCD6; --pw-card: #FEFFED; --pw-field: #FEFFED; --pw-field-line: #5F656D;
+  --pw-pick: #1F2328; --pw-pick-bg: #FEFFED; --pw-focus: #1F2328;
+  --pw-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .12  0 0 0 0 .14  0 0 0 0 .16  0 0 0 .9 -.3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E");
+  color-scheme: light; background: var(--pw-bg); color: var(--pw-ink);
+  width: min(480px, calc(100% - 32px)); max-width: 480px; max-height: calc(100dvh - 32px); margin: auto; padding: 0;
+  border: 1px solid var(--pw-line); border-radius: 22px; overflow: auto; overscroll-behavior: contain; text-align: left;
+  font: 400 16px/1.5 Atkinson, system-ui, sans-serif;
+}
+html[data-theme="dark"] dialog.tb-paywall {
+  --pw-bg: #2B3138; --pw-ink: #FEFFED; --pw-muted: #C2CCD6; --pw-line: #3A434C; --pw-card: #1F2328; --pw-field: #1F2328; --pw-field-line: #C2CCD6;
+  --pw-pick: #FFD60A; --pw-pick-bg: #1F2328; --pw-focus: #FFD60A;
+  --pw-grain: var(--tex-fine, none);
+  color-scheme: dark; border-color: var(--pw-line);
+}
+html dialog.tb-paywall::backdrop { background: rgba(31, 35, 40, .72); }
+html[data-theme="dark"] dialog.tb-paywall::backdrop { background: rgba(31, 35, 40, .82); }
+
+/* grain sits behind the content, above the surface colour */
+html dialog.tb-paywall .pw-body { position: relative; isolation: isolate; padding: 24px 24px 22px; }
+html dialog.tb-paywall .pw-body::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--pw-grain) 0 0 / 140px 140px; pointer-events: none; }
+
+html dialog.tb-paywall .pw-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin: 0 0 18px; }
+html dialog.tb-paywall h2 { margin: 2px 0 0; color: var(--pw-ink); font: 900 clamp(24px, 6vw, 29px)/1.12 Rubik, system-ui, sans-serif; letter-spacing: -.5px; text-wrap: balance; }
+html dialog.tb-paywall p { margin: 0; color: var(--pw-ink); }
+html dialog.tb-paywall .pw-lead { font-size: 17px; margin: 0 0 20px; }
+
+/* redesign.css gives every input a 2px var(--line) !important border, so the borders below need !important too */
+/* every button: one reset, one shape */
+html dialog.tb-paywall button { appearance: none; margin: 0; cursor: pointer; text-transform: none; letter-spacing: normal; box-shadow: none; font: 700 15px/1.3 Rubik, system-ui, sans-serif; }
+html dialog.tb-paywall button:disabled { cursor: default; opacity: .55; }
+html dialog.tb-paywall.tb-paywall :focus-visible { outline: 3px solid var(--pw-focus); outline-offset: 3px; }
+
+html dialog.tb-paywall .pw-x { flex: 0 0 44px; width: 44px; height: 44px; min-height: 44px; padding: 0; display: grid; place-items: center; margin: -4px -6px 0 0; border-radius: 14px; border: 1px solid var(--pw-line); background: var(--pw-card); color: var(--pw-ink); }
+html dialog.tb-paywall .pw-x:hover { border-color: var(--pw-ink); }
+
+html dialog.tb-paywall .pw-benefits { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 8px; }
+html dialog.tb-paywall .pw-benefits li { position: relative; padding-left: 28px; color: var(--pw-ink); }
+html dialog.tb-paywall .pw-benefits li::before { content: ""; position: absolute; left: 0; top: .5em; width: 17px; height: 11px; background: currentColor; -webkit-mask: url("assets/brand-stripes.svg") center / contain no-repeat; mask: url("assets/brand-stripes.svg") center / contain no-repeat; }
+
+html dialog.tb-paywall .pw-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+html dialog.tb-paywall .pw-plans { border: 0; margin: 0 0 18px; padding: 0; display: grid; gap: 10px; min-width: 0; }
+html dialog.tb-paywall .pw-plan { display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 12px 18px; border: 2px solid var(--pw-line); border-radius: 16px; background: var(--pw-card); color: var(--pw-ink); cursor: pointer; transition: border-color .15s, background-color .15s; }
+html dialog.tb-paywall .pw-plan:hover { border-color: var(--pw-muted); }
+html dialog.tb-paywall .pw-plan:has(input:checked) { border-color: var(--pw-pick); background: var(--pw-pick-bg); }
+html dialog.tb-paywall .pw-plan input { appearance: none; -webkit-appearance: none; flex: 0 0 24px; width: 24px; height: 24px; margin: 0; border-radius: 50%; border: 2px solid var(--pw-muted) !important; background: transparent; display: grid; place-items: center; cursor: pointer; }
+html dialog.tb-paywall .pw-plan input::after { content: ""; width: 12px; height: 12px; border-radius: 50%; background: #1F2328; transform: scale(0); transition: transform .12s; }
+html dialog.tb-paywall .pw-plan input:checked { border-color: #1F2328 !important; background: #FFD60A; }
+html dialog.tb-paywall .pw-plan input:checked::after { transform: scale(1); }
+html dialog.tb-paywall.tb-paywall .pw-plan input:focus-visible { outline-offset: 4px; }
+html dialog.tb-paywall .pw-plan-name { font: 800 18px/1.2 Rubik, system-ui, sans-serif; }
+html dialog.tb-paywall .pw-plan-price { margin-left: auto; font-variant-numeric: tabular-nums; font: 800 18px/1.2 Rubik, system-ui, sans-serif; white-space: nowrap; }
+
+/* the one primary action: signal yellow with ink, a little gloss */
+html dialog.tb-paywall .pw-cta { width: 100%; min-height: 54px; padding: 12px 20px; border: 2px solid #1F2328; border-radius: 16px; background: linear-gradient(180deg, rgba(255, 255, 255, .3), rgba(255, 255, 255, 0) 55%), #FFD60A; color: #1F2328; font: 800 17px/1.2 Rubik, system-ui, sans-serif; box-shadow: inset 0 -3px 0 rgba(31, 35, 40, .28); }
+html dialog.tb-paywall .pw-cta:active { transform: translateY(1px); box-shadow: inset 0 -1px 0 rgba(31, 35, 40, .28); }
+html dialog.tb-paywall.tb-paywall .pw-cta:focus-visible { outline-color: var(--pw-ink); }
+html[data-theme="dark"] dialog.tb-paywall .pw-cta { border-color: #FFD60A; }
+
+html dialog.tb-paywall .pw-fine { margin: 14px 0 0; color: var(--pw-muted); font-size: 14px; line-height: 1.45; overflow-wrap: anywhere; }
+html dialog.tb-paywall .pw-fine a { color: var(--pw-ink); text-decoration: underline; text-underline-offset: 3px; }
+html dialog.tb-paywall .pw-links { margin: 14px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 20px; }
+html dialog.tb-paywall .pw-link { min-height: 44px; padding: 0 6px; border: 0; background: transparent; color: var(--pw-ink); text-decoration: underline; text-underline-offset: 4px; font: 700 15px/1.3 Rubik, system-ui, sans-serif; }
+
+html dialog.tb-paywall .pw-code { display: grid; gap: 10px; }
+html dialog.tb-paywall .pw-code label { font: 700 15px/1.3 Rubik, system-ui, sans-serif; }
+html dialog.tb-paywall .pw-code input { width: 100%; min-height: 56px; padding: 12px 16px; border: 2px solid var(--pw-field-line) !important; border-radius: 14px; background: var(--pw-field); color: var(--pw-ink); font: 700 18px/1.2 Atkinson, system-ui, sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+html dialog.tb-paywall .pw-code input:focus { border-color: var(--pw-focus) !important; }
+html dialog.tb-paywall .pw-code .pw-cta { margin-top: 6px; }
+html dialog.tb-paywall .pw-login + .pw-code { margin-top: 20px; }
+html dialog.tb-paywall .pw-code .pw-fine { margin-top: 4px; }
+
+html dialog.tb-paywall .pw-login { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--pw-line); display: grid; gap: 8px; }
+html dialog.tb-paywall .pw-login p { color: var(--pw-muted); font-size: 14px; }
+html dialog.tb-paywall .pw-login button { width: 100%; min-height: 48px; border: 2px solid var(--pw-line); border-radius: 14px; background: var(--pw-card); color: var(--pw-ink); }
+
+html dialog.tb-paywall .tb-pw-message:not(:empty) { margin-top: 14px; padding: 12px 14px; border: 1px solid #FFD60A; border-radius: 12px; background: #FFD60A; color: #1F2328; font: 700 15px/1.4 Atkinson, system-ui, sans-serif; overflow-wrap: anywhere; }
+html[data-theme="dark"] body dialog.tb-paywall .tb-pw-message:not(:empty) { color: #FEFFED; }
+html dialog.tb-paywall .tb-pw-message[data-error=true]:not(:empty)::before { content: "Kunne ikke gennemføres. "; }
+
+/* profile page card (outside the dialog): unchanged */
 .tb-premium-settings { background: #F4F5F7; color: #1F2328; border: 1px solid #C2CCD6; border-radius: 12px; padding: 18px; margin: 18px 0; }
 .tb-premium-settings h3, .tb-premium-settings p { color: #1F2328; margin: 0 0 12px; }
-.tb-premium-settings button { margin: 4px 8px 4px 0; }
+.tb-premium-settings button { appearance: none; background: #E3E5E8; border: 1px solid #C2CCD6; border-radius: 9px; color: #1F2328; min-height: 44px; padding: 10px 14px; font: 600 14px/1.4 Rubik, system-ui, sans-serif; cursor: pointer; box-shadow: none; text-transform: none; letter-spacing: normal; margin: 4px 8px 4px 0; }
+.tb-premium-settings :focus-visible { outline: 3px solid #1F2328; outline-offset: 3px; }
+
 @media (max-width: 480px) {
-  dialog.tb-paywall { width: 100%; max-width: 100%; max-height: calc(100dvh - 12px); margin: auto 0 0; border-radius: 18px 18px 0 0; border-bottom: 0; padding: 20px 18px max(20px, env(safe-area-inset-bottom)); }
-  .tb-pw-plan { gap: 10px; }
-  .tb-pw-plan b { font-size: 14px; }
-  .tb-pw-code-row { flex-wrap: wrap; }
-  .tb-pw-code-row input { flex: 1 1 120px; }
+  html dialog.tb-paywall { width: 100%; max-width: 100%; max-height: calc(100dvh - 12px); margin: auto 0 0; border-radius: 22px 22px 0 0; border-bottom: 0; }
+  html dialog.tb-paywall .pw-body { padding: 20px 18px max(20px, env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html dialog.tb-paywall * { transition: none !important; }
 }
