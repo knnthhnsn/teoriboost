@@ -16,6 +16,7 @@ import {
   getJourneyStep, nextJourneyActionId, JOURNEY_ACTIONS
 } from './journey-session.js';
 import { getDailySummary, getJourneyRecommendations } from './journey-core.js';
+import { renderWhy, toOwnOrder, renderLessonSummary } from './lesson-summary.js';
 
 const CONTENT = { questions: QUESTIONS, lessons: LESSONS };
 const LESSON_STAGES = ['understand', 'apply', 'transfer', 'recall', 'checkpoint'];
@@ -229,9 +230,10 @@ export function createJourneyPlayer({
       ${repair ? `<div class="jp-wrong-statements"><p>Her skal du ændre dit svar:</p><ol>${wrong.map(({ statement, index }) => `<li><strong>Udsagn ${index + 1}</strong><p>${emph(statement.text)}</p><small>Du svarede ${feedback.answers[index] ? 'JA' : 'NEJ'}. Korrekt svar er ${statement.correct ? 'JA' : 'NEJ'}.</small><a class="jp-why" href="#chat" data-chat-ask="${esc(question.id)}" data-chat-focus="${index}" data-chat-answers="${answered}">Hvorfor? Spørg Sneglen</a></li>`).join('')}</ol></div>
       <div class="jp-rule"><p class="jp-rule-label">Reglen</p><p>${esc(question.explanation)}</p><div class="jp-rule-foot">${refs(question.sourceIds)}${voiceButton('feedback', 'Lyt til forklaringen')}</div></div>` : ''}
       ${showGag ? `<p class="journey-feedback-gag">${esc(question.gag)}</p>` : ''}
-      <details><summary>${repair ? 'Se alle fire svar' : 'Se reglen og alle fire svar'}</summary>${repair ? '' : `<p>${esc(question.explanation)}</p>`}
+      ${repair ? '' : renderWhy(question, { answers: toOwnOrder(feedback.answers, feedback.order), ask: false })}
+      <details><summary>Se alle fire svar</summary>
         <div class="journey-answer-review">${question.statements.map((statement, index) => `<div class="${feedback.answers[index] === statement.correct ? 'right' : 'wrong'}"><span>${feedback.answers[index] === statement.correct ? ico('check') : ico('repeat')}</span><p>${esc(statement.text)}</p><b>${statement.correct ? 'JA' : 'NEJ'}</b></div>`).join('')}</div>
-        ${repair ? '' : `${refs(question.sourceIds)}${voiceButton('feedback', 'Lyt til forklaringen')}`}
+        ${repair ? '' : voiceButton('feedback', 'Lyt til forklaringen')}
       </details>
       <a class="jp-ask" href="#chat" data-chat-ask="${esc(question.id)}" data-chat-answers="${answered}">${repair ? 'Spørg Sneglen om hele spørgsmålet' : 'Spørg Sneglen om det her'}</a></div>
       <button class="btn btn-primary jp-feedback-go" data-journey-continue-feedback type="button">${repair ? 'Prøv igen' : 'Videre'}</button>
@@ -332,6 +334,7 @@ export function createJourneyPlayer({
       <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${ico('bolt')} ${earns ? `+${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '0'}</strong>${earns ? '' : '<em>Tjent i dag allerede</em>'}</div><div><small>RIGTIG I FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
       ${sequenceFor(section.id) ? `<a class="jp-order" href="#order:${esc(sequenceFor(section.id).id)}">${ico('list')}<span><strong>Sæt det i rækkefølge</strong><small>${esc(sequenceFor(section.id).title)} <span class="tb-stripes" aria-hidden="true"></span> ${sequenceFor(section.id).steps.length} trin</small></span></a>` : ''}
       <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">${ico('target')} ${daily.goalMet ? `Dagens mål nået. +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')} Boosters` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? `. ${streak}` : ''}</div>
+      ${renderLessonSummary({ session, section })}
       ${lesson.practicalNote ? `<details class="journey-practical-note"><summary>Prøv det i bilen med din kørelærer</summary><p>${esc(lesson.practicalNote)}</p></details>` : ''}
       <div class="journey-control-dock">${completionActions}</div>
     </section>`;

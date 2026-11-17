@@ -236,4 +236,87 @@ export function composeSpec(q) {
   return { ...base, env: env || 'day', actors, extras: ex, cam: ex.cam, mark: ex.mark, studio: useStudio ? studio : undefined, cam: useStudio ? { pos: [0.8, 5.8, 12.5], look: [0.8, 1.5, -0.6] } : ex.cam, generic: generic && !useStudio && !plainRoad && !actors.some(x => x.signal) };
 }
 import { EXAM_SCHEMATICS } from './exam-schematics.js';
-export const situationFor = q => SITUATIONS[q.id] ? { ...SITUATIONS[q.id], generic: false } : composeSpec(q);
+
+/* ===== Camera: driver's view or outside view (17 Nov 2026) =====
+   view 'driver': the camera sits in the learner's seat (eye 1.2 m, a little of the bonnet in the bottom of the picture) and
+   looks along the road, with a small head turn towards whatever the question is about. view 'outside': the old chase camera
+   (spec.cam, else the default one behind and above) or, for a car part, the close-up on spec.mark.
+   OUTSIDE when one of these rules hits (first match is reported in viewWhy), DRIVER otherwise:
+     1 mark      the question is about a part of the car (tyre, lamp, mirror, seat, bonnet, cargo): close-up on the part
+     2 studio    no road in the picture (licence, exam, drink, tiredness ...)
+     3 load      trailer, caravan, overhang, roof or boot cargo, tow rope: length and load are only visible from outside
+     4 own-car   the learner's own car is the subject: hazards or breakdown (blink outside a crash), own indicator, u-turn, yard,
+                 acceleration lane (needs the overview of the lane and the traffic beside it)
+     5 train     a train crossing from the side is not in the windscreen
+     6 not-ahead a road user is behind the seat or more than 25 degrees off the line of sight even after the head turn (overtaken ...)
+   Every other traffic situation is a driver view: junctions, roundabouts, overtaking, motorway, pedestrians, cyclists, signs,
+   lights, weather, night, hills, bends, tunnels, crash scenes. Both takes of a question (V) stay driver views. */
+export const POV_EYE = Object.freeze({ x: 0.1, y: 1.28, z: -0.43 }); /* in the learner car's own frame: nose +x, right +z, x measured from the model's middle */
+const DECOR_PEOPLE = /^(snowman|deer-fawn)/;
+const roadWidth = s => { const ex = s.extras || {}; return s.road === 'highway' && !s.studio ? (ex.lanes >= 3 ? 10.5 : 7) : ex.lanes ? 11.2 : 7; };
+/* Where the eye is and where it looks, for take V (0 or 1). Pure maths, so the check script can use it too. */
+export function povPose(spec, V = 0) {
+  const L = (spec.actors || []).find(a => a.learner); if (!L) return null;
+  const ex = spec.extras || {}, rot = L.rot ?? Math.PI / 2, c = Math.cos(rot), sn = Math.sin(rot);
+  const f = [c, -sn], r = [sn, c]; /* forward and right on the ground */
+  const back = V && !ex.accident && spec.road !== 'rail' ? 2.5 : 0; /* take 2: the car stands 2.5 m further back on the road (not where the question fixes the spot) */
+  const lx = L.x - f[0] * back, lz = L.z - f[1] * back;
+  const eye = [lx + POV_EYE.x * f[0] + POV_EYE.z * r[0], (V ? POV_EYE.y - 0.07 : POV_EYE.y), lz + POV_EYE.x * f[1] + POV_EYE.z * r[1]];
+  /* the things the question is about, as ground points: other road users, people, the signs and the light */
+  const W = roadWidth(spec), pts = [];
+  for (const a of spec.actors || []) {
+    if (a.learner || a.rear || a.t === 'parked' || (a.t === 'person' && (ex.accident || DECOR_PEOPLE.test(a.p || '')))) continue; /* at a crash the bystander is beside the car: the wrecks and the triangle are the subject */
+    if (typeof a.x === 'number' && typeof a.z === 'number') pts.push([a.x, a.z]);
+  }
+  if (ex.signs) ex.signs.slice(0, 3).forEach((_, i) => pts.push([W / 2 + 1.5, eye[2] - 11 - i * 6.5]));
+  if (ex.yieldSign) { const jz = spec.jz ?? -16; pts.push([6.3, jz - 4.4], [4.9, jz + 8]); }
+  if (ex.trafficLight) pts.push([W / 2 + 0.8, (spec.jz ?? spec.rz ?? -14) + 6]);
+  const bearings = []; let behind = false;
+  for (const [x, z] of pts) {
+    const dx = x - eye[0], dz = z - eye[2], ahead = dx * f[0] + dz * f[1], side = dx * r[0] + dz * r[1];
+    if (ahead < 1.5) { behind = true; continue; }
+    bearings.push(Math.atan2(side, ahead));
+  }
+  let yaw = bearings.length ? Math.max(-0.38, Math.min(0.38, 0.8 * bearings.reduce((s, b) => s + b, 0) / bearings.length)) : 0;
+  if (V) yaw += yaw > 0.04 ? -0.07 : 0.07; /* take 2: the head is turned a little the other way */
+  const worst = bearings.reduce((m, b) => Math.max(m, Math.abs(b - yaw)), 0);
+  return { eye, yaw, f, r, back, behind, worst, pitch: 0 };
+}
+export function viewFor(s) {
+  const ex = s.extras || {}, L = (s.actors || []).find(a => a.learner);
+  const why = s.mark ? 'mark' : s.studio ? 'studio' : !L ? 'no-learner'
+    : (ex.trailer || ex.overhang || ex.cargo || ex.tow) ? 'load'
+    : ((L.blink && !ex.accident) || L.signal || ex.uturn || ex.yard || ex.ramp) ? 'own-car'
+    : ex.train ? 'train'
+    : [0, 1].some(V => { const p = povPose(s, V); return p.behind || p.worst > 0.44; }) ? 'not-ahead'
+    : null;
+  return why ? { view: 'outside', viewWhy: why } : { view: 'driver', viewWhy: 'traffic situation' };
+}
+/* ===== Rear-view mirror (17 Nov 2026) =====
+   Only driver views where the traffic behind you is part of the answer get the mirror (and its extra render); every other scene has none.
+   First match wins; each rule also puts the road user it talks about behind you (actor.rear: seen only in the mirror, left out of povPose):
+     followed   a car close behind you ("tæt bag dig", "tæt bagved", "bagvedkørende"): a car 7.5 m behind, same lane
+     emergency  an ambulance coming from behind: the ambulance moves from in front of you to 11 m behind, same lane
+     lane-chg   you change lane with a car behind in the lane you want (multi-lane roads only): a car 8 m behind in that lane
+   Not covered: reversing (no reversing scene is a driver view with traffic behind), cyclists or motorcycles from behind (their
+   pictures are drawn from the back only), being overtaken (outside view, rule 6). */
+const REAR_RULES = [
+  ['followed', /tæt bag dig|tæt bagved|bagvedkørende/i, /ingen kører tæt bag dig/i],
+  ['emergency', /(?:ambulance|brandbil|politibil|udrykning)[^.]*bagfra/i],
+  ['lane-chg', /skifte (?:vogn|kørefelt)|skifter (?:vogn|kørefelt)|fra højre til venstre (?:vogn)?bane|ligger lidt bag dig i (?:venstre|højre)/i],
+];
+export function withRearMirror(s, t) {
+  if (s.view !== 'driver') return s;
+  const L = s.actors.find(a => a.learner), ex = s.extras || {};
+  for (const [why, re, not] of REAR_RULES) {
+    if (!re.test(t) || (not && not.test(t))) continue;
+    const rot = L.rot ?? Math.PI / 2, f = [Math.cos(rot), -Math.sin(rot)], r = [Math.sin(rot), Math.cos(rot)], at = (back, side) => ({ x: L.x - f[0] * back + r[0] * side, z: L.z - f[1] * back + r[1] * side, ...(L.rot === undefined ? {} : { rot }) }); /* no rot when the learner has none: the renderer then also applies the model's nose flip */
+    let actors = s.actors;
+    if (why === 'followed') actors = [...actors, { t: 'car', kind: 'hatch', color: '#B5543A', rear: true, ...at(7.5, 0) }];
+    else if (why === 'emergency') actors = [...actors.filter(a => a.kind !== 'ambulance'), { t: 'car', kind: 'ambulance', color: '#F4F5F7', rear: true, ...at(11, 0) }];
+    else { if (!(ex.lanes >= 2)) continue; const side = /højre (?:vogn)?bane|til højre/i.test(t) && !/til venstre|venstre (?:vogn)?bane/i.test(t) ? 3.7 : -3.7; actors = [...actors, { t: 'car', kind: 'sedan', color: '#7C8FA0', rear: true, ...at(8, side) }]; }
+    return { ...s, actors, rearMirror: why };
+  }
+  return s;
+}
+export const situationFor = q => { const s = SITUATIONS[q.id] ? { ...SITUATIONS[q.id], generic: false } : composeSpec(q); return withRearMirror({ ...s, ...viewFor(s) }, q.context || ''); };

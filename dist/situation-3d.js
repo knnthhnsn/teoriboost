@@ -5,6 +5,7 @@ import { plateTexture, addPlates } from './plate-3d.js';
 import { attachCylindricalBillboard } from './cylindrical-billboard.js';
 import { createSeatedOccupants } from './seated-occupants.js';
 import { buildExtra, addPoliceMarkings } from './vehicles-extra.js';
+import { povPose, POV_EYE } from './situation-specs.js';
 const EXTRA_KINDS = new Set(['bus', 'lorry', 'ambulance', 'tractor']); // drawn from boxes when there is no model (tractor) or the model fails to load
 
 // Road-side people (Codex art, cut out): name -> height in metres.
@@ -46,11 +47,13 @@ function shadowTexture(T) {
 export async function mountSituation3d(stage, spec) {
   if (!stage || !await loadThree() || !stage.isConnected) return null;
   const T = window.THREE;
+  /* 17 Nov 2026: driver's view (spec.view, decided in situation-specs.js): the camera sits in the learner's seat; see povPose */
+  const POV = spec.view === 'driver' && !spec.studio && spec.actors.some(a => a.learner), pose = POV ? povPose(spec, spec.variant ? 1 : 0) : null;
   const kinds = [...new Set(['sedan', ...spec.actors.filter(a => a.t === 'car' || a.t === 'parked').map(a => a.kind === 'police' ? 'sedan' : a.kind || 'sedan').filter(k => LODS[k] || PLAIN[k])])], models = {};
   for (const k of kinds) { try { models[k] = await loadVehicle(T, k); } catch { if (k === 'sedan') return null; } }
   // Drivers: the game's own seated 2D people (seated-occupants.js), only when a moving sedan is in the scene.
   let occupants = null;
-  if (spec.actors.some(a => a.t === 'car' && (a.learner || !a.kind || a.kind === 'sedan' || a.kind === 'police'))) { try { occupants = await createSeatedOccupants(T); } catch { occupants = null; } }
+  if (spec.actors.some(a => a.t === 'car' && (a.learner ? !POV : (!a.kind || a.kind === 'sedan' || a.kind === 'police')))) { try { occupants = await createSeatedOccupants(T); } catch { occupants = null; } }
   let cyclist = null;
   if (spec.actors.some(a => a.t === 'cyclist')) { try { cyclist = await loadCyclist(T); } catch { cyclist = null; } }
   const people = {};
@@ -93,7 +96,7 @@ export async function mountSituation3d(stage, spec) {
   };
   const flat = (w, d, color, x, y, z) => { const road = envTex.asphalt && ROAD_COLOURS.has(color), m = new T.Mesh(new T.PlaneGeometry(w, d), mat(road ? 0xFFFFFF : color)); if (road) { m.material.color.set(0xFFFFFF); m.material.map = asphaltFor(w, d); } m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); scene.add(m); return m; };
   const shadowTex = shadowTexture(T);
-  const blob = (x, z, w, d) => { const m = new T.Mesh(new T.PlaneGeometry(w, d), new T.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false })); m.rotation.x = -Math.PI / 2; m.position.set(x, 0.03, z); scene.add(m); };
+  const blob = (x, z, w, d) => { const m = new T.Mesh(new T.PlaneGeometry(w, d), new T.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false })); m.rotation.x = -Math.PI / 2; m.position.set(x, 0.03, z); scene.add(m); return m; };
 
   // Ground and the main road (runs along z).
   // Painted ground: soft mottled patches instead of one flat colour (multiplies the ground colour).
@@ -132,7 +135,7 @@ export async function mountSituation3d(stage, spec) {
   const r = rng(7 + V * 101);
   // Painted cut-out card standing on the ground, tilted back a little towards the camera.
   const tint = spec.env === 'night' ? 0x56668A : spec.env === 'rain' ? 0xC4CCD0 : 0xFFFFFF;
-  const card = (name, h, x, z) => { const t = envTex[name]; if (!t) return null; const w = h * t.image.width / t.image.height, g = new T.PlaneGeometry(w, h); g.translate(0, h / 2, 0); g.rotateX(-0.42); const m = attachCylindricalBillboard(T, new T.Mesh(g, new T.MeshBasicMaterial({ map: t, color: tint, transparent: true, alphaTest: 0.45, fog: true }))); m.position.set(x, 0, z); scene.add(m); return m; }; /* 16 Nov 2026: trees and houses turn to face the camera around the y axis only (they looked flat from the side) */
+  const card = (name, h, x, z) => { const t = envTex[name]; if (!t) return null; const w = h * t.image.width / t.image.height, g = new T.PlaneGeometry(w, h); g.translate(0, h / 2, 0); g.rotateX(POV ? -0.05 : -0.42); /* 17 Nov 2026: the backward tilt was for the high chase camera; from eye height cards stand upright */ const m = attachCylindricalBillboard(T, new T.Mesh(g, new T.MeshBasicMaterial({ map: t, color: tint, transparent: true, alphaTest: 0.45, fog: true }))); m.position.set(x, 0, z); scene.add(m); return m; }; /* 16 Nov 2026: trees and houses turn to face the camera around the y axis only (they looked flat from the side) */
   const tree = (x, z, s) => {
     const names = ['tree-pine', 'tree-round', 'tree-pine', 'tree-bare-autumn'], n = names[Math.floor(r() * 4)];
     if (envTex[n]) { card(n, (n === 'tree-pine' ? 6.2 : 5.2) * s, x, z); blob(x, z, 3.2 * s, 2.2 * s); return; }
@@ -167,7 +170,7 @@ export async function mountSituation3d(stage, spec) {
     box(0.16, 2.3, 0.16, 0x2B3138, x, 1.15, z);
     const tex = signTexture(kind); signTextures.push(tex);
     const m = new T.Mesh(new T.PlaneGeometry(size, size), new T.MeshBasicMaterial({ map: tex, transparent: false, alphaTest: 0.5, side: T.DoubleSide, toneMapped: false }));
-    m.position.set(x, 2.3 + size * 0.2, z); m.rotation.y = ry; scene.add(m);
+    m.position.set(x, 2.3 + size * 0.2, z); m.rotation.y = POV ? Math.atan2(pose.eye[0] - x, pose.eye[2] - z) : ry; scene.add(m); /* driver's view: the sign faces the seat */
   };
   const ex = spec.extras || {};
   // Cycle path: a separate red-brown strip with a kerb beside the road; cycle lane: a red-brown strip inside the edge line. White bicycle marks on both.
@@ -378,7 +381,7 @@ export async function mountSituation3d(stage, spec) {
   const centres = {}, halves = {}, inkOutline = {}, toonCache = new Map();
   const toonRamp = (() => { const d = new Uint8Array([95, 150, 210, 255]), t = new T.DataTexture(d, 4, 1, T.LuminanceFormat); t.minFilter = t.magFilter = T.NearestFilter; t.needsUpdate = true; return t; })();
   // A driver in a moving sedan: the same seated person and seat spot as the game (judge-world.js), hands on the wheel. Parked cars stay empty.
-  let driverN = 0;
+  let driverN = 0, povCar = null, layoutCockpit = null, mirrorPass = null, mirrors = [];
   const addDriver = body => { if (!occupants) return; const raw = body.children[0]?.children[0] || body, d = occupants.create({ identity: driverN++ % 4, width: 0.55, height: 0.66 }); d.position.set(2.5, 0.83, -0.43); raw.add(d); };
   const makeCar = (kind, hex, driver = false) => {
     const model = models[kind] || models.sedan, k = models[kind] ? kind : 'sedan';
@@ -440,7 +443,7 @@ export async function mountSituation3d(stage, spec) {
     for (const p of spots.rear) glow(glowRear, p, 0.8, -0.04);
     if (spec.env === 'night' && (a.learner || a.dir === 'toward') && spots.front.length) {
       const fx = Math.max(...spots.front.map(p => p.x)), pool = new T.Mesh(new T.PlaneGeometry(11, 4.2), new T.MeshBasicMaterial({ map: poolTex, transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: 0.6 }));
-      pool.rotation.x = -Math.PI / 2; pool.position.set(fx + 5.3, 0.04, 0); body.add(pool);
+      pool.name = 'pool'; pool.rotation.x = -Math.PI / 2; pool.position.set(fx + 5.3, 0.04, 0); body.add(pool);
     }
   };
   const addLamps = (car, kind, a) => {
@@ -503,10 +506,10 @@ export async function mountSituation3d(stage, spec) {
     } catch { /* no art for this sign: the scene simply has no sign */ }
   }
   signArt.forEach((tex, i) => {
-    const size = 2.1, aspect = tex.image.width / tex.image.height, x = W / 2 + 1.5, z = -2 - i * 5.5;
+    const size = 2.1, aspect = tex.image.width / tex.image.height, x = W / 2 + 1.5, z = POV ? pose.eye[2] - 11 - i * 6.5 : -2 - i * 5.5; /* driver's view: 11 m ahead, then every 6.5 m, so the first sign is read from the seat */
     box(0.16, 2.6, 0.16, 0x2B3138, x, 1.3, z);
     const m = new T.Mesh(new T.PlaneGeometry(size * Math.min(aspect, 1.6), size / Math.max(aspect, 1)), new T.MeshBasicMaterial({ map: tex, transparent: false, alphaTest: 0.5, side: T.DoubleSide, toneMapped: false }));
-    m.position.set(x, 2.9, z); m.rotation.y = 0.55; scene.add(m);
+    m.position.set(x, 2.9, z); m.rotation.y = POV ? Math.atan2(pose.eye[0] - x, pose.eye[2] - z) : 0.55; scene.add(m);
   });
   const lorry = (x, z, color) => {
     box(2.5, 3.1, 8.4, color, x, 2.15, z + 1.4); box(2.4, 2.5, 2.1, 0x3F5F73, x, 1.6, z - 3.9); box(2.45, 0.4, 8, 0x1F2328, x, 0.5, z + 1.4);
@@ -520,7 +523,7 @@ export async function mountSituation3d(stage, spec) {
     if (a.t === 'cyclist') { if (cyclist) { const c = cyclist.clone(); c.position.set(a.x, 0, a.z); scene.add(c); blob(a.x, a.z, 1.0, 2.0); } continue; }
     const kind = a.kind || 'sedan';
     if (V && !a.learner && a.color) a = { ...a, color: ({ '#B5543A': '#4F7A8C', '#7C8FA0': '#C9A04A', '#C2CCD6': '#D9D2C0', '#3F5F73': '#8A4F3F', '#5F7F6B': '#9A5B6E' })[a.color] || a.color };
-    const car = EXTRA_KINDS.has(kind) && !models[kind] ? buildExtra(T, kind, a.color) : makeCar(a.learner ? 'sedan' : kind === 'police' ? 'sedan' : kind, a.learner ? '#FFD60A' : kind === 'police' ? '#F4F5F7' : a.color, a.t !== 'parked');
+    const car = EXTRA_KINDS.has(kind) && !models[kind] ? buildExtra(T, kind, a.color) : makeCar(a.learner ? 'sedan' : kind === 'police' ? 'sedan' : kind, a.learner ? '#FFD60A' : kind === 'police' ? '#F4F5F7' : a.color, a.t !== 'parked' && !(a.learner && POV));
     if (kind === 'police') addPoliceMarkings(T, car);
     car.rotation.y = a.dir === 'toward' ? -Math.PI / 2 : a.dir === 'side' ? Math.PI : Math.PI / 2;
     if (NOSE_FLIP[kind] && models[kind]) car.rotation.y += NOSE_FLIP[kind];
@@ -549,14 +552,16 @@ export async function mountSituation3d(stage, spec) {
       }
     }
     if (a.smoke || a.fire) addEffects(car, a);
-    car.position.set(a.x, 0, a.z); scene.add(car); { const big = { bus: [3.2, 12.5], lorry: [3.2, 11.5], ambulance: [2.6, 6.4], tractor: [2.6, 4.6], scooter: [1.2, 3] }[kind] || [3, 6]; blob(a.x, a.z, big[0], big[1]); }
+    const own = a.learner && POV, moved = POV && (own || a.rear), cx = moved ? a.x - pose.f[0] * pose.back : a.x, cz = moved ? a.z - pose.f[1] * pose.back : a.z; /* take 2 of the driver's view: the car (and the one in the mirror behind it) stands a little further back */
+    car.position.set(cx, 0, cz); scene.add(car); { const big = { bus: [3.2, 12.5], lorry: [3.2, 11.5], ambulance: [2.6, 6.4], tractor: [2.6, 4.6], scooter: [1.2, 3] }[kind] || [3, 6]; const sh = blob(cx, cz, big[0], big[1]); if (own) sh.visible = false; }
+    if (own) { povCar = car; car.children.forEach(ch => { if (ch !== car.children[0]) ch.visible = false; /* bulbs and glows round the car */ }); car.children[0].traverse(o => { if (o.isSprite) o.visible = false; /* front glows; the night light pool stays */ }); }
   }
   // Extra props named by the spec: weather, a warning triangle, cones, a trailer behind the learner's car and headlight beams at night.
   if (spec.env === 'snow' || spec.env === 'rain') {
     const m = new T.MeshBasicMaterial({ color: spec.env === 'snow' ? 0xFFFFFF : 0xDDE8F0, transparent: true, opacity: spec.env === 'snow' ? 0.9 : 0.6 });
-    for (let i = 0; i < (spec.env === 'snow' ? 90 : 120); i++) {
+    for (let i = 0; i < (spec.env === 'snow' ? 90 : 120) * (POV ? 1.6 : 1); i++) {
       const f = spec.env === 'snow' ? new T.Mesh(new T.SphereGeometry(0.07, 5, 4), m) : new T.Mesh(new T.BoxGeometry(0.03, 0.9, 0.03), m);
-      f.position.set((r() - 0.5) * 24, 0.5 + r() * 9, 12 - r() * 40); if (spec.env === 'rain') f.rotation.z = 0.2; scene.add(f);
+      if (POV) f.position.set(pose.eye[0] + (r() - 0.5) * 22, 0.4 + r() * 6, pose.eye[2] - 3 - r() * 30); /* none within 3 m of the eye: they would be big blobs on the lens */ else f.position.set((r() - 0.5) * 24, 0.5 + r() * 9, 12 - r() * 40); if (spec.env === 'rain') f.rotation.z = 0.2; scene.add(f);
     }
   }
   if (ex.triangle) { // a standing warning triangle on a small foot
@@ -577,12 +582,21 @@ export async function mountSituation3d(stage, spec) {
 
   const size = () => {
     const w = Math.max(1, stage.clientWidth), h = Math.max(1, stage.clientHeight);
-    renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = w / h < 1.3 ? 46 : 36; camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = POV ? (w / h < 1.3 ? 50 : 44) : w / h < 1.3 ? 46 : 36; camera.updateProjectionMatrix(); if (layoutCockpit) layoutCockpit(camera);
   };
   const z0 = spec.actors[0]?.z || 0;
   const reduced = () => document.body.classList.contains('no-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let mirrorTick = 0; const eyeV = new T.Vector3(), dirV = new T.Vector3(), fwdV = new T.Vector3(), rightV = new T.Vector3(), upV = new T.Vector3();
   const draw = now => {
     const sway = reduced() ? 0 : Math.sin(now / 3200) * 0.9;
+    if (POV && povCar) {
+      /* the seat: the eye is a point in the learner car's own frame, so hills, a turned car and the take-2 offset all follow */
+      povCar.updateMatrixWorld(true); const m4 = povCar.matrixWorld;
+      eyeV.set(POV_EYE.x, pose.eye[1], POV_EYE.z).applyMatrix4(m4); fwdV.set(1, 0, 0).transformDirection(m4); rightV.set(0, 0, 1).transformDirection(m4); upV.set(0, 1, 0).transformDirection(m4);
+      const yaw = pose.yaw + (reduced() ? 0 : Math.sin(now / 3200) * 0.012);
+      dirV.copy(fwdV).multiplyScalar(Math.cos(yaw)).addScaledVector(rightV, Math.sin(yaw)).multiplyScalar(Math.cos(pose.pitch)).addScaledVector(upV, Math.sin(pose.pitch));
+      if (mirrorPass && mirrorTick++ % 2 === 0) mirrorPass(m4); camera.position.copy(eyeV); camera.lookAt(eyeV.x + dirV.x * 20, eyeV.y + dirV.y * 20, eyeV.z + dirV.z * 20); renderer.render(scene, camera); return;
+    }
     const c = spec.cam; if (c) { const p = [c.pos[0] + (V ? (c.pos[0] > 0 ? -1.6 : 1.6) : 0), c.pos[1] * (V ? 0.85 : 1), c.pos[2]], m = spec.mark; if (m) { /* close-up on the part the question is about, seen from the rule's side, instead of a ring over it (16 Nov 2026) */ const d = p.map((v, i) => v - m[i]), k = Math.min(1, (spec.markDist || 3.2) / Math.hypot(...d)); camera.position.set(m[0] + d[0] * k + sway * k, m[1] + d[1] * k, m[2] + d[2] * k); camera.lookAt(...m); } else { camera.position.set(p[0] + sway, p[1], p[2]); camera.lookAt(...c.look); } } else { camera.position.set((exm.tunnel ? 0.8 : V ? -1.2 : 2.6) + sway, (exm.tunnel ? 4.5 : ex.trailer ? 11 : 8.4) * (V ? 0.72 : 1), z0 + (V ? 14.5 : 12.5) + (ex.trailer ? 8 : 0)); camera.lookAt(0.5, 0.2, z0 - 3.5 + (ex.trailer ? 2 : 0)); } renderer.render(scene, camera);
   };
   // Hills: the whole world is tilted about the learner's car, so the road climbs or drops away in front of it (a crest also fades out into mist).
@@ -591,6 +605,61 @@ export async function mountSituation3d(stage, spec) {
     for (const o of [...scene.children]) if (!o.isLight) world.add(o);
     pivot.add(world); scene.add(pivot); pivot.rotation.x = exm.hill === 'down' ? -0.2 : exm.hill === 'crest' ? 0.2 : 0.16;
     if (exm.hill === 'crest') scene.fog = new T.Fog(env.sky, 12, 38);
+  }
+  /* Driver's view: the learner's own car is not drawn (no roof, pillars or inside walls); only its night light pool stays. What says "you are driving" is a
+     clean bonnet and dashboard band drawn on the camera itself, in the brand yellow with the series' ink line (17 Nov 2026: the model's own hood, cut open, was ragged). */
+  let dash = null;
+  if (POV && povCar) {
+    povCar.traverse(o => { if (o.isMesh && o.name !== 'pool') o.visible = false; });
+    const c = document.createElement('canvas'); c.width = 1024; c.height = 256; const g = c.getContext('2d');
+    /* bonnet: the top edge is a crown (low at the sides, high in the middle); flat #FFD60A body, a soft lighter band along the crown, a mustard shade where it meets the dash */
+    const crown = dy => { g.beginPath(); g.moveTo(-10, 194 + dy); g.bezierCurveTo(250, 36 + dy, 774, 36 + dy, 1034, 194 + dy); };
+    const bonnet = dy => { crown(dy); g.lineTo(1034, 256); g.lineTo(-10, 256); g.closePath(); };
+    bonnet(-7); g.fillStyle = '#0F1215'; g.fill();
+    bonnet(0); g.fillStyle = '#FFD60A'; g.fill();
+    g.save(); bonnet(0); g.clip();
+    crown(20); g.lineWidth = 16; g.lineCap = 'round'; g.strokeStyle = 'rgba(255,255,255,0.4)'; g.shadowColor = 'rgba(255,255,255,0.6)'; g.shadowBlur = 26; g.stroke();
+    g.shadowBlur = 0; const sh = g.createLinearGradient(0, 168, 0, 196); sh.addColorStop(0, 'rgba(201,162,0,0)'); sh.addColorStop(1, 'rgba(201,162,0,0.55)'); g.fillStyle = sh; g.fillRect(0, 168, 1024, 28);
+    g.restore();
+    /* dashboard band below the bonnet, with the series' ink line on its top edge */
+    g.fillStyle = '#2B3138'; g.fillRect(0, 196, 1024, 60); g.strokeStyle = '#0F1215'; g.lineWidth = 6; g.beginPath(); g.moveTo(0, 196); g.lineTo(1024, 196); g.stroke();
+    const tex = new T.CanvasTexture(c); tex.encoding = T.sRGBEncoding; signTextures.push(tex);
+    dash = new T.Mesh(new T.PlaneGeometry(1, 1), new T.MeshBasicMaterial({ map: tex, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, fog: false }));
+    dash.renderOrder = 999; dash.frustumCulled = false;
+    const cockpit = new T.Group(); cockpit.add(dash); camera.add(cockpit); scene.add(camera);
+    /* Rear-view mirror, only when spec.rearMirror says the traffic behind is part of the answer (see REAR_RULES in situation-specs.js); other scenes
+       build no render target and do no extra pass. The housing is drawn on a canvas: a short stem down from the top edge, a rounded dark body with the
+       ink line and an inner shadow round the glass; the glass under it is a small render from a camera looking backwards (every second frame), flipped. */
+    let mir = null;
+    if (spec.rearMirror) {
+      const hc = document.createElement('canvas'); hc.width = 1024; hc.height = 330; const h = hc.getContext('2d');
+      const rr = (x, y, w, ht, r, more) => { if (!more) h.beginPath(); h.moveTo(x + r, y); h.arcTo(x + w, y, x + w, y + ht, r); h.arcTo(x + w, y + ht, x, y + ht, r); h.arcTo(x, y + ht, x, y, r); h.arcTo(x, y, x + w, y, r); h.closePath(); };
+      h.lineJoin = 'round'; h.lineWidth = 8; h.strokeStyle = '#0F1215';
+      rr(478, -20, 68, 84, 14); h.fillStyle = '#1F2328'; h.fill(); h.stroke();
+      rr(16, 44, 992, 270, 66); h.fillStyle = '#2B3138'; h.fill(); h.stroke();
+      rr(30, 56, 964, 40, 30); h.fillStyle = 'rgba(255,255,255,0.07)'; h.fill(); /* soft light on the top of the housing */
+      rr(46, 74, 932, 212, 42); h.globalCompositeOperation = 'destination-out'; h.fillStyle = '#000'; h.fill(); h.globalCompositeOperation = 'source-over';
+      h.save(); rr(46, 74, 932, 212, 42); h.clip();
+      h.beginPath(); h.rect(-60, -60, 1144, 450); rr(46, 74, 932, 212, 42, true); h.shadowColor = 'rgba(15,18,21,0.7)'; h.shadowBlur = 24; h.shadowOffsetY = 7; h.fillStyle = '#0F1215'; h.fill('evenodd');
+      h.shadowColor = 'transparent'; h.beginPath(); h.moveTo(560, 74); h.lineTo(680, 74); h.lineTo(560, 286); h.lineTo(440, 286); h.closePath(); h.fillStyle = 'rgba(255,255,255,0.09)'; h.fill(); /* glass sheen */
+      h.restore();
+      const htex = new T.CanvasTexture(hc); htex.encoding = T.sRGBEncoding; signTextures.push(htex);
+      const ratio = 932 / 212, rtm = new T.WebGLRenderTarget(Math.round(ratio * 96), 96); rtm.texture.encoding = T.sRGBEncoding; rtm.texture.wrapS = T.RepeatWrapping; rtm.texture.repeat.x = -1; rtm.texture.offset.x = 1; /* a mirror shows the picture flipped */
+      const flat = map => new T.MeshBasicMaterial({ map, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, fog: false });
+      mir = { rt: rtm, ratio, glass: new T.Mesh(new T.PlaneGeometry(1, 1), flat(rtm.texture)), housing: new T.Mesh(new T.PlaneGeometry(1, 1), flat(htex)), cam: new T.PerspectiveCamera(15, ratio, 0.5, 160) };
+      mir.glass.renderOrder = 1000; mir.housing.renderOrder = 1001; for (const o of [mir.glass, mir.housing]) { o.frustumCulled = false; cockpit.add(o); } mirrors.push(mir);
+      const p0 = new T.Vector3(), fw = new T.Vector3();
+      mirrorPass = m4 => {
+        cockpit.visible = false; p0.set(0.6, 1.4, 0).applyMatrix4(m4); fw.set(-1, 0, 0).transformDirection(m4);
+        mir.cam.position.copy(p0); mir.cam.lookAt(p0.x + fw.x * 20, p0.y + fw.y * 20 - 0.6, p0.z + fw.z * 20);
+        renderer.setRenderTarget(mir.rt); renderer.render(scene, mir.cam); renderer.setRenderTarget(null); cockpit.visible = true;
+      };
+    }
+    layoutCockpit = cam => {
+      const vh = 2 * Math.tan(cam.fov * Math.PI / 360), vw = vh * cam.aspect, bh = vh * 0.2;
+      dash.scale.set(vw, bh, 1); dash.position.set(0, -vh / 2 + bh / 2, -1);
+      if (mir) { const W = Math.min(vw * 0.42, vh * 0.72), H = W * 330 / 1024; mir.housing.scale.set(W, H, 1); mir.housing.position.set(0, vh / 2 - H / 2, -1); mir.glass.scale.set(W * 940 / 1024, H * 220 / 330, 1); mir.glass.position.set(0, vh / 2 - H / 2 - H * 14 / 330, -1); }
+    };
   }
   // Hard sun shadows, drawn once (the scene is still apart from the camera sway): sharp-edged cast shadows like a cel drawing.
   if (!spec.capture && env.sun >= 1.2) {
@@ -606,7 +675,7 @@ export async function mountSituation3d(stage, spec) {
   let raf = 0, disposed = false, last = 0;
   function dispose() {
     if (disposed) return; disposed = true; cancelAnimationFrame(raf); ro.disconnect();
-    Object.values(props).forEach(pm => pm.userData.dispose?.()); Object.values(people).forEach(pm => pm.userData.dispose?.()); Object.values(effectCards).forEach(c => c.userData.dispose?.()); cyclist?.userData.dispose?.(); signTextures.forEach(t => t.dispose()); signArt.forEach(t => t.dispose());
+    Object.values(props).forEach(pm => pm.userData.dispose?.()); Object.values(people).forEach(pm => pm.userData.dispose?.()); Object.values(effectCards).forEach(c => c.userData.dispose?.()); cyclist?.userData.dispose?.(); mirrors.forEach(m => m.rt.dispose()); signTextures.forEach(t => t.dispose()); signArt.forEach(t => t.dispose());
     scene.traverse(o => { o.geometry?.dispose?.(); for (const m of [].concat(o.material || [])) { if (!paintNames.has(m.name)) if (m.map !== plateMap) m.map?.dispose?.(); m.dispose?.(); } });
     plateMap.dispose(); occupants?.dispose(); renderer.dispose(); renderer.forceContextLoss?.(); canvas.remove(); stage.classList.remove('has-sit3d');
   }

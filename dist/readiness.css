@@ -1,0 +1,45 @@
+/* "Er du klar?" on the Prøve tab. Tokens only (redesign.css light, dark.css dark); status is always shape + word, never colour alone. */
+.rd{display:grid;gap:12px;margin:22px 0 18px}
+.rd>.list-label{margin:0}
+.rd-talk{margin:0}
+.rd-talk .talk-bubble{margin-bottom:8px}
+.rd-verdict{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:20px;background:var(--panel);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);min-width:0}
+.rd-verdict>div{min-width:0}
+.rd-verdict strong{display:block;font:900 22px/1.1 var(--font-display);color:var(--ink);letter-spacing:-.01em}
+.rd-verdict small{display:block;margin-top:4px;font-size:14px;line-height:1.4;color:var(--muted)}
+.rd-verdict-mark{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--panel2);color:var(--ink)}
+.rd-verdict-mark svg{width:28px;height:28px}
+.rd-verdict--klar .rd-verdict-mark{color:var(--good-ink);--rd-on:var(--panel2)}
+.rd-verdict--naesten .rd-verdict-mark{background:var(--accent);color:var(--accent-ink)}
+.rd-verdict--oev .rd-verdict-mark{color:var(--bad-ink)}
+
+.rd-counts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.rd-count{display:flex;flex-direction:column;gap:2px;padding:10px 8px;border-radius:14px;background:var(--panel);border:2px solid var(--line);text-align:center;min-width:0}
+.rd-count b{font:900 22px/1 var(--font-display);color:var(--ink)}
+.rd-count span{font-size:12px;line-height:1.25;color:var(--muted);overflow-wrap:anywhere}
+@media(max-width:380px){.rd-counts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.rd-sub{margin:6px 0 0;font:900 16px/1.2 var(--font-display);color:var(--ink)}
+.rd-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rd-row a{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 12px;min-height:56px;padding:10px 14px;border-radius:16px;background:var(--panel);border:2px solid var(--line);color:var(--ink);text-decoration:none}
+.rd-row-main{display:grid;gap:2px;min-width:0;flex:1 1 180px}
+.rd-row strong{font:900 16px/1.2 var(--font-display);color:var(--ink);overflow-wrap:anywhere}
+.rd-row small{font-size:13px;line-height:1.35;color:var(--muted)}
+.rd-pill{display:inline-flex;align-items:center;gap:6px;flex:none;padding:4px 10px 4px 6px;border-radius:999px;font:700 13px/1.2 var(--font-text);color:var(--ink);background:var(--panel2);border:2px solid var(--line-strong);white-space:nowrap}
+.rd-pill svg{width:18px;height:18px;flex:none}
+.rd-pill--klar{background:var(--good-bg);border-color:var(--good-ink)}
+.rd-pill--klar svg{color:var(--good-ink);--rd-on:var(--good-bg)}
+.rd-pill--naesten{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.rd-pill--oev{background:var(--bad-bg);border-color:var(--bad-ink)}
+.rd-pill--oev svg{color:var(--bad-ink)}
+.rd-pill--lidt{background:transparent;border-style:dashed;color:var(--muted)}
+
+.rd-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}
+.rd-cta{flex:0 1 auto;max-width:100%;overflow-wrap:anywhere;text-align:center}
+.rd-lesson{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.rd-all summary{min-height:44px}
+.rd-list--all{margin-top:6px}
+.rd-note{margin:0;color:var(--muted);line-height:1.5}
+.rd a:focus-visible,.rd button:focus-visible,.rd summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media(hover:hover){.rd-row a:hover{border-color:var(--line-strong)}}
+@media(min-width:900px){.rd{max-width:720px}}

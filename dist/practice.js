@@ -27,11 +27,12 @@ function card(href, title, description) {
   return `<li><a class="practice-card" href="#${esc(href)}"><strong>${esc(title)}</strong><small>${esc(description)}</small></a></li>`;
 }
 
+const signsCard = card('skilte', 'Skilte', 'Alle tavlerne forklaret, med øvelser');
 function cards(type) {
-  if (type === 'topics') return sections.map(section => card(`mission:${section.id}`, section.title, subtitles[section.id] || section.chapterTitle)).join('');
+  if (type === 'topics') return signsCard + sections.map(section => card(`mission:${section.id}`, section.title, subtitles[section.id] || section.chapterTitle)).join('');
   if (type === 'order') return SEQUENCES.map(sequence => card(`order:${sequence.id}`, sequence.title, `${sequence.steps.length} trin`)).join('');
   if (type === 'games') return games.map(([href, title, description]) => card(href, title, description)).join('');
-  return ['stop', 'sving-cykel', 'ubetinget']
+  return signsCard + ['stop', 'sving-cykel', 'ubetinget']
     .map(id => sections.find(section => section.id === id))
     .filter(Boolean)
     .map(section => card(`mission:${section.id}`, section.title, subtitles[section.id])).join('');

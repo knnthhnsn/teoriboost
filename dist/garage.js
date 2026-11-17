@@ -246,6 +246,8 @@ export function mountGarage(root, { onAnswer = () => {}, onNarrate = () => {} } 
       car3d.push(handle); if (!mini) main3d = handle;
     }
   }).catch(() => {});
+  // name pills stay inside the card and off other dots, also when the 3D car does not load (the flat drawing)
+  import('./garage-labels.js').then(({ placeLabels }) => { const labels = placeLabels(root); if (root.isConnected) car3d.push(labels); else labels.dispose(); }).catch(() => {});
   const stageEl = root.querySelector('.gx-stage');
   const input = root.querySelector('#garage-xray');
   const reduced = () => document.body.classList.contains('no-motion') || globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;

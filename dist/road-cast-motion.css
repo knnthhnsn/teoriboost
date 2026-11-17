@@ -1,5 +1,9 @@
 /* Kenneth's Figma composition (INBOX 12): one Sneglen, no travelling rail. */
 .learn{position:relative}
+/* Phone: Sneglen leans past the road panel's right edge and is cropped by clip-path, but clip-path only crops the
+   painting; the 190px box still counted as scrollable width (page 53px too wide at 390px, whole UI slid sideways).
+   Crop the box itself at the edge it is cropped against. clip, not hidden: no scroll container, sticky keeps working. */
+@supports (overflow:clip){@media (max-width:1099px){.learn{overflow-x:clip}}}
 .learn>.learn-path-wrap{margin-right:0}
 .journey-route-first .journey-path{margin-right:0}
 .learn-guide-figure{position:absolute;left:0;top:0;z-index:3;display:block;aspect-ratio:1407/1118;pointer-events:none;filter:drop-shadow(0 9px 10px rgba(15,18,21,0.3333333333333333))}

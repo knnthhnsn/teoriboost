@@ -1,0 +1,38 @@
+/* Mobile fixes (17 Nov 2026), linked last. Global rules only; component fixes live in their own files
+   (road-cast-motion.css = the sideways bleed, garage-labels.js = garage pills, texture.js = grain marks). */
+
+/* 1. No page may scroll sideways. The real cause was .learn-guide-figure (see road-cast-motion.css); this is the net under it.
+      clip, not hidden: it is no scroll container, so sticky bars and in-box scrollers (chip rows) keep working. */
+html{overscroll-behavior-x:none}
+@supports (overflow:clip){.app-layout{overflow-x:clip}}
+
+/* 2. One grain, everywhere. texture.js marks boxes with data-grain and used to pick one of four looks per class name (a 300px
+      soft-light photo of asphalt, 140px noise, paper, glossy cel) and stacked it on top of the grain the component already had.
+      Now by the surface the box sits on (texture.js sets data-tone): dark = asphalt, light = soft grain, yellow = dark grain;
+      the same tile size for every box in every state. */
+/* Same asphalt tile as screens.css, but the two white speck layers are about half as strong (opacity .34/.24 -> .16/.11).
+   At full strength a single speck reached #72767A, which dropped #C2CCD6 text to 2.8:1; now no speck passes about #505559 (>= 4.5:1). */
+:root{--asphalt:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 3.2 0 0 0 -2.05'/%3E%3C/filter%3E%3Cfilter id='n1'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 2.4 0 0 0 -1.35'/%3E%3C/filter%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.8 0 0 0 -1.5'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n0)' opacity='0.16'/%3E%3Crect width='220' height='220' filter='url(%23n1)' opacity='0.11'/%3E%3Crect width='220' height='220' filter='url(%23n2)' opacity='0.5'/%3E%3C/svg%3E")}
+html body [data-grain]{background-blend-mode:normal!important;background-repeat:repeat,var(--bg-rep,repeat)!important}
+html body [data-grain][data-tone="dark"]{background-image:var(--asphalt),var(--bg-prev,none)!important;background-size:220px 220px,var(--bg-size,auto)!important}
+html body [data-grain][data-tone="light"]{background-image:var(--grain-soft),var(--bg-prev,none)!important;background-size:200px 200px,var(--bg-size,auto)!important}
+html body [data-grain][data-tone="yellow"]:not([data-big]):not(.tb-paywall *){background-image:var(--grain-ink),var(--bg-prev,none)!important;background-size:200px 200px,var(--bg-size,auto)!important}
+
+/* The Lær banner in light theme carries a gravel photo with dark scratches; in the worst pixel the 24px title fell to 2.9:1.
+   A half-strength yellow veil over the photo keeps the gravel but lifts the darkest scratch to about 5:1. */
+html[data-theme="light"] body .unit-banner[data-grain][data-tone="yellow"]:not([data-big]){background-image:linear-gradient(rgba(255,214,10,.5),rgba(255,214,10,.5)),var(--grain-ink),var(--bg-prev,none)!important;background-size:auto,200px 200px,var(--bg-size,auto)!important;background-repeat:no-repeat,repeat,var(--bg-rep,repeat)!important}
+
+/* 3. Text on a chip that is not selected must never keep the dark ink meant for yellow (brand light #FEFFED / #C2CCD6 on #1F2328). */
+.gx-hero-left .gx-tab:not([aria-pressed="true"]) strong,.gx-hero-left .gx-tab:not([aria-pressed="true"]) .gx-tab-n{color:#FEFFED!important}
+.gx-hero-left .gx-tab:not([aria-pressed="true"]) small{color:#C2CCD6!important}
+.gx-hero-left .gx-tab[aria-pressed="true"] :is(strong,small){color:#1F2328!important}
+
+/* Selected <-> not selected swaps colour and background together. The text colour flips at once but the background faded in
+   over .16-.18s (later on a busy phone), so for a moment dark text sat on a dark chip, or light text on yellow. No fade on those two. */
+:is([aria-pressed],[aria-selected],.gx-pin-dot,.gx-pin-label){transition-property:transform,box-shadow,border-color,opacity!important}
+
+/* 4. Booster chip: the bolt must not vanish while Rive loads. motion.css hides the svg as soon as the canvas exists, but the
+      canvas stays empty for a while (a second or more on a phone). The svg is the same coin, so it stays underneath. */
+.bolt-rive[data-rive="bolt"][data-rive-on="on"]>:not(.rive-canvas){visibility:visible}
+.bolt-rive[data-rive="bolt:earn"][data-rive-on="on"]>:not(.rive-canvas){visibility:visible;animation:tb-bolt-svg-out 0s linear .5s forwards}
+@keyframes tb-bolt-svg-out{to{visibility:hidden}}

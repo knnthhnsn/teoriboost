@@ -1,0 +1,40 @@
+/* Lesson summary on "Lektion klaret" and the "Hvorfor er det rigtigt?" control. Tokens only; every result is shape + word. */
+.ls{display:grid;gap:12px;margin:4px 0 0;padding:16px;border-radius:20px;background:var(--panel);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);text-align:left;color:var(--ink);min-width:0}
+.ls-title{margin:0;font:900 20px/1.1 var(--font-display);color:var(--ink);letter-spacing:-.01em}
+.ls-sub{margin:4px 0 0;font:900 16px/1.2 var(--font-display);color:var(--ink)}
+.ls-rows{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ls-row{display:flex;align-items:flex-start;gap:10px;font-size:15px;line-height:1.4;color:var(--ink)}
+.ls-row b{font-weight:700}
+.ls-mark{flex:none;display:grid;place-items:center;width:24px;height:24px}
+.ls-mark svg{width:24px;height:24px}
+.ls-row.is-all .ls-mark{color:var(--good-ink);--ls-on:var(--panel)}
+.ls-row.is-part .ls-mark{color:var(--bad-ink)}
+.ls-repeat{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ls-repeat>li{padding:12px 14px;border-radius:14px;background:var(--panel2);border:2px solid var(--line-strong);min-width:0}
+.ls-statement{margin:0 0 4px;font-size:16px;line-height:1.4;color:var(--ink);overflow-wrap:anywhere}
+.ls-repeat small{display:block;font-size:13px;line-height:1.4;color:var(--muted)}
+.ls-none{margin:0;font-size:15px;color:var(--muted)}
+.ls-cards{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:3px;justify-self:start}
+.ls-talk{display:flex;align-items:flex-end;gap:10px}
+.ls-talk .cast-img{width:84px!important}
+.ls-talk .talk-bubble{flex:1;min-width:0;margin:0 0 6px}
+
+/* the control itself: used in the lesson answer tray, the summary and anywhere an answer is shown */
+.why{margin:4px 0;border-radius:14px;border:2px solid var(--line-strong);background:var(--panel);color:var(--ink);text-align:left}
+.why>summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;cursor:pointer;font:700 15px/1.3 var(--font-text);color:var(--ink);list-style:none}
+.why>summary::-webkit-details-marker{display:none}
+.why>summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);flex:none}
+.why[open]>summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.why-body{display:grid;gap:8px;padding:0 14px 12px}
+.why-body p{margin:0;font-size:15px;line-height:1.5;color:var(--ink)}
+.why-src{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px}
+.why-src a,.why-ask{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.why-ask{display:inline-flex;align-items:center;min-height:44px}
+.why--ask{margin:4px 0}
+.ls a:focus-visible,.ls summary:focus-visible,.why a:focus-visible,.why summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media(prefers-reduced-motion:no-preference){.why>summary::after{transition:transform .18s ease}}
+@media(max-width:380px){.ls{padding:14px 12px}}
+/* inside a "Det skal du gentage" card the control is flat, so the card does not hold a box in a box */
+.ls-repeat .why{margin:8px 0 0;border:0;border-top:2px solid var(--line-strong);border-radius:0;background:transparent}
+.ls-repeat .why>summary,.ls-repeat .why-body{padding-left:0;padding-right:0}
+@media(max-width:380px){.ls-talk .cast-img{width:56px!important}}
