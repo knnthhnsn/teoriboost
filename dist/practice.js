@@ -1,4 +1,3 @@
-import {tabExplain} from './tab-explain.js';
 import {CHAPTERS} from './content.js';
 import {SEQUENCES} from './sequences.js';
 import {renderMirrorHero, mountMirrorHero} from './mirror-hero.js';
@@ -48,7 +47,7 @@ export function renderPracticeTabs({vm = {}, ready = {}, weak = []} = {}) {
   const mirror = renderMirrorHero({streak:daily.currentStreak, goal:daily.dailyGoal, today:daily.completedSessions, pct:ready.pct, days:null, showCopy:false});
   return `<section class="practice practice-page" aria-labelledby="practice-title">
     <header class="screen-head practice-title"><h1 id="practice-title">Øvelser</h1></header>
-    ${tabExplain('practice')}
+    
     <section class="practice-hero" aria-labelledby="practice-hero-title">
       <div class="practice-hero-top"><span>DAGENS TRÆNING</span><span class="practice-status"><img src="assets/nav/light-${status}.webp" alt="">${count ? 'Klar til gentagelse' : 'Klar til at øve'}</span></div>
       ${mirror}
