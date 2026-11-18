@@ -37,7 +37,7 @@ export function summariseSession(session) {
   const apply = session?.apply?.attempts?.[0];
   const applyQ = questionById(session?.questionId);
   if (apply && applyQ) {
-    out.rows.push({ label: 'Vælg', right: rightCount(apply.answers, applyQ.statements), of: 4 });
+    out.rows.push({ label: 'Første situation', right: rightCount(apply.answers, applyQ.statements), of: 4 });
     applyQ.statements.forEach((s, i) => { if (apply.answers[i] !== s.correct) out.repeat.push({ question: applyQ, statement: s, index: i, answers: apply.answers, given: apply.answers[i] }); });
   }
   const check = session?.checkpoint?.attempts?.[0];
@@ -47,7 +47,7 @@ export function summariseSession(session) {
     // answers were given in the shown (shuffled) order; map them back to the question's own order
     const own = [null, null, null, null];
     order.forEach((original, shown) => { own[original] = check.answers[shown]; });
-    out.rows.push({ label: 'Prøv igen', right: rightCount(own, checkQ.statements), of: 4 });
+    out.rows.push({ label: 'Ny situation', right: rightCount(own, checkQ.statements), of: 4 });
     checkQ.statements.forEach((s, i) => {
       if (own[i] === s.correct) return;
       if (out.repeat.some(r => r.statement.text === s.text)) return;
@@ -69,7 +69,7 @@ export function renderLessonSummary({ session, section }) {
   const sum = summariseSession(session);
   if (!sum.rows.length) return '';
   const rows = sum.rows.map(r => `<li class="ls-row ${r.right === r.of ? 'is-all' : 'is-part'}"><span class="ls-mark">${r.right === r.of ? TICK : RING}</span><span><b>${esc(r.label)}</b> ${r.right} af ${r.of} udsagn rigtige i første forsøg</span></li>`).join('')
-    + (sum.recall ? `<li class="ls-row ${sum.recall === 'remembered' ? 'is-all' : 'is-part'}"><span class="ls-mark">${sum.recall === 'remembered' ? TICK : RING}</span><span><b>Forklar</b> ${sum.recall === 'remembered' ? 'Du havde det centrale med' : 'Du ville øve den igen senere'}</span></li>` : '');
+    + (sum.recall ? `<li class="ls-row ${sum.recall === 'remembered' ? 'is-all' : 'is-part'}"><span class="ls-mark">${sum.recall === 'remembered' ? TICK : RING}</span><span><b>Med egne ord</b> ${sum.recall === 'remembered' ? 'Du havde det centrale med' : 'Du ville øve den igen senere'}</span></li>` : '');
   const repeat = sum.repeat.length
     ? `<h4 class="ls-sub">Det skal du gentage</h4><ol class="ls-repeat">${sum.repeat.map(r => `<li><p class="ls-statement">${esc(r.statement.text)}</p><small>Du svarede ${r.given ? 'JA' : 'NEJ'}. Rigtigt er ${r.statement.correct ? 'JA' : 'NEJ'}.</small>${renderWhy(r.question, { answers: r.answers, focus: r.index, label: 'Hvorfor?' })}</li>`).join('')}</ol><a class="ls-cards" href="#lesson:${esc(section.id)}">Se de tre kort igen</a>`
     : '<p class="ls-none">Ingen udsagn at gentage.</p>';
