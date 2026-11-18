@@ -83,7 +83,7 @@ export function sparks(host, n) {
   for (let i = 0; i < n; i++) {
     const s = document.createElement('i'), a = Math.PI * 2 * i / n + Math.random() * .5, d = 40 + Math.random() * 90;
     s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(1) + 'px'); s.style.setProperty('--dy', (Math.sin(a) * d * .7 - 20).toFixed(1) + 'px');
-    s.style.setProperty('--h', ['#FFD60A', '#FFD400', '#FFFFFF', '#1F2328', '#FFD60A'][i % 5]); s.style.animationDelay = (Math.random() * .08).toFixed(2) + 's';
+    s.style.setProperty('--h', ['#FFD60A', '#FEFFED', '#C9A200', '#1F2328', '#FFD60A'][i % 5]); s.style.animationDelay = (Math.random() * .08).toFixed(2) + 's';
     box.append(s);
   }
   host.append(box); setTimeout(() => box.remove(), 1100);
@@ -131,7 +131,7 @@ function hero({ counts }) {
       <a class="start-skip" href="#home" data-start-skip>Spring over</a></header>
     
     <div class="start-show">
-      ${glowUp(['scooter'], { loop: true, label: false })}
+      ${glowUp(['smallcar', 'bigcar', 'racecar'], { loop: true, label: false })}
       <div class="start-cast" aria-hidden="true"><span class="sc sc--kegle">${renderCast('kegle', { size: 'sm', priority: true })}</span></div>
     </div>
     <div class="start-copy">
