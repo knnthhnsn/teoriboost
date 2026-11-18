@@ -100,11 +100,12 @@ export function confetti({ count = 140, origin = { x: .5, y: .35 } } = {}) {
   const c = document.createElement('canvas'); c.className = 'fx-confetti'; c.setAttribute('aria-hidden', 'true');
   const dpr = Math.min(2, devicePixelRatio || 1); c.width = innerWidth * dpr; c.height = innerHeight * dpr; document.body.append(c);
   const g = c.getContext('2d'); g.scale(dpr, dpr);
-  const colors = ['#FFD60A', '#FFFFFF', '#FFD400', '#1F2328', '#FFD60A', '#C9A200', '#FF9600'];
+  const colors = ['#FFD60A', '#FEFFED', '#1F2328', '#FFD60A', '#C9A200'];
+  const mark = new Path2D('M1 39h10L27 1H17zM19 39h10L45 1H35zM37 39h10L63 1H53z'); // the logo's three strokes, 64x40
   const ps = Array.from({ length: count }, () => {
     const a = -Math.PI / 2 + (Math.random() - .5) * 1.9, v = 7 + Math.random() * 9;
     return { x: origin.x * innerWidth, y: origin.y * innerHeight, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: Math.random() * 6.28, vr: (Math.random() - .5) * .4,
-      w: 6 + Math.random() * 6, h: 8 + Math.random() * 8, c: colors[(Math.random() * colors.length) | 0], round: Math.random() < .3 };
+      w: 16 + Math.random() * 10, c: colors[(Math.random() * colors.length) | 0] };
   });
   const t0 = performance.now();
   (function frame(t) {
@@ -112,7 +113,7 @@ export function confetti({ count = 140, origin = { x: .5, y: .35 } } = {}) {
     for (const p of ps) {
       p.vx *= .985; p.vy = p.vy * .985 + .32; p.x += p.vx; p.y += p.vy; p.r += p.vr;
       g.save(); g.translate(p.x, p.y); g.rotate(p.r); g.globalAlpha = Math.max(0, 1 - Math.max(0, k - 1.6) / .6); g.fillStyle = p.c;
-      if (p.round) { g.beginPath(); g.arc(0, 0, p.w / 2, 0, 6.28); g.fill(); } else g.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.r * 2)) + 1);
+      const s = p.w / 64; g.scale(s, s * (Math.abs(Math.cos(p.r * 2)) * .85 + .15)); g.translate(-32, -20); g.fill(mark);
       g.restore();
     }
     if (k < 2.2) requestAnimationFrame(frame); else c.remove();

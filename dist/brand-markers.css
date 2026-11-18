@@ -45,3 +45,8 @@ ul.tb-pw-benefits > li::before { content:""; position:absolute; left:0; top:.42e
 .chat-bubble .chat-prose-list{list-style:none;padding-left:0}
 .chat-bubble .chat-prose-list>li{position:relative;padding-left:1.65em}
 .chat-bubble .chat-prose-list>li::before{content:"";position:absolute;left:0;top:.3em;display:block;width:1em;height:.62em;background:currentColor;mask:url("assets/brand-stripes.svg") center/contain no-repeat;-webkit-mask:url("assets/brand-stripes.svg") center/contain no-repeat}
+
+/* The lesson-end burst (shown when Rive is off) flies the logo's strokes, in brand colours. */
+.journey-celebration i{width:22px;height:14px;border-radius:0;-webkit-mask:url("assets/brand-stripes.svg") center / contain no-repeat;mask:url("assets/brand-stripes.svg") center / contain no-repeat;background:#FFD60A !important}
+.journey-celebration i:nth-child(2){background:#FEFFED !important}
+.journey-celebration i:nth-child(3){background:#C9A200 !important}
