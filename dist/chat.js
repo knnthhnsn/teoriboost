@@ -61,7 +61,7 @@ function messageHtml(m) {
 
 export function renderChat({ history }) {
   const empty = `<div class="chat-empty">
-    <div class="chat-hero">${renderCast('sneglen', { size: 'md', priority: true })}</div>
+    <div class="chat-hero chat-xray" aria-hidden="true"><img class="xr-a" src="assets/cast/sneglen-xray-a.webp" alt="" width="427" height="520" fetchpriority="high"><img class="xr-b" src="assets/cast/sneglen-xray-b.webp" alt="" width="427" height="520"></div>
     <h1 class="chat-hello">Hej! Jeg er Sneglen.</h1>
     <p class="chat-sub">Spørg mig om alt i køreteori. Jeg svarer ud fra appens regelkort, tjekker Færdselsstyrelsen og kan quizze dig.</p>
     <div class="chat-suggest">${SUGGEST.map((t, i) => `<button type="button" class="chat-chip" style="--i:${i}" data-chat-suggest="${esc(t)}">${esc(t)}</button>`).join('')}</div>

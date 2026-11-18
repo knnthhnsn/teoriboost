@@ -141,3 +141,11 @@ html[data-theme="dark"] body.chat-mode .chat .chat-quota button{border-color:#FE
 
 /* A visible surface for the learner's own messages in dark mode. */
 html[data-theme="dark"] .chat .chat-msg--me .chat-bubble{background:#3A434C;color:#FEFFED}
+/* Sneglen in X-ray (18 Nov): its camper van is see-through and a person inside types the answer on a laptop. Two frames,
+   identical except the typing hands and a new chat bubble, swap in short bursts; the snail breathes. Static with reduced motion. */
+.chat-xray{position:relative;width:min(220px,58vw);aspect-ratio:427/520;margin:0 auto;animation:xr-breathe 4.8s ease-in-out infinite;transform-origin:50% 100%}
+.chat-xray img{position:absolute;inset:0;width:100%;height:100%}
+.chat-xray .xr-b{opacity:0;animation:xr-type 2.6s steps(1,end) infinite}
+@keyframes xr-type{0%{opacity:0}14%{opacity:1}24%{opacity:0}36%{opacity:1}46%{opacity:0}62%{opacity:1}72%{opacity:0}100%{opacity:0}}
+@keyframes xr-breathe{0%,100%{scale:1 1}50%{scale:1.012 .99}}
+@media (prefers-reduced-motion:reduce){.chat-xray,.chat-xray .xr-b{animation:none}}
