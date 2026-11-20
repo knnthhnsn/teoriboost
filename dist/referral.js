@@ -75,7 +75,7 @@ export function createReferral({ account, config, questions = [], firstSectionId
       ...(body === undefined ? {} : { body: JSON.stringify(body) })
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw Object.assign(new Error(data.error?.message || 'Henvisningen kunne ikke gennemføres. Prøv igen senere.'), { code: data.error?.code });
+    if (!response.ok) throw Object.assign(new Error(data.error?.message || 'Henvisningen kunne ikke gennemføres lige nu. Prøv igen om lidt.'), { code: data.error?.code });
     if (dead || started !== generation || currentUser()?.uid !== who.uid || account.status().state !== 'user') throw new Error('Din konto blev ændret. Prøv igen.');
     return { data, uid: who.uid };
   }

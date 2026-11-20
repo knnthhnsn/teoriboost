@@ -17,7 +17,7 @@ const STEPS = [
   { id: 'boosters', tab: 'minbil', route: '#minbil', ready: '#booster-chip', target: ['#booster-chip'],
     title: 'Boosters', text: 'Hver gang du øver, tjener du Boosters. Dem bruger du på din bil.' },
   { id: 'chat', tab: 'chat', route: '#chat', ready: '#chat-input', target: ['#chat-input', '.chat-hero'],
-    title: 'Spørg AI', text: 'Forstår du ikke noget? Skriv til mig her. Der er en daglig grænse, så brug den klogt.' },
+    title: 'Spørg AI', text: 'Forstår du ikke noget? Skriv til mig her. Du har et antal spørgsmål om dagen.' },
 ];
 
 const seen = () => { try { return localStorage.getItem(KEY) === '1'; } catch { return true; } };

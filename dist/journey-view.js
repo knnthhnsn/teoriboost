@@ -8,16 +8,16 @@ const escape = value => String(value ?? '').replace(/[&<>"']/g, character => ({ 
 const svgGlyph = (path, label = '') => `<svg class="journey-glyph" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false"><path d="${path}"${label ? ` aria-label="${label}"` : ''}/></svg>`;
 const icon = name => ({ arrow: svgGlyph('M16 3a13 13 0 1 0 0 26a13 13 0 1 0 0-26M14 11l5 5-5 5'), check: svgGlyph('M6 17l6 7L26 8'), repair: svgGlyph('M24 12a9 9 0 1 0 1 9M25 7v6h-6'), review: svgGlyph('M16 5v8l5 4') }[name] || '');
 function nodeStatus(node) {
-  if (node?.status === 'needs-repair') return 'Kræver reparation';
-  if (node?.status === 'needs-practice') return 'Gentag efter reparation';
+  if (node?.status === 'needs-repair') return 'Øv den igen';
+  if (node?.status === 'needs-practice') return 'Gentag senere';
   if (node?.status === 'review-due') return 'Gentag nu';
   if (node?.lessonComplete && node?.questionIds?.length === 1) return 'Øvet, ét prøvebillede';
   if (node?.lessonComplete) return node.longTermMastery?.durable ? 'Gentaget over tid' : 'Øvet';
   return 'Næste stop';
 }
 function recommendationWhy(node) {
-  if (node?.status === 'needs-repair') return 'En fejl venter på reparation.';
-  if (node?.status === 'needs-practice') return 'Hent reparationen frem igen.';
+  if (node?.status === 'needs-repair') return 'Du havde en fejl her. Tag den igen, så sidder den.';
+  if (node?.status === 'needs-practice') return 'Tag reglen en gang til.';
   if (node?.status === 'review-due') return 'Reglen er klar til gentagelse.';
   return 'Din næste nye regel på ruten.';
 }
@@ -37,7 +37,7 @@ function calendar(daily) {
 function dailyDetails(daily) {
   const goal = Number(daily?.dailyGoal) || 1; const quests = daily?.quests || {};
   const quest = (key, title) => { const item = quests[key] || { progress: 0, target: 1, complete: false }; return `<li class="journey-quest ${item.complete ? 'journey-quest--done' : ''}"><span>${item.complete ? icon('check') : '<span class="tb-stripes" aria-hidden="true"></span>'}</span><span>${escape(title)}</span><b>${Math.min(item.progress || 0, item.target || 1)}/${item.target || 1}</b></li>`; };
-  return `<details class="journey-details"><summary>Indstil mål og se kalender</summary><div class="journey-details-body"><div class="journey-goals" role="group" aria-label="Vælg antal øvesessioner pr. dag">${[1, 2, 3].map(value => `<button type="button" class="journey-goal ${value === goal ? 'journey-goal--active' : ''}" data-journey-goal="${value}" aria-pressed="${value === goal}">${value}<small>${value === 1 ? 'øvesession' : 'øvesessioner'}</small></button>`).join('')}</div>${calendar(daily)}<ul class="journey-quests" aria-label="Dagens små mål">${quest('lesson', 'Gennemfør en lektion')}${quest('delayedReview', 'Gentag med lidt afstand')}${quest('repair', 'Reparér en fejl')}</ul></div></details>`;
+  return `<details class="journey-details"><summary>Indstil mål og se kalender</summary><div class="journey-details-body"><div class="journey-goals" role="group" aria-label="Vælg antal øvesessioner pr. dag">${[1, 2, 3].map(value => `<button type="button" class="journey-goal ${value === goal ? 'journey-goal--active' : ''}" data-journey-goal="${value}" aria-pressed="${value === goal}">${value}<small>${value === 1 ? 'øvesession' : 'øvesessioner'}</small></button>`).join('')}</div>${calendar(daily)}<ul class="journey-quests" aria-label="Dagens små mål">${quest('lesson', 'Gennemfør en lektion')}${quest('delayedReview', 'Gentag med lidt afstand')}${quest('repair', 'Ret en fejl')}</ul></div></details>`;
 }
 function moreLinks() { return `<details class="journey-details"><summary>Flere øveveje</summary><nav class="journey-links" aria-label="Flere øveveje"><a href="#trafiklab">Trafiklab: Et blink. To baner. ${icon('arrow')}</a><a href="#judge">Beslutningskørsel ${icon('arrow')}</a><a href="#theory">Teoriatlas ${icon('arrow')}</a><a href="#garage">Garagen ${icon('arrow')}</a><a href="#exam">Øveprøve ${icon('arrow')}</a></nav></details>`; }
 function glyph(node, completed) { if (completed) return icon('check'); if (node.status === 'needs-repair') return icon('repair'); if (node.status === 'needs-practice' || node.status === 'review-due') return icon('review'); return escape(String((node.routeIndex ?? 0) + 1)); }

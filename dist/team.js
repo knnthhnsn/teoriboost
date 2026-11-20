@@ -127,7 +127,7 @@ export function createTeam({ db, store = globalThis.localStorage, now = () => Da
   const subs = new Set();
   const emit = () => subs.forEach(f => f(view()));
   const view = () => ({ status, error, team, racers, uid, confirm });
-  const fail = (e, msg) => { console.warn('team:', e?.code || e?.message); error = e?.code === 'permission-denied' ? 'Holdene er ikke slået til endnu. Prøv igen senere.' : msg; status = team ? 'in' : 'out'; emit(); };
+  const fail = (e, msg) => { console.warn('team:', e?.code || e?.message); error = e?.code === 'permission-denied' ? 'Holdene er ikke slået til endnu. Du kan stadig øve og tjene Boosters.' : msg; status = team ? 'in' : 'out'; emit(); };
 
   function listen(c) {
     unsub?.(); unsub = null;

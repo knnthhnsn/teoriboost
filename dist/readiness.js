@@ -22,7 +22,7 @@ export const STATUS = Object.freeze({
   klar: { label: 'Klar', rank: 3 },
   naesten: { label: 'Næsten', rank: 2 },
   oev: { label: 'Øv mere', rank: 1 },
-  lidt: { label: 'For lidt data', rank: 0 }
+  lidt: { label: 'Øv lidt mere først', rank: 0 }
 });
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -104,7 +104,7 @@ const LEVEL = {
   klar: { label: 'Klar til prøven', tone: 'klar' },
   naesten: { label: 'Næsten klar', tone: 'naesten' },
   oev: { label: 'Ikke klar endnu', tone: 'oev' },
-  lidt: { label: 'For lidt data', tone: 'lidt' }
+  lidt: { label: 'Øv lidt mere først', tone: 'lidt' }
 };
 
 /** Sneglen's line: one or two short sentences, built only from numbers that are on the screen. */

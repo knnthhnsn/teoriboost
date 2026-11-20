@@ -81,9 +81,9 @@ const styleOf = garage => ({ ...DEFAULT_COLORS, plate: '', neonOn: false, lowere
 /** Pure state transitions; each returns { garage, ok, message }. */
 export function buyBase(garage, progress, baseId) {
   const base = baseById(baseId);
-  if (!base) return { garage, ok: false, message: 'Ukendt køretøj.' };
+  if (!base) return { garage, ok: false, message: 'Vi kunne ikke finde køretøjet. Prøv igen.' };
   if (garage.bases.includes(baseId)) return { garage: { ...garage, active: baseId }, ok: true, message: `${base.name} er valgt.` };
-  if (balance(progress, garage) < base.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu.' };
+  if (balance(progress, garage) < base.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu. Tag en lektion, så tjener du flere.' };
   return { garage: { ...garage, spent: garage.spent + base.price, bases: [...garage.bases, baseId], active: baseId }, ok: true, message: `${base.name} er din!` };
 }
 export function buyOrEquipPart(garage, progress, partId) {
@@ -96,7 +96,7 @@ export function buyOrEquipPart(garage, progress, partId) {
     if (current === partId) delete equipped[slotKey][part.slot]; else equipped[slotKey][part.slot] = partId;
     return { garage: { ...garage, equipped }, ok: true, message: current === partId ? `${part.name} er taget af.` : `${part.name} er monteret.` };
   }
-  if (balance(progress, garage) < part.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu.' };
+  if (balance(progress, garage) < part.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu. Tag en lektion, så tjener du flere.' };
   equipped[slotKey][part.slot] = partId;
   return { garage: { ...garage, spent: garage.spent + part.price, owned: [...garage.owned, `${slotKey}:${partId}`], equipped }, ok: true, message: `${part.name} er købt og monteret.` };
 }
@@ -115,7 +115,7 @@ export function unequipAll(garage) {
 }
 export function buyOrToggleExtra(garage, progress, extraId) {
   const extra = EXTRAS[extraId];
-  if (!extra) return { garage, ok: false, message: 'Ukendt ekstraudstyr.' };
+  if (!extra) return { garage, ok: false, message: 'Vi kunne ikke finde den del. Prøv igen.' };
   if (extraId === 'lower' && !baseById(garage.active)?.split) return { garage, ok: false, message: 'Dette køretøj kan ikke sænkes endnu.' };
   const key = `extra-${extraId}`, flag = extraId === 'neon' ? 'neonOn' : 'lowered';
   const style = { ...styleOf(garage) };
@@ -123,7 +123,7 @@ export function buyOrToggleExtra(garage, progress, extraId) {
     style[flag] = !style[flag];
     return { garage: { ...garage, style: { ...garage.style, [garage.active]: style } }, ok: true, message: `${extra.name} er ${style[flag] ? 'slået til' : 'slået fra'}.` };
   }
-  if (balance(progress, garage) < extra.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu.' };
+  if (balance(progress, garage) < extra.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu. Tag en lektion, så tjener du flere.' };
   style[flag] = true;
   return { garage: { ...garage, spent: garage.spent + extra.price, owned: [...garage.owned, `${garage.active}:${key}`], style: { ...garage.style, [garage.active]: style } }, ok: true, message: `${extra.name} er købt.` };
 }
@@ -131,7 +131,7 @@ export function buyOrToggleExtra(garage, progress, extraId) {
 const HEX = /^#[0-9a-f]{6}$/i;
 /** Free colour choice for paint, stripes, windows and neon. Changing colour is free once unlocked. */
 export function setColor(garage, kind, color) {
-  if (!['paint', 'stripe', 'windows', 'neon'].includes(kind) || !HEX.test(color)) return { garage, ok: false, message: 'Ugyldig farve.' };
+  if (!['paint', 'stripe', 'windows', 'neon'].includes(kind) || !HEX.test(color)) return { garage, ok: false, message: 'Den farve kan ikke bruges. Vælg en anden.' };
   const style = { ...styleOf(garage), [kind]: color.toUpperCase() };
   return { garage: { ...garage, style: { ...garage.style, [garage.active]: style } }, ok: true, message: '' };
 }
@@ -152,7 +152,7 @@ export function withTryOn(garage, tryOn) {
 export const ownsShuffle = garage => garage.owned.includes(SHUFFLE.key);
 export function buyShuffle(garage, progress) {
   if (ownsShuffle(garage)) return { garage, ok: true, message: '' };
-  if (balance(progress, garage) < SHUFFLE.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu.' };
+  if (balance(progress, garage) < SHUFFLE.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu. Tag en lektion, så tjener du flere.' };
   return { garage: { ...garage, spent: garage.spent + SHUFFLE.price, owned: [...garage.owned, SHUFFLE.key] }, ok: true, message: 'Bland min bil er låst op. Tryk igen for at slå terningerne.' };
 }
 /** A random new look from the parts, colours and extras you own for the active vehicle (free once unlocked). Each slot
