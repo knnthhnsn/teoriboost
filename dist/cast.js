@@ -18,10 +18,10 @@ export const CAST_SIZE = 512;
 
 const LINES = Object.freeze({
   home: ['Hastighed er ikke en personlighed. Én regel ad gangen.', 'Roligt nu. Vi tager næste stræk sammen.', 'Fem minutter i dag slår en hel aften før prøven.'],
-  comeback: ['Nå, du er tilbage! Jeg er lige flyttet ind igen.', 'Velkommen tilbage. Vi starter, hvor du slap.'],
+  comeback: ['Nå, du er tilbage. Jeg er lige flyttet ind igen.', 'Velkommen tilbage. Vi starter, hvor du slap.'],
   correct: ['Blinket i god tid. Præcis rigtigt.', 'Sådan. Den sidder.', 'Du så det, før det blev farligt.'],
   wrong: ['Det var ikke helt rigtigt. Kig på reglen, så prøver du igen.', 'Tæt på. Kig på reglen, så tager vi den igen.', 'En fejl her er en fejl mindre til prøven.'],
-  missions: ['Korte runder. Lange eftervirkninger.'],
+  missions: ['Korte runder. Regler, der sidder.'],
   exam: ['25 situationer, én ad gangen. Du må gerne gå tilbage og ændre svar.'],
   pass: ['Inden for grænsen! Jeg hopper på baghjulene.'],
   fail: ['Vi kører en tur mere. Forklaringerne viser vejen.'],

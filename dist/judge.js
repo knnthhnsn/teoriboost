@@ -156,7 +156,7 @@ export function getJudgeCases() {
 
 export function renderJudge() {
   return `<section class="judge" data-judge-root aria-labelledby="judge-title">
-    <div class="game-top"><a class="game-close" href="#practice" aria-label="Luk spillet og gå til Øv">${ico('x')}</a>
+    <div class="game-top"><a class="game-close" href="#practice" aria-label="Luk spillet og gå til Øvelser">${ico('x')}</a>
       <div class="game-cases" aria-hidden="true">${CASES.map(() => '<i></i>').join('')}</div>
       <span class="game-count" data-judge-progress>Du er kørelæreren</span></div>
     <header class="judge__header">
@@ -265,7 +265,7 @@ export function mountJudge(container, options={}) {
     const choice=list.find(item=>item.id===id);if(!choice)return;
     if(!choice.correct){calmWrong(id);return;}
     transitioning=true;mark(id,'is-right');options.onSound?.('correct');
-    els.status.dataset.tone='ok';els.status.textContent='Korrekt set. Næste trin er klar.';
+    els.status.dataset.tone='ok';els.status.textContent='Godt set. Næste trin er klar.';
     const placementDelay=phase===3?world.place(choice.id):0;
     phase=Math.min(4,phase+1);window.setTimeout(()=>{transitioning=false;if(!disposed)paint();},Math.max(650,placementDelay+80));
   }

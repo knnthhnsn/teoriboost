@@ -160,7 +160,7 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
       case 'open': open(); break;
       case 'code': open('code'); break;
       case 'profile': close(); win.location.hash = 'profil'; break;
-      case 'google': await action(() => account.signInGoogle(), 'Kontrollér din konto, og prøv igen.'); break;
+      case 'google': await action(() => account.signInGoogle(), 'Tjek, at du er logget ind på den rigtige konto, og prøv igen.'); break;
       case 'email': close(); account.setUi('email'); win.location.hash = 'profil'; break;
       case 'restore':
         if (!sheet.open) open();

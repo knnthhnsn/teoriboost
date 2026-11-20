@@ -79,7 +79,7 @@ export function renderMissions({ missions, chapters, practised, due }) {
     return `<li class="topic ${done === total ? 'is-done' : ''}"><a href="#mission:${esc(c.sections[0].id)}"><span class="topic-n">${i + 1}</span><div><strong>${esc(c.title)}</strong><span class="topic-bar"><i style="--p:${total ? done / total : 0}"></i></span><small>${esc(c.tagline)} <span class="tb-stripes" aria-hidden="true"></span> ${done}/${total} øvet</small></div></a><a class="topic-cards topic-cards--go" href="#mission:${esc(c.sections[0].id)}" aria-label="Øv ${esc(c.title)}">Øv</a></li>`;
   }).join('');
   return `<section class="missions" aria-labelledby="missions-title"><header class="screen-head"><a class="back-round" href="#practice" aria-label="Tilbage til Øvelser">${ICON.back}</a><h1 id="missions-title">Vælg en øvelse</h1></header>
-    <div class="mission-intro">${renderCast('sneglen', { size: 'sm', priority: true })}<div><strong>Korte runder. Lange eftervirkninger.</strong><small>Hver øvelse er tre situationer og én genkaldelse. Du får forklaringen efter hvert svar, og det, du er usikker på, kommer igen senere. Ingen point for fart.</small></div></div>
+    <div class="mission-intro">${renderCast('sneglen', { size: 'sm', priority: true })}<div><strong>Korte runder. Regler, der sidder.</strong><small>Hver øvelse er tre situationer og én genkaldelse. Du får forklaringen efter hvert svar, og det, du er usikker på, kommer igen senere. Ingen point for fart.</small></div></div>
     <ol class="mission-steps" aria-label="Sådan virker en øvelse">${steps}</ol>
     <h2 class="list-label">ANBEFALET</h2><div class="feature-grid">${featured}</div>
     <h2 class="list-label">ALLE EMNER</h2><ol class="topic-list">${rows}</ol>

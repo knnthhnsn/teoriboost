@@ -7,12 +7,12 @@ export const money=ore=>new Intl.NumberFormat('da-DK',{style:'currency',currency
 export function paymentError(error){
   const code=error?.code||error?.type;
   if(code==='LOGIN_REQUIRED')return 'Log ind på din konto, før du bruger en kode.';
-  if(code==='paymentFailed')return error.paymentFailed?.declineCode?'Betalingen blev afvist. Kontrollér oplysningerne, eller vælg en anden betalingsmetode. Din adgang er ikke aktiveret endnu.':'Betalingen blev ikke godkendt. Prøv igen, eller vælg en anden betalingsmetode.';
-  if(['card_declined','insufficient_funds','expired_card','incorrect_cvc','incorrect_number'].includes(code))return 'Kortet blev afvist. Kontrollér oplysningerne, eller prøv et andet kort. Din adgang er ikke aktiveret endnu.';
-  if(['api_connection_error','network_error','fetch_error'].includes(code)||error instanceof TypeError)return 'Forbindelsen blev afbrudt. Kontrollér din forbindelse, og prøv igen. Hvis du allerede har godkendt betalingen, så vælg Kontrollér adgang først.';
-  if(code==='validation_error')return 'Kontrollér betalingsoplysningerne i felterne, og prøv igen.';
-  if(['card_error','api_error','invalid_request_error'].includes(error?.type))return 'Betalingen kunne ikke godkendes. Kontrollér oplysningerne, eller prøv igen om lidt.';
-  if(error?.code===null)return 'Betalingen kunne ikke gennemføres. Kontrollér oplysningerne og din forbindelse, og prøv igen.';
+  if(code==='paymentFailed')return error.paymentFailed?.declineCode?'Betalingen blev afvist. Tjek oplysningerne, eller vælg en anden betalingsmetode. Din adgang er ikke aktiveret endnu.':'Betalingen blev ikke godkendt. Prøv igen, eller vælg en anden betalingsmetode.';
+  if(['card_declined','insufficient_funds','expired_card','incorrect_cvc','incorrect_number'].includes(code))return 'Kortet blev afvist. Tjek oplysningerne, eller prøv et andet kort. Din adgang er ikke aktiveret endnu.';
+  if(['api_connection_error','network_error','fetch_error'].includes(code)||error instanceof TypeError)return 'Forbindelsen blev afbrudt. Tjek din forbindelse, og prøv igen. Hvis du allerede har godkendt betalingen, så vælg Kontrollér adgang først.';
+  if(code==='validation_error')return 'Tjek betalingsoplysningerne i felterne, og prøv igen.';
+  if(['card_error','api_error','invalid_request_error'].includes(error?.type))return 'Betalingen kunne ikke godkendes. Tjek oplysningerne, eller prøv igen om lidt.';
+  if(error?.code===null)return 'Betalingen kunne ikke gennemføres. Tjek oplysningerne og din forbindelse, og prøv igen.';
   return error?.message||'Betalingen kunne ikke gennemføres. Prøv igen om lidt.';
 }
 

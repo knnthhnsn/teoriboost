@@ -133,7 +133,7 @@ export function createTeam({ db, store = globalThis.localStorage, now = () => Da
     unsub?.(); unsub = null;
     unsub = c.fb.onSnapshot(c.fb.collection(c.db, 'teams', team.code, 'racers'), snap => {
       racers = snap.docs.map(d => ({ uid: d.id, ...d.data(), at: d.data().updatedAt?.toMillis?.() || 0 })); emit();
-    }, e => fail(e, 'Kunne ikke hente holdet lige nu.'));
+    }, e => fail(e, 'Vi kunne ikke hente holdet lige nu. Tjek din forbindelse, og prøv igen.'));
   }
   async function load() {
     const c = await db(); if (!c) { unsub?.(); unsub = null; team = null; racers = []; uid = null; status = 'signedout'; emit(); return; }
@@ -145,7 +145,7 @@ export function createTeam({ db, store = globalThis.localStorage, now = () => Da
       team = found ? { code: found.id, ...found.data() } : null; status = team ? 'in' : 'out'; error = '';
       if (team) listen(c); else { unsub?.(); unsub = null; racers = []; }
       emit();
-    } catch (e) { fail(e, 'Kunne ikke hente dit hold lige nu.'); }
+    } catch (e) { fail(e, 'Vi kunne ikke hente dit hold lige nu. Tjek din forbindelse, og prøv igen.'); }
   }
   async function create(name, kind) {
     const c = await db(); if (!c) return;
@@ -156,7 +156,7 @@ export function createTeam({ db, store = globalThis.localStorage, now = () => Da
       for (let i = 0; i < 5 && (await c.fb.getDoc(c.fb.doc(c.db, 'teams', code))).exists(); i++) code = makeCode(random);
       await c.fb.setDoc(c.fb.doc(c.db, 'teams', code), { name, kind: KINDS[kind] ? kind : 'venner', owner: c.uid, members: [c.uid], createdAt: c.fb.serverTimestamp() });
       await load();
-    } catch (e) { fail(e, 'Kunne ikke oprette holdet. Prøv igen.'); }
+    } catch (e) { fail(e, 'Vi kunne ikke oprette holdet. Prøv igen om lidt.'); }
   }
   async function join(text) {
     const c = await db(); if (!c) return;
@@ -170,7 +170,7 @@ export function createTeam({ db, store = globalThis.localStorage, now = () => Da
       if ((snap.data().members || []).length >= MAX_MEMBERS) { error = `Holdet er fuldt (${MAX_MEMBERS} på et hold).`; status = 'out'; emit(); return; }
       await c.fb.updateDoc(c.fb.doc(c.db, 'teams', code), { members: c.fb.arrayUnion(c.uid) });
       await load();
-    } catch (e) { fail(e, 'Kunne ikke komme med på holdet. Prøv igen.'); }
+    } catch (e) { fail(e, 'Vi kunne ikke sætte dig på holdet. Prøv igen om lidt.'); }
   }
   async function leave() {
     const c = await db(); if (!c || !team) return;
@@ -179,7 +179,7 @@ export function createTeam({ db, store = globalThis.localStorage, now = () => Da
       await c.fb.deleteDoc(c.fb.doc(c.db, 'teams', team.code, 'racers', c.uid));
       await c.fb.updateDoc(c.fb.doc(c.db, 'teams', team.code), { members: c.fb.arrayRemove(c.uid) });
       unsub?.(); unsub = null; team = null; racers = []; lastSent = ''; confirm = false; status = 'out'; emit();
-    } catch (e) { fail(e, 'Kunne ikke forlade holdet. Prøv igen.'); }
+    } catch (e) { fail(e, 'Vi kunne ikke tage dig af holdet. Prøv igen om lidt.'); }
   }
   /** Your racer: name, today's answers, streak, the car you drive and your boost. Sent only when something changed. */
   async function publish(me) {

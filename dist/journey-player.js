@@ -181,7 +181,7 @@ export function createJourneyPlayer({
       <div class="journey-step-intro journey-step-intro--compact"><span class="journey-kicker">KORT ${currentIndex + 1} AF 3</span>${voiceButton('lesson', 'Lyt til alle tre kort')}</div>
       ${audioView}
       <article class="journey-focus-card"><span class="lesson-number">${currentIndex + 1}</span><div>${(() => { const sq = lessonScene(QUESTIONS, section.id, currentIndex, card.title + ' ' + card.body); return sq ? `<div class="jp-card-scene">${renderQuestionVisual(sq)}</div>` : ''; })()}<h2>${esc(card.title)}</h2><div class="jp-card-text">${paras(card.body)}</div>${refs(card.sourceIds, card.sourceLocator)}</div></article>
-      <div class="journey-control-dock"><p>${session.kind === 'review' ? 'Læs forklaringen efter dit kolde forsøg.' : 'Ét kort ad gangen.'}</p><button class="btn btn-primary" type="button" data-journey-card="${currentIndex}">${currentIndex === 2 ? 'Brug reglen' : 'Næste kort'}</button></div>
+      <div class="journey-control-dock"><p>${session.kind === 'review' ? 'Prøv selv først. Forklaringen kommer bagefter.' : 'Ét kort ad gangen.'}</p><button class="btn btn-primary" type="button" data-journey-card="${currentIndex}">${currentIndex === 2 ? 'Brug reglen' : 'Næste kort'}</button></div>
     </section>`;
   }
 
@@ -248,7 +248,7 @@ export function createJourneyPlayer({
       : '';
     return `<section class="journey-assessment">
       ${notice}
-      <header class="journey-exercise-context"><span class="journey-kicker">${session.kind === 'review' && (currentStep.stage === 'apply' || feedback?.stage === 'apply') ? 'KOLD GENKALDELSE <span class="tb-stripes" aria-hidden="true"></span> FØR KORTENE' : 'VURDÉR FIRE UDSAGN'}</span><h2>${esc(question.prompt)}</h2><p class="question-context">${esc(question.context)}</p>${voiceButton('question', 'Læs situationen op')}</header>
+      <header class="journey-exercise-context"><span class="journey-kicker">${session.kind === 'review' && (currentStep.stage === 'apply' || feedback?.stage === 'apply') ? 'PRØV SELV <span class="tb-stripes" aria-hidden="true"></span> FØR KORTENE' : 'VURDÉR FIRE UDSAGN'}</span><h2>${esc(question.prompt)}</h2><p class="question-context">${esc(question.context)}</p>${voiceButton('question', 'Læs situationen op')}</header>
       ${renderQuestionVisual(question)}
       <section class="journey-statement-panel"><div class="journey-statement-head"><span>UDSAGN</span><b><span data-journey-statement-count aria-hidden="true">${ui.statementIndex + 1} / 4</span><span class="journey-sr-only" data-journey-statement-announcement aria-live="polite" aria-atomic="true">Udsagn ${ui.statementIndex + 1} af 4</span></b></div><div class="journey-statement-stage">${statementMarkup(question, ui.statementIndex, { disabled: Boolean(feedback) })}</div></section>
       ${feedback ? feedbackTray(question) : assessmentDock()}

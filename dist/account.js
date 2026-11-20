@@ -51,12 +51,12 @@ export function createAccount({ config, adapters, load = loadFirebase, storage =
     if (!force && sig === lastSent) return; // nothing new since the last save
     set({ syncing: true });
     try { await fb.setDoc(userDoc(uid), { ...packed, v: 1, updatedAt: fb.serverTimestamp() }); lastSent = sig; set({ syncing: false, syncedAt: now(), error: null }); }
-    catch { set({ syncing: false, error: 'Kunne ikke gemme i din konto lige nu. Det bliver prøvet igen.' }); }
+    catch { set({ syncing: false, error: 'Vi kunne ikke gemme i din konto lige nu. Vi prøver igen af os selv.' }); }
   }
   async function startSync() {
     paused = false; set({ syncing: true });
     try { await pull(); await push(true); }
-    catch { set({ syncing: false, error: 'Kunne ikke hente din fremgang lige nu. Det bliver prøvet igen.' }); }
+    catch { set({ syncing: false, error: 'Vi kunne ikke hente din fremgang lige nu. Vi prøver igen af os selv.' }); }
     clearInterval(timer); timer = setInterval(() => void push(), PUSH_EVERY);
     timer?.unref?.(); // (Node, in tests) the save timer must not keep the process alive
   }

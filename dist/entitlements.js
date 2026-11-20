@@ -14,10 +14,10 @@ export function hasPremium(entitlement, now = Date.now()) {
 
 export async function loadPremiumConfig(fetcher = globalThis.fetch) {
   const response = await fetcher('./premium-config.json', { cache: 'no-store', credentials: 'same-origin' });
-  if (!response.ok) throw new Error('Adgangsoversigten kunne ikke hentes. Prøv igen.');
+  if (!response.ok) throw new Error('Vi kunne ikke hente din adgang lige nu. Prøv igen om lidt.');
   const config = await response.json();
   if (config.schemaVersion !== 1 || !Array.isArray(config.plans) || !config.free) {
-    throw new Error('Adgangsoversigten kunne ikke indlæses. Prøv igen.');
+    throw new Error('Vi kunne ikke hente din adgang lige nu. Prøv igen om lidt.');
   }
   return config;
 }
