@@ -73,7 +73,7 @@ export function renderPractice(data) {
 export function renderMissions({ missions, chapters, practised, due }) {
   const steps = ['Se situationen', 'Vælg dit svar', 'Forstå reglen', 'Husk den senere'].map((s, i) => `<li><b>${i + 1}</b>${s}</li>`).join('');
   const featured = missions.map(m => `<a class="feature-card" href="#mission:${esc(m.section)}"><span class="feature-ico" style="--c:${m.tint}">${ico(m.icon)}</span>
-      <span class="feature-tag">${esc(m.tag)}</span><strong>${esc(m.title)}</strong><small>${esc(m.description)}</small><span class="feature-meta">3 situationer + hvad husker du?</span></a>`).join('');
+      <span class="feature-tag">${esc(m.tag)}</span><strong>${esc(m.title)}</strong><small>${esc(m.description)}</small><span class="feature-meta">3 situationer + husketjek</span></a>`).join('');
   const rows = chapters.map((c, i) => {
     const total = c.sections.length, done = c.sections.filter(s => practised(s.id)).length;
     return `<li class="topic ${done === total ? 'is-done' : ''}"><a href="#mission:${esc(c.sections[0].id)}"><span class="topic-n">${i + 1}</span><div><strong>${esc(c.title)}</strong><span class="topic-bar"><i style="--p:${total ? done / total : 0}"></i></span><small>${esc(c.tagline)} <span class="tb-stripes" aria-hidden="true"></span> ${done}/${total} øvet</small></div></a><a class="topic-cards topic-cards--go" href="#mission:${esc(c.sections[0].id)}" aria-label="Øv ${esc(c.title)}">Øv</a></li>`;
@@ -192,7 +192,7 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
     ${renderAccountPanel(account)}
     <div class="tile-row"><div class="tile"><b class="tile-fire"><span class="chip-ico" data-rive="flame:${flameLevel(daily?.currentStreak || 0)}">${flameArt(flameLevel(daily?.currentStreak || 0))}</span>${daily?.currentStreak || 0}</b><small>${daily?.currentStreak === 1 ? 'dag' : 'dage'} i træk</small></div><div class="tile"><b>${lessonsDone}/${lessonsTotal}</b><small>lektioner</small></div></div>
     ${ready ? `<div class="panel ready-panel"><h2>Hvor klar er du?</h2><div class="ready-row"><span class="ready-gauge" data-rive="gauge:${ready.pct}" aria-hidden="true"></span>${ready.pct > 0 && ready.pct < 10 ? '<b class="ready-early">Lige startet</b>' : `<b>${ready.pct} %</b>`}<span class="ready-bar" role="img" aria-label="${ready.pct} procent klar"><i style="--p:${ready.pct / 100}"></i></span></div>
-      <p>${ready.ok} af ${ready.total} regelkort sidder: dit seneste svar på dem var rigtigt. ${ready.passes >= 2 ? 'Og du har været inden for grænsen i mindst 2 af dine 3 seneste øveprøver.' : 'Kom inden for grænsen i 2 af dine 3 seneste øveprøver, så er du også klar til prøveformatet.'}</p><small>Appens egen vurdering, ikke en garanti for den rigtige prøve.</small></div>` : ''}
+      <p>${ready.ok} af ${ready.total} regelkort sidder: dit seneste svar på dem var rigtigt. ${ready.passes >= 2 ? 'Og du har bestået mindst 2 af dine 3 seneste øveprøver.' : 'Bestå 2 af dine 3 seneste øveprøver, så er du også klar til prøveformatet.'}</p><small>Appens egen vurdering, ikke en garanti for den rigtige prøve.</small></div>` : ''}
     <div class="panel"><h2>Denne uge</h2><ol class="week">${week}</ol></div>
     <div class="panel"><h2>Styrker og svagheder</h2><ul class="sw">${bars}</ul></div>
     <a class="set-row set-row--link" href="#start:1"><span>Prøvedato</span><small>${esc(WHEN_TEXT[intro?.when] || 'Vælg')}${examDays !== null ? ` <span class="tb-stripes" aria-hidden="true"></span> ${examDays} dage` : ''}</small></a>
