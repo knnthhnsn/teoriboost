@@ -155,7 +155,7 @@ export function renderReadiness(vm, now = Date.now()) {
   return `<section class="rd" aria-labelledby="rd-title" data-readiness="${level}">
     <h2 class="list-label" id="rd-title">ER DU KLAR?</h2>
     <div class="exam-talk rd-talk">${renderCast('sneglen', { size: 'sm' })}<p class="talk-bubble"><span class="cast-name">Sneglen</span>${esc(sneglenLine(vm))}</p></div>
-    <div class="rd-verdict rd-verdict--${lv.tone}"><span class="rd-verdict-mark">${glyph(lv.tone)}</span><div><strong>${lv.label}</strong><small>${judged} af ${total} emner har nok svar${vm.exams > 1 ? `. ${vm.examsInLimit} af dine seneste ${vm.exams} prøver var inden for grænsen` : vm.exams ? `. Din seneste prøve ${vm.examsInLimit ? 'var inden for grænsen' : 'var uden for grænsen'}` : '. Ingen øveprøver endnu'}</small></div></div>
+    <div class="rd-verdict rd-verdict--${lv.tone}"><span class="rd-verdict-mark">${glyph(lv.tone)}</span><div><strong>${lv.label}</strong><small>${judged} af ${total} emner har nok svar${vm.exams > 1 ? `. ${vm.examsInLimit} af dine seneste ${vm.exams} øveprøver blev bestået` : vm.exams ? `. Din seneste øveprøve ${vm.examsInLimit ? 'blev bestået' : 'blev ikke bestået'}` : '. Ingen øveprøver endnu'}</small></div></div>
     <ul class="rd-counts" aria-label="Emner fordelt på status">${chips}</ul>
     ${showRows.length ? `<h3 class="rd-sub">Her skal du bruge mest tid</h3><ol class="rd-list">${showRows.map(t => row(t, now)).join('')}</ol>` : ''}
     <div class="rd-actions">${cta}</div>

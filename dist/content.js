@@ -90,7 +90,7 @@ const s = (id, title, facts, sourceIds, curriculumRef) => ({ id, title, facts, s
 
 export const CHAPTERS = [
   {
-    id: 'bil', title: 'Bilen før turen', tagline: 'Cockpit, kontrol og ting der helst ikke falder af', color: '#36D399', icon: 'car', sections: [
+    id: 'bil', title: 'Bilen før turen', tagline: 'Sæde, spejle og alt det, der skal sidde fast', color: '#36D399', icon: 'car', sections: [
       s('cockpit', 'Indstilling og udsyn', [
         'Sæde, rat og spejle indstilles før kørslen, så føreren kan styre sikkert og orientere sig effektivt.',
         'Nakkestøtten skal passe til førerens højde og mindske risikoen for nakkeskade.',
@@ -155,7 +155,7 @@ export const CHAPTERS = [
     ]
   },
   {
-    id: 'koeretoejer', title: 'Køretøjer omkring dig', tagline: 'Blind vinkel, stor røv, lang reaktion', color: '#A78BFA', icon: 'car', sections: [
+    id: 'koeretoejer', title: 'Køretøjer omkring dig', tagline: 'Store køretøjer ser mindre, end du tror', color: '#A78BFA', icon: 'car', sections: [
       s('blindzoner', 'Blindzoner', [
         'Spejle viser ikke nødvendigvis hele området ved siden af og bag bilen.',
         'Et kort skulderblik kan være nødvendigt før vognbaneskift eller sving.',
@@ -242,7 +242,7 @@ export const CHAPTERS = [
     ]
   },
   {
-    id: 'grundregler', title: 'Grundregler og anvisninger', tagline: 'Politibetjenten slår algoritmen', color: '#F59E0B', icon: 'stop', sections: [
+    id: 'grundregler', title: 'Grundregler og anvisninger', tagline: 'Betjenten bestemmer over lyskurven', color: '#F59E0B', icon: 'stop', sections: [
       s('anvisninger', 'Rækkefølgen af færdselsanvisninger', [
         'En politibetjents anvisning går foran lyssignaler, tavler og almindelige regler.',
         'Lyssignaler går foran modstridende vigepligtsafmærkning, når signalet virker.',
@@ -314,7 +314,7 @@ export const CHAPTERS = [
     ]
   },
   {
-    id: 'vejmanoevrer', title: 'Manøvrer på vej', tagline: 'Spejl, plan, plads — og nul hovedpersonenergi', color: '#4ADE80', icon: 'right', sections: [
+    id: 'vejmanoevrer', title: 'Manøvrer på vej', tagline: 'Spejl, plan, plads. Du deler vejen med andre.', color: '#4ADE80', icon: 'right', sections: [
       s('placering-fart', 'Placering og fart', [
         'Man skal normalt holde så langt til højre som forholdene tillader.',
         'Den skiltede hastighed er en øvre grænse, ikke et mål under alle forhold.',
@@ -400,7 +400,7 @@ export const CHAPTERS = [
     ]
   },
   {
-    id: 'koerekort', title: 'Kørekort og prøve', tagline: 'Papirarbejde: den endelige boss', color: '#FACC15', icon: 'car', sections: [
+    id: 'koerekort', title: 'Kørekort og prøve', tagline: 'Papirerne, prøven og det sidste stykke vej', color: '#FACC15', icon: 'car', sections: [
       s('sammensat-koersel', 'Afsluttende sammensat kørsel', [
         'Afsnit 7.22 er afsluttende praktisk kørsel i skiftende situationer; kørelærer og elev fastlægger fælles mål og følger op med refleksion.',
         'Eleven skal øve selvstændig, hensynsfuld, ansvarlig og energi- og miljørigtig kørsel.',

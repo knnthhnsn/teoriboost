@@ -13,7 +13,7 @@ const ICON = {
   check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
 };
 const SUGGEST = ['Hvornår har jeg ubetinget vigepligt?', 'Forklar hajtænder på 20 sekunder', 'Hvad skal jeg øve mere på?',
-  'Hvor mange fejl må jeg have til teoriprøven?', 'Quiz mig i rundkørsler', 'Hvorfor bremser bilen længere på våd vej?'];
+  'Hvor mange fejl må jeg have til teoriprøven?', 'Test mig i rundkørsler', 'Hvorfor bremser bilen længere på våd vej?'];
 
 export function loadChat(store = globalThis.localStorage) { try { const v = JSON.parse(store.getItem(KEY)); return Array.isArray(v) ? v : []; } catch { return []; } }
 export function saveChat(list, store = globalThis.localStorage) { try { store.setItem(KEY, JSON.stringify(list.slice(-30))); } catch {} }

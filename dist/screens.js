@@ -46,7 +46,7 @@ export function renderLearn({ vm, intro, due, unitIndex, ready }) {
     const st = nodeState(n, nextInUnit?.id), label = st === 'done' ? ICON.check : st === 'review' ? ICON.repeat : st === 'repair' ? ICON.fix : String(i + 1);
     const word = { next: 'næste lektion', done: 'gennemført', review: 'klar til gentagelse', repair: 'skal øves igen', open: 'åben' }[st];
     return `<li class="pn pn--${st}" style="--x:${OFF[i % OFF.length]};--i:${i}">
-      ${st === 'next' ? `<span class="pn-start" aria-hidden="true">Start!</span>` : ''}
+      ${st === 'next' ? `<span class="pn-start" aria-hidden="true">Start her</span>` : ''}
       <a class="pn-btn" href="#journey:${esc(n.sectionId)}" data-journey-sound="node" aria-label="${i + 1}. ${esc(n.title)}, ${word}">${label}</a>
       <span class="pn-title">${esc(n.title)}</span></li>`;
   }).join('');
