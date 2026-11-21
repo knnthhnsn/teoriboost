@@ -73,13 +73,13 @@ export function renderPractice(data) {
 export function renderMissions({ missions, chapters, practised, due }) {
   const steps = ['Se situationen', 'Vælg dit svar', 'Forstå reglen', 'Husk den senere'].map((s, i) => `<li><b>${i + 1}</b>${s}</li>`).join('');
   const featured = missions.map(m => `<a class="feature-card" href="#mission:${esc(m.section)}"><span class="feature-ico" style="--c:${m.tint}">${ico(m.icon)}</span>
-      <span class="feature-tag">${esc(m.tag)}</span><strong>${esc(m.title)}</strong><small>${esc(m.description)}</small><span class="feature-meta">3 situationer + genkaldelse</span></a>`).join('');
+      <span class="feature-tag">${esc(m.tag)}</span><strong>${esc(m.title)}</strong><small>${esc(m.description)}</small><span class="feature-meta">3 situationer + hvad husker du?</span></a>`).join('');
   const rows = chapters.map((c, i) => {
     const total = c.sections.length, done = c.sections.filter(s => practised(s.id)).length;
     return `<li class="topic ${done === total ? 'is-done' : ''}"><a href="#mission:${esc(c.sections[0].id)}"><span class="topic-n">${i + 1}</span><div><strong>${esc(c.title)}</strong><span class="topic-bar"><i style="--p:${total ? done / total : 0}"></i></span><small>${esc(c.tagline)} <span class="tb-stripes" aria-hidden="true"></span> ${done}/${total} øvet</small></div></a><a class="topic-cards topic-cards--go" href="#mission:${esc(c.sections[0].id)}" aria-label="Øv ${esc(c.title)}">Øv</a></li>`;
   }).join('');
   return `<section class="missions" aria-labelledby="missions-title"><header class="screen-head"><a class="back-round" href="#practice" aria-label="Tilbage til Øvelser">${ICON.back}</a><h1 id="missions-title">Vælg en øvelse</h1></header>
-    <div class="mission-intro">${renderCast('sneglen', { size: 'sm', priority: true })}<div><strong>Korte runder. Regler, der sidder.</strong><small>Hver øvelse er tre situationer og én genkaldelse. Du får forklaringen efter hvert svar, og det, du er usikker på, kommer igen senere. Ingen point for fart.</small></div></div>
+    <div class="mission-intro">${renderCast('sneglen', { size: 'sm', priority: true })}<div><strong>Korte runder. Regler, der sidder.</strong><small>Hver øvelse er tre situationer og til sidst en runde med „Hvad husker du?“. Du får forklaringen efter hvert svar, og det, du er usikker på, kommer igen senere. Ingen point for fart.</small></div></div>
     <ol class="mission-steps" aria-label="Sådan virker en øvelse">${steps}</ol>
     <h2 class="list-label">ANBEFALET</h2><div class="feature-grid">${featured}</div>
     <h2 class="list-label">ALLE EMNER</h2><ol class="topic-list">${rows}</ol>
@@ -119,7 +119,7 @@ export function renderExamStart({ history, saved, total = 25, minutes = 25, limi
     <button class="big-btn" data-action="start-exam">Start øveprøve</button>
     ${saved ? '<button class="big-btn big-btn--ghost" data-action="resume-exam">Fortsæt din gemte prøve</button>' : ''}
     <h2 class="list-label">DINE PRØVER</h2>
-    ${rows ? `<ol class="exam-list">${rows}</ol>` : '<p class="empty-note">Din første prøve dukker op her. Du kan gå tilbage, ændre svar og markere spørgsmål undervejs.</p>'}
+    ${rows ? `<ol class="exam-list">${rows}</ol>` : '<p class="empty-note">Din første prøve dukker op her. Du kan gå tilbage, ændre svar og markere situationer undervejs.</p>'}
     <details class="fine-details"><summary>Sådan bedømmer vi</summary><p>Hver situation har fire udsagn med ja eller nej. Én forkert eller ubesvaret vurdering tæller som én fejl. Formatet er baseret på myndighedens offentlige oplysninger; scener, spørgsmål og bedømmelse er vores egne, og det er en øvebedømmelse, ikke en garanti.</p>${sourcesHtml}</details>
   </section>`;
 }
@@ -157,7 +157,7 @@ export function renderAccountPanel(s) {
   }
   return `<section class="panel account-panel" aria-labelledby="acc-title"><h2 id="acc-title">Gem din fremgang</h2>
     <p class="acc-lead">Lige nu gemmes alt kun på denne enhed. Log ind, så kan du fortsætte på både telefon og computer.</p>${renderAccountActions(s)}
-    <p class="acc-fine">Logger du ind, gemmes din fremgang i din konto hos Google Firebase (database i EU). Chatten gemmes kun på enheden. Dine spørgsmål sendes til vores AI-tjeneste for at blive besvaret.</p></section>`;
+    <p class="acc-fine">Logger du ind, gemmes din fremgang i din konto på Googles servere i EU. Chatten gemmes kun på enheden. Dine spørgsmål sendes til vores AI-tjeneste for at blive besvaret.</p></section>`;
 }
 
 /** The sign-in buttons and e-mail form on their own: the profile panel, the intro's last step and the login gate share them. */
@@ -192,7 +192,7 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
     ${renderAccountPanel(account)}
     <div class="tile-row"><div class="tile"><b class="tile-fire"><span class="chip-ico" data-rive="flame:${flameLevel(daily?.currentStreak || 0)}">${flameArt(flameLevel(daily?.currentStreak || 0))}</span>${daily?.currentStreak || 0}</b><small>${daily?.currentStreak === 1 ? 'dag' : 'dage'} i træk</small></div><div class="tile"><b>${lessonsDone}/${lessonsTotal}</b><small>lektioner</small></div></div>
     ${ready ? `<div class="panel ready-panel"><h2>Hvor klar er du?</h2><div class="ready-row"><span class="ready-gauge" data-rive="gauge:${ready.pct}" aria-hidden="true"></span>${ready.pct > 0 && ready.pct < 10 ? '<b class="ready-early">Lige startet</b>' : `<b>${ready.pct} %</b>`}<span class="ready-bar" role="img" aria-label="${ready.pct} procent klar"><i style="--p:${ready.pct / 100}"></i></span></div>
-      <p>${ready.ok} af ${ready.total} regelkort sidder: dit seneste svar på dem var rigtigt. ${ready.passes >= 2 ? 'Og du har bestået mindst 2 af dine 3 seneste øveprøver.' : 'Bestå 2 af 3 øveprøver i træk, så er du også klar til prøveformatet.'}</p><small>Appens egen vurdering, ikke en garanti for den rigtige prøve.</small></div>` : ''}
+      <p>${ready.ok} af ${ready.total} regelkort sidder: dit seneste svar på dem var rigtigt. ${ready.passes >= 2 ? 'Og du har været inden for grænsen i mindst 2 af dine 3 seneste øveprøver.' : 'Kom inden for grænsen i 2 af dine 3 seneste øveprøver, så er du også klar til prøveformatet.'}</p><small>Appens egen vurdering, ikke en garanti for den rigtige prøve.</small></div>` : ''}
     <div class="panel"><h2>Denne uge</h2><ol class="week">${week}</ol></div>
     <div class="panel"><h2>Styrker og svagheder</h2><ul class="sw">${bars}</ul></div>
     <a class="set-row set-row--link" href="#start:1"><span>Prøvedato</span><small>${esc(WHEN_TEXT[intro?.when] || 'Vælg')}${examDays !== null ? ` <span class="tb-stripes" aria-hidden="true"></span> ${examDays} dage` : ''}</small></a>

@@ -60,7 +60,7 @@ export function summariseSession(session) {
 function line(sum) {
   const n = sum.repeat.length, again = sum.recall === 'needs-review';
   if (!n && !again) return 'Det sad godt i første forsøg. Reglen kommer tilbage som gentagelse, så den bliver siddende.';
-  if (!n) return 'Du svarede rigtigt, men ville selv øve forklaringen igen. Den kommer tilbage som gentagelse.';
+  if (!n) return 'Du svarede rigtigt, men valgte selv at øve forklaringen igen. Den kommer tilbage som gentagelse.';
   return `${n === 1 ? 'Ét udsagn' : `${n} udsagn`} skal du have med dig. De kommer tilbage som gentagelse om lidt.`;
 }
 
@@ -69,7 +69,7 @@ export function renderLessonSummary({ session, section }) {
   const sum = summariseSession(session);
   if (!sum.rows.length) return '';
   const rows = sum.rows.map(r => `<li class="ls-row ${r.right === r.of ? 'is-all' : 'is-part'}"><span class="ls-mark">${r.right === r.of ? TICK : RING}</span><span><b>${esc(r.label)}</b> ${r.right} af ${r.of} udsagn rigtige i første forsøg</span></li>`).join('')
-    + (sum.recall ? `<li class="ls-row ${sum.recall === 'remembered' ? 'is-all' : 'is-part'}"><span class="ls-mark">${sum.recall === 'remembered' ? TICK : RING}</span><span><b>Med egne ord</b> ${sum.recall === 'remembered' ? 'Du havde det centrale med' : 'Du ville øve den igen senere'}</span></li>` : '');
+    + (sum.recall ? `<li class="ls-row ${sum.recall === 'remembered' ? 'is-all' : 'is-part'}"><span class="ls-mark">${sum.recall === 'remembered' ? TICK : RING}</span><span><b>Med egne ord</b> ${sum.recall === 'remembered' ? 'Du fik det vigtigste med' : 'Du vil øve den igen senere'}</span></li>` : '');
   const repeat = sum.repeat.length
     ? `<h4 class="ls-sub">Det skal du gentage</h4><ol class="ls-repeat">${sum.repeat.map(r => `<li><p class="ls-statement">${esc(r.statement.text)}</p><small>Du svarede ${r.given ? 'JA' : 'NEJ'}. Rigtigt er ${r.statement.correct ? 'JA' : 'NEJ'}.</small>${renderWhy(r.question, { answers: r.answers, focus: r.index, label: 'Hvorfor?' })}</li>`).join('')}</ol><a class="ls-cards" href="#lesson:${esc(section.id)}">Se de tre kort igen</a>`
     : '<p class="ls-none">Ingen udsagn at gentage.</p>';

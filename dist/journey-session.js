@@ -541,8 +541,8 @@ export function getJourneyStep(session, content) {
       question: resolved.checkpointView,
       reordered: restored.checkpoint.reordered,
       notice: restored.checkpoint.reordered
-        ? 'Brug reglen én gang til i situationen.'
-        : 'Nyt spørgsmål fra samme emne.',
+        ? 'Samme situation, men udsagnene står i ny rækkefølge.'
+        : 'En ny situation fra samme emne.',
       attempts: restored.checkpoint.attempts.length
     };
   }

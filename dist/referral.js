@@ -61,7 +61,7 @@ export function createReferral({ account, config, questions = [], firstSectionId
     }
   } catch {}
   async function identity() {
-    if (account.status().state !== 'user') throw new Error('Log ind, før du bruger en henvisningskode.');
+    if (account.status().state !== 'user') throw new Error('Log ind for at bruge en henvisningskode.');
     context = await account.firestore();
     const user = currentUser();
     if (!user || user.isAnonymous || context.uid !== user.uid) throw new Error('Log ind igen for at fortsætte.');
@@ -75,8 +75,8 @@ export function createReferral({ account, config, questions = [], firstSectionId
       ...(body === undefined ? {} : { body: JSON.stringify(body) })
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw Object.assign(new Error(data.error?.message || 'Henvisningen kunne ikke gennemføres lige nu. Prøv igen om lidt.'), { code: data.error?.code });
-    if (dead || started !== generation || currentUser()?.uid !== who.uid || account.status().state !== 'user') throw new Error('Din konto blev ændret. Prøv igen.');
+    if (!response.ok) throw Object.assign(new Error(data.error?.message || 'Vi kunne ikke gennemføre henvisningen lige nu. Prøv igen om lidt.'), { code: data.error?.code });
+    if (dead || started !== generation || currentUser()?.uid !== who.uid || account.status().state !== 'user') throw new Error('Du skiftede konto undervejs. Prøv igen.');
     return { data, uid: who.uid };
   }
   function paint() {
@@ -133,21 +133,21 @@ export function createReferral({ account, config, questions = [], firstSectionId
       '<div class="tb-referral-heading"><span>TEORIBOOST</span><h3>Inviter en ven</h3></div>' +
       (!enabled() ? '<p class="tb-referral-status">Programmet er ikke åbnet endnu. ' + (settings.amountsConfirmed ? 'Belønninger og lofter er godkendt, men de øvrige betingelser afventer afklaring.' : 'Belønningerne herunder er forslag.') + '</p>' :
         !signedIn ? '<p>Log ind for at få din egen kode og knytte belønningerne til din konto.</p>' : '') +
-      '<p>Du får ' + number(signup.referrerBoosters) + ' boosters, når en ny ven opretter en verificeret konto og gennemfører den første lektion. Din ven får ' + number(signup.friendBoosters) + ' boosters.</p>' +
+      '<p>Du får ' + number(signup.referrerBoosters) + ' Boosters, når en ny ven opretter en verificeret konto og gennemfører den første lektion. Din ven får ' + number(signup.friendBoosters) + ' Boosters.</p>' +
       (data?.code ? '<label class="tb-referral-code-label">Din personlige kode<input data-ref="code" readonly value="' + esc(data.code) + '"></label>' +
         '<div class="tb-referral-actions"><button type="button" data-ref="share">Del kode</button><button type="button" data-ref="copy">Kopiér kode</button></div>' +
         '<p class="tb-referral-progress">' + esc(referralProgress(data.stats)) + '</p>' +
         '<details><summary>Skift kode</summary><p>Den gamle kode virker ikke for nye invitationer bagefter. Allerede gemte henvisninger bevares.</p><button type="button" data-ref="regenerate">Opret ny kode</button></details>' :
         signedIn && enabled() ? '<p>Henter din personlige kode <span class="tb-stripes" aria-hidden="true"></span></p>' : '') +
       (!signedIn && enabled() ? '<button type="button" data-ref="login">Log ind</button>' : '') +
-      (enabled() && !data?.binding?.bound ? '<form data-referral-form><label>Har du fået en kode fra en ven? En personlig TEO-kode skal knyttes til kontoen senest 72 timer efter oprettelsen.<input name="referralCode" placeholder="TEO-ABCD2345" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" value="' + esc(invite) + '" required></label><button type="submit">Gem vennens kode</button></form>' : '') +
+      (enabled() && !data?.binding?.bound ? '<form data-referral-form><label>Har du fået en vens kode? Knyt den til din konto senest 72 timer efter oprettelsen.<input name="referralCode" placeholder="TEO-ABCD2345" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" value="' + esc(invite) + '" required></label><button type="submit">Gem vennens kode</button></form>' : '') +
       (data?.binding?.bound ? '<p>Din vens kode er knyttet til kontoen.' + (data.binding.qualified ? ' Velkomstbelønningen er registreret.' : ' Gennemfør ' + esc(firstSectionTitle) + ' for at kvalificere henvisningen.') + '</p>' + (!data.binding.qualified ? '<button type="button" data-ref="lesson">Åbn ' + esc(firstSectionTitle) + '</button>' : '') : '') +
       '<details class="tb-referral-rules"><summary>Sådan virker Inviter en ven</summary>' +
       '<p>Din ven får ' + number(settings.discountPercent) + ' % rabat på sit første pas med en gyldig henvisning. Henvisningskode og global gratis-kode kan ikke kombineres.</p>' +
       '<p>Efter ' + number(payment.holdDays) + ' dage uden refundering eller betalingsindsigelse kan et køb udløse en belønning. Har du selv betalt, kan ' + number(payment.refundPercent) + ' % af vennens faktiske betaling føres tilbage på dit eget oprindelige køb. Du kan højst få dit eget betalte beløb tilbage. Det er ikke en udbetaling af vennens penge til dig.</p>' +
       '<p>Belønninger ved MobilePay eller andre betalinger uden et kontrollerbart kortaftryk kræver manuel kontrol og behandles ikke automatisk.</p>' +
       '<p>Har du ikke selv betalt, gives i stedet ' + number(payment.unpaidReferrerDays) + ' dages premium pr. kvalificeret køb, op til ' + number(payment.maxUnpaidRewardMonths) + ' måneder i alt. En eksisterende adgang uden udløb bliver ved med at være uden udløb.</p>' +
-      '<p>Højst ' + number(signup.maxPerReferrerPerMonth) + ' nye venner kan udløse boosters til dig pr. måned. Selvhenvisning, tidligere konti og fælles betalingskort er ikke berettiget.</p>' +
+      '<p>Højst ' + number(signup.maxPerReferrerPerMonth) + ' nye venner kan udløse Boosters til dig pr. måned. Selvhenvisning, tidligere konti og fælles betalingskort er ikke berettiget.</p>' +
       '<p>En personlig kode skal knyttes til en ny konto senest ' + number(signup.maxAccountAgeHours) + ' timer efter oprettelsen.</p>' +
       '<p>Boosters er virtuelle og har ingen kontantværdi. Del kun markedsføring gennem en kanal og til modtagere, hvor det er lovligt og tilladt. Appen sender ingen beskeder for dig.</p>' +
       '<p><a href="handelsbetingelser.html#henvisningsprogram" target="_blank" rel="noopener">Læs de fulde regler i handelsbetingelserne</a>.</p></details>' +
@@ -169,14 +169,14 @@ export function createReferral({ account, config, questions = [], firstSectionId
     url.searchParams.set('invite', data.code);
     if (button.dataset.ref === 'share') {
       try {
-        if (win.navigator.share) await win.navigator.share({ title: 'TeoriBoost', text: 'Min TeoriBoost-kode er ' + data.code + '. Se regler og vilkår, før du bruger den.', url: url.href });
+        if (win.navigator.share) await win.navigator.share({ title: 'TeoriBoost', text: 'Prøv TeoriBoost med min kode ' + data.code + '. Læs reglerne og vilkårene, før du bruger den.', url: url.href });
         else { await win.navigator.clipboard.writeText(url.href); setMessage('Invitationslinket er kopieret.'); }
-      } catch (exception) { if (exception.name !== 'AbortError') setMessage('Deling kunne ikke åbnes. Brug Kopiér kode.', true); }
+      } catch (exception) { if (exception.name !== 'AbortError') setMessage('Vi kunne ikke åbne delingen. Brug Kopiér kode.', true); }
       return;
     }
     if (button.dataset.ref === 'copy') {
       try { await win.navigator.clipboard.writeText(data.code); setMessage('Din kode er kopieret.'); }
-      catch { button.closest('[data-referral-card]').querySelector('[data-ref=code]')?.select(); setMessage('Markér koden, og kopiér den med din enheds kopifunktion.'); }
+      catch { button.closest('[data-referral-card]').querySelector('[data-ref=code]')?.select(); setMessage('Markér koden, og kopiér den selv.'); }
       return;
     }
     if (button.dataset.ref === 'regenerate' && !busy) {

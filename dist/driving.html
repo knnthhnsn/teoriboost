@@ -219,11 +219,11 @@ button { font: inherit; color: inherit; }
     <div class="visual-area" id="visual-area">
     <canvas id="view" tabindex="0" aria-label="Udsyn gennem forruden og tre bagudrettede spejle"></canvas>
     <div class="mirror-strip" aria-label="Forenklede spejle og udsyn til siderne">
-      <button id="look-left" class="look-button" type="button" aria-label="Kig til venstre, hold nede" title="Hold for at kigge til venstre, slip for at se frem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m14 8-4 4 4 4"/></svg> KIG<small>Q</small></button>
+      <button id="look-left" class="look-button" type="button" aria-label="Kig til venstre, hold nede" title="Hold nede for at kigge til venstre. Slip for at se frem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m14 8-4 4 4 4"/></svg> KIG<small>Q</small></button>
       <span class="mirror mirror--side"><canvas id="mirror-left" width="96" height="48" role="img" aria-label="Venstre sidespejl"></canvas><small>V</small></span>
       <span class="mirror mirror--rear"><canvas id="mirror-rear" width="96" height="48" role="img" aria-label="Bakspejl"></canvas><small>BAGUD</small></span>
       <span class="mirror mirror--side"><canvas id="mirror-right" width="96" height="48" role="img" aria-label="Højre sidespejl"></canvas><small>H</small></span>
-      <button id="look-right" class="look-button" type="button" aria-label="Kig til højre, hold nede" title="Hold for at kigge til højre, slip for at se frem">KIG <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 4 4-4 4"/></svg><small>E</small></button>
+      <button id="look-right" class="look-button" type="button" aria-label="Kig til højre, hold nede" title="Hold nede for at kigge til højre. Slip for at se frem">KIG <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 4 4-4 4"/></svg><small>E</small></button>
     </div>
     <div class="windscreen" id="windscreen"></div>
     <div class="phone-card" id="phone" hidden>
@@ -273,7 +273,7 @@ button { font: inherit; color: inherit; }
   <div class="veil veil--start" id="start">
     <section class="card card--start" aria-labelledby="start-title">
       <div class="start-hero"><div><span class="label">Gas og bremse <span class="tb-stripes" aria-hidden="true"></span> ny tur hver gang</span><h1 id="start-title">Kør en tur<br><em>med Sneglen.</em></h1></div><img src="assets/cast/sneglen.webp" alt=""></div>
-      <p class="lede">I denne køretime kører du Nordic GT, uanset hvad du har valgt i Min bil. Hver tur er ny, så læs skilte og afmærkning ved hvert kryds, og hold øje med, hvad der sker langs vejen.</p>
+      <p class="lede">Du kører Nordic GT, uanset hvad du har valgt i Min bil. Hver tur er ny. Læs skilte og afmærkning ved hvert kryds, og hold øje med vejen.</p>
       <ul class="keys">
         <li><kbd>W</kbd> gas/frem</li>
         <li><kbd>Mellemrum</kbd> brems</li>
@@ -292,7 +292,7 @@ button { font: inherit; color: inherit; }
       <h2 id="inc-title"></h2>
       <p class="lede" id="inc-lede"></p>
       <div class="rule"><p id="inc-rule"></p><small id="inc-source"></small></div>
-      <span class="penalty">NYT MOVE <span class="tb-stripes" aria-hidden="true"></span> SAMME REGEL</span>
+      <span class="penalty">NY START <span class="tb-stripes" aria-hidden="true"></span> SAMME REGEL</span>
       <button class="go" id="inc-btn" type="button">Kør videre</button>
     </section>
   </div>
@@ -307,13 +307,13 @@ button { font: inherit; color: inherit; }
       <h2 id="res-title">Køretimen er slut.</h2>
       <p class="lede" id="res-lede"></p>
       <dl class="sheet" id="res-sheet"></dl>
-      <p class="note">Øv og genkald reglerne i missionerne.</p>
+      <p class="note">Øv reglerne i missionerne.</p>
       <button class="go" id="res-btn" type="button">Kør igen</button>
     </section>
   </div>
 
   <div class="veil veil--card" id="nogl" hidden>
-    <section class="card"><h2>Ingen 3D her</h2><p class="lede">Browseren kunne ikke starte WebGL, så forruden er sort. Prøv en anden browser eller slå hardwareacceleration til.</p></section>
+    <section class="card"><h2>Vi kunne ikke vise 3D-udsynet</h2><p class="lede">Forruden er sort, fordi 3D-visningen ikke startede. Prøv en anden browser, eller slå hardwareacceleration til.</p></section>
   </div>
 </div>
 
@@ -841,7 +841,7 @@ import {loadGarage} from './mybil.js';
       if(hash!=='08bf4d1d36777d76b97e04a31a46cd6cbf53809b48e901654ee565d63b1bcb81')throw Error('Player vehicle integrity mismatch');
       const gltf=await new Promise((resolve,reject)=>new T.GLTFLoader().parse(bytes,new URL('.',url).href,resolve,reject));
       if(!playerClosed)installPlayerModel(gltf.scene,'hatch-lite');
-    }catch{if(!playerClosed){canvas.dataset.playerModel='unavailable';playerNotice.textContent='Bilen kunne ikke hentes. Tryk Prøv igen.';playerNotice.hidden=false;}}
+    }catch{if(!playerClosed){canvas.dataset.playerModel='unavailable';playerNotice.textContent='Vi kunne ikke hente bilen lige nu. Prøv igen.';playerNotice.hidden=false;}}
     finally{playerLoading=false;syncStartButton();}
   }
   window.addEventListener('pagehide',event=>{if(!event.persisted)playerClosed=true;});
@@ -870,7 +870,7 @@ import {loadGarage} from './mybil.js';
         g.remove(fallback);for(const child of [...g.children])if(child.name==='legacy-npc-headlamp-box'||child.name==='legacy-npc-taillamp-box'){g.remove(child);child.geometry.dispose();}g.add(aligned);
       }
       trafficReady=true;canvas.dataset.trafficFleet='approved-sedan-053';trafficNotice.hidden=true;
-    }catch{trafficOccupants?.dispose();trafficOccupants=null;disposeTraffic(trafficAsset);trafficAsset=null;if(!trafficClosed){canvas.dataset.trafficFleet='unavailable';trafficNotice.textContent='Trafikken kunne ikke hentes. Tryk Prøv igen.';trafficNotice.hidden=false;}}
+    }catch{trafficOccupants?.dispose();trafficOccupants=null;disposeTraffic(trafficAsset);trafficAsset=null;if(!trafficClosed){canvas.dataset.trafficFleet='unavailable';trafficNotice.textContent='Vi kunne ikke hente trafikken lige nu. Prøv igen.';trafficNotice.hidden=false;}}
     finally{trafficLoading=false;syncStartButton();if(trafficReady){void loadScooter();void loadQuizQuestions();void loadRider();loadChild();}}
   }
   // Until the verified traffic is available, Start is gated and no legacy proxy is shown.
@@ -963,7 +963,7 @@ import {loadGarage} from './mybil.js';
   const pedestrianNotice=document.createElement('p');pedestrianNotice.className='note';pedestrianNotice.hidden=true;pedestrianNotice.setAttribute('role','status');$('start-btn').before(pedestrianNotice);
   function syncStartButton(){const loading=playerLoading||trafficLoading||pedestrianLoading||childLoading,ready=playerReady&&trafficReady&&pedestrianReady,button=$('start-btn');button.disabled=loading;button.setAttribute('aria-busy',String(loading));button.textContent=loading?'Henter køretimen …':ready?'Start køretimen':'Prøv igen';}
   function loadCrossingCard(){if(pedestrianLoading||pedestrianReady||pedestrianClosed)return;pedestrianLoading=true;canvas.dataset.pedestrianModel='loading';pedestrianNotice.hidden=true;syncStartButton();
-    new T.TextureLoader().load('assets/people-cse/a_adult.png',texture=>{pedestrianLoading=false;if(pedestrianClosed){texture.dispose();return}texture.encoding=T.sRGBEncoding;const h=1.8,w=h*texture.image.width/texture.image.height;const geometry=new T.PlaneGeometry(w,h);geometry.translate(0,h/2,0);const material=new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.05,depthWrite:false,side:T.DoubleSide});pedestrianCard=attachCylindricalBillboard(T,new T.Mesh(geometry,material));pedestrianCard.name='CSE_CROSSING';walker.add(pedestrianCard);pedestrianReady=true;canvas.dataset.pedestrianModel='approved-cse';syncStartButton();},undefined,()=>{pedestrianLoading=false;if(pedestrianClosed)return;canvas.dataset.pedestrianModel='unavailable';pedestrianNotice.textContent='Fodgængeren kunne ikke hentes. Prøv igen for at starte køretimen.';pedestrianNotice.hidden=false;syncStartButton();});}
+    new T.TextureLoader().load('assets/people-cse/a_adult.png',texture=>{pedestrianLoading=false;if(pedestrianClosed){texture.dispose();return}texture.encoding=T.sRGBEncoding;const h=1.8,w=h*texture.image.width/texture.image.height;const geometry=new T.PlaneGeometry(w,h);geometry.translate(0,h/2,0);const material=new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.05,depthWrite:false,side:T.DoubleSide});pedestrianCard=attachCylindricalBillboard(T,new T.Mesh(geometry,material));pedestrianCard.name='CSE_CROSSING';walker.add(pedestrianCard);pedestrianReady=true;canvas.dataset.pedestrianModel='approved-cse';syncStartButton();},undefined,()=>{pedestrianLoading=false;if(pedestrianClosed)return;canvas.dataset.pedestrianModel='unavailable';pedestrianNotice.textContent='Vi kunne ikke hente fodgængeren lige nu. Prøv igen for at starte køretimen.';pedestrianNotice.hidden=false;syncStartButton();});}
   canvas.dataset.playerModel='loading';
   void loadTraffic();loadCrossingCard();syncStartButton();
   window.addEventListener('pagehide',event=>{if(event.persisted||pedestrianClosed)return;pedestrianClosed=true;if(pedestrianCard){walker.remove(pedestrianCard);pedestrianCard.geometry.dispose();pedestrianCard.material.map?.dispose();pedestrianCard.material.dispose();pedestrianCard=null;}});
@@ -1073,10 +1073,10 @@ import {loadGarage} from './mybil.js';
     if(S.tour.stretch==='child'&&S.lastFault==='child')Object.assign(S.child,{phase:'done',x:SIT.CHILD.fromX,ball:false});
     say('Videre. Samme regler som før.'); $('gas').focus(); }
   function finish() { S.mode = 'result'; input.gas = input.brake = false; pedalClass(); for(const s of Object.values(S.sit))if(s.status==='pending')s.status='clean'; const all=Object.values(S.sit),total=all.length,clean = all.filter(s => s.status === 'clean').length;
-    $('res-title').textContent = S.errors === 0 ? 'Rent kørt.' : 'Du kom frem.';
+    $('res-title').textContent = S.errors === 0 ? 'Rent kørt.' : 'Du kom frem. Øv fejlene nu.';
     $('res-lede').textContent = S.errors === 0 ? 'Ingen fejl. Kørelæreren har ingen kommentar og virker lidt skuffet over det.'
-      : clean === 0 ? 'Fejl i alle situationer. Det er i det mindste konsekvent.' : 'Det gjorde reglerne ikke alle sammen.';
-    const rows = [['Rene situationer', clean + ' af ' + total, clean === total ? 'ok' : 'bad'], ['Regler at øve', String(S.errors), S.errors ? 'bad' : 'ok'], ...(quizRun.asked?[['Spørgsmål rigtige', quizRun.right + ' af ' + quizRun.asked, quizRun.right===quizRun.asked ? 'ok' : 'bad']]:[]), ['Fartgrænse', '50 km/t', '']];
+      : clean === 0 ? 'Fejl i alle situationer. Vi tager dem én ad gangen.' : 'Gennemgå fejlene, og øv reglerne igen.';
+    const rows = [['Rene situationer', clean + ' af ' + total, clean === total ? 'ok' : 'bad'], ['Fejl at øve', String(S.errors), S.errors ? 'bad' : 'ok'], ...(quizRun.asked?[['Spørgsmål rigtige', quizRun.right + ' af ' + quizRun.asked, quizRun.right===quizRun.asked ? 'ok' : 'bad']]:[]), ['Fartgrænse', '50 km/t', '']];
     $('res-sheet').innerHTML = rows.map(([k, v, c]) => `<div class="${c}"><dt>${k}</dt><dd>${v}</dd></div>`).join(''); $('result').hidden = false; $('res-btn').focus(); }
   const clock = s => `${Math.floor(s / 60)}:${(s % 60).toFixed(1).padStart(4, '0')}`;
   const kmh = v => Math.round(v * 3.6);
@@ -1096,7 +1096,7 @@ import {loadGarage} from './mybil.js';
     const front=spatial?edge(S):S.z-FRONT,rear=spatial?S.z+Math.abs(Math.cos(S.heading))*REAR+Math.abs(Math.sin(S.heading))*.9:S.z+REAR;
     const route=spatial?onRoute(S):true;
     S.top = Math.max(S.top, S.v);
-    if (S.v > SIT.SPEED_LIMIT) { S.overSince += dt; once('speed', 'Byzone. 50. Tallet er ikke vejledende.');
+    if (S.v > SIT.SPEED_LIMIT) { S.overSince += dt; once('speed', 'Byzone. 50 km/t er en grænse, ikke et forslag.');
       if(S.overSince>=SIT.SPEED_GRACE&&S.sit.speed?.status==='pending')return fail('speed','For stærkt i byzone.',`Du holdt ${kmh(S.v)} km/t i flere sekunder. Grænsen er 50.`,S.z);
     } else S.overSince = 0;
     const crossed = line => before > line && front <= line && (!spatial||Math.abs(S.x)<HALF+FRONT);
@@ -1146,7 +1146,7 @@ import {loadGarage} from './mybil.js';
       if(routeCrossed(J1+HALF))y.armed=true;
       if (relevantApproach && crossed(J1 + HALF) && conflict(j1, front, S.v, S.clock, spatial?S.x:HALF/2)) return fail(tour.j1, giveWay?'Den anden havde ret til vejen.':'Bilen fra højre skulle køre først.', giveWay?`Du kørte ud i krydset med ${kmh(S.v)} km/t, mens der kom biler på den krydsende vej.`:`Du kørte ud i krydset med ${kmh(S.v)} km/t, mens der kom en bil fra højre. Her er hverken skilte eller hajtænder.`, J1);
       if (!spatial && front<J1+HALF && rear>J1-HALF && collides(j1, S.z, S.clock,spatial?S.x:HALF/2,spatial?S.heading:0)) return fail(tour.j1, giveWay?'Den anden havde ret til vejen.':'Bilen fra højre skulle køre først.', 'Du holdt i krydset, da den næste bil kom. Den havde ikke tænkt sig at vente.', J1);
-      if (rear < J1 - HALF && (!spatial||(route&&y.armed))) { y.status = 'clean'; say(giveWay?'Du så dig for. Bemærkelsesværdigt.':'Højre først. Sådan.'); }
+      if (rear < J1 - HALF && (!spatial||(route&&y.armed))) { y.status = 'clean'; say(giveWay?'Du så dig for. Godt.':'Højre først. Sådan.'); }
     }
     // 2 · second junction: a stop sign, or a turn
     if(tour.j2==='stop'){const st = S.sit.stop, j2 = junctions[1];
@@ -1156,9 +1156,9 @@ import {loadGarage} from './mybil.js';
       if (!st.stopped && route && S.v === 0 && front >= STOP_LINE && front <= STOP_LINE + 1) { st.stopped = true; say('Det var et stop. Se dig for, før du kører.'); }
       if (relevantApproach && crossed(STOP_LINE) && !st.stopped) return fail('stop', 'Det var ikke et stop.', `Du rullede over stoplinjen med ${Math.max(1, kmh(S.v))} km/t. Et stop er 0.`, J2 + 2);
       if(routeCrossed(J2+HALF))st.armed=true;
-      if (relevantApproach && crossed(J2 + HALF) && conflict(j2, front, S.v, S.clock,spatial?S.x:HALF/2)) return fail('stop', 'Du stoppede. Og kørte så ud foran en bil.', 'Stoppet var fint. Vigepligten gælder stadig bagefter.', J2);
-      if (!spatial && front<J2+HALF && rear>J2-HALF && collides(j2, S.z, S.clock,spatial?S.x:HALF/2,spatial?S.heading:0)) return fail('stop', 'Du stoppede. Og kørte så ud foran en bil.', 'Du holdt i krydset, da den næste bil kom.', J2);
-      if (rear < J2 - HALF && (!spatial||(route&&st.armed))) { st.status = 'clean'; say('Fuldt stop og fri bane. Jeg noterer det som en begivenhed.'); }
+      if (relevantApproach && crossed(J2 + HALF) && conflict(j2, front, S.v, S.clock,spatial?S.x:HALF/2)) return fail('stop', 'Du stoppede, men kørte så ud foran en bil.', 'Stoppet var fint. Vigepligten gælder stadig bagefter.', J2);
+      if (!spatial && front<J2+HALF && rear>J2-HALF && collides(j2, S.z, S.clock,spatial?S.x:HALF/2,spatial?S.heading:0)) return fail('stop', 'Du stoppede, men kørte så ud foran en bil.', 'Du holdt i krydset, da den næste bil kom.', J2);
+      if (rear < J2 - HALF && (!spatial||(route&&st.armed))) { st.status = 'clean'; say('Fuldt stop og fri bane. Godt.'); }
     }}else{stepTurn(dt,front,crossed,relevantApproach);if(S.mode!=='drive')return;}
     // 3 · fodgængerfelt
     if(tour.ped){const p = S.sit.ped, w = S.walker;
@@ -1208,7 +1208,7 @@ import {loadGarage} from './mybil.js';
         k.passed=true;say('Blink, blik og plads. Ud i trafikken.');}
       if(kerb.status==='pending'&&k.started&&S.z<=SIT.KERB.blinkOffZ){if(S.indicator===-1)return fail('kerb','Blinket står stadig til venstre.','Du er ude i vognbanen, men blinket viser stadig, at du vil til venstre. Sluk det, når manøvren er færdig.',S.z);kerb.status='clean';}
       if(sit.status==='pending'){
-        if(SIT.tooClose(l,pose,S.v)){S.closeSince+=dt;if(S.closeSince>=SIT.LEAD.closeFor)return fail('follow','For tæt på bilen foran.',`Du lå mindre end et sekund bag bilen foran i flere sekunder ved ${kmh(S.v)} km/t. Bremser den, når du ikke at standse.`,S.z);}
+        if(SIT.tooClose(l,pose,S.v)){S.closeSince+=dt;if(S.closeSince>=SIT.LEAD.closeFor)return fail('follow','For tæt på bilen foran.',`Du lå mindre end et sekund bag bilen foran i flere sekunder ved ${kmh(S.v)} km/t. Hvis den bremser, kan du ikke nå at standse.`,S.z);}
         else S.closeSince=0;
         if(l.state==='braking')once('lead-brake','Bilen foran bremser og blinker til højre.');
         if(SIT.passedLead(l,pose)){sit.status='clean';say('God afstand hele vejen. Sådan.');}

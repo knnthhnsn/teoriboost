@@ -11,13 +11,13 @@ const STEPS = [
   { id: 'oevelser', tab: 'practice', route: '#practice', ready: '.practice-page .practice-main-btn', target: ['.practice-page .practice-main-btn', '.practice-page .practice-hero'],
     title: 'Øvelser', text: 'Her træner du på situationer fra vejen. Det du er i tvivl om, kommer igen, så det sidder.' },
   { id: 'proeve', tab: 'exam', route: '#exam', gate: 'exam', ready: '.exam-start .big-btn, .exam-start .btn-primary', target: ['.exam-start .big-btn', '.exam-start .btn-primary', '.exam-start'],
-    title: 'Prøve', text: 'Som den rigtige teoriprøve med 25 spørgsmål. Tryk her, når du føler dig klar.' },
+    title: 'Prøve', text: 'Den ligner den rigtige teoriprøve med 25 spørgsmål. Tryk her, når du er klar.' },
   { id: 'minbil', tab: 'minbil', route: '#minbil', ready: '.mybil-road', target: ['.mybil-road'],
     title: 'Min bil', text: 'Her er din egen bil. Du gør den til din med det, du tjener.' },
   { id: 'boosters', tab: 'minbil', route: '#minbil', ready: '#booster-chip', target: ['#booster-chip'],
     title: 'Boosters', text: 'Hver gang du øver, tjener du Boosters. Dem bruger du på din bil.' },
   { id: 'chat', tab: 'chat', route: '#chat', ready: '#chat-input', target: ['#chat-input', '.chat-hero'],
-    title: 'Spørg AI', text: 'Forstår du ikke noget? Skriv til mig her. Du har et antal spørgsmål om dagen.' },
+    title: 'Spørg AI', text: 'Har du spørgsmål? Skriv til mig her. Du har et begrænset antal spørgsmål om dagen.' },
 ];
 
 const seen = () => { try { return localStorage.getItem(KEY) === '1'; } catch { return true; } };
@@ -43,7 +43,7 @@ export function startTour() {
     <div class="tour__card" data-side="above">
       <div class="tour__snail" aria-hidden="true">${renderCast('sneglen', { size: 'md', priority: true })}</div>
       <div class="tour__bubble">
-        <button type="button" class="tour__close" aria-label="Luk">${X_ICON}</button>
+        <button type="button" class="tour__close" aria-label="Luk rundvisningen">${X_ICON}</button>
         <div class="tour__dots" aria-hidden="true"></div>
         <h2 class="tour__title" id="tour-title"></h2>
         <p class="tour__text"></p>

@@ -13,13 +13,13 @@ const loadFirebase = () => Promise.all(['app', 'auth', 'firestore'].map(m => imp
   .then(mods => Object.assign({}, ...mods));
 
 const MESSAGES = {
-  'auth/popup-blocked': 'Din browser blokerede login-vinduet. Tillad pop op-vinduer for siden, og prøv igen.',
+  'auth/popup-blocked': 'Din browser blokerede login-vinduet. Tillad pop op-vinduer for TeoriBoost, og prøv igen.',
   'auth/network-request-failed': 'Ingen forbindelse. Prøv igen, når du er online.',
-  'auth/invalid-email': 'Den e-mailadresse ser ikke rigtig ud.',
+  'auth/invalid-email': 'Tjek e-mailadressen. Den ser ikke rigtig ud.',
   'auth/missing-email': 'Skriv din e-mailadresse.',
   'auth/invalid-action-code': 'Login-linket er udløbet eller allerede brugt. Bed om et nyt.',
   'auth/expired-action-code': 'Login-linket er udløbet. Bed om et nyt.',
-  'auth/requires-recent-login': 'Af sikkerhedshensyn skal du logge ud og ind igen, før kontoen kan slettes.',
+  'auth/requires-recent-login': 'Af sikkerhedshensyn skal du logge ud og ind igen, før du sletter kontoen.',
   'auth/quota-exceeded': 'Vi kan ikke sende flere login-links i dag. Brug Google, eller prøv igen i morgen.',
   'auth/too-many-requests': 'For mange forsøg lige nu. Vent lidt, og prøv igen.',
   'auth/unauthorized-domain': 'Login er ikke slået til for denne adresse endnu.',
@@ -27,7 +27,7 @@ const MESSAGES = {
   'auth/operation-not-allowed': 'Den login-metode er ikke slået til endnu.',
 };
 const CANCELLED = ['auth/popup-closed-by-user', 'auth/cancelled-popup-request', 'auth/user-cancelled'];
-export const friendly = e => MESSAGES[e?.code] || 'Noget gik galt. Prøv igen om lidt.';
+export const friendly = e => MESSAGES[e?.code] || 'Vi kunne ikke gennemføre det lige nu. Prøv igen om lidt.';
 
 /**
  * adapters: read() -> { learning, intro, mybil, order }; merge(remote) folds the account's copy into this

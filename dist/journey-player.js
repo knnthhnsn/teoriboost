@@ -22,7 +22,7 @@ const CONTENT = { questions: QUESTIONS, lessons: LESSONS };
 const LESSON_STAGES = ['understand', 'apply', 'transfer', 'recall', 'checkpoint'];
 const REVIEW_STAGES = ['apply', 'understand', 'transfer', 'recall', 'checkpoint'];
 const STAGE_LABELS = {
-  understand: 'Forstå', apply: 'Vælg', transfer: 'Brug', recall: 'Forklar', checkpoint: 'Prøv igen', done: 'Færdig'
+  understand: 'Forstå', apply: 'Vælg', transfer: 'Brug', recall: 'Forklar', checkpoint: 'Prøv selv', done: 'Færdig'
 };
 const RESPONSE_LIMIT = 5000;
 const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({
@@ -162,7 +162,7 @@ export function createJourneyPlayer({
     const progress = stageProgress(shownStage);
     return `<article class="journey-player" data-journey-session="${esc(session.sessionId)}">
       <header class="journey-player-head jp-top">
-        <a class="back-btn jp-close" href="#home" aria-label="Gem lektionen og gå til din rute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
+        <a class="back-btn jp-close" href="#home" aria-label="Gem og gå til din rute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
         <div class="journey-progress" role="progressbar" aria-label="Lektionens fremskridt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progress.percent)}"><i style="--journey-progress:${progress.percent}%;--journey-progress-ratio:${progress.percent / 100}">${progressCar()}</i></div>
         <span class="journey-player-count">${progress.count}</span>
       </header>
@@ -227,7 +227,7 @@ export function createJourneyPlayer({
     return `<aside class="journey-feedback-tray ${repair ? 'repair' : 'correct'}" role="status">
       <div class="jp-feedback-content">${showGag ? `<div class="feedback-cast">${renderCast(question.speaker, { size: 'sm', mood: repair ? 'wrong' : 'correct' })}</div>` : ''}
       <div class="journey-feedback-summary"><span aria-hidden="true">${repair ? ico('repeat') : ico('check')}</span><div><strong>${title}</strong><p>${lead}</p></div></div>
-      ${repair ? `<div class="jp-wrong-statements"><p>Her skal du ændre dit svar:</p><ol>${wrong.map(({ statement, index }) => `<li><strong>Udsagn ${index + 1}</strong><p>${emph(statement.text)}</p><small>Du svarede ${feedback.answers[index] ? 'JA' : 'NEJ'}. Korrekt svar er ${statement.correct ? 'JA' : 'NEJ'}.</small><a class="jp-why" href="#chat" data-chat-ask="${esc(question.id)}" data-chat-focus="${index}" data-chat-answers="${answered}">Hvorfor? Spørg Sneglen</a></li>`).join('')}</ol></div>
+      ${repair ? `<div class="jp-wrong-statements"><p>Her skal du ændre dit svar:</p><ol>${wrong.map(({ statement, index }) => `<li><strong>Udsagn ${index + 1}</strong><p>${emph(statement.text)}</p><small>Du svarede ${feedback.answers[index] ? 'JA' : 'NEJ'}. Rigtigt svar er ${statement.correct ? 'JA' : 'NEJ'}.</small><a class="jp-why" href="#chat" data-chat-ask="${esc(question.id)}" data-chat-focus="${index}" data-chat-answers="${answered}">Hvorfor? Spørg Sneglen</a></li>`).join('')}</ol></div>
       <div class="jp-rule"><p class="jp-rule-label">Reglen</p><p>${esc(question.explanation)}</p><div class="jp-rule-foot">${refs(question.sourceIds)}${voiceButton('feedback', 'Lyt til forklaringen')}</div></div>` : ''}
       ${showGag ? `<p class="journey-feedback-gag">${esc(question.gag)}</p>` : ''}
       ${repair ? '' : renderWhy(question, { answers: toOwnOrder(feedback.answers, feedback.order), ask: false })}
@@ -244,7 +244,7 @@ export function createJourneyPlayer({
     const question = currentQuestion() ?? currentStep.question;
     const feedback = ui.feedback;
     const notice = currentStep.stage === 'checkpoint' || feedback?.stage === 'checkpoint'
-      ? `<p class="journey-checkpoint-note">${currentStep.notice || (session.checkpoint.reordered ? 'Samme situation med omordnede udsagn.' : 'Et andet spørgsmål fra samme emne.')}</p>`
+      ? `<p class="journey-checkpoint-note">${currentStep.notice || (session.checkpoint.reordered ? 'Samme situation, men udsagnene står i ny rækkefølge.' : 'En ny situation fra samme emne.')}</p>`
       : '';
     return `<section class="journey-assessment">
       ${notice}
@@ -257,20 +257,20 @@ export function createJourneyPlayer({
 
   function writingForm(stage, label, placeholder) {
     const draft = stage === 'transfer' ? ui.transferDraft : ui.recallDraft;
-    return `<div class="journey-writing-form"><label for="journey-open-answer">${label}</label><textarea id="journey-open-answer" maxlength="${RESPONSE_LIMIT}" rows="4" placeholder="${esc(placeholder)}">${esc(draft)}</textarea><div class="journey-writing-actions"><button type="button" class="btn btn-secondary" data-journey-cancel-writing>Tilbage til mentalt bud</button><button type="button" class="btn btn-primary" data-journey-open-submit ${draft.trim() ? '' : 'disabled'}>Sammenlign</button></div></div>`;
+    return `<div class="journey-writing-form"><label for="journey-open-answer">${label}</label><textarea id="journey-open-answer" maxlength="${RESPONSE_LIMIT}" rows="4" placeholder="${esc(placeholder)}">${esc(draft)}</textarea><div class="journey-writing-actions"><button type="button" class="btn btn-secondary" data-journey-cancel-writing>Svar i hovedet i stedet</button><button type="button" class="btn btn-primary" data-journey-open-submit ${draft.trim() ? '' : 'disabled'}>Sammenlign</button></div></div>`;
   }
 
   function responseDock(stage, currentStep) {
     if (currentStep.revealed) {
       if (stage === 'recall') {
-        return `<div class="journey-control-dock journey-self-check"><p>Vurdér selv. Dine ord er ikke automatisk bedømt.</p><button class="btn btn-secondary" type="button" data-journey-self-check="needs-review">Øv den igen senere</button><button class="btn btn-primary" type="button" data-journey-self-check="remembered">Jeg havde det centrale med</button></div>`;
+        return `<div class="journey-control-dock journey-self-check"><p>Vurdér selv. Ingen bedømmer dine ord automatisk.</p><button class="btn btn-secondary" type="button" data-journey-self-check="needs-review">Øv den igen senere</button><button class="btn btn-primary" type="button" data-journey-self-check="remembered">Jeg havde det centrale med</button></div>`;
       }
       return `<div class="journey-control-dock"><p>Sammenlign handling og begrundelse.</p><button class="btn btn-primary" type="button" data-journey-transfer-next>Forklar med egne ord</button></div>`;
     }
     if (currentStep.committed) {
       return `<div class="journey-control-dock"><p>Se svaret, og sammenlign med dit eget.</p><button class="btn btn-primary" type="button" data-journey-reveal="${stage}">Vis svaret</button></div>`;
     }
-    return `<div class="journey-control-dock journey-response-choice"><p>Hvordan vil du svare?</p><button class="btn btn-secondary" type="button" data-journey-write="${stage}">Skriv med egne ord</button><button class="btn btn-primary" type="button" data-journey-mental="${stage}">Jeg ved det</button></div>`;
+    return `<div class="journey-control-dock journey-response-choice"><p>Hvordan vil du svare?</p><button class="btn btn-secondary" type="button" data-journey-write="${stage}">Skriv med egne ord</button><button class="btn btn-primary" type="button" data-journey-mental="${stage}">Jeg har mit svar</button></div>`;
   }
 
   function openStepView(currentStep) {
@@ -279,7 +279,7 @@ export function createJourneyPlayer({
     const voiceKind = isTransfer ? 'case' : 'recall';
     const answer = currentStep.answer;
     const ownAnswer = currentStep.responseMode === 'written'
-      ? `<div class="journey-own-answer"><span>DIT SKRIFTLIGE BUD</span><p>${esc(answer)}</p></div>`
+      ? `<div class="journey-own-answer"><span>DIT SKRIFTLIGE SVAR</span><p>${esc(answer)}</p></div>`
       : '';
     const modelAnswer = currentStep.revealed
       ? (isTransfer
@@ -290,10 +290,10 @@ export function createJourneyPlayer({
       ? writingForm(stage, isTransfer ? 'Dit næste træk og hvorfor' : 'Forklar reglen uden at kigge i kortene', isTransfer ? 'Hvad ville du gøre?' : 'Hvad husker du?')
       : '';
     return `<section class="journey-open-step">
-      <span class="journey-kicker">${isTransfer ? 'BRUG REGLEN I EN NY CASE' : 'HENT REGLEN FREM'}</span>
+      <span class="journey-kicker">${isTransfer ? 'BRUG REGLEN I EN NY SITUATION' : 'HENT REGLEN FREM'}</span>
       <h2>${isTransfer ? 'Hvad ville du gøre?' : esc(currentStep.prompt)}</h2>
       ${isTransfer ? `<p class="journey-case-context">${esc(currentStep.case.context)}</p>` : ''}
-      ${voiceButton(voiceKind, isTransfer ? 'Lyt til casen' : 'Lyt til spørgsmålet')}
+      ${voiceButton(voiceKind, isTransfer ? 'Lyt til situationen' : 'Lyt til spørgsmålet')}
       ${writing}${ownAnswer}${modelAnswer}${ui.writingStage === stage && !currentStep.committed ? '' : responseDock(stage, currentStep)}
     </section>`;
   }
@@ -331,7 +331,7 @@ export function createJourneyPlayer({
       <div class="journey-done-art">${renderCast('kegle', { size: 'md', mood: 'correct', priority: true })}</div>
       <h2 class="jp-done-title">${repaired ? 'Rettet og klaret!' : 'Lektion klaret!'}</h2>
       <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den, og det er sådan, det sætter sig.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>
-      <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${ico('bolt')} ${earns ? `+${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '0'}</strong>${earns ? '' : '<em>Tjent i dag allerede</em>'}</div><div><small>RIGTIG I FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
+      <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${ico('bolt')} ${earns ? `+${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '0'}</strong>${earns ? '' : '<em>Allerede tjent i dag</em>'}</div><div><small>RIGTIG I FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
       ${sequenceFor(section.id) ? `<a class="jp-order" href="#order:${esc(sequenceFor(section.id).id)}">${ico('list')}<span><strong>Sæt det i rækkefølge</strong><small>${esc(sequenceFor(section.id).title)} <span class="tb-stripes" aria-hidden="true"></span> ${sequenceFor(section.id).steps.length} trin</small></span></a>` : ''}
       <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">${ico('target')} ${daily.goalMet ? `Dagens mål nået. +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')} Boosters` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? `. ${streak}` : ''}</div>
       ${renderLessonSummary({ session, section })}
@@ -375,7 +375,7 @@ export function createJourneyPlayer({
     const currentStep = step();
     const lesson = LESSONS[session.sectionId];
     if (!currentStep) {
-      host.innerHTML = '<p>Lektionen kunne ikke gendannes. <a href="#home">Til din rute</a></p>';
+      host.innerHTML = '<p>Vi kunne ikke åbne lektionen lige nu. Prøv igen fra <a href="#home">din rute</a>.</p>';
       return;
     }
     let body;
@@ -670,7 +670,7 @@ export function createJourneyPlayer({
     mount(sectionId) {
       section = CHAPTERS.flatMap(chapter => chapter.sections).find(item => item.id === sectionId);
       if (!section || !LESSONS[sectionId]) {
-        host.innerHTML = '<p>Lektionen findes ikke. <a href="#home">Til din rute</a></p>';
+        host.innerHTML = '<p>Vi kunne ikke finde lektionen. Prøv igen fra <a href="#home">din rute</a>.</p>';
         return;
       }
       const stored = state().journeySessions?.[sectionId];
@@ -681,7 +681,7 @@ export function createJourneyPlayer({
         const completed = state().journey?.events?.filter(event => event.sectionId === sectionId) || [];
         const candidates = QUESTIONS.filter(question => question.sectionId === sectionId);
         if (!candidates.length) {
-          host.innerHTML = '<p>Denne regel har ingen øvesituation endnu. <a href="#theory">Åbn teorien</a></p>';
+          host.innerHTML = '<p>Der er ingen situationer til denne regel endnu. <a href="#theory">Åbn teorien</a></p>';
           return;
         }
         session = createJourneySession({
@@ -690,7 +690,7 @@ export function createJourneyPlayer({
           question: candidates[completed.length % candidates.length],
           lesson: LESSONS[sectionId], questions: QUESTIONS, startedAt: Date.now()
         });
-        if (stored && !restored) notify('Den gemte lektion kunne ikke genoptages. Din øvrige fremgang er bevaret.');
+        if (stored && !restored) notify('Vi kunne ikke åbne den gemte lektion igen. Din øvrige fremgang er gemt.');
       }
 
       const sourceUi = resume ? stored.ui : null;

@@ -104,7 +104,7 @@ test('hele femtrinsløbet kræver tre kort, fire faktiske svar, selvcheck og kor
 
   const checkpointStep = getJourneyStep(session, content);
   assert.equal(checkpointStep.reordered, true);
-  assert.match(checkpointStep.notice, /omordnet/);
+  assert.match(checkpointStep.notice, /ny rækkefølge/);
   assert.equal(checkpointStep.question.id, question.id);
   assert.notDeepEqual(checkpointStep.question.statements.map(statement => statement.text), question.statements.map(statement => statement.text));
 
@@ -140,7 +140,7 @@ test('checkpoint bruger et andet spørgsmål fra samme afsnit, når et findes', 
   assert.equal(step.reordered, false);
   assert.notEqual(step.question.id, question.id);
   assert.equal(step.question.sectionId, question.sectionId);
-  assert.match(step.notice, /Nyt spørgsmål/);
+  assert.match(step.notice, /En ny situation/);
 
   session = dispatch(session, JOURNEY_ACTIONS.SUBMIT_CHECKPOINT, { answers: correctAnswers(step.question) }).session;
   const evidence = getJourneyCompletionEvidence(session);

@@ -81,14 +81,14 @@ const styleOf = garage => ({ ...DEFAULT_COLORS, plate: '', neonOn: false, lowere
 /** Pure state transitions; each returns { garage, ok, message }. */
 export function buyBase(garage, progress, baseId) {
   const base = baseById(baseId);
-  if (!base) return { garage, ok: false, message: 'Vi kunne ikke finde køretøjet. Prøv igen.' };
+  if (!base) return { garage, ok: false, message: 'Vi kunne ikke finde køretøjet lige nu. Prøv igen.' };
   if (garage.bases.includes(baseId)) return { garage: { ...garage, active: baseId }, ok: true, message: `${base.name} er valgt.` };
-  if (balance(progress, garage) < base.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu. Tag en lektion, så tjener du flere.' };
-  return { garage: { ...garage, spent: garage.spent + base.price, bases: [...garage.bases, baseId], active: baseId }, ok: true, message: `${base.name} er din!` };
+  if (balance(progress, garage) < base.price) return { garage, ok: false, message: 'Du mangler Boosters til det. Tag en lektion, så tjener du flere.' };
+  return { garage: { ...garage, spent: garage.spent + base.price, bases: [...garage.bases, baseId], active: baseId }, ok: true, message: `${base.name} er din! Den har du fortjent.` };
 }
 export function buyOrEquipPart(garage, progress, partId) {
   const part = partById(partId);
-  if (!part || !partsFor(garage.active).includes(part)) return { garage, ok: false, message: 'Den del passer ikke til dette køretøj.' };
+  if (!part || !partsFor(garage.active).includes(part)) return { garage, ok: false, message: 'Den del passer ikke til køretøjet. Vælg en anden.' };
   const slotKey = garage.active;
   const equipped = { ...garage.equipped, [slotKey]: { ...(garage.equipped[slotKey] || {}) } };
   if (owns(garage, partId)) {
@@ -96,9 +96,9 @@ export function buyOrEquipPart(garage, progress, partId) {
     if (current === partId) delete equipped[slotKey][part.slot]; else equipped[slotKey][part.slot] = partId;
     return { garage: { ...garage, equipped }, ok: true, message: current === partId ? `${part.name} er taget af.` : `${part.name} er monteret.` };
   }
-  if (balance(progress, garage) < part.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu. Tag en lektion, så tjener du flere.' };
+  if (balance(progress, garage) < part.price) return { garage, ok: false, message: 'Du mangler Boosters til det. Tag en lektion, så tjener du flere.' };
   equipped[slotKey][part.slot] = partId;
-  return { garage: { ...garage, spent: garage.spent + part.price, owned: [...garage.owned, `${slotKey}:${partId}`], equipped }, ok: true, message: `${part.name} er købt og monteret.` };
+  return { garage: { ...garage, spent: garage.spent + part.price, owned: [...garage.owned, `${slotKey}:${partId}`], equipped }, ok: true, message: `${part.name} er købt og monteret! Det har du fortjent.` };
 }
 /** Take one part off. It stays owned, so putting it back on is free. */
 export function unequipSlot(garage, slot) {
@@ -116,16 +116,16 @@ export function unequipAll(garage) {
 export function buyOrToggleExtra(garage, progress, extraId) {
   const extra = EXTRAS[extraId];
   if (!extra) return { garage, ok: false, message: 'Vi kunne ikke finde den del. Prøv igen.' };
-  if (extraId === 'lower' && !baseById(garage.active)?.split) return { garage, ok: false, message: 'Dette køretøj kan ikke sænkes endnu.' };
+  if (extraId === 'lower' && !baseById(garage.active)?.split) return { garage, ok: false, message: 'Den bil kan ikke sænkes endnu.' };
   const key = `extra-${extraId}`, flag = extraId === 'neon' ? 'neonOn' : 'lowered';
   const style = { ...styleOf(garage) };
   if (owns(garage, key)) {
     style[flag] = !style[flag];
     return { garage: { ...garage, style: { ...garage.style, [garage.active]: style } }, ok: true, message: `${extra.name} er ${style[flag] ? 'slået til' : 'slået fra'}.` };
   }
-  if (balance(progress, garage) < extra.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu. Tag en lektion, så tjener du flere.' };
+  if (balance(progress, garage) < extra.price) return { garage, ok: false, message: 'Du mangler Boosters til det. Tag en lektion, så tjener du flere.' };
   style[flag] = true;
-  return { garage: { ...garage, spent: garage.spent + extra.price, owned: [...garage.owned, `${garage.active}:${key}`], style: { ...garage.style, [garage.active]: style } }, ok: true, message: `${extra.name} er købt.` };
+  return { garage: { ...garage, spent: garage.spent + extra.price, owned: [...garage.owned, `${garage.active}:${key}`], style: { ...garage.style, [garage.active]: style } }, ok: true, message: `${extra.name} er købt! Det har du fortjent.` };
 }
 
 const HEX = /^#[0-9a-f]{6}$/i;
@@ -152,7 +152,7 @@ export function withTryOn(garage, tryOn) {
 export const ownsShuffle = garage => garage.owned.includes(SHUFFLE.key);
 export function buyShuffle(garage, progress) {
   if (ownsShuffle(garage)) return { garage, ok: true, message: '' };
-  if (balance(progress, garage) < SHUFFLE.price) return { garage, ok: false, message: 'Du har ikke Boosters nok endnu. Tag en lektion, så tjener du flere.' };
+  if (balance(progress, garage) < SHUFFLE.price) return { garage, ok: false, message: 'Du mangler Boosters til det. Tag en lektion, så tjener du flere.' };
   return { garage: { ...garage, spent: garage.spent + SHUFFLE.price, owned: [...garage.owned, SHUFFLE.key] }, ok: true, message: 'Bland min bil er låst op. Tryk igen for at slå terningerne.' };
 }
 /** A random new look from the parts, colours and extras you own for the active vehicle (free once unlocked). Each slot
@@ -185,9 +185,9 @@ export function cleanPlate(text) {
 }
 export function setPlate(garage, text) {
   const plate = cleanPlate(text);
-  if (text && !plate) return { garage, ok: false, message: 'Den tekst kan ikke bruges på pladen.' };
+  if (text && !plate) return { garage, ok: false, message: 'Teksten kan ikke bruges på nummerpladen. Prøv en anden.' };
   const style = { ...styleOf(garage), plate };
-  return { garage: { ...garage, style: { ...garage.style, [garage.active]: style } }, ok: true, message: plate ? `Pladen siger ${plate}.` : '' };
+  return { garage: { ...garage, style: { ...garage.style, [garage.active]: style } }, ok: true, message: plate ? `Nummerpladen siger ${plate}.` : '' };
 }
 
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -279,8 +279,8 @@ export function renderMyCar({ garage, progress, slot = '', message = '', tryOn =
     ${panel}
     <h2 class="mybil-subtitle">Dine køretøjer</h2>
     <div class="mybil-bases">${bases}</div>
-    <p class="mybil-earn">Boosters tjenes kun ved at lære: ${fmt(BOOSTER_RATES.lesson)} pr. lektion, ${fmt(BOOSTER_RATES.dailyGoal)} for dagens mål og ${fmt(BOOSTER_RATES.examPass)} for en bestået øveprøve.</p>
-    <a class="mybil-learn" href="#garage"><span class="mybil-learn-kicker">Også pensum</span><strong>Garagen: lær bilens dele</strong><small>Lys, dæk, bremser og papirer, som det spørges til prøven.</small><span class="mybil-learn-go" aria-hidden="true">Åbn</span></a>
+    <p class="mybil-earn">Du tjener kun Boosters, når du lærer:${fmt(BOOSTER_RATES.lesson)} pr. lektion, ${fmt(BOOSTER_RATES.dailyGoal)} for dagens mål og ${fmt(BOOSTER_RATES.examPass)} for en bestået øveprøve.</p>
+    <a class="mybil-learn" href="#garage"><span class="mybil-learn-kicker">Også pensum</span><strong>Garagen: lær bilens dele</strong><small>Lys, dæk, bremser og papirer, som der spørges om til prøven.</small><span class="mybil-learn-go" aria-hidden="true">Åbn</span></a>
   </section>`;
 }
 
@@ -334,6 +334,6 @@ function installedRow(garage, equipped, style, base) {
     return `<button type="button" class="on-chip" data-mybil-unequip="${s.id}" aria-label="Tag ${escape(name)} af">${escape(name)}<i aria-hidden="true">${ico('x')}</i></button>`;
   });
   if (style.neonOn && owns(garage, 'extra-neon')) chips.push('<button type="button" class="on-chip" data-mybil-extra="neon" aria-label="Sluk neon">Neon<i aria-hidden="true">' + ico('x') + '</i></button>');
-  if (style.lowered && base?.split && owns(garage, 'extra-lower')) chips.push('<button type="button" class="on-chip" data-mybil-extra="lower" aria-label="Hæv køretøjet igen">Sænket<i aria-hidden="true">' + ico('x') + '</i></button>');
+  if (style.lowered && base?.split && owns(garage, 'extra-lower')) chips.push('<button type="button" class="on-chip" data-mybil-extra="lower" aria-label="Hæv bilen igen">Sænket<i aria-hidden="true">' + ico('x') + '</i></button>');
   return `<div class="mybil-on" role="group" aria-label="Monteret nu"><span class="mybil-on-label">Monteret nu</span>${chips.length ? chips.join('') + '<button type="button" class="on-clear" data-mybil-unequip-all>Fjern al tuning</button>' : '<span class="mybil-on-empty">Ingen tuning endnu</span>'}</div>`;
 }

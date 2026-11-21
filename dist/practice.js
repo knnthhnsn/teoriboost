@@ -26,7 +26,7 @@ function card(href, title, description) {
   return `<li><a class="practice-card" href="#${esc(href)}"><strong>${esc(title)}</strong><small>${esc(description)}</small></a></li>`;
 }
 
-const signsCard = card('skilte', 'Skilte', 'Alle tavlerne forklaret, med øvelser');
+const signsCard = card('skilte', 'Skilte', 'Alle skiltene forklaret, med øvelser');
 function cards(type) {
   if (type === 'topics') return signsCard + sections.map(section => card(`mission:${section.id}`, section.title, subtitles[section.id] || section.chapterTitle)).join('');
   if (type === 'order') return SEQUENCES.map(sequence => card(`order:${sequence.id}`, sequence.title, `${sequence.steps.length} trin`)).join('');

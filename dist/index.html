@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#FFD60A">
   <script>(function(){var d=false;try{var p=localStorage.getItem('teoriboost.theme')||'dark';d=p==='dark'||(p==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);}catch(e){d=true}document.documentElement.dataset.theme=d?'dark':'light';if(d)document.querySelector('meta[name="theme-color"]').setAttribute('content','#0F1215');})();</script>
-  <meta name="description" content="Træn dansk køreteori i korte missioner. Lær af dine fejl, genkald reglerne og øv prøveformatet.">
+  <meta name="description" content="Træn dansk køreteori i korte øvelser. Lær af dine fejl, husk reglerne og øv prøveformatet.">
   <title>TeoriBoost — din hjerne. Dit kørekort.</title>
     <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="judge.css">
@@ -55,13 +55,13 @@
   <header class="topbar">
     <a class="brand" href="#home" aria-label="TeoriBoost, hjem"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M9.8 46.8h6.8l16-29.6h-6.8zM20.6 46.8h6.8l16-29.6h-6.8zM31.4 46.8h6.8l16-29.6h-6.8z"/></svg></span><span>TeoriBoost<span class="brand-dot" aria-hidden="true">.</span></span></a>
     <div class="top-strap mono">KATEGORI B <span>/</span> DANMARK <span>/</span> LÆR. KØR. GENTAG.</div>
-    <div class="top-actions"><a id="booster-chip" class="booster-chip" href="#minbil" hidden aria-label="Dine Boosters. Åbn Min bil"></a><button id="humor-toggle" class="mode-toggle" aria-pressed="true" aria-label="Humor og huskekroge"><span class="mode-led"></span><span class="mode-text">BRAINROT</span><b>ON</b></button><button id="sound-toggle" class="icon-btn sound-btn" aria-pressed="true" aria-label="Små lyde"></button><button id="settings-btn" class="icon-btn" aria-label="Indstillinger"></button></div>
+    <div class="top-actions"><a id="booster-chip" class="booster-chip" href="#minbil" hidden aria-label="Dine Boosters. Åbn Min bil"></a><button id="humor-toggle" class="mode-toggle" aria-pressed="true" aria-label="Humor og huskekroge"><span class="mode-led"></span><span class="mode-text">HUMOR</span><b>TIL</b></button><button id="sound-toggle" class="icon-btn sound-btn" aria-pressed="true" aria-label="Små lyde"></button><button id="settings-btn" class="icon-btn" aria-label="Indstillinger"></button></div>
   </header>
   <div class="app-layout">
     <aside class="sidebar">
       <div class="sidebar-label mono">DIN GENVEJ TIL TEORIEN</div>
       <nav aria-label="Hovednavigation" id="desktop-nav"></nav>
-      <div class="sidebar-bottom"><div class="small-license"><span class="mono">DIT FØRERKORT</span><span class="license-symbol">B</span><strong>Det begynder<br>med et godt blik.</strong></div><a class="nav-item nav-item--profile" href="#profil" data-tab="profil" aria-label="Din profil"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span class="nav-label">Din profil</span></a><button class="source-link" id="sources-btn" hidden>Kilder & faglig status</button></div>
+      <div class="sidebar-bottom"><div class="small-license"><span class="mono">DIT FØRERKORT</span><span class="license-symbol">B</span><strong>Det begynder<br>med et godt blik.</strong></div><a class="nav-item nav-item--profile" href="#profil" data-tab="profil" aria-label="Din profil"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span class="nav-label">Din profil</span></a><button class="source-link" id="sources-btn" hidden>Kilder og faglig status</button></div>
     </aside>
     <main id="main" tabindex="-1"><section id="voice-panel" hidden></section><audio id="voice-audio" preload="none" hidden></audio><div id="view"></div></main>
   </div>

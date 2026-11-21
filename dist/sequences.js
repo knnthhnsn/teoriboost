@@ -1,10 +1,10 @@
 // Ordering exercises. Every sequence is taken from the app's own source-checked rule cards and lessons
 // (sectionId points at the card; its sources are shown with the feedback). Nothing here is new content.
 export const SEQUENCES = [
-  { id: 'saede-spejle', sectionId: 'cockpit', title: 'Før du kører', prompt: 'Du sætter dig i en bil, der er indstillet til en anden. Hvad gør du i hvilken rækkefølge?',
+  { id: 'saede-spejle', sectionId: 'cockpit', title: 'Før du kører', prompt: 'Du sætter dig i en bil, som en anden har indstillet. Hvad gør du, og i hvilken rækkefølge?',
     steps: ['Indstil sæde og ryglæn', 'Tjek, at pedaler og rat kan betjenes uden at strække kroppen', 'Indstil spejlene fra den færdige siddestilling'],
     explanation: 'Spejlene indstilles fra den færdige siddestilling. Flytter du sædet bagefter, ændrer du også det udsnit, spejlene viser.' },
-  { id: 'kantsten', sectionId: 'start-stop', title: 'Sæt i gang fra kantstenen', prompt: 'Du holder ved kantstenen og vil køre ud. Sæt orienteringen i rækkefølge.',
+  { id: 'kantsten', sectionId: 'start-stop', title: 'Sæt i gang fra kantstenen', prompt: 'Du holder ved kantstenen og vil køre ud. Sæt trinene i rækkefølge.',
     steps: ['Orientér dig fremad', 'Kig i spejlene', 'Orientér dig direkte mod de skjulte områder', 'Sæt i gang, når der er et sikkert hul'],
     explanation: 'Vurder ikke kun, om vejen er tom nu, men også om en cyklist eller bil kan nå frem, mens bilen forlader kanten.' },
   { id: 'doeren', sectionId: 'doer-aabning', title: 'Åbn døren mod trafikken', prompt: 'Du holder langs en cykelsti og vil stige ud. Hvordan åbner du døren?',

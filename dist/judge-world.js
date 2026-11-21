@@ -11,7 +11,7 @@ export function createJudgeWorld(canvas, fallback, initialMotion=true, initialCa
   const T = window.THREE;
   if (!T) {
     fallback.hidden = false;
-    fallback.textContent = '3D-scenen kunne ikke indlæses. Opgavens tekst og knapper kan stadig bruges.';
+    fallback.textContent = 'Vi kunne ikke vise 3D-scenen lige nu. Teksten og knapperne virker stadig.';
     return { setCase(c){ fallback.textContent=c.setup; }, replay(){}, replayCorrected(){}, snapshot(){return '';}, place(){return 0;}, bindHotspots(){}, clearHotspots(){}, setMotion(){}, dispose(){} };
   }
   let renderer;
@@ -19,7 +19,7 @@ export function createJudgeWorld(canvas, fallback, initialMotion=true, initialCa
     renderer = new T.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:'low-power', preserveDrawingBuffer:true });
   } catch {
     fallback.hidden = false;
-    fallback.textContent = '3D-visningen er ikke tilgængelig. Opgavens tekst og knapper kan stadig bruges.';
+    fallback.textContent = 'Vi kunne ikke vise 3D-scenen her. Teksten og knapperne virker stadig.';
     return { setCase(c){ fallback.textContent=c.setup; }, replay(){}, replayCorrected(){}, snapshot(){return '';}, place(){return 0;}, bindHotspots(){}, clearHotspots(){}, setMotion(){}, dispose(){} };
   }
 
@@ -491,7 +491,7 @@ export function createJudgeWorld(canvas, fallback, initialMotion=true, initialCa
   function applySceneAvailability(){
     const state=current?.scene==='yield' ? (details.traffic?'ready':canvas.dataset.judgeTrafficFleet) : current?.scene==='bike'?cyclistStatus:current?.scene==='pedestrian'?walkerStatus:'ready';
     if(state==='ready'){canvas.hidden=false;fallback.hidden=true;resize();return;}
-    canvas.hidden=true;fallback.hidden=false;fallback.textContent=state==='unavailable'?'Situationen kunne ikke indlæses. Brug opgavens tekst og knapper.':'Henter situationen …';
+    canvas.hidden=true;fallback.hidden=false;fallback.textContent=state==='unavailable'?'Vi kunne ikke hente situationen lige nu. Brug teksten og knapperne.':'Henter situationen …';
   }
   async function requestModel(kind,file){
     detailStatus(kind,'loading');let loaded=null;

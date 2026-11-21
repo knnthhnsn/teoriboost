@@ -48,7 +48,7 @@ export function renderAccountCard({state,syncedMarkup,errorMarkup,actionsMarkup,
       <header class="acc-card-header"><h2 id="acc-title">Din konto</h2><span class="tb-stripes" aria-hidden="true"></span></header>
       <div class="acc-card-body">
         <div class="acc-card-photo"><img data-account-photo src="${image.src}" width="320" height="320" alt="${esc(image.label)}" decoding="async"></div>
-        <div class="acc-card-identity"><p class="acc-card-email">${esc(state.email||'Logget ind')}</p><p class="acc-card-provider">${provider}</p>
+        <div class="acc-card-identity"><p class="acc-card-email">${esc(state.email||'Du er logget ind')}</p><p class="acc-card-provider">${provider}</p>
           <p class="acc-sync acc-card-sync" aria-live="polite">${saved?ico('check',{cls:'acc-card-check'}):''}${syncedMarkup}</p>
         </div>
       </div>

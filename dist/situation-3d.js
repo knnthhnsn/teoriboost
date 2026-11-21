@@ -67,7 +67,7 @@ export async function mountSituation3d(stage, spec) {
   if (!stage.isConnected) return null;
 
   const canvas = document.createElement('canvas'); canvas.className = 'sit3d'; canvas.setAttribute('role', 'img');
-  canvas.setAttribute('aria-label', 'Tredimensionel illustration af situationen. Alle betingelser står i situationens tekst.');
+  canvas.setAttribute('aria-label', '3D-illustration af situationen. Alle betingelser står i situationens tekst.');
   let renderer; try { renderer = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: 'low-power', preserveDrawingBuffer: !!spec.capture }); } catch { return null; }
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75)); renderer.outputEncoding = T.sRGBEncoding;
   // 16 Nov 2026: no filmic tone mapping. ACES flattened the brand yellow to pastel and greyed the Codex-painted CSE art;

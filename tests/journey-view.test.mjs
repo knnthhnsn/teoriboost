@@ -13,7 +13,7 @@ test('chapter choice exposes one real next action without a nested main landmark
   const html=renderJourneyHome({units:getRouteUnits(input),daily:getDailySummary(input.journey,time),recommendations:getJourneyRecommendations(input),activeUnitId:'bil'});
   assert.equal(active(html),'cockpit');assert.ok(!html.includes('<main'));
   assert.equal((html.match(/<option /g)||[]).length,10);
-  assert.ok(html.includes('0/5 forløb gennemført'));
+  assert.ok(html.includes('0/5 lektioner gennemført'));
 });
 
 test('switching chapter does not turn a just repaired lesson into an immediate review',()=>{

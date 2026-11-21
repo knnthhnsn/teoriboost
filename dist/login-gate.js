@@ -48,10 +48,10 @@ export function createLoginGate({ account, route, doc = globalThis.document, win
       const s = account.status();
       return `<section class="login-gate" data-login-gate aria-labelledby="login-gate-title">
         <div class="login-gate__cast">${renderCast('sneglen', { size: 'md', priority: true })}</div>
-        <h1 id="login-gate-title">Gem din plan, før du går i gang</h1>
+        <h1 id="login-gate-title">Gem din fremgang, før du går i gang</h1>
         <p class="login-gate__lead">Log ind, så gemmes dine svar, dine fejl og din bil i din konto. Så kan du fortsætte på både telefon og computer, og intet går tabt.</p>
         <div class="login-gate__actions" data-login-body>${renderAccountActions(s)}</div>
-        <p class="login-gate__fine">Din fremgang gemmes hos Google Firebase (database i EU). <a href="#home">Tilbage til Lær</a></p>
+        <p class="login-gate__fine">Din fremgang gemmes på Googles servere i EU. <a href="#home">Tilbage til Lær</a></p>
       </section>`;
     },
     accountActions: () => renderAccountActions(account.status()),

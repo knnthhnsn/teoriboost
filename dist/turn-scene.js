@@ -1342,7 +1342,7 @@ export function createTurnScene(canvas, { motion = true, variant = 'junction', o
       if(disposed){card.userData.disposeApprovedCyclist();return;}
       detailedCyclist=card;canvas.dataset.cyclistModel='approved-static';if(notice)notice.hidden=true;attachDetailedCyclist();render();
     }catch{
-      if(disposed)return;canvas.dataset.cyclistModel='unavailable';if(notice){notice.hidden=false;notice.textContent='Cyklisten kunne ikke indlæses. Brug opgavens tekst.';}
+      if(disposed)return;canvas.dataset.cyclistModel='unavailable';if(notice){notice.hidden=false;notice.textContent='Vi kunne ikke hente cyklisten lige nu. Situationen står stadig i teksten.';}
     }
   }
 

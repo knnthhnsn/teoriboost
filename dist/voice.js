@@ -174,7 +174,7 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop, sp
       playAttempt += 1;
       audio.pause();
       if (!speech || typeof speech.speak !== 'function' || typeof Utterance !== 'function') {
-        fail('Oplæsning er ikke tilgængelig på denne enhed. Teksten står på skærmen.');
+        fail('Vi kunne ikke læse op på denne enhed. Teksten står på skærmen.');
         return;
       }
       try {
@@ -186,13 +186,13 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop, sp
         speechActive = true;
         activeUtterance = utterance;
         utterance.onend = () => { if (speechActive) advance(); };
-        utterance.onerror = () => { if (speechActive && stillCurrent()) fail('Oplæsning er ikke tilgængelig på denne enhed. Teksten står på skærmen.'); };
+        utterance.onerror = () => { if (speechActive && stillCurrent()) fail('Vi kunne ikke læse op på denne enhed. Teksten står på skærmen.'); };
         phase = paused ? 'paused' : 'playing';
         emit();
         speech.speak(utterance);
         if (paused) speech.pause?.();
       } catch {
-        if (stillCurrent()) fail('Oplæsning er ikke tilgængelig på denne enhed. Teksten står på skærmen.');
+        if (stillCurrent()) fail('Vi kunne ikke læse op på denne enhed. Teksten står på skærmen.');
       }
     };
     if (!clip.src) { startSpeech(); return; }
@@ -277,7 +277,7 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop, sp
     try {
       result = audio.play();
     } catch {
-      fail('Oplæsningen kunne ikke fortsætte. Teksten står stadig på skærmen.');
+      fail('Vi kunne ikke fortsætte oplæsningen. Teksten står stadig på skærmen.');
       return false;
     }
     Promise.resolve(result).then(() => {
@@ -286,7 +286,7 @@ export function createPlaybackEngine({ audio, onChange = noop, notify = noop, sp
       emit();
     }, () => {
       if (disposed || ownSession !== session || ownGeneration !== clipGeneration || attempt !== playAttempt) return;
-      fail('Oplæsningen kunne ikke fortsætte. Teksten står stadig på skærmen.');
+      fail('Vi kunne ikke fortsætte oplæsningen. Teksten står stadig på skærmen.');
     });
     return true;
   }
@@ -486,7 +486,7 @@ export function createNarrator({ host, audio, pack, notify = noop } = {}) {
     notify: safeNotify,
     onChange(state) {
       setBrandText(status, statusText(state));
-      setBrandText(speaker,state.browserVoice ? 'Dansk browserstemme' : (pack?.speaker || 'Dansk oplæser'));
+      setBrandText(speaker,state.browserVoice ? 'Dansk stemme på din enhed' : (pack?.speaker || 'Dansk oplæser'));
       host.setAttribute('aria-busy', String(state.phase === 'loading'));
       const isPaused = state.phase === 'paused';
       setButton(toggle, {
@@ -533,7 +533,7 @@ export function createNarrator({ host, audio, pack, notify = noop } = {}) {
       restart.disabled = true;
       triggers.release();
       status.textContent = result.reason === 'empty' ? 'Ingen tekst at læse op' : 'Oplæsning ikke tilgængelig';
-      if (result.reason !== 'empty') safeNotify('Oplæsningen findes ikke til denne tekst endnu. Teksten står stadig på skærmen.');
+      if (result.reason !== 'empty') safeNotify('Vi kan ikke læse denne tekst op endnu. Teksten står stadig på skærmen.');
       return false;
     }
 

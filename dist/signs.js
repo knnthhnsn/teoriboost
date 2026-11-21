@@ -92,7 +92,7 @@ function nameQuestion(sign, pool) {
 }
 function imageQuestion(sign, pool) {
   const others = shuffle(pool.filter(o => o.code !== sign.code && !o.wide)).slice(0, 3);
-  return { type: 'image', code: sign.code, prompt: `Hvilken tavle hedder "${sign.name}"?`,
+  return { type: 'image', code: sign.code, prompt: `Hvilken tavle hedder „${sign.name}“?`,
     options: shuffle([opt({ code: sign.code }, true), ...others.map(o => opt({ code: o.code }, false))]) };
 }
 function situationQuestion(item) {

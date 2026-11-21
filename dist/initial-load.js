@@ -40,7 +40,7 @@ export function createLazyNarrator({createNarrator, loadPack = () => import('./v
       const result = await request;
       if (disposed || current !== generation) return false;
       if (!result) {
-        options.notify?.('Oplæsningen kunne ikke hentes. Teksten står stadig på skærmen.');
+        options.notify?.('Vi kunne ikke hente oplæsningen. Teksten står stadig på skærmen.');
         return false;
       }
       narrator ||= createNarrator({...options, pack: result.VOICE_PACK});

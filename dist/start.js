@@ -144,8 +144,8 @@ function hero({ counts }) {
   </section>`;
 }
 
-const WHEN = [['2w', 'Inden for 2 uger', 'Turbo-plan'], ['1m', 'Om ca. 1 måned', 'Rolig plan'], ['3m', 'Om 2–3 måneder', 'God tid'], ['?', 'Ved ikke endnu', 'Vi starter blødt']];
-const GOALS = [[1, '1 lektion', 'ca. 5 min, Afslappet'], [2, '2 lektioner', 'ca. 10 min, Fast vane'], [3, '3 lektioner', 'ca. 15 min, Seriøs']];
+const WHEN = [['2w', 'Inden for 2 uger', 'Hurtig plan'], ['1m', 'Om ca. 1 måned', 'Rolig plan'], ['3m', 'Om 2–3 måneder', 'God tid'], ['?', 'Ved ikke endnu', 'Vi starter blødt']];
+const GOALS = [[1, '1 lektion', 'ca. 5 min, rolig'], [2, '2 lektioner', 'ca. 10 min, fast vane'], [3, '3 lektioner', 'ca. 15 min, seriøs']];
 // The suggested daily goal follows the exam date, and the plan tells the truth when the date is too close.
 export const DEFAULT_GOAL = { '2w': 3, '1m': 2, '3m': 1 };
 const DEADLINE_DAYS = { '2w': 14, '1m': 30, '3m': 75 };
@@ -158,7 +158,7 @@ function shell(step, body, cta, { ctaAttr = 'data-start-next', ctaHref = `#start
   const leftText = left === 1 ? 'Sidste trin' : left === 2 ? '2 trin igen' : '';
   return `<section class="start-step" data-step="${step}" aria-labelledby="step-title">
     <header class="step-top"><a class="step-back" href="${step === 1 ? '#start' : `#start:${step - 1}`}" aria-label="Tilbage">Tilbage</a>
-      <span class="step-bar" role="progressbar" aria-label="Intro" aria-valuemin="0" aria-valuemax="${parts}" aria-valuenow="${step + 1}" aria-valuetext="Trin ${step} af ${total}">${Array.from({ length: parts }, (_, i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</span>
+      <span class="step-bar" role="progressbar" aria-label="Fremgang i introen" aria-valuemin="0" aria-valuemax="${parts}" aria-valuenow="${step + 1}" aria-valuetext="Trin ${step} af ${total}">${Array.from({ length: parts }, (_, i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</span>
       <a class="step-skip" href="#home" data-start-skip>Spring over</a></header>
     <div class="step-body">${leftText ? `<p class="step-left">${leftText}</p>` : ''}${body}</div>
     ${cta ? `<footer class="step-foot"><a class="start-cta" href="${ctaHref}" ${ctaAttr}>${cta}</a></footer>` : ''}
@@ -181,7 +181,7 @@ export function renderStart(step, ctx) {
     const done = ctx.loginState === 'user';
     return shell(5, `<div class="plan-hero">${renderCast('sneglen', { size: 'md', priority: true, mood: done ? 'correct' : undefined })}<h1 id="step-title" class="step-title plan-title">${done ? 'Din plan er gemt' : 'Gem din plan'}</h1></div>
       <p class="step-note step-save-lead">${done ? 'Dine svar, dine fejl og din bil gemmes nu i din konto.' : 'Log ind, så gemmes dine svar, dine fejl og din bil. Så kan du fortsætte på både telefon og computer.'}</p>
-      ${done ? '' : `<div class="step-login" data-login-body>${ctx.accountActions || ''}</div><p class="step-note">Din fremgang gemmes hos Google Firebase (database i EU).</p>`}`,
+      ${done ? '' : `<div class="step-login" data-login-body>${ctx.accountActions || ''}</div><p class="step-note">Din fremgang gemmes på Googles servere i EU.</p>`}`,
     done ? 'Start første lektion' : '', { ctaAttr: 'data-start-finish', ctaHref: plan.firstHref, total });
   }
   if (step === 1) return shell(1, `<h1 id="step-title" class="sr-only">Hvornår skal du til teoriprøve?</h1>${talk('sneglen', 'Hej! Hvornår skal du til teoriprøve?')}${options('when', WHEN, intro.when || '1m')}`, 'Fortsæt', { total });
@@ -205,7 +205,7 @@ export function renderStart(step, ctx) {
     <ol class="plan-list">
       <li style="--i:0" class="${tooTight ? 'plan-tight' : ''}"><span class="plan-ico">${ico('calendar')}</span><div><strong>${esc(whenText)}</strong><small>${planLine}</small></div>${mark}</li>
       <li style="--i:1"><span class="plan-ico">${ico('clock')}</span><div><strong>${goal} ${goal === 1 ? 'lektion' : 'lektioner'} om dagen</strong><small>${goal * 5} minutter <span class="tb-stripes" aria-hidden="true"></span> dagens mål giver ${fmt(BOOSTER_RATES.dailyGoal)} Boosters</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
-      <li style="--i:2"><span class="plan-ico">${ico('target')}</span><div><strong>Første lektion: ${esc(plan.firstTitle)}</strong><small>Tre korte regelkort, så dit første rigtige spørgsmål</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+      <li style="--i:2"><span class="plan-ico">${ico('target')}</span><div><strong>Første lektion: ${esc(plan.firstTitle)}</strong><small>Tre korte regelkort, og så dit første rigtige spørgsmål</small></div><svg class="plan-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
     </ol>`, login ? 'Gem min plan' : 'Start første lektion', { ctaAttr: 'data-start-finish', ctaHref: login ? '#start:5' : plan.firstHref, total });
 }
 

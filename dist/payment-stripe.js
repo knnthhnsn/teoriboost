@@ -16,8 +16,8 @@ export async function loadStripeFactory({doc=globalThis.document,win=globalThis.
   if(win.Stripe)return win.Stripe;
   if(!scriptPromise)scriptPromise=new Promise((resolve,reject)=>{
     const script=doc.createElement('script');script.src='https://js.stripe.com/endive/stripe.js';script.async=true;
-    script.onload=()=>win.Stripe?resolve(win.Stripe):reject(new Error('Betalingsfelterne kunne ikke indlæses.'));
-    script.onerror=()=>reject(new Error('Ingen forbindelse til betalingen. Prøv igen, når du er online.'));
+    script.onload=()=>win.Stripe?resolve(win.Stripe):reject(new Error('Vi kunne ikke indlæse betalingsfelterne. Prøv igen om lidt.'));
+    script.onerror=()=>reject(new Error('Vi kunne ikke hente betalingen. Tjek din forbindelse, og prøv igen.'));
     doc.head.append(script);
   }).catch(error=>{scriptPromise=null;throw error;});
   return scriptPromise;
@@ -28,7 +28,7 @@ export async function mountStripePayment({session,root,win=globalThis.window,str
   const stripe=factory(session.publishableKey,{locale:'da'});
   const checkout=stripe.initCheckoutElementsSdk({clientSecret:session.clientSecret,elementsOptions:{appearance:paymentAppearanceFromApp(win,root),fonts:[{family:'Atkinson',src:'url('+new URL('assets/fonts/atkinson-400.woff2',win.location.href).href+')',weight:'400'}]}});
   const loaded=await checkout.loadActions();
-  if(loaded.type!=='success')throw new Error('Betalingsfelterne kunne ikke indlæses. Prøv igen.');
+  if(loaded.type!=='success')throw new Error('Vi kunne ikke indlæse betalingsfelterne. Prøv igen.');
   const actions=loaded.actions;
   let valid=false,destroyed=false;
   function total(){
@@ -45,7 +45,7 @@ export async function mountStripePayment({session,root,win=globalThis.window,str
   payment.mount(root.querySelector('[data-payment-element]'));
   const express=checkout.createExpressCheckoutElement({buttonHeight:48,buttonTheme:{applePay:'black',googlePay:'black'},layout:{maxColumns:1,maxRows:0}});
   express.on('ready',event=>{root.querySelector('[data-payment-express]').hidden=!Object.values(event.availablePaymentMethods||{}).some(Boolean);});
-  express.on('confirm',event=>{if(!valid){onError(new Error('Kontrollér prisen, og prøv igen.'));return;}void onConfirm(event);});
+  express.on('confirm',event=>{if(!valid){onError(new Error('Tjek prisen, og prøv igen.'));return;}void onConfirm(event);});
   express.mount(root.querySelector('[data-express-element]'));
   return {async confirm({email,expressCheckoutConfirmEvent}={}){if(destroyed||!valid)throw new Error('Vælg dit pas igen for at fortsætte.');total();return actions.confirm({redirect:'if_required',...(email?{email}:{}),...(expressCheckoutConfirmEvent?{expressCheckoutConfirmEvent}:{})});},destroy(){destroyed=true;payment.destroy();express.destroy();checkout.destroy?.();}};
 }

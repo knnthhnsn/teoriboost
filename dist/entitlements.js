@@ -55,9 +55,9 @@ export function createEntitlementClient({ account, fetcher = globalThis.fetch, n
       ...(body === undefined ? {} : { body: JSON.stringify(body) })
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw Object.assign(new Error(data.error?.message || 'Det kunne ikke gennemføres. Prøv igen om lidt.'), { code: data.error?.code || 'REQUEST_FAILED' });
+    if (!response.ok) throw Object.assign(new Error(data.error?.message || 'Vi kunne ikke gennemføre det lige nu. Prøv igen om lidt.'), { code: data.error?.code || 'REQUEST_FAILED' });
     const current = await identity();
-    if (disposed || started !== generation || current.uid !== who.uid) throw new Error('Din konto blev ændret. Prøv igen.');
+    if (disposed || started !== generation || current.uid !== who.uid) throw new Error('Du skiftede konto undervejs. Prøv igen.');
     if (data.entitlement) {
       uid = who.uid;
       entitlement = { ...EMPTY_ENTITLEMENT, ...data.entitlement };

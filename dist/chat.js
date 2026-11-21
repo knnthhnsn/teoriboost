@@ -51,7 +51,7 @@ function actionHtml(a, i) {
 function messageHtml(m) {
   if (m.role === 'user') return `<div class="chat-msg chat-msg--me"><div class="chat-bubble">${esc(m.content)}</div></div>`;
   return `<div class="chat-msg chat-msg--ai">${avatar()}<div class="chat-col">
-    ${m.offline ? '<span class="chat-mode">AI er ikke slået til endnu · svarer fra regelkortene</span>' : ''}
+    ${m.offline ? '<span class="chat-mode">AI er ikke slået til endnu. Sneglen svarer fra regelkortene</span>' : ''}
     ${m.content ? `<div class="chat-bubble">${md(m.content)}</div>` : ''}
     ${(m.actions || []).map(actionHtml).join('')}
     ${m.sources?.length ? `<div class="chat-sources"><span>Kilder</span>${m.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label).slice(0, 48)}</a>`).join('')}</div>` : ''}
@@ -63,11 +63,11 @@ export function renderChat({ history }) {
   const empty = `<div class="chat-empty">
     <div class="chat-hero chat-xray" aria-hidden="true"><img class="xr-a" src="assets/cast/sneglen-xray-a.webp" alt="" width="427" height="520" fetchpriority="high"><img class="xr-b" src="assets/cast/sneglen-xray-b.webp" alt="" width="427" height="520"></div>
     <h1 class="chat-hello">Hej, jeg er Sneglen.</h1>
-    <p class="chat-sub">Spørg mig om alt i køreteori. Jeg svarer ud fra appens regelkort, tjekker Færdselsstyrelsen og kan quizze dig.</p>
+    <p class="chat-sub">Spørg mig om alt i køreteori. Jeg svarer ud fra appens regelkort, tjekker Færdselsstyrelsens kilder og kan teste dig med en quiz.</p>
     <div class="chat-suggest">${SUGGEST.map((t, i) => `<button type="button" class="chat-chip" style="--i:${i}" data-chat-suggest="${esc(t)}">${esc(t)}</button>`).join('')}</div>
   </div>`;
   return `<section class="chat" aria-label="Spørg Sneglen">
-    <header class="chat-top"><a class="chat-x" href="#home" aria-label="Luk chatten">${ICON.close}</a>
+    <header class="chat-top"><a class="chat-x" href="#home" aria-label="Luk samtalen">${ICON.close}</a>
       <div class="chat-who">${avatar()}<div><strong>Sneglen</strong><small>Kender alle ${Object.keys(LESSONS).length} regelkort</small></div></div>
       <button type="button" class="chat-fresh" data-chat-new aria-label="Start en ny samtale">Ny samtale</button></header>
     <div class="chat-log" role="log" aria-live="polite" aria-relevant="additions">${history.length ? history.map(messageHtml).join('') : empty}</div>
@@ -77,7 +77,7 @@ export function renderChat({ history }) {
       <form class="chat-form" data-chat-form><label class="sr-only" for="chat-input">Skriv dit spørgsmål</label>
         <textarea id="chat-input" rows="1" maxlength="1500" placeholder="Spørg om alt i køreteori…" enterkeyhint="send" aria-describedby="chat-quota chat-validation"></textarea>
         <button type="submit" class="chat-send" aria-label="Send">Send</button></form>
-      <p class="chat-note">Svar laves af AI (Claude) ud fra appens regelkort og officielle kilder og kan tage fejl. Skriv ikke personlige oplysninger.</p>
+      <p class="chat-note">Svar laves af AI (Claude) ud fra appens regelkort og officielle kilder. Svar kan være forkerte. Skriv ikke personlige oplysninger.</p>
     </div>
   </section>`;
 }
@@ -133,17 +133,17 @@ export function mountChat(root, { context = () => ({}), sound = () => {}, initia
         who = currentIdentity();
         if (sameIdentity(before, who)) { stable = true; break; }
       }
-      if (!stable) throw Object.assign(new Error('Account changed'), { userMessage: 'Din konto blev ændret. Prøv igen.' });
+      if (!stable) throw Object.assign(new Error('Account changed'), { userMessage: 'Du skiftede konto undervejs. Prøv igen.' });
       if (who.uid && !headers.get('Authorization')) throw Object.assign(new Error('Missing account token'), { userMessage: 'Log ind igen for at fortsætte.' });
       const result = await usage.request(who, async () => {
-        if (!sameIdentity(who, currentIdentity())) throw Object.assign(new Error('Account changed'), { userMessage: 'Din konto blev ændret. Prøv igen.' });
+        if (!sameIdentity(who, currentIdentity())) throw Object.assign(new Error('Account changed'), { userMessage: 'Du skiftede konto undervejs. Prøv igen.' });
         log.querySelector('.chat-empty')?.remove();
         history.push({ role: 'user', content: text });
         ai = { role: 'assistant', content: '', actions: [], sources: [] }; history.push(ai);
         log.insertAdjacentHTML('beforeend', messageHtml(history[history.length - 2])); userNode = log.lastElementChild;
         log.insertAdjacentHTML('beforeend', `<div class="chat-msg chat-msg--ai is-live">${avatar()}<div class="chat-col"><span class="chat-status"><i aria-hidden="true"></i><b>Tænker</b></span></div></div>`);
         live = log.lastElementChild; const col = live.querySelector('.chat-col');
-        paint = statusText => { col.innerHTML = (ai.offline ? '<span class="chat-mode">AI er ikke slået til endnu · svarer fra regelkortene</span>' : '') + (ai.content ? `<div class="chat-bubble">${md(ai.content)}<i class="chat-caret" aria-hidden="true"></i></div>` : '') + ai.actions.map(actionHtml).join('') + (statusText ? `<span class="chat-status"><i aria-hidden="true"></i><b>${esc(statusText)}</b></span>` : ''); scroll(); };
+        paint = statusText => { col.innerHTML = (ai.offline ? '<span class="chat-mode">AI er ikke slået til endnu. Sneglen svarer fra regelkortene</span>' : '') + (ai.content ? `<div class="chat-bubble">${md(ai.content)}<i class="chat-caret" aria-hidden="true"></i></div>` : '') + ai.actions.map(actionHtml).join('') + (statusText ? `<span class="chat-status"><i aria-hidden="true"></i><b>${esc(statusText)}</b></span>` : ''); scroll(); };
         if (input.value.trim() === text) input.value = '';
         grow(); scroll(); sound('select');
         headers.set('content-type', 'application/json');

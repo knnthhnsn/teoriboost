@@ -167,12 +167,12 @@ export function renderJudge() {
         <button class="judge__toggle" type="button" data-judge-motion aria-pressed="true">Bevægelse</button>
       </div>
     </header>
-    <div class="judge__meta" data-judge-meta hidden><span data-judge-progress>Case 1 af 4</span><span data-judge-score>Førstevalg: 0/4</span></div>
+    <div class="judge__meta" data-judge-meta hidden><span data-judge-progress>Fejlklip 1 af 4</span><span data-judge-score>Første forsøg: 0/4</span></div>
     <div class="judge__stage" data-judge-stage>
       <canvas class="judge__canvas" data-judge-canvas aria-label="3D-trafikscene set som diorama"></canvas>
       <div class="judge__fallback" data-judge-fallback hidden></div>
       <div class="judge__intro" data-judge-intro>
-        <p>Se førerens fejlklip. Find problemet, vælg reglen, og placér bilen korrekt.</p>
+        <p>Se førerens fejl i klippet. Find problemet, vælg reglen, og placér bilen rigtigt.</p>
         <button class="judge__start" type="button" data-judge-start>Start første fejlklip</button>
         <button class="judge__voice" type="button" data-judge-read-intro aria-pressed="false">Lyt til startguiden</button>
       </div>
@@ -182,7 +182,7 @@ export function renderJudge() {
       <div class="judge__legend" data-judge-legend hidden><span><i class="judge__legend-blue"></i>Din rettelse</span><span><i class="judge__legend-gray"></i>Fejlklippet</span></div>
     </div>
     <div class="judge__workspace" data-judge-workspace hidden>
-      <div class="judge__step"><span class="sr-only" data-judge-step>Trin 1 af 4</span><ol class="judge__track" aria-hidden="true">${['Find', 'Regel', 'Placér', 'Feedback'].map(t => `<li>${t}</li>`).join('')}</ol><i data-judge-stepbar hidden></i></div>
+      <div class="judge__step"><span class="sr-only" data-judge-step>Trin 1 af 4</span><ol class="judge__track" aria-hidden="true">${['Find', 'Regel', 'Placér', 'Rettelse'].map(t => `<li>${t}</li>`).join('')}</ol><i data-judge-stepbar hidden></i></div>
       <p class="judge__mobile-legend" data-judge-mobile-legend hidden>Blå: din rettelse. Grå: fejlklippet.</p>
       <p class="judge__setup" data-judge-setup></p>
       <div class="judge__ask"><h3 class="judge__prompt" data-judge-prompt tabindex="-1"></h3>
@@ -191,7 +191,7 @@ export function renderJudge() {
       <p class="judge__status" data-judge-status role="status" aria-live="polite"></p>
       <blockquote class="judge__excuse" data-judge-excuse hidden></blockquote>
       <div class="judge__feedback" data-judge-feedback hidden></div>
-      <details class="judge__description" data-judge-description><summary>Beskriv klippet med tekst</summary><p data-judge-description-text></p></details>
+      <details class="judge__description" data-judge-description><summary>Læs klippet som tekst</summary><p data-judge-description-text></p></details>
     </div>
   </section>`;
 }
@@ -250,13 +250,13 @@ export function mountJudge(container, options={}) {
       'judge-bike':'CYKLIST: SET IGEN',
       'judge-pedestrian':'FELT: GJORT FRIT',
     }[c.id];
-    return `<aside class="judge__receipt" aria-label="Stop og Søn kvittering"><div class="judge__receipt-head"><strong>STOP &amp; SØN</strong><span>KVITTERING</span></div><p>UNDSKYLDNING: AFVIST</p><p>${escapeHtml(wheelLine)}</p><p>MANØVRE: RETTET <span class="tb-stripes" aria-hidden="true"></span> PRIS: 0 KR</p><small>Ingen bøde. Bare en bedre beslutning.</small></aside>`;
+    return `<aside class="judge__receipt" aria-label="Stop og Søn kvittering"><div class="judge__receipt-head"><strong>STOP &amp; SØN</strong><span>KVITTERING</span></div><p>UNDSKYLDNING: AFVIST</p><p>${escapeHtml(wheelLine)}</p><p>MANØVRE: RETTET <span class="tb-stripes" aria-hidden="true"></span> PRIS: 0 KR</p><small>Ingen bøde. En bedre beslutning.</small></aside>`;
   }
   function mark(id,cls){root.querySelectorAll(`[data-choice="${CSS.escape(id)}"]`).forEach(b=>{b.classList.remove('is-wrong','is-right');void b.offsetWidth;b.classList.add(cls);if(cls==='is-wrong')b.setAttribute('aria-disabled','true');});}
   function calmWrong(id){
     caseFirstTry=false;mark(id,'is-wrong');options.onSound?.('repair');
     els.status.dataset.tone='retry';
-    wildlife?.dispose();els.status.textContent=phase===2?'Ikke helt. Vælg den regel, der passer til situationen i klippet, og prøv igen.':phase===3?'Ikke helt. Se på klippet igen, og prøv en anden placering.':'Ikke helt. Se på den trafikant eller markering, som direkte ændrer førerens pligt, og prøv igen.';
+    wildlife?.dispose();els.status.textContent=phase===2?'Ikke helt. Vælg den regel, der passer til situationen, og prøv igen.':phase===3?'Ikke helt. Se klippet igen, og prøv en anden placering.':'Ikke helt. Se efter den trafikant eller markering, der ændrer førerens pligt, og prøv igen.';
     // the deer sits in the hint line, so the answer rows never change height
     if(humor)wildlife=mountWildlife(els.status,{animal:'deer',state:'shock',reducedMotion:!motion});
   }
@@ -304,7 +304,7 @@ export function mountJudge(container, options={}) {
     root.querySelectorAll('.game-cases i').forEach(seg=>{seg.className='is-done';seg.style.setProperty('--p',1);});root.querySelectorAll('.judge__track li').forEach(li=>li.className='is-done');
     els.feedback.hidden=false;els.feedback.innerHTML=`<div class="rive-hero" data-rive="celebrate" aria-hidden="true"></div><div class="judge__done is-first"><span class="judge__done-ico">${ico('check')}</span><div><strong>${correctFirst} af ${CASES.length} i første forsøg</strong><small>Alle fire fejlklip er rettet.</small></div></div><div class="judge__actions"><a class="big-btn big-btn--ghost" href="#practice">Tilbage til Øvelser</a><button type="button" class="big-btn" data-judge-again>Spil igen</button></div>`;
     els.feedback.querySelector('[data-judge-again]').addEventListener('click',()=>{location.hash='judge';window.dispatchEvent(new HashChangeEvent('hashchange'));});
-    els.status.textContent='';els.step.textContent='Færdig';els.stepbar.style.setProperty('--judge-step-ratio','1');els.score.textContent=`Førstevalg: ${correctFirst}/${CASES.length}`;
+    els.status.textContent='';els.step.textContent='Færdig';els.stepbar.style.setProperty('--judge-step-ratio','1');els.score.textContent=`Første forsøg: ${correctFirst}/${CASES.length}`;
   }
   function paint(){
     wildlife?.dispose();wildlife=null;
@@ -321,7 +321,7 @@ export function mountJudge(container, options={}) {
     setBrandText(els.clip,phase===4?'Din rettede placering':`Fejlklip ${caseIndex+1} · se efter`);
     els.legend.hidden=phase!==4;els.mobileLegend.hidden=phase!==4;
     els.replay.textContent=phase===4?'Se korrekt forløb':'Afspil igen';
-    els.canvas.setAttribute('aria-label',phase===1?`Trafikklip ${caseIndex+1}. En tekstbeskrivelse kan åbnes under scenen.`:`3D-fejlklip: ${c.setup}`);
+    els.canvas.setAttribute('aria-label',phase===1?`Trafikklip ${caseIndex+1}. Læs en tekstbeskrivelse under scenen.`:`3D-fejlklip: ${c.setup}`);
     els.step.textContent=`Trin ${phase} af 4`;els.stepbar.style.setProperty('--judge-step-ratio',String(phase/4));els.setup.textContent=c.setup;els.setup.hidden=phase===1;
     els.description.hidden=phase!==1&&phase!==4;els.description.open=false;els.descriptionText.textContent=c.setup;
     els.status.textContent='';delete els.status.dataset.tone;els.answers.innerHTML='';els.answers.classList.remove('judge__answers--spatial');world.clearHotspots();els.hotspots.innerHTML='';els.feedback.hidden=true;els.feedback.innerHTML='';
@@ -330,11 +330,11 @@ export function mountJudge(container, options={}) {
     else if(phase===2){els.prompt.textContent=c.rulePrompt;makeRuleButtons(c.rules);}
     else if(phase===3){els.prompt.textContent=c.placePrompt;makeHotspots(c.places,'place');}
     else {
-      els.prompt.textContent='Kørelærerens feedback';
+      els.prompt.textContent='Kørelærerens tilbagemelding';
       els.feedback.hidden=false;
       const picture=world.snapshot(),placeLabel=c.places.find(x=>x.correct)?.label||'Korrekt placering';
       const thumb=picture?`<figure class="judge__correct-thumb"><img src="${escapeHtml(picture)}" alt="Din rettede bilplacering: ${escapeHtml(placeLabel)}"><figcaption>${escapeHtml(placeLabel)}</figcaption></figure>`:'';
-      els.feedback.innerHTML=`<div class="judge__done${caseFirstTry?' is-first':''}"><span class="judge__done-ico judge__done-ico--cast" data-rive="cast:blink" aria-hidden="true"><img src="assets/cast/blink.webp" alt="" width="64" height="64"></span><div><strong>${caseFirstTry?'Klaret i første forsøg':'Klaret'}</strong><small>Du har rettet ${escapeHtml(c.short==='STOP'?'STOP-fejlen':'fejlen')}. Her er reglen.</small></div></div><p class="judge__rule"><span>REGEL</span>${escapeHtml(c.explanation)}</p><div class="judge__actions"><button type="button" class="big-btn big-btn--ghost judge__compare" data-judge-corrected>Se det korrekte forløb</button><button type="button" class="big-btn judge__confirm" data-judge-confirm>${caseIndex===CASES.length-1?'Afslut forløbet':'Næste case'}</button></div>${thumb}<div class="judge__sources">${sourceLinks(c)}</div>${receipt(c)}`;
+      els.feedback.innerHTML=`<div class="judge__done${caseFirstTry?' is-first':''}"><span class="judge__done-ico judge__done-ico--cast" data-rive="cast:blink" aria-hidden="true"><img src="assets/cast/blink.webp" alt="" width="64" height="64"></span><div><strong>${caseFirstTry?'Klaret i første forsøg':'Klaret'}</strong><small>Du har rettet ${escapeHtml(c.short==='STOP'?'STOP-fejlen':'fejlen')}. Her er reglen.</small></div></div><p class="judge__rule"><span>REGEL</span>${escapeHtml(c.explanation)}</p><div class="judge__actions"><button type="button" class="big-btn big-btn--ghost judge__compare" data-judge-corrected>Se det korrekte forløb</button><button type="button" class="big-btn judge__confirm" data-judge-confirm>${caseIndex===CASES.length-1?'Afslut forløbet':'Næste klip'}</button></div>${thumb}<div class="judge__sources">${sourceLinks(c)}</div>${receipt(c)}`;
       if(humor)wildlife=mountWildlife(els.feedback.querySelector('.judge__done'),{animal:'hare',state:'smug',reducedMotion:!motion});
       els.feedback.querySelector('[data-judge-corrected]').addEventListener('click',correctedReplay);
       els.feedback.querySelector('[data-judge-confirm]').addEventListener('click',completeCase);

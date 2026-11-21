@@ -165,9 +165,9 @@ export function createTeam({ db, store = globalThis.localStorage, now = () => Da
     status = 'busy'; error = ''; emit();
     try {
       const snap = await c.fb.getDoc(c.fb.doc(c.db, 'teams', code));
-      if (!snap.exists()) { error = 'Der findes ikke et hold med den kode.'; status = 'out'; emit(); return; }
+      if (!snap.exists()) { error = 'Vi fandt ikke et hold med den kode. Tjek koden, og prøv igen.'; status = 'out'; emit(); return; }
       if ((snap.data().members || []).includes(c.uid)) { await load(); return; }
-      if ((snap.data().members || []).length >= MAX_MEMBERS) { error = `Holdet er fuldt (${MAX_MEMBERS} på et hold).`; status = 'out'; emit(); return; }
+      if ((snap.data().members || []).length >= MAX_MEMBERS) { error = `Holdet er fyldt op. Der kan højst være ${MAX_MEMBERS} på et hold. Prøv et andet hold.`; status = 'out'; emit(); return; }
       await c.fb.updateDoc(c.fb.doc(c.db, 'teams', code), { members: c.fb.arrayUnion(c.uid) });
       await load();
     } catch (e) { fail(e, 'Vi kunne ikke sætte dig på holdet. Prøv igen om lidt.'); }
@@ -301,10 +301,10 @@ export function renderTeamPage({ view, account, me, ranked, boost, name, garage 
   const head = '<header class="screen-head"><a class="back-round" href="#minbil" aria-label="Tilbage til Min bil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><h1 id="team-title">Dit hold</h1></header>';
   const how = `<details class="panel team-how"><summary>Sådan virker kapløbet</summary>
     <p><b>Dagens point:</b> ${POINTS.correct} for hvert spørgsmål, du svarer rigtigt på i dag, og ${POINTS.streakDay} for hver dag i din streak (op til ${POINTS.streakCap} dage). Ranglisten starter forfra hver nat.</p>
-    <p><b>Holdboost:</b> Så længe du ligger på ranglisten og har svaret rigtigt i dag, får du ekstra Boosters på alt, du tjener: 1. plads +50 %, 2. plads +35 %, 3. plads +25 %, 4. plads +15 %, 5. plads +10 %, længere tilbage +5 %. En bedre bil giver op til +15 % ekstra, og hver del, du har monteret, +1 % (op til +10 %). Højst +${BOOST_CAP} % i alt.</p>
+    <p><b>Holdboost:</b> Så længe du ligger på ranglisten og har svaret rigtigt i dag, får du ekstra Boosters på alt, du tjener: 1. plads +50 %, 2. plads +35 %, 3. plads +25 %, 4. plads +15 %, 5. plads +10 %, længere tilbage +5 %. Din bil giver op til +15 % ekstra, og hver monteret del giver +1 % (op til +10 %). Højst +${BOOST_CAP} % i alt.</p>
     <p><b>Ild:</b> Den forreste kører på nitro. Har du ${HOT_STREAK} dage eller flere i træk, brænder din udstødning også, og er du forrest med den streak, går den helt amok.</p></details>`;
-  const privacy = '<p class="team-fine">Dem på holdet kan se dit brugernavn, din bil og dine point i dag. Din e-mail vises aldrig.</p>';
-  if (!account || account.state === 'off' || account.state === 'local') return `<section class="team" aria-labelledby="team-title">${head}<div class="panel"><p>Holdene kræver forbindelse til din konto, og den kan ikke startes her lige nu.</p></div>${how}</section>`;
+  const privacy = '<p class="team-fine">Dem på holdet kan se dit brugernavn, din bil og dine point i dag. Din e-mail bliver aldrig vist.</p>';
+  if (!account || account.state === 'off' || account.state === 'local') return `<section class="team" aria-labelledby="team-title">${head}<div class="panel"><p>Holdene kræver en konto, og den kan ikke åbnes her lige nu.</p></div>${how}</section>`;
   if (account.state !== 'user') return `<section class="team" aria-labelledby="team-title">${head}<div class="panel team-intro"><h2>Kør om kap med dit hold</h2><p>Saml din køreskoles hold eller dine venner på én vej. Den, der svarer rigtigt på flest spørgsmål i dag, kører forrest og får mest ekstra Boosters.</p><p>Log ind først, så holdet kan finde dig igen på alle dine enheder.</p><div class="acc-actions acc-actions--stack"><button type="button" class="big-btn" data-account="google">Fortsæt med Google</button><a class="big-btn big-btn--ghost" href="#profil">Log ind med e-mail på din profil</a></div></div>${how}</section>`;
   const err = view.error ? `<p class="acc-error" role="alert">${esc(view.error)}</p>` : '';
   if (view.status === 'loading' || view.status === 'idle') return `<section class="team" aria-labelledby="team-title">${head}<div class="panel"><p class="acc-sync">Henter dit hold <span class="tb-stripes" aria-hidden="true"></span></p></div></section>`;
@@ -320,11 +320,11 @@ export function renderTeamPage({ view, account, me, ranked, boost, name, garage 
       </div>${name ? '' : '<p class="team-fine">Vælg dit brugernavn først.</p>'}${how}${privacy}</section>`;
   }
   const t = view.team, mine = ranked.find(r => r.uid === me);
-  const rows = ranked.map(r => `<li class="team-row${r.uid === me ? ' is-me' : ''}"><b class="team-place">${r.place}</b><span class="team-thumb" aria-hidden="true">${vehicleLayers(carGarage(r.car))}</span><span class="team-who"><strong>${esc(r.name)}${r.uid === me ? ' <small>(dig)</small>' : ''}</strong><small>${r.correct} rigtige i dag <span class="tb-stripes" aria-hidden="true"></span> ${r.streak} ${r.streak === 1 ? 'dag' : 'dage'} i træk</small></span><span class="team-pts"><b>${fmt(r.points)}</b><small>point</small></span></li>`).join('');
+  const rows = ranked.map(r => `<li class="team-row${r.uid === me ? ' is-me' : ''}"><b class="team-place">${r.place}</b><span class="team-thumb" aria-hidden="true">${vehicleLayers(carGarage(r.car))}</span><span class="team-who"><strong>${esc(r.name)}${r.uid === me ? ' <small>(dig)</small>' : ''}</strong><small>${r.correct} rigtige svar i dag <span class="tb-stripes" aria-hidden="true"></span> ${r.streak} ${r.streak === 1 ? 'dag' : 'dage'} i træk</small></span><span class="team-pts"><b>${fmt(r.points)}</b><small>point</small></span></li>`).join('');
   const parts = boost?.parts || { place: 0, car: 0, tuning: 0 };
   const boostCard = `<div class="panel team-boost${boost?.on ? ' is-on' : ''}"><div class="team-boost-big"><small>Din holdboost</small><strong>+${boost?.pct || 0} %</strong><span>på de Boosters, du tjener nu</span></div>
     <ul class="team-boost-parts"><li><span>${mine ? `${mine.place}. plads` : 'Placering'}</span><b>+${parts.place} %</b></li><li><span>Din bil</span><b>+${parts.car} %</b></li><li><span>Tuning</span><b>+${parts.tuning} %</b></li></ul>
-    ${boost?.on ? '' : `<p class="team-fine">${ranked.length < 2 ? 'Boosten starter, når én mere er med på holdet.' : 'Svar rigtigt på et spørgsmål i dag, så starter din boost.'}</p>`}
+    ${boost?.on ? '' : `<p class="team-fine">${ranked.length < 2 ? 'Boosten starter, når én mere er med på holdet.' : 'Svar rigtigt på et spørgsmål i dag, så starter boosten.'}</p>`}
     ${garage?.lastBonus ? `<p class="team-fine">Seneste boost: +${fmt(garage.lastBonus)} Boosters.</p>` : ''}</div>`;
   return `<section class="team" aria-labelledby="team-title">${head}${err}
     <div id="team-race" class="team-race"></div>

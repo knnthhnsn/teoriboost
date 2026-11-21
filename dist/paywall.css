@@ -81,7 +81,7 @@ html dialog.tb-paywall .pw-login button { width: 100%; min-height: 48px; border:
 
 html dialog.tb-paywall .tb-pw-message:not(:empty) { margin-top: 14px; padding: 12px 14px; border: 1px solid #FFD60A; border-radius: 12px; background: #FFD60A; color: #1F2328; font: 700 15px/1.4 Atkinson, system-ui, sans-serif; overflow-wrap: anywhere; }
 html[data-theme="dark"] body dialog.tb-paywall .tb-pw-message:not(:empty) { color: #FEFFED; }
-html dialog.tb-paywall .tb-pw-message[data-error=true]:not(:empty)::before { content: "Kunne ikke gennemføres. "; }
+html dialog.tb-paywall .tb-pw-message[data-error=true]:not(:empty)::before { content: "Det gik ikke igennem. "; }
 
 /* profile page card (outside the dialog): unchanged */
 .tb-premium-settings { background: #F4F5F7; color: #1F2328; border: 1px solid #C2CCD6; border-radius: 12px; padding: 18px; margin: 18px 0; }
