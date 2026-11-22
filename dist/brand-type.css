@@ -1,0 +1,40 @@
+/* Brand typography from the Figma design manual (file "Design", page "Design manual"), for the whole app. 22 Nov 2026.
+   Loaded last on every page. The app names its fonts several ways (Atkinson, DM, Plex = body; Rubik, Barlow = display), so the
+   faces are redefined under those names: later @font-face rules win for the characters they cover.
+     Brødtekst: Atkinson Hyperlegible Mono · Tal: Black Ops One for every digit · Display/H1 Rubik 800 · H2/H3 Rubik 700 · H4 600 · Knap Rubik 700 */
+@font-face{font-family:Atkinson;src:url('assets/fonts/atkinson-mono-latin.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Atkinson;src:url('assets/fonts/atkinson-mono-latin-ext.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:DM;src:url('assets/fonts/atkinson-mono-latin.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:DM;src:url('assets/fonts/atkinson-mono-latin-ext.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Plex;src:url('assets/fonts/atkinson-mono-latin.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Plex;src:url('assets/fonts/atkinson-mono-latin-ext.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Atkinson;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
+@font-face{font-family:DM;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
+@font-face{font-family:Plex;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
+@font-face{font-family:Rubik;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
+@font-face{font-family:Barlow;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
+
+/* headings, as in the manual */
+h1{font-weight:800!important;letter-spacing:-.02em!important}
+h2{font-weight:800!important;letter-spacing:-.01em!important}
+h3{font-weight:700!important}
+h4{font-weight:600!important}
+/* Knap (CTA): Rubik Bold */
+button,.btn,[role="button"]{font-weight:700}
+
+
+/* ===== Blink is a light bug: it always glows, breathing softly in and out (never a hard on/off). 22 Nov 2026.
+   Every Blink everywhere: images by file name, the app's approved-cast wrapper (also around its Rive canvas) and Rive slots. ===== */
+@keyframes tb-blink-glow{
+  0%,100%{filter:drop-shadow(0 0 2px rgba(255,214,10,.25)) drop-shadow(0 0 6px rgba(255,190,40,.12))}
+  50%{filter:drop-shadow(0 0 9px rgba(255,214,10,.9)) drop-shadow(0 0 24px rgba(255,196,40,.6)) brightness(1.07)}
+}
+img[src*="cast/blink"]:not([data-approved-cast] img),[data-approved-cast="blink"],[data-rive="cast:blink"]{animation:tb-blink-glow 2.8s cubic-bezier(.45,0,.55,1) infinite}
+.q-cast[src*="cast/blink"]{animation:hop .9s var(--spring),tb-blink-glow 2.8s cubic-bezier(.45,0,.55,1) .9s infinite}
+@media (prefers-reduced-motion:reduce){
+  img[src*="cast/blink"]:not([data-approved-cast] img),[data-approved-cast="blink"],[data-rive="cast:blink"],.q-cast[src*="cast/blink"]{animation:none;filter:drop-shadow(0 0 8px rgba(255,214,10,.7)) drop-shadow(0 0 20px rgba(255,196,40,.35))}
+}
+/* the app's character card already moves Blink (enter, breathe, cheer, wobble): the glow runs alongside */
+.cast .cast-img[src*="cast/blink"]{animation:cast-in .45s var(--spring) both,var(--idle,idle-breathe) var(--idle-t,3.2s) .5s var(--in-out) infinite,tb-blink-glow 2.8s cubic-bezier(.45,0,.55,1) infinite}
+.cast--wrong .cast-img[src*="cast/blink"]{animation:cast-in .45s var(--spring) both,cast-wobble 1.6s .45s ease-in-out 1,var(--idle,idle-breathe) var(--idle-t,3.2s) 2.1s var(--in-out) infinite,tb-blink-glow 2.8s cubic-bezier(.45,0,.55,1) infinite}
+.cast--correct .cast-img[src*="cast/blink"]{animation:cast-in .45s var(--spring) both,cast-cheer .7s .45s var(--spring) 1,var(--idle,idle-breathe) var(--idle-t,3.2s) 1.2s var(--in-out) infinite,tb-blink-glow 2.8s cubic-bezier(.45,0,.55,1) infinite}
