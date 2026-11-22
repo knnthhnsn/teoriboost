@@ -72,14 +72,14 @@ export async function mountSituation3d(stage, spec) {
      The painting's horizon sits SKY_H up from its bottom edge; below that it is the weather's fog colour (made so in post). */
   const SKIES = { day: ['sky-day-1', 'sky-day-2', 'sky-day-3'], sun: ['sky-sun'], rain: ['sky-rain'], fog: ['sky-fog'], snow: ['sky-snow'], night: ['sky-night'] }, SKY_H = 0.42;
   const skyList = SKIES[spec.env] || SKIES.day, skyPick = [...JSON.stringify(spec.actors || [])].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) + (spec.variant || 0);
-  const skyTex = spec.studio ? null : await new Promise(res => new T.TextureLoader().load(`assets/scene-env/${skyList[skyPick % skyList.length]}.webp?v=20261122b`, t => { t.encoding = T.sRGBEncoding; res(t); }, undefined, () => res(null)));
+  const skyTex = spec.studio ? null : await new Promise(res => new T.TextureLoader().load(`assets/scene-env/${skyList[skyPick % skyList.length]}.webp?v=20261122c`, t => { t.encoding = T.sRGBEncoding; res(t); }, undefined, () => res(null)));
   let renderer; try { renderer = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: 'low-power', preserveDrawingBuffer: !!spec.capture }); } catch { return null; }
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75)); renderer.outputEncoding = T.sRGBEncoding;
   // 16 Nov 2026: no filmic tone mapping. ACES flattened the brand yellow to pastel and greyed the Codex-painted CSE art;
   // colours now come out as drawn, and the light is scaled down instead (env.lightScale).
   renderer.toneMapping = T.NoToneMapping;
-  // Weather and light: sky, fog, ground and light strength per environment.
-  const ENVS = { day: { sky: 0x9DB7B2, fogColor: 0xA9B9A6, fog: [70, 150], ground: 0x56703A, hemiSky: 0xC9D9D0, hemiGround: 0x3F3A2A, hemi: 0.6, hemiBoost: 4.3, sunColor: 0xFFD9A0, sun: 1.9, sunPos: [-14, 6, 10], exposure: 0.88 }, night: { sky: 0x101C2C, fog: [14, 60], ground: 0x25382A, hemi: 0.45, sun: 0.18 }, fog: { sky: 0xD3D9DE, fog: [6, 34], ground: 0x8FA070, hemi: 1.2, sun: 0.5 }, snow: { sky: 0xDCE6EC, fog: [30, 90], ground: 0xD9E0E6, hemi: 1.35, sun: 0.7, lightScale: 0.55 }, rain: { sky: 0x93A6B3, fog: [22, 80], ground: 0x62804F, hemi: 0.95, sun: 0.35 }, sun: { sky: 0xF3E3B0, fog: [60, 130], ground: 0x8AA645, hemi: 1.3, sun: 1.5 } };
+  // Weather and light: sky, fog, ground and light strength per environment. 22 Nov 2026: day and sun fog take the painted sky's horizon colour, so distant land fades into air, not a grey veil.
+  const ENVS = { day: { sky: 0x9DB7B2, fogColor: 0xA4BFC8, fog: [70, 150], ground: 0x56703A, hemiSky: 0xC9D9D0, hemiGround: 0x3F3A2A, hemi: 0.6, hemiBoost: 4.3, sunColor: 0xFFD9A0, sun: 1.9, sunPos: [-14, 6, 10], exposure: 0.88 }, night: { sky: 0x101C2C, fog: [14, 60], ground: 0x25382A, hemi: 0.45, sun: 0.18 }, fog: { sky: 0xD3D9DE, fog: [6, 34], ground: 0x8FA070, hemi: 1.2, sun: 0.5 }, snow: { sky: 0xDCE6EC, fog: [30, 90], ground: 0xD9E0E6, hemi: 1.35, sun: 0.7, lightScale: 0.55 }, rain: { sky: 0x93A6B3, fog: [22, 80], ground: 0x62804F, hemi: 0.95, sun: 0.35 }, sun: { sky: 0xF3E3B0, fogColor: 0xD6B793, fog: [60, 130], ground: 0x8AA645, hemi: 1.3, sun: 1.5 } };
   const env = { ...(ENVS[spec.env] || ENVS.day), ...(spec.look || {}) };
   if (spec.variant && env.sunPos) env.sunPos = [-env.sunPos[0], env.sunPos[1], env.sunPos[2]];
   const LS = env.lightScale ?? 0.9, HF = env.hemiBoost ?? 1; // light without tone mapping: less direct sun, more even sky fill (measured against the old look)
