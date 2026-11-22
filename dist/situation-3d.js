@@ -68,6 +68,11 @@ export async function mountSituation3d(stage, spec) {
 
   const canvas = document.createElement('canvas'); canvas.className = 'sit3d'; canvas.setAttribute('role', 'img');
   canvas.setAttribute('aria-label', '3D-illustration af situationen. Alle betingelser står i situationens tekst.');
+  /* 22 Nov 2026: a painted sky per weather (Codex, CSE style) instead of a flat colour; day scenes rotate between three.
+     The painting's horizon sits SKY_H up from its bottom edge; below that it is the weather's fog colour (made so in post). */
+  const SKIES = { day: ['sky-day-1', 'sky-day-2', 'sky-day-3'], sun: ['sky-sun'], rain: ['sky-rain'], fog: ['sky-fog'], snow: ['sky-snow'], night: ['sky-night'] }, SKY_H = 0.3;
+  const skyList = SKIES[spec.env] || SKIES.day, skyPick = [...JSON.stringify(spec.actors || [])].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) + (spec.variant || 0);
+  const skyTex = spec.studio ? null : await new Promise(res => new T.TextureLoader().load(`assets/scene-env/${skyList[skyPick % skyList.length]}.webp`, t => { t.encoding = T.sRGBEncoding; res(t); }, undefined, () => res(null)));
   let renderer; try { renderer = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: 'low-power', preserveDrawingBuffer: !!spec.capture }); } catch { return null; }
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75)); renderer.outputEncoding = T.sRGBEncoding;
   // 16 Nov 2026: no filmic tone mapping. ACES flattened the brand yellow to pastel and greyed the Codex-painted CSE art;
@@ -78,8 +83,19 @@ export async function mountSituation3d(stage, spec) {
   const env = { ...(ENVS[spec.env] || ENVS.day), ...(spec.look || {}) };
   if (spec.variant && env.sunPos) env.sunPos = [-env.sunPos[0], env.sunPos[1], env.sunPos[2]];
   const LS = env.lightScale ?? 0.9, HF = env.hemiBoost ?? 1; // light without tone mapping: less direct sun, more even sky fill (measured against the old look)
-  const scene = new T.Scene(); scene.background = new T.Color(env.sky); scene.fog = new T.Fog(env.fogColor ?? env.sky, env.fog[0], env.fog[1]);
+  const scene = new T.Scene(); scene.background = skyTex || new T.Color(env.sky); scene.fog = new T.Fog(env.fogColor ?? env.sky, env.fog[0], env.fog[1]);
   const camera = new T.PerspectiveCamera(36, 1, 0.5, 160);
+  /* the screen height of the true horizon (a far point straight ahead at eye height) decides where the painting's horizon goes,
+     so the sky meets the land from the driver's seat and from the high view alike; a mirror camera gets its own fit */
+  if (skyTex) {
+    const far = new T.Vector3(), dir = new T.Vector3(), render0 = renderer.render.bind(renderer);
+    renderer.render = (sc, cam) => {
+      cam.updateMatrixWorld(); cam.getWorldDirection(dir); dir.y = 0; if (dir.lengthSq() < 1e-6) dir.set(0, 0, -1);
+      far.copy(cam.position).addScaledVector(dir.normalize(), 1000).project(cam);
+      skyTex.offset.y = SKY_H - Math.min(1.3, Math.max(-0.3, (far.y + 1) / 2));
+      render0(sc, cam);
+    };
+  }
   scene.add(new T.HemisphereLight(env.hemiSky ?? 0xEAF1F5, env.hemiGround ?? 0x6A7452, env.hemi * HF * LS));
   const sun = new T.DirectionalLight(env.sunColor ?? 0xFFF1D6, env.sun * LS); sun.position.set(...(env.sunPos || [-8, 14, 6])); scene.add(sun);
 
@@ -176,8 +192,19 @@ export async function mountSituation3d(stage, spec) {
   // Cycle path: a separate red-brown strip with a kerb beside the road; cycle lane: a red-brown strip inside the edge line. White bicycle marks on both.
   // Bicycle pictogram painted on the cycle path (two wheels, frame, handlebar, saddle), drawn once on a canvas.
   const bikeTex = (() => { const c = document.createElement('canvas'); c.width = 256; c.height = 128; const g = c.getContext('2d'); g.strokeStyle = '#FEFFED'; g.fillStyle = '#FEFFED'; g.lineWidth = 9; g.lineCap = 'round'; g.lineJoin = 'round'; for (const wx of [58, 198]) { g.beginPath(); g.arc(wx, 78, 34, 0, 7); g.stroke(); } g.beginPath(); g.moveTo(58, 78); g.lineTo(104, 40); g.lineTo(168, 40); g.lineTo(198, 78); g.moveTo(104, 40); g.lineTo(128, 78); g.lineTo(58, 78); g.moveTo(128, 78); g.lineTo(168, 40); g.moveTo(96, 28); g.lineTo(116, 28); g.moveTo(168, 40); g.lineTo(160, 18); g.lineTo(184, 18); g.stroke(); const t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; return t; })();
-  const bikeMark = (x, z) => { const m = new T.Mesh(new T.PlaneGeometry(1.5, 0.75), new T.MeshBasicMaterial({ map: bikeTex, transparent: true, depthWrite: false })); m.rotation.set(-Math.PI / 2, 0, Math.PI / 2); m.position.set(x, 0.045, z); scene.add(m); };
-  if (exm.cyclePath) { flat(2.3, 200, 0x8A4B3C, W / 2 + 1.65, 0.015, -50); box(0.25, 0.18, 200, 0xC2CCD6, W / 2 + 0.38, 0.09, -50, false); for (let z = 8; z > -60; z -= 9) bikeMark(W / 2 + 1.65, z); }
+  const bikeMark = (x, z) => { const m = new T.Mesh(new T.PlaneGeometry(1.9, 0.95), new T.MeshBasicMaterial({ map: bikeTex, transparent: true, depthWrite: false })); m.rotation.set(-Math.PI / 2, 0, Math.PI / 2); m.position.set(x, 0.045, z); scene.add(m); };
+  if (exm.cyclePath) {
+    /* 22 Nov 2026: a Danish cycle path (Kenneth: the flat salmon strip was slop). Asphalt like the road, a shade lighter, behind a low matte kerb.
+       At a side road the path stops and crosses in a blue cycle field with white block edges instead of running over the junction. */
+    const cx = W / 2 + 1.35, gap = spec.road === 'junction' ? [spec.jz + 3.3, spec.jz - 3.3] : null;
+    const seg = (z0, z1) => { if (z0 - z1 < 0.5) return; const cz = (z0 + z1) / 2, len = z0 - z1; flat(2.3, len, 0x2D343B, cx, 0.012, cz).material.color.set(0xE4DFDA); box(0.2, 0.1, len, 0x6E7378, W / 2 + 0.1, 0.05, cz, false); };
+    if (gap) {
+      seg(50, gap[0]); seg(gap[1], -150);
+      flat(2.3, gap[0] - gap[1], 0x235390, cx, 0.016, spec.jz);
+      for (const bx of [cx - 1.06, cx + 1.06]) for (let z = gap[1] + 0.3; z < gap[0] - 0.2; z += 0.9) box(0.18, 0.01, 0.5, 0xFEFFED, bx, 0.022, z + 0.25, false);
+    } else seg(50, exm.bend ? -10 : -150); /* in a bend the path beyond z = -10 is laid with the curved road below */
+    for (let z = 8; z > (exm.bend ? -10 : -60); z -= 15) if (!gap || z > gap[0] + 2 || z < gap[1] - 2) bikeMark(cx, z);
+  }
   if (exm.cycleLane) { flat(1.4, 200, 0x8A4B3C, E - 0.7, 0.012, -50); for (let z = 8; z > -60; z -= 9) bikeMark(E - 0.7, z); }
   if (spec.road === 'roundabout') {
     const rz = spec.rz, R1 = 5.2, R2 = 11.2;
@@ -220,6 +247,10 @@ export async function mountSituation3d(stage, spec) {
       for (const x of [-E, E]) part(0.16, SEG + 0.5, WHITE, x, 0.08, -SEG / 2);
       for (const z of [-2.5, -7.5]) part(0.14, 2, WHITE, 0, 0.08, z);
       for (const sx of [-1, 1]) { const tx = sx * (W / 2 + 4 + ((i * 7 + (sx > 0 ? 3 : 0)) % 4)); const tc = i % 2 === (sx > 0 ? 0 : 1) ? card((i + (sx > 0 ? 1 : 0)) % 2 ? 'tree-pine' : 'tree-round', 5.4, tx, -SEG / 2) : null; if (tc) { scene.remove(tc); g.add(tc); } }
+      if (exm.cyclePath) { /* 22 Nov 2026: path and kerb ride along each bend piece (a little longer, so the outer side has no gaps) */
+        const cp = part(2.3, SEG + 1.4, 0x2D343B, W / 2 + 1.35, 0.075, -SEG / 2); if (envTex.asphalt) { cp.material.color.set(0xE4DFDA); cp.material.map = asphaltFor(2.3, SEG); }
+        const kb = new T.Mesh(new T.BoxGeometry(0.2, 0.1, SEG + 0.9), mat(0x6E7378)); kb.position.set(W / 2 + 0.1, 0.12, -SEG / 2); g.add(kb);
+      }
       if (exm.guardrail) for (const sx of [-1, 1]) { const rail = new T.Mesh(new T.BoxGeometry(0.15, 0.5, SEG + 0.2), mat(0xC2CCD6)); rail.position.set(sx * (W / 2 + 0.9), 0.7, -SEG / 2); g.add(rail); }
     }
   }

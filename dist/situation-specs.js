@@ -10,6 +10,8 @@ export const SITUATIONS = Object.freeze({
   // Cyklist lige før krydset, plads og frit udsyn.
   'q-131': { road: 'junction', jz: -22, actors: [learner(4), { t: 'cyclist', x: 3.2, z: -4.5 }] },
   // Jernbaneoverkoersel: roede lys, bomme aabne, tog langt vaek.
+  // 22 Nov 2026: the e-cyclist comes from BEHIND on the cycle path while you indicate for the right turn ahead (the auto scene put it in front).
+  'q-405': { road: 'junction', jz: -16, actors: [{ ...learner(-2), signal: 'R' }, { t: 'cyclist', x: 4.9, z: 2.6 }], extras: { cyclePath: true } },
   'q-099': { road: 'rail', rz: -16, actors: [learner(2)], extras: { redLights: true, barrier: 'up', train: true } },
   // Hilse med hornet: vennen paa fortovet, og en anden fodgaenger der ikke er imponeret over dyttet.
   'q-212': { road: 'country', actors: [learner(3), { t: 'person', p: 'phone-walker', x: 5.4, z: -9 }, { t: 'person', p: 'wheelchair-finger', x: 4.7, z: -2.5, joke: true }], extras: { town: true } },
