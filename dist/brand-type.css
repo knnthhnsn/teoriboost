@@ -38,3 +38,49 @@ img[src*="cast/blink"]:not([data-approved-cast] img),[data-approved-cast="blink"
 .cast .cast-img[src*="cast/blink"]{animation:cast-in .45s var(--spring) both,var(--idle,idle-breathe) var(--idle-t,3.2s) .5s var(--in-out) infinite,tb-blink-glow 2.8s cubic-bezier(.45,0,.55,1) infinite}
 .cast--wrong .cast-img[src*="cast/blink"]{animation:cast-in .45s var(--spring) both,cast-wobble 1.6s .45s ease-in-out 1,var(--idle,idle-breathe) var(--idle-t,3.2s) 2.1s var(--in-out) infinite,tb-blink-glow 2.8s cubic-bezier(.45,0,.55,1) infinite}
 .cast--correct .cast-img[src*="cast/blink"]{animation:cast-in .45s var(--spring) both,cast-cheer .7s .45s var(--spring) 1,var(--idle,idle-breathe) var(--idle-t,3.2s) 1.2s var(--in-out) infinite,tb-blink-glow 2.8s cubic-bezier(.45,0,.55,1) infinite}
+
+/* ===== Blink's light, v2 (22 Nov 2026: "glow ser ikke lækkert ud"). Not an outline any more: a warm light that swells up
+   behind the shell and fades, while the shell itself brightens a touch. Firefly rhythm: rise, fall, short rest. ===== */
+@keyframes tb-blink-glow{
+  0%,100%{filter:brightness(1) saturate(1) drop-shadow(0 0 0 rgba(255,214,10,0))}
+  28%{filter:brightness(1.09) saturate(1.12) drop-shadow(0 0 26px rgba(255,214,10,.5))}
+  52%{filter:brightness(1.02) saturate(1.03) drop-shadow(0 0 12px rgba(255,214,10,.18))}
+  70%{filter:brightness(1) saturate(1) drop-shadow(0 0 0 rgba(255,214,10,0))}
+}
+@keyframes tb-blink-lit{0%,70%,100%{filter:brightness(1) saturate(1)}28%{filter:brightness(1.09) saturate(1.12)}52%{filter:brightness(1.02)}}
+@keyframes tb-blink-bloom{0%,70%,100%{opacity:.12;scale:.78}28%{opacity:1;scale:1.06}52%{opacity:.45;scale:.92}}
+/* where Blink sits in its own wrapper, the light is a soft round bloom behind the shell */
+.mate-art:has(> img[src*="cast/blink"]),[data-approved-cast="blink"]{position:relative;isolation:isolate;animation:none}
+.mate-art:has(> img[src*="cast/blink"])::before,[data-approved-cast="blink"]::before{content:"";position:absolute;left:-6%;top:8%;width:86%;height:80%;z-index:-1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(255,230,90,1),rgba(255,214,10,.6) 42%,rgba(255,214,10,0) 100%);filter:blur(18px);
+  animation:tb-blink-bloom 3.2s cubic-bezier(.45,0,.55,1) infinite}
+.mate .mate-art img[src*="cast/blink"]{animation:idle 4.4s var(--in-out) infinite,tb-blink-lit 3.2s cubic-bezier(.45,0,.55,1) infinite}
+@media (prefers-reduced-motion:reduce){
+  .mate-art:has(> img[src*="cast/blink"])::before,[data-approved-cast="blink"]::before{animation:none;opacity:.7}
+  .mate .mate-art img[src*="cast/blink"]{animation:none}
+}
+
+/* ===== Blink's light, v3 (22 Nov 2026: "ikke blødt lys, kun blød motion"). A clear, bright light: the shell switches on
+   like a lamp with a tight, strong glow. Only the timing is soft (eases up, holds, eases down, short rest). ===== */
+@keyframes tb-blink-glow{
+  0%,70%,100%{filter:brightness(1) saturate(1) drop-shadow(0 0 0 rgba(255,214,10,0)) drop-shadow(0 0 0 rgba(255,214,10,0))}
+  24%,40%{filter:brightness(1.22) saturate(1.18) drop-shadow(0 0 2px rgba(255,214,10,1)) drop-shadow(0 0 9px rgba(255,200,0,.85))}
+}
+@keyframes tb-blink-lit{
+  0%,70%,100%{filter:drop-shadow(0 0 0 rgba(255,214,10,0)) drop-shadow(0 0 0 rgba(255,214,10,0))}
+  24%,40%{filter:drop-shadow(0 0 2px rgba(255,214,10,1)) drop-shadow(0 0 9px rgba(255,200,0,.85))}
+}
+@keyframes tb-blink-on{0%,70%,100%{opacity:0}24%,40%{opacity:1}}
+/* no diffuse bloom */
+.mate-art:has(> img[src*="cast/blink"])::before,[data-approved-cast="blink"]::before{content:none}
+[data-approved-cast="blink"]{animation:tb-blink-glow 3.2s cubic-bezier(.45,0,.55,1) infinite}
+/* the front-page card: the shell itself lights up, clipped to Blink's own shape */
+.mate-art:has(> img[src*="cast/blink"])::after{content:"";position:absolute;inset:0;pointer-events:none;
+  -webkit-mask:url('assets/cast/blink.webp') center/contain no-repeat;mask:url('assets/cast/blink.webp') center/contain no-repeat;
+  background:radial-gradient(44% 38% at 38% 56%,rgba(255,255,235,1),rgba(255,240,120,.85) 52%,rgba(255,214,10,0) 82%);mix-blend-mode:overlay;
+  opacity:0;animation:tb-blink-on 3.2s cubic-bezier(.45,0,.55,1) infinite}
+.mate .mate-art img[src*="cast/blink"]{animation:idle 4.4s var(--in-out) infinite,tb-blink-lit 3.2s cubic-bezier(.45,0,.55,1) infinite}
+@media (prefers-reduced-motion:reduce){
+  .mate-art:has(> img[src*="cast/blink"])::after{animation:none;opacity:.6}
+  [data-approved-cast="blink"],.mate .mate-art img[src*="cast/blink"]{animation:none;filter:drop-shadow(0 0 2px rgba(255,214,10,1)) drop-shadow(0 0 8px rgba(255,200,0,.7))}
+}
