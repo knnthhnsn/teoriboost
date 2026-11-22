@@ -70,9 +70,9 @@ export async function mountSituation3d(stage, spec) {
   canvas.setAttribute('aria-label', '3D-illustration af situationen. Alle betingelser står i situationens tekst.');
   /* 22 Nov 2026: a painted sky per weather (Codex, CSE style) instead of a flat colour; day scenes rotate between three.
      The painting's horizon sits SKY_H up from its bottom edge; below that it is the weather's fog colour (made so in post). */
-  const SKIES = { day: ['sky-day-1', 'sky-day-2', 'sky-day-3'], sun: ['sky-sun'], rain: ['sky-rain'], fog: ['sky-fog'], snow: ['sky-snow'], night: ['sky-night'] }, SKY_H = 0.3;
+  const SKIES = { day: ['sky-day-1', 'sky-day-2', 'sky-day-3'], sun: ['sky-sun'], rain: ['sky-rain'], fog: ['sky-fog'], snow: ['sky-snow'], night: ['sky-night'] }, SKY_H = 0.42;
   const skyList = SKIES[spec.env] || SKIES.day, skyPick = [...JSON.stringify(spec.actors || [])].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) + (spec.variant || 0);
-  const skyTex = spec.studio ? null : await new Promise(res => new T.TextureLoader().load(`assets/scene-env/${skyList[skyPick % skyList.length]}.webp`, t => { t.encoding = T.sRGBEncoding; res(t); }, undefined, () => res(null)));
+  const skyTex = spec.studio ? null : await new Promise(res => new T.TextureLoader().load(`assets/scene-env/${skyList[skyPick % skyList.length]}.webp?v=20261122b`, t => { t.encoding = T.sRGBEncoding; res(t); }, undefined, () => res(null)));
   let renderer; try { renderer = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: 'low-power', preserveDrawingBuffer: !!spec.capture }); } catch { return null; }
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75)); renderer.outputEncoding = T.sRGBEncoding;
   // 16 Nov 2026: no filmic tone mapping. ACES flattened the brand yellow to pastel and greyed the Codex-painted CSE art;
