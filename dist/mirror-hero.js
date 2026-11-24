@@ -18,11 +18,11 @@ function flameState(streak, store = globalThis.localStorage) {
 export function heroCopy({ streak = 0, days = null, goal = 1, today = 0, pct = 0 }) {
   const left = Math.max(0, goal - today);
   const eyebrow = days === null ? 'DIN KØRETEORI' : days <= 0 ? 'PRØVEN ER I DAG' : `${days} ${plural(days, 'DAG', 'DAGE')} TIL PRØVEN`;
-  const title = today >= goal ? 'Dagens mål er nået. Flot kørt.'
+  const title = today >= goal ? 'Dagens mål er nået. Flot kørt!'
     : pct === 0 && streak === 0 && today === 0 ? 'Spejlet er stillet. Klar til første tur?'
     : pct >= 85 ? 'Du er næsten klar til prøven.'
     : pct > 0 && pct < 10 ? 'Du er lige startet. Tallet stiger, når flere regler sidder.'
-    : streak >= 2 ? `${streak} dage i træk. Hold farten.`
+    : streak >= 2 ? `${streak} dage i træk! Hold farten.`
     : `Du er ${pct} % klar til prøven.`;
   const text = today >= goal ? 'Kom igen i morgen, så holder du kursen.'
     : days !== null && days > 0 ? `${left} ${plural(left, 'lektion', 'lektioner')} mere i dag, så er du på sporet til prøven om ${days} ${plural(days, 'dag', 'dage')}.`

@@ -91,7 +91,7 @@ export function createDriveQuiz({ veil, card, storage, run, onDone }) {
       return `<li class="quiz-row${checked ? (correct ? ' is-right' : ' is-wrong') : ''}"><span class="quiz-text" id="quiz-statement-${shown}">${esc(s.text)}</span><span class="quiz-choices" role="group" aria-labelledby="quiz-statement-${shown}">${choice(true)}${choice(false)}</span>${checked ? `<span class="quiz-outcome">${mark(correct)}${correct ? 'Rigtigt' : `Forkert, svaret er ${s.correct ? 'ja' : 'nej'}`}</span>` : ''}</li>`;
     }).join('');
     card.innerHTML = `<div class="quiz-side">
-        <span class="label">${list.length > 1 ? `Spørgsmål ${index + 1} af ${list.length}` : 'Spørgsmål til din fejl'}</span>
+        <span class="label">${list.length > 1 ? `Spørgsmål ${index + 1} af ${list.length}` : 'Spørgsmål om din fejl'}</span>
         <h2 id="quiz-title">${esc(q.prompt)}</h2>
         <p class="lede">${esc(q.context)}</p>
         ${checked ? `<div class="quiz-feedback ${right ? 'is-right' : 'is-wrong'}" role="status"><strong>${mark(right)}${right ? 'Rigtigt.' : 'Se reglen igen.'}</strong><p>${esc(q.explanation)}</p></div>` : ''}

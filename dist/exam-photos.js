@@ -339,7 +339,7 @@ export const EXAM_PHOTOS=Object.freeze({
     "src": "assets/exam/detail-q-048-v1.webp",
     "width": 1586,
     "height": 992,
-    "title": "Situation 8 til gennemgang",
+    "title": "Situation 8",
     "facts": []
   },
   "q-049": {

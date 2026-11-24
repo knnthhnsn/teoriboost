@@ -51,7 +51,7 @@ function actionHtml(a, i) {
 function messageHtml(m) {
   if (m.role === 'user') return `<div class="chat-msg chat-msg--me"><div class="chat-bubble">${esc(m.content)}</div></div>`;
   return `<div class="chat-msg chat-msg--ai">${avatar()}<div class="chat-col">
-    ${m.offline ? '<span class="chat-mode">AI er ikke slået til endnu. Sneglen svarer fra regelkortene</span>' : ''}
+    ${m.offline ? '<span class="chat-mode">Sneglen svarer lige nu fra regelkortene. AI er ikke slået til endnu.</span>' : ''}
     ${m.content ? `<div class="chat-bubble">${md(m.content)}</div>` : ''}
     ${(m.actions || []).map(actionHtml).join('')}
     ${m.sources?.length ? `<div class="chat-sources"><span>Kilder</span>${m.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label).slice(0, 48)}</a>`).join('')}</div>` : ''}
@@ -63,7 +63,7 @@ export function renderChat({ history }) {
   const empty = `<div class="chat-empty">
     <div class="chat-hero chat-xray" aria-hidden="true"><img class="xr-a" src="assets/cast/sneglen-xray-a.webp" alt="" width="427" height="520" fetchpriority="high"><img class="xr-b" src="assets/cast/sneglen-xray-b.webp" alt="" width="427" height="520"></div>
     <h1 class="chat-hello">Hej, jeg er Sneglen.</h1>
-    <p class="chat-sub">Spørg mig om alt i køreteori. Jeg svarer ud fra appens regelkort, tjekker Færdselsstyrelsens kilder og kan teste dig med en quiz.</p>
+    <p class="chat-sub">Spørg mig om alt i køreteori. Jeg svarer fra regelkortene, tjekker Færdselsstyrelsens kilder og tester dig med en quiz.</p>
     <div class="chat-suggest">${SUGGEST.map((t, i) => `<button type="button" class="chat-chip" style="--i:${i}" data-chat-suggest="${esc(t)}">${esc(t)}</button>`).join('')}</div>
   </div>`;
   return `<section class="chat" aria-label="Spørg Sneglen">
@@ -77,7 +77,7 @@ export function renderChat({ history }) {
       <form class="chat-form" data-chat-form><label class="sr-only" for="chat-input">Skriv dit spørgsmål</label>
         <textarea id="chat-input" rows="1" maxlength="1500" placeholder="Spørg om alt i køreteori…" enterkeyhint="send" aria-describedby="chat-quota chat-validation"></textarea>
         <button type="submit" class="chat-send" aria-label="Send">Send</button></form>
-      <p class="chat-note">Svar laves af AI (Claude) ud fra appens regelkort og officielle kilder. Svar kan være forkerte. Skriv ikke personlige oplysninger.</p>
+      <p class="chat-note">AI (Claude) svarer ud fra appens regelkort og officielle kilder. Svar kan være forkerte. Skriv ikke personlige oplysninger.</p>
     </div>
   </section>`;
 }
@@ -98,9 +98,9 @@ export function mountChat(root, { context = () => ({}), sound = () => {}, initia
     const who = currentIdentity(), quota = usage.view(who);
     let html = '';
     if (quota.remaining === 0) {
-      if (quota.tier === 'guest') html = `<span>Log ind for at stille ${AI_CONFIG.dailyLimits.free} spørgsmål om dagen</span><button type="button" data-chat-login>Log ind</button>`;
-      else if (quota.tier === 'free' && who.paymentsEnabled) html = `<span>Du har brugt dagens ${quota.limit} spørgsmål. Med Premium får du ${AI_CONFIG.dailyLimits.premium} om dagen.</span><button type="button" data-chat-premium>Se Premium</button>`;
-      else html = `<span>Du har brugt dagens ${quota.limit} spørgsmål. Kom igen i morgen.</span>`;
+      if (quota.tier === 'guest') html = `<span>Log ind, så kan du stille ${AI_CONFIG.dailyLimits.free} spørgsmål om dagen</span><button type="button" data-chat-login>Log ind</button>`;
+      else if (quota.tier === 'free' && who.paymentsEnabled) html = `<span>Dagens ${quota.limit} spørgsmål er brugt. Med Premium får du ${AI_CONFIG.dailyLimits.premium} om dagen.</span><button type="button" data-chat-premium>Se Premium</button>`;
+      else html = `<span>Dagens ${quota.limit} spørgsmål er brugt. Kom igen i morgen.</span>`;
     } else if (quota.remaining <= 2) html = `<span>${quota.remaining} spørgsmål tilbage i dag</span>`;
     if (quotaNote.innerHTML !== html) quotaNote.innerHTML = html;
     send.disabled = !ctrl && quota.remaining === 0;
@@ -118,7 +118,7 @@ export function mountChat(root, { context = () => ({}), sound = () => {}, initia
 
   async function ask(text) {
     text = String(text || '').trim(); if (!text || ctrl || dead) return;
-    if (text.length > 1500) { validation.textContent = 'Spørgsmålet må højst være 1.500 tegn.'; return; }
+    if (text.length > 1500) { validation.textContent = 'Spørgsmålet er for langt. Hold det på højst 1.500 tegn.'; return; }
     validation.textContent = '';
     ctrl = new AbortController(); const signal = ctrl.signal; busy(true);
     let live, userNode, ai, paint, response;
@@ -133,17 +133,17 @@ export function mountChat(root, { context = () => ({}), sound = () => {}, initia
         who = currentIdentity();
         if (sameIdentity(before, who)) { stable = true; break; }
       }
-      if (!stable) throw Object.assign(new Error('Account changed'), { userMessage: 'Du skiftede konto undervejs. Prøv igen.' });
+      if (!stable) throw Object.assign(new Error('Account changed'), { userMessage: 'Din konto skiftede undervejs. Prøv igen.' });
       if (who.uid && !headers.get('Authorization')) throw Object.assign(new Error('Missing account token'), { userMessage: 'Log ind igen for at fortsætte.' });
       const result = await usage.request(who, async () => {
-        if (!sameIdentity(who, currentIdentity())) throw Object.assign(new Error('Account changed'), { userMessage: 'Du skiftede konto undervejs. Prøv igen.' });
+        if (!sameIdentity(who, currentIdentity())) throw Object.assign(new Error('Account changed'), { userMessage: 'Din konto skiftede undervejs. Prøv igen.' });
         log.querySelector('.chat-empty')?.remove();
         history.push({ role: 'user', content: text });
         ai = { role: 'assistant', content: '', actions: [], sources: [] }; history.push(ai);
         log.insertAdjacentHTML('beforeend', messageHtml(history[history.length - 2])); userNode = log.lastElementChild;
-        log.insertAdjacentHTML('beforeend', `<div class="chat-msg chat-msg--ai is-live">${avatar()}<div class="chat-col"><span class="chat-status"><i aria-hidden="true"></i><b>Tænker</b></span></div></div>`);
+        log.insertAdjacentHTML('beforeend', `<div class="chat-msg chat-msg--ai is-live">${avatar()}<div class="chat-col"><span class="chat-status"><i aria-hidden="true"></i><b>Tænker …</b></span></div></div>`);
         live = log.lastElementChild; const col = live.querySelector('.chat-col');
-        paint = statusText => { col.innerHTML = (ai.offline ? '<span class="chat-mode">AI er ikke slået til endnu. Sneglen svarer fra regelkortene</span>' : '') + (ai.content ? `<div class="chat-bubble">${md(ai.content)}<i class="chat-caret" aria-hidden="true"></i></div>` : '') + ai.actions.map(actionHtml).join('') + (statusText ? `<span class="chat-status"><i aria-hidden="true"></i><b>${esc(statusText)}</b></span>` : ''); scroll(); };
+        paint = statusText => { col.innerHTML = (ai.offline ? '<span class="chat-mode">Sneglen svarer lige nu fra regelkortene. AI er ikke slået til endnu.</span>' : '') + (ai.content ? `<div class="chat-bubble">${md(ai.content)}<i class="chat-caret" aria-hidden="true"></i></div>` : '') + ai.actions.map(actionHtml).join('') + (statusText ? `<span class="chat-status"><i aria-hidden="true"></i><b>${esc(statusText)}</b></span>` : ''); scroll(); };
         if (input.value.trim() === text) input.value = '';
         grow(); scroll(); sound('select');
         headers.set('content-type', 'application/json');
@@ -163,7 +163,7 @@ export function mountChat(root, { context = () => ({}), sound = () => {}, initia
         }
         throw Object.assign(new Error(String(response.status)), { userMessage: data.error?.message });
       }
-      const reader = response.body.getReader(), dec = new TextDecoder(); let buf = '', status = 'Tænker';
+      const reader = response.body.getReader(), dec = new TextDecoder(); let buf = '', status = 'Tænker …';
       for (;;) {
         const { value, done } = await reader.read(); if (done || dead) break;
         buf += dec.decode(value, { stream: true }); let i;
@@ -181,7 +181,7 @@ export function mountChat(root, { context = () => ({}), sound = () => {}, initia
       }
     } catch (e) {
       if (e.name !== 'AbortError') {
-        const message = e.userMessage || 'Sneglen kunne ikke svare lige nu. Tjek din forbindelse, og prøv igen.';
+        const message = e.userMessage || 'Vi kunne ikke få svar fra Sneglen lige nu. Tjek din forbindelse, og prøv igen.';
         if (ai) ai.error = message; else validation.textContent = message;
       }
     } finally {
@@ -206,7 +206,7 @@ export function mountChat(root, { context = () => ({}), sound = () => {}, initia
       q.statements.forEach((st, k) => { const row = card.querySelector(`[data-st="${k}"]`); const on = row.querySelector('[data-qv].on'); const ok = on && (on.dataset.qv === 'true') === st.correct; if (ok) right++; else wrong.push(st.text);
         row.classList.add(ok ? 'is-right' : 'is-wrong'); row.querySelectorAll('button').forEach(b => b.disabled = true); });
       const res = card.querySelector('.chat-quiz-res'); res.hidden = false; check.hidden = true;
-      res.innerHTML = `<strong>${right === 4 ? 'Alle fire rigtige!' : `${right} af 4 rigtige`}</strong><p>${esc(q.explanation)}</p>${right < 4 ? `<button type="button" class="chat-step chat-step--solo" data-chat-suggest="${esc(`Jeg fik ${right} af 4 rigtige på "${q.prompt}". Forklar kort det, jeg tog fejl i: ${wrong.join(' / ')}`)}">Forklar mine fejl</button>` : ''}`;
+      res.innerHTML = `<strong>${right === 4 ? 'Alle fire rigtige!' : `${right} af 4 rigtige`}</strong><p>${esc(q.explanation)}</p>${right < 4 ? `<button type="button" class="chat-step chat-step--solo" data-chat-suggest="${esc(`Jeg fik ${right} af 4 rigtige på "${q.prompt}". Forklar kort, hvad jeg tog fejl i: ${wrong.join(' / ')}`)}">Forklar mine fejl</button>` : ''}`;
       sound(right === 4 ? 'correct' : 'repair'); scroll();
     }
   };

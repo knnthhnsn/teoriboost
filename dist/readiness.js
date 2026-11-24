@@ -20,7 +20,7 @@ export const LIMITS = Object.freeze({
 
 export const STATUS = Object.freeze({
   klar: { label: 'Klar', rank: 3 },
-  naesten: { label: 'Næsten', rank: 2 },
+  naesten: { label: 'Tæt på', rank: 2 },
   oev: { label: 'Øv mere', rank: 1 },
   lidt: { label: 'Øv lidt mere først', rank: 0 }
 });
@@ -112,11 +112,11 @@ export function sneglenLine(vm) {
   const { level, counts, next, examOk, exams, lastOk } = vm;
   const t = next.title ? `»${next.title}«` : '';
   const good = lastOk && level !== 'klar'; // the exam signal above this card says "Klar" after one good exam; say why this card still waits
-  if (level === 'lidt') return good ? 'Din seneste øveprøve gik godt, men jeg kender dig ikke nok endnu til at sige, om du er klar.' : 'Jeg kender dig ikke nok endnu. Øv nogle flere emner, så kan jeg sige noget, der holder.';
+  if (level === 'lidt') return good ? 'Din seneste øveprøve gik godt. Men jeg har ikke nok svar fra dig endnu til at sige, om du er klar.' : 'Jeg har ikke nok svar fra dig endnu. Øv nogle flere emner, så kan jeg sige noget, der holder.';
   if (level === 'klar') return 'Dine svar og dine prøver peger samme vej. Det er en øvning og ingen garanti, så hold reglerne varme.';
   if (level === 'naesten') {
     if (next.kind === 'topic') return `${good ? 'Din seneste øveprøve gik godt, men du er ikke helt der endnu.' : 'Du er tæt på.'} Tag ${t} en gang til${exams && !examOk && !good ? ', og prøv så en øveprøve' : ''}.`;
-    return exams ? 'Du er tæt på. Lav en øveprøve mere, så ser vi, om det holder.' : 'Du er tæt på. Tag en øveprøve, så ser vi, hvor du står.';
+    return exams ? 'Du er tæt på. Tag en øveprøve mere, så ser vi, om det holder.' : 'Du er tæt på. Tag en øveprøve, så ser vi, hvor du står.';
   }
   const lead = good ? 'Din seneste øveprøve gik godt, men ' : '';
   if (!counts.oev) return `${good ? lead + `der mangler stadig svar i ${counts.lidt} emner.` : `Der mangler stadig svar i ${counts.lidt} emner, så jeg kan ikke sige, at du er klar.`}`;

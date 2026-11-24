@@ -18,13 +18,13 @@ function nodeStatus(node) {
 function recommendationWhy(node) {
   if (node?.status === 'needs-repair') return 'Du havde en fejl her. Tag den igen, så sidder den.';
   if (node?.status === 'needs-practice') return 'Tag reglen en gang til.';
-  if (node?.status === 'review-due') return 'Reglen er klar til gentagelse.';
+  if (node?.status === 'review-due') return 'Reglen er klar til at blive øvet igen.';
   return 'Din næste regel på ruten.';
 }
 function nodeLabel(node) {
   if (!node) return 'Åbn teorien';
   if (node.status === 'needs-repair') return `Ret ${node.title}`;
-  if (node.status === 'needs-practice' || node.status === 'review-due') return `Gentag ${node.title}`;
+  if (node.status === 'needs-practice' || node.status === 'review-due') return `Øv ${node.title} nu`;
   if (node.lessonComplete) return `Øv ${node.title} igen`;
   return `Start ${node.title}`;
 }
@@ -44,12 +44,12 @@ function glyph(node, completed) { if (completed) return icon('check'); if (node.
 function routeNode(node, active, index, humor) {
   const completed = node.lessonComplete; const state = node.status || (completed ? 'lesson-complete' : 'ready'); const label = `${escape(node.title)} — ${nodeStatus(node)}`;
   const coach = active ? `<aside class="journey-coach" aria-label="Din næste anbefaling"><span>${escape(recommendationWhy(node))}</span></aside>` : '';
-  const action = state === 'needs-repair' ? 'Ret reglen' : ['needs-practice','review-due'].includes(state) || completed ? 'Gentag reglen' : 'Start lektionen';
+  const action = state === 'needs-repair' ? 'Ret reglen' : ['needs-practice','review-due'].includes(state) || completed ? 'Øv reglen igen' : 'Start lektionen';
   return `<div class="journey-step journey-step--${escape(state)} ${active ? 'journey-step--active' : ''}" role="listitem"><a class="journey-node" href="#journey:${escape(node.sectionId)}" aria-label="${label}"${active ? ' aria-current="step"' : ''} data-journey-sound="node"><span class="journey-node__circle">${glyph(node, completed)}</span><span class="journey-node__title"><strong>${escape(node.title)}</strong><small>${escape(active ? `Næste: ${action}` : nodeStatus(node))}</small></span></a>${coach}</div>`;
 }
 function path(units, activeUnitId, activeNodeId, humor) {
-  const unit = units.find(item => item.id === activeUnitId) || units[0]; if (!unit) return '<p class="journey-empty">Ruten er ikke klar endnu.</p>';
-  return `<section class="journey-path" aria-labelledby="journey-path-title"><header class="journey-path-head"><div><span class="journey-kicker">EMNE</span><h2 id="journey-path-title">${escape(unit.title)}</h2><p>${escape(unit.tagline || 'En kort strækning ad gangen.')}</p></div><span class="journey-path-count">${unit.nodes.filter(node => node.lessonComplete).length}/${unit.nodes.length} lektioner gennemført</span></header><div class="journey-road" role="list">${unit.nodes.map((node, index) => routeNode(node, node.id === activeNodeId, index, humor)).join('')}</div></section>`;
+  const unit = units.find(item => item.id === activeUnitId) || units[0]; if (!unit) return '<p class="journey-empty">Ruten er ikke klar endnu. Åbn teorien imens.</p>';
+  return `<section class="journey-path" aria-labelledby="journey-path-title"><header class="journey-path-head"><div><span class="journey-kicker">EMNE</span><h2 id="journey-path-title">${escape(unit.title)}</h2><p>${escape(unit.tagline || 'En kort strækning ad gangen.')}</p></div><span class="journey-path-count">${unit.nodes.filter(node => node.lessonComplete).length}/${unit.nodes.length} lektioner klaret</span></header><div class="journey-road" role="list">${unit.nodes.map((node, index) => routeNode(node, node.id === activeNodeId, index, humor)).join('')}</div></section>`;
 }
 // Redesign: one greeting, honest progress (guided lessons done, not a pass prediction) and one next action.
 function homeHello({ units, daily, next }) {
@@ -82,5 +82,5 @@ export function renderJourneyHome({ units = [], daily = {}, recommendations = {}
 }
 export function renderJourneyProgress({ units = [], daily = {}, recommendations = {}, humor = true, activeUnitId } = {}) {
   const completed = units.flatMap(unit => unit.nodes || []).filter(node => node.lessonComplete).length; const total = units.flatMap(unit => unit.nodes || []).length;
-  return `<div class="journey-shell journey-progress"><header class="journey-progress-head"><div><span class="journey-kicker">DIN FREMDRIFT</span><h1>${escape(String(completed))}<small>/${escape(String(total))}</small> lektioner gennemført.</h1><p>Gentagelser over tid gør ruten mere din.</p></div>${humor ? renderArt('sneglen', { variant: 'garage', humorOnly: true }) : ''}</header>${renderJourneyHome({ units, daily, recommendations, humor: false, activeUnitId })}</div>`;
+  return `<div class="journey-shell journey-progress"><header class="journey-progress-head"><div><span class="journey-kicker">DIN FREMDRIFT</span><h1>${escape(String(completed))}<small>/${escape(String(total))}</small> lektioner klaret.</h1><p>Gentagelser over tid gør ruten mere din.</p></div>${humor ? renderArt('sneglen', { variant: 'garage', humorOnly: true }) : ''}</header>${renderJourneyHome({ units, daily, recommendations, humor: false, activeUnitId })}</div>`;
 }

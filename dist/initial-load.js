@@ -34,13 +34,13 @@ export function createLazyNarrator({createNarrator, loadPack = () => import('./v
       if (narrator) return narrator.read(parts, info);
       const current = ++generation;
       if (!request) {
-        options.notify?.('Henter oplæsning…');
+        options.notify?.('Henter oplæsningen …');
         request = loadPack().catch(() => { request = null; return null; });
       }
       const result = await request;
       if (disposed || current !== generation) return false;
       if (!result) {
-        options.notify?.('Vi kunne ikke hente oplæsningen. Teksten står stadig på skærmen.');
+        options.notify?.('Vi kunne ikke hente oplæsningen lige nu. Teksten står stadig på skærmen.');
         return false;
       }
       narrator ||= createNarrator({...options, pack: result.VOICE_PACK});

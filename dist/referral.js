@@ -138,7 +138,7 @@ export function createReferral({ account, config, questions = [], firstSectionId
         '<div class="tb-referral-actions"><button type="button" data-ref="share">Del kode</button><button type="button" data-ref="copy">Kopiér kode</button></div>' +
         '<p class="tb-referral-progress">' + esc(referralProgress(data.stats)) + '</p>' +
         '<details><summary>Skift kode</summary><p>Den gamle kode virker ikke for nye invitationer bagefter. Allerede gemte henvisninger bevares.</p><button type="button" data-ref="regenerate">Opret ny kode</button></details>' :
-        signedIn && enabled() ? '<p>Henter din personlige kode <span class="tb-stripes" aria-hidden="true"></span></p>' : '') +
+        signedIn && enabled() ? '<p>Henter din personlige kode … <span class="tb-stripes" aria-hidden="true"></span></p>' : '') +
       (!signedIn && enabled() ? '<button type="button" data-ref="login">Log ind</button>' : '') +
       (enabled() && !data?.binding?.bound ? '<form data-referral-form><label>Har du fået en vens kode? Knyt den til din konto senest 72 timer efter oprettelsen.<input name="referralCode" placeholder="TEO-ABCD2345" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" value="' + esc(invite) + '" required></label><button type="submit">Gem vennens kode</button></form>' : '') +
       (data?.binding?.bound ? '<p>Din vens kode er knyttet til kontoen.' + (data.binding.qualified ? ' Velkomstbelønningen er registreret.' : ' Gennemfør ' + esc(firstSectionTitle) + ' for at kvalificere henvisningen.') + '</p>' + (!data.binding.qualified ? '<button type="button" data-ref="lesson">Åbn ' + esc(firstSectionTitle) + '</button>' : '') : '') +

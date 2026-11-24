@@ -222,7 +222,7 @@ export function createJourneyPlayer({
     const showGag = state()?.settings?.humor === true && questionGagFits(question, feedback.correct);
     const wrong = question.statements.map((statement, index) => ({ statement, index })).filter(({ statement, index }) => feedback.answers[index] !== statement.correct);
     const answered = feedback.answers.map(value => value ? 1 : 0).join('');
-    const title = !repair ? 'Godt set!' : wrong.length === 1 ? 'Næsten. Se reglen igen.' : 'Ikke helt endnu';
+    const title = !repair ? 'Godt set!' : wrong.length === 1 ? 'Tæt på. Se reglen igen.' : 'Ikke helt endnu';
     const lead = !repair ? 'Alle fire udsagn er vurderet korrekt.' : wrong.length === 1 ? 'Ét udsagn skal rettes. Reglen står herunder.' : `${wrong.length} udsagn skal rettes. Reglen står herunder.`;
     return `<aside class="journey-feedback-tray ${repair ? 'repair' : 'correct'}" role="status">
       <div class="jp-feedback-content">${showGag ? `<div class="feedback-cast">${renderCast(question.speaker, { size: 'sm', mood: repair ? 'wrong' : 'correct' })}</div>` : ''}
@@ -263,7 +263,7 @@ export function createJourneyPlayer({
   function responseDock(stage, currentStep) {
     if (currentStep.revealed) {
       if (stage === 'recall') {
-        return `<div class="journey-control-dock journey-self-check"><p>Vurdér selv. Ingen bedømmer dine ord automatisk.</p><button class="btn btn-secondary" type="button" data-journey-self-check="needs-review">Øv den igen senere</button><button class="btn btn-primary" type="button" data-journey-self-check="remembered">Jeg havde det centrale med</button></div>`;
+        return `<div class="journey-control-dock journey-self-check"><p>Vurdér selv. Ingen bedømmer dine ord automatisk.</p><button class="btn btn-secondary" type="button" data-journey-self-check="needs-review">Øv den igen senere</button><button class="btn btn-primary" type="button" data-journey-self-check="remembered">Jeg havde det vigtigste med</button></div>`;
       }
       return `<div class="journey-control-dock"><p>Sammenlign handling og begrundelse.</p><button class="btn btn-primary" type="button" data-journey-transfer-next>Forklar med egne ord</button></div>`;
     }
@@ -333,7 +333,7 @@ export function createJourneyPlayer({
       <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den, og det er sådan, det sætter sig.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>
       <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${ico('bolt')} ${earns ? `+${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '0'}</strong>${earns ? '' : '<em>Allerede tjent i dag</em>'}</div><div><small>RIGTIG I FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
       ${sequenceFor(section.id) ? `<a class="jp-order" href="#order:${esc(sequenceFor(section.id).id)}">${ico('list')}<span><strong>Sæt det i rækkefølge</strong><small>${esc(sequenceFor(section.id).title)} <span class="tb-stripes" aria-hidden="true"></span> ${sequenceFor(section.id).steps.length} trin</small></span></a>` : ''}
-      <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">${ico('target')} ${daily.goalMet ? `Dagens mål nået. +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')} Boosters` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? `. ${streak}` : ''}</div>
+      <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">${ico('target')} ${daily.goalMet ? `Dagens mål nået! +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')} Boosters` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? `. ${streak}` : ''}</div>
       ${renderLessonSummary({ session, section })}
       ${lesson.practicalNote ? `<details class="journey-practical-note"><summary>Prøv det i bilen med din kørelærer</summary><p>${esc(lesson.practicalNote)}</p></details>` : ''}
       <div class="journey-control-dock">${completionActions}</div>

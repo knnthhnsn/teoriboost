@@ -8,7 +8,7 @@ import {garageCaseVoiceParts,garageExplainVoiceParts,garageFeedbackVoiceParts,ga
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const source = SOURCES.find(item => item.id === 'plan-b-1-1');
 const zones = [
-  { id: 'cockpit', title: 'Fra førersædet', caption: 'Betjening, instrumenter og hjælpere', number: '1' },
+  { id: 'cockpit', title: 'Fra førersædet', caption: 'Knapper, målere og hjælpere', number: '1' },
   { id: 'powertrain', title: 'Under overfladen', caption: 'Motor, kobling, gear og energi', number: '2' },
   { id: 'exterior', title: 'Rundt om bilen', caption: 'Styring, bremser, lys og udstyr', number: '3' },
   { id: 'documents', title: 'Ansvar og papirer', caption: 'Hvem har ansvaret? Hvad står i attesten?', number: '4' }
@@ -96,7 +96,7 @@ function pinSet(view, active) {
 }
 
 function blueprint() {
-  return `<svg class="gx-bp" viewBox="70 30 500 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bil set oppefra med motor, gear og drivlinje synlig under karrosseriet. Forenden er øverst.">
+  return `<svg class="gx-bp" viewBox="70 30 500 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bilen set oppefra med motor, gear og drivaksel synlig. Forenden er øverst.">
     <defs><pattern id="gx-grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#3A434C" stroke-width=".7"/></pattern></defs>
     <rect x="70" y="30" width="500" height="400" fill="url(#gx-grid)"/>
     <path d="M167 44v380m260-380v380M157 56h20m-20 354h20m240-354h20m-20 354h20" fill="none" stroke="#5F656D" stroke-width="1.2" stroke-dasharray="4 7"/>
@@ -118,7 +118,7 @@ function blueprint() {
 function stage(active, { interactive = true } = {}) {
   return `<div class="gx-stage" data-zone="${esc(active)}" style="--reveal:0%">
     <div class="gx-floor" aria-hidden="true"></div>
-    <div class="gx-layer gx-layer-out"><img class="gx-car" src="assets/garage/nordic.webp" width="1280" height="853" alt="En moderne sedan set på skrå. Tallene 1 til 4 viser områderne i bilen." decoding="async"><svg class="gx-paper gx-part gx-part-documents" viewBox="0 0 104 129" aria-hidden="true"><rect width="104" height="129" rx="6"/><rect x="12" y="14" width="29" height="18" class="gx-detail-fill"/><path d="M13 47h77m-77 15h64m-64 15h77m-77 15h48m-48 16h77" class="gx-detail"/></svg><div class="gx-focus" aria-hidden="true"></div></div>
+    <div class="gx-layer gx-layer-out"><img class="gx-car" src="assets/garage/nordic.webp" width="1280" height="853" alt="Bilen set skråt udefra. Tallene 1 til 4 viser områderne i bilen." decoding="async"><svg class="gx-paper gx-part gx-part-documents" viewBox="0 0 104 129" aria-hidden="true"><rect width="104" height="129" rx="6"/><rect x="12" y="14" width="29" height="18" class="gx-detail-fill"/><path d="M13 47h77m-77 15h64m-64 15h77m-77 15h48m-48 16h77" class="gx-detail"/></svg><div class="gx-focus" aria-hidden="true"></div></div>
     ${interactive ? `<div class="gx-layer gx-layer-in">${blueprint()}</div><div class="gx-wipe" aria-hidden="true"></div>` : ''}
     ${pinSet('out', active)}${interactive ? pinSet('bp', active) : ''}
   </div>`;
@@ -126,12 +126,12 @@ function stage(active, { interactive = true } = {}) {
 
 function xrayControl() {
   return `<div class="gx-xray"><div class="gx-seg" role="group" aria-label="Vis bilen udefra eller indefra"><button type="button" class="gx-seg-btn" data-gx-view="0" aria-pressed="true">Udefra</button><button type="button" class="gx-seg-btn" data-gx-view="100" aria-pressed="false">Indeni</button></div>
-    <label class="gx-slider"><span class="sr-only">Røntgen: træk for at se ind under karrosseriet</span><input id="garage-xray" type="range" min="0" max="100" value="0" aria-valuetext="Bilen set udefra"></label></div>`;
+    <label class="gx-slider"><span class="sr-only">Træk for at se ind under karrosseriet</span><input id="garage-xray" type="range" min="0" max="100" value="0" aria-valuetext="Bilen set udefra"></label></div>`;
 }
 
 function topicRow(topic) {
   const isDone = done.has(topic.id);
-  return `<a href="#garage:${esc(topic.id)}" class="gx-row ${isDone ? 'is-done' : ''}"><span class="gx-row-mark" aria-hidden="true">${isDone ? ico('check') : esc(topic.pointRef)}</span><span class="gx-row-text"><strong>${esc(topic.title)}</strong><small>${topic.objectives.length} delmål${topic.objectives.some(physical) ? ' · opgave i bilen' : ''}${isDone ? ' · gennemgået' : ''}</small></span><span class="gx-go" aria-hidden="true">${chev('right')}</span></a>`;
+  return `<a href="#garage:${esc(topic.id)}" class="gx-row ${isDone ? 'is-done' : ''}"><span class="gx-row-mark" aria-hidden="true">${isDone ? ico('check') : esc(topic.pointRef)}</span><span class="gx-row-text"><strong>${esc(topic.title)}</strong><small>${topic.objectives.length} delmål${topic.objectives.some(physical) ? ' · øves i bilen' : ''}${isDone ? ' · gennemgået' : ''}</small></span><span class="gx-go" aria-hidden="true">${chev('right')}</span></a>`;
 }
 
 function panel(zoneId) {
@@ -151,7 +151,7 @@ function zoneTabs(active) {
 
 function topicCard(topic) {
   const isDone = done.has(topic.id);
-  return `<a href="#garage:${esc(topic.id)}" class="gx-card ${isDone ? 'is-done' : ''}"><span class="gx-card-ref">${esc(topic.pointRef)}</span><strong>${esc(topic.title)}</strong><small>${topic.objectives.length} delmål${topic.objectives.some(physical) ? ' · opgave i bilen' : ''}</small><span class="gx-card-state">${isDone ? `${ico('check')}Gennemgået` : 'Ikke startet'}</span></a>`;
+  return `<a href="#garage:${esc(topic.id)}" class="gx-card ${isDone ? 'is-done' : ''}"><span class="gx-card-ref">${esc(topic.pointRef)}</span><strong>${esc(topic.title)}</strong><small>${topic.objectives.length} delmål${topic.objectives.some(physical) ? ' · øves i bilen' : ''}</small><span class="gx-card-state">${isDone ? `${ico('check')}Gennemgået` : 'Ikke startet'}</span></a>`;
 }
 
 function topicLinks(topics) {
@@ -167,20 +167,20 @@ function overview(zoneId = '') {
   const total = GARAGE.topics.length, finished = doneIn(GARAGE.topics), next = nextTopic();
   const score = `<div class="gx-score" role="img" aria-label="${finished} af ${total} systemer gennemgået"><strong>${finished}</strong><span>af ${total}<br>gennemgået</span></div>`;
   return `<section class="garage-page gx-page" data-active="${active}">
-    ${head('#theory', 'Tilbage til teorien', 'BILEN FØR TUREN / VÆRKSTED 1', 'GARAGEN', score)}
+    ${head('#theory', 'Tilbage til teorien', 'BILEN FØR TUREN', 'GARAGEN', score)}
     <div class="gx-hero">
       <div class="gx-hero-left">${stage(active)}${xrayControl()}${zoneTabs(active)}</div>
       <div class="gx-panel" id="gx-panel" aria-live="polite">${panel(active)}</div>
     </div>
     <div class="gx-next ${next ? '' : 'is-all'}">
-      <div class="gx-next-text"><span class="gx-eyebrow">${next ? 'DIT NÆSTE SYSTEM' : 'ALT GENNEMGÅET'}</span><h2>${next ? esc(next.title) : 'Tag kontrollen med ud i bilen'}</h2><p>${next ? esc(next.lead) : 'Du har gennemgået hele bilen. Næste skridt er biltjeklisten sammen med kørelæreren.'}</p>
+      <div class="gx-next-text"><span class="gx-eyebrow">${next ? 'DIT NÆSTE SYSTEM' : 'ALT GENNEMGÅET'}</span><h2>${next ? esc(next.title) : 'Du er klar til biltjeklisten'}</h2><p>${next ? esc(next.lead) : 'Hele bilen er gennemgået. Næste skridt er biltjeklisten sammen med kørelæreren.'}</p>
         <a class="gx-btn" href="${next ? `#garage:${esc(next.id)}` : '#garage:checklist'}">${next ? 'Start systemet' : 'Åbn biltjeklisten'}<span class="gx-go" aria-hidden="true">${chev('right')}</span></a></div>
       <img class="gx-next-daek" src="assets/cast/daek.webp" alt="" aria-hidden="true" width="512" height="512" loading="lazy" decoding="async">
     </div>
     <div class="gx-list-head"><h2>Alle ${total} systemer</h2></div>
     <label class="gx-search"><span class="sr-only">Søg i garagens emner og delmål</span><input id="garage-search" type="search" placeholder="Søg fx kobling, dæk eller ratslør" autocomplete="off"></label>
     <div id="garage-topic-results" data-zone="">${topicLinks(GARAGE.topics)}</div>
-    <a class="gx-check" href="#garage:checklist"><span class="gx-check-ico" aria-hidden="true">${ico('clipboard')}</span><span><strong>Kontrollen skal med ud i bilen</strong><small>Forbered udpegning, aflæsning og kontrol her. Selve kontrollen laver du med kørelæreren. Åbn den samlede biltjekliste.</small></span><span class="gx-go" aria-hidden="true">${chev('right')}</span></a>
+    <a class="gx-check" href="#garage:checklist"><span class="gx-check-ico" aria-hidden="true">${ico('clipboard')}</span><span><strong>Kontrollen skal med ud i bilen</strong><small>Øv udpegning, aflæsning og kontrol her. Den rigtige kontrol laver du med kørelæreren.</small></span><span class="gx-go" aria-hidden="true">${chev('right')}</span></a>
   </section>`;
 }
 
@@ -199,7 +199,7 @@ function caseMarkup(topic) {
   const answered = selected !== undefined;
   return `<section class="garage-case" aria-labelledby="garage-case-title"><span class="garage-section-label">1 / TAG STILLING FØRST</span><h2 id="garage-case-title">Hvilket svar passer?</h2><p>${esc(topic.case.context)}</p><button class="voice-read" type="button" data-garage-voice="case" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til situationen og mulighederne</button>
     <div class="garage-case-options">${optionOrder(topic).map((option, index) => `<button type="button" class="garage-option ${answered && option.correct ? 'correct' : ''} ${answered && selected === option.id && !option.correct ? 'incorrect' : ''}" data-garage-answer="${esc(option.id)}" data-garage-topic="${esc(topic.id)}" ${answered ? 'disabled' : ''}><span>${answered && option.correct ? ico('check') : String(index + 1)}</span><strong>${esc(option.text)}</strong>${answered ? `<small>${esc(option.why)}</small>` : ''}</button>`).join('')}</div>
-    <div id="garage-case-feedback" role="status" aria-live="polite">${answered ? `<div class="garage-case-result"><strong>${gradeGarageChoice(topic, selected).correct ? 'Godt valgt. Det passer til situationen.' : 'Ikke helt. Se, hvad der ændrer svaret.'}</strong><p>Læs forklaringen, og prøv at huske den bagefter. Det er en øvelse i viden; den godkender ikke en fysisk kontrol.</p>${references([...new Set(topic.case.options.flatMap(option => option.refs))])}<button class="voice-read" type="button" data-garage-voice="feedback" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til vurderingerne</button></div>${hooks[topic.id] ? `<aside class="garage-joke art-scene">${renderArt('daek',{variant:'reaction',humorOnly:true})}<div><span class="mono">DÆK / EN HUSKEKROG</span><p>${esc(hooks[topic.id])}</p><button class="voice-read" type="button" data-garage-voice="hook" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til huskekrogen</button></div></aside>` : ''}<button class="btn btn-secondary garage-retry" data-garage-retry="${esc(topic.id)}">Prøv igen</button>` : '<p class="garage-case-note">Et svar åbner forklaringen. Du kan også vælge at læse den først.</p>'}</div>
+    <div id="garage-case-feedback" role="status" aria-live="polite">${answered ? `<div class="garage-case-result"><strong>${gradeGarageChoice(topic, selected).correct ? 'Godt valgt! Det passer til situationen.' : 'Ikke helt. Læs, hvad der ændrer svaret.'}</strong><p>Læs forklaringen, og prøv at huske den bagefter. Det her øver viden, ikke en fysisk kontrol.</p>${references([...new Set(topic.case.options.flatMap(option => option.refs))])}<button class="voice-read" type="button" data-garage-voice="feedback" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til vurderingerne</button></div>${hooks[topic.id] ? `<aside class="garage-joke art-scene">${renderArt('daek',{variant:'reaction',humorOnly:true})}<div><span class="mono">DÆK / EN HUSKEKROG</span><p>${esc(hooks[topic.id])}</p><button class="voice-read" type="button" data-garage-voice="hook" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til huskekrogen</button></div></aside>` : ''}<button class="btn btn-secondary garage-retry" data-garage-retry="${esc(topic.id)}">Prøv igen</button>` : '<p class="garage-case-note">Svar, så åbner forklaringen. Du kan også læse den først.</p>'}</div>
   </section>`;
 }
 
@@ -210,10 +210,10 @@ function topicView(topic) {
   return `<article class="garage-page gx-page garage-detail">
     ${head('#garage', 'Tilbage til garagen', `GARAGEN / PLANPUNKT ${esc(topic.pointRef)}`, esc(topic.title))}${steps(topic)}
     <div class="garage-detail-grid"><div class="garage-detail-main"><div id="garage-current-case">${caseMarkup(topic)}</div>
-      <details class="garage-explanation" id="garage-explanation" ${answers.has(topic.id) ? 'open' : ''}><summary><span class="garage-section-label">2 / FORSTÅ SYSTEMET</span><strong>Se forklaringen</strong><span aria-hidden="true">＋</span></summary><div class="garage-explanation-body"><p class="garage-topic-lead">${esc(topic.lead)}</p><button class="voice-read" type="button" data-garage-voice="explanation" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til forklaringen</button>${topic.cards.map(card => `<section class="garage-knowledge-card"><h3>${esc(card.title)}</h3><p>${esc(card.body)}</p>${references(card.refs)}</section>`).join('')}<section class="garage-recall"><span class="garage-section-label">3 / HVAD HUSKER DU?</span><h3>${esc(topic.recall.prompt)}</h3><button class="voice-read" type="button" data-garage-voice="recall" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til spørgsmålet</button><details><summary>Se svaret, når du har prøvet</summary><p>${esc(topic.recall.answer)}</p>${references(topic.recall.refs)}<button class="voice-read" type="button" data-garage-voice="recall-answer" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til svaret</button></details><p class="garage-case-note">Sig det med dine egne ord. Svaret bliver ikke vurderet for dig.</p></section></div></details>
+      <details class="garage-explanation" id="garage-explanation" ${answers.has(topic.id) ? 'open' : ''}><summary><span class="garage-section-label">2 / FORSTÅ SYSTEMET</span><strong>Se forklaringen</strong><span aria-hidden="true">＋</span></summary><div class="garage-explanation-body"><p class="garage-topic-lead">${esc(topic.lead)}</p><button class="voice-read" type="button" data-garage-voice="explanation" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til forklaringen</button>${topic.cards.map(card => `<section class="garage-knowledge-card"><h3>${esc(card.title)}</h3><p>${esc(card.body)}</p>${references(card.refs)}</section>`).join('')}<section class="garage-recall"><span class="garage-section-label">3 / HVAD HUSKER DU?</span><h3>${esc(topic.recall.prompt)}</h3><button class="voice-read" type="button" data-garage-voice="recall" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til spørgsmålet</button><details><summary>Se svaret, når du har prøvet</summary><p>${esc(topic.recall.answer)}</p>${references(topic.recall.refs)}<button class="voice-read" type="button" data-garage-voice="recall-answer" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til svaret</button></details><p class="garage-case-note">Sig det med dine egne ord. Appen vurderer ikke svaret.</p></section></div></details>
       <details class="garage-objectives"><summary>Se alle ${topic.objectives.length} delmål og deres krav</summary><ul>${topic.objectives.map(objective => `<li><div><span class="mono">${esc(objective.ref)}</span><span class="garage-requirement ${physical(objective) ? 'physical' : ''}">${esc(objective.requirement)}${physical(objective) ? ' <span class="tb-stripes" aria-hidden="true"></span> i bilen' : ''}</span></div><p>${esc(objective.summary)}</p></li>`).join('')}</ul>${references([topic.pointRef])}</details>
     </div><aside class="garage-detail-side">${miniCar(topic)}
-      <section class="garage-practical"><span class="garage-section-label">TAG DET MED TIL BILEN</span><h2>${needsCar ? 'Skal vises i bilen' : 'Tag forståelsen med dig'}</h2><p class="garage-practical-intro">${needsCar ? 'Appen gør dig klar. Udpegning, aflæsning og kontrol øver du med kørelæreren i undervisningsbilen.' : 'Prøv forståelsen af sammen med kørelæreren. Placering og betjening afhænger af den bil, du kører i.'}</p>${topic.practical.length ? `<ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol>` : ''}<button class="voice-read" type="button" data-garage-voice="practical" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til opgaven i bilen</button><a class="text-link" href="#garage:checklist">Se den samlede biltjekliste</a></section>
+      <section class="garage-practical"><span class="garage-section-label">TAG DET MED I BILEN</span><h2>${needsCar ? 'Skal vises i bilen' : 'Tag forståelsen med dig'}</h2><p class="garage-practical-intro">${needsCar ? 'Appen gør dig klar. Øvelsen i bilen laver du med kørelæreren.' : 'Øv det sammen med kørelæreren. Placering og betjening afhænger af bilen.'}</p>${topic.practical.length ? `<ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol>` : ''}<button class="voice-read" type="button" data-garage-voice="practical" data-garage-topic="${esc(topic.id)}" aria-pressed="false">Lyt til opgaven i bilen</button><a class="text-link" href="#garage:checklist">Se den samlede biltjekliste</a></section>
     </aside></div>
     <div class="garage-next"><a class="btn btn-primary" href="#garage:${esc(next.id)}">Næste system: ${esc(next.title)}</a><a class="text-link" href="#garage">Tilbage til garagen</a></div>
   </article>`;
@@ -221,14 +221,14 @@ function topicView(topic) {
 
 function checklistView() {
   const topics = GARAGE.topics.filter(topic => topic.practical.length && topic.objectives.some(physical));
-  return `<article class="garage-page gx-page garage-checklist">${head('#garage', 'Tilbage til garagen', 'GARAGEN / TIL NÆSTE KØRETIME', 'Tag kontrollen<br>med til bilen')}<p class="garage-topic-lead">En fælles huskeliste til dig og kørelæreren. Lav kontrollen i undervisningsbilen, som bilens egne anvisninger beskriver. Listen registrerer eller godkender ingen praktisk færdighed.</p><div class="garage-checklist-list">${topics.map(topic => `<section><div class="garage-list-head"><h2>${esc(topic.title)}</h2><a href="#garage:${esc(topic.id)}" class="text-link">Forstå systemet</a></div><ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol></section>`).join('')}</div><a href="#garage" class="btn btn-secondary">Til garagen</a></article>`;
+  return `<article class="garage-page gx-page garage-checklist">${head('#garage', 'Tilbage til garagen', 'GARAGEN / TIL NÆSTE KØRETIME', 'Kontrollen<br>med i bilen')}<p class="garage-topic-lead">En huskeliste til dig og kørelæreren. Lav kontrollen i bilen, som bilens egne anvisninger beskriver. Listen registrerer eller godkender ingen praktisk færdighed.</p><div class="garage-checklist-list">${topics.map(topic => `<section><div class="garage-list-head"><h2>${esc(topic.title)}</h2><a href="#garage:${esc(topic.id)}" class="text-link">Forstå systemet</a></div><ol>${topic.practical.map(step => `<li><strong>${esc(step.title)}</strong><p>${esc(step.action)}</p>${references(step.refs)}</li>`).join('')}</ol></section>`).join('')}</div><a href="#garage" class="btn btn-secondary">Til garagen</a></article>`;
 }
 
 export function renderGarage(id = '', zone = '') {
   if (id === 'checklist') return checklistView();
   if (id) {
     const topic = topicMap.get(id);
-    return topic ? topicView(topic) : '<div class="empty-state"><h1>Det system findes ikke</h1><a href="#garage" class="btn btn-primary">Åbn garagen</a></div>';
+    return topic ? topicView(topic) : '<div class="empty-state"><h1>Vi kunne ikke finde systemet lige nu.</h1><a href="#garage" class="btn btn-primary">Åbn garagen</a></div>';
   }
   return overview(zone);
 }
@@ -297,7 +297,7 @@ export function mountGarage(root, { onAnswer = () => {}, onNarrate = () => {} } 
     const term = event.target.value.trim().toLocaleLowerCase('da-DK');
     const output = root.querySelector('#garage-topic-results');
     const matches = searchGarage(term, output.dataset.zone);
-    output.innerHTML = matches.length ? topicLinks(matches) : '<p class="garage-empty" role="status">Ingen emner passer til din søgning. Prøv et andet ord. Prøv et andet ord.</p>';
+    output.innerHTML = matches.length ? topicLinks(matches) : '<p class="garage-empty" role="status">Ingen emner passer til din søgning. Prøv et andet ord.</p>';
   });
   root.addEventListener('click', event => {
     const read = event.target.closest('[data-garage-voice]');

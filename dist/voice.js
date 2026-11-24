@@ -476,7 +476,7 @@ export function createNarrator({ host, audio, pack, notify = noop } = {}) {
     if (state.phase === 'playing') return `Afspiller · ${state.index + 1} af ${state.total}`;
     if (state.phase === 'paused') return `På pause · ${state.index + 1} af ${state.total}`;
     if (state.phase === 'complete') return 'Oplæsning færdig';
-    if (state.phase === 'error') return 'Oplæsning ikke tilgængelig';
+    if (state.phase === 'error') return 'Oplæsning virker ikke her';
     if (state.phase === 'stopped') return 'Oplæsning stoppet';
     return 'Klar';
   };
@@ -532,7 +532,7 @@ export function createNarrator({ host, audio, pack, notify = noop } = {}) {
       engine.stop();
       restart.disabled = true;
       triggers.release();
-      status.textContent = result.reason === 'empty' ? 'Ingen tekst at læse op' : 'Oplæsning ikke tilgængelig';
+      status.textContent = result.reason === 'empty' ? 'Ingen tekst at læse op' : 'Oplæsning virker ikke her';
       if (result.reason !== 'empty') safeNotify('Vi kan ikke læse denne tekst op endnu. Teksten står stadig på skærmen.');
       return false;
     }

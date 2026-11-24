@@ -181,7 +181,7 @@ export function mountSigns(root, { sound = () => {} } = {}) {
     if (index >= questions.length) return finish();
     const q = questions[index];
     progress();
-    const media = q.media ? `<div class="sk-q-art">${img(q.media, 'Færdselstavle')}</div>` : '';
+    const media = q.media ? `<div class="sk-q-art">${img(q.media, 'Tavlen, du skal bestemme')}</div>` : '';
     stage.innerHTML = `<h2 class="sk-q" tabindex="-1">${esc(q.prompt)}</h2>${media}
       <div class="sk-opts${q.options.some(o => o.code) ? ' is-grid' : ''}" role="group" aria-label="Svarmuligheder">${q.options.map(optionHtml).join('')}</div>
       <div class="sk-fb" role="status" hidden></div>`;
@@ -220,7 +220,7 @@ export function mountSigns(root, { sound = () => {} } = {}) {
     saveSigns(data);
     sound('complete');
     const seen = new Set(), misses = wrongNow.filter(q => q.code && !seen.has(q.code) && seen.add(q.code));
-    const list = misses.length ? `<h2 class="sk-miss-title">Det skal du lige øve igen</h2><ul class="sk-miss">${misses.slice(0, 6).map(q => `<li>${img(q.code, '', 'sk-miss-img')}<span><b>${esc(q.code)}</b> ${esc(SIGN_BY_CODE[q.code].name)}</span></li>`).join('')}</ul>` : '';
+    const list = misses.length ? `<h2 class="sk-miss-title">Øv de her igen</h2><ul class="sk-miss">${misses.slice(0, 6).map(q => `<li>${img(q.code, '', 'sk-miss-img')}<span><b>${esc(q.code)}</b> ${esc(SIGN_BY_CODE[q.code].name)}</span></li>`).join('')}</ul>` : '';
     const back = id === 'bland' ? '#skilte' : `#skilte:${id}`;
     stage.innerHTML = `<div class="sk-result"><p class="sk-score"><span>${score}</span> af ${total} rigtige</p>
       <p class="sk-lead">${score === total ? 'Alle rigtige. Prøv en anden gruppe, eller bland dem.' : score >= total * 0.75 ? 'Rigtig godt. Tag de sidste fejl en gang til.' : 'Gennemgå tavlerne, og prøv igen.'}</p>${list}

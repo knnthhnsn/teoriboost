@@ -14,12 +14,12 @@ const loadFirebase = () => Promise.all(['app', 'auth', 'firestore'].map(m => imp
 
 const MESSAGES = {
   'auth/popup-blocked': 'Din browser blokerede login-vinduet. Tillad pop op-vinduer for TeoriBoost, og prøv igen.',
-  'auth/network-request-failed': 'Ingen forbindelse. Prøv igen, når du er online.',
+  'auth/network-request-failed': 'Vi kunne ikke logge ind lige nu. Tjek din forbindelse, og prøv igen.',
   'auth/invalid-email': 'Tjek e-mailadressen. Den ser ikke rigtig ud.',
   'auth/missing-email': 'Skriv din e-mailadresse.',
   'auth/invalid-action-code': 'Login-linket er udløbet eller allerede brugt. Bed om et nyt.',
   'auth/expired-action-code': 'Login-linket er udløbet. Bed om et nyt.',
-  'auth/requires-recent-login': 'Af sikkerhedshensyn skal du logge ud og ind igen, før du sletter kontoen.',
+  'auth/requires-recent-login': 'Log ud og ind igen, før du sletter kontoen. Det er for din sikkerheds skyld.',
   'auth/quota-exceeded': 'Vi kan ikke sende flere login-links i dag. Brug Google, eller prøv igen i morgen.',
   'auth/too-many-requests': 'For mange forsøg lige nu. Vent lidt, og prøv igen.',
   'auth/unauthorized-domain': 'Login er ikke slået til for denne adresse endnu.',

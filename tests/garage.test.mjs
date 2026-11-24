@@ -27,7 +27,7 @@ test('Every original garage decision has one correct option and rejects unknown 
 });
 
 test('Garage route errors are explicit, and physical checklist cannot award or certify success', () => {
-  assert.match(renderGarage('nonexistent-topic'), /Det system findes ikke/);
+  assert.match(renderGarage('nonexistent-topic'), /Vi kunne ikke finde systemet lige nu\./);
   const html = renderGarage('checklist');
   assert.match(html, /registrerer eller godkender ingen praktisk færdighed/);
   assert.doesNotMatch(html, /type="checkbox"|data-action="check"|[0-9]+ XP/);

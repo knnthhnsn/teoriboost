@@ -189,7 +189,7 @@ function createFallback(canvas, options) {
     if (!oldPosition || oldPosition === 'static') parent.style.position = 'relative';
     svg = doc.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('role', 'img');
-    svg.setAttribute('aria-label', 'Trafikscene: bil drejer til højre over en cykelsti');
+    svg.setAttribute('aria-label', 'Trafiksituation: bilen drejer til højre over en cykelsti');
     svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;background:#101b2b;pointer-events:none';
     // Keep controls and the status badge above the fallback artwork.
     parent.insertBefore(svg, canvas.nextSibling);

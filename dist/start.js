@@ -14,10 +14,10 @@ export function saveIntro(patch, store = globalThis.localStorage) { const v = { 
 
 /** The "lækker" build of each vehicle, used by the hero loop and by "Se hvad den kan blive". */
 export const DREAMS = {
-  scooter: { from: 'Scooter', to: 'Lækker scooter', equipped: { restore: 'restore', paint: 'paint-mask', stripe: 'stripe-racing', wheels: 'wheels-chrome', mirrors: 'mirrors-cat', charm: 'charm-heart', top: 'top-bow', plate: 'plate-blank' }, style: { paint: '#D9A93A', stripe: '#F1E6CC', neon: '#FFB000', neonOn: true, lowered: true, plate: 'LÆKKER' } },
-  smallcar: { from: 'Lille bil', to: 'Lækker lille bil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-chrome', top: 'top-spoiler', lights: 'lights-fog', front: 'front-led', plate: 'plate-blank' }, style: { paint: '#2F6F78', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#14E0F0', neonOn: true, lowered: true, plate: 'BOOST' } },
-  bigcar: { from: 'Stor bil', to: 'Lækker stor bil', equipped: { paint: 'paint-mask', stripe: 'stripe-side', windows: 'windows-mask', wheels: 'wheels-big', bar: 'bar-chrome', lights: 'lights-roofbar', exhaust: 'exhaust-4', plate: 'plate-blank' }, style: { paint: '#7E8C5A', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#FFB000', neonOn: true, lowered: true, plate: 'TEORI 1' } },
-  racecar: { from: 'Racerbil', to: 'Lækker racerbil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-sport', front: 'front-led', kit: 'kit-street', exhaust: 'exhaust-6', plate: 'plate-blank' }, style: { paint: '#E8B530', stripe: '#2B2F33', windows: '#2B2F33', neon: '#FF4B4B', neonOn: true, lowered: true, plate: 'BESTÅET' } },
+  scooter: { from: 'Scooter', to: 'Drømmescooter', equipped: { restore: 'restore', paint: 'paint-mask', stripe: 'stripe-racing', wheels: 'wheels-chrome', mirrors: 'mirrors-cat', charm: 'charm-heart', top: 'top-bow', plate: 'plate-blank' }, style: { paint: '#D9A93A', stripe: '#F1E6CC', neon: '#FFB000', neonOn: true, lowered: true, plate: 'LÆKKER' } },
+  smallcar: { from: 'Lille bil', to: 'Lille drømmebil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-chrome', top: 'top-spoiler', lights: 'lights-fog', front: 'front-led', plate: 'plate-blank' }, style: { paint: '#2F6F78', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#14E0F0', neonOn: true, lowered: true, plate: 'BOOST' } },
+  bigcar: { from: 'Stor bil', to: 'Stor drømmebil', equipped: { paint: 'paint-mask', stripe: 'stripe-side', windows: 'windows-mask', wheels: 'wheels-big', bar: 'bar-chrome', lights: 'lights-roofbar', exhaust: 'exhaust-4', plate: 'plate-blank' }, style: { paint: '#7E8C5A', stripe: '#F1E6CC', windows: '#2B2F33', neon: '#FFB000', neonOn: true, lowered: true, plate: 'TEORI 1' } },
+  racecar: { from: 'Racerbil', to: 'Drømmeracerbil', equipped: { paint: 'paint-mask', stripe: 'stripe-racing', windows: 'windows-mask', wheels: 'wheels-sport', front: 'front-led', kit: 'kit-street', exhaust: 'exhaust-6', plate: 'plate-blank' }, style: { paint: '#E8B530', stripe: '#2B2F33', windows: '#2B2F33', neon: '#FF4B4B', neonOn: true, lowered: true, plate: 'BESTÅET' } },
 };
 const ORDER = ['scooter', 'smallcar', 'bigcar', 'racecar'];
 const garageFor = (base, dream) => ({ spent: 0, earnedSeen: 0, owned: [], bases: [base], active: base,
@@ -145,11 +145,11 @@ function hero({ counts }) {
 }
 
 const WHEN = [['2w', 'Inden for 2 uger', 'Hurtig plan'], ['1m', 'Om ca. 1 måned', 'Rolig plan'], ['3m', 'Om 2–3 måneder', 'God tid'], ['?', 'Ved ikke endnu', 'Vi starter blødt']];
-const GOALS = [[1, '1 lektion', 'ca. 5 min, rolig'], [2, '2 lektioner', 'ca. 10 min, fast vane'], [3, '3 lektioner', 'ca. 15 min, seriøs']];
+const GOALS = [[1, '1 lektion', 'ca. 5 min, rolig'], [2, '2 lektioner', 'ca. 10 min, fast vane'], [3, '3 lektioner', 'ca. 15 min, ambitiøs']];
 // The suggested daily goal follows the exam date, and the plan tells the truth when the date is too close.
 export const DEFAULT_GOAL = { '2w': 3, '1m': 2, '3m': 1 };
 const DEADLINE_DAYS = { '2w': 14, '1m': 30, '3m': 75 };
-const GOAL_TIP = { '2w': 'Med prøve inden for 2 uger anbefaler vi 3 lektioner om dagen.', '1m': 'Med prøve om ca. 1 måned passer 2 lektioner om dagen.', '3m': 'Med 2–3 måneder til prøven er 1 lektion om dagen nok.' };
+const GOAL_TIP = { '2w': 'Prøve inden for 2 uger? Så passer 3 lektioner om dagen.', '1m': 'Prøve om ca. 1 måned? Så passer 2 lektioner om dagen.', '3m': '2–3 måneder til prøven? Så er 1 lektion om dagen nok.' };
 
 // Goal gradient: "Kom i gang" already counts as the first step, so the bar never starts empty,
 // and the last steps say how many are left instead of how many are done.
@@ -180,7 +180,7 @@ export function renderStart(step, ctx) {
   if (step === 5 && login) {
     const done = ctx.loginState === 'user';
     return shell(5, `<div class="plan-hero">${renderCast('sneglen', { size: 'md', priority: true, mood: done ? 'correct' : undefined })}<h1 id="step-title" class="step-title plan-title">${done ? 'Din plan er gemt' : 'Gem din plan'}</h1></div>
-      <p class="step-note step-save-lead">${done ? 'Dine svar, dine fejl og din bil gemmes nu i din konto.' : 'Log ind, så gemmes dine svar, dine fejl og din bil. Så kan du fortsætte på både telefon og computer.'}</p>
+      <p class="step-note step-save-lead">${done ? 'Dine svar, fejl og din bil er nu gemt i din konto.' : 'Log ind, så gemmer vi dine svar, fejl og din bil. Så kan du fortsætte på telefon og computer.'}</p>
       ${done ? '' : `<div class="step-login" data-login-body>${ctx.accountActions || ''}</div><p class="step-note">Din fremgang gemmes på Googles servere i EU.</p>`}`,
     done ? 'Start første lektion' : '', { ctaAttr: 'data-start-finish', ctaHref: plan.firstHref, total });
   }
@@ -190,13 +190,13 @@ export function renderStart(step, ctx) {
       <div class="step-garage">${glowUp(['scooter'], { loop: true, label: true })}</div>
       <div class="step-first"><img src="${baseSrc('scooter')}" alt="" width="64" height="64"><div><strong>Din første: Scooter</strong><small>Den er din fra start. Alt andet tjener du dig til.</small></div></div>
       <div class="step-earn"><span class="step-earn-icon">${boosterIcon(28)}</span><div><strong>Tjen Boosters ved at lære</strong><small>${fmt(BOOSTER_RATES.lesson)} pr. lektion <span class="tb-stripes" aria-hidden="true"></span> ${fmt(BOOSTER_RATES.dailyGoal)} for dagens mål <span class="tb-stripes" aria-hidden="true"></span> ${fmt(BOOSTER_RATES.examPass)} for en bestået øveprøve</small></div></div>
-      <p class="step-note">Restaurér den, lakér den, giv den fælge og neon. Eller spar op til en rigtig bil.</p>`, 'Den er min!', { ctaAttr: 'data-start-claim', total });
+      <p class="step-note">Restaurér den, lakér den, giv den fælge og neon. Eller spar op til en rigtig bil.</p>`, 'Den er min', { ctaAttr: 'data-start-claim', total });
   const whenText = { '2w': 'Teoriprøve inden for 2 uger', '1m': 'Teoriprøve om ca. 1 måned', '3m': 'Teoriprøve om 2–3 måneder', '?': 'Ingen dato endnu' }[intro.when || '1m'];
   const goal = Number(intro.goal || DEFAULT_GOAL[intro.when || '1m'] || 2);
   const days = Math.ceil(counts.lessons / goal), deadline = DEADLINE_DAYS[intro.when || '1m'] || null;
   const tooTight = deadline !== null && days > deadline;
   const planLine = tooTight
-    ? `Med ${goal} om dagen når du ${Math.min(counts.lessons, goal * deadline)} af ${counts.lessons} lektioner før prøven. Tag en øveprøve hver 3.–4. dag, så du også kender prøveformatet.`
+    ? `Med ${goal} om dagen når du ${Math.min(counts.lessons, goal * deadline)} af ${counts.lessons} lektioner før prøven. Tag en øveprøve hver 3.–4. dag, så kender du formatet.`
     : `${counts.lessons} lektioner <span class="tb-stripes" aria-hidden="true"></span> med ${goal} om dagen er du igennem på ca. ${days} dage${deadline !== null ? ', før prøven' : ''}`;
   const mark = tooTight
     ? '<svg class="plan-check plan-check--note" viewBox="0 0 24 24" role="img" aria-label="Bemærk"><circle cx="12" cy="12" r="9.5"/><path d="M12 7.2v6.2M12 16.6v.2"/></svg>'

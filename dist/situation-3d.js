@@ -67,7 +67,7 @@ export async function mountSituation3d(stage, spec) {
   if (!stage.isConnected) return null;
 
   const canvas = document.createElement('canvas'); canvas.className = 'sit3d'; canvas.setAttribute('role', 'img');
-  canvas.setAttribute('aria-label', '3D-illustration af situationen. Alle betingelser står i situationens tekst.');
+  canvas.setAttribute('aria-label', 'Situationen i 3D. Alle betingelser står i situationens tekst.');
   /* 22 Nov 2026: a painted sky per weather (Codex, CSE style) instead of a flat colour; day scenes rotate between three.
      The painting's horizon sits SKY_H up from its bottom edge; below that it is the weather's fog colour (made so in post). */
   const SKIES = { day: ['sky-day-1', 'sky-day-2', 'sky-day-3'], sun: ['sky-sun'], rain: ['sky-rain'], fog: ['sky-fog'], snow: ['sky-snow'], night: ['sky-night'] }, SKY_H = 0.42;

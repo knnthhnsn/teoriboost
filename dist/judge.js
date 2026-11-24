@@ -169,10 +169,10 @@ export function renderJudge() {
     </header>
     <div class="judge__meta" data-judge-meta hidden><span data-judge-progress>Fejlklip 1 af 4</span><span data-judge-score>Første forsøg: 0/4</span></div>
     <div class="judge__stage" data-judge-stage>
-      <canvas class="judge__canvas" data-judge-canvas aria-label="3D-trafikscene set som diorama"></canvas>
+      <canvas class="judge__canvas" data-judge-canvas aria-label="3D-trafikscene af situationen"></canvas>
       <div class="judge__fallback" data-judge-fallback hidden></div>
       <div class="judge__intro" data-judge-intro>
-        <p>Se førerens fejl i klippet. Find problemet, vælg reglen, og placér bilen rigtigt.</p>
+        <p>Se, hvad føreren gør galt i klippet. Find problemet, vælg reglen, og placér bilen rigtigt.</p>
         <button class="judge__start" type="button" data-judge-start>Start første fejlklip</button>
         <button class="judge__voice" type="button" data-judge-read-intro aria-pressed="false">Lyt til startguiden</button>
       </div>

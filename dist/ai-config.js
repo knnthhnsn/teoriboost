@@ -16,7 +16,7 @@ const dayFormatter = new Intl.DateTimeFormat('en-CA', {
 
 export function aiDayKey(now = Date.now()) {
   const date = new Date(now);
-  if (!Number.isFinite(date.getTime())) throw new RangeError('Invalid date');
+  if (!Number.isFinite(date.getTime())) throw new RangeError('Ugyldig dato');
   const parts = Object.fromEntries(dayFormatter.formatToParts(date).map(p => [p.type, p.value]));
   return `${parts.year}-${parts.month}-${parts.day}`;
 }

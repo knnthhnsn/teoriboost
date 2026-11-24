@@ -116,7 +116,7 @@ export function unequipAll(garage) {
 export function buyOrToggleExtra(garage, progress, extraId) {
   const extra = EXTRAS[extraId];
   if (!extra) return { garage, ok: false, message: 'Vi kunne ikke finde den del. Prøv igen.' };
-  if (extraId === 'lower' && !baseById(garage.active)?.split) return { garage, ok: false, message: 'Den bil kan ikke sænkes endnu.' };
+  if (extraId === 'lower' && !baseById(garage.active)?.split) return { garage, ok: false, message: 'Den bil kan ikke sænkes endnu. Vælg en anden.' };
   const key = `extra-${extraId}`, flag = extraId === 'neon' ? 'neonOn' : 'lowered';
   const style = { ...styleOf(garage) };
   if (owns(garage, key)) {
@@ -175,7 +175,7 @@ export function shuffleLook(garage, random = Math.random) {
   const now = JSON.stringify({ e: garage.equipped?.[base] || {}, s: styleOf(garage) });
   let look = roll();
   for (let i = 0; i < 6 && JSON.stringify({ e: look.equipped, s: look.style }) === now; i++) look = roll();
-  return { garage: { ...garage, equipped: { ...garage.equipped, [base]: look.equipped }, style: { ...garage.style, [base]: look.style } }, ok: true, message: 'Nyt look! Tryk igen for et andet.' };
+  return { garage: { ...garage, equipped: { ...garage.equipped, [base]: look.equipped }, style: { ...garage.style, [base]: look.style } }, ok: true, message: 'Nyt udseende. Tryk igen for et andet.' };
 }
 
 /** Licence plate text: letters, digits and space, max 7, a small list of words not allowed. */
@@ -264,7 +264,7 @@ export function renderMyCar({ garage, progress, slot = '', message = '', tryOn =
     const plateOwned = slot === 'plate' && owns(garage, 'plate-blank');
     panel = `<div class="mybil-grid">${items}</div>`
       + (tintOwned ? `<h3 class="mybil-subtitle">Vælg farve</h3>${colorPicker(tintKind, style[tintKind])}` : '')
-      + (plateOwned ? `<label class="mybil-plate-input"><span>Din tekst (op til 7 tegn)</span><input type="text" maxlength="7" value="${escape(style.plate)}" data-mybil-plate autocomplete="off" spellcheck="false"></label>` : '');
+      + (plateOwned ? `<label class="mybil-plate-input"><span>Din tekst, op til 7 tegn</span><input type="text" maxlength="7" value="${escape(style.plate)}" data-mybil-plate autocomplete="off" spellcheck="false"></label>` : '');
   }
   const bases = BASES.map(base => {
     const owned = garage.bases.includes(base.id);

@@ -7,9 +7,9 @@ const KEY = 'teoriboost.tour.v1';
 // route = the tab to open, ready = a selector that only exists once that screen has rendered, target = what to ring (first one that is visible wins).
 const STEPS = [
   { id: 'laer', tab: 'home', route: '#home', ready: '.learn .pn-btn', target: ['.learn .pn-btn', '.learn .unit-banner'],
-    title: 'Lær', text: 'Hej, jeg er Sneglen. Her tager du én lektion ad gangen. Start med det gule felt med 1.' },
+    title: 'Lær', text: 'Hej, jeg er Sneglen. Tag én lektion ad gangen. Start med det gule felt med 1.' },
   { id: 'oevelser', tab: 'practice', route: '#practice', ready: '.practice-page .practice-main-btn', target: ['.practice-page .practice-main-btn', '.practice-page .practice-hero'],
-    title: 'Øvelser', text: 'Her træner du på situationer fra vejen. Det du er i tvivl om, kommer igen, så det sidder.' },
+    title: 'Øvelser', text: 'Her øver du situationer fra vejen. Det du er i tvivl om, kommer igen, så det sidder.' },
   { id: 'proeve', tab: 'exam', route: '#exam', gate: 'exam', ready: '.exam-start .big-btn, .exam-start .btn-primary', target: ['.exam-start .big-btn', '.exam-start .btn-primary', '.exam-start'],
     title: 'Prøve', text: 'Den ligner den rigtige teoriprøve med 25 spørgsmål. Tryk her, når du er klar.' },
   { id: 'minbil', tab: 'minbil', route: '#minbil', ready: '.mybil-road', target: ['.mybil-road'],

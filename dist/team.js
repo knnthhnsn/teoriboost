@@ -127,7 +127,7 @@ export function createTeam({ db, store = globalThis.localStorage, now = () => Da
   const subs = new Set();
   const emit = () => subs.forEach(f => f(view()));
   const view = () => ({ status, error, team, racers, uid, confirm });
-  const fail = (e, msg) => { console.warn('team:', e?.code || e?.message); error = e?.code === 'permission-denied' ? 'Holdene er ikke slået til endnu. Du kan stadig øve og tjene Boosters.' : msg; status = team ? 'in' : 'out'; emit(); };
+  const fail = (e, msg) => { console.warn('team:', e?.code || e?.message); error = e?.code === 'permission-denied' ? 'Holdene er ikke åbnet endnu. Du kan stadig øve og tjene Boosters.' : msg; status = team ? 'in' : 'out'; emit(); };
 
   function listen(c) {
     unsub?.(); unsub = null;
@@ -179,7 +179,7 @@ export function createTeam({ db, store = globalThis.localStorage, now = () => Da
       await c.fb.deleteDoc(c.fb.doc(c.db, 'teams', team.code, 'racers', c.uid));
       await c.fb.updateDoc(c.fb.doc(c.db, 'teams', team.code), { members: c.fb.arrayRemove(c.uid) });
       unsub?.(); unsub = null; team = null; racers = []; lastSent = ''; confirm = false; status = 'out'; emit();
-    } catch (e) { fail(e, 'Vi kunne ikke tage dig af holdet. Prøv igen om lidt.'); }
+    } catch (e) { fail(e, 'Vi kunne ikke forlade holdet lige nu. Prøv igen om lidt.'); }
   }
   /** Your racer: name, today's answers, streak, the car you drive and your boost. Sent only when something changed. */
   async function publish(me) {
@@ -316,7 +316,7 @@ export function renderTeamPage({ view, account, me, ranked, boost, name, garage,
   if (account.state !== 'user') return shell(`${hero('Kør om kap med din køreskole eller dine venner', code ? `Du er inviteret med koden <b class="team-inline-code">${esc(code)}</b>. Log ind, så kører du med med det samme.` : 'Den, der svarer rigtigt på flest spørgsmål i dag, kører forrest og får mest ekstra Boosters.')}
     <div class="panel team-login"><p>Log ind først, så holdet kan finde dig igen på alle dine enheder.</p><div class="acc-actions acc-actions--stack"><button type="button" class="big-btn" data-account="google">Fortsæt med Google</button><a class="big-btn big-btn--ghost" href="#profil">Log ind med e-mail på din profil</a></div></div>${how}`);
   const err = view.error ? `<p class="acc-error" role="alert">${esc(view.error)}</p>` : '';
-  if (view.status === 'loading' || view.status === 'idle') return shell(`<div class="panel"><p class="acc-sync">Henter dit hold <span class="tb-stripes" aria-hidden="true"></span></p></div>`);
+  if (view.status === 'loading' || view.status === 'idle') return shell(`<div class="panel"><p class="acc-sync">Henter dit hold … <span class="tb-stripes" aria-hidden="true"></span></p></div>`);
   const busy = view.status === 'busy';
   // the username lives in the same form as the action, so one tap does both
   const nameField = id => name ? '' : `<label for="${id}">Dit brugernavn på holdet</label><input id="${id}" name="name" maxlength="16" autocomplete="nickname" required placeholder="fx Kenneth_K">`;
@@ -333,7 +333,7 @@ export function renderTeamPage({ view, account, me, ranked, boost, name, garage,
       </div>${how}${privacy}`);
   }
   const t = view.team, mine = ranked.find(r => r.uid === me);
-  const rows = ranked.map(r => `<li class="team-row${r.uid === me ? ' is-me' : ''}${r.place <= 3 ? ` is-top is-p${r.place}` : ''}"><b class="team-place">${r.place}</b><span class="team-thumb" aria-hidden="true">${vehicleLayers(carGarage(r.car))}</span><span class="team-who"><strong>${esc(r.name)}${r.uid === me ? ' <small>(dig)</small>' : ''}</strong><small>${r.correct} rigtige i dag<br>${r.streak} ${r.streak === 1 ? 'dag' : 'dage'} i træk</small></span><span class="team-pts"><b>${fmt(r.points)}</b><small>point</small></span></li>`).join('');
+  const rows = ranked.map(r => `<li class="team-row${r.uid === me ? ' is-me' : ''}${r.place <= 3 ? ` is-top is-p${r.place}` : ''}"><b class="team-place">${r.place}</b><span class="team-thumb" aria-hidden="true">${vehicleLayers(carGarage(r.car))}</span><span class="team-who"><strong>${esc(r.name)}${r.uid === me ? ' <small>(dig)</small>' : ''}</strong><small>${r.correct} rigtige svar i dag<br>${r.streak} ${r.streak === 1 ? 'dag' : 'dage'} i træk</small></span><span class="team-pts"><b>${fmt(r.points)}</b><small>point</small></span></li>`).join('');
   const parts = boost?.parts || { place: 0, car: 0, tuning: 0 };
   const top = `<div class="team-top"><div class="team-top-text"><p class="team-kicker">${esc(KINDS[t.kind] || 'Hold')} · ${ranked.length} ${ranked.length === 1 ? 'kører' : 'kørere'}</p><h2>${esc(t.name)}</h2>${mine ? `<p class="team-top-place">Du ligger nr. <b>${mine.place}</b> af <b>${ranked.length}</b></p>` : ''}</div>
     <div class="team-ticket"><small>Holdkode</small><b>${esc(t.code)}</b><button type="button" class="big-btn" data-team="share" data-code="${esc(t.code)}" data-name="${esc(t.name)}">Del koden</button></div></div>`;

@@ -5,7 +5,7 @@ const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&a
 export const IMMEDIATE_ACCESS_TEXT = 'Jeg anmoder om, at leveringen af det digitale indhold begynder straks inden udløbet af fortrydelsesfristen, og jeg anerkender, at jeg mister min fortrydelsesret, når leveringen begynder.';
 export const TERMS_TEXT = 'Jeg accepterer handelsbetingelserne.';
 export function priceText(amount) {
-  return Number.isFinite(amount) && amount > 0 ? new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK', maximumFractionDigits: 2 }).format(amount) : 'Pris følger';
+  return Number.isFinite(amount) && amount > 0 ? new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK', maximumFractionDigits: 2 }).format(amount) : 'Prisen kommer snart';
 }
 
 export function createPaywall({ account, chapters = [], questions = [], fetcher = globalThis.fetch, config: providedConfig, document: doc = globalThis.document, win = globalThis.window, onAccessChange = () => {}, currentExamId = () => '' }) {
@@ -34,7 +34,7 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
     const status = account.status(), id = describe ? ' id="tb-pw-description"' : '';
     if (status.state === 'user') return '<p' + id + ' class="pw-fine pw-account">Din adgang gemmes på ' + esc(status.email || 'din konto') + '.</p>';
     if (['off', 'local'].includes(status.state)) return '<p' + id + ' class="pw-fine">Login er ikke åbnet her endnu. Køb og koder kræver en konto.</p>';
-    return '<div' + id + ' class="pw-login"><p>Log ind, så følger adgangen dig på alle dine enheder.</p><button type="button" data-pw="google">Fortsæt med Google</button><button type="button" data-pw="email">Få et login-link på e-mail</button></div>';
+    return '<div' + id + ' class="pw-login"><p>Log ind, og så er adgangen med dig på alle dine enheder.</p><button type="button" data-pw="google">Fortsæt med Google</button><button type="button" data-pw="email">Få et login-link på e-mail</button></div>';
   }
   function planMarkup() {
     return '<fieldset class="pw-plans"><legend class="pw-sr">Vælg dit pas</legend>' + (config?.plans || []).map(plan =>
@@ -51,13 +51,13 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
     const plan = config?.plans?.find(item => item.id === selected);
     const available = gatesEnabled(config) && Number.isFinite(plan?.amountDkk) && plan.amountDkk > 0;
     const premium = isPremium();
-    const X = '<button type="button" class="pw-x" data-pw="close" aria-label="Luk"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></button>';
-    const title = premium ? 'Din premiumadgang' : mode === 'code' ? 'Har du en kode?' : 'Én regel ad gangen. Hele vejen til prøven.';
+    const X = '<button type="button" class="pw-x" data-pw="close" aria-label="Luk vinduet"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></button>';
+    const title = premium ? 'Din premiumadgang' : mode === 'code' ? 'Har du en kode?' : 'Én regel ad gangen, hele vejen til prøven';
     const codeForm = '<form class="pw-code" data-pw-code><label for="tb-pw-code-input">Din kode</label><input id="tb-pw-code-input" name="code" type="text" maxlength="128" autocomplete="off" autocapitalize="characters" spellcheck="false" required autofocus><button type="submit" class="pw-cta">Brug kode</button></form>';
     const signedIn = account.status().state === 'user';
     let body;
     if (premium) {
-      body = '<p id="tb-pw-description" class="pw-lead">' + (client.view().entitlement.expiresAt ? 'Adgang til ' + esc(new Date(client.view().entitlement.expiresAt).toLocaleString('da-DK', { dateStyle: 'long', timeStyle: 'short' })) + '.' : 'Din adgang har ingen udløbsdato.') + '</p>' +
+      body = '<p id="tb-pw-description" class="pw-lead">' + (client.view().entitlement.expiresAt ? 'Din adgang gælder til ' + esc(new Date(client.view().entitlement.expiresAt).toLocaleString('da-DK', { dateStyle: 'long', timeStyle: 'short' })) + '.' : 'Din adgang har ingen udløbsdato.') + '</p>' +
         (mode === 'code' ? codeForm : '<button class="pw-cta" type="button" data-pw="close">Tilbage til appen</button>');
     } else if (mode === 'code') {
       body = (signedIn ? '' : loginMarkup(true)) + codeForm + (signedIn ? loginMarkup(true) : '') +
@@ -65,7 +65,7 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
     } else {
       body = '<ul id="tb-pw-description" class="pw-benefits"><li>Alle emner, én regel ad gangen</li><li>En forklaring på hver fejl</li><li>Øveprøver som den rigtige, og hjælp fra Sneglen</li></ul>' + planMarkup() +
         // BILLING HOOK: consent and card entry belong to our own payment page.
-        '<button class="pw-cta" type="button" data-pw="buy">' + (available ? esc(buyLabel(plan)) : 'Se betalingsside') + '</button>' +
+        '<button class="pw-cta" type="button" data-pw="buy">' + (available ? esc(buyLabel(plan)) : 'Gå til betaling') + '</button>' +
         '<p class="pw-fine">' + (available ? 'Engangskøb. Samlet pris inklusive moms. Ingen automatisk fornyelse.' : config?.price?.confirmed ? 'Priser inklusive moms. Ingen automatisk fornyelse. Køb er ikke åbnet endnu.' : 'Priserne er ikke fastlagt endnu. Køb er ikke åbnet.') + ' <a href="handelsbetingelser.html" target="_blank" rel="noopener">Handelsbetingelser</a></p>' +
         (referral?.discountPercent() ? '<p class="pw-fine">Din vens rabat på ' + esc(referral.discountPercent()) + ' % er med i priserne. Den gælder dit første pas.</p>' : '') +
         loginMarkup() +
@@ -126,7 +126,7 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
     if (gatesEnabled(config) && !isPremium()) quota.record(attempt);
   }
   function settingsMarkup() {
-    return '<section class="tb-premium-settings" data-premium-settings aria-label="Premium"><h3>Din adgang</h3><p>' + (isPremium() ? 'Premium er aktiv på din konto.' : 'Se premiumadgang, eller brug en kode.') + '</p><button type="button" data-pw="open">Se premium</button><button type="button" data-pw="code">Har du en kode?</button><button type="button" data-pw="restore">Gendan køb</button></section>' + (referral?.markup() || '');
+    return '<section class="tb-premium-settings" data-premium-settings aria-label="Premium"><h3>Din adgang</h3><p>' + (isPremium() ? 'Premium er aktiv på din konto.' : 'Se din adgang, eller brug en kode.') + '</p><button type="button" data-pw="open">Se premium</button><button type="button" data-pw="code">Har du en kode?</button><button type="button" data-pw="restore">Gendan køb</button></section>' + (referral?.markup() || '');
   }
   function decorate() {
     const host = doc.querySelector('.profile');
@@ -227,7 +227,7 @@ export function createPaywall({ account, chapters = [], questions = [], fetcher 
     await client.refresh();
     // The return URL is a refresh trigger only. It cannot mint access.
     const result = new URL(win.location.href).searchParams.get('billing');
-    if (result) { open(); notify(result === 'cancelled' ? 'Købet blev afbrudt. Du er ikke blevet opkrævet.' : 'Vi tjekker din betaling. Brug Gendan køb, hvis adgangen ikke er klar endnu.'); }
+    if (result) { open(); notify(result === 'cancelled' ? 'Købet blev afbrudt. Der er ikke trukket penge.' : 'Vi tjekker din betaling. Tryk på Gendan køb, hvis adgangen ikke er klar endnu.'); }
   })();
   return {
     ready, client, open, close, allowRoute, requireAccess, requireExam, recordExam, practiceAllowed, recordPractice, settingsMarkup, decorate, chatHeaders,
