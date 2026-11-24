@@ -7,7 +7,7 @@ export const TURN_LEGAL_SOURCE = 'https://www.retsinformation.dk/eli/lta/2026/11
 export const TURN_LEGAL_ANCHOR = 'Færdselsloven § 26, stk. 6, 2. og 5. pkt.; jf. § 17, stk. 1, og § 16, stk. 2';
 const types = new Set(['start','view','next','answer','retry','commit','draft','point']);
 const validId = v => typeof v === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9_.:-]{2,119}$/.test(v);
-const choices = { risk:['cycle','exit','road'],decision:['wait','turn','horn'], repair:['wait','turn','horn'], transfer:['yield','green','signal'], contrast:['proceed','always-wait','skip-check'], 'recall-check':['repeat','once','signal'] };
+const choices = { risk:['cycle','exit','road'],decision:['wait','turn','horn'], repair:['wait','turn','horn'], transfer:['yield','green','signal'], contrast:['proceed','always-wait','skip-check'], 'recall-check':['repeat','once','signal'], recall:['repeat','once','signal'] }; /* 24 Nov 2026: recall is a choice like the other steps, no typed answer */
 export const TURN_VOICE = Object.freeze({
   observe:'Du vil dreje til højre. Bilen holder stille. Undersøg højresiden, før du vælger din handling.',
   risk:'Hvad skal du blive ved med at undersøge, mens du gør klar til at dreje? Tænk på, hvor bilen skal hen, og hvem der kan komme i vejen for svinget.',
@@ -21,7 +21,7 @@ export const TURN_VOICE = Object.freeze({
   transferExplain:'Bilen skal over cyklistens bane. Fri vej for bilen eller et tændt blinklys giver ikke forrang over cyklisten. Orientér dig, hold tilbage, og drej først, når det er frit.',
   contrast:'Nu er cyklisten allerede forbi svingstedet. Der er ingen andre trafikanter i nærheden. Du holder stille og har frit udsyn. Hvad gør du nu?',
   contrastExplain:'Du skal give plads, når der er nogen at give plads til. Når du har orienteret dig igen og sikret dig, at svinget er frit, kan du dreje. Reglen betyder ikke, at du altid skal vente.',
-  recall:'Hent reglen frem uden hjælp. Du har set i spejlet i god tid. Hvad skal du gøre lige før højresvinget? Skriv dit svar, eller sig det højt for dig selv, før du viser reglen.',
+  recall:'Hent reglen frem uden hjælp. Du har set i spejlet i god tid. Hvad skal du gøre lige før højresvinget? Vælg det svar, der passer.',
   recallCheck:'Sammenlign med dit eget svar. Første punkt: Gentag orienteringen i spejle og blind vinkel lige før svinget. Andet punkt: Hold tilbage for cyklisten, og drej først, når det er frit. Vurder selv, om begge punkter var med. Ingen AI bedømmer dit svar.',
   recallSaved:'Dit selvtjek er gemt. En cyklist kan nå fra bag bilen til siden, mens du nærmer dig svinget. Se tidligt i spejle og blind vinkel, og gentag orienteringen lige før svinget. Gem nu dit forløb.',
   recallRepair:'Tag handlingen én gang mere. En cyklist kan nå fra bag bilen til siden, mens du nærmer dig svinget. Se tidligt i spejle og blind vinkel, og gentag orienteringen lige før svinget. Hent derefter dit eget svar frem igen.',
@@ -57,7 +57,7 @@ function foldAttempt(events,start) {
       if(stage==='repair'){state.decision=e.value;if(e.value==='wait')state.stage='transfer';}
       if(stage==='transfer'){state.transfer=e.value;state.firstTransfer??=e.value;state.stage='transfer-feedback';}
       if(stage==='contrast'){state.contrast=e.value;state.firstContrast??=e.value;state.stage='contrast-feedback';}
-      if(stage==='recall-check'){state.recall=e.value;state.firstRecall??=e.value;state.stage='recall-feedback';}
+      if(stage==='recall-check'||stage==='recall'){state.recall=e.value;state.firstRecall??=e.value;state.stage='recall-feedback';}
     } else if(e.type==='point' && stage==='risk' && ['cycle','other'].includes(e.value)) {
       state.risk=e.value==='cycle'?'cycle':'road';if(state.firstRisk===null){state.firstRisk=state.risk;state.firstRiskMethod='image';}state.stage='risk-feedback';
     } else if(e.type==='draft' && stage==='recall') {state.recallText=e.value;
