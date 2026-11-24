@@ -11,8 +11,9 @@
 @font-face{font-family:Atkinson;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
 @font-face{font-family:DM;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
 @font-face{font-family:Plex;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
-@font-face{font-family:Rubik;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
-@font-face{font-family:Barlow;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:100 1000;font-display:swap;unicode-range:U+0030-0039}
+/* 24 Nov 2026: the digit face must carry the exact weight range of the Rubik and Barlow faces in redesign.css and styles.css (300 900); with another range Chrome never combines them, so Rubik digits stayed Rubik */
+@font-face{font-family:Rubik;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:300 900;font-display:swap;unicode-range:U+0030-0039}
+@font-face{font-family:Barlow;src:url('assets/fonts/black-ops-one.woff2') format('woff2');font-weight:300 900;font-display:swap;unicode-range:U+0030-0039}
 
 /* headings, as in the manual */
 h1{font-weight:800!important;letter-spacing:-.02em!important}
