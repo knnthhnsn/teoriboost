@@ -11,6 +11,13 @@
       "schedule": "0 3 * * *"
     }
   ],
+  "redirects": [
+    {
+      "source": "/assets/voice/:path*",
+      "destination": "https://app.teoriboost.dk/assets/voice/:path*",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/__/auth/:path*",
