@@ -296,45 +296,59 @@ export function mountRace(el, { prev = {}, me, motion = true, onOvertake } = {})
   return { overtakes, dispose() { anims.forEach(a => a.cancel()); } };
 }
 
-/** The team page (#hold). */
-export function renderTeamPage({ view, account, me, ranked, boost, name, garage }) {
+/** The team page (#hold). 24 Nov 2026 ("få hold til at virke og se lækkert ud"): one step to join or start a team (the username is part of
+ *  that form, the buttons are never locked), a code from a shared link is filled in, and a hero with the cars on the road. */
+export function renderTeamPage({ view, account, me, ranked, boost, name, garage, pendingCode = '' }) {
   const head = '<header class="screen-head"><a class="back-round" href="#minbil" aria-label="Tilbage til Min bil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><h1 id="team-title">Dit hold</h1></header>';
   const how = `<details class="panel team-how"><summary>Sådan virker kapløbet</summary>
     <p><b>Dagens point:</b> ${POINTS.correct} for hvert spørgsmål, du svarer rigtigt på i dag, og ${POINTS.streakDay} for hver dag i din streak (op til ${POINTS.streakCap} dage). Ranglisten starter forfra hver nat.</p>
-    <p><b>Holdboost:</b> Så længe du ligger på ranglisten og har svaret rigtigt i dag, får du ekstra Boosters på alt, du tjener: 1. plads +50 %, 2. plads +35 %, 3. plads +25 %, 4. plads +15 %, 5. plads +10 %, længere tilbage +5 %. Din bil giver op til +15 % ekstra, og hver monteret del giver +1 % (op til +10 %). Højst +${BOOST_CAP} % i alt.</p>
+    <p><b>Holdboost:</b> Så længe du ligger på ranglisten og har svaret rigtigt i dag, får du ekstra Boosters på alt, du tjener: 1. plads +50 %, 2. plads +35 %, 3. plads +25 %, 4. plads +15 %, 5. plads +10 %, længere tilbage +5 %. En bedre bil giver op til +15 % ekstra, og hver del, du har monteret, +1 % (op til +10 %). Højst +${BOOST_CAP} % i alt.</p>
     <p><b>Ild:</b> Den forreste kører på nitro. Har du ${HOT_STREAK} dage eller flere i træk, brænder din udstødning også, og er du forrest med den streak, går den helt amok.</p></details>`;
-  const privacy = '<p class="team-fine">Dem på holdet kan se dit brugernavn, din bil og dine point i dag. Din e-mail bliver aldrig vist.</p>';
-  if (!account || account.state === 'off' || account.state === 'local') return `<section class="team" aria-labelledby="team-title">${head}<div class="panel"><p>Holdene kræver en konto, og den kan ikke åbnes her lige nu.</p></div>${how}</section>`;
-  if (account.state !== 'user') return `<section class="team" aria-labelledby="team-title">${head}<div class="panel team-intro"><h2>Kør om kap med dit hold</h2><p>Saml din køreskoles hold eller dine venner på én vej. Den, der svarer rigtigt på flest spørgsmål i dag, kører forrest og får mest ekstra Boosters.</p><p>Log ind først, så holdet kan finde dig igen på alle dine enheder.</p><div class="acc-actions acc-actions--stack"><button type="button" class="big-btn" data-account="google">Fortsæt med Google</button><a class="big-btn big-btn--ghost" href="#profil">Log ind med e-mail på din profil</a></div></div>${how}</section>`;
+  const privacy = '<p class="team-fine">Dem på holdet kan se dit brugernavn, din bil og dine point i dag. Din e-mail vises aldrig.</p>';
+  const code = cleanCode(pendingCode);
+  // the hero: your own car in front, two others behind it, on the home road's asphalt
+  const own = garage ? JSON.stringify(publicCar(garage)) : JSON.stringify({ base: 'smallcar' });
+  const heroCars = [JSON.stringify({ base: 'scooter' }), JSON.stringify({ base: 'bigcar' }), own];
+  const hero = (title, sub) => `<div class="team-hero"><div class="team-hero-text"><p class="team-kicker">Kapløb med dit hold</p><h2>${title}</h2><p>${sub}</p></div>
+    <div class="team-hero-road" aria-hidden="true"><span class="team-hero-dash"></span>${heroCars.map((c, i) => `<span class="team-hero-car team-hero-car--${i}">${vehicleLayers(carGarage(c))}</span>`).join('')}</div></div>`;
+  const shell = body => `<section class="team" aria-labelledby="team-title">${head}${body}</section>`;
+  if (!account || account.state === 'off' || account.state === 'local') return shell(`<div class="panel"><p>Holdene kræver forbindelse til din konto, og den kan ikke startes her lige nu.</p></div>${how}`);
+  if (account.state !== 'user') return shell(`${hero('Kør om kap med din køreskole eller dine venner', code ? `Du er inviteret med koden <b class="team-inline-code">${esc(code)}</b>. Log ind, så kører du med med det samme.` : 'Den, der svarer rigtigt på flest spørgsmål i dag, kører forrest og får mest ekstra Boosters.')}
+    <div class="panel team-login"><p>Log ind først, så holdet kan finde dig igen på alle dine enheder.</p><div class="acc-actions acc-actions--stack"><button type="button" class="big-btn" data-account="google">Fortsæt med Google</button><a class="big-btn big-btn--ghost" href="#profil">Log ind med e-mail på din profil</a></div></div>${how}`);
   const err = view.error ? `<p class="acc-error" role="alert">${esc(view.error)}</p>` : '';
-  if (view.status === 'loading' || view.status === 'idle') return `<section class="team" aria-labelledby="team-title">${head}<div class="panel"><p class="acc-sync">Henter dit hold <span class="tb-stripes" aria-hidden="true"></span></p></div></section>`;
-  const nameForm = `<form class="team-form" data-team-form="name"><label for="team-name">Dit brugernavn på holdet</label><div class="acc-row"><input id="team-name" name="name" maxlength="16" autocomplete="nickname" required value="${esc(name)}" placeholder="fx Kenneth_K"><button type="submit" class="big-btn">Gem</button></div></form>`;
+  if (view.status === 'loading' || view.status === 'idle') return shell(`<div class="panel"><p class="acc-sync">Henter dit hold <span class="tb-stripes" aria-hidden="true"></span></p></div>`);
+  const busy = view.status === 'busy';
+  // the username lives in the same form as the action, so one tap does both
+  const nameField = id => name ? '' : `<label for="${id}">Dit brugernavn på holdet</label><input id="${id}" name="name" maxlength="16" autocomplete="nickname" required placeholder="fx Kenneth_K">`;
   if (!view.team) {
-    return `<section class="team" aria-labelledby="team-title">${head}${err}
-      <div class="panel team-intro"><h2>Kør om kap med dit hold</h2><p>Saml din køreskoles hold eller dine venner på én vej. Alle kører i deres egen bil, og den, der svarer rigtigt på flest spørgsmål i dag, kører forrest.</p>${name ? '' : nameForm}</div>
+    return shell(`${hero('Kør om kap med din køreskole eller dine venner', 'Alle kører i deres egen bil. Den, der svarer rigtigt på flest spørgsmål i dag, kører forrest og får mest ekstra Boosters.')}${err}
       <div class="team-split">
-        <form class="panel team-form" data-team-form="join"><h2>Har du en kode?</h2><label for="team-code">Holdkode</label><div class="acc-row"><input id="team-code" name="code" maxlength="7" autocomplete="off" autocapitalize="characters" spellcheck="false" required placeholder="K7M2QX" class="team-code-input"><button type="submit" class="big-btn"${name ? '' : ' disabled'}>Kør med</button></div></form>
-        <form class="panel team-form" data-team-form="create"><h2>Start et hold</h2><label for="team-new">Holdets navn</label><input id="team-new" name="team" maxlength="30" required placeholder="fx Hold 3, Aarhus Køreskole">
+        <form class="panel team-form team-form--join${code ? ' is-invited' : ''}" data-team-form="join"><h2>${code ? 'Du er inviteret' : 'Har du en kode?'}</h2><p class="team-form-lead">${code ? 'Koden står klar. Tryk Kør med.' : 'Skriv de seks tegn fra din kørelærer eller ven.'}</p>
+          <label for="team-code">Holdkode</label><input id="team-code" name="code" maxlength="7" autocomplete="off" autocapitalize="characters" spellcheck="false" required placeholder="K7M2QX" class="team-code-input" value="${esc(code)}">
+          ${nameField('team-name-join')}<button type="submit" class="big-btn"${busy ? ' disabled' : ''}>${busy ? 'Et øjeblik' : 'Kør med'}</button></form>
+        <form class="panel team-form" data-team-form="create"><h2>Start et hold</h2><p class="team-form-lead">Du får en kode, som du deler med de andre.</p>
+          <label for="team-new">Holdets navn</label><input id="team-new" name="team" maxlength="30" required placeholder="fx Hold 3, Aarhus Køreskole">
           <fieldset class="team-kind"><legend>Hvem kører med?</legend>${Object.entries(KINDS).map(([id, label], i) => `<label><input type="radio" name="kind" value="${id}"${i === 0 ? ' checked' : ''}><span>${label}</span></label>`).join('')}</fieldset>
-          <button type="submit" class="big-btn"${name ? '' : ' disabled'}>Opret holdet</button></form>
-      </div>${name ? '' : '<p class="team-fine">Vælg dit brugernavn først.</p>'}${how}${privacy}</section>`;
+          ${nameField('team-name-new')}<button type="submit" class="big-btn"${busy ? ' disabled' : ''}>${busy ? 'Et øjeblik' : 'Opret holdet'}</button></form>
+      </div>${how}${privacy}`);
   }
   const t = view.team, mine = ranked.find(r => r.uid === me);
-  const rows = ranked.map(r => `<li class="team-row${r.uid === me ? ' is-me' : ''}"><b class="team-place">${r.place}</b><span class="team-thumb" aria-hidden="true">${vehicleLayers(carGarage(r.car))}</span><span class="team-who"><strong>${esc(r.name)}${r.uid === me ? ' <small>(dig)</small>' : ''}</strong><small>${r.correct} rigtige svar i dag <span class="tb-stripes" aria-hidden="true"></span> ${r.streak} ${r.streak === 1 ? 'dag' : 'dage'} i træk</small></span><span class="team-pts"><b>${fmt(r.points)}</b><small>point</small></span></li>`).join('');
+  const rows = ranked.map(r => `<li class="team-row${r.uid === me ? ' is-me' : ''}${r.place <= 3 ? ` is-top is-p${r.place}` : ''}"><b class="team-place">${r.place}</b><span class="team-thumb" aria-hidden="true">${vehicleLayers(carGarage(r.car))}</span><span class="team-who"><strong>${esc(r.name)}${r.uid === me ? ' <small>(dig)</small>' : ''}</strong><small>${r.correct} rigtige i dag<br>${r.streak} ${r.streak === 1 ? 'dag' : 'dage'} i træk</small></span><span class="team-pts"><b>${fmt(r.points)}</b><small>point</small></span></li>`).join('');
   const parts = boost?.parts || { place: 0, car: 0, tuning: 0 };
+  const top = `<div class="team-top"><div class="team-top-text"><p class="team-kicker">${esc(KINDS[t.kind] || 'Hold')} · ${ranked.length} ${ranked.length === 1 ? 'kører' : 'kørere'}</p><h2>${esc(t.name)}</h2>${mine ? `<p class="team-top-place">Du ligger nr. <b>${mine.place}</b> af <b>${ranked.length}</b></p>` : ''}</div>
+    <div class="team-ticket"><small>Holdkode</small><b>${esc(t.code)}</b><button type="button" class="big-btn" data-team="share" data-code="${esc(t.code)}" data-name="${esc(t.name)}">Del koden</button></div></div>`;
   const boostCard = `<div class="panel team-boost${boost?.on ? ' is-on' : ''}"><div class="team-boost-big"><small>Din holdboost</small><strong>+${boost?.pct || 0} %</strong><span>på de Boosters, du tjener nu</span></div>
     <ul class="team-boost-parts"><li><span>${mine ? `${mine.place}. plads` : 'Placering'}</span><b>+${parts.place} %</b></li><li><span>Din bil</span><b>+${parts.car} %</b></li><li><span>Tuning</span><b>+${parts.tuning} %</b></li></ul>
-    ${boost?.on ? '' : `<p class="team-fine">${ranked.length < 2 ? 'Boosten starter, når én mere er med på holdet.' : 'Svar rigtigt på et spørgsmål i dag, så starter boosten.'}</p>`}
+    ${boost?.on ? '' : `<p class="team-fine">${ranked.length < 2 ? 'Boosten starter, når én mere er med på holdet. Del koden.' : 'Svar rigtigt på et spørgsmål i dag, så starter din boost.'}</p>`}
     ${garage?.lastBonus ? `<p class="team-fine">Seneste boost: +${fmt(garage.lastBonus)} Boosters.</p>` : ''}</div>`;
-  return `<section class="team" aria-labelledby="team-title">${head}${err}
+  const nameForm = `<form class="team-form" data-team-form="name"><label for="team-name">Dit brugernavn på holdet</label><div class="acc-row"><input id="team-name" name="name" maxlength="16" autocomplete="nickname" required value="${esc(name)}" placeholder="fx Kenneth_K"><button type="submit" class="big-btn">Gem</button></div></form>`;
+  return shell(`${err}${top}
     <div id="team-race" class="team-race"></div>
+    <div class="panel team-board"><h2>Dagens rangliste</h2><ol class="team-list">${rows || '<li class="empty-note">Holdet er klar. Svar på et spørgsmål, så kører du ud på vejen.</li>'}</ol></div>
     ${boostCard}
-    <div class="panel team-board"><h2>${esc(t.name)} <small>${esc(KINDS[t.kind] || '')} <span class="tb-stripes" aria-hidden="true"></span> ${ranked.length} ${ranked.length === 1 ? 'kører' : 'kører'}</small></h2><ol class="team-list">${rows || '<li class="empty-note">Holdet er klar. Svar på et spørgsmål, så kører du ud på vejen.</li>'}</ol></div>
-    <div class="panel team-invite"><h2>Inviter flere</h2><p>Del koden med dit hold. Op til ${MAX_MEMBERS} kan køre med.</p><div class="team-code"><b>${esc(t.code)}</b><button type="button" class="big-btn" data-team="share" data-code="${esc(t.code)}" data-name="${esc(t.name)}">Del koden</button></div></div>
-    <div class="panel">${nameForm}</div>
-    ${how}${privacy}
-    <div class="team-leave">${view.confirm ? `<p>Vil du forlade ${esc(t.name)}? Dine point på holdet forsvinder.</p><div class="acc-actions"><button type="button" class="big-btn acc-danger" data-team="leave-yes">Forlad holdet</button><button type="button" class="big-btn big-btn--ghost" data-team="cancel">Bliv</button></div>` : '<button type="button" class="acc-link acc-link--danger" data-team="leave">Forlad holdet</button>'}</div>
-  </section>`;
+    <details class="panel team-more"${view.confirm ? ' open' : ''}><summary>Dit brugernavn og holdet</summary>${nameForm}${privacy}
+      <div class="team-leave">${view.confirm ? `<p>Vil du forlade ${esc(t.name)}? Dine point på holdet forsvinder.</p><div class="acc-actions"><button type="button" class="big-btn acc-danger" data-team="leave-yes">Forlad holdet</button><button type="button" class="big-btn big-btn--ghost" data-team="cancel">Bliv</button></div>` : '<button type="button" class="acc-link acc-link--danger" data-team="leave">Forlad holdet</button>'}</div></details>
+    ${how}`);
 }
 
 /* ---------- a stand-in for Firestore (tests, and the local race preview on a development host) ---------- */

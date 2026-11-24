@@ -495,7 +495,9 @@ function mountMyCarRoad(slot){
 function playRace(el){const v=team.view(),rk=raceRanked();
   raceDispose=mountRace(el,{prev:team.lastOrder(),me:v.uid,motion:state.settings.motion&&!reduceMotion.matches,onOvertake:list=>{if(list.some(o=>o.uid===v.uid))void experience.play('rev-'+(loadGarage().active||'scooter'));}});
   team.rememberOrder(Object.fromEntries(rk.map(r=>[r.uid,r.place])));}
-function teamView(){const v=team?.view()||{status:'idle'};const rk=raceRanked();return renderTeamPage({view:v,account:RACE_DEMO?{state:'user'}:account?.status(),me:v.uid,ranked:rk,boost:v.team?boostOf(rk,v.uid):null,name:savedName(),garage:loadGarage()});}
+function teamView(){const v=team?.view()||{status:'idle'};const rk=raceRanked();return renderTeamPage({view:v,account:RACE_DEMO?{state:'user'}:account?.status(),me:v.uid,ranked:rk,boost:v.team?boostOf(rk,v.uid):null,name:savedName(),garage:loadGarage(),pendingCode:pendingTeamCode()});}
+/* 24 Nov 2026: a shared link #hold:CODE keeps the code for this tab, through a login, until the learner is on a team */
+function pendingTeamCode(){const m=/^#hold:([A-Za-z0-9]{6})$/.exec(location.hash);try{if(m)sessionStorage.setItem('teoriboost.team.code',m[1].toUpperCase());if(team?.view().team){sessionStorage.removeItem('teoriboost.team.code');return '';}return sessionStorage.getItem('teoriboost.team.code')||'';}catch{return m?m[1].toUpperCase():'';}}
 function mountTeamRace(){const host=document.getElementById('team-race'),v=team?.view(),rk=raceRanked();if(!host||!v?.team||!rk.length)return;
   raceDispose?.dispose();host.innerHTML=renderRace({ranked:rk,me:v.uid,team:v.team,max:innerWidth<700?4:7,href:'#hold'}).replace('<a class="road-loop is-race" href="#hold"','<div class="road-loop is-race is-big" role="img"').replace(/<\/a>$/,'</div>');playRace(host.firstElementChild);}
 /** Something changed in the team: redraw where it shows. */
@@ -513,12 +515,12 @@ window.addEventListener('hashchange',publishMe);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')publishMe();});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-team]');if(!b)return;const a=b.dataset.team;
   if(a==='leave')team.setConfirm(true);else if(a==='cancel')team.setConfirm(false);else if(a==='leave-yes'){void team.leave().then(()=>{team.rememberBoost(0);});}
-  else if(a==='share'){const text=`Kør om kap med mig på TeoriBoost: hold ${b.dataset.name}, kode ${b.dataset.code}`;const url=location.origin+location.pathname+'#hold';
+  else if(a==='share'){const text=`Kør om kap med mig på TeoriBoost: hold ${b.dataset.name}, kode ${b.dataset.code}`;const url=location.origin+location.pathname+'#hold:'+b.dataset.code;
     if(navigator.share)navigator.share({title:'TeoriBoost-hold',text,url}).catch(()=>{});else navigator.clipboard?.writeText(`${text} ${url}`).then(()=>toast('Koden er kopieret.'),()=>toast('Koden er '+b.dataset.code));}});
 document.addEventListener('submit',e=>{const f=e.target.closest('[data-team-form]');if(!f)return;e.preventDefault();const kind=f.dataset.teamForm;
   if(kind==='name'){const n=team.setName(f.elements.name.value);if(!n){toast('Brug 2 til 16 bogstaver eller tal.');return;}toast('Dit brugernavn er gemt.');teamChanged();}
-  else if(kind==='join')void team.join(f.elements.code.value);
-  else if(kind==='create')void team.create(f.elements.team.value,f.elements.kind.value);});
+  else{if(f.elements.name){if(!team.setName(f.elements.name.value)){toast('Brug 2 til 16 bogstaver eller tal i dit brugernavn.');f.elements.name.focus();return;}}
+    if(kind==='join')void team.join(f.elements.code.value);else if(kind==='create')void team.create(f.elements.team.value,f.elements.kind.value);}});
 /** The made-up team for ?race=demo on a development host: four others, one of them on fire. */
 function raceDemo(){const me='demo-me',day=dayOf(),car=(base,eq={},style={})=>JSON.stringify({base,equipped:eq,style});
   const seed={'teams/K7M2QX':{name:'Hold 3, Aarhus Køreskole',kind:'skole',owner:'a',members:['a','b','c','d',me]},
