@@ -520,6 +520,8 @@ export async function mountSituation3d(stage, spec) {
     else if (k === 'D 21') { sq(BLUE); g.lineWidth = 9; g.beginPath(); g.arc(88, 156, 28, 0, 7); g.arc(168, 156, 28, 0, 7); g.moveTo(88, 156); g.lineTo(122, 104); g.lineTo(168, 156); g.moveTo(104, 104); g.lineTo(138, 104); g.stroke(); }
     else if (k === 'E 18') { sq(BLUE); g.fillRect(104, 90, 48, 110); g.fillStyle = RED; g.fillRect(70, 62, 116, 30); }
     else if (k === 'E 19') { sq(BLUE); arrow(128, 128, 0, 150); }
+    else if (k === 'E 33') { sq(BLUE); g.font = '900 170px Rubik, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('P', 128, 138); } /* 24 Nov 2026: parking */
+    else if (k === 'D 15') disc(BLUE, BLUE, () => { arrow(128, 128, Math.PI * 1.25, 120); }); /* 24 Nov 2026: keep left, arrow down to the left */
     else if (k === 'F 11') { g.fillStyle = RED; g.beginPath(); g.moveTo(10, 70); g.lineTo(190, 70); g.lineTo(246, 128); g.lineTo(190, 186); g.lineTo(10, 186); g.closePath(); g.fill(); g.fillStyle = '#fff'; g.beginPath(); g.moveTo(26, 86); g.lineTo(184, 86); g.lineTo(228, 128); g.lineTo(184, 170); g.lineTo(26, 170); g.closePath(); g.fill(); g.fillStyle = '#C9CED4'; for (const y of [104, 128, 152]) g.fillRect(44, y - 5, 110, 10); }
     else if (k === 'E 68') { g.fillStyle = '#fff'; g.beginPath(); g.roundRect(8, 60, 240, 136, 16); g.fill(); g.fillStyle = '#2E8B57'; g.beginPath(); g.roundRect(18, 70, 220, 116, 10); g.fill(); g.fillStyle = '#fff'; g.font = '900 34px Rubik, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('MILJØ', 128, 110); g.fillText('ZONE', 128, 150); }
     else if (k.startsWith('C 55')) disc('#fff', RED, () => { g.fillStyle = INK; g.font = '900 96px Rubik, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(k.startsWith('C 55:') ? k.slice(5) : '80', 128, 136); });
@@ -551,7 +553,7 @@ export async function mountSituation3d(stage, spec) {
     if (a.t === 'lorry') a = { ...a, t: 'car', kind: 'lorry', dir: a.dir };
     if (a.t === 'person') { const pm = people[a.p]; if (pm) { const c = pm.clone(); c.position.set(a.x, 0, a.z); if (/^(dog|deer)/.test(a.p) && a.x > 0) c.scale.x = -1; scene.add(c); blob(a.x, a.z, 1.3, 1.3); } continue; }
     if (a.t === 'pedestrian') { box(0.5, 1.0, 0.35, 0x3F5F73, a.x, 0.9, a.z); const h = new T.Mesh(new T.SphereGeometry(0.22, 12, 10), mat(0xE9C9A0)); h.position.set(a.x, 1.65, a.z); scene.add(h); box(0.45, 0.55, 0.3, 0x1F2328, a.x, 0.28, a.z); blob(a.x, a.z, 1, 1); continue; }
-    if (a.t === 'cyclist') { if (cyclist) { const c = cyclist.clone(); c.position.set(a.x, 0, a.z); scene.add(c); blob(a.x, a.z, 1.0, 2.0); } continue; }
+    if (a.t === 'cyclist') { if (cyclist) { const mv = POV && a.rear, x = mv ? a.x - pose.f[0] * pose.back : a.x, z = mv ? a.z - pose.f[1] * pose.back : a.z; /* 24 Nov 2026: a cyclist behind you moves back with the car in take 2, as rear cars do, so it stays in the mirror */ const c = cyclist.clone(); c.position.set(x, 0, z); scene.add(c); blob(x, z, 1.0, 2.0); } continue; }
     const kind = a.kind || 'sedan';
     if (V && !a.learner && a.color) a = { ...a, color: ({ '#B5543A': '#4F7A8C', '#7C8FA0': '#C9A04A', '#C2CCD6': '#D9D2C0', '#3F5F73': '#8A4F3F', '#5F7F6B': '#9A5B6E' })[a.color] || a.color };
     const car = EXTRA_KINDS.has(kind) && !models[kind] ? buildExtra(T, kind, a.color) : makeCar(a.learner ? 'sedan' : kind === 'police' ? 'sedan' : kind, a.learner ? '#FFD60A' : kind === 'police' ? '#F4F5F7' : a.color, a.t !== 'parked' && !(a.learner && POV));
@@ -661,35 +663,57 @@ export async function mountSituation3d(stage, spec) {
     /* Rear-view mirror, only when spec.rearMirror says the traffic behind is part of the answer (see REAR_RULES in situation-specs.js); other scenes
        build no render target and do no extra pass. The housing is drawn on a canvas: a short stem down from the top edge, a rounded dark body with the
        ink line and an inner shadow round the glass; the glass under it is a small render from a camera looking backwards (every second frame), flipped. */
-    let mir = null;
-    if (spec.rearMirror) {
-      const hc = document.createElement('canvas'); hc.width = 1024; hc.height = 330; const h = hc.getContext('2d');
-      const rr = (x, y, w, ht, r, more) => { if (!more) h.beginPath(); h.moveTo(x + r, y); h.arcTo(x + w, y, x + w, y + ht, r); h.arcTo(x + w, y + ht, x, y + ht, r); h.arcTo(x, y + ht, x, y, r); h.arcTo(x, y, x + w, y, r); h.closePath(); };
+    /* 24 Nov 2026: side mirrors too ("du glemmer ofte bagspejl sidespejl"). spec.mirrors lists 'rear', 'left' and 'right'; spec.rearMirror alone
+       still means the rear one. Each mirror is the same idea: a small backwards render from where that mirror sits on the car, flipped, in a drawn housing. */
+    const wanted = [...new Set([...(spec.mirrors || []), ...(spec.rearMirror ? ['rear'] : [])])];
+    const housingTex = (w, ht, stem) => {
+      const hc = document.createElement('canvas'); hc.width = w; hc.height = ht; const h = hc.getContext('2d'), r0 = Math.min(66, ht * 0.24);
+      const rr = (x, y, ww, hh, r, more) => { if (!more) h.beginPath(); h.moveTo(x + r, y); h.arcTo(x + ww, y, x + ww, y + hh, r); h.arcTo(x + ww, y + hh, x, y + hh, r); h.arcTo(x, y + hh, x, y, r); h.arcTo(x, y, x + ww, y, r); h.closePath(); };
+      const top = stem ? 44 : 16, gx = 30, gy = top + 30;
       h.lineJoin = 'round'; h.lineWidth = 8; h.strokeStyle = '#0F1215';
-      rr(478, -20, 68, 84, 14); h.fillStyle = '#1F2328'; h.fill(); h.stroke();
-      rr(16, 44, 992, 270, 66); h.fillStyle = '#2B3138'; h.fill(); h.stroke();
-      rr(30, 56, 964, 40, 30); h.fillStyle = 'rgba(255,255,255,0.07)'; h.fill(); /* soft light on the top of the housing */
-      rr(46, 74, 932, 212, 42); h.globalCompositeOperation = 'destination-out'; h.fillStyle = '#000'; h.fill(); h.globalCompositeOperation = 'source-over';
-      h.save(); rr(46, 74, 932, 212, 42); h.clip();
-      h.beginPath(); h.rect(-60, -60, 1144, 450); rr(46, 74, 932, 212, 42, true); h.shadowColor = 'rgba(15,18,21,0.7)'; h.shadowBlur = 24; h.shadowOffsetY = 7; h.fillStyle = '#0F1215'; h.fill('evenodd');
-      h.shadowColor = 'transparent'; h.beginPath(); h.moveTo(560, 74); h.lineTo(680, 74); h.lineTo(560, 286); h.lineTo(440, 286); h.closePath(); h.fillStyle = 'rgba(255,255,255,0.09)'; h.fill(); /* glass sheen */
+      if (stem) { rr(w / 2 - 34, -20, 68, 84, 14); h.fillStyle = '#1F2328'; h.fill(); h.stroke(); }
+      rr(16, top, w - 32, ht - top - 16, r0); h.fillStyle = '#2B3138'; h.fill(); h.stroke();
+      rr(30, top + 12, w - 60, 40, 30); h.fillStyle = 'rgba(255,255,255,0.07)'; h.fill(); /* soft light on the top of the housing */
+      const gw = w - 2 * gx, gh = ht - gy - 44; rr(gx, gy, gw, gh, r0 * 0.64); h.globalCompositeOperation = 'destination-out'; h.fillStyle = '#000'; h.fill(); h.globalCompositeOperation = 'source-over';
+      h.save(); rr(gx, gy, gw, gh, r0 * 0.64); h.clip();
+      h.beginPath(); h.rect(-60, -60, w + 120, ht + 120); rr(gx, gy, gw, gh, r0 * 0.64, true); h.shadowColor = 'rgba(15,18,21,0.7)'; h.shadowBlur = 24; h.shadowOffsetY = 7; h.fillStyle = '#0F1215'; h.fill('evenodd');
+      h.shadowColor = 'transparent'; h.beginPath(); h.moveTo(w * 0.55, gy); h.lineTo(w * 0.66, gy); h.lineTo(w * 0.55, gy + gh); h.lineTo(w * 0.43, gy + gh); h.closePath(); h.fillStyle = 'rgba(255,255,255,0.09)'; h.fill(); /* glass sheen */
       h.restore();
-      const htex = new T.CanvasTexture(hc); htex.encoding = T.sRGBEncoding; signTextures.push(htex);
-      const ratio = 932 / 212, rtm = new T.WebGLRenderTarget(Math.round(ratio * 96), 96); rtm.texture.encoding = T.sRGBEncoding; rtm.texture.wrapS = T.RepeatWrapping; rtm.texture.repeat.x = -1; rtm.texture.offset.x = 1; /* a mirror shows the picture flipped */
-      const flat = map => new T.MeshBasicMaterial({ map, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, fog: false });
-      mir = { rt: rtm, ratio, glass: new T.Mesh(new T.PlaneGeometry(1, 1), flat(rtm.texture)), housing: new T.Mesh(new T.PlaneGeometry(1, 1), flat(htex)), cam: new T.PerspectiveCamera(15, ratio, 0.5, 160) };
-      mir.glass.renderOrder = 1000; mir.housing.renderOrder = 1001; for (const o of [mir.glass, mir.housing]) { o.frustumCulled = false; cockpit.add(o); } mirrors.push(mir);
+      const t = new T.CanvasTexture(hc); t.encoding = T.sRGBEncoding; signTextures.push(t);
+      return { tex: t, glass: [gx / w, gy / ht, gw / w, gh / ht] };
+    };
+    const flat = map => new T.MeshBasicMaterial({ map, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, fog: false });
+    /* car frame: nose +x, right +z, metres. pos = where the glass sits, dir = where it looks (backwards, a side mirror turned a little outwards) */
+    const KIND = { rear: { w: 1024, h: 330, stem: true, fov: 15, pos: [0.6, 1.4, 0], dir: [-1, -0.03, 0] }, left: { w: 620, h: 400, stem: false, fov: 24, pos: [0.55, 1.05, -1.02], dir: [-1, -0.04, -0.2] }, right: { w: 620, h: 400, stem: false, fov: 24, pos: [0.55, 1.05, 1.02], dir: [-1, -0.04, 0.2] } };
+    for (const which of wanted) {
+      const k = KIND[which]; if (!k) continue;
+      const hs = housingTex(k.w, k.h, k.stem), ratio = (hs.glass[2] * k.w) / (hs.glass[3] * k.h);
+      const rt = new T.WebGLRenderTarget(Math.round(ratio * 110), 110); rt.texture.encoding = T.sRGBEncoding; rt.texture.wrapS = T.RepeatWrapping; rt.texture.repeat.x = -1; rt.texture.offset.x = 1; /* a mirror shows the picture flipped */
+      const m = { which, k, hs, rt, ratio, glass: new T.Mesh(new T.PlaneGeometry(1, 1), flat(rt.texture)), housing: new T.Mesh(new T.PlaneGeometry(1, 1), flat(hs.tex)), cam: new T.PerspectiveCamera(k.fov, ratio, 0.3, 160) };
+      m.glass.renderOrder = 1000; m.housing.renderOrder = 1001; for (const o of [m.glass, m.housing]) { o.frustumCulled = false; cockpit.add(o); } mirrors.push(m);
+    }
+    if (mirrors.length) {
       const p0 = new T.Vector3(), fw = new T.Vector3();
       mirrorPass = m4 => {
-        cockpit.visible = false; p0.set(0.6, 1.4, 0).applyMatrix4(m4); fw.set(-1, 0, 0).transformDirection(m4);
-        mir.cam.position.copy(p0); mir.cam.lookAt(p0.x + fw.x * 20, p0.y + fw.y * 20 - 0.6, p0.z + fw.z * 20);
-        renderer.setRenderTarget(mir.rt); renderer.render(scene, mir.cam); renderer.setRenderTarget(null); cockpit.visible = true;
+        cockpit.visible = false;
+        for (const m of mirrors) {
+          p0.set(...m.k.pos).applyMatrix4(m4); fw.set(...m.k.dir).normalize().transformDirection(m4);
+          m.cam.position.copy(p0); m.cam.lookAt(p0.x + fw.x * 20, p0.y + fw.y * 20, p0.z + fw.z * 20);
+          renderer.setRenderTarget(m.rt); renderer.render(scene, m.cam);
+        }
+        renderer.setRenderTarget(null); cockpit.visible = true;
       };
     }
     layoutCockpit = cam => {
       const vh = 2 * Math.tan(cam.fov * Math.PI / 360), vw = vh * cam.aspect, bh = vh * 0.2;
       dash.scale.set(vw, bh, 1); dash.position.set(0, -vh / 2 + bh / 2, -1);
-      if (mir) { const W = Math.min(vw * 0.42, vh * 0.72), H = W * 330 / 1024; mir.housing.scale.set(W, H, 1); mir.housing.position.set(0, vh / 2 - H / 2, -1); mir.glass.scale.set(W * 940 / 1024, H * 220 / 330, 1); mir.glass.position.set(0, vh / 2 - H / 2 - H * 14 / 330, -1); }
+      for (const m of mirrors) {
+        const rear = m.which === 'rear', W = rear ? Math.min(vw * 0.42, vh * 0.72) : Math.min(vw * 0.2, vh * 0.34), H = W * m.k.h / m.k.w;
+        /* rear: top middle; side mirrors: low in the corners, just above the bonnet line */
+        const cx = rear ? 0 : (m.which === 'left' ? -1 : 1) * (vw / 2 - W / 2 - vw * 0.025), cy = rear ? vh / 2 - H / 2 : -vh / 2 + bh + H / 2 + vh * 0.02;
+        m.housing.scale.set(W, H, 1); m.housing.position.set(cx, cy, -1);
+        const [gx, gy, gw, gh] = m.hs.glass; m.glass.scale.set(W * gw, H * gh, 1); m.glass.position.set(cx - W / 2 + W * (gx + gw / 2), cy + H / 2 - H * (gy + gh / 2), -1);
+      }
     };
   }
   // Hard sun shadows, drawn once (the scene is still apart from the camera sway): sharp-edged cast shadows like a cel drawing.

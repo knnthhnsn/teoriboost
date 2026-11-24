@@ -16,7 +16,64 @@ export const SITUATIONS = Object.freeze({
   // Hilse med hornet: vennen paa fortovet, og en anden fodgaenger der ikke er imponeret over dyttet.
   'q-212': { road: 'country', actors: [learner(3), { t: 'person', p: 'phone-walker', x: 5.4, z: -9 }, { t: 'person', p: 'wheelchair-finger', x: 4.7, z: -2.5, joke: true }], extras: { town: true } },
   // Sidevind forbi en lastbil.
-  'q-176': { road: 'highway', actors: [learner(1, 1.9), { t: 'car', kind: 'lorry', x: -1.7, z: -3, color: '#C2CCD6' }], extras: { wind: true } }
+  'q-176': { road: 'highway', actors: [learner(1, 1.9), { t: 'car', kind: 'lorry', x: -1.7, z: -3, color: '#C2CCD6' }], extras: { wind: true } },
+  // ===== 24 Nov 2026: the photo questions q-001 to q-083 get their own 3D situations (Lær and Øv; the AI photo stays in the Prøve). =====
+  // Only the ones the automatic scene got wrong are written out here; the rest come from composeSpec like every other question.
+  // view: 'outside' forces the chase camera where the subject is the learner's own car or traffic behind it.
+  'q-002': { road: 'country', actors: [learner(2), { t: 'person', p: 'road-worker', x: -3.0, z: -10 }], extras: { roadworks: true, signs: ['C 55:50'] } },
+  'q-003': { road: 'country', actors: [learner(2, 3.2)], extras: { town: true }, cam: { pos: [8.4, 1.5, 6.2], look: [3.8, 0.45, 2.6] }, mark: [4.2, 0.4, 3.53] },
+  'q-006': { road: 'country', actors: [{ ...learner(2, 3.4), signal: 'L' }, { t: 'cyclist', x: 2.0, z: 10, rear: true }], extras: { town: true }, view: 'driver', mirrors: ['rear', 'left'] },
+  'q-008': { road: 'country', actors: [{ t: 'car', learner: true, x: 7.4, z: -4, rot: 0 }, { t: 'person', p: 'kid-ball', x: 6.4, z: -7.4 }, { t: 'parked', kind: 'hatch', x: 4.7, z: 6, color: '#7C8FA0' }], extras: { town: true }, view: 'outside', cam: { pos: [-3.5, 7.5, 6], look: [5.6, 0.4, -4.8] } },
+  'q-009': { road: 'country', actors: [learner(2, 3.0), { t: 'cyclist', x: 4.9, z: 11, rear: true }], extras: { cyclePath: true, town: true }, view: 'driver', mirrors: ['rear', 'right'] },
+  'q-010': { road: 'highway', actors: [learner(2), { t: 'car', kind: 'hatch', x: 1.7, z: -14, color: '#B5543A' }], extras: {} },
+  'q-011': { road: 'country', actors: [learner(2, 3.7), { t: 'car', kind: 'scooter', x: 0.6, z: 4.2, color: '#3F5F73', rear: true }], extras: { lanes: 2, town: true }, view: 'driver', mirrors: ['rear', 'left'] },
+  'q-012': { road: 'junction', jz: -16, actors: [learner(4), { t: 'car', kind: 'lorry', x: 0.9, z: -10, color: '#C2CCD6', signal: 'R' }], extras: { town: true } },
+  'q-013': { road: 'country', env: 'night', actors: [learner(4), { t: 'car', kind: 'hatch', x: 1.7, z: -6, color: '#7C8FA0' }, { t: 'car', kind: 'scooter', x: -1.7, z: -42, dir: 'toward', color: '#3F5F73' }], extras: {} },
+  'q-014': { road: 'junction', jz: -12, actors: [{ ...learner(2), signal: 'R' }, { t: 'cyclist', x: 4.9, z: 7.5, rear: true }], extras: { cyclePath: true }, view: 'driver', mirrors: ['rear', 'right'] },
+  'q-016': { road: 'country', actors: [learner(4), { t: 'parked', kind: 'sedan', x: 4.7, z: -5, color: '#7C8FA0' }, { t: 'parked', kind: 'hatch', x: 4.7, z: -12.5, color: '#B5543A' }, { t: 'person', p: 'kid-ball', x: 2.2, z: -8.2 }], extras: { town: true } },
+  'q-018': { road: 'country', actors: [{ t: 'car', learner: true, x: -3.6, z: -1.2 }], extras: {}, studio: ['coffee-clock'], cam: { pos: [0.8, 5.8, 12.5], look: [0.8, 1.5, -0.6] } },
+  'q-021': { road: 'country', actors: [learner(4)], extras: { bridge: true, bend: 'right' } },
+  'q-022': { road: 'country', env: 'rain', actors: [learner(2)], extras: {}, cam: { pos: [5.1, 2.0, 9.0], look: [1.7, 0.8, 3.4] }, mark: [2.5, 0.8, 4.15] },
+  'q-024': { road: 'country', actors: [learner(4), { t: 'parked', kind: 'sedan', x: 4.7, z: -6, color: '#7C8FA0' }, { t: 'parked', kind: 'hatch', x: 4.7, z: -12, color: '#B5543A' }, { t: 'person', p: 'dad-shoulders', x: 3.6, z: -9 }], extras: { town: true, school: true } },
+  'q-025': { road: 'rail', rz: -14, actors: [learner(2), { t: 'car', kind: 'hatch', x: 1.7, z: -22, color: '#B5543A' }, { t: 'car', kind: 'lorry', x: 1.7, z: -31, color: '#7C8FA0' }], extras: { barrier: 'up' } },
+  'q-026': { road: 'junction', jz: -16, actors: [learner(4), { t: 'car', kind: 'police', x: -2.4, z: -13, rot: Math.PI / 2 + 0.5, blink: true, color: '#F4F5F7' }], extras: { trafficLight: 'green' } },
+  'q-027': { road: 'junction', jz: -16, actors: [learner(4), { t: 'car', kind: 'hatch', x: 1.7, z: -16, color: '#B5543A' }, { t: 'car', kind: 'sedan', x: 1.7, z: -23, color: '#7C8FA0' }, { t: 'car', kind: 'lorry', x: 1.7, z: -31, color: '#C2CCD6' }], extras: { trafficLight: 'green' } },
+  'q-028': { road: 'junction', jz: -14, actors: [learner(4), { t: 'car', kind: 'hatch', x: 5.9, z: -12.4, rot: Math.PI, signal: 'R', color: '#B5543A' }], extras: {} },
+  'q-029': { road: 'junction', jz: -14, actors: [learner(2), { t: 'person', p: 'phone-walker', x: -1.2, z: -9.5 }, { t: 'person', p: 'pram-mum', x: 2.6, z: -9.8 }], extras: { trafficLight: 'red', zebra: true, lanes: 2 } },
+  'q-031': { road: 'country', actors: [{ t: 'car', learner: true, x: 8.2, z: 0, rot: Math.PI }, { t: 'car', kind: 'hatch', x: 1.7, z: 8, color: '#B5543A' }, { t: 'cyclist', x: 4.9, z: -8, dir: 'toward' }], extras: { cyclePath: true }, view: 'outside', cam: { pos: [-5, 6.5, 12], look: [5, 0.4, -1] } },
+  'q-032': { road: 'junction', jz: -14, actors: [learner(4)], extras: { signs: ['B 13'], paint: ['stop'] } },
+  'q-033': { road: 'junction', jz: -14, actors: [learner(4), { t: 'car', kind: 'sedan', x: 5.9, z: -12.4, rot: Math.PI, color: '#7C8FA0' }], extras: {} },
+  'q-034': { road: 'junction', jz: -12, actors: [{ ...learner(2), signal: 'R' }, { t: 'cyclist', x: 4.9, z: 5.6, rear: true }], extras: { cyclePath: true }, view: 'driver', mirrors: ['right'] },
+  'q-036': { road: 'country', env: 'rain', actors: [learner(2)], extras: { signs: ['C 55:80'] } },
+  'q-037': { road: 'country', actors: [learner(2, 3.7)], extras: { lanes: 2 }, view: 'driver', mirrors: ['rear', 'left'] },
+  'q-038': { road: 'country', actors: [learner(4), { t: 'parked', kind: 'sedan', x: 2.4, z: -9, color: '#F4F5F7' }, { t: 'car', kind: 'hatch', x: -1.5, z: -15, dir: 'toward', color: '#5F7F6B' }], extras: { town: true, narrow: true } },
+  'q-043': { road: 'country', env: 'rain', actors: [learner(4), { t: 'car', kind: 'hatch', x: 1.7, z: -40, color: '#B5543A' }, { t: 'car', kind: 'sedan', x: 1.7, z: -47, color: '#7C8FA0' }, { t: 'car', kind: 'lorry', x: 1.7, z: -56, color: '#C2CCD6' }], extras: { lampsOn: true } },
+  'q-045': { road: 'country', actors: [learner(2)], extras: { town: true }, cam: { pos: [5.9, 3.4, 6.6], look: [1.7, 1.1, 2.4] }, mark: [2.1, 1.05, 1.85] },
+  'q-047': { road: 'country', actors: [{ t: 'car', learner: true, x: -3.6, z: -1.2 }], extras: {}, studio: ['laptop'], cam: { pos: [0.8, 5.8, 12.5], look: [0.8, 1.5, -0.6] } },
+  'q-048': { road: 'country', actors: [{ t: 'car', learner: true, x: -3.6, z: -1.2 }], extras: {}, studio: ['laptop', 'coffee-clock'], cam: { pos: [0.8, 5.8, 12.5], look: [0.8, 1.5, -0.6] } },
+  'q-051': { road: 'junction', jz: -14, actors: [learner(-0.8, 3.4)], extras: { town: true }, view: 'outside', cam: { pos: [-4.5, 9, 9], look: [3, 0, -6] } },
+  'q-052': { road: 'country', actors: [{ ...learner(-1, 3.4), blink: true }, { t: 'person', p: 'phone-walker', x: 5.4, z: -0.4 }], extras: { zebra: true, town: true }, view: 'outside' },
+  'q-053': { road: 'country', actors: [learner(0, 3.6)], extras: {}, view: 'outside' },
+  'q-054': { road: 'country', actors: [learner(0, 3.4), { t: 'person', p: 'granny-rollator', x: 5.3, z: 0.6 }], extras: { town: true, signs: ['C 62'] }, view: 'outside' },
+  'q-055': { road: 'country', actors: [learner(4)], extras: { town: true, bays: true, signs: ['E 33'] } },
+  'q-056': { road: 'country', actors: [learner(0, 4.3)], extras: { cyclePath: true, town: true }, view: 'outside' },
+  'q-057': { road: 'country', actors: [learner(4), { t: 'person', p: 'wheelchair-cheer', x: 5.6, z: -6 }], extras: { town: true, bays: true, signs: ['E 33'] } },
+  'q-059': { road: 'junction', jz: -14, actors: [learner(4)], extras: { signs: ['B 13'], paint: ['stop'] } },
+  'q-060': { road: 'country', env: 'rain', actors: [learner(2)], extras: { signs: ['C 55:60'] } },
+  'q-061': { road: 'country', actors: [learner(4)], extras: { island: true, signs: ['D 15'] } },
+  'q-063': { road: 'country', env: 'rain', actors: [learner(2)], extras: {}, cam: { pos: [5.1, 2.0, 9.0], look: [1.7, 0.8, 3.4] }, mark: [2.5, 0.8, 4.15] },
+  'q-064': { road: 'junction', jz: -12, actors: [learner(2)], extras: { town: true, signs: ['B 13'], paint: ['stop'] } },
+  'q-065': { road: 'junction', jz: -14, actors: [learner(4), { t: 'cyclist', x: 6.4, z: -15.2, rot: Math.PI }], extras: { sharkTeeth: true } },
+  'q-066': { road: 'junction', jz: -12, actors: [{ ...learner(2), signal: 'R' }, { t: 'cyclist', x: 4.9, z: 5.2, rear: true }], extras: { cyclePath: true }, view: 'driver', mirrors: ['rear', 'right'] },
+  'q-067': { road: 'junction', jz: -14, actors: [learner(4)], extras: {} },
+  'q-070': { road: 'country', actors: [{ t: 'car', learner: true, x: -3.6, z: -1.2 }], extras: {}, studio: ['licence', 'coffee-clock'], cam: { pos: [0.8, 5.8, 12.5], look: [0.8, 1.5, -0.6] } },
+  'q-071': { road: 'country', actors: [{ t: 'car', learner: true, x: 8.2, z: 0, rot: Math.PI }, { t: 'cyclist', x: 3.0, z: -9, dir: 'toward' }, { t: 'car', kind: 'sedan', x: -1.7, z: -20, dir: 'toward', color: '#7C8FA0' }], extras: {}, view: 'outside', cam: { pos: [-5, 6.5, 12], look: [5, 0.4, -1] } },
+  'q-074': { road: 'country', actors: [learner(4), { t: 'person', p: 'kid-ball', x: 0.6, z: -11 }], extras: { town: true, signs: ['E 51'] } },
+  'q-075': { road: 'country', actors: [learner(4), { t: 'cyclist', x: 0.9, z: -7 }, { t: 'cyclist', x: 2.6, z: -7.6 }], extras: { town: true, bumps: true } },
+  'q-076': { road: 'junction', jz: -16, actors: [learner(4), { t: 'car', kind: 'hatch', x: 1.7, z: -4, color: '#B5543A', signal: 'L' }, { t: 'car', kind: 'scooter', x: -1.7, z: -30, dir: 'toward', color: '#3F5F73' }], extras: { trafficLight: 'green' } },
+  'q-078': { road: 'rail', rz: -14, actors: [learner(2)], extras: { redLights: true, barrier: null, train: true, town: true } },
+  'q-082': { road: 'country', actors: [learner(2, 3.3)], extras: {}, view: 'outside', cam: { pos: [-1.2, 2.8, 10.5], look: [3.6, 0.3, 1.2] } },
+  'q-083': { road: 'country', actors: [learner(2, 3.3)], extras: {}, view: 'outside', cam: { pos: [-1.2, 2.8, 10.5], look: [3.6, 0.3, 1.2] } },
 });
 
 // Every other schematic question gets a scene from its own context sentence: a road kind plus only the road users the sentence names.
@@ -209,7 +266,7 @@ export function composeSpec(q) {
       } else { const lorry = actors.find(x => x.kind === 'lorry' && !x.learner); if (lorry) { lorry.x = 5.3; lorry.z = -4; lorry.rot = Math.PI / 2; delete lorry.dir; } else actors.push({ t: 'car', kind: 'hatch', x: 5.3, z: -3, rot: Math.PI / 2, color: '#B5543A' }); }
     }
     if (/rager\s+(?:\d[\d,.]*\s*(?:meter|m)\s+)?ud over|fastgjort (?:stige|bræt)|stige\s+\d/i.test(t) && !/sofa/i.test(t)) ex.overhang = true;
-    if (/slæb|tov(?![a-zæøå])/i.test(t) && /bil/i.test(t) && !ex.tow) { ex.tow = { x: lx, z1: lz - 2.4, z2: lz - 6.4 }; actors.push({ t: 'car', kind: 'sedan', x: lx, z: lz - 9, color: '#7C8FA0', blink: true }); }
+    if (/slæb|(?<![a-zæøå])tov(?![a-zæøå])/i.test(t) && /bil/i.test(t) && !ex.tow) /* 24 Nov 2026: whole word only, "fortov" drew a tow rope */ { ex.tow = { x: lx, z1: lz - 2.4, z2: lz - 6.4 }; actors.push({ t: 'car', kind: 'sedan', x: lx, z: lz - 9, color: '#7C8FA0', blink: true }); }
     if (/(?:rød )?trekant bagpå/i.test(t) && !actors.some(x => x.kind === 'tractor')) actors.push({ t: 'car', kind: 'tractor', x: 1.7, z: -8, color: '#4F7A47' });
     if (/pludseligt? smallere/i.test(t)) { ex.narrow = true; actors.push({ t: 'car', kind: 'sedan', x: -1.4, z: -10, dir: 'toward', color: '#7C8FA0' }); }
     if (/tæt bag bilen foran/i.test(t) && !actors.some(x => !x.learner && x.t === 'car')) actors.push({ t: 'car', x: lx, z: lz - 7.5, color: '#B5543A' });
@@ -222,7 +279,8 @@ export function composeSpec(q) {
     if (/vognbaneassistent|tre baner i din retning|skifte fra højre til venstre vognbane/i.test(t) && !ex.lanes) { ex.lanes = 3; if (Lr) Lr.x = base.road === 'highway' ? 3.3 : 3.7; if (/skifte fra højre til venstre/i.test(t) && Lr) Lr.signal = 'L'; }
   }
   if (/nødtelefon/i.test(t)) { ex.sos = true; base.road = 'highway'; }
-  if (/hvide vinkler|hajtænder|hajtand/i.test(t)) { ex.sharkTeeth = true; delete ex.signs; }
+  /* 24 Nov 2026: shark teeth belong at a junction (they were painted across a straight road), and "uden ... hajtænder" means none */
+  if (/hvide vinkler|hajtænder|hajtand/i.test(t) && !/(uden|ingen|ikke)[^.]{0,60}(hajtænder|hajtand|hvide vinkler)/i.test(t)) { ex.sharkTeeth = true; delete ex.signs; if (base.road === 'country') { base.road = 'junction'; base.jz = -14; } }
   const unsupported = false; // every layout the questions name now has a scene
   const generic = unsupported || ((base.road === 'country' || base.road === 'highway') && actors.every(x => x.learner) && !Object.keys(ex).length && (!env || env === 'day'));
   // Studio props for the abstract questions (licence, exam, drink, pills, tiredness, electric car ...), only when nothing else shows the situation.
@@ -321,4 +379,4 @@ export function withRearMirror(s, t) {
   }
   return s;
 }
-export const situationFor = q => { const s = SITUATIONS[q.id] ? { ...SITUATIONS[q.id], generic: false } : composeSpec(q); return withRearMirror({ ...s, ...viewFor(s) }, q.context || ''); };
+export const situationFor = q => { const s = SITUATIONS[q.id] ? { ...SITUATIONS[q.id], generic: false } : composeSpec(q); return withRearMirror({ ...s, ...viewFor(s), ...(s.view ? { view: s.view, viewWhy: 'set by hand' } : {}) }, q.context || ''); }; /* 24 Nov 2026: a hand-written spec may fix the view */
