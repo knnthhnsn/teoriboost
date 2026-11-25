@@ -91,347 +91,347 @@ const s = (id, title, facts, sourceIds, curriculumRef) => ({ id, title, facts, s
 export const CHAPTERS = [
   {
     id: 'bil', title: 'Bilen før turen', tagline: 'Sæde, spejle og alt det, der skal sidde fast', color: '#36D399', icon: 'car', sections: [
-      s('cockpit', 'Indstilling og udsyn', [
-        'Sæde, rat og spejle indstilles før kørslen, så føreren kan styre sikkert og orientere sig effektivt.',
-        'Nakkestøtten skal passe til førerens højde og mindske risikoen for nakkeskade.',
-        'Løse genstande kan flyve frem ved en hård opbremsning og bør sikres.'
+      s('cockpit', 'Sæde, spejle og udsyn', [
+        'Indstil sæde, rat og spejle, før du kører. Så kan du styre sikkert og orientere dig godt.',
+        'Nakkestøtten skal passe til din højde. Så mindsker du risikoen for nakkeskade.',
+        'Løse ting kan flyve frem ved hård opbremsning, så du bør sikre dem.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 1.1 og 2.1 · modul 2'),
-      s('assistenter', 'Førerassistenter', [
-        'Førerassistenter kan advare eller gribe ind, men føreren har fortsat ansvaret for kørslen.',
-        'Kameraer og sensorer kan fejle eller give misvisende oplysninger.',
-        'Adaptiv fartpilot fjerner ikke behovet for at holde øje med vej, afstand og hastighed.'
+      s('assistenter', 'Førerassistenter og ansvar', [
+        'Assistenterne kan advare eller gribe ind. Men du har stadig ansvaret for kørslen.',
+        'Kameraer og sensorer kan fejle eller give vildledende oplysninger.',
+        'Adaptiv fartpilot gør ikke, at du kan slippe for at holde øje med vejen, afstanden og farten.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 1.1.6 · modul 2'),
-      s('bremser', 'Styring og bremser', [
-        'Bremsepedalen må ikke kunne trædes i bund ved hårdt tryk og må normalt ikke synke ved konstant tryk; pedalvandringen afhænger af bilfabrikatet.',
-        'Bilen må ikke trække tydeligt til siden ved en normal opbremsning på jævn vej.',
-        'Fejl i styretøj eller bremser skal undersøges, før bilen bruges videre.'
+      s('bremser', 'Bremser og styretøj', [
+        'Bremsepedalen må ikke kunne trædes i bund ved hårdt tryk. Den må normalt ikke synke ved konstant tryk. Pedalvandringen afhænger af bilens fabrikat.',
+        'Bilen må ikke trække tydeligt til siden, når du bremser normalt på jævn vej.',
+        'Fejl i styretøj eller bremser skal undersøges, før du kører videre.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 1.2.2-1.2.3 · modul 2'),
       s('lys-daek', 'Lys, horn og dæk', [
-        'Lygter og reflekser skal være hele og rene, så bilen kan ses og signalerne forstås.',
-        'Dæk skal have mindst 1,6 mm mønsterdybde i hovedmønstret og være ubeskadigede.',
-        'Et blinklys, der blinker usædvanligt hurtigt, kan være tegn på en defekt blinklygte.'
+        'Lygter og reflekser skal være hele og rene. Så kan andre se bilen og forstå dine signaler.',
+        'Dækkene skal have mindst 1,6 millimeter mønsterdybde i hovedmønstret. Og de skal være ubeskadigede.',
+        'Hvis blinklyset blinker usædvanligt hurtigt, kan en blinklygte være defekt.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 1.2.4 og 1.2.7 · modul 2'),
-      s('motor-dokumenter', 'Motor, miljø og papirer', [
-        'Olie og kølervæske kontrolleres efter bilens anvisninger; advarsler må ikke bare ignoreres.',
-        'Unormal røg eller støj kan være tegn på fejl, der kræver kontrol.',
-        'Registreringsattesten beskriver bilen og er vigtig ved blandt andet ejerskifte og kørsel med påhæng.'
+      s('motor-dokumenter', 'Motor og papirer', [
+        'Tjek olie og kølervæske, som bilens anvisninger beskriver. Advarsler må du ikke ignorere.',
+        'Usædvanlig røg eller støj kan være tegn på en fejl. Den skal tjekkes.',
+        'Registreringsattesten beskriver bilen. Du har brug for den blandt andet ved ejerskifte og kørsel med påhæng.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 1.2.5-1.3 · modul 2')
     ]
   },
   {
     id: 'grundmanoevrer', title: 'Grundmanøvrer', tagline: 'Langsomt er også en hastighed', color: '#60A5FA', icon: 'parking', sections: [
       s('start-stop', 'Start og standsning', [
-        'Ved igangsætning fra vejkant skal der altid gives tegn i god tid; tegnet giver ikke fortrinsret.',
-        'Hastigheden ved igangsætning skal være så lav, at bilen hele tiden kan kontrolleres.',
-        'Standsning bør ske roligt og på et sted, hvor bilen ikke skaber fare eller unødig ulempe.'
+        'Når du sætter i gang fra vejkanten, giv altid tegn i god tid. Tegnet giver dig ikke fortrinsret.',
+        'Kør så langsomt fra start, at du hele tiden har bilen under kontrol.',
+        'Du bør standse roligt. Vælg et sted, hvor bilen ikke skaber fare eller unødig ulempe.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 2.2 og 7.1 · modul 2 og 3'),
-      s('rat-blik', 'Rat og blik', [
-        'Bilen søger ofte i den retning, føreren ser, så blikket skal flyttes mod den ønskede kørebane.',
-        'Hænderne bør give et sikkert greb og mulighed for jævn ratbetjening.',
-        'Ved lav fart kan store ratudslag være nødvendige, men omgivelserne skal stadig kontrolleres.'
+      s('rat-blik', 'Blik og ratbetjening', [
+        'Bilen har ofte tendens til at køre der, hvor du kigger. Flyt derfor blikket hen mod den kørebane, du vil køre i.',
+        'Dine hænder bør have et sikkert greb, så du kan styre jævnt.',
+        'Ved lav fart kan du få brug for store ratudslag. Men du skal stadig holde øje med omgivelserne.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 2.3-2.6 · modul 2'),
       s('bakning', 'Bakning', [
-        'Bakning må kun ske, når det kan udføres uden fare eller ulempe for andre.',
-        'Føreren skal orientere sig hele vejen rundt og være særlig opmærksom på lave og små trafikanter.',
-        'Bakkamera og sensorer er hjælpemidler og erstatter ikke direkte orientering.'
+        'Du må kun bakke, når det sker uden fare eller ulempe for andre.',
+        'Orientér dig hele vejen rundt. Vær særlig opmærksom på små og lave trafikanter.',
+        'Bakkamera og sensorer hjælper dig. De erstatter ikke, at du selv kigger dig omkring.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 2.5 og 7.5 · modul 2 og 4'),
-      s('parkering-manovre', 'Forlæns parkering ved vejkant', [
-        'Øvelsen i afsnit 2.7 trænes praktisk på lukket øvelsesplads med kørelærer; appen kan kun forberede observationer og rækkefølge.',
-        'Ved forlæns parkering ved højre vejkant skal farten være så lav, at føreren kan bedømme bilens bredde og hjulenes placering.',
-        'Blik og orientering skal fordeles mellem pladsen, bilens hjørner og trafikanter omkring manøvren.',
-        'På øvelsespladsen trænes først med god plads til korrektion og derefter på et mere begrænset område.',
-        'Slutstillingen skal være parallel med kanten og med højre hjul højst 20 cm fra kanten; et korrekt appsvar gennemfører ikke den praktiske færdighed.'
+      s('parkering-manovre', 'Parker forlæns ved vejkanten', [
+        'Øvelsen i afsnit 2.7 trænes praktisk på en lukket øvelsesplads med kørelæreren. Appen kan kun forberede dig med observationer og rækkefølgen.',
+        'Ved forlæns parkering i højre vejkant skal farten være så lav, at du kan vurdere bilens bredde og hjulenes placering.',
+        'Fordel blikket mellem pladsen, bilens hjørner og trafikanterne omkring dig.',
+        'På øvelsespladsen øver du først med god plads til at rette op. Derefter øver du på et mere begrænset område.',
+        'Slutstillingen skal være parallel med kanten, og højre hjul må højst være 20 centimeter fra kanten. Et rigtigt svar i appen gennemfører ikke den praktiske færdighed.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 2.7.1 · modul 2 · praktisk øvelse på lukket øvelsesplads'),
-      s('doer-aabning', 'Døre og udstigning', [
-        'Før en dør åbnes, skal fører og passagerer sikre sig, at ingen cyklist eller anden trafik udsættes for fare.',
-        'Åbning af vogndøre samt af- og påstigning skal ske uden fare eller unødig ulempe.',
-        'Efter parkering skal bilen sikres mod at sætte i gang og mod uberettiget brug.'
+      s('doer-aabning', 'Åbn døren med omtanke', [
+        'Før døren åbnes, skal du og passagererne sikre jer, at ingen cyklister eller anden trafik kommer i fare.',
+        'Åbn vogndøre, og stig af og på uden fare eller unødig ulempe.',
+        'Efter parkering skal du sikre bilen mod at blive sat i gang og mod uberettiget brug.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.18.3-7.18.5 · modul 4'),
-      s('vending', 'Vending', [
-        'En vending kræver tilstrækkeligt udsyn og plads samt løbende orientering.',
-        'Manøvren skal afbrydes, hvis en trafikant pludselig kommer ind i området.',
-        'På motorvej og til- eller frakørselsvej er vending og bakning forbudt.'
+      s('vending', 'Vend sikkert', [
+        'Vending kræver godt udsyn, nok plads og hele tiden orientering.',
+        'Afbryd vendingen, hvis en trafikant pludselig kommer ind i området.',
+        'Vending og bakning er forbudt på motorvej og på til- og frakørselsveje.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 2.9, 7.5 og 7.16 · modul 2 og 4')
     ]
   },
   {
     id: 'koeretoejer', title: 'Køretøjer omkring dig', tagline: 'Store køretøjer ser mindre, end du tror', color: '#A78BFA', icon: 'car', sections: [
       s('blindzoner', 'Blindzoner', [
-        'Spejle viser ikke nødvendigvis hele området ved siden af og bag bilen.',
-        'Et kort skulderblik kan være nødvendigt før vognbaneskift eller sving.',
-        'Store køretøjer har store områder, hvor føreren kan have svært ved at se andre.'
+        'Spejle viser ikke altid hele området ved siden af og bag bilen.',
+        'Før vognbaneskift eller sving kan du få brug for et kort skulderblik.',
+        'Store køretøjer har store blinde områder. Her kan du have svært ved at se andre.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 3.1.3 og 3.2 · modul 1'),
       s('tunge', 'Lastbiler og busser', [
-        'Et langt køretøj kan bruge ekstra plads ved sving og kan komme tæt på kantstenen.',
-        'Tunge køretøjer kan accelerere langsommere og kræver længere plads til visse manøvrer.',
-        'Man bør undgå at opholde sig unødigt i områder, hvor den tunge fører kan have blindzone.'
+        'Lange køretøjer har brug for ekstra plads i sving og kan komme tæt på kantstenen.',
+        'Tunge køretøjer kan accelerere langsommere og har brug for længere plads til visse manøvrer.',
+        'Du bør ikke opholde dig unødigt i områder, hvor den tunge bils fører kan have blindzone.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 3.2.2 · modul 1'),
       s('tohjulede', 'Motorcykler og knallerter', [
-        'Tohjulede kan være svære at bedømme korrekt på afstand, især i mørke.',
-        'Motorcyklister kan ændre placering for at få udsyn eller undgå ujævnheder.',
-        'En lille silhuet betyder ikke nødvendigvis lav hastighed.'
+        'Tohjulede kan være svære at vurdere på afstand, især i mørke.',
+        'Motorcyklister kan skifte placering for at få udsyn eller undgå ujævnheder.',
+        'En lille silhuet betyder ikke nødvendigvis lav fart.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 3.2.5-3.2.6 · modul 1'),
       s('cykler-smaa', 'Cykler og små køretøjer', [
-        'Cykler, elcykler og små motoriserede køretøjer kan nærme sig hurtigere end forventet.',
-        'De kan være skjult af parkerede biler, stolper og bilens egne spejle.',
-        'Ved sving skal føreren orientere sig efter cyklister både før og under manøvren.'
+        'Cykler, elcykler og små motorkøretøjer kan komme hurtigere end forventet.',
+        'Parkerede biler, stolper og dine egne spejle kan skjule dem.',
+        'Ved sving skal du orientere dig efter cyklister, både før og under svinget.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 3.2.7-3.2.8 og 7.13 · modul 1, 3 og 4'),
-      s('laes-trailer', 'Belæsning og påhæng', [
-        'Last skal placeres og sikres, så den ikke forskyder sig eller falder af.',
-        'Belæsning ændrer bilens styre-, bremse- og stabilitetsegenskaber.',
-        'En påhængsvogn ændrer vogntogets længde og kræver mere omtanke ved sving og bakning.'
+      s('laes-trailer', 'Last og påhæng', [
+        'Placér og sikr lasten, så den ikke flytter sig eller falder af.',
+        'Last ændrer bilens egenskaber ved styring, bremsning og stabilitet.',
+        'En påhængsvogn gør vogntoget længere. Du skal vise mere omtanke ved sving og bakning.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 3.2.3, 6.2.7 og 9.1 · modul 1, 2 og 5')
     ]
   },
   {
     id: 'foereren', title: 'Mennesket bag rattet', tagline: 'Hjernen har også en advarselslampe', color: '#FB7185', icon: 'car', sections: [
-      s('opfattelse', 'Opfattelse og reaktion', [
-        'Reaktionstid begynder, når en fare kan opfattes, og slutter, når føreren begynder at reagere.',
-        'En sikker og rigtig reaktion er vigtigere end en hurtig, men forkert reaktion.',
-        'Højere fart betyder længere strækning, før en reaktion overhovedet får virkning.'
+      s('opfattelse', 'Fare og reaktion', [
+        'Reaktionstiden starter, når du kan opfatte faren. Den slutter, når du begynder at reagere.',
+        'En rigtig og sikker reaktion er vigtigere end en hurtig, men forkert en.',
+        'Højere fart giver en længere strækning, før din reaktion overhovedet virker.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 4.1.1-4.1.4 · modul 1'),
-      s('distraktion', 'Telefon og distraktion', [
-        'Håndholdt teleudstyr må ikke bruges under kørsel.',
-        'Også håndfri samtaler, skærme, passagerer og stærke følelser kan stjæle opmærksomhed.',
-        'Hvis noget kræver betjening, er den sikre løsning ofte at holde lovligt ind først.'
+      s('distraktion', 'Telefon og afledning', [
+        'Du må ikke bruge håndholdt teleudstyr, mens du kører.',
+        'Også håndfri samtaler, skærme, passagerer og stærke følelser kan tage din opmærksomhed.',
+        'Hvis noget kræver betjening, så hold lovligt ind først. Det er ofte den sikre løsning.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 4.1.5-4.1.7 · modul 1'),
-      s('traet-medicin', 'Træthed, sygdom og medicin', [
-        'Træthed kan give langsommere reaktion og korte perioder uden reel opmærksomhed.',
-        'Sygdom og medicin kan gøre kørsel uforsvarlig, også selv om medicinen er lovligt udleveret.',
-        'Kaffe eller et åbent vindue gør ikke en udmattet fører køreklar.'
+      s('traet-medicin', 'Træt, syg eller på medicin', [
+        'Træthed gør dig langsommere. Og du kan miste opmærksomheden i korte øjeblikke.',
+        'Sygdom og medicin kan gøre kørsel uforsvarlig. Det gælder, selv om medicinen er udleveret lovligt.',
+        'Kaffe eller et åbent vindue gør dig ikke klar til at køre, hvis du er udmattet.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 4.4.3 og 8 · modul 1 og 4'),
       s('alkohol-stoffer', 'Alkohol og stoffer', [
-        'Alkohol forringer blandt andet dømmekraft, opmærksomhed og reaktion.',
-        'Ulovlige stoffer og visse lægemidler kan gøre føreren ude af stand til at køre sikkert.',
-        'Planlæg hjemtransport før festen; vurderingsevnen er et dårligt måleinstrument efter alkohol.'
+        'Alkohol svækker blandt andet din dømmekraft, din opmærksomhed og din reaktion.',
+        'Ulovlige stoffer og visse lægemidler kan gøre dig ude af stand til at køre sikkert.',
+        'Planlæg hjemturen, før festen starter. Din vurdering er et dårligt redskab, når du har drukket.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 4.4 og 8.1 · modul 1 og 4'),
-      s('holdning', 'Holdning og risikoblindhed', [
-        'Rutine kan give overdreven tro på egne evner og gøre farer mindre synlige for føreren.',
-        'Tidspres er ikke en grund til at presse andre eller reducere sikkerhedsmarginen.',
-        'En ansvarlig fører retter sin kørsel efter egne begrænsninger og andres mulige fejl.'
+      s('holdning', 'Holdning og risiko', [
+        'Rutine kan få dig til at tro for meget på dig selv. Så bliver farer sværere at se.',
+        'Tidspres er ingen grund til at presse andre eller gøre sikkerhedsmarginen mindre.',
+        'Du kører ansvarligt, når du tilpasser kørslen til dine egne begrænsninger og andres mulige fejl.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 4.7 og 8.2 · modul 1 og 4')
     ]
   },
   {
     id: 'vej-vejr', title: 'Vej, vejr og udsyn', tagline: 'Asfalt har humør', color: '#22D3EE', icon: 'weather', sections: [
       s('vaadt-glat', 'Våd og glat vej', [
-        'Regn, sne, is, grus og fedtet belægning kan reducere vejgrebet.',
-        'Hastighed og afstand skal tilpasses, før grebet bliver kritisk.',
-        'Pludselige rat- eller pedalbevægelser kan lettere udløse tab af vejgreb.'
+        'Regn, sne, is, grus og fedtet vej kan gøre vejgrebet dårligere.',
+        'Tilpas farten og afstanden, før grebet bliver kritisk.',
+        'Pludselige bevægelser med rat eller pedal kan lettere give tab af vejgreb.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 5.2 og 9.1 · modul 2 og 5'),
       s('sigt', 'Tåge, regn og sol', [
-        'Dårligt udsyn kræver lavere hastighed og større mulighed for at standse inden for det overskuelige område.',
-        'Nærlys er normalt lys ved dårlig sigt; særligt kørelys er ikke nok i lygtetændingstiden.',
-        'Fjernlys kan blænde og kan gøre udsynet dårligere i tæt nedbør eller tåge.'
+        'Ved dårligt udsyn skal du køre langsommere. Du skal kunne standse inden for det, du kan overskue.',
+        'Brug normalt nærlys ved dårligt udsyn. Især kørelys er ikke nok i lygtetændingstiden.',
+        'Fjernlys kan blænde dig og gøre udsynet dårligere i tæt nedbør eller tåge.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 5.2.4, 6.2.5 og 7.19 · modul 2 og 4'),
       s('kurver-bakker', 'Kurver og bakker', [
-        'Bakketoppe og skarpe kurver begrænser udsynet og kræver hastighedstilpasning før stedet.',
-        'Man må ikke bygge en overhaling på gæt om, at vejen er fri bag toppen eller kurven.',
-        'Lavt vejgreb øger risikoen, fordi både styring og bremsning bruger af det samme greb.'
+        'Bakketoppe og skarpe kurver begrænser udsynet. Tilpas farten, før du kommer dertil.',
+        'Du må ikke gætte på, at vejen er fri bag toppen eller kurven, og overhale ud fra det.',
+        'Lavt vejgreb øger risikoen. Styring og bremsning deler det samme greb.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 5.2.4, 7.3 og 7.9 · modul 2, 3 og 4'),
       s('vejmiljoe', 'Skoler, butikker og stoppesteder', [
-        'Vejens omgivelser kan varsle børn, ældre eller gående, der handler uventet.',
-        'Parkerede biler kan skjule personer, der er på vej ud på kørebanen.',
-        'Ved stoppesteder og butikker bør føreren forvente krydsende og distraherede trafikanter.'
+        'Omgivelserne kan varsle om børn, ældre eller gående, der handler uventet.',
+        'Parkerede biler kan skjule folk, der er på vej ud på kørebanen.',
+        'Ved stoppesteder og butikker bør du forvente trafikanter, der krydser og er distraherede.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 5.2.2 og 5.2.5 · modul 2'),
       s('tunnel-jernbane', 'Tunnel og jernbane', [
-        'Ved indkørsel i tunnel kan øjnene bruge tid på at vænne sig til lysforskellen.',
-        'I tunnel bør føreren kende flugtveje og følge tavler, signaler og personalets anvisninger.',
-        'Ved jernbaneoverkørsel må man aldrig køre ind, hvis der ikke er plads til at komme helt fri.'
+        'Når du kører ind i en tunnel, tager det tid for øjnene at vænne sig til lysforskellen.',
+        'I tunnel bør du kende flugtvejene. Følg tavler, signaler og personalets anvisninger.',
+        'Ved jernbaneoverkørsel må du aldrig køre ind, hvis der ikke er plads til at komme helt fri af overkørslen.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 5.2.4 og 7.20 samt færdselsloven § 5 · modul 2 og 4')
     ]
   },
   {
     id: 'grundregler', title: 'Grundregler og anvisninger', tagline: 'Betjenten bestemmer over lyskurven', color: '#F59E0B', icon: 'stop', sections: [
-      s('anvisninger', 'Rækkefølgen af færdselsanvisninger', [
-        'En politibetjents anvisning går foran lyssignaler, tavler og almindelige regler.',
-        'Lyssignaler går foran modstridende vigepligtsafmærkning, når signalet virker.',
-        'Hvis et lyssignal er ude af drift, følges synlig vigepligtsafmærkning og ellers de almindelige regler.'
+      s('anvisninger', 'Hvad går foran?', [
+        'En anvisning fra politiet går foran lyssignaler, tavler og almindelige regler.',
+        'Når signalet virker, går lyset foran modstridende vigepligtsafmærkning.',
+        'Er et lyssignal ude af drift, følger du synlig vigepligtsafmærkning. Ellers følger du de almindelige regler.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 6.1 og 7.11 · modul 1, 3 og 4'),
       s('hensyn', 'Fare, ulempe og hensyn', [
-        'Alle trafikanter skal optræde hensynsfuldt og agtpågivende.',
-        'Man må ikke skabe fare eller unødig ulempe for andre.',
-        'Regler giver ikke ret til at fremtvinge en manøvre, hvis situationen er farlig.'
+        'Alle trafikanter skal vise hensyn og være agtpågivende.',
+        'Du må ikke skabe fare eller unødig ulempe for andre.',
+        'Reglerne giver dig ikke ret til at tvinge en manøvre igennem, hvis situationen er farlig.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 6.2.1-6.2.2 og 7.11 · modul 1, 3 og 4'),
       s('tegn', 'Blink, horn og lys', [
-        'Tegngivning skal gives tydeligt og i god tid, når andre har gavn af den.',
-        'Blinklys giver information; det giver ikke i sig selv ret til at køre først.',
-        'Horn og lyssignal bruges som nødvendig advarsel, ikke som følelsesmæssig anmeldelse.'
+        'Giv tegn tydeligt og i god tid, når andre har gavn af det.',
+        'Blinklys giver information. Men det giver ikke ret til at køre først.',
+        'Brug horn og lyssignal som nødvendig advarsel, ikke til at vise irritation.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 6.2.3-6.2.5 · modul 2'),
       s('udrykning', 'Udrykning og fri passage', [
-        'Trafikanter skal give fri passage for køretøjer under udrykning.',
-        'Man skal handle roligt, orientere sig og undgå at skabe en ny farlig situation.',
-        'Et rødt signal bliver ikke automatisk grønt, fordi en ambulance kommer bagfra.'
+        'Giv fri passage til køretøjer, der er i udrykning.',
+        'Handl roligt, orientér dig, og skab ikke en ny farlig situation.',
+        'Et rødt signal bliver ikke grønt af sig selv, bare fordi en ambulance kommer bagfra.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 6.2.6 og 7.11 · modul 2, 3 og 4'),
       s('uheld', 'Uheld og havari', [
-        'Ved færdselsuheld skal man standse og hjælpe personer, der kan være kommet til skade.',
-        'Stedet skal sikres uden at udsætte hjælperen eller andre for ny fare.',
-        'Ved havari skal bilen så vidt muligt væk fra kørebanen og andre trafikanter advares.'
+        'Ved et uheld skal du standse og hjælpe dem, der måske er kommet til skade.',
+        'Sikr stedet, uden at du selv eller andre udsættes for ny fare.',
+        'Ved havari skal bilen så vidt muligt væk fra kørebanen. Og du skal advare andre trafikanter.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 6.2.8-6.2.9 · modul 1 og 2'),
       s('tavler-signaler', 'Tavler, signaler og vejarbejde', [
-        'B 11 Ubetinget vigepligt kræver, at man holder tilbage; fuldt stop kræves kun, hvis situationen kræver det.',
-        'B 13 Stop kræver fuld standsning ved stoplinjen og derefter ubetinget vigepligt.',
-        'C 55 angiver den højest tilladte hastighed fra tavlen, men forholdene kan kræve lavere fart.',
-        'D 15 Påbudt passage viser med pilen, hvilken side tavlen skal passeres på.',
-        'Ved vejarbejde gælder midlertidig gul afmærkning frem for modstridende hvid afmærkning.'
+        'B 11 Ubetinget vigepligt betyder, at du skal holde tilbage. Fuldt stop kræves kun, hvis situationen kræver det.',
+        'B 13 Stop betyder fuld standsning ved stoplinjen. Derefter gælder ubetinget vigepligt.',
+        'C 55 viser den højeste tilladte fart. Men forholdene kan kræve, at du kører langsommere.',
+        'D 15 Påbudt passage viser med pilen, hvilken side du skal passere tavlen på.',
+        'Ved vejarbejde går midlertidig gul afmærkning foran modstridende hvid afmærkning.'
       ], ['plan-b-1-1', 'fl-2026', 'afmaerkning'], 'Kategori B v1.1: 6.1, 7.2-7.3 og 7.11 · modul 1, 3 og 4')
     ]
   },
   {
     id: 'kryds', title: 'Kryds og sårbare trafikanter', tagline: 'Se igen. Cyklisten er stadig der.', color: '#F97316', icon: 'yield', sections: [
       s('ubetinget', 'Ubetinget vigepligt', [
-        'Hajtænder og tavlen for ubetinget vigepligt kræver, at man holder tilbage for trafikken på den vej, man kører ind på.',
-        'Man har også ubetinget vigepligt ved blandt andet udkørsel fra ejendom, parkeringsplads eller tankstation.',
-        'Man skal vælge et ophold, så andre ikke tvinges til at bremse eller ændre placering.'
+        'Hajtænder og tavlen for ubetinget vigepligt betyder, at du skal holde tilbage for trafikken på den vej, du kører ind på.',
+        'Du har også ubetinget vigepligt, når du for eksempel kører ud fra en ejendom, en parkeringsplads eller en tankstation.',
+        'Vælg et ophold, så andre ikke bliver tvunget til at bremse eller skifte placering.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.11-7.12 · modul 3 og 4'),
       s('stop', 'STOP betyder stop', [
-        'Ved STOP skal bilen standses helt ved stoplinjen; uden stoplinje standses før krydset, og om nødvendigt standses igen for at få udsyn.',
-        'Efter standsning gælder den ubetingede vigepligt stadig.',
-        'En rullende næsten-standsning opfylder ikke stopkravet.'
+        'Ved STOP skal du standse helt ved stoplinjen. Er der ingen stoplinje, standser du før krydset. Og hvis du skal bruge det til udsyn, så stands igen.',
+        'Efter standsningen gælder den ubetingede vigepligt stadig.',
+        'Et rullende næsten-stop opfylder ikke kravet om stop.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 6.1 og 7.11 · modul 1, 3 og 4'),
       s('hoejre', 'Højre vigepligt', [
-        'Hvor ingen har ubetinget vigepligt, skal man som udgangspunkt holde tilbage for kørende fra højre.',
-        'Højre vigepligt kræver også kontrol af, om andre faktisk overholder deres pligt.',
-        'Reglen gælder ikke som erstatning for reglerne om vognbaneskift og sammenfletning.'
+        'Hvor ingen har ubetinget vigepligt, skal du som udgangspunkt holde tilbage for trafik fra højre.',
+        'Højre vigepligt kræver også, at du tjekker, om andre faktisk holder deres vigepligt.',
+        'Reglen erstatter ikke reglerne om vognbaneskift og sammenfletning.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.11-7.12 · modul 3 og 4'),
       s('sving-cykel', 'Sving og cyklister', [
-        'Ved højresving skal man holde tilbage for cyklister og andre, der fortsætter ligeud langs vejen.',
-        'Orientering skal ske tidligt og gentages lige før svinget, fordi en cyklist kan være kommet frem.',
-        'Placering og lav hastighed skal gøre hensigten tydelig og give tid til at standse.'
+        'Ved højresving skal du holde tilbage for cyklister og andre, der kører ligeud langs vejen.',
+        'Orientér dig tidligt, og gentag det lige før svinget. En cyklist kan være kommet frem i mellemtiden.',
+        'Placering og lav fart skal vise, hvad du vil, og give tid til at standse.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.13-7.14 · modul 3 og 4'),
       s('venstresving', 'Venstresving i kryds', [
-        'Før venstresving skal føreren orientere sig bagud til venstre og efter modkørende, tværgående trafik og trafikanter på den vej, der svinges ind på.',
-        'Tegn til venstre skal gives i god tid, og bilen placeres i den venstre del af egen kørselsretning eller i den anviste svingbane.',
-        'Den venstresvingende skal holde tilbage for modkørende, der fortsætter ligeud eller svinger til højre.',
-        'Svinget må ikke fuldføres, mens en foranholdende venstresvinger spærrer udsynet; efter frit udsyn og et tilstrækkeligt ophold afsluttes svinget uden unødigt ophold.',
-        'Fodgængere samt cyklister og knallertkørere på den vej, der svinges ind på, skal om nødvendigt have plads først, og bilen føres ind i den korrekte bane.'
+        'Før du svinger til venstre, skal du orientere dig bagud til venstre. Og du skal kigge efter modkørende, tværgående trafik og trafikanter på den vej, du svinger ind på.',
+        'Giv tegn til venstre i god tid. Placér bilen i den venstre del af din kørselsretning eller i den viste svingbane.',
+        'Du skal holde tilbage for modkørende, der kører ligeud eller svinger til højre.',
+        'Du må ikke gennemføre svinget, mens en venstresvinger, der holder foran dig, spærrer udsynet. Når du har frit udsyn og har ventet nok, afslutter du svinget uden unødigt ophold.',
+        'Fodgængere, cyklister og knallertkørere på den vej, du svinger ind på, skal have plads først, hvis det er nødvendigt. Før så bilen ind i den rigtige bane.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.14.1-7.14.4 · modul 3 og 4'),
       s('fodgaenger-rund', 'Fodgængere og rundkørsler', [
-        'Ved fodgængerfelt skal føreren nærme sig med en hastighed, der gør det muligt at holde tilbage.',
-        'Ved ind- og udkørsel af rundkørsel kræver cyklister og gående særlig orientering.',
-        'Blink ud af rundkørslen fortæller om hensigten, men ophæver ikke pligten til at holde tilbage.'
+        'Ved fodgængerfelt skal du nærme dig i en fart, så du kan holde tilbage.',
+        'Når du kører ind i og ud af rundkørsel, skal du være særligt opmærksom på cyklister og gående.',
+        'Blinket ud af rundkørslen viser din hensigt. Men det fjerner ikke din pligt til at holde tilbage.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.6 og 7.15 · modul 3 og 4')
     ]
   },
   {
     id: 'vejmanoevrer', title: 'Manøvrer på vej', tagline: 'Spejl, plan, plads. Du deler vejen med andre.', color: '#4ADE80', icon: 'right', sections: [
       s('placering-fart', 'Placering og fart', [
-        'Man skal normalt holde så langt til højre som forholdene tillader.',
-        'Den skiltede hastighed er en øvre grænse, ikke et mål under alle forhold.',
-        'Hastigheden skal give mulighed for at standse for en påregnelig hindring.'
+        'Du skal normalt køre så langt til højre, som forholdene tillader.',
+        'Den skiltede fart er en øvre grænse. Den er ikke en fart, du altid skal køre.',
+        'Farten skal gøre det muligt at standse for en hindring, du kan forudse.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.2-7.3 · modul 3'),
       s('bane-flet', 'Vognbaneskift og sammenfletning', [
-        'Ved vognbaneskift har den skiftende fører ansvaret for, at manøvren kan ske uden fare eller unødig ulempe.',
-        'Spejle, skulderblik og tydeligt tegn bruges før et vognbaneskift.',
-        'Ved sammenfletning skal trafikanterne tilpasse sig gensidigt til den fælles bane.'
+        'Ved vognbaneskift har du ansvaret for, at det sker uden fare eller unødig ulempe.',
+        'Brug spejle, skulderblik og et tydeligt tegn, før du skifter vognbane.',
+        'Ved sammenfletning skal trafikanterne tilpasse sig hinanden på den fælles bane.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.4 · modul 3 og 4'),
       s('afstand-moede', 'Afstand og møde', [
-        'Afstanden til forankørende skal give tid og plads til at reagere, hvis den bremser.',
-        'Afstanden skal øges, når vejgreb, udsyn eller opmærksomhed er dårligere.',
-        'Ved møde på smal vej skal hastigheden sænkes, og den med hindringen på sin side må ofte vente.'
+        'Hold afstand til bilen foran, så du har tid og plads til at reagere, hvis den bremser.',
+        'Øg afstanden, når vejgrebet, udsynet eller opmærksomheden er dårligere.',
+        'Ved møde på smal vej skal du sænke farten. Den, der har hindringen på sin side, må ofte vente.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.7-7.8 · modul 3'),
       s('overhaling', 'Overhaling', [
-        'Overhaling kræver frit udsyn, tilstrækkelig plads og sikker tilbagevenden.',
-        'Man må ikke begynde, hvis en bagvedkørende allerede er ved at overhale.',
-        'Hvis forholdene ændrer sig, skal man kunne afbryde uden at presse andre.'
+        'Overhaling kræver frit udsyn, nok plads og en sikker tilbagevenden.',
+        'Du må ikke begynde at overhale, hvis en bagvedkørende allerede er i gang med at overhale.',
+        'Hvis forholdene ændrer sig, skal du kunne afbryde uden at presse andre.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.9 · modul 4'),
       s('trafiksanering', 'Trafiksanerede områder', [
-        'I opholds- og legeområder kan gående og legende børn færdes på hele vejarealet, og motorkørsel sker på deres betingelser.',
-        'Hastigheden skal normalt være under 15 km/t; føreren holder tilbage og fortsætter først, når de gående har set bilen og givet plads, og ingen kan komme farligt nær den.',
-        'Parkering i opholds- og legeområde må kun ske på særligt afmærkede pladser.',
-        'I gågade kræves særlig hensyn til gående; i cykelgade skal motorkørende vise særlig agtpågivenhed og må ikke unødigt hindre andre kørende.',
-        'Bump, forsætninger og andre fartdæmpere kan kræve lavere fart end områdets angivne maksimum.'
+        'I opholds- og legeområder må gående og legende børn færdes på hele vejen. Bilerne kører på deres betingelser.',
+        'Kør normalt under 15 kilometer i timen. Hold tilbage, og fortsæt først, når de gående har set bilen og givet plads, og ingen kan komme farligt tæt på den.',
+        'Du må kun parkere i opholds- og legeområder på særligt afmærkede pladser.',
+        'I gågade skal du tage særligt hensyn til gående. I cykelgade skal du være ekstra agtpågivende. Du må ikke unødigt hindre andre, der kører.',
+        'Bump, forsætninger og andre fartdæmpere kan kræve lavere fart end områdets maksimum.'
       ], ['plan-b-1-1', 'fl-2026', 'afmaerkning'], 'Kategori B v1.1: 7.10.1-7.10.5 · modul 4'),
       s('motorvej', 'Motorvej og tæt trafik', [
-        'På motorvej bruges accelerationsbanen til at tilpasse hastigheden og finde et sikkert ophold.',
-        'Bakning, vending, standsning og parkering er forbudt uden for anviste steder, bortset fra nødsituationer.',
-        'Ved kø skal man holde afstand, følge trafikken og være forberedt på pludselige opbremsninger.'
+        'På motorvejen bruger du accelerationsbanen til at tilpasse farten og finde et sikkert ophold.',
+        'Bakning, vending, standsning og parkering er forbudt uden for anviste steder. Undtagen i nødsituationer.',
+        'I kø skal du holde afstand, følge trafikken og være klar til pludselige opbremsninger.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 7.16-7.17 · modul 4'),
       s('letbane', 'Kørsel ved letbane', [
-        'Letbanespor og tog kræver skærpet opmærksomhed, fordi et letbanetog har lang bremselængde og ikke kan undvige sporet.',
-        'Føreren skal følge de signaler og tavler, der gælder for bilens kørselsretning, og må ikke forveksle dem med signaler for letbanen.',
-        'Ved passage og sving over spor skal føreren kontrollere togets placering og sporets fortsatte forløb.',
-        'Andre trafikanter kan overse biler, fordi deres opmærksomhed er rettet mod letbanen; hastighed og afstand skal tilpasses dette.',
-        'Praktisk letbanekørsel indgår, når en lektion på mindst 45 minutter tillader kørsel til, ved og tilbage fra letbanen; ellers undervises de praktiske færdigheder i teorilokalet.'
+        'Letbanespor og tog kræver ekstra opmærksomhed. Et letbanetog har lang bremselængde og kan ikke undvige sporet.',
+        'Følg de signaler og tavler, der gælder for din kørselsretning. Forveksl dem ikke med signaler for letbanen.',
+        'Ved passage og sving over spor skal du tjekke, hvor toget er, og hvordan sporet fortsætter.',
+        'Andre trafikanter kan overse biler, fordi de kigger på letbanen. Tilpas fart og afstand til det.',
+        'Praktisk letbanekørsel indgår, når lektionen er mindst 45 minutter. Så kan du køre til, ved og tilbage fra letbanen. Ellers øves de praktiske færdigheder i teorilokalet.'
       ], ['plan-b-1-1', 'fl-2026', 'afmaerkning'], 'Kategori B v1.1: 7.21.1-7.21.4 · modul 4'),
       s('standsning-parkering', 'Standsning og parkering', [
-        'Standsning kortere end tre minutter er ikke parkering; af- og påstigning samt aktiv af- og pålæsning regnes heller ikke som parkering.',
-        'Uden afmærket bås må man hverken standse eller parkere i et kryds eller nærmere end 10 m fra den tværgående kørebanes nærmeste kant.',
-        'Man må hverken standse eller parkere på et fodgængerfelt eller nærmere end 5 m foran feltet.',
-        'Standsning og parkering er forbudt på cykelsti, gangsti og som hovedregel fortov; den begrænsede fortovsundtagelse uden for tættere bebygget område gælder ikke cykelsti.',
-        'P-tavler, undertavlers tidsrum og reserverede båse skal følges; en handicapbås kræver gyldigt parkeringskort.'
+        'Standsning under tre minutter er ikke parkering. Af- og påstigning og aktiv af- og pålæsning regnes heller ikke som parkering.',
+        'Uden afmærket bås må du hverken standse eller parkere i et kryds. Du må heller ikke gøre det nærmere end 10 meter fra den tværgående kørebanes nærmeste kant.',
+        'Du må hverken standse eller parkere på et fodgængerfelt. Heller ikke nærmere end 5 meter foran feltet.',
+        'Du må ikke standse eller parkere på cykelsti eller gangsti. Som hovedregel gælder det også fortov. Undtagelsen for fortov uden for tættere bebygget område gælder ikke cykelsti.',
+        'Følg P-tavler, tidsrummet på undertavler og reserverede båse. En handicapbås kræver et gyldigt parkeringskort.'
       ], ['plan-b-1-1', 'fl-2026', 'afmaerkning', 'handicapkort'], 'Kategori B v1.1: 7.18 · modul 4')
     ]
   },
   {
     id: 'risiko-teknik', title: 'Risiko, miljø og køreteknik', tagline: 'Fysik er ligeglad med din streak', color: '#E879F9', icon: 'speed', sections: [
-      s('energi-miljoe', 'Energi- og miljørigtig kørsel', [
-        'Jævn kørsel og færre unødvendige hastighedsændringer reducerer energiforbruget.',
-        'For lavt dæktryk, unødig vægt og tagboks kan øge energiforbruget.',
-        'Miljøhensyn må aldrig føre til, at sikker acceleration eller bremsning undlades.'
+      s('energi-miljoe', 'Spar energi og miljø', [
+        'Kør jævnt, og undgå unødige ændringer i farten. Så bruger bilen mindre energi.',
+        'For lavt dæktryk, unødig vægt og tagboks kan få bilen til at bruge mere energi.',
+        'Hensyn til miljøet må aldrig gøre, at du undlader sikker acceleration eller bremsning.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 1.2.6 · modul 2'),
-      s('fart-energi', 'Hastighed og bevægelsesenergi', [
-        'Når hastigheden stiger, vokser både reaktionsstrækning og bremselængde.',
-        'Bevægelsesenergien vokser kraftigt med hastigheden, så et sammenstød bliver mere alvorligt.',
-        'En lille hastighedsnedsættelse kan give en stor sikkerhedsgevinst.'
+      s('fart-energi', 'Fart og bevægelsesenergi', [
+        'Når farten stiger, bliver både reaktionsstrækningen og bremselængden længere.',
+        'Bevægelsesenergien vokser kraftigt med farten. Derfor bliver et sammenstød mere alvorligt.',
+        'Selv en lille fartnedsættelse kan give en stor sikkerhedsgevinst.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 8.1.3 og 9.2 · modul 4 og 5'),
       s('bremse-greb', 'Bremsning og vejgreb', [
-        'Dæk kan kun overføre begrænsede kræfter til vejen.',
-        'Hård bremsning og kraftig styring samtidig kan overskride vejgrebet.',
-        'Elektroniske systemer hjælper, men kan ikke skabe greb på en glat vej.'
+        'Dækkene kan kun overføre begrænsede kræfter til vejen.',
+        'Hård bremsning og kraftig styring på samme tid kan overskride vejgrebet.',
+        'Elektroniske systemer hjælper. Men de kan ikke skabe greb på en glat vej.'
       ], ['plan-b-1-1'], 'Kategori B v1.1: 9.1-9.3 · modul 5'),
       s('udskridning', 'Udskridning og undvigelse', [
-        'Tidlig hastighedstilpasning er den vigtigste måde at undgå kritiske manøvrer på.',
-        'Ved tab af vejgreb skal føreren undgå panikbevægelser og søge at genvinde kontrol.',
-        'Praktisk træning i udskridning og undvigelse hører til på køreteknisk anlæg.'
+        'Tilpas farten tidligt. Det er den vigtigste måde at undgå kritiske manøvrer på.',
+        'Hvis du mister vejgrebet, skal du undgå panikbevægelser og prøve at genvinde kontrollen.',
+        'Praktisk træning i udskridning og undvigelse foregår på et køreteknisk anlæg.'
       ], ['plan-b-1-1', 'udd-731'], 'Kategori B v1.1: 9.3-9.5 · modul 5'),
       s('hoej-vejkant', 'Høj vejkant', [
-        'Hvis hjulene kommer ud over en høj vejkant, kan en brat tilbageføring ved høj fart få føreren til at miste kontrollen.',
-        'Føreren skal først holde rattet roligt og styre bilen langs kanten uden pludselige bevægelser.',
-        'Hastigheden reduceres forsigtigt, mens bilen holdes stabil langs kanten.',
-        'Bilen styres først tilbage over kanten, når hastigheden er så lav, at manøvren kan gennemføres kontrolleret.',
-        'Situationen kan opstå ved både højre og venstre vejkant; øvelsen trænes på køreteknisk anlæg med kørelærer og må ikke selvafprøves på offentlig vej.'
+        'Hvis hjulene kommer ud over en høj vejkant, kan du miste kontrollen, hvis du rykker brat tilbage ved høj fart.',
+        'Hold rattet roligt, og styr bilen langs kanten uden pludselige bevægelser.',
+        'Sæt farten forsigtigt ned, mens bilen holdes stabil langs kanten.',
+        'Først når farten er så lav, at du kan gennemføre manøvren under kontrol, styrer du bilen tilbage over kanten.',
+        'Situationen kan opstå ved både højre og venstre vejkant. Øvelsen trænes på et køreteknisk anlæg med kørelæreren. Du må ikke selv prøve den på offentlig vej.'
       ], ['plan-b-1-1', 'udd-731'], 'Kategori B v1.1: 9.5.1 · modul 5 · praktisk øvelse på køreteknisk anlæg'),
       s('sele-ansvar', 'Sele, børn og ansvar', [
-        'Sikkerhedssele reducerer risikoen for alvorlig skade og skal bruges på korte ture også.',
-        'Børn under 135 cm skal som hovedregel bruge godkendt sikkerhedsudstyr tilpasset barnets højde og vægt.',
-        'Føreren er ansvarlig for, at passagerer under 15 år bruger sele eller andet godkendt sikkerhedsudstyr.'
+        'Sikkerhedssele mindsker risikoen for alvorlig skade. Brug den også på korte ture.',
+        'Børn under 135 centimeter skal som hovedregel have godkendt sikkerhedsudstyr. Det skal passe til barnets højde og vægt.',
+        'Du er ansvarlig for, at passagerer under 15 år bruger sele eller andet godkendt sikkerhedsudstyr.'
       ], ['plan-b-1-1', 'fl-2026'], 'Kategori B v1.1: 6.2.7 og 8.1.4 · modul 2 og 4')
     ]
   },
   {
     id: 'koerekort', title: 'Kørekort og prøve', tagline: 'Papirerne, prøven og det sidste stykke vej', color: '#FACC15', icon: 'car', sections: [
-      s('sammensat-koersel', 'Afsluttende sammensat kørsel', [
-        'Afsnit 7.22 er afsluttende praktisk kørsel i skiftende situationer; kørelærer og elev fastlægger fælles mål og følger op med refleksion.',
-        'Eleven skal øve selvstændig, hensynsfuld, ansvarlig og energi- og miljørigtig kørsel.',
-        'Et samlet forløb kan omfatte kontrol af bilen, brug af førerstøttesystemer, ruteplanlægning eller GPS og tidligere vejmanøvrer.',
-        'Førerstøtte og navigation er hjælpemidler; eleven skal fortsat orientere sig og reagere på den faktiske trafik.',
-        'Appens scenarier kan forberede refleksion, men kan ikke gennemføre eller dokumentere den praktiske lektion med kørelærer.'
+      s('sammensat-koersel', 'Sammensat kørsel til sidst', [
+        'Afsnit 7.22 er praktisk kørsel i skiftende situationer. Kørelæreren og du aftaler fælles mål og taler bagefter om, hvordan det gik.',
+        'Du skal øve dig i selvstændig, hensynsfuld og ansvarlig kørsel, der er energi- og miljørigtig.',
+        'Et samlet forløb kan indeholde tjek af bilen, brug af førerstøtte, ruteplanlægning eller GPS og tidligere vejmanøvrer.',
+        'Førerstøtte og navigation er hjælpemidler. Du skal stadig orientere dig og reagere på den trafik, der faktisk er.',
+        'Appens scenarier kan hjælpe dig med at reflektere, men de kan ikke gennemføre eller dokumentere den praktiske lektion med kørelæreren.'
       ], ['plan-b-1-1', 'udd-731'], 'Kategori B v1.1: 7.22.1-7.22.3 · modul 5 · afsluttende praktisk kørsel med kørelærer'),
       s('forloeb', 'De fem moduler', [
-        'Den moderniserede kategori B-uddannelse er bygget op i fem moduler.',
-        'Minimumsforløbet omfatter 30 teorilektioner og 24 praktiske lektioner på mindst 45 minutter.',
-        'Egen hjemmebrug tæller ikke automatisk som undervisning; kørelæreren kan planlægge og registrere højst syv selvstudielektioner i egnede dele af afsnit 1, 3, 6, 9 og 10, dog ikke afsnit 10 i modul 1.'
+        'Den moderniserede kategori B-uddannelse består af fem moduler.',
+        'Minimumsforløbet består af 30 teorilektioner og 24 praktiske lektioner. De praktiske lektioner er mindst 45 minutter hver.',
+        'Din hjemmebrug tæller ikke automatisk som undervisning. Kørelæreren kan planlægge og registrere højst syv selvstudielektioner i egnede dele af afsnit 1, 3, 6, 9 og 10. Dog ikke afsnit 10 i modul 1.'
       ], ['udd-731', 'plan-b-1-1', 'modern-fstyr'], 'Kategori B v1.1: 0.3 og BEK nr. 731 §§ 9, 24-25 · modul 1, 2, 3, 4 og 5'),
-      s('teoriproeve', 'Teoriprøvens format', [
-        'Kategori B-prøven viser 25 trafikale situationer med fire udsagn til hver.',
-        'Der er altid mindst ét korrekt udsagn, og der kan være flere.',
-        'Prøven varer 25 minutter, og højst fem fejl giver bestået.'
+      s('teoriproeve', 'Sådan er teoriprøven', [
+        'Kategori B-prøven viser 25 trafiksituationer. Hver situation har fire udsagn.',
+        'Der er altid mindst ét rigtigt udsagn. Der kan være flere.',
+        'Prøven varer 25 minutter. Højst fem fejl giver bestået.'
       ], ['prove-fstyr', 'digital-fstyr', 'test-fstyr'], 'Kategori B v1.1: 10.2.2 · modul 4'),
-      s('digital-proeve', 'Digital prøveadfærd', [
-        'Den digitale teoriprøve afholdes på et prøvested og kræver fysisk fremmøde.',
-        'Kandidaten kan gå tilbage, ændre svar og markere spørgsmål til senere.',
-        'I NATKØRSEL tæller et scenarie som én app-fejl, hvis et eller flere valg er forkerte eller mangler; dette må ikke kaldes dokumenteret identisk med myndighedens optælling.'
+      s('digital-proeve', 'Den digitale prøve', [
+        'Den digitale teoriprøve tages på et prøvested. Du skal møde op fysisk.',
+        'Du kan gå tilbage, ændre dine svar og markere spørgsmål, du vil vende tilbage til.',
+        'I NATKØRSEL tæller en situation som én app-fejl, hvis et eller flere valg er forkerte eller mangler. Det må ikke kaldes dokumenteret identisk med myndighedens optælling.'
       ], ['prove-fstyr', 'digital-fstyr'], 'Kategori B v1.1: 10.2.2 · modul 4'),
       s('sytten', '17-årige bilister', [
-        'En 17-årig må køre alene i Danmark kl. 05.00-20.00.',
-        'Kl. 20.00-05.00 kræves en ledsager, indtil føreren fylder 18 år.',
-        'Den danske 17-årsordning giver ikke automatisk ret til at køre i udlandet.'
+        'En 17-årig må køre alene i Danmark klokken 05.00 til 20.00.',
+        'Fra klokken 20.00 til 05.00 skal du have en ledsager, indtil du fylder 18 år.',
+        'Ordningen for 17-årige giver ikke automatisk ret til at køre i udlandet.'
       ], ['17-fstyr', 'kort-718'], 'Kategori B v1.1: 10.3 · modul 4'),
-      s('nybilist', 'Nye bilister og gyldighed', [
-        'I de første tre år efter første B-kørekort er den juridiske tærskel over 0,20 ‰ i blodet eller over 0,10 mg alkohol pr. liter udåndingsluft, uanset alder.',
-        'Myndighedernes praktiske råd til nye bilister er at lade være med at drikke alkohol før kørsel.',
-        'En bestået teoriprøve er gyldig i 18 måneder, men er ikke i sig selv et kørekort.'
+      s('nybilist', 'Nye bilister og prøven', [
+        'I de første tre år efter dit første B-kørekort må du ikke have over 0,20 promille i blodet eller over 0,10 milligram alkohol per liter udåndingsluft. Det gælder uanset alder.',
+        'Det praktiske råd fra myndighederne er: Drik ikke alkohol før kørsel.',
+        'En bestået teoriprøve gælder i 18 måneder. Den er ikke i sig selv et kørekort.'
       ], ['fl-2026', 'kort-bil-fstyr'], 'Kategori B v1.1: 4.4, 8.1 og 10.3 · modul 1 og 4')
     ]
   }

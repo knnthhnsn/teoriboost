@@ -16,23 +16,23 @@ const zones = [
 const answers = new Map();
 const orders = new Map();
 const hooks = {
-  'betjeningsudstyr': 'Bilen er ikke et escape room. Find knapperne, før plottet begynder.',
-  'instrumenter-og-kontrollys': 'Advarselslampen har skrevet i gruppechatten. Læs beskeden.',
-  'motor-taending-og-speeder': 'Motoren leverer kraft. Din selvtillid er ikke et brændstof.',
-  'kobling': 'Motor og hjul kan holde pause fra hinanden. Koblingen styrer relationen.',
-  'gear': 'Gearkassen har en plan. “Jeg vibeser bare” er ikke et gear.',
-  'foererassistentsystemer': 'Du kan få hjælp fra bilen. Du kan ikke give ansvaret til en NPC.',
-  'ansvar-for-bilens-stand': 'Lånt bil. Du har stadig et føreransvar. Gruppechatten tager ikke din køretime.',
-  'styreapparat': 'Rattet skal styre bilen. Din tro på mirakler er ikke en reservedel.',
-  'bremser': 'Bremsepedalen skal være en bremsepedal. Ikke en elevator mod gulvet.',
-  'lygter-reflekser-horn': 'Juletræ vibes er ikke en lygtegodkendelse.',
-  'motor-udstoedning-batteri': 'Bilens mystiske røg er ikke en atmosfærisk feature.',
-  'energi-og-miljo': 'Forudseenhed: et energihack uden rabatkode.',
-  'daek-faelge-baerende-dele': 'Dækket er din kontakt med virkeligheden. Bogstaveligt talt.',
-  'karrosseri': 'Bilen må godt have personlighed. Skarpe kanter er ikke en personlighed.',
-  'sikkerhedsseler-udsyn-udstyr': 'Udsyn er en feature. En fedtet forrude er et nerf.',
-  'saerlige-koeretoejer': 'Kategori B er ikke et “jeg kører alt”-abonnement.',
-  'registreringsattest': 'Papirerne kender bilens grænser. Din optimisme gør ikke.'
+  'betjeningsudstyr': 'Knapperne står klar. Find dem, så er du godt i gang.',
+  'instrumenter-og-kontrollys': 'Lampen blinker, fordi den har noget at sige. Lyt til den.',
+  'motor-taending-og-speeder': 'Motoren leverer kraften. Du bestemmer, hvor meget den får.',
+  'kobling': 'Koblingen bestemmer, hvornår motor og gearkasse må mødes.',
+  'gear': 'Gearkassen ved, hvad den gør. Du skal vælge det rigtige gear.',
+  'foererassistentsystemer': 'Assistenten er en god kollega. Men du sidder stadig ved rattet.',
+  'ansvar-for-bilens-stand': 'Bilen er lånt, men turen er din. Den del låner du ikke.',
+  'styreapparat': 'Rattet er bilens stemme. Den skal lyde klart og præcist.',
+  'bremser': 'Bremsepedalen gør præcis det, du beder om. Det skal den også.',
+  'lygter-reflekser-horn': 'Lygterne er bilens måde at sige hej på. Så de skal lyse.',
+  'motor-udstoedning-batteri': 'Røg fra udstødningen er bilens måde at sige, at noget mangler.',
+  'energi-og-miljo': 'Blød fod og god planlægning sparer både penge og luft.',
+  'daek-faelge-baerende-dele': 'Dækkene er de eneste dele, der rører vejen. De fortjener opmærksomhed.',
+  'karrosseri': 'Glatte kanter og lukkede klapper. Så er karrosseriet i god form.',
+  'sikkerhedsseler-udsyn-udstyr': 'Sele på, ruder rene, spejle rigtige. Så er du klar til at se og blive set.',
+  'saerlige-koeretoejer': 'Kategori B er ikke ét køretøj. Det er mange typer med hver sine regler.',
+  'registreringsattest': 'Attesten kender tallene. Nu skal du også kende dem.'
 };
 const DONE_KEY = 'teoriboost.garage.done';
 const done = new Set();

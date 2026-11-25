@@ -9,23 +9,23 @@ const types = new Set(['start','view','next','answer','retry','commit','draft','
 const validId = v => typeof v === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9_.:-]{2,119}$/.test(v);
 const choices = { risk:['cycle','exit','road'],decision:['wait','turn','horn'], repair:['wait','turn','horn'], transfer:['yield','green','signal'], contrast:['proceed','always-wait','skip-check'], 'recall-check':['repeat','once','signal'], recall:['repeat','once','signal'] }; /* 24 Nov 2026: recall is a choice like the other steps, no typed answer */
 export const TURN_VOICE = Object.freeze({
-  observe:'Du vil dreje til højre. Bilen holder stille. Undersøg højresiden, før du vælger din handling.',
-  risk:'Hvad skal du blive ved med at undersøge, mens du gør klar til at dreje? Tænk på, hvor bilen skal hen, og hvem der kan komme i vejen for svinget.',
-  riskExplain:'Følg den bane, du vil krydse. En cyklist kan nå fra bag bilen til siden. En tom vej foran bilen siger ikke, at cykelstien er fri.',
-  decision:'Cyklisten kommer bagfra og fortsætter ligeud. Hvad gør du, før du drejer til højre?',
-  safe:'Du holder tilbage. Cyklisten passerer først. Orientér dig igen, og drej først, når det er frit.',
+  observe:'Du vil dreje til højre. Bilen står stille. Tjek højre side, før du vælger, hvad du gør.',
+  risk:'Hvad skal du blive ved med at tjekke, mens du gør dig klar til at dreje? Tænk på, hvor bilen skal hen, og hvem der kan komme i vejen for svinget.',
+  riskExplain:'Følg den bane, du vil krydse. En cyklist kan nå fra bag bilen og over til siden. En tom vej foran bilen betyder ikke, at cykelstien er fri.',
+  decision:'Cyklisten kommer bagfra og kører ligeud. Hvad gør du, før du drejer til højre?',
+  safe:'Du holder tilbage, og cyklisten passerer først. Orientér dig igen, og drej, når det er frit.',
   unsafe:'Jeres baner krydser hinanden. Blinklyset giver dig ikke ret til at køre foran cyklisten. Hold tilbage, orientér dig igen, og lad cyklisten passere.',
-  explain:'Se tidligt i spejle og blind vinkel før placering, og gentag kontrollen lige før svinget. Når du drejer til højre, må du ikke være til fare eller ulempe for cyklister, der fortsætter ligeud.',
+  explain:'Kig tidligt i spejle og blind vinkel, før du placerer bilen. Gentag kontrollen lige før svinget. Når du drejer til højre, må du ikke skabe fare eller ulempe for cyklister, der kører ligeud.',
   transfer:'Ny situation. Du skal ind ad en indkørsel over en gennemgående cykelsti. En cyklist kommer bagfra. Hvad afgør, om du kan dreje?',
-  review:'En ny situation efter en uge. Du vil til højre i et T-kryds. Cyklisten på højresiden fortsætter ligeud. Hvad afgør, om du kan dreje?',
-  transferExplain:'Bilen skal over cyklistens bane. Fri vej for bilen eller et tændt blinklys giver ikke forrang over cyklisten. Orientér dig, hold tilbage, og drej først, når det er frit.',
-  contrast:'Nu er cyklisten allerede forbi svingstedet. Der er ingen andre trafikanter i nærheden. Du holder stille og har frit udsyn. Hvad gør du nu?',
-  contrastExplain:'Du skal give plads, når der er nogen at give plads til. Når du har orienteret dig igen og sikret dig, at svinget er frit, kan du dreje. Reglen betyder ikke, at du altid skal vente.',
-  recall:'Hent reglen frem uden hjælp. Du har set i spejlet i god tid. Hvad skal du gøre lige før højresvinget? Vælg det svar, der passer.',
+  review:'Ny situation efter en uge. Du vil dreje til højre i et T-kryds. Cyklisten på højre side kører ligeud. Hvad afgør, om du kan dreje?',
+  transferExplain:'Bilen skal over cyklistens bane. Fri vej eller et tændt blinklys giver ikke forrang over cyklisten. Orientér dig, hold tilbage, og drej, når det er frit.',
+  contrast:'Cyklisten er allerede forbi svingstedet. Der er ingen andre trafikanter i nærheden. Du står stille og har frit udsyn. Hvad gør du nu?',
+  contrastExplain:'Du skal give plads, når der er nogen at give plads til. Når du har orienteret dig igen, og svinget er frit, kan du dreje. Reglen betyder ikke, at du altid skal vente.',
+  recall:'Prøv selv uden hjælp. Du har kigget i spejlet i god tid. Hvad skal du gøre lige før højresvinget? Vælg det svar, der passer.',
   recallCheck:'Sammenlign med dit eget svar. Første punkt: Gentag orienteringen i spejle og blind vinkel lige før svinget. Andet punkt: Hold tilbage for cyklisten, og drej først, når det er frit. Vurder selv, om begge punkter var med. Ingen AI bedømmer dit svar.',
-  recallSaved:'Dit selvtjek er gemt. En cyklist kan nå fra bag bilen til siden, mens du nærmer dig svinget. Se tidligt i spejle og blind vinkel, og gentag orienteringen lige før svinget. Gem nu dit forløb.',
-  recallRepair:'Tag handlingen én gang mere. En cyklist kan nå fra bag bilen til siden, mens du nærmer dig svinget. Se tidligt i spejle og blind vinkel, og gentag orienteringen lige før svinget. Hent derefter dit eget svar frem igen.',
-  done:'Du har gennemført situationen. En ny variant og en genkaldelse efter en uge kan vise mere om, hvad der bliver hængende.'
+  recallSaved:'Dit selvtjek er gemt. En cyklist kan nå fra bag bilen og over til siden, mens du nærmer dig svinget. Se tidligt i spejle og blind vinkel, og gentag orienteringen lige før svinget. Gem dit forløb nu.',
+  recallRepair:'Tag handlingen én gang til. En cyklist kan nå fra bag bilen og over til siden, mens du nærmer dig svinget. Se tidligt i spejle og blind vinkel, og gentag orienteringen lige før svinget. Prøv dit eget svar igen.',
+  done:'Du har gennemført situationen. En ny variant og et tjek efter en uge kan vise mere om, hvad der er blevet hængende.'
 });
 export function restoreTurnProfile(raw) {
   const events = Array.isArray(raw?.events) ? raw.events : [];

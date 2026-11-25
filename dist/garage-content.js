@@ -6,10 +6,10 @@ export const GARAGE = {
   "topics": [
     {
       "id": "betjeningsudstyr",
-      "title": "Find bilens betjeningsudstyr",
+      "title": "Find betjeningsudstyret i bilen",
       "pointRef": "1.1.1",
       "zone": "cockpit",
-      "lead": "Du skal kende navnet på udstyret og kunne finde det i netop den bil, du undervises i.",
+      "lead": "Du skal kunne finde og navngive udstyret i netop den bil, du øver i.",
       "objectives": [
         {
           "ref": "1.1.1.1",
@@ -44,24 +44,24 @@ export const GARAGE = {
       ],
       "cards": [
         {
-          "title": "Kontakterne omkring dig",
-          "body": "Ratlås, tænding, elektrisk starter, lys, horn, visker, vasker, ventilation, el-bagrude og spejlindstilling kan være samlet eller placeret forskelligt. Du skal også finde anordninger til fronthjelm, motorhjelm og lågen til bilens drivmiddel. Hjelmbetegnelserne kan dække samme klap eller forskellige klapper i den konkrete bil.",
+          "title": "Knapperne omkring dig",
+          "body": "Ratlås, tænding, elektrisk starter, lys, horn, visker, vasker, ventilation, elbagrude og spejlindstilling sidder forskelligt i hver bil. Du skal også finde knapperne til fronthjelm, motorhjelm og lågen til brændstof eller opladning. Hjelmene kan være to klapper, eller det kan være én og samme klap i din bil.",
           "refs": [
             "1.1.1.1",
             "1.1.1.5"
           ]
         },
         {
-          "title": "Fødder, hænder og parkering",
-          "body": "Pedalerne ligger i fast rækkefølge, men koblingspedalen findes kun i relevante biler. Gearvælgeren kan være mellem sæderne, ved rattet eller på instrumentbordet. Parkeringsbremsen kan være et håndtag, en pedal eller en kontakt. Rattet skal også kunne udpeges uden tøven.",
+          "title": "Pedaler, gear og parkering",
+          "body": "Pedalerne ligger altid i samme rækkefølge. Koblingspedalen findes kun i nogle biler. Gearvælgeren kan sidde mellem sæderne, ved rattet eller på instrumentbordet. Parkeringsbremsen kan være et håndtag, en pedal eller en kontakt. Du skal kunne pege på rattet uden at tøve.",
           "refs": [
             "1.1.1.2",
             "1.1.1.3"
           ]
         },
         {
-          "title": "Sele og væskesteder",
-          "body": "Selen består ikke kun af spændet: du skal også kunne vise dens fastgørelsespunkter. Under hjelmen skal du kende dækslet til sprinklervæske og de øvrige relevante beholdere i bilen. Nogle elbiler har ikke motorolie eller hydraulisk servostyringsolie, så undervisningsbilen afgør listen.",
+          "title": "Sele og væskepåfyldning",
+          "body": "Selen er ikke kun spændet. Du skal også kunne vise, hvor den er fastgjort. Under motorhjelmen skal du kende dækslet til sprinklervæske og de andre beholdere, bilen har. Nogle elbiler har ingen motorolie og ingen hydraulisk servoolie. Din undervisningsbil bestemmer listen.",
           "refs": [
             "1.1.1.4",
             "1.1.1.6"
@@ -70,16 +70,16 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Udpeg kontakter og åbninger i undervisningsbilen",
-          "action": "Sammen med kørelæreren og i den standsede undervisningsbil udpeger du én for én ratlås, tænding, elektrisk starter, visker og vasker, horn, lygter, klima, el-bagrude og spejlindstilling. Udpeg også hver betjeningsanordning til fronthjelm, motorhjelm og låge til drivmiddel, som findes i bilen.",
+          "title": "Udpeg kontakter og låger i bilen",
+          "action": "Stå stille i undervisningsbilen sammen med kørelæreren. Peg på hver kontakt én for én: ratlås, tænding, elektrisk starter, visker, vasker, horn, lygter, klima, elbagrude og spejlindstilling. Peg også på knapperne til fronthjelm, motorhjelm og låge til brændstof eller opladning, hvis de findes i bilen.",
           "refs": [
             "1.1.1.1",
             "1.1.1.5"
           ]
         },
         {
-          "title": "Udpeg førerpladsens betjening",
-          "action": "Med kørelæreren viser du i undervisningsbilen pedaler, gearplaceringer, parkeringsbremse, rat, selelås og fastgørelsespunkter. Kørelæreren forklarer bilens særlige løsning, før du rører udstyr, der kan sætte bilen i bevægelse.",
+          "title": "Udpeg betjeningen ved førersædet",
+          "action": "Vis med kørelæreren pedalerne, gearpositionerne, parkeringsbremsen, rattet, selelåsen og selens fastgørelsespunkter. Kørelæreren forklarer bilens særlige løsning, før du rører noget, der kan sætte bilen i bevægelse.",
           "refs": [
             "1.1.1.2",
             "1.1.1.3",
@@ -87,30 +87,30 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Udpeg relevante væskedæksler",
-          "action": "Med motoren slukket og efter kørelærerens anvisning udpeger du sprinklervæske og de olie- eller væskepåfyldninger, som faktisk findes i undervisningsbilen. Åbn ikke varme eller tryksatte beholdere.",
+          "title": "Udpeg væskedæksler",
+          "action": "Med motoren slukket og efter kørelærerens anvisning peger du på sprinklervæske og de olie- eller væskepåfyldninger, der findes i undervisningsbilen. Åbn aldrig en varm eller tryksat beholder.",
           "refs": [
             "1.1.1.6"
           ]
         }
       ],
       "case": {
-        "context": "I undervisningsbilen sidder gearvælgeren ved rattet, og parkeringsbremsen er en kontakt på midterkonsollen. Hvilken gruppe skal du kunne udpege under planpunkt 1.1.1.3?",
+        "context": "I din undervisningsbil sidder gearvælgeren ved rattet, og parkeringsbremsen er en kontakt på midterkonsollen. Hvilken gruppe skal du kunne udpege under planpunkt 1.1.1.3?",
         "options": [
           {
             "id": "a",
-            "text": "Gearvælger med gearenes placering, parkeringsbremsens betjening og rattet.",
+            "text": "Gearvælgeren med gearpositionerne, parkeringsbremsen og rattet.",
             "correct": true,
-            "why": "Punkt 1.1.1.3 samler netop gearvælger og gearplaceringer, parkeringsbremsens betjening og rat.",
+            "why": "Punkt 1.1.1.3 dækker gearvælgeren, gearpositionerne, parkeringsbremsen og rattet.",
             "refs": [
               "1.1.1.3"
             ]
           },
           {
             "id": "b",
-            "text": "Gearvælger med gearenes placering, tændingskontakten og rattet.",
+            "text": "Gearvælgeren med gearpositionerne, tændingskontakten og rattet.",
             "correct": false,
-            "why": "Tændingskontakten skal også udpeges, men den hører til 1.1.1.1; 1.1.1.3 kræver parkeringsbremsens betjening.",
+            "why": "Tændingskontakten skal du også kunne finde, men den hører til 1.1.1.1. Punkt 1.1.1.3 handler om parkeringsbremsen.",
             "refs": [
               "1.1.1.1",
               "1.1.1.3"
@@ -118,9 +118,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Gearvælgeren, parkeringsbremsens betjening og sikkerhedsselens fastgørelsespunkter.",
+            "text": "Gearvælgeren, parkeringsbremsen og selens fastgørelsespunkter.",
             "correct": false,
-            "why": "Sikkerhedsselens fastgørelsespunkter hører til 1.1.1.4, mens 1.1.1.3 også kræver gearplaceringerne og rattet.",
+            "why": "Selens fastgørelsespunkter hører til 1.1.1.4. Punkt 1.1.1.3 kræver gearpositionerne og rattet.",
             "refs": [
               "1.1.1.3",
               "1.1.1.4"
@@ -129,8 +129,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvordan viser du, at du kan udpege betjeningsudstyret i undervisningsbilen?",
-        "answer": "Du lokaliserer og udpeger de krævede dele i den konkrete bil sammen med kørelæreren.",
+        "prompt": "Hvordan viser du, at du kan finde betjeningen i din undervisningsbil?",
+        "answer": "Du finder og peger på de krævede dele i bilen sammen med kørelæreren.",
         "refs": [
           "1.1.1.1",
           "1.1.1.2",
@@ -143,10 +143,10 @@ export const GARAGE = {
     },
     {
       "id": "instrumenter-og-kontrollys",
-      "title": "Læs instrumenter og advarsler",
+      "title": "Læs målere og advarsler",
       "pointRef": "1.1.2",
       "zone": "cockpit",
-      "lead": "Instrumenter, lamper, displaybeskeder og lyde skal forstås i den konkrete undervisningsbil.",
+      "lead": "Målere, lamper, beskeder og lyde skal forstås i din egen undervisningsbil.",
       "objectives": [
         {
           "ref": "1.1.2.1",
@@ -166,22 +166,22 @@ export const GARAGE = {
       ],
       "cards": [
         {
-          "title": "Målere fortæller om bilen",
-          "body": "Speedometeret viser kørehastigheden. Bilen kan desuden have en omdrejningstæller og en temperaturmåler. Du skal kunne finde, aflæse og forstå de instrumenter, der findes i den konkrete undervisnings- og prøvebil, fordi deres placering og udformning kan variere mellem biler.",
+          "title": "Målerne fortæller om bilen",
+          "body": "Speedometeret viser farten. Bilen kan også have en omdrejningstæller og en temperaturmåler. Du skal kunne finde og aflæse de målere, som din undervisnings- og prøvebil har. Placering og udseende kan variere fra bil til bil.",
           "refs": [
             "1.1.2.1"
           ]
         },
         {
           "title": "Kontrollys er ikke pynt",
-          "body": "Kontrollys kan gælde åbne døre, bilens elektriske system, lygter, blinklys og parkeringsbremse. Andre varsler gælder ABS, ESC, motor, airbag, bremsesystem og eventuelt olietryk. I undervisningsbilen skal du lære hvert relevant symbols betydning og den reaktion, som situationen kræver.",
+          "body": "Nogle kontrollys viser åbne døre, bilens elektriske system, lygter, blinklys og parkeringsbremsen. Andre viser ABS, ESC, motor, airbag, bremser og eventuelt olietryk. Du skal lære hvert relevante symbol at kende, og hvilken reaktion det kræver.",
           "refs": [
             "1.1.2.2"
           ]
         },
         {
-          "title": "Display og lyd kræver vurdering",
-          "body": "En besked eller alarmlyd kan handle om kørsel, miljø eller sikkerhed. Læs hele beskeden, find det tilhørende symbol og reager efter bilens anvisning og kørelærerens instruktion. Et højt bip er ikke automatisk farligere end et stille symbol; betydningen skal forstås.",
+          "title": "Beskeder og lyd kræver din vurdering",
+          "body": "En besked eller alarmlyd kan handle om kørsel, miljø eller sikkerhed. Læs hele beskeden, find symbolet og reager efter bilens anvisning og kørelærerens instruktion. Et højt bip er ikke automatisk farligere end et stille symbol. Det er betydningen, du skal forstå.",
           "refs": [
             "1.1.2.3"
           ]
@@ -189,8 +189,8 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Aflæs undervisningsbilens instrumenter",
-          "action": "I den standsede undervisningsbil gennemgår du sammen med kørelæreren speedometer, eventuelle øvrige målere samt de kontrollys, displaybeskeder og lydalarmer, bilen kan vise. Du forklarer betydning og nødvendig reaktion.",
+          "title": "Aflæs målere og lamper i bilen",
+          "action": "Stå stille i undervisningsbilen sammen med kørelæreren. Gennemgå speedometeret, eventuelle andre målere, kontrollys, beskeder og lydalarmer. Forklar, hvad hver enkelt betyder, og hvad du skal gøre.",
           "refs": [
             "1.1.2.1",
             "1.1.2.2",
@@ -199,22 +199,22 @@ export const GARAGE = {
         }
       ],
       "case": {
-        "context": "Kørelæreren beder dig skelne kontrollys i 1.1.2.2 fra målere i 1.1.2.1 og øvrige displayoplysninger i 1.1.2.3. Hvilken gruppe består kun af kontrollys fra 1.1.2.2?",
+        "context": "Kørelæreren beder dig skelne kontrollys fra punkt 1.1.2.2 fra målere i 1.1.2.1 og beskeder i 1.1.2.3. Hvilken gruppe består kun af kontrollys fra 1.1.2.2?",
         "options": [
           {
             "id": "a",
             "text": "Kontrollys for ABS, ESC og airbag.",
             "correct": true,
-            "why": "ABS, ESC og airbag er alle udtrykkeligt med i kontrolområderne under 1.1.2.2.",
+            "why": "ABS, ESC og airbag er alle nævnt i punkt 1.1.2.2.",
             "refs": [
               "1.1.2.2"
             ]
           },
           {
             "id": "b",
-            "text": "Speedometer, temperaturmåler og kontrollys for motor.",
+            "text": "Speedometer, temperaturmåler og motorlampen.",
             "correct": false,
-            "why": "Motorlampen hører til 1.1.2.2, men speedometer og temperaturmåler er instrumenter under 1.1.2.1.",
+            "why": "Motorlampen hører til 1.1.2.2. Speedometer og temperaturmåler er målere under 1.1.2.1.",
             "refs": [
               "1.1.2.1",
               "1.1.2.2"
@@ -222,9 +222,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Omdrejningstæller, dørlukning og en relevant akustisk alarm.",
+            "text": "Omdrejningstælleren, dørlukningen og en relevant lydalarm.",
             "correct": false,
-            "why": "Dørlukning hører til 1.1.2.2, men omdrejningstælleren ligger i 1.1.2.1 og akustiske alarmer i 1.1.2.3.",
+            "why": "Dørlukningen hører til 1.1.2.2. Omdrejningstælleren hører til 1.1.2.1, og lydalarmer hører til 1.1.2.3.",
             "refs": [
               "1.1.2.1",
               "1.1.2.2",
@@ -235,7 +235,7 @@ export const GARAGE = {
       },
       "recall": {
         "prompt": "Hvad er forskellen på at se et kontrollys og at forstå det?",
-        "answer": "Du skal kunne forbinde symbolet med dets betydning og vide, hvilken reaktion der er nødvendig i den konkrete bil.",
+        "answer": "Du skal kunne knytte symbolet til dets betydning og vide, hvilken reaktion bilen kræver.",
         "refs": [
           "1.1.2.2",
           "1.1.2.3"
@@ -247,7 +247,7 @@ export const GARAGE = {
       "title": "Fra energi til bevægelse",
       "pointRef": "1.1.3",
       "zone": "powertrain",
-      "lead": "Forstå den enkle kraftvej i forbrændingsbil, elbil og hybrid uden at gøre dig til mekaniker.",
+      "lead": "Lær den enkle kraftvej i en forbrændingsbil, en elbil og en hybrid. Du skal ikke være mekaniker.",
       "objectives": [
         {
           "ref": "1.1.3.1",
@@ -287,8 +287,8 @@ export const GARAGE = {
       ],
       "cards": [
         {
-          "title": "Forbrændingsmotorens kraftvej",
-          "body": "I en forbrændingsmotor antændes en blanding af luft og brændstof. Det bevæger stemplerne. Deres bevægelse omdannes til rotation i krumtappen, og rotationen føres videre gennem kobling og gear til hjulene. Speederen regulerer motorens omdrejninger, ikke direkte hjulenes fart.",
+          "title": "Kraftvejen i en forbrændingsmotor",
+          "body": "I en forbrændingsmotor antændes luft og brændstof. Det får stemplerne til at bevæge sig. Bevægelsen bliver til rotation i krumtappen, og rotationen føres videre gennem koblingen og gearet til hjulene. Speederen styrer motorens omdrejninger. Den styrer ikke direkte hjulenes fart.",
           "refs": [
             "1.1.3.1",
             "1.1.3.2",
@@ -296,16 +296,16 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Startmotoren låner strøm",
-          "body": "En forbrændingsmotor kommer i gang med hjælp fra en elektrisk startmotor, som får strøm fra batteriet. Når motoren er startet, skal nøgle eller startknap slippes med det samme. Ellers fortsætter startmotoren unødigt og kan tage skade.",
+          "title": "Startmotoren får strøm fra batteriet",
+          "body": "En forbrændingsmotor starter med hjælp fra en elektrisk startmotor. Den får strøm fra batteriet. Når motoren er i gang, skal du slippe nøglen eller startknappen med det samme. Ellers kører startmotoren for længe, og den kan tage skade.",
           "refs": [
             "1.1.3.4",
             "1.1.3.5"
           ]
         },
         {
-          "title": "Elbil og hybrid er forskellige",
-          "body": "En elbil drives af en elmotor, der får strøm fra bilens batteri. I en hybrid kan elmotoren være kombineret med en forbrændingsmotor. Derfor skal du skelne mellem ren elektrisk drift og en drivlinje, hvor to motortyper indgår.",
+          "title": "Elbil og hybrid er ikke det samme",
+          "body": "En elbil kører på en elmotor, der får strøm fra batteriet. I en hybrid kan elmotoren arbejde sammen med en forbrændingsmotor. Du skal kunne skelne mellem ren elektrisk kørsel og en drivlinje med to motortyper.",
           "refs": [
             "1.1.3.6",
             "1.1.3.7"
@@ -314,8 +314,8 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Følg kraftvejen på en skitse",
-          "action": "Peg på energikilden og forklar mundtligt vejen frem mod hjulene for henholdsvis en forbrændingsbil, en elbil og en hybrid. Brug biltype som første spørgsmål, så startmotor og kobling ikke fejlagtigt overføres til alle biler.",
+          "title": "Følg kraftvejen i tre biltyper",
+          "action": "Peg på energikilden, og forklar med ord, hvordan kraften når hjulene. Gør det for en forbrændingsbil, en elbil og en hybrid. Start med biltypen, så du ikke overfører startmotor og kobling til alle biler.",
           "refs": [
             "1.1.3.1",
             "1.1.3.2",
@@ -326,13 +326,13 @@ export const GARAGE = {
         }
       ],
       "case": {
-        "context": "Både en forbrændingsbil og en elbil har et batteri, men batteriets rolle er ikke den samme. Hvilken forklaring stemmer med Plan B?",
+        "context": "Både en forbrændingsbil og en elbil har et batteri, men batteriet har ikke samme rolle. Hvilken forklaring stemmer med Plan B?",
         "options": [
           {
             "id": "a",
-            "text": "I forbrændingsbilen forsyner batteriet startmotoren; i elbilen forsyner batteriet den motor, der driver bilen.",
+            "text": "I forbrændingsbilen forsyner batteriet startmotoren. I elbilen forsyner det motoren, der driver bilen.",
             "correct": true,
-            "why": "Planen beskriver batteristrøm til forbrændingsmotorens startmotor og batteristrøm til elbilens drivende elmotor.",
+            "why": "Planen beskriver batteristrøm til startmotoren i en forbrændingsbil og til elmotoren, der driver en elbil.",
             "refs": [
               "1.1.3.4",
               "1.1.3.6",
@@ -341,9 +341,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "I forbrændingsbilen driver batteriet hjulene gennem gear; i elbilen bruges batteriet kun under motorstart.",
+            "text": "I forbrændingsbilen driver batteriet hjulene gennem gearet. I elbilen bruges batteriet kun, når motoren startes.",
             "correct": false,
-            "why": "Forbrændingsmotorens bevægelse føres gennem kobling og gear, mens elbilens batteri leverer strøm til elmotoren under drift.",
+            "why": "I en forbrændingsbil føres bevægelsen gennem koblingen og gearet. I en elbil leverer batteriet strøm til elmotoren under kørsel.",
             "refs": [
               "1.1.3.2",
               "1.1.3.4",
@@ -352,9 +352,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "I forbrændingsbilen antænder batteriet brændstoffet direkte; i elbilen drejer batteriet en startmotor ved igangsætning.",
+            "text": "I forbrændingsbilen antænder batteriet brændstoffet. I elbilen drejer batteriet en startmotor, når bilen sættes i gang.",
             "correct": false,
-            "why": "Planen knytter forbrændingsbilens batteri til den elektriske startmotor og elbilens batteri til den drivende elmotor.",
+            "why": "Planen knytter batteriet i forbrændingsbilen til startmotoren og batteriet i elbilen til den motor, der driver bilen.",
             "refs": [
               "1.1.3.1",
               "1.1.3.4",
@@ -365,8 +365,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvad sker der mellem stemplernes bevægelse og hjulenes bevægelse i en forbrændingsbil?",
-        "answer": "Stempelbevægelsen bliver til rotation i krumtappen, som føres videre gennem kobling og gear til hjulene.",
+        "prompt": "Hvad sker der mellem stemplerne og hjulene i en forbrændingsbil?",
+        "answer": "Stemplernes bevægelse bliver til rotation i krumtappen. Den føres videre gennem koblingen og gearet til hjulene.",
         "refs": [
           "1.1.3.2"
         ]
@@ -377,7 +377,7 @@ export const GARAGE = {
       "title": "Koblingen forbinder og frigør",
       "pointRef": "1.1.4",
       "zone": "powertrain",
-      "lead": "Koblingen styrer forbindelsen mellem motor og gearkasse i biler med manuel koblingspedal.",
+      "lead": "Koblingen styrer forbindelsen mellem motor og gearkasse i biler med koblingspedal.",
       "objectives": [
         {
           "ref": "1.1.4.1",
@@ -417,8 +417,8 @@ export const GARAGE = {
       ],
       "cards": [
         {
-          "title": "Forbindelsen kan åbnes",
-          "body": "Koblingen forbinder motor og gearkasse eller skiller dem ad. Grundideen er, at en plade kan presses mod en roterende del ved krumtappen, så bevægelsen går videre til gearkassen. Når koblingspedalen trædes helt ned, afbrydes forbindelsen.",
+          "title": "Koblingen kan åbne forbindelsen",
+          "body": "Koblingen forbinder motor og gearkasse eller skiller dem ad. Grundideen er, at en plade presses mod en roterende del ved krumtappen. Så føres bevægelsen videre til gearkassen. Træder du koblingspedalen helt ned, bliver forbindelsen afbrudt.",
           "refs": [
             "1.1.4.1",
             "1.1.4.2",
@@ -426,8 +426,8 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Pedalen beskytter og blødgør",
-          "body": "I en bil med koblingspedal kan pedalen trædes helt i bund under motorstart for at skåne startmotoren. Ved gearskift skal den helt i bund, så gearkassen ikke beskadiges. Når pedalen løftes langsomt, føres motorkraften blødt videre til hjulene.",
+          "title": "Pedalen skåner og blødgør",
+          "body": "I en bil med koblingspedal kan du træde pedalen helt i bund ved motorstart, så startmotoren skånes. Ved gearskift skal pedalen også helt i bund, så gearkassen ikke bliver beskadiget. Løfter du pedalen langsomt, føres kraften blødt videre til hjulene.",
           "refs": [
             "1.1.4.4",
             "1.1.4.5"
@@ -435,7 +435,7 @@ export const GARAGE = {
         },
         {
           "title": "Hydraulik og biltype",
-          "body": "Nogle manuelle koblinger bruger hydraulik, og så skal væskeniveauet være tilstrækkeligt. Biler med automatgear og elbiler har ingen koblingspedal. Det betyder ikke, at alle transmissioner er ens; kun at føreren ikke betjener en særskilt koblingspedal.",
+          "body": "Nogle manuelle koblinger bruger hydraulik. Så skal væskeniveauet være tilstrækkeligt. Biler med automatgear og elbiler har ingen koblingspedal. Det betyder ikke, at alle gear er ens. Det betyder kun, at du ikke betjener en koblingspedal.",
           "refs": [
             "1.1.4.6",
             "1.1.4.7"
@@ -444,8 +444,8 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Forklar tre koblingstilstande",
-          "action": "Beskriv med ord, hvad der sker mellem motor og gearkasse, når koblingspedalen er oppe, helt nede og løftes langsomt. Afslut med at forklare, hvorfor øvelsen ikke passer til en elbil eller en bil uden koblingspedal.",
+          "title": "Forklar tre koblingsstillinger",
+          "action": "Beskriv med ord, hvad der sker mellem motor og gearkasse, når pedalen er oppe, helt nede og løftes langsomt. Afslut med at forklare, hvorfor øvelsen ikke passer til en elbil eller en bil uden koblingspedal.",
           "refs": [
             "1.1.4.1",
             "1.1.4.3",
@@ -455,13 +455,13 @@ export const GARAGE = {
         }
       ],
       "case": {
-        "context": "I en bil med koblingspedal skal du forklare, hvad der sker under et gearskift. Hvilken rækkefølge følger koblingens funktion i Plan B?",
+        "context": "I en bil med koblingspedal skal du forklare, hvad der sker ved et gearskift. Hvilken rækkefølge følger Plan B?",
         "options": [
           {
             "id": "a",
-            "text": "Pedalen trædes i bund, forbindelsen afbrydes, gearet skiftes, og pedalen løftes langsomt for blød overførsel.",
+            "text": "Pedalen trædes i bund, forbindelsen afbrydes, gearet skiftes, og pedalen løftes langsomt, så kraften føres blødt videre.",
             "correct": true,
-            "why": "Fuld nedtrædning afbryder forbindelsen til gearkassen, og langsom opløftning overfører bevægelsen blødt efter skiftet.",
+            "why": "Pedalen i bund afbryder forbindelsen til gearkassen. Løftes den langsomt, føres bevægelsen blødt videre efter skiftet.",
             "refs": [
               "1.1.4.3",
               "1.1.4.4",
@@ -470,9 +470,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Pedalen trædes halvt ned, forbindelsen bevares delvist, gearet skiftes, og pedalen løftes hurtigt for blød overførsel.",
+            "text": "Pedalen trædes halvt ned, forbindelsen bevares delvist, gearet skiftes, og pedalen løftes hurtigt, så kraften føres blødt videre.",
             "correct": false,
-            "why": "Planen kræver pedalen i bund under gearskift og langsom opløftning; halv nedtrædning og hurtig opløftning matcher ikke funktionen.",
+            "why": "Planen kræver pedalen helt i bund ved gearskift og langsom opløftning. Halv nedtrædning og hurtig opløftning passer ikke.",
             "refs": [
               "1.1.4.3",
               "1.1.4.4",
@@ -481,9 +481,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Pedalen trædes i bund, forbindelsen forstærkes, gearet skiftes, og pedalen holdes nede for blød overførsel.",
+            "text": "Pedalen trædes i bund, forbindelsen forstærkes, gearet skiftes, og pedalen holdes nede, så kraften føres blødt videre.",
             "correct": false,
-            "why": "Nedtrædning afbryder forbindelsen i stedet for at forstærke den, og bevægelsen overføres først blødt, når pedalen løftes langsomt.",
+            "why": "Nedtrædning afbryder forbindelsen og forstærker den ikke. Bevægelsen føres blødt videre først, når pedalen løftes langsomt.",
             "refs": [
               "1.1.4.1",
               "1.1.4.3",
@@ -493,8 +493,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvorfor løftes koblingspedalen langsomt efter et gearskift?",
-        "answer": "For at føre motorens roterende bevægelse blødt videre gennem gearkassen til hjulene.",
+        "prompt": "Hvorfor løfter du koblingspedalen langsomt efter et gearskift?",
+        "answer": "Så motorens rotation føres blødt videre gennem gearkassen til hjulene.",
         "refs": [
           "1.1.4.5"
         ]
@@ -502,10 +502,10 @@ export const GARAGE = {
     },
     {
       "id": "gear",
-      "title": "Gear til kraft, fart og bakning",
+      "title": "Vælg gear til kraft, fart og bakning",
       "pointRef": "1.1.5",
       "zone": "powertrain",
-      "lead": "Gearkassen tilpasser motorens rotation til den trækkraft og bevægelse, bilen har brug for.",
+      "lead": "Gearkassen tilpasser motorens rotation til den kraft og bevægelse, bilen har brug for.",
       "objectives": [
         {
           "ref": "1.1.5.1",
@@ -536,7 +536,7 @@ export const GARAGE = {
       "cards": [
         {
           "title": "Gearkassen tilpasser rotationen",
-          "body": "Gearkassen ændrer, hvordan motorens roterende bevægelse overføres til hjulene. I den enkle forklaring griber tandhjul i forskellige størrelser ind i hinanden. Føreren vælger gear i en manuel bil, mens en automatisk transmission foretager valget automatisk.",
+          "body": "Gearkassen ændrer, hvordan motorens rotation føres til hjulene. I den enkle forklaring griber tandhjul i forskellig størrelse ind i hinanden. I en manuel bil vælger du gearet selv. I en automatisk bil vælger gearkassen det for dig.",
           "refs": [
             "1.1.5.1",
             "1.1.5.2"
@@ -544,14 +544,14 @@ export const GARAGE = {
         },
         {
           "title": "Lave gear giver trækkraft",
-          "body": "Lave gear passer til igangsætning, acceleration, langsom kørsel og stejle bakker, hvor bilen har brug for stor trækkraft. Det gælder både opad og nedad. Valget handler altså ikke kun om lav fart, men om den kraft og kontrol situationen kræver.",
+          "body": "Lave gear passer til igangsætning, acceleration, langsom kørsel og stejle bakker, hvor bilen har brug for stor trækkraft. Det gælder både op og ned ad bakke. Valget handler ikke kun om lav fart. Det handler om den kraft og kontrol, situationen kræver.",
           "refs": [
             "1.1.5.3"
           ]
         },
         {
           "title": "Høje gear og bakgear",
-          "body": "Højere gear bruges ved højere fart og kan skåne motoren samt begrænse brændstofforbruget i en forbrændingsbil. Bakgear sørger for bevægelse baglæns. Automatgear kan vise valgene på en anden måde, men føreren skal stadig forstå forskellen på fremad og bak.",
+          "body": "Højere gear bruges ved højere fart. I en forbrændingsbil kan det skåne motoren og spare brændstof. Bakgearet kører bilen baglæns. Automatgear viser valgene på en anden måde, men du skal stadig kunne se forskellen på frem og bak.",
           "refs": [
             "1.1.5.4",
             "1.1.5.5"
@@ -560,8 +560,8 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Vælg gearidé til situationen",
-          "action": "Sorter fem tænkte situationer i behov for lavt gear, højt gear eller bakgear: igangsætning, stejl nedkørsel, rolig kørsel ved højere fart, langsom fremdrift og baglæns placering. Forklar valget ud fra trækkraft og bevægelsesretning.",
+          "title": "Vælg gear til situationen",
+          "action": "Sorter fem tænkte situationer efter, om de kræver lavt gear, højt gear eller bakgear. Situationerne er: igangsætning, stejl nedkørsel, rolig kørsel ved højere fart, langsom fremdrift og baglæns placering. Forklar valget ud fra trækkraft og kørselsretning.",
           "refs": [
             "1.1.5.3",
             "1.1.5.4",
@@ -570,13 +570,13 @@ export const GARAGE = {
         }
       ],
       "case": {
-        "context": "Du skal koble hver geartype til den anvendelse, som Plan B beskriver. Hvilken samlet kobling er korrekt?",
+        "context": "Du skal koble hver geartype til den anvendelse, Plan B beskriver. Hvilken kombination er korrekt?",
         "options": [
           {
             "id": "a",
-            "text": "Lavt gear ved igangsætning og stejle bakker, højt gear ved høj fart og bakgear baglæns.",
+            "text": "Lavt gear ved igangsætning og på stejle bakker, højt gear ved høj fart og bakgear for at køre baglæns.",
             "correct": true,
-            "why": "Lave gear giver den ønskede trækkraft, høje gear bruges ved høj fart, og bakgear muliggør baglæns kørsel.",
+            "why": "Lave gear giver trækkraft, høje gear bruges ved høj fart, og bakgearet gør det muligt at køre baglæns.",
             "refs": [
               "1.1.5.3",
               "1.1.5.4",
@@ -585,9 +585,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Lavt gear ved igangsætning, højt gear på stejle bakker og bakgear ved kørsel baglæns.",
+            "text": "Lavt gear ved igangsætning, højt gear på stejle bakker og bakgear for at køre baglæns.",
             "correct": false,
-            "why": "Igangsætning og bakgear er parret rigtigt, men en stejl bakke hører til anvendelserne for lave gear, ikke høje.",
+            "why": "Igangsætning og bakgear er rigtige. Men stejle bakker hører til lave gear, ikke høje.",
             "refs": [
               "1.1.5.3",
               "1.1.5.4",
@@ -596,9 +596,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Lavt gear på stejle bakker, højt gear ved lav hastighed og bakgear ved kørsel baglæns.",
+            "text": "Lavt gear på stejle bakker, højt gear ved lav hastighed og bakgear for at køre baglæns.",
             "correct": false,
-            "why": "Stejl bakke og bakgear er parret rigtigt, men planen knytter høje gear til høj hastighed, ikke lav hastighed.",
+            "why": "Stejle bakker og bakgear er rigtige. Men planen knytter høje gear til høj hastighed, ikke lav.",
             "refs": [
               "1.1.5.3",
               "1.1.5.4",
@@ -608,8 +608,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvornår er et lavere gear typisk relevant?",
-        "answer": "Når bilen skal have stor trækkraft eller køre langsomt, eksempelvis ved igangsætning, acceleration eller en stejl bakke.",
+        "prompt": "Hvornår vælger du et lavere gear?",
+        "answer": "Når bilen skal have stor trækkraft eller køre langsomt. For eksempel ved igangsætning, acceleration eller på en stejl bakke.",
         "refs": [
           "1.1.5.3"
         ]
@@ -617,10 +617,10 @@ export const GARAGE = {
     },
     {
       "id": "foererassistentsystemer",
-      "title": "Assistenter hjælper, men overtager ikke ansvaret",
+      "title": "Assistenter hjælper dig, men ansvaret er dit",
       "pointRef": "1.1.6",
       "zone": "cockpit",
-      "lead": "Lær systemernes typiske hjælp, deres sanser og grænser samt bilens konkrete signaler.",
+      "lead": "Lær, hvad systemerne kan hjælpe med, hvordan de ser og mærker, og hvor deres grænser går.",
       "objectives": [
         {
           "ref": "1.1.6.1",
@@ -690,8 +690,8 @@ export const GARAGE = {
       ],
       "cards": [
         {
-          "title": "Bilen sanser gennem teknik",
-          "body": "Planen beskriver alle nyere biler som udstyret med førerassistenter, der kan vejlede eller gribe ind i faresituationer. Den beskriver kameraer, sensorer og radarer som fælles teknologier bag overvågningen. Det betyder ikke, at hvert system bruger alle tre samtidigt; mulige indgreb sker via bremser eller styring.",
+          "title": "Bilen sanser med teknik",
+          "body": "Planen siger, at alle nyere biler er udstyret med førerassistenter. De kan vejlede føreren eller gribe ind i farlige situationer. Kameraer, sensorer og radarer er fælles teknologier bag overvågningen. Hvert system bruger ikke alle tre. Indgreb sker via bremser eller styring.",
           "refs": [
             "1.1.6.1",
             "1.1.6.2"
@@ -699,7 +699,7 @@ export const GARAGE = {
         },
         {
           "title": "Afstand, blind vinkel og vognbane",
-          "body": "Adaptiv fartpilot kan tilpasse afstand og hastighed til forankørende. Blindvinkelassistent kan advare om trafikanter ved siden af bilen, og vognbaneassistent kan reagere, hvis bilen forlader en markeret bane. Advarsler kan være lys, lyd eller vibration; visse systemer kan også gribe ind.",
+          "body": "Adaptiv fartpilot kan tilpasse afstand og hastighed til bilen foran. Blindvinkelassistenten kan advare om trafikanter ved siden af bilen. Vognbaneassistenten kan reagere, hvis bilen forlader en markeret vognbane. Advarslerne kan være lys, lyd eller vibration. Nogle systemer kan også gribe ind.",
           "refs": [
             "1.1.6.3a",
             "1.1.6.3b",
@@ -708,15 +708,15 @@ export const GARAGE = {
         },
         {
           "title": "Parkering og nødbremsning",
-          "body": "Parkeringssensorer vurderer afstand og advarer med lyd eller lys. En parkeringsassistent kan i nogle biler udføre bestemte parkeringsbevægelser. Frontalkollisions- og nødbremseassistent kan advare om sammenstødsrisiko og i faresituationer bremse automatisk, også ved visse parkerings- eller bakkemanøvrer.",
+          "body": "Parkeringssensorer måler afstanden og advarer med lyd eller lys. Nogle biler har en parkeringsassistent, der kan styre visse parkeringsbevægelser. Frontalkollisionsassistenten og nødbremseassistenten advarer om sammenstødsrisiko. I en faresituation kan de bremse automatisk. Det gælder også ved visse parkerings- og bakkemanøvrer.",
           "refs": [
             "1.1.6.3d",
             "1.1.6.3e"
           ]
         },
         {
-          "title": "Træthed, tavler og lys",
-          "body": "Træthedsregistrering kan advare med lyd, lys eller vibration. En tavleassistent kan vise genkendte tavler og sammen med adaptiv fartpilot ændre hastigheden efter dem. Lysassistenten kan tilpasse nær- og fjernlys. Systemer kan vise forkert, så føreren skal fortsat observere og bevare ansvaret.",
+          "title": "Træthed, skilte og lys",
+          "body": "Træthedsregistrering kan advare med lyd, lys eller vibration. Skiltegenkendelsen viser genkendte skilte. Sammen med adaptiv fartpilot kan den ændre farten efter skiltene. Lysassistenten kan skifte mellem nærlys og fjernlys. Systemer kan vise forkert. Du skal derfor fortsat observere og bevare ansvaret.",
           "refs": [
             "1.1.6.3f",
             "1.1.6.3g",
@@ -725,16 +725,16 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Kritisk fører, fuldt ansvar",
-          "body": "Et system kan overse noget, misforstå omgivelserne eller give en misvisende oplysning. Føreren har stadig ansvaret for kørslen og kan ikke henvise til assistenten efter en forseelse eller et uheld. Bekvemmeligheden kan desuden øge uopmærksomheden, så aktiv overvågning er nødvendig.",
+          "title": "Du har stadig det fulde ansvar",
+          "body": "Et system kan overse noget, misforstå omgivelserne eller vise noget forkert. Føreren har stadig ansvaret for kørslen, og føreren kan ikke give assistenten skylden for en forseelse eller et uheld. Det er let at blive uopmærksom, når bilen hjælper. Derfor skal du overvåge aktivt hele tiden.",
           "refs": [
             "1.1.6.4",
             "1.1.6.5"
           ]
         },
         {
-          "title": "Lær præcis den bil, du skal køre",
-          "body": "Systemnavne, symboler, lyde, indstillinger og indgreb varierer mellem biler. Du skal derfor kunne aflæse og forstå samtlige førerassistenter i undervisnings- og prøvebilen. Gennemgå både systemernes status og de nødvendige reaktioner med kørelæreren i den konkrete bil.",
+          "title": "Lær den bil, du skal køre i",
+          "body": "Navne, symboler, lyde, indstillinger og indgreb er forskellige fra bil til bil. Du skal kunne aflæse og forstå alle førerassistenter i din undervisnings- og prøvebil. Gennemgå status og de nødvendige reaktioner med kørelæreren i den bil.",
           "refs": [
             "1.1.6.6"
           ]
@@ -742,15 +742,15 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Gennemgå undervisningsbilens assistenter",
-          "action": "I den standsede undervisningsbil åbner kørelæreren bilens relevante visninger og gennemgår hvert installeret førerassistentsystem. Du aflæser symboler og status, forklarer advarsler og beskriver, hvordan føreren skal reagere.",
+          "title": "Gennemgå assistenterne i bilen",
+          "action": "Stå stille i undervisningsbilen. Kørelæreren åbner bilens relevante visninger og gennemgår hvert førerassistentsystem, bilen har. Du aflæser symboler og status, forklarer advarslerne og beskriver, hvordan du skal reagere.",
           "refs": [
             "1.1.6.6"
           ]
         },
         {
-          "title": "Kobl signal til system uden at aktivere kørsel",
-          "action": "Med kørelæreren matcher du bilens egne symboler og indstillinger til de systemtyper, bilen faktisk har. I taler også om systemer, bilen ikke har, så fravær ikke forveksles med fejl. Øvelsen udføres uden at fremkalde farlige situationer.",
+          "title": "Find systemerne uden at køre",
+          "action": "Med kørelæreren matcher du bilens egne symboler og indstillinger med de systemer, bilen faktisk har. Tal også om systemer, bilen ikke har, så du ikke forveksler fravær med fejl. Øvelsen laves uden at skabe farlige situationer.",
           "refs": [
             "1.1.6.3a",
             "1.1.6.3b",
@@ -765,13 +765,13 @@ export const GARAGE = {
         }
       ],
       "case": {
-        "context": "Tavleassistenten viser en anden hastighed end den tavle, føreren netop har observeret. Hvilket udsagn om systemet og ansvaret følger Plan B?",
+        "context": "Skiltegenkendelsen viser en anden hastighed end det skilt, du lige har set. Hvilket udsagn om systemet og ansvaret følger Plan B?",
         "options": [
           {
             "id": "a",
-            "text": "Systemet kan vise forkert; føreren vurderer tavlen og beholder ansvaret, også ved automatisk hastighedsændring.",
+            "text": "Systemet kan vise forkert. Føreren vurderer skiltet og beholder ansvaret, også hvis farten ændres automatisk.",
             "correct": true,
-            "why": "Tavleassistenten kan kobles med adaptiv fartpilot, men fejlmuligheden består, og føreren fritages ikke for ansvar.",
+            "why": "Skiltegenkendelsen kan koble sammen med adaptiv fartpilot. Fejlen kan stadig ske, og føreren bliver ikke fritaget for ansvar.",
             "refs": [
               "1.1.6.3g",
               "1.1.6.4"
@@ -779,9 +779,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Systemet kan vise forkert; føreren sænker farten, men fartpiloten overtager ansvaret for tavlefortolkningen.",
+            "text": "Systemet kan vise forkert. Føreren sænker farten, men fartpiloten overtager ansvaret for at fortolke skiltet.",
             "correct": false,
-            "why": "At sænke farten kan være forsigtigt, men ingen førerassistent overtager førerens ansvar for kørslen eller tavlefortolkningen.",
+            "why": "At sænke farten kan være forsigtigt. Men ingen førerassistent overtager førerens ansvar for kørslen eller for at tolke skiltet.",
             "refs": [
               "1.1.6.3g",
               "1.1.6.4"
@@ -789,9 +789,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Systemet kan vise forkert; føreren afbryder funktionen, hvorefter den viste tavleinformation får forrang.",
+            "text": "Systemet kan vise forkert. Føreren slår funktionen fra, og så får det viste skilt forrang.",
             "correct": false,
-            "why": "Afbrydelse kan være en forsigtig handling, men displayets oplysning får ikke forrang, og førerens ansvar består fortsat.",
+            "why": "At slå funktionen fra kan være forsigtigt. Men skærmens oplysning får ikke forrang, og førerens ansvar består.",
             "refs": [
               "1.1.6.4"
             ]
@@ -799,8 +799,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvad ændrer en aktiv førerassistent ved førerens ansvar?",
-        "answer": "Ingenting: føreren skal fortsat observere, vurdere og handle og kan ikke overlade ansvaret til systemet.",
+        "prompt": "Ændrer en aktiv førerassistent noget ved førerens ansvar?",
+        "answer": "Ingenting. Føreren skal stadig observere, vurdere og handle, og ansvaret kan ikke overlades til systemet.",
         "refs": [
           "1.1.6.4",
           "1.1.6.5"
@@ -809,10 +809,10 @@ export const GARAGE = {
     },
     {
       "id": "ansvar-for-bilens-stand",
-      "title": "Ansvar for bilens stand",
+      "title": "Hvem har ansvaret for bilens stand",
       "pointRef": "1.2.1",
       "zone": "documents",
-      "lead": "Lovlighed og sikkerhed er to nært beslægtede ansvar, som skal være afklaret før og under kørslen.",
+      "lead": "Lovlighed og sikkerhed er to ansvar, der hænger sammen. Begge skal være afklaret før og under kørslen.",
       "objectives": [
         {
           "ref": "1.2.1.1",
@@ -838,22 +838,22 @@ export const GARAGE = {
       "cards": [
         {
           "title": "To slags ansvar",
-          "body": "Ejeren eller den registrerede bruger har ansvaret for, at bilen er lovlig. Føreren har ansvaret for, at den er sikkerhedsmæssigt forsvarlig. En lånt bil flytter derfor ikke førerens pligt til at reagere på fejl, som kan gøre turen farlig.",
+          "body": "Ejeren eller den registrerede bruger har ansvaret for, at bilen er lovlig. Føreren har ansvaret for, at den er sikkerhedsmæssigt forsvarlig. Låner du en bil, flytter det ikke din pligt til at reagere på fejl, der kan gøre turen farlig.",
           "refs": [
             "1.2.1.1"
           ]
         },
         {
-          "title": "Opmærksom hele turen",
-          "body": "Førerens kontrol slutter ikke, når bilen starter. Styring, bremser, lygter og horn skal fungere sikkert og efter reglerne, og en trailer skal være forsvarligt koblet. Nye lyde, lamper eller ændret adfærd undervejs kræver en konkret vurdering.",
+          "title": "Vær opmærksom hele turen",
+          "body": "Dit ansvar stopper ikke, når bilen er startet. Styring, bremser, lygter og horn skal fungere sikkert og efter reglerne. En trailer skal være forsvarligt koblet på. Nye lyde, lamper eller en ændret opførsel undervejs kræver, at du vurderer det.",
           "refs": [
             "1.2.1.2",
             "1.2.1.3"
           ]
         },
         {
-          "title": "Støj og udledning tæller også",
-          "body": "Føreren skal være opmærksom på unødig støj og på fejl ved motor eller forureningsbegrænsende udstyr, som påvirker udledningen. Usædvanlig røg eller lyd er derfor ikke blot bilens humør; det kan være et tegn på ulovlig eller uforsvarlig stand.",
+          "title": "Støj og udstødning tæller også",
+          "body": "Du skal være opmærksom på unødig støj og på fejl ved motoren eller udstyr, der begrænser udledningen. Usædvanlig røg eller lyd er mere end bilens humør. Det kan være tegn på en ulovlig eller uforsvarlig stand.",
           "refs": [
             "1.2.1.4"
           ]
@@ -862,7 +862,7 @@ export const GARAGE = {
       "practical": [
         {
           "title": "Ansvarsrunden",
-          "action": "Gå bilen rundt sammen med kørelæreren, peg på de områder føreren skal følge, og forklar ansvarsdelingen. Kørelæreren stiller spørgsmål til ejerens, brugerens og førerens ansvar ved den konkrete bil.",
+          "action": "Gå rundt om bilen sammen med kørelæreren. Peg på de områder, føreren skal følge, og forklar, hvem der har ansvaret for hvad. Kørelæreren stiller spørgsmål om ejerens, brugerens og førerens ansvar i den bil.",
           "refs": [
             "1.2.1.1",
             "1.2.1.2",
@@ -872,13 +872,13 @@ export const GARAGE = {
         }
       ],
       "case": {
-        "context": "En lovligt registreret bil lånes med påhængskøretøj. Hvilken ansvarsfordeling gengiver Plan B præcist?",
+        "context": "Du låner en lovligt registreret bil med et påhængskøretøj. Hvilken ansvarsfordeling gengiver Plan B præcist?",
         "options": [
           {
             "id": "a",
-            "text": "Ejeren eller brugeren svarer for lovlig stand; føreren svarer for sikker stand og forsvarlig trailerkobling.",
+            "text": "Ejeren eller brugeren svarer for, at bilen er lovlig. Føreren svarer for, at den er sikker, og for en forsvarlig trailerkobling.",
             "correct": true,
-            "why": "Planen deler ansvaret netop sådan og pålægger føreren særskilt at sikre en forsvarlig tilkobling ved kørsel med påhængskøretøj.",
+            "why": "Planen deler ansvaret præcis sådan. Føreren skal særskilt sikre en forsvarlig tilkobling, når der køres med påhængskøretøj.",
             "refs": [
               "1.2.1.1",
               "1.2.1.2",
@@ -887,9 +887,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Føreren svarer for både lovlig og sikker stand; ejeren svarer kun for bilens registreringsoplysninger.",
+            "text": "Føreren svarer for både lovlig og sikker stand. Ejeren svarer kun for registreringsoplysningerne.",
             "correct": false,
-            "why": "Planen lægger den lovlige stand hos ejeren eller den registrerede bruger, mens føreren har ansvaret for den sikkerhedsmæssigt forsvarlige stand.",
+            "why": "Planen lægger den lovlige stand hos ejeren eller brugeren. Føreren har ansvaret for, at bilen er sikker.",
             "refs": [
               "1.2.1.1",
               "1.2.1.2"
@@ -897,9 +897,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Ejeren svarer for begge forhold, indtil føreren under kørslen bliver opmærksom på en konkret fejl.",
+            "text": "Ejeren svarer for begge dele, indtil føreren under kørslen opdager en konkret fejl.",
             "correct": false,
-            "why": "Førerens ansvar gælder ikke først efter en opdaget fejl; føreren skal hele tiden være opmærksom på bilens sikkerhedsmæssige stand.",
+            "why": "Førerens ansvar gælder ikke først, når en fejl opdages. Føreren skal hele tiden være opmærksom på bilens sikkerhed.",
             "refs": [
               "1.2.1.1",
               "1.2.1.2"
@@ -908,8 +908,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvem har ansvaret, når en lovlig bil udvikler en sikkerhedsrelevant fejl under kørslen?",
-        "answer": "Føreren skal opdage og reagere på, at bilen ikke længere er sikkerhedsmæssigt forsvarlig, selv om ejeren har ansvaret for den lovlige stand.",
+        "prompt": "Hvem har ansvaret, hvis en lovlig bil får en sikkerhedsfejl undervejs?",
+        "answer": "Føreren skal opdage og reagere, hvis bilen ikke længere er sikkerhedsmæssigt forsvarlig. Ejeren har stadig ansvaret for, at bilen er lovlig.",
         "refs": [
           "1.2.1.1",
           "1.2.1.2"
@@ -918,10 +918,10 @@ export const GARAGE = {
     },
     {
       "id": "styreapparat",
-      "title": "Styreapparat",
+      "title": "Styreapparatet",
       "pointRef": "1.2.2",
       "zone": "cockpit",
-      "lead": "Styringen skal overføre rattets bevægelser præcist og uden unødig modstand, slør eller mislyde.",
+      "lead": "Styringen skal følge rattet præcist, uden unødig modstand, slør eller mislyde.",
       "objectives": [
         {
           "ref": "1.2.2.1",
@@ -987,23 +987,23 @@ export const GARAGE = {
       "cards": [
         {
           "title": "Fra rat til forhjul",
-          "body": "Når rattet drejes, føres bevægelsen gennem styreapparatets forbindelser og led til forhjulene. Under kørsel søger styringen normalt tilbage mod ligeud, når grebet lettes. Funktionen hjælper bilen med at følge en stabil linje, men føreren skal bevare kontrollen.",
+          "body": "Når du drejer rattet, føres bevægelsen gennem styreapparatets forbindelser og led til forhjulene. Under kørsel søger styringen normalt tilbage mod ligeud, når du letter på rattet. Det hjælper bilen med at følge en stabil linje. Men du skal stadig have kontrollen.",
           "refs": [
             "1.2.2.1",
             "1.2.2.2"
           ]
         },
         {
-          "title": "Servo og ESC har forskellige roller",
-          "body": "Hydraulisk eller elektrisk servo gør rattet lettere at dreje. Nyere biler skal have ESC, som kan bremse ét eller flere hjul for at mindske udskridning eller væltning, især i sving. Et servosvigt gør styringen tungere; fortsat kørsel kan være uforsvarlig og ulovlig.",
+          "title": "Servo og ESC har hver sin rolle",
+          "body": "Hydraulisk eller elektrisk servo gør rattet lettere at dreje. Nyere biler skal have ESC. ESC kan bremse ét eller flere hjul, så bilen ikke udskrider eller vælter, især i sving. Svigter servoen, bliver styringen tung. Så kan det være uforsvarligt og ulovligt at køre videre.",
           "refs": [
             "1.2.2.3",
             "1.2.2.4"
           ]
         },
         {
-          "title": "Lovkravet kan mærkes",
-          "body": "Styreapparatet skal gøre bilen let, sikker og hurtig at styre. Der må ikke være væsentligt slør. Ved lav fart skal rattet kunne drejes fra side til side uden ujævn modstand eller mislyde, som kan afsløre en fejl.",
+          "title": "Lovkravet kan du mærke",
+          "body": "Styreapparatet skal gøre bilen let, sikker og hurtig at styre. Der må ikke være væsentligt slør. Ved lav fart skal du kunne dreje rattet fra side til side uden ujævn modstand eller mislyde. Mislyde kan afsløre en fejl.",
           "refs": [
             "1.2.2.5",
             "1.2.2.6",
@@ -1012,15 +1012,15 @@ export const GARAGE = {
         },
         {
           "title": "Ratslør og servovæske",
-          "body": "Ved kontrol skal hjulene straks følge rattets bevægelse. Har bilen servostyring, skal servoen være aktiveret. En eventuel servobeholder kontrolleres efter fabrikantens forskrift, typisk mellem min- og maxmærket eller ved at sikre, at den relevante kontrollampe ikke lyser.",
+          "body": "Ved tjek skal hjulene straks følge rattets bevægelse. Har bilen servostyring, skal servoen være slået til. Har bilen en servobeholder, tjekkes den efter fabrikantens forskrift. Typisk tjekker du, at væsken står mellem min- og maxmærket, eller at kontrollampen ikke lyser.",
           "refs": [
             "1.2.2.8",
             "1.2.2.9"
           ]
         },
         {
-          "title": "Fejlene fortæller en historie",
-          "body": "Tung styring kan skyldes for lidt servovæske, en slidt eller knækket drivrem eller fejl i elektrisk servo. Følger hjulene ikke rattet straks, kan der være slør. For lidt væske eller væsentligt ratslør kræver eftersyn.",
+          "title": "Fejlene fortæller noget",
+          "body": "Tung styring kan skyldes for lidt servovæske, en slidt eller knækket drivrem eller fejl i den elektriske servo. Følger hjulene ikke rattet straks, kan der være slør. For lidt væske eller væsentligt ratslør kræver eftersyn.",
           "refs": [
             "1.2.2.10",
             "1.2.2.11",
@@ -1030,28 +1030,28 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Kontrollér ratslør",
-          "action": "På en holdende bil og efter kørelærerens anvisning: aktivér eventuel servo, bevæg rattet lidt, og se udefra om forhjulene straks følger rattets bevægelse.",
+          "title": "Tjek ratslør",
+          "action": "I en bil, der står stille, efter kørelærerens anvisning: slå servoen til, hvis bilen har den. Bevæg rattet lidt, og se udefra, om forhjulene straks følger med.",
           "refs": [
             "1.2.2.8"
           ]
         },
         {
-          "title": "Kontrollér servosystemet",
-          "action": "Find med kørelæreren bilens relevante servokontrol: væskebeholder med min- og maxmærke eller kontrollampe efter fabrikantens forskrift. Metoden afhænger af bilen, og den fysiske udførelse vurderes ved bilen.",
+          "title": "Find servokontrollen",
+          "action": "Find sammen med kørelæreren bilens servokontrol. Det kan være en væskebeholder med min- og maxmærke eller en kontrollampe, efter fabrikantens forskrift. Metoden afhænger af bilen, og den praktiske udførelse vurderes i bilen.",
           "refs": [
             "1.2.2.9"
           ]
         }
       ],
       "case": {
-        "context": "På en bil med aktiveret servo følger forhjulene ikke straks en lille ratbevægelse. Hvilken vurdering gengiver Plan B?",
+        "context": "I en bil med servo slået til følger forhjulene ikke straks en lille ratbevægelse. Hvilken vurdering gengiver Plan B?",
         "options": [
           {
             "id": "a",
-            "text": "Det kan være slør i styreforbindelserne; ved væsentligt ratslør skal styreapparatet efterses.",
+            "text": "Det kan være slør i styreforbindelserne. Ved væsentligt ratslør skal styreapparatet efterses.",
             "correct": true,
-            "why": "Hjulene skal normalt følge rattets bevægelse straks. Forsinket reaktion kan vise slør, og væsentligt ratslør udløser krav om eftersyn.",
+            "why": "Hjulene skal normalt følge rattet straks. Forsinket reaktion kan vise slør, og væsentligt ratslør kræver eftersyn.",
             "refs": [
               "1.2.2.8",
               "1.2.2.11",
@@ -1060,9 +1060,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Det er normalt ved servostyring, hvis rattet ellers kan drejes uden mislyde ved lav fart.",
+            "text": "Det er normalt med servostyring, hvis rattet ellers kan drejes uden mislyde ved lav fart.",
             "correct": false,
-            "why": "Aktiveret servo er netop forudsætningen for ratslørskontrollen. Let styring uden mislyd ophæver ikke kravet om, at hjulene straks følger rattet.",
+            "why": "Servoen skal være slået til for at tjekke ratslør. Let styring uden mislyde fjerner ikke kravet om, at hjulene straks følger rattet.",
             "refs": [
               "1.2.2.7",
               "1.2.2.8",
@@ -1071,9 +1071,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Det peger alene på for lidt servovæske; styreforbindelserne kræver derfor ikke nærmere eftersyn.",
+            "text": "Det peger kun på for lidt servovæske. Styreforbindelserne behøver derfor ikke eftersyn.",
             "correct": false,
-            "why": "For lidt servovæske kan give tung styring, men forsinket hjulreaktion er særskilt tegn på slør i styreforbindelserne.",
+            "why": "For lidt servovæske kan give tung styring. Men forsinket hjulreaktion er et særskilt tegn på slør i styreforbindelserne.",
             "refs": [
               "1.2.2.9",
               "1.2.2.10",
@@ -1083,8 +1083,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvordan kontrolleres ratslør i en bil med servostyring?",
-        "answer": "Med servoen aktiveret bevæges rattet, mens man ser, om forhjulene straks følger rattets bevægelse.",
+        "prompt": "Hvordan tjekker du ratslør i en bil med servostyring?",
+        "answer": "Med servoen slået til bevæger du rattet og ser, om forhjulene straks følger med.",
         "refs": [
           "1.2.2.8"
         ]
@@ -1095,7 +1095,7 @@ export const GARAGE = {
       "title": "Bremser",
       "pointRef": "1.2.3",
       "zone": "cockpit",
-      "lead": "Bremsernes funktion, kontrollamper og fysiske kontrol skal tilsammen afsløre fejl, før sikkerheden svigter.",
+      "lead": "Bremsernes funktion, lamper og tjek skal sammen afsløre fejl, før sikkerheden svigter.",
       "objectives": [
         {
           "ref": "1.2.3.1",
@@ -1216,7 +1216,7 @@ export const GARAGE = {
       "cards": [
         {
           "title": "Tryk bliver til bremsekraft",
-          "body": "Når pedalen trædes ned, skaber hovedcylinderen væsketryk, som føres gennem rør og slanger til hjulbremserne. Belægninger presses mod skiver eller tromler. En forstærker hjælper føreren; svigter den, kan fortsat kørsel være uforsvarlig og ulovlig.",
+          "body": "Når du træder på pedalen, skaber hovedcylinderen væsketryk. Trykket føres gennem rør og slanger til hjulbremserne. Her presses belægningerne mod skiverne eller tromlerne. En forstærker hjælper dig. Svigter den, kan det være uforsvarligt og ulovligt at køre videre.",
           "refs": [
             "1.2.3.1",
             "1.2.3.2"
@@ -1224,15 +1224,15 @@ export const GARAGE = {
         },
         {
           "title": "Kredse og nødbremse",
-          "body": "Tokredsbremsen har to adskilte kredse. Hvis én bliver utæt, kan den anden yde nødbremsevirkning, men fortsat kørsel er uforsvarlig og ulovlig. Nødbremsen skal kunne bremse bilen sikkert, hvis driftsbremsen svigter under kørslen.",
+          "body": "Tokredsbremsen har to adskilte kredse. Bliver den ene utæt, kan den anden give nødbremsevirkning. Men så er det uforsvarligt og ulovligt at køre videre. Nødbremsen skal kunne bremse bilen sikkert, hvis driftsbremsen svigter under kørslen.",
           "refs": [
             "1.2.3.3",
             "1.2.3.12"
           ]
         },
         {
-          "title": "ABS, assistent og ESC",
-          "body": "Hjulfølere sender hjulenes omdrejninger til en elektronisk styreboks, som regulerer bremsetrykket og modvirker blokering. Reguleringen giver vibrationer i pedalen og muliggør i en vis udstrækning styring under bremsning. Bremseassistent hjælper ved kraftig opbremsning. Slukker ABS-lampen ikke kort efter igangsætning, er der tegn på fejl. Planen begrænser en eventuel forsvarlig tur til nærmeste værksted; bilen skal stadig være sikkerhedsmæssigt forsvarlig. Ved andre bremsefejl eller usikker bremsevirkning standses sikkert og skaffes hjælp. Konstant ESC-lampe kræver, at fabrikantens anvisninger følges.",
+          "title": "ABS, bremseassistent og ESC",
+          "body": "Hjulfølere sender hjulenes omdrejninger til en styreboks, der modvirker blokering. Du kan i en vis grad styre under bremsning. Bremseassistenten hjælper ved kraftig opbremsning. Slukker ABS-lampen ikke kort efter igangsætning, er der fejl. Planen begrænser en eventuel forsvarlig tur til nærmeste værksted, og bilen skal stadig være sikkerhedsmæssigt forsvarlig. Ved andre bremsefejl standser du sikkert og får hjælp. Lyser ESC-lampen konstant, følg fabrikantens anvisninger.",
           "refs": [
             "1.2.3.4",
             "1.2.3.6",
@@ -1249,16 +1249,16 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Elbilens særlige bremser",
-          "body": "One-pedal-funktion findes på elbiler og kan ofte slås til og fra. Når speederen løftes, aktiveres regenerativ bremsning, som samtidig lader batteriet. Er virkningen utilstrækkelig, skal bremsepedalen bruges. Elbilens bremser kræver mere vedligeholdelsesopmærksomhed for at bevare en effektiv funktion.",
+          "title": "Elbilens bremser er særlige",
+          "body": "Én-pedal-funktionen findes på elbiler og kan ofte slås til og fra. Når du løfter speederen, aktiveres regenerativ bremsning, som samtidig lader batteriet. Er bremsevirkningen for svag, skal du bruge bremsepedalen. Elbilens bremser kræver mere vedligeholdelse, for at de virker effektivt.",
           "refs": [
             "1.2.3.7",
             "1.2.3.8"
           ]
         },
         {
-          "title": "Tre bremsekrav",
-          "body": "Driftsbremsen skal virke på alle hjul og bremse sikkert, hurtigt og virksomt ved alle hastigheder og belastninger. Parkeringsbremsen skal holde bilen på hældende vej og kan være elektrisk. En hydraulisk driftsbremse kan være vakuum- eller elektrisk forstærket.",
+          "title": "Tre krav til bremserne",
+          "body": "Driftsbremsen skal virke på alle hjul. Den skal bremse sikkert, hurtigt og virksomt ved alle hastigheder og belastninger. Parkeringsbremsen skal holde bilen på en skråning og kan være elektrisk. En hydraulisk driftsbremse kan være forstærket med vakuum eller elektrisk.",
           "refs": [
             "1.2.3.5",
             "1.2.3.9",
@@ -1267,8 +1267,8 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Pedal og væske",
-          "body": "Ved fysisk kontrol må bremsepedalen ikke gå i bund ved hårdt tryk eller normalt synke under et konstant tryk. Bremsevæsken skal stå mellem min- og maxmærket, eller den tilhørende kontrollampe skal være slukket. Pedalvandringen varierer mellem biler.",
+          "title": "Pedal og bremsevæske",
+          "body": "Når du tjekker i bilen, må bremsepedalen ikke gå i bund ved hårdt tryk. Den må heller ikke normalt synke, når du holder et konstant tryk. Bremsevæsken skal stå mellem min- og maxmærket, eller kontrollampen skal være slukket. Pedalvandringen er forskellig fra bil til bil.",
           "refs": [
             "1.2.3.13",
             "1.2.3.14",
@@ -1276,8 +1276,8 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Fejl mærkes i bilen",
-          "body": "Skævtrækning ved let opbremsning på vandret vej, hugninger, ujævn bremsning eller pludseligt længere pedalvandring er fejltegn, der kræver umiddelbart eftersyn. Fugt efter bilvask kan kortvarigt påvirke belægningerne og forsvinde ved en kortvarig kontrolleret bremsning. Ved vedvarende afvigelser eller usikker bremsevirkning skal bilen undersøges før videre kørsel. For lidt bremsevæske eller en tændt bremseadvarsel kræver også straks eftersyn.",
+          "title": "Fejl kan mærkes i bilen",
+          "body": "Bilen trækker skævt, når du let bremser på vandret vej. Den hugger eller bremser ujævnt. Pedalen kan pludselig gå længere ned. Det er fejltegn, der kræver eftersyn straks. Fugt efter vask kan kortvarigt påvirke bremsebelægningerne, men forsvinder ved kontrolleret bremsning. Vedvarer det, eller er bremsevirkningen usikker, skal bilen undersøges før videre kørsel. For lidt bremsevæske eller en tændt bremseadvarsel kræver også eftersyn med det samme.",
           "refs": [
             "1.2.3.16",
             "1.2.3.17",
@@ -1298,29 +1298,29 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Kontrollér pedalvandring",
-          "action": "I den holdende bil og efter kørelærerens anvisning: tryk hårdt på pedalen og hold derefter et konstant tryk. Vurder, om pedalen går i bund eller normalt synker under det konstante tryk.",
+          "title": "Tjek pedalvandring",
+          "action": "I en bil, der står stille, efter kørelærerens anvisning: tryk hårdt på pedalen, og hold derefter et konstant tryk. Vurder, om pedalen går i bund, eller om den normalt synker under det konstante tryk.",
           "refs": [
             "1.2.3.13",
             "1.2.3.14"
           ]
         },
         {
-          "title": "Kontrollér bremsevæske",
-          "action": "Find med kørelæreren beholderens min- og maxmærker eller den relevante kontrollampe. Følg bilens løsning uden værktøj; den fysiske kontrol skal læres og vurderes på den konkrete bil.",
+          "title": "Tjek bremsevæsken",
+          "action": "Find sammen med kørelæreren beholderens min- og maxmærker eller den relevante kontrollampe. Følg bilens løsning, uden værktøj. Den praktiske kontrol skal du lære og vurdere i den konkrete bil.",
           "refs": [
             "1.2.3.15"
           ]
         }
       ],
       "case": {
-        "context": "ABS-lampen slukker ikke kort efter igangsætning. Hvilken kørselsadgang angiver Plan B præcist for denne fejl?",
+        "context": "ABS-lampen slukker ikke kort efter, du har sat i gang. Hvilken kørselsadgang angiver Plan B præcist for fejlen?",
         "options": [
           {
             "id": "a",
-            "text": "Planen tillader kun kørsel direkte til nærmeste værksted, fordi bilens bremseegenskaber er ændret.",
+            "text": "Planen tillader kun kørsel direkte til nærmeste værksted, fordi bremseegenskaberne er ændret.",
             "correct": true,
-            "why": "En ABS-lampe, der ikke slukker kort efter igangsætning, er tegn på fejl; Plan B afgrænser kørslen til nærmeste værksted.",
+            "why": "En ABS-lampe, der ikke slukker kort efter igangsætning, er tegn på fejl. Planen begrænser kørslen til nærmeste værksted.",
             "refs": [
               "1.2.3.4",
               "1.2.3.22"
@@ -1328,9 +1328,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Planen forbyder al egen kørsel og kræver transport af bilen direkte til et værksted.",
+            "text": "Planen forbyder al kørsel selv og kræver, at bilen transporteres direkte til et værksted.",
             "correct": false,
-            "why": "Det er lovligt at lade bilen stå, men udsagnet gengiver ikke planen: den tillader den snævert afgrænsede kørsel til nærmeste værksted.",
+            "why": "Det er lovligt at lade bilen stå. Men udsagnet passer ikke med planen, der tillader kørsel til nærmeste værksted.",
             "refs": [
               "1.2.3.4",
               "1.2.3.22"
@@ -1338,9 +1338,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Planen tillader forsigtige nødvendige ture, hvis føreren undgår hårde opbremsninger og holder lav hastighed.",
+            "text": "Planen tillader forsigtige nødvendige ture, hvis du undgår hårde bremsninger og holder lav fart.",
             "correct": false,
-            "why": "Planen giver ikke en generel adgang til nødvendige ture; den eneste angivne fortsatte kørsel er til nærmeste værksted.",
+            "why": "Planen giver ikke generel adgang til nødvendige ture. Den eneste fortsatte kørsel, den nævner, er til nærmeste værksted.",
             "refs": [
               "1.2.3.4",
               "1.2.3.22"
@@ -1349,8 +1349,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvad gør du, hvis bremsepedalen pludselig kan trædes længere ned end sædvanligt?",
-        "answer": "Det er tegn på en defekt bremsekreds. Bremserne skal straks efterses, og normal videre kørsel er ikke forsvarlig.",
+        "prompt": "Hvad gør du, hvis bremsepedalen pludselig går længere ned end normalt?",
+        "answer": "Det er tegn på en defekt bremsekreds. Få bremserne efterset med det samme. Så er det ikke forsvarligt at køre videre som normalt.",
         "refs": [
           "1.2.3.18",
           "1.2.3.21"
@@ -1362,7 +1362,7 @@ export const GARAGE = {
       "title": "Lygter, reflekser og horn",
       "pointRef": "1.2.4",
       "zone": "exterior",
-      "lead": "Bilens lys skal både oplyse vejen og gøre køretøjet tydeligt uden at blænde andre.",
+      "lead": "Lysene skal oplyse vejen og gøre bilen synlig uden at blænde andre.",
       "objectives": [
         {
           "ref": "1.2.4.1",
@@ -1467,24 +1467,24 @@ export const GARAGE = {
       ],
       "cards": [
         {
-          "title": "Det obligatoriske lyssæt",
-          "body": "Bilen skal have to fjernlys, to asymmetriske nærlys, to positionslys, to baglys, normalt tre stoplys, mindst ét nummerpladelys, blinklys foran, bagpå og på siderne samt to røde, godkendte, mærkede og ikke-trekantede bagreflekser.",
+          "title": "Det lys, bilen skal have",
+          "body": "Bilen skal have to fjernlys, to asymmetriske nærlys, to positionslys og to baglys. Normalt skal den have tre stoplys. Den skal også have mindst ét nummerpladelys og blinklys foran, bagpå og på siderne. Og to røde bagreflekser, godkendte, mærkede og ikke trekantede.",
           "refs": [
             "1.2.4.1",
             "1.2.4.2"
           ]
         },
         {
-          "title": "Tre afstande og én plade",
-          "body": "Fjernlys skal oplyse mindst 100 meter frem. Nærlys skal nå mindst 30 meter uden at blænde. Positionslys skal kunne ses mindst 300 meter væk. Nummerpladelyset skal gøre den bageste plade læselig mindst 20 meter bag bilen.",
+          "title": "Tre afstande og én nummerplade",
+          "body": "Fjernlyset skal lyse mindst 100 meter frem. Nærlyset skal nå mindst 30 meter, uden at det blænder. Positionslyset skal kunne ses mindst 300 meter væk. Nummerpladelyset skal gøre den bageste nummerplade læselig mindst 20 meter bag bilen.",
           "refs": [
             "1.2.4.3",
             "1.2.4.9"
           ]
         },
         {
-          "title": "Farver og par",
-          "body": "Forlygter skal lyse hvidt eller gulligt, mens baglygter skal lyse rødt. Pærer skal sidde korrekt, og lygter i samme par skal have ens farve og lysstyrke. Alle lygter og reflekser skal være hele, rene og funktionsdygtige.",
+          "title": "Farver og par af lygter",
+          "body": "Forlygterne skal lyse hvidt eller gulligt. Baglygterne skal lyse rødt. Pærerne skal sidde korrekt. Lygter i samme par skal have samme farve og styrke. Alle lygter og reflekser skal være hele, rene og virke.",
           "refs": [
             "1.2.4.4",
             "1.2.4.5",
@@ -1494,30 +1494,30 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Lange biler",
-          "body": "En bil over 6 meter skal have godkendte og mærkede gule sidereflekser samt sidemarkeringslygter fordelt på siderne. Kravet er knyttet til bilens længde og skal ikke forveksles med de supplerende reflekser, som kan være tilladt på andre biler.",
+          "title": "Biler over 6 meter",
+          "body": "En bil over 6 meter skal have godkendte og mærkede gule sidereflekser. Den skal også have sidemarkeringslygter fordelt på siderne. Kravet gælder på grund af bilens længde. Det må ikke forveksles med de supplerende reflekser, som kan være tilladt på andre biler.",
           "refs": [
             "1.2.4.10"
           ]
         },
         {
-          "title": "Tilladte ekstra lygter og reflekser",
-          "body": "Tilladt ekstraudstyr omfatter ekstra fjernlys, kørelys, ekstra stop- og baglygter, tågeforlygter, baklygter, tågebaglygter, søge- og arbejdslygter, afmærknings- og markeringslygter, parkeringslygter og overhalingsblink. Desuden må bilen have hvide reflekser foran, gule på siderne og supplerende røde bagpå. Udstyret følger særlige regler.",
+          "title": "Ekstra lygter og reflekser, der er tilladt",
+          "body": "Disse ekstra lygter er tilladt: ekstra fjernlys, kørelys, ekstra stop- og baglygter, tågeforlygter, baklygter, tågebaglygter, søge- og arbejdslygter, afmærknings- og markeringslygter, parkeringslygter og overhalingsblink. Bilen må også have hvide reflekser foran, gule på siderne og supplerende røde bagpå. Udstyret følger særlige regler.",
           "refs": [
             "1.2.4.11"
           ]
         },
         {
           "title": "Nærlysets grænse",
-          "body": "En forkert monteret pære kan give et forkert lysbillede. Mod en væg kan lys-mørke-grænsen vurderes. Nærlyset må ikke blænde, og overkanten af lysgrænsen skal falde 1 centimeter for hver meter væk fra bilen.",
+          "body": "En forkert monteret pære kan give et forkert lysbillede. Mod en væg kan du se lys-mørke-grænsen. Nærlyset må ikke blænde. Overkanten af lysgrænsen skal falde 1 centimeter for hver meter væk fra bilen.",
           "refs": [
             "1.2.4.12",
             "1.2.4.13"
           ]
         },
         {
-          "title": "Rundt om bilen",
-          "body": "Kontrollen omfatter hele og rene lygter og reflekser, kraftigere stoplys end baglys, synligt gult blinklys, samlet havariblink, hvidt nummerpladelys og et horn med klar, konstant tone. Hurtig blinkrytme betyder normalt, at mindst én blinklygte ikke virker.",
+          "title": "Tjek rundt om bilen",
+          "body": "Tjek, at lygter og reflekser er hele og rene. Stoplyset skal være kraftigere end baglyset. Det gule blinklys skal ses tydeligt. Havariblinket skal tænde alle blinklygter. Nummerpladelyset skal være hvidt, og hornet skal give en klar, konstant tone. Hurtig blinkrytme betyder normalt, at mindst én blinklygte ikke virker.",
           "refs": [
             "1.2.4.14",
             "1.2.4.15",
@@ -1531,8 +1531,8 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Lygter og reflekser",
-          "action": "Sammen med kørelæreren i undervisningsbilen: 1) kontrollér at alle lygter og reflekser er hele og rene, 2) sammenlign stoplys med baglys og se at stoplyset er væsentligt kraftigere, 3) kontrollér gult blinklys, som ses tydeligt i sollys, 4) tænd havariblink og se at alle blinklygter tænder samtidig, og 5) kontrollér at nummerpladelyset belyser den bageste nummerplade med hvidt lys.",
+          "title": "Tjek lygter og reflekser",
+          "action": "Sammen med kørelæreren i undervisningsbilen gør du dette. Først tjekker du, at alle lygter og reflekser er hele og rene. Dernæst sammenligner du stoplyset med baglyset, og du ser, at stoplyset er væsentligt kraftigere. Så tjekker du det gule blinklys, der skal ses tydeligt i sollys. Tænd havariblinket, og se at alle blinklygterne tænder samtidig. Til sidst tjekker du, at nummerpladelyset lyser den bageste nummerplade op med hvidt lys.",
           "refs": [
             "1.2.4.14",
             "1.2.4.15",
@@ -1543,29 +1543,29 @@ export const GARAGE = {
         },
         {
           "title": "Hornet",
-          "action": "På et egnet sted og efter kørelærerens anvisning: giv et kort signal og vurder, om tonen er klar og konstant. Undgå unødig brug; kontrollen skal udføres på bilen.",
+          "action": "Find et egnet sted, og følg kørelærerens anvisning. Giv et kort signal, og vurder, om tonen er klar og konstant. Brug hornet kun, når det er nødvendigt. Kontrollen skal laves i bilen.",
           "refs": [
             "1.2.4.19"
           ]
         }
       ],
       "case": {
-        "context": "Blinklygterne blinker væsentligt hurtigere end sædvanligt. Hvad er dette normalt tegn på ifølge Plan B?",
+        "context": "Blinklygterne blinker markant hurtigere end normalt. Hvad er det ifølge Plan B normalt et tegn på?",
         "options": [
           {
             "id": "a",
-            "text": "Det er normalt tegn på, at én eller flere af bilens blinklygter ikke virker.",
+            "text": "Det er normalt et tegn på, at en eller flere blinklygter ikke virker.",
             "correct": true,
-            "why": "Plan B knytter den væsentligt hurtigere blinkrytme direkte til, at én eller flere blinklygter normalt er ude af funktion.",
+            "why": "Plan B knytter den hurtige blinkrytme til, at en eller flere blinklygter normalt er ude af funktion.",
             "refs": [
               "1.2.4.20"
             ]
           },
           {
             "id": "b",
-            "text": "Det er normalt en selvtest, som viser, at alle blinklygter og havariblink virker korrekt.",
+            "text": "Det er normalt en selvtest, der viser, at alle blinklygter og havariblinket virker.",
             "correct": false,
-            "why": "Planen beskriver ikke den hurtige rytme som en selvtest; den er normalt et tegn på en ikke-fungerende blinklygte.",
+            "why": "Planen nævner ikke en selvtest. Den hurtige rytme er normalt et tegn på en blinklygte, der ikke virker.",
             "refs": [
               "1.2.4.17",
               "1.2.4.20"
@@ -1573,9 +1573,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Det viser normalt, at blinklygterne lyser for kraftigt, selv om alle fortsat virker.",
+            "text": "Det viser normalt, at blinklygterne lyser for kraftigt, selv om de alle virker.",
             "correct": false,
-            "why": "Lysstyrken kontrolleres ved tydelig synlighed i sollys, mens den hurtige rytme knyttes til manglende funktion i en blinklygte.",
+            "why": "Lysstyrken tjekkes ved, at blinket ses tydeligt i sollys. Den hurtige rytme hører til en blinklygte, der ikke virker.",
             "refs": [
               "1.2.4.16",
               "1.2.4.20"
@@ -1584,8 +1584,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvilke tre afstande knytter sig til fjernlys, nærlys og positionslys?",
-        "answer": "Fjernlys mindst 100 meter, nærlys mindst 30 meter uden at blænde og positionslys synligt på mindst 300 meter.",
+        "prompt": "Hvilke afstande skal fjernlys, nærlys og positionslys nå?",
+        "answer": "Fjernlyset mindst 100 meter. Nærlyset mindst 30 meter, uden at blænde. Positionslyset skal kunne ses på mindst 300 meter.",
         "refs": [
           "1.2.4.3"
         ]
@@ -1596,7 +1596,7 @@ export const GARAGE = {
       "title": "Motor, udstødning og batteri",
       "pointRef": "1.2.5",
       "zone": "powertrain",
-      "lead": "Væsker, støj, røg og ændret kraftoverførsel giver tidlige tegn på fejl i drivlinjen.",
+      "lead": "Væske, støj, røg og ændret kraftoverførsel viser tidligt, at noget er galt i drivlinjen.",
       "objectives": [
         {
           "ref": "1.2.5.1",
@@ -1667,7 +1667,7 @@ export const GARAGE = {
       "cards": [
         {
           "title": "Olie og kølervæske",
-          "body": "Motorolie kontrolleres i tilstrækkelig mængde mellem min- og maxmærker på oliepinden, via bilens instrumenter eller efter instruktionsbogen. Kølervæske kontrolleres efter instruktionsbogen. For lidt olie eller kølervæske kan skade motoren alvorligt under kørsel.",
+          "body": "Tjek, at der er nok motorolie. Det gør du med oliepinden mellem min- og maxmærket, med bilens målere eller efter instruktionsbogen. Kølervæsken tjekker du efter instruktionsbogen. For lidt olie eller kølervæske kan skade motoren alvorligt under kørsel.",
           "refs": [
             "1.2.5.1",
             "1.2.5.2",
@@ -1675,15 +1675,15 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Kulilte kan ikke lugtes",
-          "body": "En utæt udstødning eller kørsel med åben bagklap kan føre kulilte ind i bilen. Gassen er lugtfri og farlig selv i små mængder. Lugt er derfor ingen sikker test; fejl og uhensigtsmæssig brug skal forebygges.",
+          "title": "Kulilte kan du ikke lugte",
+          "body": "En utæt udstødning eller kørsel med åben bagklap kan lukke kulilte ind i bilen. Gassen er lugtfri og farlig, selv i små mængder. Så lugt er ingen sikker test. Fejl skal forebygges, og forkert brug skal undgås.",
           "refs": [
             "1.2.5.3"
           ]
         },
         {
           "title": "Røg, støj og kraftoverførsel",
-          "body": "Unormal udstødningsrøg peger på dårlig forbrænding, og usædvanlig støj ved gasgivning på udstødningsfejl. Stiger motorens omdrejninger uden tilsvarende fart, kan koblingen glide. Kraftige mislyde ved gearskift eller kryb med koblingen nede er også fejltegn.",
+          "body": "Usædvanlig udstødningsrøg tyder på dårlig forbrænding. Usædvanlig støj, når du giver gas, tyder på en udstødningsfejl. Stiger omdrejningerne uden, at farten stiger, kan koblingen glide. Kraftige mislyde ved gearskift er også fejltegn. Det samme gælder, hvis bilen kryber frem, mens koblingen er helt nede.",
           "refs": [
             "1.2.5.5",
             "1.2.5.6",
@@ -1694,7 +1694,7 @@ export const GARAGE = {
         },
         {
           "title": "Elbilens batteri ændrer sig",
-          "body": "Et højvoltsbatteri mister normalt kapacitet med alder og slid, så rækkevidden bliver kortere. Følg fabrikantens råd for at begrænse unødigt slid. Opvarmning eller køling af kabine og batteri, mens bilen stadig lader, kan forbedre rækkevidden.",
+          "body": "Et højvoltsbatteri mister normalt kapacitet med alder og slid. Så bliver rækkevidden kortere. Følg fabrikantens råd for at begrænse unødigt slid. Varme eller afkøling af kabine og batteri, mens bilen lader, kan forbedre rækkevidden.",
           "refs": [
             "1.2.5.10",
             "1.2.5.11",
@@ -1703,7 +1703,7 @@ export const GARAGE = {
         },
         {
           "title": "Lovlig stand undervejs",
-          "body": "Føreren skal løbende være opmærksom på unødig støj og på fejl ved motor eller forureningsbegrænsende udstyr, der påvirker udledningen. En ny lyd eller røgsky er ikke noget, man gemmer til næste olieskift uden vurdering.",
+          "body": "Du skal løbende være opmærksom på unødig støj og på fejl ved motoren eller udstyr, der påvirker udledningen. En ny lyd eller røgsky skal du ikke gemme til næste olieskift. Vurder den med det samme.",
           "refs": [
             "1.2.5.13"
           ]
@@ -1711,28 +1711,28 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Kontrollér motorolie",
-          "action": "På den konkrete bil viser kørelæreren den korrekte metode: oliepind, instrumentvisning eller instruktionsbog. Udfør kontrollen uden værktøj efter fabrikantens anvisning, og forklar hvordan du afgør, om oliemængden er tilstrækkelig.",
+          "title": "Tjek motorolien",
+          "action": "Kørelæreren viser den rigtige metode i din bil: oliepind, instrumentvisning eller instruktionsbog. Lav tjekket uden værktøj efter fabrikantens anvisning. Forklar, hvordan du ser, at oliemængden er tilstrækkelig.",
           "refs": [
             "1.2.5.1"
           ]
         },
         {
-          "title": "Kontrollér kølervæske",
-          "action": "Find beholder eller relevant visning med kørelæreren, og følg instruktionsbogen. Åbn aldrig et varmt system på egen hånd. Den praktiske kontrol skal udføres og vurderes ved bilen.",
+          "title": "Tjek kølervæsken",
+          "action": "Find beholderen eller den relevante visning sammen med kørelæreren, og følg instruktionsbogen. Åbn aldrig et varmt system alene. Det praktiske tjek skal du lave og vurdere i bilen.",
           "refs": [
             "1.2.5.2"
           ]
         }
       ],
       "case": {
-        "context": "Motoren tager omdrejninger uden tilsvarende fart, og gearskiftet er vanskeligt med kraftige mislyde. Hvilken fejlkobling følger Plan B?",
+        "context": "Motoren får flere omdrejninger uden højere fart, og gearskiftet er svært med kraftige mislyde. Hvilken fejlkobling følger Plan B?",
         "options": [
           {
             "id": "a",
-            "text": "Opspeedningen tyder på koblingsfejl; mislydene ved vanskelig gearskiftning tyder på fejl i gear eller kobling.",
+            "text": "Omdrejningerne uden fart tyder på koblingsfejl. Mislydene ved svært gearskift tyder på fejl i gearet eller koblingen.",
             "correct": true,
-            "why": "Plan B beskriver præcis de to tegn og knytter dem henholdsvis til koblingen og til gear eller kobling.",
+            "why": "Planen beskriver præcis de to tegn. Det første hører til koblingen, og det andet hører til gear eller kobling.",
             "refs": [
               "1.2.5.7",
               "1.2.5.8"
@@ -1740,9 +1740,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Begge tegn skyldes normalt for lidt kølervæske og skal derfor vurderes som en motorfejl.",
+            "text": "Begge tegn skyldes normalt for lidt kølervæske, så de skal vurderes som en motorfejl.",
             "correct": false,
-            "why": "For lidt kølervæske kan skade motoren, men planen knytter ikke disse to konkrete symptomer til kølesystemet.",
+            "why": "For lidt kølervæske kan skade motoren. Men planen knytter ikke de to tegn til kølesystemet.",
             "refs": [
               "1.2.5.2",
               "1.2.5.4",
@@ -1752,9 +1752,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Opspeedningen viser udstødningsfejl, mens mislydene viser, at batteriets kapacitet er blevet for lav.",
+            "text": "Omdrejningerne uden fart viser en udstødningsfejl. Mislydene viser, at batteriets kapacitet er for lav.",
             "correct": false,
-            "why": "Udstødningsfejl forbindes med unormal støj ved gasgivning, og batterikapacitet med rækkevidde; ingen af dem matcher de beskrevne tegn.",
+            "why": "Udstødningsfejl hører til støj, når du giver gas. Batterikapacitet hører til rækkevidde. Ingen af dem passer til tegnene.",
             "refs": [
               "1.2.5.6",
               "1.2.5.7",
@@ -1765,8 +1765,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvorfor kan man ikke bruge lugtesansen til at afgøre, om der er kulilte i bilen?",
-        "answer": "Kulilte er lugtfri og farlig selv i små mængder; en utæt udstødning eller åben bagklap kan føre den ind i kabinen.",
+        "prompt": "Hvorfor kan du ikke bruge lugtesansen til at finde kulilte i bilen?",
+        "answer": "Kulilte er lugtfri og farlig, selv i små mængder. En utæt udstødning eller åben bagklap kan lukke den ind i bilen.",
         "refs": [
           "1.2.5.3"
         ]
@@ -1774,10 +1774,10 @@ export const GARAGE = {
     },
     {
       "id": "energi-og-miljo",
-      "title": "Energi- og miljørigtig kørsel",
+      "title": "Kør energi- og miljørigtigt",
       "pointRef": "1.2.6",
       "zone": "powertrain",
-      "lead": "Forudseenhed, jævn fart og bevidst brug af biltypen reducerer energi, støj og unødige udledninger.",
+      "lead": "Tænk frem og kør jævnt. Så bruger du mindre energi og laver mindre støj og udledning.",
       "objectives": [
         {
           "ref": "1.2.6.1",
@@ -1927,8 +1927,8 @@ export const GARAGE = {
       ],
       "cards": [
         {
-          "title": "Start, når turen starter",
-          "body": "Start først forbrændingsmotoren umiddelbart før afgang. Undgå længere tomgang, og brug automatisk stop ved korte standsninger, hvis bilen har funktionen. Ved længere ventetid kan motoren slukkes. Det begrænser både energi, støj og luftforurening.",
+          "title": "Start motoren, når du skal af sted",
+          "body": "Start forbrændingsmotoren lige før afgang. Undgå at lade den gå i tomgang længe. Brug automatisk motorstop ved korte standsninger, hvis bilen har det. Ved længere ventetid kan du slukke motoren. Det sparer energi og begrænser støj og luftforurening.",
           "refs": [
             "1.2.6.1",
             "1.2.6.2",
@@ -1938,8 +1938,8 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Jævnhed og gearvalg",
-          "body": "Undgå gentagne fartændringer. Ved fartreduktion slippes speederen helt, og i en bil med kobling undgås udkobling så vidt muligt. I en relevant manuelt gearet bil kan korrekt, tidligt gearvalg eksempelvis være skift fra 2. til 4. eller fra 3. til 5. gear efter kvik acceleration med cirka halv speeder.",
+          "title": "Jævn kørsel og rigtigt gearvalg",
+          "body": "Undgå at skifte fart hele tiden. Når du sænker farten, slipper du speederen helt. I en bil med kobling undgår du så vidt muligt at koble ud. I en manuel bil kan du for eksempel skifte fra 2. til 4. gear, eller fra 3. til 5. gear, tidligt efter en kvik acceleration med cirka halv speeder.",
           "refs": [
             "1.2.6.6",
             "1.2.6.7",
@@ -1949,7 +1949,7 @@ export const GARAGE = {
         },
         {
           "title": "Modstand koster energi",
-          "body": "Unødig vægt, for lavt dæktryk og en tagboks øger energiforbruget. Aircondition, klimaanlæg og andet elektrisk udstyr bruger også energi. Bilens eventuelle forbrugsvisning kan gøre virkningen synlig, så føreren kan justere sine vaner.",
+          "body": "Unødig vægt, for lavt dæktryk og en tagboks gør, at bilen bruger mere energi. Aircondition og andet elektrisk udstyr bruger også energi. Har bilen en forbrugsvisning, kan du se effekten og ændre dine vaner.",
           "refs": [
             "1.2.6.10",
             "1.2.6.11",
@@ -1960,7 +1960,7 @@ export const GARAGE = {
         },
         {
           "title": "Se rødt lys tidligt",
-          "body": "Høj fart og aggressiv acceleration øger forbruget. Frem mod et signal bør føreren forudse et muligt stop og sænke farten tidligt i stedet for at fortsætte hurtigt og bremse hårdt. Energiøkonomisk teknik kan normalt spare 5-10 procent og i mange tilfælde op til 25 procent brændstof.",
+          "body": "Høj fart og hård acceleration øger forbruget. Når du nærmer dig et signal, bør du forudse et muligt stop. Sænk farten i god tid, i stedet for at køre hurtigt og bremse hårdt til sidst. Energirigtig kørsel kan normalt spare 5 til 10 procent brændstof, og i mange tilfælde op til 25 procent.",
           "refs": [
             "1.2.6.15",
             "1.2.6.16"
@@ -1968,7 +1968,7 @@ export const GARAGE = {
         },
         {
           "title": "Planlæg før du kører",
-          "body": "Undgå korte, unødvendige ture. Når det er muligt, kan turen flyttes uden for myldretiden, deles med andre eller gennemføres i et mere energieffektivt og mindre forurenende køretøj. Den bedste sparemanøvre kan være at planlægge anderledes.",
+          "body": "Undgå korte, unødvendige ture. Hvis det er muligt, kan du køre uden for myldretiden, dele turen med andre eller tage et køretøj, der er mere energieffektivt og forurener mindre. Den bedste sparemanøvre kan være at planlægge turen anderledes.",
           "refs": [
             "1.2.6.17",
             "1.2.6.18",
@@ -1977,8 +1977,8 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Hybrid kræver opladning",
-          "body": "Hybrid- og plug-in-hybridbiler kombinerer forbrændingsmotor og elmotor for at forbedre energiforbruget mest muligt. Plug-in-modellen er kun miljøvenlig og energieffektiv, når opladningsmuligheden gennem en ladestander udnyttes mest muligt. Den faktiske opladning er derfor afgørende for den tilsigtede energi- og miljøfordel.",
+          "title": "Plug-in-hybrid kræver opladning",
+          "body": "Hybrid- og plug-in-hybridbiler kombinerer en forbrændingsmotor og en elmotor, så energiforbruget bliver lavest muligt. En plug-in-hybrid er kun miljøvenlig og energieffektiv, når du lader den mest muligt ved en ladestander. Den faktiske opladning er derfor afgørende for, at du får den tilsigtede energi- og miljøgevinst.",
           "refs": [
             "1.2.6.21",
             "1.2.6.22"
@@ -1986,7 +1986,7 @@ export const GARAGE = {
         },
         {
           "title": "Elbilens rækkevidde",
-          "body": "Elbiler udnytter generelt energien bedre end fossilbiler. Rækkevidden påvirkes af køremåde og årstid. På lange ture skal rute og ladestop planlægges omhyggeligt, gerne med relevante apps, og regeneration bør udnyttes mest muligt, når forholdene tillader det.",
+          "body": "Elbiler udnytter generelt energien bedre end fossilbiler. Rækkevidden påvirkes af din køremåde og af årstiden. Lange ture kræver, at du planlægger ruten og ladestoppene omhyggeligt, gerne med relevante apps. Brug regenerering mest muligt, når forholdene tillader det.",
           "refs": [
             "1.2.6.23",
             "1.2.6.24",
@@ -1996,7 +1996,7 @@ export const GARAGE = {
         },
         {
           "title": "Støj og røg er ikke gratis",
-          "body": "Bilen skal betjenes uden unødig støj eller unødige mængder røg og gas. Forstyrrende kørsel ved bebyggelse skal undgås eller udføres med mindst mulig gene. Lokale bestemmelser kan desuden sætte en konkret grænse for tomgang.",
+          "body": "Betjen bilen uden unødig støj, røg og gas. Undgå forstyrrende kørsel ved bebyggelse, eller lav den med mindst mulig gene. Lokale regler kan også sætte en konkret grænse for, hvor længe bilen må gå i tomgang.",
           "refs": [
             "1.2.6.27",
             "1.2.6.28",
@@ -2007,7 +2007,7 @@ export const GARAGE = {
       "practical": [
         {
           "title": "Læs forbrugsvisningen",
-          "action": "I undervisningsbilen viser kørelæreren den eventuelle energivisning. Aflæs den før og efter rolige og ujævne hastighedsændringer under lovlig undervisning, og forklar hvordan køremåden påvirker visningen.",
+          "action": "I undervisningsbilen viser kørelæreren energivisningen, hvis bilen har en. Aflæs den ved rolige og ujævne fartændringer, mens I øver lovligt. Forklar, hvordan din køremåde påvirker visningen.",
           "refs": [
             "1.2.6.3",
             "1.2.6.11",
@@ -2015,8 +2015,8 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Biltypecheck",
-          "action": "Afgør sammen med kørelæreren, om bilen er forbrændingsbil, hybrid, plug-in-hybrid eller elbil, og peg på de relevante stop-, lade- eller regenerationsfunktioner. Funktionerne afhænger af bilen.",
+          "title": "Tjek biltypen",
+          "action": "Afgør sammen med kørelæreren, om bilen er en forbrændingsbil, hybrid, plug-in-hybrid eller elbil. Peg på de stop-, lade- eller regenerationsfunktioner, der er relevante. De afhænger af bilen.",
           "refs": [
             "1.2.6.4",
             "1.2.6.21",
@@ -2026,13 +2026,13 @@ export const GARAGE = {
         }
       ],
       "case": {
-        "context": "Hvilken beskrivelse gengiver Plan B's energirigtige teknik for en relevant manuelt gearet forbrændingsbil præcist?",
+        "context": "Hvilken beskrivelse gengiver Plan B præcist for energirigtig teknik i en manuelt gearet forbrændingsbil?",
         "options": [
           {
             "id": "a",
-            "text": "Start umiddelbart før afgang, undgå længere tomgang, accelerér kvikt med cirka halv speeder, skift tidligt højt og tilpas farten før signalet.",
+            "text": "Start lige før afgang, undgå længere tomgang, giv kvik gas med cirka halv speeder, skift tidligt til et højt gear, og tilpas farten før signalet.",
             "correct": true,
-            "why": "Alle led følger planens konkrete råd om starttidspunkt, tomgang, acceleration, gearvalg og forudseende farttilpasning ved signalregulerede kryds.",
+            "why": "Hvert led følger planens råd om starttidspunkt, tomgang, acceleration, gearvalg og tilpasning af farten før signalet i kryds.",
             "refs": [
               "1.2.6.1",
               "1.2.6.2",
@@ -2043,9 +2043,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Start tidligt og varm motoren roligt i tomgang; accelerér derefter forsigtigt i lave gear og koble ud ved fartreduktion.",
+            "text": "Start tidligt, og varm motoren op i tomgang. Giv derefter forsigtigt gas i lave gear, og koble ud, når du sænker farten.",
             "correct": false,
-            "why": "Planen fraråder længere tomgang, anbefaler højt gear og siger, at udkobling så vidt muligt bør undgås ved fartreduktion.",
+            "why": "Planen fraråder lang tomgang og anbefaler højt gear. Den siger også, at du så vidt muligt bør undgå at koble ud, når du sænker farten.",
             "refs": [
               "1.2.6.1",
               "1.2.6.2",
@@ -2056,9 +2056,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Start ved afgang og behold lave gear for trækkraft; hold normal fart mod signalet, før der bremses jævnt.",
+            "text": "Start lige før afgang, og hold lave gear for trækkraft. Hold normal fart mod signalet, og brems jævnt til sidst.",
             "correct": false,
-            "why": "Starttidspunktet passer, men de lave gear og den sene farttilpasning strider mod rådene om højt gear og tidlig tilpasning før signalet.",
+            "why": "Starttidspunktet passer. Men lave gear og sen tilpasning af farten strider mod planens råd om højt gear og tidlig tilpasning før signalet.",
             "refs": [
               "1.2.6.1",
               "1.2.6.8",
@@ -2069,7 +2069,7 @@ export const GARAGE = {
       },
       "recall": {
         "prompt": "Hvorfor er en plug-in-hybrid ikke automatisk energi- og miljørigtig?",
-        "answer": "Fordi dens opladningsmulighed skal udnyttes mest muligt; køremåde, tomgang, vægt og turplanlægning har stadig betydning.",
+        "answer": "Den skal lades mest muligt. Og køremåde, tomgang, vægt og turplanlægning betyder stadig noget.",
         "refs": [
           "1.2.6.2",
           "1.2.6.3",
@@ -2082,7 +2082,7 @@ export const GARAGE = {
       "title": "Dæk, fælge og bærende dele",
       "pointRef": "1.2.7",
       "zone": "exterior",
-      "lead": "Dæk og hjul skal passe sammen, være korrekt monteret og afsløre fejl gennem slid, lyd og styreadfærd.",
+      "lead": "Dækkene og hjulene skal passe sammen og sidde rigtigt. Slid, lyd og styring viser, hvis noget er galt.",
       "objectives": [
         {
           "ref": "1.2.7.1",
@@ -2178,7 +2178,7 @@ export const GARAGE = {
       "cards": [
         {
           "title": "Hjulene skal passe sammen",
-          "body": "Dæk, fælge og hjullejer skal være ubeskadigede. På samme aksel skal dækkene have samme dimension og type, bortset fra et nødhjul til midlertidig brug. Dæktrykket skal følge fabrikantens forskrift, og åbenbart uegnede dæk må ikke anvendes.",
+          "body": "Dæk, fælge og hjullejer skal være ubeskadigede. På samme aksel skal dækkene have samme dimension og type. Undtagelsen er et nødhjul til midlertidig brug. Dæktrykket skal følge fabrikantens forskrift. Åbenbart uegnede dæk må du ikke bruge.",
           "refs": [
             "1.2.7.1",
             "1.2.7.2",
@@ -2187,8 +2187,8 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Læs dækkets type",
-          "body": "Almindelige dæk er beregnet til højere temperaturer end vinterdæk. M+S betegner et typegodkendt vinterdæk. Det alpine snegrebsmærke med tre bjergtinder og snefnug, også kaldet 3PMSF, viser yderligere egnethed til krævende sneforhold. Helårsdæk er en markedsføringsbetegnelse og kan også have disse mærker. Læs derfor de konkrete mærker og egenskaber frem for at slutte dæktypen ud fra mønstret alene.",
+          "title": "Læs, hvilken type dæk du har",
+          "body": "Almindelige dæk er lavet til højere temperaturer end vinterdæk. M plus S betyder, at dækket er typegodkendt som vinterdæk. Snefnugmærket med tre bjergtinder viser, at dækket også egner sig til krævende sne. Helårsdæk er en markedsføringsbetegnelse, og de kan også have de mærker. Læs derfor mærkerne og egenskaberne. Gæt ikke dæktypen ud fra mønstret alene.",
           "refs": [
             "1.2.7.5",
             "1.2.7.6"
@@ -2205,7 +2205,7 @@ export const GARAGE = {
         },
         {
           "title": "Pigdæk og tunge biler",
-          "body": "På bil og registreringspligtigt påhængskøretøj til bil må pigdæk kun bruges fra 1. november til 15. april og kun, når alle køretøjets eller vogntogets hjul er forsynet med dem. Tvillingehjul kan dog have pigdæk på kun det ene hjul, hvis der er symmetri om køretøjets længdeakse. Antallet af pigge skal tilnærmelsesvis være det samme for hjulene efter reglerne. El- og hybridbiler har ofte større dækslid på grund af højere vægt og regenerationsfunktion.",
+          "body": "På en bil og et registreringspligtigt påhængskøretøj må pigdæk kun bruges fra 1. november til 15. april, og kun når alle hjul på køretøjet eller vogntoget har pigdæk. Tvillingehjul kan dog have pigdæk på kun det ene hjul, hvis der er symmetri om køretøjets længdeakse. Antallet af pigge skal være cirka ens. El- og hybridbiler slides ofte mere på grund af vægt og regeneration.",
           "refs": [
             "1.2.7.7",
             "1.2.7.8"
@@ -2220,8 +2220,8 @@ export const GARAGE = {
           ]
         },
         {
-          "title": "Tre konkrete kontroller",
-          "body": "Hovedmønstret skal være mindst 1,6 millimeter på alle hjul og kan vurderes ved slidindikatorer. Dæk og fælge skal være uden skader. Et retningsbestemt dæk skal vende i korrekt omløbsretning efter markeringen på siden.",
+          "title": "Tre konkrete tjek",
+          "body": "Hovedmønstret skal være mindst 1,6 millimeter på alle hjul. Du kan vurdere det med slidindikatorerne. Dæk og fælge skal være uden skader. Et retningsbestemt dæk skal sidde med korrekt omløbsretning efter markeringen på siden.",
           "refs": [
             "1.2.7.9",
             "1.2.7.10",
@@ -2230,7 +2230,7 @@ export const GARAGE = {
         },
         {
           "title": "Slid peger videre",
-          "body": "Ujævnt eller skævt slid kan skyldes forkert dæktryk, hjul, hjulindstilling, bremser eller støddæmpere. Over- eller understyring og større sidevindsfølsomhed kan også pege på dæktrykket. Årsagen skal straks findes og afhjælpes.",
+          "body": "Ujævnt eller skævt slid kan skyldes forkert dæktryk, et fejlende hjul, hjulindstilling, bremser eller støddæmpere. Over- eller understyring og større følsomhed over for sidevind kan også pege på dæktrykket. Find årsagen med det samme, og ret den.",
           "refs": [
             "1.2.7.12",
             "1.2.7.13",
@@ -2241,7 +2241,7 @@ export const GARAGE = {
         },
         {
           "title": "Lyt til ophænget",
-          "body": "Knirk under kørsel kan komme fra hjulophæng, fjedre eller støddæmpere. Unormal støj eller vibration fra hjulleje eller ophæng kan også være tegn på fejl. Lyden er et signal om undersøgelse, ikke et soundtrack bilen selv har valgt.",
+          "body": "Knirk under kørsel kan komme fra hjulophæng, fjedre eller støddæmpere. Unormal støj eller vibration fra hjullejet eller ophænget kan også være tegn på fejl. Lyden er et signal om at undersøge bilen. Den er ikke noget, du skal vænne dig til.",
           "refs": [
             "1.2.7.14",
             "1.2.7.16"
@@ -2250,8 +2250,8 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Mønster og skader",
-          "action": "På samtlige hjul på den konkrete bil viser kørelæreren hovedmønster og eventuelle slidindikatorer. Kontrollér mindst 1,6 millimeter i hovedmønstret samt synlige skader på dæk og fælge.",
+          "title": "Tjek mønster og skader",
+          "action": "Kørelæreren viser hovedmønstret og eventuelle slidindikatorer på alle hjul i bilen. Tjek, at hovedmønstret er mindst 1,6 millimeter, og tjek for synlige skader på dæk og fælge.",
           "refs": [
             "1.2.7.9",
             "1.2.7.10"
@@ -2259,20 +2259,20 @@ export const GARAGE = {
         },
         {
           "title": "Omløbsretning",
-          "action": "Find pil eller anden retningsmarkering på et retningsbestemt dæk sammen med kørelæreren, og kontrollér den mod hjulets fremadgående rotation. Kravet gælder kun, når dækket er retningsbestemt.",
+          "action": "Find pilen eller anden retningsmarkering på et retningsbestemt dæk sammen med kørelæreren. Tjek den mod hjulets rotation fremad. Kravet gælder kun, når dækket er retningsbestemt.",
           "refs": [
             "1.2.7.11"
           ]
         }
       ],
       "case": {
-        "context": "Dækkene har lovlig mønsterdybde, men ét er skævt slidt, og bilen er usædvanligt sidevindsfølsom. Hvilken vurdering følger Plan B?",
+        "context": "Dækkene har lovlig mønsterdybde, men ét dæk er skævt slidt, og bilen er usædvanligt følsom over for sidevind. Hvilken vurdering følger Plan B?",
         "options": [
           {
             "id": "a",
-            "text": "Skævt slid tyder på fejl, sidevindsfølsomhed kan pege på forkert dæktryk, og forholdene skal straks afhjælpes.",
+            "text": "Skævt slid tyder på fejl. Sidevindsfølsomhed kan pege på forkert dæktryk. Forholdene skal rettes med det samme.",
             "correct": true,
-            "why": "Planen gør både skævt slid og den unormale styreadfærd til fejltegn og kræver umiddelbar afhjælpning af årsagen.",
+            "why": "Planen gør både skævt slid og unormal styring til fejltegn. Årsagen skal rettes med det samme.",
             "refs": [
               "1.2.7.12",
               "1.2.7.13",
@@ -2283,9 +2283,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Lovlig mønsterdybde betyder, at skævslid og sidevindsfølsomhed kan afvente det næste almindelige serviceeftersyn.",
+            "text": "Lovlig mønsterdybde betyder, at skævt slid og sidevindsfølsomhed kan vente til næste almindelige service.",
             "correct": false,
-            "why": "Mindstekravet til mønsterdybde ophæver ikke de øvrige fejltegn; planen siger, at disse fejl skal afhjælpes umiddelbart.",
+            "why": "Mindstekravet til mønsterdybde fjerner ikke de andre fejltegn. Planen siger, at fejlene skal rettes med det samme.",
             "refs": [
               "1.2.7.9",
               "1.2.7.12",
@@ -2296,9 +2296,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Skævslid kræver kun dækombytning på akslen; fabrikantens dæktryk og øvrige mulige fejl er uden betydning.",
+            "text": "Skævt slid løses kun ved at skifte dæk på akslen. Dæktrykket og andre mulige fejl er uden betydning.",
             "correct": false,
-            "why": "Planen peger på flere mulige årsager, blandt andet dæktryk, hjulindstilling, bremser og støddæmpere; dækombytning alene løser ikke årsagen.",
+            "why": "Planen nævner flere mulige årsager, blandt andet dæktryk, hjulindstilling, bremser og støddæmpere. At skifte dæk løser ikke årsagen alene.",
             "refs": [
               "1.2.7.3",
               "1.2.7.12",
@@ -2309,8 +2309,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvad skal du gøre ved ujævnt eller skævt dækslid, selv om mønsterdybden stadig er lovlig?",
-        "answer": "Få årsagen undersøgt og straks afhjulpet; den kan være dæktryk, hjulindstilling, bremser, støddæmpere eller andre hjulfejl.",
+        "prompt": "Hvad gør du ved skævt slid, selv om mønsterdybden stadig er lovlig?",
+        "answer": "Få årsagen undersøgt og rettet med det samme. Den kan være dæktryk, hjulindstilling, bremser, støddæmpere eller andre hjulfejl.",
         "refs": [
           "1.2.7.12",
           "1.2.7.15",
@@ -2323,7 +2323,7 @@ export const GARAGE = {
       "title": "Karrosseriet skal være sikkert",
       "pointRef": "1.2.8",
       "zone": "exterior",
-      "lead": "Tag, sider, skærme, hætter, klapper, døre og vognbund må ikke skabe fare.",
+      "lead": "Tag, sider, skærme, klapper, døre og vognbund må ikke skabe fare.",
       "objectives": [
         {
           "ref": "1.2.8.1",
@@ -2344,21 +2344,21 @@ export const GARAGE = {
       "cards": [
         {
           "title": "Ingen farlige kanter",
-          "body": "Karrosseriet omfatter blandt andet tag, sider, skærme, front- eller motorhjelm, bagageklap, døre og vognbund. Delene må ikke have skarpe kanter eller stikke ud på en måde, der skaber unødig fare for cyklister, gående eller andre trafikanter.",
+          "body": "Karrosseriet består blandt andet af tag, sider, skærme, front- eller motorhjelm, bagageklap, døre og vognbund. Delene må ikke have skarpe kanter eller stikke ud. Så skaber de unødig fare for cyklister, gående og andre trafikanter.",
           "refs": [
             "1.2.8.1"
           ]
         },
         {
           "title": "Skade og rust vurderes efter fare",
-          "body": "En bule eller en rustplet er ikke i sig selv den afgørende vurdering. Spørgsmålet er, om skade eller rust har et sådant omfang, at karrosseriet er til fare for færdselssikkerheden. Kriteriet er faren, ikke om skaden sidder i en bestemt type del.",
+          "body": "En bule eller en rustplet er ikke i sig selv det afgørende. Spørgsmålet er, om skaden eller rusten er så stor, at karrosseriet er en fare for trafikken. Det er faren, der tæller, ikke hvilken del skaden sidder på.",
           "refs": [
             "1.2.8.2"
           ]
         },
         {
-          "title": "Låse skal holde under kørslen",
-          "body": "Døre, front- eller motorhjelm og bagageklap skal have låse, der kan holde dem lukkede, mens bilen kører. En klap, der ser lukket ud, men ikke fastholdes, kan åbne og skabe fare eller spærre førerens udsyn.",
+          "title": "Låsene skal holde under kørsel",
+          "body": "Døre, front- eller motorhjelm og bagageklap skal have låse, der holder dem lukkede, mens bilen kører. En klap, der ser lukket ud, men ikke bliver fastholdt, kan åbne sig. Så kan den skabe fare eller spærre dit udsyn.",
           "refs": [
             "1.2.8.3"
           ]
@@ -2366,8 +2366,8 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Vurder et tænkt karrosseriproblem",
-          "action": "For hvert eksempel afgør du, hvilket princip der er berørt: en skarp løs pynteliste, en rustskade af sikkerhedsfarligt omfang eller en bagageklap, som ikke kan låses. Forklar den mulige fare frem for at diagnosticere en reparation.",
+          "title": "Vurder et tænkt problem med karrosseriet",
+          "action": "Ved hvert eksempel afgør du, hvilket krav der er berørt. Eksemplerne er: en skarp, løs pynteliste, en rustskade, der er farlig, og en bagageklap, der ikke kan låses. Forklar den mulige fare i stedet for at stille en diagnose af reparationen.",
           "refs": [
             "1.2.8.1",
             "1.2.8.2",
@@ -2376,31 +2376,31 @@ export const GARAGE = {
         }
       ],
       "case": {
-        "context": "En bil har en løs skarp pynteliste, en sikkerhedsfarlig rustskade og en bagageklap, hvis lås ikke holder. Hvilken observation hører specifikt til låsekravet i 1.2.8.3?",
+        "context": "En bil har en løs, skarp pynteliste, en farlig rustskade og en bagageklap, hvis lås ikke holder. Hvilken observation hører specifikt til låsekravet i punkt 1.2.8.3?",
         "options": [
           {
             "id": "a",
-            "text": "Bagageklappens lås kan ikke holde klappen lukket under kørslen.",
+            "text": "Bagageklappens lås kan ikke holde klappen lukket under kørsel.",
             "correct": true,
-            "why": "Punkt 1.2.8.3 kræver låse, som kan holde døre, fronthjelm og bagageklap lukkede under kørsel.",
+            "why": "Punkt 1.2.8.3 kræver låse, der kan holde døre, fronthjelm og bagageklap lukkede under kørsel.",
             "refs": [
               "1.2.8.3"
             ]
           },
           {
             "id": "b",
-            "text": "Den løse pynteliste har en skarp kant, som kan skade andre trafikanter.",
+            "text": "Den løse pynteliste har en skarp kant, der kan skade andre trafikanter.",
             "correct": false,
-            "why": "Udsagnet beskriver et reelt problem, men det hører til kravet om skarpe eller udragende dele i 1.2.8.1.",
+            "why": "Udsagnet beskriver et reelt problem. Men det hører til kravet om skarpe kanter i punkt 1.2.8.1.",
             "refs": [
               "1.2.8.1"
             ]
           },
           {
             "id": "c",
-            "text": "Rustskaden har et sådant omfang, at den er farlig for færdselssikkerheden.",
+            "text": "Rustskaden er så stor, at den er farlig for færdselssikkerheden.",
             "correct": false,
-            "why": "Udsagnet beskriver et reelt problem, men det hører til skade- og rustkravet i 1.2.8.2.",
+            "why": "Udsagnet beskriver et reelt problem. Men det hører til kravet om skade og rust i punkt 1.2.8.2.",
             "refs": [
               "1.2.8.2"
             ]
@@ -2409,7 +2409,7 @@ export const GARAGE = {
       },
       "recall": {
         "prompt": "Hvilke tre hovedtyper af karrosserikrav skal du kende?",
-        "answer": "Ingen farlige kanter eller fremspring, ingen sikkerhedsfarlig skade eller rust og låse, der holder døre og klapper lukkede.",
+        "answer": "Ingen farlige kanter eller fremspring. Ingen skade eller rust, der er farlig. Og låse, der holder døre og klapper lukkede.",
         "refs": [
           "1.2.8.1",
           "1.2.8.2",
@@ -2419,10 +2419,10 @@ export const GARAGE = {
     },
     {
       "id": "sikkerhedsseler-udsyn-udstyr",
-      "title": "Sikkerhedsseler, udsyn og særligt udstyr",
+      "title": "Seler, udsyn og særligt udstyr",
       "pointRef": "1.2.9",
       "zone": "exterior",
-      "lead": "Seler, ruder, viskere og spejle skal give beskyttelse og udsyn i den konkrete bil.",
+      "lead": "Seler, ruder, viskere og spejle skal beskytte dig og give dig udsyn i din bil.",
       "objectives": [
         {
           "ref": "1.2.9.1",
@@ -2493,7 +2493,7 @@ export const GARAGE = {
       "cards": [
         {
           "title": "Sele og nakkestøtte",
-          "body": "Bilen skal normalt have sikkerhedssele på alle siddepladser, og selerne skal være uden skader. Påbudte nakkestøtter må ikke fjernes, når pladsen bruges. Beskyttelsen begynder altså før kørslen med udstyr, der er til stede og intakt.",
+          "body": "Bilen skal normalt have sikkerhedssele på alle siddepladser, og selerne skal være uden skader. Påbudte nakkestøtter må ikke fjernes, når pladsen bruges. Beskyttelsen begynder allerede før kørslen. Udstyret skal være til stede og intakt.",
           "refs": [
             "1.2.9.1",
             "1.2.9.2",
@@ -2502,7 +2502,7 @@ export const GARAGE = {
         },
         {
           "title": "Ruden skal kunne holdes ren",
-          "body": "Forruden skal som hovedregel være hel og uden skader. Visker og vasker skal kunne holde den ren. Hvis det ikke lykkes, er det tegn på fejl i et af systemerne, også selv om udsynet virker acceptabelt i tørvejr.",
+          "body": "Forruden skal som hovedregel være hel og uden skader. Viskerne og vaskeren skal kunne holde den ren. Lykkes det ikke, er der fejl i et af systemerne. Det gælder også, selv om udsynet virker fint i tørvejr.",
           "refs": [
             "1.2.9.4",
             "1.2.9.9"
@@ -2510,7 +2510,7 @@ export const GARAGE = {
         },
         {
           "title": "Spejle eller kamera",
-          "body": "En almindelig nyere personbil M1 skal have et indvendigt førerspejl og et udvendigt førerspejl i hver side. Det indvendige spejl kræves ikke, hvis bilens opbygning ikke giver noget udsyn bagud. For M1-biler registreret første gang før 1. juli 2025 kan højre sidespejl undværes, når venstre og indvendigt spejl giver tilstrækkeligt udsyn bagud, hverken bagrudens eller de bageste sideruders lysgennemgang er under 70 procent, og bilen ikke er højrestyret. Spejlene skal være rene og ubeskadigede. En kamera- og monitorerstatning skal være godkendt og mærket, vise de krævede synsfelter uden indstilling og ikke reducere det direkte udsyn gennem forrude og forreste sideruder. Find den konkrete bils godkendte løsning.",
+          "body": "M1-biler skal have indvendigt og udvendigt førerspejl i hver side. Indvendigt spejl kræves ikke, hvis bilen intet udsyn giver bagud. Højre sidespejl kan undværes på biler registreret før 1. juli 2025, når venstre og indvendigt spejl giver udsyn, bagrude og bageste sideruder har mindst 70 procent lysgennemgang, og bilen ikke er højrestyret. Spejle skal være rene og hele. Et godkendt og mærket kamera med skærm kan erstatte spejlene. Det skal vise de krævede synsfelter uden indstilling og må ikke mindske det direkte udsyn gennem forruden og de forreste sideruder.",
           "refs": [
             "1.2.9.5",
             "1.2.9.6",
@@ -2527,14 +2527,14 @@ export const GARAGE = {
         },
         {
           "title": "Trekanten skal være ved hånden",
-          "body": "En godkendt advarselstrekant bør medbringes, så den kan opstilles i de situationer, hvor der er pligt til det. Den hjælper ikke meget hjemme i garagen, når bilen står havareret et andet sted.",
+          "body": "Du bør medbringe en godkendt advarselstrekant, så du kan opstille den, når du har pligt til det. Den hjælper ikke, hvis den ligger hjemme i garagen, mens bilen står havareret et andet sted.",
           "refs": [
             "1.2.9.8"
           ]
         },
         {
           "title": "Udsynets skjulte film",
-          "body": "Sprinklervæske skal være tilstrækkelig, viskerne skal rense ruden, og spejlene skal være hele, rene og korrekt indstillede. En tynd indvendig film kan være næsten usynlig i gråvejr, men gøre udsynet meget dårligt ved lav sol eller blændende lygter.",
+          "body": "Der skal være nok sprinklervæske. Viskerne skal kunne rense ruden, og spejlene skal være hele, rene og rigtigt indstillet. En tynd indvendig film kan være næsten usynlig i gråvejr. Men den kan gøre udsynet meget dårligt ved lav sol eller blændende lygter.",
           "refs": [
             "1.2.9.10",
             "1.2.9.11",
@@ -2545,29 +2545,29 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Sprinkler og viskere",
-          "action": "I undervisningsbilen og sammen med kørelæreren: kontrollér væskemængden efter bilens løsning og instruktionsbog, aktivér vasker og viskere, og vurder om viskerne kan holde forruden ren.",
+          "title": "Tjek sprinkler og viskere",
+          "action": "Sammen med kørelæreren i undervisningsbilen tjekker du væskemængden efter bilens løsning og instruktionsbogen. Aktiver vaskeren og viskerne, og vurder, om viskerne kan holde forruden ren.",
           "refs": [
             "1.2.9.10",
             "1.2.9.11"
           ]
         },
         {
-          "title": "Spejlkontrol",
-          "action": "Indstil siddestillingen først. Kontrollér derefter med kørelæreren, at spejle eller monitorer er rene, hele og korrekt indstillet for den konkrete bil. Den fysiske præstation vurderes ved bilen.",
+          "title": "Tjek spejlene",
+          "action": "Indstil siddestillingen først. Tjek derefter sammen med kørelæreren, at spejlene eller monitorerne er rene, hele og rigtigt indstillet til din bil. Det praktiske vurderes i bilen.",
           "refs": [
             "1.2.9.12"
           ]
         }
       ],
       "case": {
-        "context": "Forruden har indvendig film, sprinklervæsken er næsten tom, og viskerne bevæger sig. Hvilken kontrol og vurdering følger Plan B?",
+        "context": "Forruden har en indvendig film, sprinklervæsken er næsten tom, og viskerne bevæger sig. Hvilken vurdering følger Plan B?",
         "options": [
           {
             "id": "a",
-            "text": "Sprinklervæsken skal være tilstrækkelig, viskerne skal kunne holde ruden ren, og filmen bør fjernes på grund af modlys.",
+            "text": "Der skal være nok sprinklervæske, viskerne skal kunne holde ruden ren, og filmen bør fjernes, fordi den kan gøre udsynet dårligt i modlys.",
             "correct": true,
-            "why": "Planen kræver tilstrækkelig sprinklervæske og fungerende viskere og beskriver, at indvendig film kan gøre udsynet umuligt i modlys.",
+            "why": "Planen kræver nok sprinklervæske og fungerende viskere. Den beskriver også, at en indvendig film kan gøre udsynet umuligt i modlys.",
             "refs": [
               "1.2.9.4",
               "1.2.9.9",
@@ -2578,9 +2578,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "Viskernes bevægelse opfylder kontrollen alene; sprinklervæsken kan vente, hvis der ikke forventes regn.",
+            "text": "Viskernes bevægelse er nok alene. Sprinklervæsken kan vente, hvis der ikke er regn i sigte.",
             "correct": false,
-            "why": "Kontrollen gælder både tilstrækkelig sprinklervæske og viskernes evne til faktisk at holde forruden ren, uanset vejrudsigten.",
+            "why": "Kontrollen gælder både nok sprinklervæske og, at viskerne faktisk kan holde forruden ren. Vejret ændrer ikke det.",
             "refs": [
               "1.2.9.4",
               "1.2.9.9",
@@ -2590,9 +2590,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "Den indvendige film er kun relevant ved rudeskade; rene spejle kan ellers erstatte en ren forrude.",
+            "text": "Den indvendige film er kun relevant ved skader på ruden. Rene spejle kan erstatte en ren forrude.",
             "correct": false,
-            "why": "Planen behandler filmen som en selvstændig udsynsrisiko i modlys, og spejlkravene erstatter ikke kravet om en forrude, der kan holdes ren.",
+            "why": "Planen ser filmen som en selvstændig risiko for udsynet i modlys. Spejlkravene erstatter ikke kravet om en forrude, der kan holdes ren.",
             "refs": [
               "1.2.9.4",
               "1.2.9.5",
@@ -2603,8 +2603,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvorfor skal ruder rengøres indvendigt, selv når de ser acceptable ud i gråvejr?",
-        "answer": "En tynd film kan blive stærkt synshæmmende ved lav sol eller blændende lygter og i værste fald gøre udsynet umuligt.",
+        "prompt": "Hvorfor skal du gøre ruden ren indvendigt, selv når den ser fin ud i gråvejr?",
+        "answer": "En tynd film kan gøre udsynet meget dårligt ved lav sol eller blændende lygter. I værste fald gør den udsynet umuligt.",
         "refs": [
           "1.2.9.13"
         ]
@@ -2615,7 +2615,7 @@ export const GARAGE = {
       "title": "Særlige køretøjer",
       "pointRef": "1.2.10",
       "zone": "documents",
-      "lead": "Kategori B kan omfatte flere køretøjstyper, men hver type kan have særlige krav til indretning og udstyr.",
+      "lead": "Kategori B dækker flere køretøjstyper. Hver type kan have sine egne krav til indretning og udstyr.",
       "objectives": [
         {
           "ref": "1.2.10.1",
@@ -2626,21 +2626,21 @@ export const GARAGE = {
       "cards": [
         {
           "title": "Flere typer under kategori B",
-          "body": "Særregler kan gælde for varebil, påhængskøretøj til person- og varebil, quadricykel, trehjulet motorcykel, ATV, stor knallert, traktor og motorredskab, selv når køretøjet kan føres med kategori B. Førerretten gør dem ikke teknisk ens.",
+          "body": "Der kan gælde særregler for varebiler, påhængskøretøjer til person- og varebiler, quadricykler, trehjulede motorcykler, ATV'er, store knallerter, traktorer og motorredskaber. Det gælder, selv om du må køre dem med kategori B. Førerretten gør dem ikke ens.",
           "refs": [
             "1.2.10.1"
           ]
         },
         {
           "title": "Mål og vægt varierer",
-          "body": "Reglerne vedrører især længde, bredde, tilladt last og tilladt totalvægt. Derfor kan man ikke overføre personbilens grænser eller antage, at et køretøj må lastes ud fra den plads, der ser ledig ud.",
+          "body": "Reglerne handler især om længde, bredde, tilladt last og tilladt totalvægt. Du kan derfor ikke bruge personbilens grænser. Og du kan ikke gå ud fra, at et køretøj må lastes, fordi der ser ud til at være plads.",
           "refs": [
             "1.2.10.1"
           ]
         },
         {
           "title": "Udstyr følger køretøjet",
-          "body": "Bremser, lygter, dæk og spejle kan være reguleret særligt. For nogle typer er styrthjelm relevant, og for påhængskøretøj gælder særlige tilkoblingskrav. Kravene findes i reglerne for den konkrete køretøjstype; dokumenterne bruges som støtte, når de indeholder relevante oplysninger.",
+          "body": "Bremser, lygter, dæk og spejle kan have særlige regler. For nogle typer gælder krav om styrthjelm, og for påhængskøretøjer gælder særlige krav til tilkobling. Kravene findes i reglerne for den konkrete køretøjstype. Dokumenterne kan støtte dig, når de har relevante oplysninger.",
           "refs": [
             "1.2.10.1"
           ]
@@ -2648,8 +2648,8 @@ export const GARAGE = {
       ],
       "practical": [
         {
-          "title": "Type og særkrav",
-          "action": "Gennemgå med kørelæreren et konkret køretøjs type, relevante dokumenter og de regler, der gælder for typen. Peg på krav til mål, vægt, bremser, lygter, dæk, spejle, hjelm eller tilkobling, hvor de er relevante.",
+          "title": "Find typen og dens særkrav",
+          "action": "Gennemgå med kørelæreren typen af et konkret køretøj, de relevante dokumenter og reglerne for typen. Peg på krav til mål, vægt, bremser, lygter, dæk, spejle, hjelm eller tilkobling, hvor de er relevante.",
           "refs": [
             "1.2.10.1"
           ]
@@ -2662,25 +2662,25 @@ export const GARAGE = {
             "id": "a",
             "text": "ATV-typen kan have særregler om blandt andet mål, vægt, bremser, lygter, dæk, spejle og styrthjelm.",
             "correct": true,
-            "why": "Planen siger udtrykkeligt, at de nævnte kategori B-køretøjer kan være omfattet af særlige regler om disse forhold.",
+            "why": "Planen siger tydeligt, at de nævnte køretøjer kan være omfattet af særlige regler om disse forhold.",
             "refs": [
               "1.2.10.1"
             ]
           },
           {
             "id": "b",
-            "text": "ATV-typen følger personbilens udstyrskrav, men kan have en særregel om styrthjelm, hvis den er åben.",
+            "text": "ATV-typen følger personbilens udstyrskrav. Den kan dog have en særregel om styrthjelm, hvis den er åben.",
             "correct": false,
-            "why": "Planens særregler er ikke begrænset til styrthjelm; de kan også vedrøre mål, vægt, bremser, lygter, dæk og spejle.",
+            "why": "Særreglerne er ikke begrænset til styrthjelm. De kan også handle om mål, vægt, bremser, lygter, dæk og spejle.",
             "refs": [
               "1.2.10.1"
             ]
           },
           {
             "id": "c",
-            "text": "Kategori B betyder, at særregler bortfalder, når ATV'en er registreret og dens tilladte totalvægt er kendt.",
+            "text": "Kategori B betyder, at særregler ophører, når ATV'en er registreret, og dens tilladte totalvægt er kendt.",
             "correct": false,
-            "why": "Førerretten og registreringen fjerner ikke køretøjstypens særlige regler om indretning, udstyr og eventuelt førerudstyr.",
+            "why": "Førerretten og registreringen fjerner ikke typens særlige regler om indretning, udstyr og eventuelt førerudstyr.",
             "refs": [
               "1.2.10.1"
             ]
@@ -2688,8 +2688,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvorfor er kategori B alene ikke nok til at afgøre et særligt køretøjs udstyrskrav?",
-        "answer": "Fordi køretøjstypen kan have egne regler om blandt andet mål, vægt, bremser, lys, dæk, spejle, hjelm og tilkobling.",
+        "prompt": "Hvorfor er kategori B alene ikke nok til at vide, hvilket udstyr et særligt køretøj skal have?",
+        "answer": "Køretøjstypen kan have egne regler. Det gælder blandt andet mål, vægt, bremser, lys, dæk, spejle, hjelm og tilkobling.",
         "refs": [
           "1.2.10.1"
         ]
@@ -2697,10 +2697,10 @@ export const GARAGE = {
     },
     {
       "id": "registreringsattest",
-      "title": "Registreringsattesten fortæller, hvad bilen må",
+      "title": "Registreringsattesten viser, hvad bilen må",
       "pointRef": "1.3.1",
       "zone": "documents",
-      "lead": "Attesten dokumenterer registrering og centrale vægte og bruges ved vurdering af bil og påhængskøretøj.",
+      "lead": "Attesten viser registreringen og de vigtige vægte. Du bruger den til at vurdere bil og påhængskøretøj.",
       "objectives": [
         {
           "ref": "1.3.1.1",
@@ -2736,21 +2736,21 @@ export const GARAGE = {
       "cards": [
         {
           "title": "Registrering og dokument",
-          "body": "En bil, der bruges på færdselslovens område, skal være registreret og have en registreringsattest. Ved kørsel i mange andre lande skal originalen medbringes. Inden en tur over grænsen må du derfor undersøge dokumentkravet for de lande, rejsen går gennem.",
+          "body": "En bil, der bruges efter færdselsloven, skal være registreret og have en registreringsattest. Når du kører i mange andre lande, skal du have originalen med. Før en tur over grænsen skal du derfor tjekke dokumentkravet for de lande, rejsen går gennem.",
           "refs": [
             "1.3.1.1"
           ]
         },
         {
           "title": "Vægtene står på attesten",
-          "body": "Registreringsattesten oplyser bilens egenvægt eller køreklar vægt og dens tilladte totalvægt. Den kan også vise, hvor tungt et påhængskøretøj bilen må kobles med, samt en eventuel største tilladt vogntogsvægt. Felterne bruges samlet, ikke som løse gæt.",
+          "body": "Registreringsattesten viser bilens egenvægt eller køreklar vægt og den tilladte totalvægt. Den kan også vise, hvor tungt et påhængskøretøj bilen må trække, og den største tilladte vogntogsvægt, hvis der er en. Brug felterne samlet, ikke som løse gæt.",
           "refs": [
             "1.3.1.2"
           ]
         },
         {
           "title": "To køretøjer, to attester",
-          "body": "Bilens og påhængskøretøjets registreringsattester bruges til at vurdere, om de må sammenkobles. Ved synsfri sammenkobling medbringes del 1 af begge køretøjers attester. I Danmark kan relevante kopier medbringes. Til udlandet medbringes originalernes del 1 eller en gyldig officiel genpart udstedt af Motorstyrelsen efter reglerne; en privat fotokopi er ikke en officiel genpart. Begge attester betyder begge køretøjers dokumenter, ikke at både del 1 og del 2 skal med. Motorstyrelsen fraråder at opbevare begge dele samlet i bilen, fordi del 2 indeholder kontroloplysninger til omregistrering.",
+          "body": "Registreringsattesterne viser, om bilen og påhængskøretøjet må kobles sammen. Ved synsfri sammenkobling skal du have del 1 af begge køretøjers attester med. I Danmark kan kopier bruges. I udlandet skal du have originalerne af del 1 eller en officiel genpart fra Motorstyrelsen. En privat fotokopi tæller ikke. Det betyder ikke, at både del 1 og del 2 skal med. Motorstyrelsen fraråder at have begge dele i bilen, fordi del 2 har kontroloplysninger til omregistrering.",
           "refs": [
             "1.3.1.3",
             "1.3.1.4",
@@ -2767,7 +2767,7 @@ export const GARAGE = {
         },
         {
           "title": "Elbilens vægt påvirker lasten",
-          "body": "Elkøretøjer har ofte højere egenvægt og derfor lavere lasteevne. Det er ikke en regel om, at enhver elbil kan laste mindre end enhver anden bil; den konkrete registreringsattest viser de relevante vægte for netop køretøjet.",
+          "body": "Elkøretøjer har ofte højere egenvægt og derfor lavere lasteevne. Men det er ikke en regel om, at enhver elbil kan laste mindre end enhver anden bil. Registreringsattesten viser de vægte, der gælder for netop dit køretøj.",
           "refs": [
             "1.3.1.6"
           ]
@@ -2776,7 +2776,7 @@ export const GARAGE = {
       "practical": [
         {
           "title": "Læs en øvelsesattest",
-          "action": "Brug en anonymiseret øvelsesattest til at finde egenvægt eller køreklar vægt, tilladt totalvægt, tilladt påhængsvægt og eventuel vogntogsvægt. Forklar derefter, hvilke to attester der skal sammenholdes ved en tænkt sammenkobling.",
+          "action": "Brug en anonymiseret øvelsesattest til at finde egenvægt eller køreklar vægt, tilladt totalvægt, tilladt påhængsvægt og eventuel vogntogsvægt. Forklar derefter, hvilke to attester du skal sammenholde ved en tænkt sammenkobling.",
           "refs": [
             "1.3.1.2",
             "1.3.1.3"
@@ -2784,7 +2784,7 @@ export const GARAGE = {
         },
         {
           "title": "Vælg dokumenter til turen",
-          "action": "Sammenlign en tur i Danmark med en tur til udlandet med påhængskøretøj. Udpeg for hver tur, hvilke registreringsattester der skal med, og om kopi, original eller en genpart fra Motorstyrelsen er relevant.",
+          "action": "Sammenlign en tur i Danmark med en tur til udlandet med påhængskøretøj. Peg for hver tur på, hvilke registreringsattester du skal have med, og om du skal have en kopi, originalen eller en genpart fra Motorstyrelsen.",
           "refs": [
             "1.3.1.1",
             "1.3.1.4",
@@ -2793,13 +2793,13 @@ export const GARAGE = {
         }
       ],
       "case": {
-        "context": "En fører planlægger én tur i Danmark og én tur til udlandet med påhængskøretøj. Hvilken sammenligning af registreringsattester følger Plan B?",
+        "context": "Du planlægger en tur i Danmark og en tur til udlandet med påhængskøretøj. Hvilken sammenligning af registreringsattester følger Plan B?",
         "options": [
           {
             "id": "a",
-            "text": "I Danmark kan kopier af begge attester medbringes; i udlandet kræves originaler eller Motorstyrelsens genpart.",
+            "text": "I Danmark kan kopier af begge attester medbringes. I udlandet kræves originaler eller en genpart fra Motorstyrelsen.",
             "correct": true,
-            "why": "Begge attester skal med ved kørsel med påhængskøretøj; Danmark tillader kopier, mens udlandet kræver originaler eller officiel genpart.",
+            "why": "Begge attester skal med ved kørsel med påhængskøretøj. Danmark tillader kopier, mens udlandet kræver originaler eller en officiel genpart.",
             "refs": [
               "1.3.1.4",
               "1.3.1.5"
@@ -2807,9 +2807,9 @@ export const GARAGE = {
           },
           {
             "id": "b",
-            "text": "I Danmark er bilens kopi nok; i udlandet er påhængskøretøjets originale attest alene tilstrækkelig.",
+            "text": "I Danmark er en kopi af bilens attest nok. I udlandet er påhængskøretøjets originale attest alene nok.",
             "correct": false,
-            "why": "Ved begge ture skal attesterne for både det trækkende køretøj og påhængskøretøjet medbringes.",
+            "why": "Ved begge ture skal attesterne for både det trækkende køretøj og påhængskøretøjet med.",
             "refs": [
               "1.3.1.4",
               "1.3.1.5"
@@ -2817,9 +2817,9 @@ export const GARAGE = {
           },
           {
             "id": "c",
-            "text": "I Danmark kan kopier af begge attester medbringes; i udlandet er almindelige kopier af begge tilstrækkelige.",
+            "text": "I Danmark kan kopier af begge attester medbringes. I udlandet er almindelige kopier af begge nok.",
             "correct": false,
-            "why": "Danmark tillader kopier, men ved kørsel i udlandet kræver planen originaler eller en genpart udstedt af Motorstyrelsen.",
+            "why": "Danmark tillader kopier. Men i udlandet kræver planen originaler eller en genpart fra Motorstyrelsen.",
             "refs": [
               "1.3.1.4",
               "1.3.1.5"
@@ -2828,8 +2828,8 @@ export const GARAGE = {
         ]
       },
       "recall": {
-        "prompt": "Hvilke vægtoplysninger skal du kunne finde på en registreringsattest?",
-        "answer": "Egenvægt eller køreklar vægt, tilladt totalvægt, tilladt vægt for et eventuelt påhængskøretøj og eventuel største vogntogsvægt.",
+        "prompt": "Hvilke vægte skal du kunne finde på en registreringsattest?",
+        "answer": "Egenvægt eller køreklar vægt, tilladt totalvægt, tilladt vægt for et påhængskøretøj og eventuel største vogntogsvægt.",
         "refs": [
           "1.3.1.2"
         ]
