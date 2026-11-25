@@ -51,10 +51,11 @@ const live = new Map(); // element -> Rive instance
 
 const still = () => document.body.classList.contains('no-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- old phones: every animation draws each frame, which an old phone cannot keep up with. A few seconds
-   after the first one starts, the frame rate is measured; under about 38 frames a second all animations stop where
-   they are and no new ones start for the rest of the visit (each element's own picture shows instead). Data saver
-   and a line the browser rates 2G or 3G (the runtime alone is about 1 MB) skip them from the start. ---------- */
+/* ---------- gamle telefoner: hver animation tegner hvert billede, og det kan en gammel telefon ikke følge med til.
+   Et par sekunder efter den første animation starter, måler vi billedfrekvensen. Under cirka 38 billeder i sekundet
+   stopper alle animationer, hvor de er, og der starter ingen nye resten af besøget (elementets eget billede vises i
+   stedet). Datasparetilstand og en forbindelse, browseren kalder 2G eller 3G, springer dem over fra start, fordi
+   runtime alene fylder cirka 1 MB. ---------- */
 const LITE_KEY = 'teoriboost.riveLite';
 let lite = (() => { const c = globalThis.navigator?.connection, save = c?.saveData === true || ['slow-2g', '2g', '3g'].includes(c?.effectiveType); try { return save || sessionStorage.getItem(LITE_KEY) === '1'; } catch { return save; } })();
 const instances = new Set(); // every running Rive, whichever module made it

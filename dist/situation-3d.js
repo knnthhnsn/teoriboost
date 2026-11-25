@@ -628,6 +628,7 @@ export async function mountSituation3d(stage, spec) {
       eyeV.set(POV_EYE.x, pose.eye[1], POV_EYE.z).applyMatrix4(m4); fwdV.set(1, 0, 0).transformDirection(m4); rightV.set(0, 0, 1).transformDirection(m4); upV.set(0, 1, 0).transformDirection(m4);
       const yaw = pose.yaw + (reduced() ? 0 : Math.sin(now / 3200) * 0.012);
       dirV.copy(fwdV).multiplyScalar(Math.cos(yaw)).addScaledVector(rightV, Math.sin(yaw)).multiplyScalar(Math.cos(pose.pitch)).addScaledVector(upV, Math.sin(pose.pitch));
+      // Spejlene tegnes kun hvert andet billede. Det ser øjet ikke, men telefonen sparer meget arbejde.
       if (mirrorPass && mirrorTick++ % 2 === 0) mirrorPass(m4); camera.position.copy(eyeV); camera.lookAt(eyeV.x + dirV.x * 20, eyeV.y + dirV.y * 20, eyeV.z + dirV.z * 20); renderer.render(scene, camera); return;
     }
     const c = spec.cam; if (c) { const p = [c.pos[0] + (V ? (c.pos[0] > 0 ? -1.6 : 1.6) : 0), c.pos[1] * (V ? 0.85 : 1), c.pos[2]], m = spec.mark; if (m) { /* close-up on the part the question is about, seen from the rule's side, instead of a ring over it (16 Nov 2026) */ const d = p.map((v, i) => v - m[i]), k = Math.min(1, (spec.markDist || 3.2) / Math.hypot(...d)); camera.position.set(m[0] + d[0] * k + sway * k, m[1] + d[1] * k, m[2] + d[2] * k); camera.lookAt(...m); } else { camera.position.set(p[0] + sway, p[1], p[2]); camera.lookAt(...c.look); } } else { camera.position.set((exm.tunnel ? 0.8 : V ? -1.2 : 2.6) + sway, (exm.tunnel ? 4.5 : ex.trailer ? 11 : 8.4) * (V ? 0.72 : 1), z0 + (V ? 14.5 : 12.5) + (ex.trailer ? 8 : 0)); camera.lookAt(0.5, 0.2, z0 - 3.5 + (ex.trailer ? 2 : 0)); } renderer.render(scene, camera);
@@ -665,6 +666,7 @@ export async function mountSituation3d(stage, spec) {
        ink line and an inner shadow round the glass; the glass under it is a small render from a camera looking backwards (every second frame), flipped. */
     /* 24 Nov 2026: side mirrors too ("du glemmer ofte bagspejl sidespejl"). spec.mirrors lists 'rear', 'left' and 'right'; spec.rearMirror alone
        still means the rear one. Each mirror is the same idea: a small backwards render from where that mirror sits on the car, flipped, in a drawn housing. */
+    // Hvilke spejle skal scenen have? Kun dem, situationen beder om, så andre scener ikke tegner noget ekstra.
     const wanted = [...new Set([...(spec.mirrors || []), ...(spec.rearMirror ? ['rear'] : [])])];
     const housingTex = (w, ht, stem) => {
       const hc = document.createElement('canvas'); hc.width = w; hc.height = ht; const h = hc.getContext('2d'), r0 = Math.min(66, ht * 0.24);
@@ -685,6 +687,8 @@ export async function mountSituation3d(stage, spec) {
     const flat = map => new T.MeshBasicMaterial({ map, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, fog: false });
     /* car frame: nose +x, right +z, metres. pos = where the glass sits, dir = where it looks (backwards, a side mirror turned a little outwards) */
     const KIND = { rear: { w: 1024, h: 330, stem: true, fov: 15, pos: [0.6, 1.4, 0], dir: [-1, -0.03, 0] }, left: { w: 620, h: 400, stem: false, fov: 24, pos: [0.55, 1.05, -1.02], dir: [-1, -0.04, -0.2] }, right: { w: 620, h: 400, stem: false, fov: 24, pos: [0.55, 1.05, 1.02], dir: [-1, -0.04, 0.2] } };
+    // Hvert spejl er et lille kamera, der kigger bagud fra spejlets plads på bilen.
+    // Billedet vendes om, så det ser ud som i et rigtigt spejl.
     for (const which of wanted) {
       const k = KIND[which]; if (!k) continue;
       const hs = housingTex(k.w, k.h, k.stem), ratio = (hs.glass[2] * k.w) / (hs.glass[3] * k.h);

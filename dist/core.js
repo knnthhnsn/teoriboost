@@ -98,6 +98,7 @@ export function restoreState(raw) {
   }catch{return blankState();}
 }
 
+// Et spørgsmål tæller kun som rigtigt, når alle fire udsagn er vurderet rigtigt.
 export function gradeQuestion(question,answers) {
   if(!Array.isArray(question.statements)||question.statements.length!==4)throw new Error('Spørgsmål kræver fire udsagn');
   if(!isCompleteResponse(answers))return false;

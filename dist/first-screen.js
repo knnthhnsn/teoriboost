@@ -1,6 +1,6 @@
-// On a slow line the first screen's own pictures go first. Optional work (animations, screens that are not open yet)
-// waits for the page to load, for #view to show a real screen (not the "Henter" line) and for that screen's visible
-// pictures, at most 4 s, and then for a quiet moment.
+// På en langsom forbindelse kommer den første skærms egne billeder først. Det, der kan vente (animationer
+// og skærme, der ikke er åbne endnu), venter på, at siden er indlæst, at #view viser en rigtig skærm, og at
+// skærmens synlige billeder er hentet. Højst 4 sekunder, og så et roligt øjeblik.
 let settled = null;
 export function afterFirstScreen() {
   return settled ||= new Promise(resolve => {

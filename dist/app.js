@@ -45,6 +45,7 @@ import {questionGagFits,questionVoiceParts,questionFeedbackParts,sectionVoicePar
 // for a screen's part (ROUTE_PARTS) and shows "Henter" meanwhile.
 let renderSigns,mountSigns,renderQuestionVisual,mountQuestionVisual,renderJudge,mountJudge,createTurnLesson,renderTurnEntry,createJourneyPlayer,renderChat,mountChat,loadChat,createNarrator,routeSeq=0;
 const lazyPart=load=>{let request=null,ok=false;const get=()=>request||=load().then(()=>{ok=true;},error=>{request=null;throw error;});get.ready=()=>ok;return get;};
+// Skærmene hentes først, når eleven åbner dem. Så skal telefonen ikke hente det hele, når appen starter.
 const VISUAL=lazyPart(()=>import('./exam-photo-view.js').then(m=>{({renderQuestionVisual,mountQuestionVisual}=m);}));
 const JUDGE=lazyPart(()=>import('./judge.js').then(m=>{({renderJudge,mountJudge}=m);}));
 const TURN=lazyPart(()=>import('./turn-lesson.js').then(m=>{({createTurnLesson,renderTurnEntry}=m);}));
@@ -509,7 +510,7 @@ function playRace(el){const v=team.view(),rk=raceRanked();
   raceDispose=mountRace(el,{prev:team.lastOrder(),me:v.uid,motion:state.settings.motion&&!reduceMotion.matches,onOvertake:list=>{if(list.some(o=>o.uid===v.uid))void experience.play('rev-'+(loadGarage().active||'scooter'));}});
   team.rememberOrder(Object.fromEntries(rk.map(r=>[r.uid,r.place])));}
 function teamView(){const v=team?.view()||{status:'idle'};const rk=raceRanked();return renderTeamPage({view:v,account:RACE_DEMO?{state:'user'}:account?.status(),me:v.uid,ranked:rk,boost:v.team?boostOf(rk,v.uid):null,name:savedName(),garage:loadGarage(),pendingCode:pendingTeamCode()});}
-/* 24 Nov 2026: a shared link #hold:CODE keeps the code for this tab, through a login, until the learner is on a team */
+/* 24. nov. 2026: koden fra et delt link (#hold:KODE) gemmes i fanen, også gennem et login, indtil eleven er kommet på holdet */
 function pendingTeamCode(){const m=/^#hold:([A-Za-z0-9]{6})$/.exec(location.hash);try{if(m)sessionStorage.setItem('teoriboost.team.code',m[1].toUpperCase());if(team?.view().team){sessionStorage.removeItem('teoriboost.team.code');return '';}return sessionStorage.getItem('teoriboost.team.code')||'';}catch{return m?m[1].toUpperCase():'';}}
 function mountTeamRace(){const host=document.getElementById('team-race'),v=team?.view(),rk=raceRanked();if(!host||!v?.team||!rk.length)return;
   raceDispose?.dispose();host.innerHTML=renderRace({ranked:rk,me:v.uid,team:v.team,max:innerWidth<700?4:7,href:'#hold'}).replace('<a class="road-loop is-race" href="#hold"','<div class="road-loop is-race is-big" role="img"').replace(/<\/a>$/,'</div>');playRace(host.firstElementChild);}

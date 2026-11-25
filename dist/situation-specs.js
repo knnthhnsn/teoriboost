@@ -29,6 +29,8 @@ export const SITUATIONS = Object.freeze({
   'q-011': { road: 'country', actors: [learner(2, 3.7), { t: 'car', kind: 'scooter', x: 0.6, z: 4.2, color: '#3F5F73', rear: true }], extras: { lanes: 2, town: true }, view: 'driver', mirrors: ['rear', 'left'] },
   'q-012': { road: 'junction', jz: -16, actors: [learner(4), { t: 'car', kind: 'lorry', x: 0.9, z: -10, color: '#C2CCD6', signal: 'R' }], extras: { town: true } },
   'q-013': { road: 'country', env: 'night', actors: [learner(4), { t: 'car', kind: 'hatch', x: 1.7, z: -6, color: '#7C8FA0' }, { t: 'car', kind: 'scooter', x: -1.7, z: -42, dir: 'toward', color: '#3F5F73' }], extras: {} },
+  // q-014: højresving, hvor elcyklisten kommer bagfra på cykelstien. Eleven ser det fra førersædet
+  // og skal opdage cyklisten i bakspejlet og højre sidespejl, ligesom i en rigtig bil.
   'q-014': { road: 'junction', jz: -12, actors: [{ ...learner(2), signal: 'R' }, { t: 'cyclist', x: 4.9, z: 7.5, rear: true }], extras: { cyclePath: true }, view: 'driver', mirrors: ['rear', 'right'] },
   'q-016': { road: 'country', actors: [learner(4), { t: 'parked', kind: 'sedan', x: 4.7, z: -5, color: '#7C8FA0' }, { t: 'parked', kind: 'hatch', x: 4.7, z: -12.5, color: '#B5543A' }, { t: 'person', p: 'kid-ball', x: 2.2, z: -8.2 }], extras: { town: true } },
   'q-018': { road: 'country', actors: [{ t: 'car', learner: true, x: -3.6, z: -1.2 }], extras: {}, studio: ['coffee-clock'], cam: { pos: [0.8, 5.8, 12.5], look: [0.8, 1.5, -0.6] } },

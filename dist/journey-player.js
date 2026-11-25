@@ -220,10 +220,13 @@ export function createJourneyPlayer({
     const feedback = ui.feedback;
     const repair = !feedback.correct;
     const showGag = state()?.settings?.humor === true && questionGagFits(question, feedback.correct);
+    // Find de udsagn, eleven svarede forkert på. Det er dem, fejlvisningen skal pege på.
     const wrong = question.statements.map((statement, index) => ({ statement, index })).filter(({ statement, index }) => feedback.answers[index] !== statement.correct);
     const answered = feedback.answers.map(value => value ? 1 : 0).join('');
+    // Én fejl giver "Næsten", flere giver "Ikke helt endnu". Teksten skal være rolig og uden skyld.
     const title = !repair ? 'Godt set!' : wrong.length === 1 ? 'Tæt på. Se reglen igen.' : 'Ikke helt endnu';
     const lead = !repair ? 'Alle fire udsagn er vurderet korrekt.' : wrong.length === 1 ? 'Ét udsagn skal rettes. Reglen står herunder.' : `${wrong.length} udsagn skal rettes. Reglen står herunder.`;
+    // Hvert forkert udsagn vises med elevens svar, det rigtige svar og en knap, der spørger Sneglen om netop det.
     return `<aside class="journey-feedback-tray ${repair ? 'repair' : 'correct'}" role="status">
       <div class="jp-feedback-content">${showGag ? `<div class="feedback-cast">${renderCast(question.speaker, { size: 'sm', mood: repair ? 'wrong' : 'correct' })}</div>` : ''}
       <div class="journey-feedback-summary"><span aria-hidden="true">${repair ? ico('repeat') : ico('check')}</span><div><strong>${title}</strong><p>${lead}</p></div></div>

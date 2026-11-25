@@ -37,6 +37,7 @@ export function correctToday(state, now = Date.now()) {
   const day = dayOf(now);
   return (Array.isArray(state?.rewards) ? state.rewards : []).filter(key => typeof key === 'string' && key.endsWith(':' + day)).length;
 }
+// Dagens point: 10 for hvert rigtigt svar i dag og 3 for hver dag i træk (højst 30 dage).
 export const points = ({ correct = 0, streak = 0 } = {}) => Math.max(0, correct | 0) * POINTS.correct + Math.min(POINTS.streakCap, Math.max(0, streak | 0)) * POINTS.streakDay;
 
 /** A racer as it counts today: yesterday's answers are not today's, and a streak not kept up since yesterday is over. */
@@ -45,7 +46,8 @@ export function asOfToday(racer, now = Date.now()) {
   const correct = live ? racer.correct | 0 : 0, streak = kept ? racer.streak | 0 : 0;
   return { ...racer, correct, streak, points: points({ correct, streak }) };
 }
-/** Today's ranking: most points first; on a tie, the one who got there first (earlier update) stays in front. */
+/** Dagens stilling: flest point først. Ved lige point ligger den, der nåede det først, forrest.
+    Pointene gælder kun i dag, så den, der er bagud, kan komme forrest i morgen. */
 export function rank(racers, now = Date.now()) {
   return racers.map(r => asOfToday(r, now))
     .sort((a, b) => b.points - a.points || (a.at || 0) - (b.at || 0) || String(a.name).localeCompare(String(b.name), 'da'))
@@ -56,9 +58,9 @@ export function tuningCount(garage) {
   const base = garage?.active, eq = garage?.equipped?.[base] || {}, style = garage?.style?.[base] || {};
   return Object.values(eq).filter(Boolean).length + (style.neonOn ? 1 : 0) + (style.lowered ? 1 : 0);
 }
-/** Your boost now, and what it is made of. */
+/** Dit boost lige nu, og hvad det består af: placering, bil og tuning. Det har et loft, så ingen kan købe sig foran. */
 export function boostFor({ place, racers, correct, garage }) {
-  const on = racers >= 2 && correct >= 1;
+  const on = racers >= 2 && correct >= 1; // kræver mindst to på holdet og mindst ét rigtigt svar i dag
   const parts = { place: placeBoost(place), car: CAR_BOOST[garage?.active] || 0, tuning: Math.min(TUNING_CAP, tuningCount(garage)) };
   return { on, parts, pct: on ? Math.min(BOOST_CAP, parts.place + parts.car + parts.tuning) : 0 };
 }
