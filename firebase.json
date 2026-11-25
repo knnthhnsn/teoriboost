@@ -7,8 +7,8 @@
     ],
     "redirects": [
       {
-        "source": "/assets/voice/:path*",
-        "destination": "https://app.teoriboost.dk/assets/voice/:path",
+        "source": "/assets/voice/jeppe-neural-v1/:path*",
+        "destination": "https://app.teoriboost.dk/assets/voice/jeppe-neural-v1/:path",
         "type": 302
       }
     ],

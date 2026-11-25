@@ -3,7 +3,7 @@ export const LESSONS = {
   "cockpit": {
     "sectionId": "cockpit",
     "chapterId": "bil",
-    "lead": "En sikker kørestilling gør betjeningen rolig og udsynet pålideligt, før bilen bevæger sig.",
+    "lead": "Sid godt, før bilen ruller. Så bliver det roligere at styre bilen, og du kan stole på det, du ser.",
     "cards": [
       {
         "title": "Indstil sæde og spejle",
