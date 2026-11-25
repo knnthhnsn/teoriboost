@@ -185,7 +185,7 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
   const bars = strengths.length
     ? strengths.map(s => `<li><span>${esc(s.title)}</span><span class="sw-bar ${s.score >= .6 ? 'good' : 'weak'}"><i style="--p:${s.score.toFixed(2)}"></i></span></li>`).join('')
     : '<li class="empty-note">Ingen styrker eller svagheder endnu. Øv et par emner først.</li>';
-  const toggle = (key, title) => `<label class="set-row"><span>${title}</span><input type="checkbox" role="switch" data-setting="${key}" ${settings[key] ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
+  const toggle = (key, title) => `<label class="set-row"><span>${title}</span><input type="checkbox" role="switch" data-setting="${key}" ${(key === 'haptics' ? settings[key] !== false : settings[key]) ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
   return `<section class="profile" aria-labelledby="profile-title"><header class="screen-head"><a class="back-round" href="#home" aria-label="Tilbage">${ICON.back}</a><h1 id="profile-title">Din profil</h1></header>
     ${avatarPicker()}
     <a class="panel team-link" href="#hold"><img src="assets/nav/car.webp" alt="" decoding="async"><span><strong>Dit hold</strong><small>Kør om kap med din køreskole eller dine venner, og få ekstra Boosters.</small></span></a>
@@ -196,7 +196,7 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
     <div class="panel"><h2>Denne uge</h2><ol class="week">${week}</ol></div>
     <div class="panel"><h2>Styrker og svagheder</h2><ul class="sw">${bars}</ul></div>
     <a class="set-row set-row--link" href="#start:1"><span>Prøvedato</span><small>${esc(WHEN_TEXT[intro?.when] || 'Vælg')}${examDays !== null ? ` <span class="tb-stripes" aria-hidden="true"></span> ${examDays} dage` : ''}</small></a>
-    ${toggle('sound', 'Lyd og oplæsning')}${toggle('humor', 'Humor i forklaringer')}${toggle('motion', 'Bevægelse og animationer')}
+    ${toggle('sound', 'Lyd og oplæsning')}${toggle('haptics', 'Vibration')}${toggle('humor', 'Humor i forklaringer')}${toggle('motion', 'Bevægelse og animationer')}
     <a class="set-row set-row--link" href="#start"><span>Se introen og opstarten igen</span></a>
     <button class="set-row set-row--link" type="button" data-action="tour"><span>Vis rundvisning med Sneglen</span></button>
     <div class="set-row set-row--theme" role="radiogroup" aria-labelledby="theme-label"><span id="theme-label">Udseende</span><span class="seg">${THEME_CHOICES.map(([v, label]) => `<label><input type="radio" name="theme" value="${v}" ${themePref() === v ? 'checked' : ''}><span>${label}</span></label>`).join('')}</span></div>

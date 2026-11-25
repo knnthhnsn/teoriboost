@@ -92,7 +92,7 @@ export function restoreState(raw) {
       if(!r||!Number.isInteger(r.attempts)||r.attempts<0||!Number.isFinite(r.due))continue;
       s.records[id]={attempts:r.attempts,assessments:Math.max(0,Number.isInteger(r.assessments)?r.assessments:Number.isInteger(r.correct)?r.correct:0),correct:Math.max(0,Number.isInteger(r.correct)?r.correct:0),streak:Math.max(0,Number.isInteger(r.streak)?r.streak:0),due:r.due,last:Number.isFinite(r.last)?r.last:0,lastCorrect:!!r.lastCorrect,lastAssessment:['complete','partial','unanswered','unknown'].includes(r.lastAssessment)?r.lastAssessment:r.lastCorrect?'complete':'unknown',days:Array.isArray(r.days)?r.days.filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)):[],questions:Array.isArray(r.questions)?r.questions.filter(q=>typeof q==='string'):[]};
     }
-    for(const key of ['humor','sound','motion'])if(typeof parsed.settings?.[key]==='boolean')s.settings[key]=parsed.settings[key];
+    for(const key of ['humor','sound','motion','haptics'])if(typeof parsed.settings?.[key]==='boolean')s.settings[key]=parsed.settings[key];
     if(parsed.savedExam&&Array.isArray(parsed.savedExam.ids)&&parsed.savedExam.ids.length===25&&Number.isFinite(parsed.savedExam.deadline))s.savedExam=parsed.savedExam;
     return s;
   }catch{return blankState();}
