@@ -105,7 +105,7 @@ function examSignal(history, limit) {
     : [4, 'yellow', 'På vej', `Din seneste prøve havde ${last.errors} fejl. Grænsen er ${limit}. Øv videre, så sidder reglerne.`];
   return `<div class="exam-signal exam-signal--${still}"><span class="exam-signal-light" data-rive="signal:${light}"><img src="assets/traffic/${still}.webp" alt="" decoding="async"></span><div><span class="exam-signal-kicker">Din status</span><strong>${title}</strong><small>${line}</small></div></div>`;
 }
-export function renderExamStart({ history, saved, total = 25, minutes = 25, limit = 5, sourcesHtml = '' }) {
+export function renderExamStart({ history, saved, total = 25, minutes = 25, limit = 5, sourcesHtml = '', extraHtml = '' }) {
   const rows = [...history].reverse().slice(0, 8).map(h => {
     const ok = h.errors <= limit, near = !ok && h.errors <= limit + 3;
     return `<li class="exam-row ${ok ? 'is-ok' : near ? 'is-near' : 'is-off'}"><span class="exam-badge">${h.errors}</span><div><strong>${ok ? 'Inden for grænsen' : near ? 'Tæt på grænsen' : 'Øv videre'}</strong><small>${when(h.at)} <span class="tb-stripes" aria-hidden="true"></span> ${Math.max(0, (h.ids?.length || total) - h.errors)} rigtige</small></div></li>`;
@@ -118,6 +118,7 @@ export function renderExamStart({ history, saved, total = 25, minutes = 25, limi
     <div class="exam-facts"><div><b>${total}</b><small>situationer</small></div><div><b>${minutes} min</b><small>tid</small></div><div><b>≤ ${limit}</b><small>fejl</small></div></div>
     <button class="big-btn" data-action="start-exam">Start øveprøve</button>
     ${saved ? '<button class="big-btn big-btn--ghost" data-action="resume-exam">Fortsæt din gemte prøve</button>' : ''}
+    ${extraHtml}
     <h2 class="list-label">DINE PRØVER</h2>
     ${rows ? `<ol class="exam-list">${rows}</ol>` : '<p class="empty-note">Ingen prøver endnu. Tag din første øveprøve, så ser du den her.</p>'}
     <details class="fine-details"><summary>Sådan bedømmer vi</summary><p>Hver situation har fire udsagn, du svarer ja eller nej til. Én forkert eller ubesvaret vurdering tæller som én fejl. Formatet bygger på myndighedens offentlige oplysninger. Scener, spørgsmål og bedømmelse er vores egne. Det er en øvebedømmelse, ikke en garanti.</p>${sourcesHtml}</details>
@@ -180,6 +181,12 @@ function avatarPicker() {
   return `<div class="panel avatar-panel"><h2 id="avatar-title">Dit profilbillede</h2><div class="avatar-pick" role="radiogroup" aria-labelledby="avatar-title">${AVATARS.map(([id, name]) =>
     `<button type="button" role="radio" class="avatar-opt${id === now ? ' is-on' : ''}" data-avatar="${id}" aria-checked="${id === now}"><img src="assets/nav/profile-${id}.webp" alt="" decoding="async"><span>${esc(name)}</span></button>`).join('')}</div></div>`;
 }
+/** De tre afsnit, flest svarer forkert i ved den digitale teoriprøve, og hvor mange af elevens regelkort i dem der sidder. */
+function hardAfsnit(list) {
+  if (!list?.length) return '';
+  return `<div class="hard-afsnit"><h3>Prøvens svære afsnit</h3><ul>${list.map(a => `<li><span><b>Afsnit ${a.nr}</b> ${a.name}</span><small>${a.ok} af ${a.total} regelkort sidder · ${a.correct} % svarer rigtigt ved prøven</small><span class="ready-bar" role="img" aria-label="${a.ok} af ${a.total} regelkort sidder"><i style="--p:${a.total ? a.ok / a.total : 0}"></i></span></li>`).join('')}</ul>
+    <p class="hard-afsnit-note">Andel rigtige svar ved den digitale teoriprøve fra januar 2024 på 15 prøvesteder (Færdselsstyrelsen, 29. april 2025). Øv tager afsnit 1 og 8 først.</p></div>`;
+}
 export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, intro, settings, examDays, ready, account }) {
   const week = (daily?.week || []).map(d => `<li class="${d.completed ? 'on' : ''} ${d.today ? 'today' : ''}"><small>${['Ma', 'Ti', 'On', 'To', 'Fr', 'Lø', 'Sø'][(new Date(d.day + 'T12:00').getDay() + 6) % 7]}</small><i role="img" aria-label="${d.completed ? 'øvet' : 'ikke øvet'}${d.today ? ', i dag' : ''}"></i></li>`).join('');
   const bars = strengths.length
@@ -192,11 +199,12 @@ export function renderProfile({ daily, lessonsDone, lessonsTotal, strengths, int
     ${renderAccountPanel(account)}
     <div class="tile-row"><div class="tile"><b class="tile-fire"><span class="chip-ico" data-rive="flame:${flameLevel(daily?.currentStreak || 0)}">${flameArt(flameLevel(daily?.currentStreak || 0))}</span>${daily?.currentStreak || 0}</b><small>${daily?.currentStreak === 1 ? 'dag' : 'dage'} i træk</small></div><div class="tile"><b>${lessonsDone}/${lessonsTotal}</b><small>lektioner</small></div></div>
     ${ready ? `<div class="panel ready-panel"><h2>Hvor klar er du?</h2><div class="ready-row"><span class="ready-gauge" data-rive="gauge:${ready.pct}" aria-hidden="true"></span>${ready.pct > 0 && ready.pct < 10 ? '<b class="ready-early">Lige startet</b>' : `<b>${ready.pct} %</b>`}<span class="ready-bar" role="img" aria-label="${ready.pct} procent klar"><i style="--p:${ready.pct / 100}"></i></span></div>
-      <p>${ready.ok} af ${ready.total} regelkort sidder: dit seneste svar på dem var rigtigt. ${ready.passes >= 2 ? 'Og mindst 2 af dine 3 seneste øveprøver er bestået.' : 'Få 2 af dine 3 seneste øveprøver bestået, så er du også klar til prøveformatet.'}</p><small>Appens egen vurdering, ikke en garanti for den rigtige prøve.</small></div>` : ''}
+      <p>${ready.ok} af ${ready.total} regelkort sidder: dit seneste svar på dem var rigtigt. ${ready.passes >= 2 ? 'Og mindst 2 af dine 3 seneste øveprøver er bestået.' : 'Få 2 af dine 3 seneste øveprøver bestået, så er du også klar til prøveformatet.'}</p><small>Appens egen vurdering, ikke en garanti for den rigtige prøve.</small>${hardAfsnit(ready.afsnit)}</div>` : ''}
     <div class="panel"><h2>Denne uge</h2><ol class="week">${week}</ol></div>
     <div class="panel"><h2>Styrker og svagheder</h2><ul class="sw">${bars}</ul></div>
     <a class="set-row set-row--link" href="#start:1"><span>Prøvedato</span><small>${esc(WHEN_TEXT[intro?.when] || 'Vælg')}${examDays !== null ? ` <span class="tb-stripes" aria-hidden="true"></span> ${examDays} dage` : ''}</small></a>
     ${toggle('sound', 'Lyd og oplæsning')}${toggle('haptics', 'Vibration')}${toggle('humor', 'Humor i forklaringer')}${toggle('motion', 'Bevægelse og animationer')}
+    <a class="set-row set-row--link" href="#sytten"><span>Kørekort som 17-årig</span></a>
     <a class="set-row set-row--link" href="#start"><span>Se introen og opstarten igen</span></a>
     <button class="set-row set-row--link" type="button" data-action="tour"><span>Vis rundvisning med Sneglen</span></button>
     <div class="set-row set-row--theme" role="radiogroup" aria-labelledby="theme-label"><span id="theme-label">Udseende</span><span class="seg">${THEME_CHOICES.map(([v, label]) => `<label><input type="radio" name="theme" value="${v}" ${themePref() === v ? 'checked' : ''}><span>${label}</span></label>`).join('')}</span></div>

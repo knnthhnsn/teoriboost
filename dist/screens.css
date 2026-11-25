@@ -638,3 +638,53 @@ html[data-theme] body .learn > .learn-card .pill-btn{background:#1F2328;border-c
 }
 /* The overview shares its old name with the small lesson progress bar. Scope the correction to the overview only. */
 html[data-theme] body .journey-shell.journey-progress{height:auto;overflow:visible;margin-bottom:0;border-radius:0;background:transparent}
+
+/* ---------- 25. nov. 2026: roadmap-funktionerne ---------- */
+/* Svære ord: små knapper under spørgsmålets kontekst. Ingen accentstreger, kun en neutral kant. */
+.term-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 4px}
+.term-row-label{font:700 12px var(--font-ui,inherit);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.term-row .term-chip{min-height:36px;padding:0 14px;border-radius:999px;border:2px solid #5F656D;background:transparent;color:inherit;font:700 14px var(--font-ui,inherit);cursor:pointer}
+.term-row .term-chip:hover{border-color:#FFD60A}
+.term-row .term-chip:focus-visible{outline:3px solid #FFD60A;outline-offset:2px}
+.term-body p{margin:0 0 12px;font-size:17px;line-height:1.5}
+.term-en{color:var(--muted)}
+.term-en span{display:block;font:700 12px var(--font-ui,inherit);letter-spacing:.06em;text-transform:uppercase}
+
+/* Prøvedagen */
+.exam-day{margin-top:14px}
+.exam-day-list{margin:10px 0;padding-left:20px;display:grid;gap:8px;line-height:1.45}
+.exam-day-note{color:var(--muted);font-size:14px}
+.exam-day .btn{margin-top:6px}
+.warm-note{color:var(--muted);margin:0 0 8px}
+.warm h3{margin:6px 0}
+.warm-list{list-style:none;padding:0;margin:12px 0;display:grid;gap:10px}
+.warm-st{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;padding:10px 12px;border-radius:14px;border:2px solid #5F656D}
+.warm-st small{grid-column:1/-1;color:var(--muted)}
+.warm-st.is-right{border-color:#58CC02}
+.warm-st.is-wrong{border-color:#FF4B4B}
+.warm-yn{display:flex;gap:6px}
+.warm-yn .choice-btn{min-width:64px;min-height:44px}
+.warm-why{line-height:1.5}
+
+/* Prøvens svære afsnit i "Hvor klar er du?" */
+.hard-afsnit{margin-top:14px}
+.hard-afsnit h3{margin:0 0 8px;font-size:17px}
+.hard-afsnit ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.hard-afsnit li{display:grid;gap:4px}
+.hard-afsnit small{color:var(--muted)}
+.hard-afsnit-note{color:var(--muted);font-size:13px;margin:10px 0 0}
+
+/* Kørekort som 17-årig */
+.sytten{display:grid;gap:14px;max-width:720px}
+.sytten-lead{margin:0;font-size:17px;line-height:1.5}
+/* Uret: gul flade, når du må køre alene, asfalt, når du skal have ledsager med. Teksten siger det også, så farven aldrig står alene. */
+.sytten .sytten-clock{display:flex;align-items:center;gap:16px;padding:18px;border-radius:18px;background:#2B3138;color:#FEFFED;border:2px solid #5F656D}
+.sytten .sytten-clock.is-solo{background:#FFD60A;color:#1F2328;border-color:#E8BC00}
+.sytten .sytten-clock b{font-size:40px;line-height:1;flex:none}
+.sytten .sytten-clock span{font-size:16px;line-height:1.4}
+.sytten-rules,.sytten-check{list-style:none;padding:0;margin:8px 0;display:grid;gap:10px;line-height:1.45}
+.sytten-rules li{padding-left:2px}
+.sytten-check label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;min-height:44px}
+.sytten-check input{width:22px;height:22px;margin-top:2px;accent-color:#FFD60A;flex:none}
+.sytten-result{font-weight:700;margin:8px 0}
+.sytten-small{color:var(--muted);font-size:14px;margin:6px 0}
