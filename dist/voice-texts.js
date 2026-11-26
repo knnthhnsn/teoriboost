@@ -20,7 +20,9 @@ export function questionVoiceParts(q) {
 
 export function questionGagFits(q, correct) {
   if (!q?.gag || !['sneglen','kegle','daek'].includes(q.speaker)) return false;
-  return q.gagWhen === 'always' || q.gagWhen === (correct ? 'correct' : 'wrong');
+  // Rødt lys i tone of voice: ingen jokes efter et forkert svar
+  if (!correct) return false;
+  return q.gagWhen === 'always' || q.gagWhen === 'correct';
 }
 
 export function questionFeedbackParts(q, { humor = false, correct } = {}) {
