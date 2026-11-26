@@ -290,7 +290,7 @@ export function createJourneyPlayer({
         : `<div class="journey-model-answer"><h3>Sammenlign med forklaringen</h3><p>${esc(currentStep.modelAnswer)}</p>${voiceButton('recall-answer', 'Lyt til svaret')}</div>`)
       : '';
     const writing = ui.writingStage === stage && !currentStep.committed
-      ? writingForm(stage, isTransfer ? 'Dit næste træk og hvorfor' : 'Forklar reglen uden at kigge i kortene', isTransfer ? 'Hvad ville du gøre?' : 'Hvad husker du?')
+      ? writingForm(stage, isTransfer ? 'Hvad gør du, og hvorfor?' : 'Forklar reglen uden at kigge i kortene', isTransfer ? 'Hvad ville du gøre?' : 'Hvad husker du?')
       : '';
     return `<section class="journey-open-step">
       <span class="journey-kicker">${isTransfer ? 'BRUG REGLEN I EN NY SITUATION' : 'HENT REGLEN FREM'}</span>
@@ -332,9 +332,9 @@ export function createJourneyPlayer({
       <div class="journey-celebration" aria-hidden="true" data-rive="confetti"><i></i><i></i><i></i></div>
       <div class="lesson-rive" data-rive="lessondone" aria-hidden="true"></div>
       <div class="journey-done-art">${renderCast('kegle', { size: 'md', mood: 'correct', priority: true })}</div>
-      <h2 class="jp-done-title">${repaired ? 'Rettet og klaret!' : 'Lektion klaret!'}</h2>
-      <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den, og det er sådan, det sætter sig.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>
-      <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${ico('bolt')} ${earns ? `+${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '0'}</strong>${earns ? '' : '<em>Allerede tjent i dag</em>'}</div><div><small>RIGTIG I FØRSTE FORSØG</small><strong>${firstTry}/2</strong></div></div>
+      <h2 class="jp-done-title">${repaired ? 'Rettet og klaret' : 'Lektion klaret'}</h2>
+      <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den. Sådan bliver en regel siddende.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>
+      <div class="jp-done-stats"><div><small>BOOSTERS</small><strong>${ico('bolt')} ${earns ? `+${BOOSTER_RATES.lesson.toLocaleString('da-DK')}` : '0'}</strong>${earns ? '' : '<em>Allerede tjent i dag</em>'}</div><div><small>RIGTIGT FØRSTE GANG</small><strong>${firstTry}/2</strong></div></div>
       ${sequenceFor(section.id) ? `<a class="jp-order" href="#order:${esc(sequenceFor(section.id).id)}">${ico('list')}<span><strong>Sæt det i rækkefølge</strong><small>${esc(sequenceFor(section.id).title)} <span class="tb-stripes" aria-hidden="true"></span> ${sequenceFor(section.id).steps.length} trin</small></span></a>` : ''}
       <div class="jp-done-goal ${daily.goalMet ? 'is-met' : ''}">${ico('target')} ${daily.goalMet ? `Dagens mål nået! +${BOOSTER_RATES.dailyGoal.toLocaleString('da-DK')} Boosters` : `Dagens mål: ${daily.completedSessions}/${daily.dailyGoal}`}${streak ? `. ${streak}` : ''}</div>
       ${renderLessonSummary({ session, section })}

@@ -119,7 +119,7 @@ export const CHAPTERS = [
     ]
   },
   {
-    id: 'grundmanoevrer', title: 'Grundmanøvrer', tagline: 'Langsomt er også en hastighed', color: '#60A5FA', icon: 'parking', sections: [
+    id: 'grundmanoevrer', title: 'Grundmanøvrer', tagline: 'Igangsætning, styring, bakning og parkering', color: '#60A5FA', icon: 'parking', sections: [
       s('start-stop', 'Start og standsning', [
         'Når du sætter i gang fra vejkanten, giv altid tegn i god tid. Tegnet giver dig ikke fortrinsret.',
         'Kør så langsomt fra start, at du hele tiden har bilen under kontrol.',
@@ -184,7 +184,7 @@ export const CHAPTERS = [
     ]
   },
   {
-    id: 'foereren', title: 'Mennesket bag rattet', tagline: 'Hjernen har også en advarselslampe', color: '#FB7185', icon: 'car', sections: [
+    id: 'foereren', title: 'Mennesket bag rattet', tagline: 'Opmærksomhed, træthed, alkohol og din egen rolle', color: '#FB7185', icon: 'car', sections: [
       s('opfattelse', 'Fare og reaktion', [
         'Reaktionstiden starter, når du kan opfatte faren. Den slutter, når du begynder at reagere.',
         'En rigtig og sikker reaktion er vigtigere end en hurtig, men forkert en.',
@@ -213,7 +213,7 @@ export const CHAPTERS = [
     ]
   },
   {
-    id: 'vej-vejr', title: 'Vej, vejr og udsyn', tagline: 'Asfalt har humør', color: '#22D3EE', icon: 'weather', sections: [
+    id: 'vej-vejr', title: 'Vej, vejr og udsyn', tagline: 'Våd og glat vej, mørke og dårlig sigt', color: '#22D3EE', icon: 'weather', sections: [
       s('vaadt-glat', 'Våd og glat vej', [
         'Regn, sne, is, grus og fedtet vej kan gøre vejgrebet dårligere.',
         'Tilpas farten og afstanden, før grebet bliver kritisk.',
@@ -278,7 +278,7 @@ export const CHAPTERS = [
     ]
   },
   {
-    id: 'kryds', title: 'Kryds og sårbare trafikanter', tagline: 'Se igen. Cyklisten er stadig der.', color: '#F97316', icon: 'yield', sections: [
+    id: 'kryds', title: 'Kryds og sårbare trafikanter', tagline: 'Vigepligt, sving og hensyn til cyklister og gående', color: '#F97316', icon: 'yield', sections: [
       s('ubetinget', 'Ubetinget vigepligt', [
         'Hajtænder og tavlen for ubetinget vigepligt betyder, at du skal holde tilbage for trafikken på den vej, du kører ind på.',
         'Du har også ubetinget vigepligt, når du for eksempel kører ud fra en ejendom, en parkeringsplads eller en tankstation.',
@@ -364,7 +364,7 @@ export const CHAPTERS = [
     ]
   },
   {
-    id: 'risiko-teknik', title: 'Risiko, miljø og køreteknik', tagline: 'Fysik er ligeglad med din streak', color: '#E879F9', icon: 'speed', sections: [
+    id: 'risiko-teknik', title: 'Risiko, miljø og køreteknik', tagline: 'Fart, bremselængde, udskridning og miljø', color: '#E879F9', icon: 'speed', sections: [
       s('energi-miljoe', 'Spar energi og miljø', [
         'Kør jævnt, og undgå unødige ændringer i farten. Så bruger bilen mindre energi.',
         'For lavt dæktryk, unødig vægt og tagboks kan få bilen til at bruge mere energi.',

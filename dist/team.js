@@ -341,7 +341,7 @@ export function renderTeamPage({ view, account, me, ranked, boost, name, garage,
     <div class="team-ticket"><small>Holdkode</small><b>${esc(t.code)}</b><button type="button" class="big-btn" data-team="share" data-code="${esc(t.code)}" data-name="${esc(t.name)}">Del koden</button></div></div>`;
   const boostCard = `<div class="panel team-boost${boost?.on ? ' is-on' : ''}"><div class="team-boost-big"><small>Din holdboost</small><strong>+${boost?.pct || 0} %</strong><span>på de Boosters, du tjener nu</span></div>
     <ul class="team-boost-parts"><li><span>${mine ? `${mine.place}. plads` : 'Placering'}</span><b>+${parts.place} %</b></li><li><span>Din bil</span><b>+${parts.car} %</b></li><li><span>Tuning</span><b>+${parts.tuning} %</b></li></ul>
-    ${boost?.on ? '' : `<p class="team-fine">${ranked.length < 2 ? 'Boosten starter, når én mere er med på holdet. Del koden.' : 'Svar rigtigt på et spørgsmål i dag, så starter din boost.'}</p>`}
+    ${boost?.on ? '' : `<p class="team-fine">${ranked.length < 2 ? 'Boosten starter, når én mere er med på holdet. Del koden.' : 'Svar rigtigt på et spørgsmål i dag, så får du ekstra Boosters.'}</p>`}
     ${garage?.lastBonus ? `<p class="team-fine">Seneste boost: +${fmt(garage.lastBonus)} Boosters.</p>` : ''}</div>`;
   const nameForm = `<form class="team-form" data-team-form="name"><label for="team-name">Dit brugernavn på holdet</label><div class="acc-row"><input id="team-name" name="name" maxlength="16" autocomplete="nickname" required value="${esc(name)}" placeholder="fx Kenneth_K"><button type="submit" class="big-btn">Gem</button></div></form>`;
   return shell(`${err}${top}

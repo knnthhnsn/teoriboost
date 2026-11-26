@@ -53,11 +53,18 @@ function mountBase(host,q,{onOpen=()=>{}}={}){
   return {open,close,dispose(){if(disposed)return;close();disposed=true;loadGeneration++;observer?.disconnect();media.removeEventListener('load',ready);media.removeEventListener('error',failed);expand.removeEventListener('click',open);retry.removeEventListener('click',reload);dialog?.remove();}};
 }
 
-// Each time a question's picture is shown it alternates between two takes (stored per question), so a returning learner cannot just recognise the image.
-function nextSceneVariant(id){try{const k='teoriboost.scenevar.v1',m=JSON.parse(localStorage.getItem(k)||'{}'),n=(m[id]|0)+1;m[id]=n;localStorage.setItem(k,JSON.stringify(m));return n%2;}catch{return 0;}}
+// Hver gang et spørgsmål vises, skifter billedet (tælleren gemmes pr. spørgsmål), så eleven lærer at aflæse situationen
+// i stedet for at genkende ét bestemt billede. peek=true læser tælleren uden at tælle op: øveprøven holder det samme billede,
+// mens eleven går frem og tilbage i den.
+function nextSceneCount(id,peek=false){try{const k='teoriboost.scenevar.v1',m=JSON.parse(localStorage.getItem(k)||'{}'),n=(m[id]|0)+(peek?0:1);if(!peek){m[id]=n;localStorage.setItem(k,JSON.stringify(m));}return n;}catch{return 0;}}
 // The 3D diorama (situation-3d.js) is drawn over the schematic stage when the browser can do WebGL; otherwise the schematic stays.
 export function mountQuestionVisual(host,q,opts){
-  const base=mountBase(host,q,opts);/* 24 Nov 2026: the photo questions (q-001 to q-083) get the 3D diorama in Lær and Øv too; the AI photo stays only in the practice exam */const exam=!!(host?.matches?.('[data-exam-mode]')||host?.querySelector?.('[data-exam-mode]'));const spec0=(EXAM_SCHEMATICS[q.id]||(EXAM_PHOTOS[q.id]&&!exam))&&situationFor(q);if(!spec0||spec0.generic||!host)return base;const spec={...spec0,variant:nextSceneVariant(q.id)};
+  const base=mountBase(host,q,opts);const exam=!!(host?.matches?.('[data-exam-mode]')||host?.querySelector?.('[data-exam-mode]'));
+  /* 26. nov. 2026: spørgsmål q-001 til q-083 har både en tegnet illustration og en 3D-situation i to vinkler. De skiftes efter tur,
+     også i øveprøven: tegningen, 3D vinkel 1, 3D vinkel 2. Tegningen er det billede, mountBase allerede har vist. */
+  const spec0=(EXAM_SCHEMATICS[q.id]||EXAM_PHOTOS[q.id])&&situationFor(q);if(!spec0||spec0.generic||!host)return base;
+  const n=nextSceneCount(q.id,exam);if(EXAM_PHOTOS[q.id]&&n%3===0)return base;
+  const spec={...spec0,variant:EXAM_PHOTOS[q.id]?(n%3)-1:n%2};
   let gone=false,three=null;
   // 16 Nov 2026: a loading skeleton while the 3D scene loads; the schematic only shows when 3D cannot be drawn (no WebGL, error).
   const stage=host.querySelector('.scene-photo-stage'),settle=()=>stage?.classList.remove('is-sit3d-loading');stage?.classList.add('is-sit3d-loading');

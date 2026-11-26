@@ -15,7 +15,8 @@ def probe(item):
     runtime=(ROOT/'dist'/src).resolve();native=(ROOT/'reference/exam-native'/Path(src).with_suffix('.png').name).resolve()
     if not runtime.is_relative_to((ROOT/'dist/assets/exam').resolve()) or not native.is_relative_to((ROOT/'reference/exam-native').resolve()):raise ValueError('Image escaped asset directory')
     size,pixels=rgb(runtime);native_size,native_pixels=rgb(native)
-    if size!=native_size or pixels!=native_pixels:raise ValueError('Runtime/native pixel mismatch '+src)
+    # lossy toon-billeder: samme mål som originalen, men pixlerne må afvige en smule
+    if size!=native_size or (record.get('encoding')!='lossy WebP' and pixels!=native_pixels):raise ValueError('Runtime/native pixel mismatch '+src)
     return src,{'width':size[0],'height':size[1],'sha256':digest(runtime),'decodedRgbSha256':pixels,'nativeSha256':digest(native),'nativeBytes':native.stat().st_size}
 with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:result=dict(pool.map(probe,sources.items()))
 print(json.dumps(result))

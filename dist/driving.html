@@ -11,7 +11,7 @@ body{font-family:DM,sans-serif;color:#F4F5F7}h1,h2,.go,.pedal{font-family:Barlow
 <link rel="stylesheet" href="brand-type.css"></head><body>
 <style>.turn-phone{display:none}@media (orientation:portrait){.turn-phone{position:fixed;inset:0;z-index:9999;display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;padding:28px;background:#1F2328;color:#F4F5F7;font:600 18px/1.45 system-ui,sans-serif}.turn-phone strong{display:block;color:#FFD60A;font-size:28px}.turn-phone a{color:#FFD60A;margin-top:14px}.turn-phone img{width:150px;height:auto}.turn-phone-icon{width:34px;height:53px;border:3px solid #f2e8be;border-radius:7px;box-shadow:inset 0 -5px #627267;transform:rotate(90deg);animation:turn-phone-motion 2.6s ease-in-out infinite}@keyframes turn-phone-motion{0%,25%{transform:rotate(0)}65%,100%{transform:rotate(90deg)}}}@media(prefers-reduced-motion:reduce){.turn-phone-icon{animation:none}}</style>
 <div class="turn-phone" role="status"><img src="assets/cast/sneglen.webp" alt=""><span class="turn-phone-icon" aria-hidden="true"></span><strong>Vend telefonen</strong><span>Køreturen virker bedst, når du holder telefonen på siden.</span><a href="./index.html#practice" target="_top">Tilbage til TeoriBoost</a></div>
-<title>TeoriBoost — kør en tur</title>
+<title>TeoriBoost: kør en tur</title>
 
 <style>
 /* Layout: one framed windscreen fills the screen; instruments sit on the glass like a head-up display,
@@ -1055,7 +1055,7 @@ import {loadGarage} from './mybil.js';
     pendingQuiz=pickQuizQuestions(mistakeTags({kind,speedMs:S.v,collision:physicalCollision,stoppedFirst:kind==='stop'&&S.sit.stop.stopped,twoWheeler}),quizQuestions,quizRun,{seen:driveQuiz?.seen()});
     if(sit.status!=='failed'){S.errors++;S.penalty+=12;}sit.status='failed';S.lastFault=kind;S.mode='incident'; S.v = 0; S.spot = { z: spotZ, x: Math.abs(S.x)>HALF+6?S.x:0 }; input.gas = input.brake = false; pedalClass();
     const t = TEXT[kind]; setBrandText($('inc-kicker'),`Fejl ${S.errors} · ${t.kicker}`); $('inc-title').textContent = title; $('inc-lede').textContent = lede;
-    $('inc-rule').textContent = t.rule; setBrandText($('inc-source'),'Kilde: ' + t.source); $('inc-btn').textContent=pendingQuiz.length===0?'Kør videre':pendingQuiz.length===1?'Besvar spørgsmålet':`Besvar ${pendingQuiz.length} spørgsmål`;$('incident').hidden = false; $('inc-btn').focus(); say('Vi tager den ovenfra. Reglen er din næste genvej.'); }
+    $('inc-rule').textContent = t.rule; setBrandText($('inc-source'),'Kilde: ' + t.source); $('inc-btn').textContent=pendingQuiz.length===0?'Kør videre':pendingQuiz.length===1?'Besvar spørgsmålet':`Besvar ${pendingQuiz.length} spørgsmål`;$('incident').hidden = false; $('inc-btn').focus(); say('Vi tager den igen. Læs reglen, og så kører vi videre.'); }
   function resume() { if (S.mode !== 'incident') return; $('incident').hidden = true; S.mode = 'drive';
     for (const j of junctions) if (Math.abs(S.z - j.z) < 30) j.shift = j.free - S.clock;            // the road ahead is clear when we roll on
     if (S.sit.ped?.status === 'failed' && S.walker.state !== 'done') { S.walker.state = 'done'; S.walker.x = -HALF - 1.6; }
@@ -1074,7 +1074,7 @@ import {loadGarage} from './mybil.js';
     say('Videre. Samme regler som før.'); $('gas').focus(); }
   function finish() { S.mode = 'result'; input.gas = input.brake = false; pedalClass(); for(const s of Object.values(S.sit))if(s.status==='pending')s.status='clean'; const all=Object.values(S.sit),total=all.length,clean = all.filter(s => s.status === 'clean').length;
     $('res-title').textContent = S.errors === 0 ? 'Rent kørt.' : 'Du kom frem. Øv fejlene nu.';
-    $('res-lede').textContent = S.errors === 0 ? 'Ingen fejl. Kørelæreren har ingen kommentar og virker lidt skuffet over det.'
+    $('res-lede').textContent = S.errors === 0 ? 'Ingen fejl. Kørelæreren har ingen bemærkninger.'
       : clean === 0 ? 'Fejl i alle situationer. Vi tager dem én ad gangen.' : 'Gennemgå fejlene, og øv reglerne igen.';
     const rows = [['Rene situationer', clean + ' af ' + total, clean === total ? 'ok' : 'bad'], ['Fejl at øve', String(S.errors), S.errors ? 'bad' : 'ok'], ...(quizRun.asked?[['Spørgsmål rigtige', quizRun.right + ' af ' + quizRun.asked, quizRun.right===quizRun.asked ? 'ok' : 'bad']]:[]), ['Fartgrænse', '50 km/t', '']];
     $('res-sheet').innerHTML = rows.map(([k, v, c]) => `<div class="${c}"><dt>${k}</dt><dd>${v}</dd></div>`).join(''); $('result').hidden = false; $('res-btn').focus(); }

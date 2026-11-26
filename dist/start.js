@@ -135,8 +135,8 @@ function hero({ counts }) {
       <div class="start-cast" aria-hidden="true"><span class="sc sc--kegle">${renderCast('kegle', { size: 'sm', priority: true })}</span></div>
     </div>
     <div class="start-copy">
-      <span class="start-kicker">Din hjerne. Dit kørekort.</span><h1 id="start-title" class="start-title"><span class="kl">${words('Bestå teoriprøven.')}</span><span class="kl">${words('Med et', 'kw-b')} ${smile}</span></h1>
-      <p class="start-lead">5 minutter om dagen. Byg din bil op, mens du lærer.</p>
+      <span class="start-kicker">Teori til kørekortet</span><h1 id="start-title" class="start-title"><span class="kl">${words('Bestå teoriprøven')}</span><span class="kl">${words('med et', 'kw-b')} ${smile}</span></h1>
+      <p class="start-lead">Fem minutter om dagen er nok. Undervejs bygger du din egen bil op.</p>
       <p class="start-trust">Reglerne følger Færdselsstyrelsens undervisningsplan for kategori B.</p>
       ${ticker()}
       <div class="start-actions"><span class="cta-rive" data-rive="cta"><a class="start-cta rive-keep" href="#start:1" data-start-go>Kom i gang</a></span></div>
@@ -144,7 +144,7 @@ function hero({ counts }) {
   </section>`;
 }
 
-const WHEN = [['2w', 'Inden for 2 uger', 'Hurtig plan'], ['1m', 'Om ca. 1 måned', 'Rolig plan'], ['3m', 'Om 2–3 måneder', 'God tid'], ['?', 'Ved ikke endnu', 'Vi starter blødt']];
+const WHEN = [['2w', 'Inden for 2 uger', 'Hurtig plan'], ['1m', 'Om ca. 1 måned', 'Rolig plan'], ['3m', 'Om 2–3 måneder', 'God tid'], ['?', 'Ved ikke endnu', 'Vi starter roligt']];
 const GOALS = [[1, '1 lektion', 'ca. 5 min, rolig'], [2, '2 lektioner', 'ca. 10 min, fast vane'], [3, '3 lektioner', 'ca. 15 min, ambitiøs']];
 // The suggested daily goal follows the exam date, and the plan tells the truth when the date is too close.
 export const DEFAULT_GOAL = { '2w': 3, '1m': 2, '3m': 1 };
@@ -186,11 +186,11 @@ export function renderStart(step, ctx) {
   }
   if (step === 1) return shell(1, `<h1 id="step-title" class="sr-only">Hvornår skal du til teoriprøve?</h1>${talk('sneglen', 'Hej! Hvornår skal du til teoriprøve?')}${options('when', WHEN, intro.when || '1m')}`, 'Fortsæt', { total });
   if (step === 2) return shell(2, `<h1 id="step-title" class="sr-only">Hvor meget vil du øve om dagen?</h1>${talk('sneglen', 'Hvor meget vil du øve om dagen?')}${options('goal', GOALS, intro.goal || DEFAULT_GOAL[intro.when || '1m'] || 2)}${GOAL_TIP[intro.when || '1m'] ? `<p class="step-note step-tip">${GOAL_TIP[intro.when || '1m']}</p>` : ''}<p class="step-note">Du kan altid ændre det. Ingen straf, hvis du springer en dag over.</p>`, 'Fortsæt', { total });
-  if (step === 3) return shell(3, `<p class="eyebrow step-eyebrow">DIT MÅL</p><h1 id="step-title" class="step-title">Start med en rusten scooter. <span>Byg dig op til racerbilen.</span></h1>
+  if (step === 3) return shell(3, `<p class="eyebrow step-eyebrow">DIT MÅL</p><h1 id="step-title" class="step-title">Start med en rusten scooter. <span>Du kan bygge dig op til en racerbil.</span></h1>
       <div class="step-garage">${glowUp(['scooter'], { loop: true, label: true })}</div>
-      <div class="step-first"><img src="${baseSrc('scooter')}" alt="" width="64" height="64"><div><strong>Din første: Scooter</strong><small>Den er din fra start. Alt andet tjener du dig til.</small></div></div>
+      <div class="step-first"><img src="${baseSrc('scooter')}" alt="" width="64" height="64"><div><strong>Din første: Scooter</strong><small>Den får du fra start. Resten tjener du, mens du lærer.</small></div></div>
       <div class="step-earn"><span class="step-earn-icon">${boosterIcon(28)}</span><div><strong>Tjen Boosters ved at lære</strong><small>${fmt(BOOSTER_RATES.lesson)} pr. lektion <span class="tb-stripes" aria-hidden="true"></span> ${fmt(BOOSTER_RATES.dailyGoal)} for dagens mål <span class="tb-stripes" aria-hidden="true"></span> ${fmt(BOOSTER_RATES.examPass)} for en bestået øveprøve</small></div></div>
-      <p class="step-note">Restaurér den, lakér den, giv den fælge og neon. Eller spar op til en rigtig bil.</p>`, 'Den er min', { ctaAttr: 'data-start-claim', total });
+      <p class="step-note">Du kan sætte den i stand, lakere den og give den nye fælge, eller spare op til en større bil.</p>`, 'Den er min', { ctaAttr: 'data-start-claim', total });
   const whenText = { '2w': 'Teoriprøve inden for 2 uger', '1m': 'Teoriprøve om ca. 1 måned', '3m': 'Teoriprøve om 2–3 måneder', '?': 'Ingen dato endnu' }[intro.when || '1m'];
   const goal = Number(intro.goal || DEFAULT_GOAL[intro.when || '1m'] || 2);
   const days = Math.ceil(counts.lessons / goal), deadline = DEADLINE_DAYS[intro.when || '1m'] || null;

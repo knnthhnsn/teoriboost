@@ -42,7 +42,7 @@ export function renderPracticeTabs({vm = {}, ready = {}, weak = []} = {}) {
   const daily = vm.daily || {}, count = Array.isArray(weak) ? weak.length : 0;
   const status = count >= 5 ? 'red' : count ? 'yellow' : 'green';
   const title = count ? `${count} ${count === 1 ? 'regel skal gentages' : 'regler skal gentages'}` : 'Hold reglerne varme';
-  const detail = count ? 'Start med det, der har brug for lidt mere tid.' : 'Tre blandede situationer. Tag dem i dit eget tempo.';
+  const detail = count ? 'Start med det, der trænger til lidt mere øvelse.' : 'Tre blandede situationer. Tag dem i dit eget tempo.';
   const action = count ? 'Øv dem nu' :'Tag 3 blandede situationer';
   const mirror = renderMirrorHero({streak:daily.currentStreak, goal:daily.dailyGoal, today:daily.completedSessions, pct:ready.pct, days:null, showCopy:false});
   return `<section class="practice practice-page" aria-labelledby="practice-title">
