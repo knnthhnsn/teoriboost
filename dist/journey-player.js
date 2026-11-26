@@ -330,7 +330,7 @@ export function createJourneyPlayer({
     const firstTry = [evidence.apply, evidence.checkpoint].filter(x => x && !x.hadWrong).length;
     return `<section class="journey-lesson-done ${session.finalizedAt ? 'is-finalized' : ''}">
       <div class="journey-celebration" aria-hidden="true" data-rive="confetti"><i></i><i></i><i></i></div>
-      <div class="lesson-rive" data-rive="lessondone" aria-hidden="true"></div>
+      <div class="lesson-rive" data-rive="lessondone:${[...section.id].reduce((a, c) => a + c.charCodeAt(0), 0) % 2 ? 'b' : 'a'}" aria-hidden="true"></div>
       <div class="journey-done-art">${renderCast('kegle', { size: 'md', mood: 'correct', priority: true })}</div>
       <h2 class="jp-done-title">${repaired ? 'Rettet og klaret' : 'Lektion klaret'}</h2>
       <p class="jp-done-lead">${esc(section.title)} sidder nu. ${repaired ? 'Du fandt fejlen og rettede den. Sådan bliver en regel siddende.' : 'Den kommer tilbage som gentagelse, så den bliver siddende.'}</p>

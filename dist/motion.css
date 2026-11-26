@@ -351,3 +351,11 @@ html.is-hidden *,html.is-hidden *::before,html.is-hidden *::after{animation-play
 .lesson-rive{display:none;width:min(100%,420px);aspect-ratio:5/3;margin:0 auto 4px}
 .lesson-rive[data-rive-on="on"]{display:block}
 .journey-lesson-done:has(.lesson-rive[data-rive-on="on"]) .journey-done-art{display:none!important} /* play.css forces flex */
+
+/* Dage i træk, udgave A: antallet står på flammens gule plade, når pladen er løftet */
+.streak-rive{position:relative;container-type:inline-size}
+.streak-rive[data-rive-on="on"]>.streak-plate{visibility:visible}
+.streak-plate{position:absolute;left:50%;top:18%;z-index:3;transform:translate(-50%,-50%);font:400 16cqw/1 "Black Ops One",sans-serif;letter-spacing:.02em;color:#1F2328;opacity:0;pointer-events:none;animation:streak-plate-in .3s ease-out .55s forwards}
+.streak-rive:not([data-rive-on="on"])>.streak-plate{display:none}
+@keyframes streak-plate-in{from{opacity:0;transform:translate(-50%,-30%)}to{opacity:1;transform:translate(-50%,-50%)}}
+@media (prefers-reduced-motion:reduce){.streak-plate{animation:none;opacity:1}}

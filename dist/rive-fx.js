@@ -19,8 +19,8 @@
 //   hero:<base>                       the start page's glow-up: drives in, transforms, drives off (riveSwap for the next)
 //   pass:<base>                       a passed practice test: the dream build crosses the finish line, fireworks
 //   logo                              the logo intro: lane markings race in and click into place as ///
-//   streak:3 | streak:7 | streak:30   a streak milestone: a wheel of fire and a bronze, silver or gold medal
-//   lessondone                        a lesson is done: green light, the road rolls out, stars fill a bar
+//   streak:a | streak:b               dage i træk (celebrate.riv): flammen løfter pladen, eller flammen på speedometeret
+//   lessondone:a | lessondone:b       en lektion er klaret (celebrate.riv): stoppet bliver gult, eller bilen ruller over målstregen
 //   cta                               the intro's start button: bool "hover" lights it, trigger "press" launches it
 // The element gets a bubbling 'rive-on' event when its animation is running, 'rive-off' when it will not run.
 import {afterFirstScreen} from './first-screen.js';
@@ -42,8 +42,8 @@ const BOARDS = {
   hero: { artboard: 'Hero', machine: 'Hero', file: base => `glowup-${base}.riv`, states: ['scooter', 'smallcar', 'bigcar', 'racecar'] },
   pass: { artboard: 'Pass', machine: 'Pass', file: base => `glowup-${base}.riv`, states: ['scooter', 'smallcar', 'bigcar', 'racecar'] },
   logo: { artboard: 'Logo', machine: 'Logo', file: () => 'brand.riv' },
-  streak: { artboard: days => 'Streak' + days, machine: 'Streak', file: () => 'brand.riv', states: ['3', '7', '30'] },
-  lessondone: { artboard: 'LessonDone', machine: 'LessonDone', file: () => 'brand.riv' },
+  streak: { artboard: v => 'Streak' + v.toUpperCase(), machine: 'Streak', file: () => 'celebrate.riv', states: ['a', 'b'] },
+  lessondone: { artboard: v => 'Lesson' + v.toUpperCase(), machine: 'Lesson', file: () => 'celebrate.riv', states: ['a', 'b'] },
   cta: { artboard: 'Cta', machine: 'Cta', file: () => 'brand.riv', fit: 'Fill' }, // the canvas is laid over the button exactly
 };
 let runtime = null; const files = new Map(); // file name -> its bytes
