@@ -56,3 +56,4 @@ html body #frame .card .keys kbd{min-width:28px!important;text-align:center!impo
 html body #frame .card .keys li{grid-template-columns:78px minmax(0,1fr)!important;white-space:nowrap}
 html body #frame .card .keys li:nth-child(2) kbd{font-size:10px!important;padding-inline:5px!important}
 html body #frame .card .keys{gap:8px 12px!important}html body #frame .card .keys li{grid-template-columns:68px minmax(0,1fr)!important;gap:6px!important}
+html body #frame .card .penalty{justify-self:start!important;align-self:start!important;width:auto!important;display:inline-block!important;padding:4px 12px!important}
