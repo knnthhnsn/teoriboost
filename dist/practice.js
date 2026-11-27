@@ -7,13 +7,13 @@ const storageKey = 'teoriboost.practice.tab';
 const tabs = [
   {id:'recommended', title:'Anbefalet', heading:'Anbefalet til dig'},
   {id:'topics', title:'Emner', heading:'Emner'},
-  {id:'order', title:'Rækkefølger', heading:'Rækkefølger'},
-  {id:'games', title:'Spil', heading:'Spil'}
+  {id:'order', title:'Rækkefølger', heading:'Rækkefølger'}
 ];
+// Spillene har deres egen sektion under fanerne (27. nov. 2026), hver med et billede fra spillet.
 const games = [
-  ['judge', 'Du er kørelæreren', 'Find fejlen i en elevs kørsel.'],
-  ['trafiklab', 'Trafiklab', 'Øv vigepligt og orientering.'],
-  ['drive', 'Gas og bremse', 'Øv gas og bremse i tre situationer.']
+  ['judge', 'Du er kørelæreren', 'Find fejlen i en elevs kørsel.', 'game-judge'],
+  ['trafiklab', 'Trafiklab', 'Øv vigepligt og orientering.', 'game-trafiklab'],
+  ['drive', 'Gas og bremse', 'Øv gas og bremse i tre situationer.', 'game-drive']
 ];
 const subtitles = {
   stop: 'Fuldt stop ved stoptavlen',
@@ -22,19 +22,22 @@ const subtitles = {
 };
 const sections = CHAPTERS.flatMap(chapter => chapter.sections.map(section => ({...section, chapterTitle:chapter.title})));
 
-function card(href, title, description) {
-  return `<li><a class="practice-card" href="#${esc(href)}"><strong>${esc(title)}</strong><small>${esc(description)}</small></a></li>`;
+// Hvert kort har et billede øverst, så eleven kan se, hvad øvelsen handler om (som små plakater i App Store).
+// Emner og rækkefølger bruger den tegnede situation fra emnets første spørgsmål, skåret til i assets/thumbs.
+function card(href, title, description, thumb) {
+  const img = thumb ? `<img class="practice-thumb" src="assets/thumbs/${esc(thumb)}.webp" width="480" height="300" alt="" loading="lazy" decoding="async">` : '';
+  return `<li><a class="practice-card${thumb ? ' has-thumb' : ''}" href="#${esc(href)}">${img}<strong>${esc(title)}</strong><small>${esc(description)}</small></a></li>`;
 }
 
-const signsCard = card('skilte', 'Skilte', 'Alle skiltene, forklaret og øvet');
+const signsCard = card('skilte', 'Skilte', 'Alle skiltene, forklaret og øvet', 'skilte');
 function cards(type) {
-  if (type === 'topics') return signsCard + sections.map(section => card(`mission:${section.id}`, section.title, subtitles[section.id] || section.chapterTitle)).join('');
-  if (type === 'order') return SEQUENCES.map(sequence => card(`order:${sequence.id}`, sequence.title, `${sequence.steps.length} trin`)).join('');
-  if (type === 'games') return games.map(([href, title, description]) => card(href, title, description)).join('');
+  if (type === 'topics') return signsCard + sections.map(section => card(`mission:${section.id}`, section.title, subtitles[section.id] || section.chapterTitle, section.id)).join('');
+  if (type === 'order') return SEQUENCES.map(sequence => card(`order:${sequence.id}`, sequence.title, `${sequence.steps.length} trin`, sequence.sectionId)).join('');
+  if (type === 'games') return games.map(([href, title, description, thumb]) => card(href, title, description, thumb)).join('');
   return signsCard + ['stop', 'sving-cykel', 'ubetinget']
     .map(id => sections.find(section => section.id === id))
     .filter(Boolean)
-    .map(section => card(`mission:${section.id}`, section.title, subtitles[section.id])).join('');
+    .map(section => card(`mission:${section.id}`, section.title, subtitles[section.id], section.id)).join('');
 }
 
 /** The live practice screen; tab state is restored when mounted. */
@@ -57,6 +60,10 @@ export function renderPracticeTabs({vm = {}, ready = {}, weak = []} = {}) {
       <p class="list-label">DIN TRÆNING</p><h2 id="practice-choose-title" class="practice-choose-title">Vælg din træning</h2><p>Nye regler får du i Lær, trin for trin. Her i Øvelser øver du dem, du har lært.</p>
       <div class="practice-tabs" role="tablist" aria-label="Vælg træning" data-practice-tabs>${tabs.map(({id,title}, index) => `<button type="button" role="tab" id="practice-tab-${id}" aria-controls="practice-panel-${id}" aria-selected="${index === 0}" tabindex="${index === 0 ? '0' : '-1'}" data-practice-tab="${id}">${esc(title)}</button>`).join('')}</div>
       ${tabs.map(({id,heading}, index) => `<section class="practice-panel" role="tabpanel" id="practice-panel-${id}" aria-labelledby="practice-tab-${id}" tabindex="0" data-practice-panel="${id}"${index === 0 ? '' : ' hidden'}><h3>${esc(heading)}</h3><ul class="practice-grid">${cards(id)}</ul></section>`).join('')}
+    </section>
+    <section class="practice-games" aria-labelledby="practice-games-title">
+      <p class="list-label">SPIL</p><h2 id="practice-games-title" class="practice-choose-title">Spil</h2><p>Øv reglerne, mens du kører, retter og vælger.</p>
+      <ul class="practice-grid practice-grid--games">${cards('games')}</ul>
     </section>
   </section>`;
 }

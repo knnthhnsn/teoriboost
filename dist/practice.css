@@ -40,3 +40,17 @@ html[data-theme=dark] .practice-card small{color:#C2CCD6}
 html[data-theme=dark] .practice-card:active{box-shadow:0 2px 0 #3A434C}
 @media(max-width:700px){.practice-page{padding-bottom:120px}.practice-hero{padding:18px}.practice-primary h2{font-size:21px}.practice-main-btn{width:100%}.practice-grid{grid-template-columns:1fr;gap:10px}.practice-choose-title{font-size:25px}}
 @media(max-width:360px){.practice-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Billeder på øvelseskortene og spillenes egen sektion (27. nov. 2026). */
+.practice-games{margin-top:36px}
+.practice-games>p:not(.list-label){margin:6px 0 0}
+.practice-card.has-thumb{padding:8px 8px 14px;gap:4px}
+.practice-card.has-thumb strong,.practice-card.has-thumb small{padding-inline:6px}
+.practice-card.has-thumb strong{margin-top:6px}
+.practice-thumb{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:#2B3138}
+.practice-grid--games{grid-template-columns:repeat(3,minmax(0,1fr))}
+.practice-grid--games .practice-card strong{font-size:20px}
+@media(max-width:700px){.practice-panel .practice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.practice-card.has-thumb strong{font-size:16px}.practice-card.has-thumb small{font-size:13px}.practice-grid--games{grid-template-columns:1fr}.practice-grid--games .practice-thumb{aspect-ratio:2/1}}
+@media(max-width:360px){.practice-panel .practice-grid{grid-template-columns:1fr}}
+.practice-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(min-width:701px){.practice-panel .practice-grid,.practice-grid--games{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}}
+@media(max-width:360px){.practice-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}}

@@ -73,8 +73,8 @@ html[data-theme="dark"] .skilte{--sk-card:#1F2328;--sk-card-ink:#FEFFED}
 html:not([data-theme="dark"]) .skilte .sk-opt.is-wrong{border-color:#1F2328}
 .skilte .sk-fb{padding:16px;border-radius:18px;border:2px solid var(--line-strong,#3A434C);background:var(--sk-card);color:var(--sk-card-ink);display:flex;flex-direction:column;gap:8px;animation:sk-rise .3s ease both}
 .skilte .sk-fb[hidden]{display:none}
-.skilte .sk-fb.is-right{border-left:8px solid #FFD60A}
-.skilte .sk-fb.is-wrong{border-left:8px dashed #5F656D}
+.skilte .sk-fb.is-right{border-color:#FFD60A}
+.skilte .sk-fb.is-wrong{border-style:dashed;border-color:#5F656D}
 .skilte .sk-fb p{margin:0;font-size:16px;line-height:1.5}
 .skilte .sk-fb .sk-trap{color:inherit}
 .skilte .sk-fb .sk-trap b{color:inherit}

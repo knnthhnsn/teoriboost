@@ -274,12 +274,14 @@ button { font: inherit; color: inherit; }
     <section class="card card--start" aria-labelledby="start-title">
       <div class="start-hero"><div><span class="label">Gas og bremse <span class="tb-stripes" aria-hidden="true"></span> ny tur hver gang</span><h1 id="start-title">Kør en tur<br><em>med Sneglen.</em></h1></div><img src="assets/cast/sneglen.webp" alt=""></div>
       <p class="lede">Du kører Nordic GT, uanset hvad du har valgt i Min bil. Hver tur er ny. Læs skilte og afmærkning ved hvert kryds, og hold øje med vejen.</p>
-      <ul class="keys">
-        <li><kbd>W</kbd> gas/frem</li>
-        <li><kbd>Mellemrum</kbd> brems</li>
-        <li><kbd>A</kbd> venstre, <kbd>D</kbd> højre. <kbd>F</kbd> fremadgear, <kbd>R</kbd> bakgear</li>
-        <li><kbd>Z</kbd> blink venstre, <kbd>C</kbd> blink højre</li>
-        <li><kbd>Q E</kbd> kig til siderne. <kbd>H</kbd> dyt</li>
+      <ul class="keys" aria-label="Tasterne">
+        <li><span><kbd>W</kbd></span>Gas</li>
+        <li><span><kbd>Mellemrum</kbd></span>Brems</li>
+        <li><span><kbd>A</kbd><kbd>D</kbd></span>Styr</li>
+        <li><span><kbd>F</kbd><kbd>R</kbd></span>Frem og bak</li>
+        <li><span><kbd>Z</kbd><kbd>C</kbd></span>Blink</li>
+        <li><span><kbd>Q</kbd><kbd>E</kbd></span>Kig til siden</li>
+        <li><span><kbd>H</kbd></span>Dyt</li>
       </ul>
       <button class="go" id="start-btn" type="button" disabled aria-busy="true">Henter køretimen …</button>
     </section>
@@ -1494,4 +1496,5 @@ import {loadGarage} from './mybil.js';
 })();
 </script>
 
+<link rel="stylesheet" href="drive-brand.css">
 </body></html>
