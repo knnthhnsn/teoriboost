@@ -41,7 +41,7 @@ html[data-theme=dark] .practice-card:active{box-shadow:0 2px 0 #3A434C}
 @media(max-width:700px){.practice-page{padding-bottom:120px}.practice-hero{padding:18px}.practice-primary h2{font-size:21px}.practice-main-btn{width:100%}.practice-grid{grid-template-columns:1fr;gap:10px}.practice-choose-title{font-size:25px}}
 @media(max-width:360px){.practice-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* Billeder på øvelseskortene og spillenes egen sektion (27. nov. 2026). */
-.practice-games{margin-top:36px}
+.practice-games{margin-top:32px}
 .practice-games>p:not(.list-label){margin:6px 0 0}
 .practice-card.has-thumb{padding:8px 8px 14px;gap:4px}
 .practice-card.has-thumb strong,.practice-card.has-thumb small{padding-inline:6px}
@@ -54,3 +54,5 @@ html[data-theme=dark] .practice-card:active{box-shadow:0 2px 0 #3A434C}
 .practice-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(min-width:701px){.practice-panel .practice-grid,.practice-grid--games{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}}
 @media(max-width:360px){.practice-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* På telefonen ligger spillene på én række, man kan skubbe til siden. */
+@media(max-width:700px){.practice-grid--games{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:-16px;padding:2px 16px 8px;scroll-padding-inline:16px}.practice-grid--games::-webkit-scrollbar{display:none}.practice-grid--games>li{scroll-snap-align:start}.practice-grid--games .practice-thumb{aspect-ratio:16/10}}

@@ -56,14 +56,15 @@ export function renderPracticeTabs({vm = {}, ready = {}, weak = []} = {}) {
       ${mirror}
       <div class="practice-primary"><h2 id="practice-hero-title">${esc(title)}</h2><p>${esc(detail)}</p><a class="btn btn-primary practice-main-btn" href="#review">${esc(action)}</a></div>
     </section>
+    <section class="practice-games" aria-labelledby="practice-games-title">
+      <h2 id="practice-games-title" class="practice-choose-title">Spil</h2><p>Øv reglerne, mens du kører, retter og vælger.</p>
+      <ul class="practice-grid practice-grid--games">${cards('games')}</ul>
+    </section>
     <section class="practice-choose" aria-labelledby="practice-choose-title">
       <p class="list-label">DIN TRÆNING</p><h2 id="practice-choose-title" class="practice-choose-title">Vælg din træning</h2><p>Nye regler får du i Lær, trin for trin. Her i Øvelser øver du dem, du har lært.</p>
       <div class="practice-tabs" role="tablist" aria-label="Vælg træning" data-practice-tabs>${tabs.map(({id,title}, index) => `<button type="button" role="tab" id="practice-tab-${id}" aria-controls="practice-panel-${id}" aria-selected="${index === 0}" tabindex="${index === 0 ? '0' : '-1'}" data-practice-tab="${id}">${esc(title)}</button>`).join('')}</div>
       ${tabs.map(({id,heading}, index) => `<section class="practice-panel" role="tabpanel" id="practice-panel-${id}" aria-labelledby="practice-tab-${id}" tabindex="0" data-practice-panel="${id}"${index === 0 ? '' : ' hidden'}><h3>${esc(heading)}</h3><ul class="practice-grid">${cards(id)}</ul></section>`).join('')}
-    </section>
-    <section class="practice-games" aria-labelledby="practice-games-title">
-      <p class="list-label">SPIL</p><h2 id="practice-games-title" class="practice-choose-title">Spil</h2><p>Øv reglerne, mens du kører, retter og vælger.</p>
-      <ul class="practice-grid practice-grid--games">${cards('games')}</ul>
+
     </section>
   </section>`;
 }

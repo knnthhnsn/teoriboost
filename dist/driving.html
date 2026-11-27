@@ -1352,7 +1352,7 @@ import {loadGarage} from './mybil.js';
     if(lookDrag){S.look=lookDrag.yaw;headPitch=lookDrag.pitch;}
     else if(input.lookLeft||input.lookRight){lookReturn=null;S.look+=(lookTarget-S.look)*(motionOff?1:1-Math.exp(-12*lookDt));headPitch+=(0-headPitch)*(motionOff?1:1-Math.exp(-12*lookDt));}
     else if(lookReturn){const progress=Math.min(1,Math.max(0,(lookFrameAt-lookReturn.start)/300)),ease=1-progress*progress*(3-2*progress);S.look=lookReturn.yaw*ease;headPitch=lookReturn.pitch*ease;if(progress>=1)lookReturn=null;}
-    else {S.look+=(0-S.look)*(motionOff?1:1-Math.exp(-12*lookDt));headPitch+=(0-headPitch)*(motionOff?1:1-Math.exp(-12*lookDt));}
+    else {const mouse=window.__mouseLook,mouseYaw=mouse&&S.mode==='drive'?mouse.yaw:0,rate=mouseYaw?6:12;S.look+=(mouseYaw-S.look)*(motionOff?1:1-Math.exp(-rate*lookDt));headPitch+=(0-headPitch)*(motionOff?1:1-Math.exp(-12*lookDt));}
     canvas.dataset.look=Math.abs(S.look)<.05?'forward':S.look>0?'left':'right';if(S.kerb&&S.look>SIT.KERB.look)S.kerb.lookedAt=S.clock;
     ownCar.position.set(S.x, 0, S.z);ownCar.rotation.y=-S.heading;
     beamLight.position.set(S.x+Math.sin(S.heading)*3.3,.7,S.z-Math.cos(S.heading)*3.3);
@@ -1441,6 +1441,11 @@ import {loadGarage} from './mybil.js';
   surface.addEventListener('pointerdown',e=>{if(S.mode!=='drive'||lookDrag||!e.isPrimary||(e.pointerType==='mouse'&&e.button!==0)||e.target!==surface)return;e.preventDefault();lookGeneration++;if(lookReturnTimer){clearTimeout(lookReturnTimer);lookReturnTimer=null}lookReturn=null;lookDrag={id:e.pointerId,x:e.clientX,y:e.clientY,baseYaw:S.look,basePitch:headPitch,yaw:S.look,pitch:headPitch};try{surface.setPointerCapture(e.pointerId)}catch{}});
   surface.addEventListener('pointermove',e=>{if(!lookDrag||e.pointerId!==lookDrag.id)return;e.preventDefault();const r=surface.getBoundingClientRect();lookDrag.yaw=clampLook(lookDrag.baseYaw+(e.clientX-lookDrag.x)*Math.PI/(Math.max(1,r.width)*.7),Math.PI);lookDrag.pitch=clampLook(lookDrag.basePitch+(e.clientY-lookDrag.y)*Math.PI/(Math.max(1,r.height)*4.2),Math.PI/3);S.look=lookDrag.yaw;headPitch=lookDrag.pitch;});
   for(const type of ['pointerup','pointercancel','lostpointercapture'])surface.addEventListener(type,e=>{if(type==='lostpointercapture'&&surface.hasPointerCapture?.(e.pointerId))return;if(lookDrag&&e.pointerId===lookDrag.id)endLook();});
+  // Desktop med mus (27. nov. 2026): blikket følger musen uden at man skal trække. Midten er en død zone,
+  // så vejen ligger stille, når musen hviler; ude ved kanten kigger man lige så langt som med Q og E.
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){const mouse=window.__mouseLook={yaw:0},frameEl=document.querySelector('.frame')||document.body;
+    window.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const r=frameEl.getBoundingClientRect(),nx=Math.max(-1,Math.min(1,(e.clientX-(r.left+r.width/2))/(r.width/2))),dead=.18,x=Math.abs(nx)<dead?0:(nx-Math.sign(nx)*dead)/(1-dead);mouse.yaw=-x*1.1;});
+    document.documentElement.addEventListener('mouseleave',()=>{mouse.yaw=0;});window.addEventListener('blur',()=>{mouse.yaw=0;});}
   const KEYS = { ArrowUp: 'gas', KeyW: 'gas', ArrowDown: 'brake', KeyS: 'brake', Space: 'brake' },STEER_KEYS={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right'},LOOK_KEYS={KeyQ:'lookLeft',KeyE:'lookRight'},GEAR_KEYS={KeyF:'auto',KeyR:'R'},BLINK_KEYS={KeyZ:-1,KeyC:1};
   const typingDriveKey=e=>e.target.matches?.('select,input,textarea')||e.target.isContentEditable;
   const modifiedDriveKey=e=>e.ctrlKey||e.metaKey||e.altKey;
