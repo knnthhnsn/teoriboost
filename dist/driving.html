@@ -246,6 +246,8 @@ button { font: inherit; color: inherit; }
       </div>
       <div class="pedals">
         <div class="gear-buttons" role="group" aria-label="Vælg køreretning">
+          <button id="gear-up" type="button" aria-label="Skift et gear op, tast G" aria-keyshortcuts="G" title="Gear op (G)" hidden>Op</button>
+          <button id="gear-down" type="button" aria-label="Skift et gear ned, tast B" aria-keyshortcuts="B" title="Gear ned (B)" hidden>Ned</button>
           <button id="gear-drive" type="button" aria-label="Vælg fremadgear, tast F" aria-keyshortcuts="F" title="Fremadgear (F)" aria-pressed="true">Frem</button>
           <button id="gear-reverse" type="button" aria-label="Vælg bakgear, tast R" aria-keyshortcuts="R" title="Bakgear (R)" aria-pressed="false">Bak</button>
         </div>
@@ -265,7 +267,7 @@ button { font: inherit; color: inherit; }
         <button id="blink-right" class="tool-button" type="button" aria-label="Blink til højre, tast C" aria-keyshortcuts="C" title="Blink til højre (C)" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 4 4-4 4"/></svg></button>
         <button id="horn" class="tool-button horn" type="button" aria-label="Dyt med hornet, H" aria-keyshortcuts="H" title="Dyt (H)">Dyt</button>
         <button id="mirror-toggle" class="tool-button mirror-toggle" type="button" aria-label="Slå spejle fra" aria-pressed="true" title="Slå spejlvisning til eller fra">Spejle<br>til</button>
-        <select id="gear" hidden aria-label="Gear"><option value="auto">D</option><option value="R">R</option></select><button id="handedness" class="tool-button" type="button" aria-pressed="false">Venstrehånd: fra</button>
+        <select id="gear" hidden aria-label="Gear"><option value="auto">D</option><option value="R">R</option></select><button id="handedness" class="tool-button" type="button" aria-pressed="false">Venstrehånd: fra</button><button id="gearbox" class="tool-button" type="button" aria-pressed="false">Gear: automat</button>
       </div>
     </div>
   </div>
@@ -282,6 +284,7 @@ button { font: inherit; color: inherit; }
         <li><span><kbd>Z</kbd><kbd>C</kbd></span>Blink</li>
         <li><span><kbd>Q</kbd><kbd>E</kbd></span>Kig til siden</li>
         <li><span><kbd>H</kbd></span>Dyt</li>
+        <li><span><kbd>G</kbd><kbd>B</kbd></span>Gear op, ned</li>
       </ul>
       <button class="go" id="start-btn" type="button" disabled aria-busy="true">Henter køretimen …</button>
     </section>
@@ -1042,7 +1045,7 @@ import {loadGarage} from './mybil.js';
     const message=PHONE_MESSAGES[Math.floor(Math.random()*PHONE_MESSAGES.length)];$('phone-from').textContent='Ny besked fra '+message[0];$('phone-look-from').textContent=message[0];$('phone-look-text').textContent=message[1];phoneShown=null;
     Object.assign(S, { tour, drawnStretch, lastFault:null, oncoming:{armed:false,phase:0,entered:false}, meet, child:SIT.newChild(), phone:SIT.newPhone(), parked:SIT.parkedCars(tour), leftSince:0, kerb:SIT.newKerb(), lead:SIT.newLead(), parking:SIT.newParking(), closeSince:0, bike:Object.assign(SIT.newBike(),{available:riderReady}), rider:{available:riderReady,active:false,done:false,z:0,v:0,following:false,crossing:false}, mode: 'intro', z: 26, x:LANE, heading:0, steer:0, look:0, indicator:0, gear:'auto', v: 0, acc: 0, time: 0, clock: 0, errors: 0, penalty: 0, top: 0, overSince: 0, said: {}, spot: null,
       sit: SIT.newSituations(tour), walker: { state: 'wait', x: HALF + 1.3 } });if(tour.stretch==='follow')S.x=SIT.KERB.x;applyTour(tour);
-    junctions.forEach(j => { j.shift = j.lead + Math.random() * 3; });input.left=input.right=input.lookLeft=input.lookRight=false;input.touchSteer=0;endLook(true);$('gear').value='auto';updateGearUI();updateBlink();say(S.tour.stretch==='follow'?KERB_LINE:'Kør, når du er klar. Jeg siger først noget, når det går galt.'); }
+    junctions.forEach(j => { j.shift = j.lead + Math.random() * 3; });input.left=input.right=input.lookLeft=input.lookRight=false;input.touchSteer=0;endLook(true);S.gear=manualBox?'1':'auto';lastGearTip=-99;$('gear').value='auto';updateGearUI();updateBlink();say(S.tour.stretch==='follow'?KERB_LINE:'Kør, når du er klar. Jeg siger først noget, når det går galt.'); }
   // Short enough for the smallest screen. A touch screen looks by dragging the windscreen, a keyboard with Q.
   const KERB_LINE=window.matchMedia?.('(pointer: coarse)').matches?'Blink, kig over skulderen (træk i ruden), og vent på bilen bagfra.':'Blink, kig over skulderen (Q), og vent på bilen bagfra.';
   // The first tour is drawn while the art is still loading. Once the child's art is there, the tour gets its child back.
@@ -1086,8 +1089,10 @@ import {loadGarage} from './mybil.js';
   /* ---------- simulation ---------- */
   function step(dt) {
     S.clock += dt; S.time += dt;
-    const gearLimit=S.gear==='R'?3:S.gear&&S.gear!=='auto'?([0,7,11,14.5,17.2][Number(S.gear)]||17.2):17.2;
-    const braking = input.brake, a = braking ? -7 : input.gas ? 2.9 * Math.max(0,1 - S.v / gearLimit) : -(0.35 + 0.035 * S.v);
+    const g=Number(S.gear),manualGear=g>=1&&g<=5,gearLimit=S.gear==='R'?3:manualGear?MAN_TOP[g]:17.2,pull=manualGear&&S.v<MAN_LO[g]?.2:1;
+    const braking = input.brake, a = braking ? -7 : input.gas ? 2.9 * pull * Math.max(0,1 - S.v / gearLimit) : -(0.35 + 0.035 * S.v);
+    // Manuelt gear: Sneglen siger til, når gearet ikke passer til farten. Ingen fejl, kun et råd, højst hvert 5. sekund.
+    if(manualGear&&input.gas&&!braking&&S.clock-lastGearTip>5){if(g>=2&&S.v<MAN_LO[g]*.6){lastGearTip=S.clock;say('Bilen trækker ikke i '+g+'. gear. Skift ned med B.');}else if(g<5&&S.v>gearLimit*.95){lastGearTip=S.clock;say('Motoren kører højt. Skift op i '+(g+1)+'. gear med G.');}}
     S.v = Math.max(0, S.v + a * dt); S.acc = S.v > 0 || a > 0 ? a : 0;
     const spatial=Number.isFinite(S.x)&&Number.isFinite(S.heading),oldPose=spatial?{x:S.x,z:S.z,heading:S.heading}:null;
     const edge=pose=>pose.z-Math.abs(Math.cos(pose.heading))*FRONT-Math.abs(Math.sin(pose.heading))*.9;
@@ -1428,9 +1433,20 @@ import {loadGarage} from './mybil.js';
   function setBlink(side){if(S.mode!=='drive')return;S.indicator=S.indicator===side?0:side;updateBlink();}
   $('phone-read').addEventListener('click',()=>{if(S.mode==='drive'&&S.tour.stretch==='phone')SIT.openPhone(S.phone,S.z,S.v);});
   $('blink-left').addEventListener('click',()=>setBlink(-1));$('blink-right').addEventListener('click',()=>setBlink(1));
-  function updateGearUI(){const reverse=S.gear==='R';$('gear').value=reverse?'R':'auto';$('gear-drive').setAttribute('aria-pressed',String(!reverse));$('gear-reverse').setAttribute('aria-pressed',String(reverse));$('cluster-gear').textContent=reverse?'R':'D';$('cluster-gear').setAttribute('aria-label',reverse?'Gear R, bak':'Gear D, fremad');}
-  function setGear(next){if(S.mode!=='drive'){updateGearUI();return false}next=next==='R'?'R':'auto';if(next!==S.gear&&S.v>.05){updateGearUI();say('Stands først, før du skifter gear.');return false}if(next!==S.gear)S.v=0;S.gear=next;updateGearUI();return true;}
-  $('gear').addEventListener('change',e=>setGear(e.target.value));$('gear-drive').addEventListener('click',()=>setGear('auto'));$('gear-reverse').addEventListener('click',()=>setGear('R'));
+  // Manuelt gear (27. nov. 2026): gear 1 til 5 uden kobling. Topfart og laveste fart, hvor gearet trækker, i m/s.
+  var MAN_TOP=[0,6,10,15,20,25],MAN_LO=[0,0,2,5,8,12],lastGearTip=-99,boxKey='teoriboost.drive.gearbox',manualBox=false;try{manualBox=localStorage.getItem(boxKey)==='manual'}catch{}
+  function updateGearUI(){const reverse=S.gear==='R',num=/^[1-5]$/.test(S.gear),label=reverse?'R':num?S.gear:'D';$('gear').value=reverse?'R':'auto';$('gear-drive').setAttribute('aria-pressed',String(!reverse));$('gear-reverse').setAttribute('aria-pressed',String(reverse));$('gear-up').hidden=$('gear-down').hidden=!manualBox;$('cluster-gear').textContent=label;$('cluster-gear').setAttribute('aria-label',reverse?'Gear R, bak':num?'Gear '+label:'Gear D, fremad');}
+  function setGear(next){if(S.mode!=='drive'){updateGearUI();return false}
+    if(manualBox){const cur=Number(S.gear)||1;if(next==='auto')next=S.gear==='R'?'1':String(cur);else if(next==='up')next=S.gear==='R'?'R':String(Math.min(5,cur+1));else if(next==='down')next=S.gear==='R'?'R':String(Math.max(1,cur-1));
+      const viaR=next==='R'||S.gear==='R';if(next!==S.gear&&viaR&&S.v>.05){updateGearUI();say('Stands først, før du skifter til eller fra bakgear.');return false}
+      if(next!=='R'&&S.v>MAN_TOP[Number(next)]){updateGearUI();say('Farten er for høj til '+next+'. gear.');return false}
+      if(next!==S.gear&&viaR)S.v=0;S.gear=next;updateGearUI();return true;}
+    if(next!=='R'&&next!=='auto'){updateGearUI();return false}
+    next=next==='R'?'R':'auto';if(next!==S.gear&&S.v>.05){updateGearUI();say('Stands først, før du skifter gear.');return false}if(next!==S.gear)S.v=0;S.gear=next;updateGearUI();return true;}
+  $('gear').addEventListener('change',e=>setGear(e.target.value));$('gear-drive').addEventListener('click',()=>setGear('auto'));$('gear-reverse').addEventListener('click',()=>setGear('R'));$('gear-up').addEventListener('click',()=>setGear('up'));$('gear-down').addEventListener('click',()=>setGear('down'));
+  function updateGearbox(){document.body.classList.toggle('manual-gear',manualBox);$('gearbox').setAttribute('aria-pressed',String(manualBox));$('gearbox').textContent='Gear: '+(manualBox?'manuelt':'automat');
+    if(S.gear!=='R'){const v=S.v||0,i=MAN_TOP.findIndex((top,k)=>k>0&&v<=top);S.gear=manualBox?String(i>0?i:5):'auto';}updateGearUI();}
+  updateGearbox();$('gearbox').addEventListener('click',()=>{manualBox=!manualBox;try{localStorage.setItem(boxKey,manualBox?'manual':'auto')}catch{}updateGearbox();});
   const handKey='teoriboost.drive.left-handed';let leftHanded=false;try{leftHanded=localStorage.getItem(handKey)==='1'}catch{}function updateHandedness(){document.body.classList.toggle('left-handed',leftHanded);$('handedness').setAttribute('aria-pressed',String(leftHanded));$('handedness').textContent='Venstrehånd: '+(leftHanded?'til':'fra');}updateHandedness();$('handedness').addEventListener('click',()=>{leftHanded=!leftHanded;try{localStorage.setItem(handKey,leftHanded?'1':'0')}catch{}updateHandedness();});
   let hornContext=null;function horn(){if(S.mode!=='drive')return;let allowed=true;try{const toggle=window.parent.document.querySelector('#sound-toggle');if(toggle)allowed=toggle.getAttribute('aria-pressed')!=='false';}catch{}if(!allowed)return;
     try{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;hornContext=hornContext||new Audio();if(hornContext.state==='suspended')hornContext.resume();
@@ -1446,7 +1462,7 @@ import {loadGarage} from './mybil.js';
   if(matchMedia('(hover:hover) and (pointer:fine)').matches){const mouse=window.__mouseLook={yaw:0},frameEl=document.querySelector('.frame')||document.body;
     window.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const r=frameEl.getBoundingClientRect(),nx=Math.max(-1,Math.min(1,(e.clientX-(r.left+r.width/2))/(r.width/2))),dead=.18,x=Math.abs(nx)<dead?0:(nx-Math.sign(nx)*dead)/(1-dead);mouse.yaw=-x*1.1;});
     document.documentElement.addEventListener('mouseleave',()=>{mouse.yaw=0;});window.addEventListener('blur',()=>{mouse.yaw=0;});}
-  const KEYS = { ArrowUp: 'gas', KeyW: 'gas', ArrowDown: 'brake', KeyS: 'brake', Space: 'brake' },STEER_KEYS={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right'},LOOK_KEYS={KeyQ:'lookLeft',KeyE:'lookRight'},GEAR_KEYS={KeyF:'auto',KeyR:'R'},BLINK_KEYS={KeyZ:-1,KeyC:1};
+  const KEYS = { ArrowUp: 'gas', KeyW: 'gas', ArrowDown: 'brake', KeyS: 'brake', Space: 'brake' },STEER_KEYS={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right'},LOOK_KEYS={KeyQ:'lookLeft',KeyE:'lookRight'},GEAR_KEYS={KeyF:'auto',KeyR:'R',KeyG:'up',KeyB:'down',Digit1:'1',Digit2:'2',Digit3:'3',Digit4:'4',Digit5:'5'},BLINK_KEYS={KeyZ:-1,KeyC:1};
   const typingDriveKey=e=>e.target.matches?.('select,input,textarea')||e.target.isContentEditable;
   const modifiedDriveKey=e=>e.ctrlKey||e.metaKey||e.altKey;
   // Driving keys win before focused controls can activate their own shortcuts.

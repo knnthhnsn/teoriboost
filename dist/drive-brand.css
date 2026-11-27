@@ -57,3 +57,7 @@ html body #frame .card .keys li{grid-template-columns:78px minmax(0,1fr)!importa
 html body #frame .card .keys li:nth-child(2) kbd{font-size:10px!important;padding-inline:5px!important}
 html body #frame .card .keys{gap:8px 12px!important}html body #frame .card .keys li{grid-template-columns:68px minmax(0,1fr)!important;gap:6px!important}
 html body #frame .card .penalty{justify-self:start!important;align-self:start!important;width:auto!important;display:inline-block!important;padding:4px 12px!important}
+/* Valget mellem automat- og manuelt gear står under indstillinger, under Venstrehånd */
+html body #frame #gearbox{display:none!important;position:absolute!important;right:8px;top:240px;z-index:10;min-width:150px;height:44px;padding:5px 10px;font-size:13px}
+html body.drive-settings-open #frame #gearbox{display:block!important}
+html body #frame #gearbox[aria-pressed="true"]{background:#FFD60A!important;border-color:#FFD60A!important;color:#1F2328!important}
